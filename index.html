@@ -719,10 +719,20 @@
     #pillars {
       background: var(--charcoal);
       padding: 140px 60px;
+      position: relative;
+    }
+    #pillars::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='0.8' fill='rgba(201,168,76,0.08)'/%3E%3C/svg%3E");
+      background-size: 60px 60px;
+      pointer-events: none;
     }
     .pillars-inner {
       max-width: 1400px;
       margin: 0 auto;
+      position: relative;
     }
     .section-header {
       text-align: center;
@@ -744,55 +754,94 @@
     .pillars-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
+      gap: 24px;
     }
     .pillar-card {
-      background: var(--charcoal-mid);
-      padding: 64px 48px;
+      background: linear-gradient(145deg, #272727 0%, #1e1e1e 100%);
+      padding: 56px 44px 52px;
       position: relative;
       overflow: hidden;
-      transition: background 0.5s;
+      border: 1px solid rgba(201,168,76,0.08);
+      transition: border-color 0.5s, box-shadow 0.5s, transform 0.4s;
+      cursor: default;
     }
     .pillar-card::before {
       content: '';
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      top: 0; left: 0;
+      width: 3px;
+      height: 0;
+      background: linear-gradient(to bottom, var(--gold), var(--gold-light));
+      transition: height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-    .pillar-card:hover { background: #272727; }
-    .pillar-card:hover::before { transform: scaleX(1); }
+    .pillar-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 50% 110%, rgba(201,168,76,0.06) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .pillar-card:hover {
+      border-color: rgba(201,168,76,0.25);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.1), inset 0 1px 0 rgba(201,168,76,0.1);
+      transform: translateY(-4px);
+    }
+    .pillar-card:hover::before { height: 100%; }
+    .pillar-card:hover::after { opacity: 1; }
 
     .pillar-num {
       font-family: var(--ff-serif);
-      font-size: 5rem;
+      font-size: 6rem;
       font-weight: 300;
-      color: rgba(201, 168, 76, 0.08);
+      color: rgba(201, 168, 76, 0.06);
       line-height: 1;
+      position: absolute;
+      top: 24px; right: 32px;
+      user-select: none;
+      transition: color 0.5s;
+    }
+    .pillar-card:hover .pillar-num { color: rgba(201,168,76,0.12); }
+
+    .pillar-icon-wrap {
+      width: 56px;
+      height: 56px;
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-bottom: 32px;
+      position: relative;
+      z-index: 1;
+      transition: border-color 0.4s, background 0.4s;
+    }
+    .pillar-card:hover .pillar-icon-wrap {
+      border-color: rgba(201,168,76,0.5);
+      background: rgba(201,168,76,0.06);
     }
     .pillar-icon {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 28px;
+      width: 26px;
+      height: 26px;
       color: var(--gold);
+      position: relative;
+      z-index: 1;
     }
     .pillar-title {
       font-family: var(--ff-serif);
       font-size: 2rem;
       font-weight: 300;
       color: var(--ivory);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
     }
     .pillar-desc {
-      font-size: 0.85rem;
-      line-height: 1.8;
-      color: rgba(250, 248, 245, 0.45);
+      font-size: 0.84rem;
+      line-height: 1.85;
+      color: rgba(250, 248, 245, 0.42);
+      position: relative;
+      z-index: 1;
     }
 
     /* ─── PORTFOLIO ─── */
@@ -1691,6 +1740,234 @@
       #reels { padding: 100px 24px !important; }
       #reels .insta-follow { display: none; }
     }
+
+    /* ─── DEPTH & DESIGN SYSTEM ENHANCEMENTS ─── */
+
+    /* About section — more dramatic photo + stats */
+    .about-frame {
+      box-shadow: 24px 32px 80px rgba(0,0,0,0.18), -4px -4px 0 0 rgba(201,168,76,0.15);
+    }
+    .about-corner.tl { border-color: var(--gold); }
+    .about-corner.br { border-color: var(--gold); }
+
+    .about-stats {
+      position: relative;
+    }
+    .stat-num {
+      font-size: 3.2rem;
+      background: linear-gradient(135deg, var(--charcoal) 0%, var(--charcoal-soft) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stat-item {
+      position: relative;
+      padding-bottom: 16px;
+    }
+    .stat-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 24px; height: 1px;
+      background: var(--gold);
+    }
+
+    /* Portfolio — richer overlays */
+    .portfolio-item {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+    }
+    .portfolio-overlay {
+      background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.4) 50%, transparent 80%);
+    }
+    .portfolio-tag {
+      background: rgba(201,168,76,0.12);
+      backdrop-filter: blur(4px);
+    }
+
+    /* Reels — enhanced visual depth */
+    .reel-thumb {
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+    }
+    .reel-play {
+      transition: background 0.3s, transform 0.3s;
+    }
+    .reel-item:hover .reel-play {
+      background: rgba(201,168,76,0.5);
+      transform: scale(1.05);
+    }
+    .reel-play svg {
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+      transform: scale(1.1);
+    }
+    .reel-caption {
+      font-size: 0.78rem;
+      color: rgba(250,248,245,0.5);
+      transition: color 0.3s;
+    }
+    .reel-item:hover .reel-caption { color: var(--gold-light); }
+
+    /* Reels section header */
+    #reels {
+      position: relative;
+    }
+    #reels::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.3), transparent);
+    }
+
+    /* Collabs — more visual weight */
+    #collabs {
+      position: relative;
+      overflow: hidden;
+    }
+    #collabs::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 800px; height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(201,168,76,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    #collabs::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.2), transparent);
+    }
+    .collab-tag {
+      transition: all 0.3s;
+      background: rgba(26,26,26,0.03);
+    }
+    .collab-tag:hover {
+      background: rgba(201,168,76,0.08);
+      box-shadow: 0 4px 16px rgba(201,168,76,0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Media kit — premium treatment */
+    #mediakit {
+      position: relative;
+      overflow: hidden;
+    }
+    #mediakit::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(201,168,76,0.03) 0%, transparent 50%);
+    }
+    .mk-num {
+      font-size: 3.2rem;
+      background: linear-gradient(135deg, var(--ivory) 0%, rgba(250,248,245,0.7) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Instagram grid — richer overlay */
+    .insta-overlay {
+      background: linear-gradient(to top, rgba(201,168,76,0.25) 0%, rgba(0,0,0,0.1) 100%);
+    }
+
+    /* Contact section — more presence */
+    #contact {
+      position: relative;
+    }
+    #contact::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.2), transparent);
+    }
+    .contact-link-value {
+      position: relative;
+      display: inline-block;
+    }
+    .contact-link-value::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.4s;
+    }
+    .contact-link:hover .contact-link-value::after { width: 100%; }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .form-group input:hover,
+    .form-group textarea:hover {
+      border-bottom-color: rgba(201,168,76,0.4);
+    }
+
+    /* Journal — add depth to the editorial layout */
+    .journal-editorial {
+      box-shadow: 0 32px 80px rgba(0,0,0,0.12);
+    }
+    .journal-feature,
+    .journal-aside {
+      overflow: hidden;
+    }
+
+    /* Nav scrolled — cleaner shadow */
+    nav.scrolled {
+      box-shadow: 0 2px 40px rgba(0,0,0,0.08);
+    }
+
+    /* Section dividers for rhythm */
+    #about {
+      position: relative;
+    }
+    #about::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 60px; right: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.15), transparent);
+    }
+
+    /* Portfolio section label */
+    #portfolio .section-heading { color: var(--charcoal); }
+
+    /* Gold horizontal rule ornament */
+    .gold-rule {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 0 auto 32px;
+      width: fit-content;
+    }
+    .gold-rule::before,
+    .gold-rule::after {
+      content: '';
+      width: 40px; height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+    .gold-rule-dot {
+      width: 4px; height: 4px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+
+    /* Responsive tweaks for new card gaps */
+    @media (max-width: 1100px) {
+      .pillars-grid { gap: 16px; }
+      .pillar-card:last-child { max-width: 100%; }
+    }
+    @media (max-width: 768px) {
+      .pillars-grid { gap: 12px; }
+      #about::after { left: 20px; right: 20px; }
+    }
   </style>
 </head>
 <body>
@@ -1851,27 +2128,33 @@
 
         <div class="pillar-card reveal">
           <div class="pillar-num">01</div>
-          <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
-          </svg>
+          <div class="pillar-icon-wrap">
+            <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
           <h3 class="pillar-title">Lifestyle</h3>
           <p class="pillar-desc">Refined home aesthetics, considered travel, curated interiors, and the quiet rituals that make everyday life feel like an occasion.</p>
         </div>
 
         <div class="pillar-card reveal reveal-delay-1">
           <div class="pillar-num">02</div>
-          <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
-          </svg>
+          <div class="pillar-icon-wrap">
+            <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+              <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+            </svg>
+          </div>
           <h3 class="pillar-title">Fashion & Beauty</h3>
           <p class="pillar-desc">Elevated style edits, luxury skincare deep-dives, editorial outfit compositions, and the beauty philosophy behind every look.</p>
         </div>
 
         <div class="pillar-card reveal reveal-delay-2">
           <div class="pillar-num">03</div>
-          <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          </svg>
+          <div class="pillar-icon-wrap">
+            <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
           <h3 class="pillar-title">Fitness & Wellness</h3>
           <p class="pillar-desc">Holistic wellbeing as a luxury practice. Movement, mindfulness, nourishment, and the journey to feeling as beautiful as you look.</p>
         </div>
@@ -1966,19 +2249,19 @@
       </div>
       <div class="reels-grid reveal reveal-delay-1">
         <a class="reel-item" href="https://www.instagram.com/reel/DYxDAzwMLew/" target="_blank" rel="noopener">
-          <div class="reel-thumb"><img src="https://scontent.cdninstagram.com/v/t51.82787-15/707522518_18592495642012102_203982357873216047_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=104&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=ZbjKQS_VhZMQ7kNvwG7HRYg&oh=00_Af89LIvGJdkorj8ss5r0nhDp6iaNsx5Px7QwM9lz5MYOnA&oe=6A265ED8" alt="Make the money reel" /><div class="reel-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+          <div class="reel-thumb"><img src="images/IMG_0066.JPG" alt="Make the money reel" /><div class="reel-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><polygon points="5,3 19,12 5,21"/></svg></div></div>
           <p class="reel-caption">Make the money, say the prayer, wear the outfit</p>
         </a>
         <a class="reel-item" href="https://www.instagram.com/reel/DYpNrJXsiiE/" target="_blank" rel="noopener">
-          <div class="reel-thumb"><img src="https://scontent.cdninstagram.com/v/t51.82787-15/706003588_18591561940012102_4043615543403732148_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=9sVFrOhG6t4Q7kNvwHeRjdg&oh=00_Af-7jY2KAS556dDITin2MhS82VBb0e_fzdQZ7sE6Kdk5hw&oe=6A26567A" alt="Dolce Gabbana glow reel" /><div class="reel-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+          <div class="reel-thumb"><img src="images/IMG_2813.JPG" alt="Dolce Gabbana glow reel" /><div class="reel-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><polygon points="5,3 19,12 5,21"/></svg></div></div>
           <p class="reel-caption">Fresh skin. Fresh look. Dolce kind of glow</p>
         </a>
         <a class="reel-item" href="https://www.instagram.com/reel/DYC0gG6sqmB/" target="_blank" rel="noopener">
-          <div class="reel-thumb"><img src="https://scontent.cdninstagram.com/v/t51.82787-15/688355777_18587364826012102_8338258294882322288_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=104&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=KSx7N1G4sjUQ7kNvwE-sYtV&oh=00_Af_fF1kvI6As7OQKSopsVshBEWlS3KVsURQARvTHFjHUwQ&oe=6A2656D6" alt="Unexpected co-star reel" /><div class="reel-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+          <div class="reel-thumb"><img src="images/IMG_9859.JPG" alt="Unexpected co-star reel" /><div class="reel-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><polygon points="5,3 19,12 5,21"/></svg></div></div>
           <p class="reel-caption">One unexpected co-star. Watch till the end.</p>
         </a>
         <a class="reel-item" href="https://www.instagram.com/reel/DX_SCY-sPQQ/" target="_blank" rel="noopener">
-          <div class="reel-thumb"><img src="https://scontent.cdninstagram.com/v/t51.82787-15/687450797_18586998124012102_1173059042777177380_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=e_ZLY1JdWJ8Q7kNvwFthVzT&oh=00_Af8VU_8eMv1D52vHV5r_wIz6tXUs5CtM8I_Td-bqHm8avQ&oe=6A266CC4" alt="Ulta Beauty reel" /><div class="reel-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+          <div class="reel-thumb"><img src="images/IMG_6977.JPG" alt="Ulta Beauty reel" /><div class="reel-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><polygon points="5,3 19,12 5,21"/></svg></div></div>
           <p class="reel-caption">21 Days of Beauty. Don't walk, RUN.</p>
         </a>
       </div>
