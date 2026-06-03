@@ -1,0 +1,9 @@
+{
+  "name": "aastha-chopra-website",
+  "version": "1.0.0",
+  "description": "Official website and media pack for Aastha Chopra (@aastha_sochic)",
+  "dependencies": {
+    "docx": "^9.7.1",
+    "puppeteer": "^25.1.0"
+  }
+}

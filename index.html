@@ -2873,16 +2873,20 @@
         const thumb = reel.thumbnail_url || '';
         const imgHtml = thumb
           ? `<img src="${thumb}" alt="${caption.replace(/"/g,'&quot;')}" loading="lazy" onerror="this.style.opacity='0'" />`
-          : `<div style="width:100%;height:100%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(180,150,80,0.3)" stroke-width="1.5"><polygon points="5,3 19,12 5,21"/></svg></div>`;
+          : `<div style="width:100%;height:100%;background:#1a1a1a;"></div>`;
         return `
-          <div class="reel-item" data-index="${i}">
+          <a class="reel-item" data-index="${i}" href="${reel.permalink}" target="_blank" rel="noopener" style="text-decoration:none;display:block;">
             <div class="reel-thumb">
               ${imgHtml}
               <span style="position:absolute;top:10px;left:10px;font-family:var(--ff-sans);font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;background:rgba(0,0,0,0.55);color:var(--gold);padding:4px 8px;backdrop-filter:blur(4px);">${reel.category}</span>
-              <a class="reel-permalink" href="${reel.permalink}" target="_blank" rel="noopener">View on Instagram →</a>
+              <button class="reel-play-btn" tabindex="-1" aria-hidden="true">
+                <span class="play-circle">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="6,3 20,12 6,21"/></svg>
+                </span>
+              </button>
             </div>
             <p class="reel-caption">${caption}</p>
-          </div>`;
+          </a>`;
       }
 
       function render() {
