@@ -10,9 +10,9 @@ export default async function handler(req) {
 
   try {
     let allMedia = [];
-    let url = `https://graph.instagram.com/v21.0/me/media?fields=id,media_type,thumbnail_url,permalink&limit=50&access_token=${token}`;
+    let url = `https://graph.instagram.com/v21.0/me/media?fields=id,media_type,thumbnail_url,permalink&limit=100&access_token=${token}`;
 
-    while (url && allMedia.length < 100) {
+    while (url && allMedia.length < 500) {
       const res = await fetch(url);
       const data = await res.json();
       if (data.error) throw new Error(data.error.message);
