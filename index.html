@@ -1566,11 +1566,14 @@
     }
     .journal-cat {
       font-family: var(--ff-sans);
-      font-size: 0.58rem;
-      letter-spacing: 0.4em;
+      font-size: 0.5rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--gold);
-      display: block;
+      background: var(--gold);
+      color: #080706;
+      font-weight: 600;
+      display: inline-block;
+      padding: 5px 10px;
       margin-bottom: 14px;
     }
     .journal-title {
@@ -1859,7 +1862,7 @@
       #portfolio { padding: 80px 0 0; }
       .portfolio-inner { padding: 0 20px; }
       .portfolio-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: 1fr;
         margin-left: -20px;
         margin-right: -20px;
         gap: 2px;
@@ -2027,7 +2030,7 @@
     .reels-tab.active { color: var(--gold); border-color: var(--gold); background: rgba(201,168,76,0.06); }
 
     @media (max-width: 768px) {
-      .reels-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .reels-grid { grid-template-columns: 1fr; gap: 10px; }
       #reels { padding: 100px 24px !important; }
       #reels .insta-follow { display: none; }
     }
@@ -2886,7 +2889,7 @@
           <div class="reel-item" data-index="${i}">
             <div class="reel-thumb">
               ${mediaEl}
-              <span style="position:absolute;top:10px;left:10px;font-family:var(--ff-sans);font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;background:rgba(0,0,0,0.55);color:var(--gold);padding:4px 8px;backdrop-filter:blur(4px);">${reel.category}</span>
+              <span style="position:absolute;top:10px;left:10px;font-family:var(--ff-sans);font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;background:var(--gold);color:#080706;padding:5px 10px;font-weight:600;">${reel.category}</span>
               <button class="reel-play-btn" aria-label="Play reel">
                 <div class="play-circle">
                   <svg viewBox="0 0 24 24" fill="white" width="20" height="20"><polygon points="6,4 20,12 6,20"/></svg>
