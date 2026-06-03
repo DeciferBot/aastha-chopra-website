@@ -1019,10 +1019,10 @@
 
     /* ─── INSTAGRAM ─── */
     #instagram {
-      padding: 120px 0 0;
+      padding: 140px 0 100px;
       background: var(--charcoal);
     }
-    .instagram-inner { max-width: 960px; margin: 0 auto; padding: 0 60px; }
+    .instagram-inner { max-width: 1280px; margin: 0 auto; padding: 0 60px; }
 
     .instagram-header {
       display: flex;
@@ -1053,26 +1053,31 @@
     .instagram-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
+      gap: 12px;
       margin-top: 40px;
-      margin-left: -60px;
-      margin-right: -60px;
     }
     .insta-tile {
-      aspect-ratio: 1;
+      aspect-ratio: 4/5;
       overflow: hidden;
       position: relative;
       display: block;
+      border-radius: 2px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.3);
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s;
+    }
+    .insta-tile:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 4px 16px rgba(201,168,76,0.15);
     }
     .insta-tile img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center top;
+      object-position: center 20%;
       display: block;
       transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-    .insta-tile:hover img { transform: scale(1.04); }
+    .insta-tile:hover img { transform: scale(1.06); }
     .insta-placeholder {
       width: 100%;
       height: 100%;
@@ -1651,14 +1656,9 @@
         gap: 2px;
       }
 
-      #instagram { padding: 80px 0 0; }
+      #instagram { padding: 80px 0 60px; }
       .instagram-inner { padding: 0 20px; }
-      .instagram-grid {
-        margin-left: -20px;
-        margin-right: -20px;
-        gap: 2px;
-        grid-template-columns: repeat(3, 1fr);
-      }
+      .instagram-grid { gap: 8px; grid-template-columns: repeat(3, 1fr); }
       .instagram-header { flex-direction: column; align-items: flex-start; gap: 24px; }
 
       #journal { padding: 80px 20px; }
@@ -2458,31 +2458,8 @@
         <a href="https://www.instagram.com/aastha_sochic/" target="_blank" class="insta-follow">Follow on Instagram</a>
       </div>
 
-      <div class="instagram-grid reveal reveal-delay-1">
-        <a class="insta-tile" href="https://www.instagram.com/p/DZDQ1bDjCEG/" target="_blank" rel="noopener">
-          <img src="https://scontent.cdninstagram.com/v/t51.82787-15/711406296_18594715408012102_544616012631401237_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=mN0E-UqEj6wQ7kNvwHsUhjW&oh=00_Af8KOnywLtb7IYQyzarJHOJQ0p28ekMQs3YLxgYOgl_0BA&oe=6A2670FA" alt="New York coffee moments" style="width:100%;height:100%;object-fit:cover;" crossorigin="anonymous" />
-          <div class="insta-overlay"><svg class="insta-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></div>
-        </a>
-        <a class="insta-tile" href="https://www.instagram.com/reel/DYxDAzwMLew/" target="_blank" rel="noopener">
-          <img src="https://scontent.cdninstagram.com/v/t51.82787-15/707522518_18592495642012102_203982357873216047_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=104&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=ZbjKQS_VhZMQ7kNvwG7HRYg&oh=00_Af89LIvGJdkorj8ss5r0nhDp6iaNsx5Px7QwM9lz5MYOnA&oe=6A265ED8" alt="Fashion reel — Acler, Hermès, Chanel" style="width:100%;height:100%;object-fit:cover;" crossorigin="anonymous" />
-          <div class="insta-overlay"><svg class="insta-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></div>
-        </a>
-        <a class="insta-tile" href="https://www.instagram.com/p/DYmfDXyDLz4/" target="_blank" rel="noopener">
-          <img src="https://scontent.cdninstagram.com/v/t51.82787-15/703261078_18591247858012102_1473101614924580350_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=bfWsMw1VEGUQ7kNvwGZ8rvj&oh=00_Af-toVSn5vz3K2F93wP_qXzh1o8yTRcRAMK89xtB7kRuUQ&oe=6A266A9E" alt="Huda Beauty event" style="width:100%;height:100%;object-fit:cover;" crossorigin="anonymous" />
-          <div class="insta-overlay"><svg class="insta-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></div>
-        </a>
-        <a class="insta-tile" href="https://www.instagram.com/p/DYXTPxRDOD0/" target="_blank" rel="noopener">
-          <img src="https://scontent.cdninstagram.com/v/t51.82787-15/671842919_18589533850012102_4571186840931657788_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=103&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=rC-n_r-5HkIQ7kNvwF3Z1Hy&oh=00_Af9BzyNpvEbQvbSincPA7yD4bLqt4YB6AvFuv986GjryIg&oe=6A264F57" alt="Valentino Rockstud Salon Dubai" style="width:100%;height:100%;object-fit:cover;" crossorigin="anonymous" />
-          <div class="insta-overlay"><svg class="insta-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></div>
-        </a>
-        <a class="insta-tile" href="https://www.instagram.com/p/DYVCwXgDLiU/" target="_blank" rel="noopener">
-          <img src="https://scontent.cdninstagram.com/v/t51.82787-15/696264292_18589307269012102_2025279870868977394_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=v5d3xVsxTxIQ7kNvwHuq6RA&oh=00_Af-pLQmG7ahxPe-Ozg4SQdGfb7-2Dbo7Ll7ztD5lDaQS2Q&oe=6A264932" alt="Celine Été 2026 Dubai Mall" style="width:100%;height:100%;object-fit:cover;" crossorigin="anonymous" />
-          <div class="insta-overlay"><svg class="insta-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></div>
-        </a>
-        <a class="insta-tile" href="https://www.instagram.com/p/DYhDfdNjznr/" target="_blank" rel="noopener">
-          <img src="https://scontent.cdninstagram.com/v/t51.82787-15/702176905_18590642938012102_4711739119626825511_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=eaa6FbB6docQ7kNvwGWLQBe&oh=00_Af_1EMsrlLnE1gauW_gwwJhVGJSN5aoct-JipO6N_ytX4g&oe=6A265608" alt="Out and about Dubai" style="width:100%;height:100%;object-fit:cover;" crossorigin="anonymous" />
-          <div class="insta-overlay"><svg class="insta-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></div>
-        </a>
+      <div class="instagram-grid reveal reveal-delay-1" id="instaGrid">
+        <div class="reels-loading">Loading…</div>
       </div>
     </div>
   </section>
@@ -2648,6 +2625,51 @@
     loadInstagramFeed();
 
     // Hamburger (mobile)
+    /* ─── INSTAGRAM GRID: fetch from API ─── */
+    (async function loadInstaGrid() {
+      const grid = document.getElementById('instaGrid');
+      if (!grid) return;
+
+      const INSTA_ICON = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>`;
+
+      let posts = [];
+      try {
+        const res = await fetch('/api/instagram');
+        const data = await res.json();
+        posts = (data.data || []).slice(0, 6);
+      } catch (e) {
+        console.warn('Instagram API unavailable', e);
+      }
+
+      // Fallback to local images when API unavailable (local dev)
+      if (!posts.length) {
+        const fallbacks = [
+          { media_url: 'images/IMG_0066.JPG', permalink: 'https://www.instagram.com/aastha_sochic/', caption: 'Evening in Dubai' },
+          { media_url: 'images/IMG_2813.JPG', permalink: 'https://www.instagram.com/aastha_sochic/', caption: 'Powder Blue Moment' },
+          { media_url: 'images/IMG_6977.JPG', permalink: 'https://www.instagram.com/aastha_sochic/', caption: 'Dubai Nights' },
+          { media_url: 'images/IMG_9859.JPG', permalink: 'https://www.instagram.com/aastha_sochic/', caption: 'Desert Arches' },
+          { media_url: 'images/IMG_7280.JPG', permalink: 'https://www.instagram.com/aastha_sochic/', caption: 'Golden Heritage' },
+          { media_url: 'images/IMG_1364.JPG', permalink: 'https://www.instagram.com/aastha_sochic/', caption: 'Burj Al Arab Days' },
+        ];
+        grid.innerHTML = fallbacks.map(p => `
+          <a class="insta-tile" href="${p.permalink}" target="_blank" rel="noopener">
+            <img src="${p.media_url}" alt="${p.caption}" loading="lazy" />
+            <div class="insta-overlay">${INSTA_ICON}</div>
+          </a>`).join('');
+        return;
+      }
+
+      grid.innerHTML = posts.map(p => {
+        const imgSrc = p.thumbnail_url || p.media_url || '';
+        const alt = (p.caption || '').slice(0, 60);
+        return `
+          <a class="insta-tile" href="${p.permalink}" target="_blank" rel="noopener">
+            <img src="${imgSrc}" alt="${alt}" loading="lazy" />
+            <div class="insta-overlay">${INSTA_ICON}</div>
+          </a>`;
+      }).join('');
+    })();
+
     /* ─── REELS: fetch from API and render custom player ─── */
     (async function loadReels() {
       const grid = document.getElementById('reelsGrid');
