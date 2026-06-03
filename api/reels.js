@@ -10,7 +10,7 @@ export default async function handler(req) {
 
   try {
     let allMedia = [];
-    let url = `https://graph.instagram.com/v21.0/me/media?fields=id,media_type,thumbnail_url,permalink&limit=100&access_token=${token}`;
+    let url = `https://graph.instagram.com/v21.0/me/media?fields=id,media_type,media_url,thumbnail_url,permalink&limit=100&access_token=${token}`;
 
     while (url && allMedia.length < 500) {
       const res = await fetch(url);
@@ -20,11 +20,17 @@ export default async function handler(req) {
       url = data.paging?.next || null;
     }
 
+    // Map reel shortcode → { thumbnail_url, media_url }
     const thumbMap = {};
     for (const m of allMedia) {
-      if (m.thumbnail_url && m.permalink) {
+      if (m.permalink) {
         const match = m.permalink.match(/\/(reel|p)\/([^/]+)\//);
-        if (match) thumbMap[match[2]] = m.thumbnail_url;
+        if (match) {
+          thumbMap[match[2]] = {
+            thumbnail_url: m.thumbnail_url || null,
+            media_url: m.media_type === 'VIDEO' ? (m.media_url || null) : null,
+          };
+        }
       }
     }
 
@@ -34,6 +40,7 @@ export default async function handler(req) {
       .map(m => ({
         id: m.id,
         thumbnail_url: m.thumbnail_url || null,
+        media_url: m.media_url || null,
         permalink: m.permalink,
       }));
 

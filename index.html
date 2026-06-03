@@ -2871,22 +2871,74 @@
       function reelCard(reel, i) {
         const caption = reel.caption || '';
         const thumb = reel.thumbnail_url || '';
-        const imgHtml = thumb
-          ? `<img src="${thumb}" alt="${caption.replace(/"/g,'&quot;')}" loading="lazy" onerror="this.style.opacity='0'" />`
-          : `<div style="width:100%;height:100%;background:#1a1a1a;"></div>`;
+        const hasVideo = !!reel.media_url;
+        const mediaEl = hasVideo
+          ? `<video src="${reel.media_url}" poster="${thumb}" loop muted playsinline preload="none" style="width:100%;height:100%;object-fit:cover;"></video>`
+          : `<img src="${thumb}" alt="${caption.replace(/"/g,'&quot;')}" loading="lazy" onerror="this.style.opacity='0'" style="width:100%;height:100%;object-fit:cover;" />`;
+        const unmuteBtn = hasVideo ? `
+          <button class="reel-unmute-btn" aria-label="Toggle mute">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07" class="sound-waves"/>
+            </svg>
+          </button>` : '';
         return `
-          <a class="reel-item" data-index="${i}" href="${reel.permalink}" target="_blank" rel="noopener" style="text-decoration:none;display:block;">
+          <div class="reel-item" data-index="${i}">
             <div class="reel-thumb">
-              ${imgHtml}
+              ${mediaEl}
               <span style="position:absolute;top:10px;left:10px;font-family:var(--ff-sans);font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;background:rgba(0,0,0,0.55);color:var(--gold);padding:4px 8px;backdrop-filter:blur(4px);">${reel.category}</span>
-              <button class="reel-play-btn" tabindex="-1" aria-hidden="true">
-                <span class="play-circle">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="6,3 20,12 6,21"/></svg>
-                </span>
+              <button class="reel-play-btn" aria-label="Play reel">
+                <div class="play-circle">
+                  <svg viewBox="0 0 24 24" fill="white" width="20" height="20"><polygon points="6,4 20,12 6,20"/></svg>
+                </div>
               </button>
+              ${unmuteBtn}
+              <a class="reel-permalink" href="${reel.permalink}" target="_blank" rel="noopener">View on Instagram →</a>
             </div>
             <p class="reel-caption">${caption}</p>
-          </a>`;
+          </div>`;
+      }
+
+      function wireVideos(grid) {
+        grid.querySelectorAll('.reel-item').forEach(item => {
+          const video = item.querySelector('video');
+          const playBtn = item.querySelector('.reel-play-btn');
+          const unmuteBtn = item.querySelector('.reel-unmute-btn');
+          if (!video) {
+            // Image-only card: clicking play opens Instagram
+            if (playBtn) {
+              const link = item.querySelector('.reel-permalink');
+              playBtn.addEventListener('click', () => { if (link) window.open(link.href, '_blank'); });
+            }
+            return;
+          }
+          playBtn.addEventListener('click', () => {
+            if (video.paused) {
+              grid.querySelectorAll('video').forEach(v => {
+                if (v !== video) { v.pause(); v.closest('.reel-item').querySelector('.reel-play-btn').classList.remove('playing'); v.closest('.reel-item').querySelector('.play-circle').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="20" height="20"><polygon points="6,4 20,12 6,20"/></svg>'; }
+              });
+              video.play();
+              playBtn.classList.add('playing');
+              playBtn.querySelector('.play-circle').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="18" height="18"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+            } else {
+              video.pause();
+              playBtn.classList.remove('playing');
+              playBtn.querySelector('.play-circle').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="20" height="20"><polygon points="6,4 20,12 6,20"/></svg>';
+            }
+          });
+          if (unmuteBtn) {
+            unmuteBtn.addEventListener('click', e => {
+              e.stopPropagation();
+              video.muted = !video.muted;
+              const waves = unmuteBtn.querySelector('.sound-waves');
+              if (waves) waves.style.opacity = video.muted ? '0.3' : '1';
+            });
+          }
+          video.addEventListener('ended', () => {
+            playBtn.classList.remove('playing');
+            playBtn.querySelector('.play-circle').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="20" height="20"><polygon points="6,4 20,12 6,20"/></svg>';
+          });
+        });
       }
 
       function render() {
@@ -2896,6 +2948,7 @@
         const filtered = getFiltered();
         const visible = filtered.slice(0, (page + 1) * PAGE_SIZE);
         grid.innerHTML = visible.map((r, i) => reelCard(r, i)).join('');
+        wireVideos(grid);
         if (moreWrap) moreWrap.style.display = visible.length < filtered.length ? 'block' : 'none';
       }
 
@@ -2919,7 +2972,10 @@
           if (!data?.thumbMap) return;
           TOP50.forEach(reel => {
             const id = reel.permalink.match(/\/reel\/([^/]+)\//)?.[1];
-            if (id && data.thumbMap[id]) reel.thumbnail_url = data.thumbMap[id];
+            if (id && data.thumbMap[id]) {
+              reel.thumbnail_url = data.thumbMap[id].thumbnail_url || reel.thumbnail_url;
+              reel.media_url = data.thumbMap[id].media_url || null;
+            }
           });
           render();
         })
