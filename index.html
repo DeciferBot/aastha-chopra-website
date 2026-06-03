@@ -105,20 +105,7 @@
       transform: translate(-50%, -50%);
       transition: transform 0.1s, width 0.3s, height 0.3s, opacity 0.3s;
     }
-    .cursor-ring {
-      position: fixed;
-      width: 36px;
-      height: 36px;
-      border: 1px solid var(--gold);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-      transform: translate(-50%, -50%);
-      transition: transform 0.15s ease-out, width 0.3s, height 0.3s, opacity 0.3s;
-      opacity: 0.6;
-    }
     .cursor.hover { width: 16px; height: 16px; }
-    .cursor-ring.hover { width: 56px; height: 56px; opacity: 0.3; }
 
     /* Nav */
     nav {
@@ -202,6 +189,10 @@
     .reveal-delay-2 { transition-delay: 0.3s; }
     .reveal-delay-3 { transition-delay: 0.45s; }
     .reveal-delay-4 { transition-delay: 0.6s; }
+    .reveal { transition-duration: 0.8s; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
 
     /* ─── NEW HERO ─── */
     :root {
@@ -1539,7 +1530,7 @@
 
     @media (max-width: 768px) {
       body { cursor: auto; }
-      .cursor, .cursor-ring { display: none; }
+      .cursor { display: none; }
       nav { padding: 20px 24px; }
       nav.scrolled { padding: 14px 24px; }
       .nav-links { display: none; }
@@ -1551,7 +1542,6 @@
       .orn-c1, .orn-c2 { display: none; }
       #about {
         grid-template-columns: 1fr;
-        padding: 100px 24px;
         gap: 60px;
       }
       .about-number { display: none; }
@@ -1571,7 +1561,8 @@
       footer { flex-direction: column; gap: 24px; text-align: center; padding: 48px 24px; }
       .footer-socials { justify-content: center; }
       .about-stats { gap: 32px; }
-      #pillars, #portfolio, #instagram, #contact, #collabs, #journal, #newsletter { padding: 100px 24px; }
+      #about { padding: 80px 24px; }
+      #pillars, #portfolio, #instagram, #contact, #collabs, #journal, #newsletter { padding: 80px 24px; }
       #mediakit { padding: 48px 24px; }
       .mediakit-inner { grid-template-columns: 1fr; gap: 32px; }
       .mk-divider { display: none; }
@@ -1582,13 +1573,58 @@
       .newsletter-input { border-right: 1px solid rgba(26,26,26,0.15); border-bottom: none; }
       .newsletter-btn { width: 100%; }
     }
+
+    .reels-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .reel-item {
+      text-decoration: none;
+      display: block;
+    }
+    .reel-thumb {
+      position: relative;
+      aspect-ratio: 9/16;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+    .reel-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reel-item:hover .reel-thumb img { transform: scale(1.05); }
+    .reel-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.25);
+      transition: background 0.3s;
+    }
+    .reel-item:hover .reel-play { background: rgba(201,168,76,0.3); }
+    .reel-caption {
+      font-family: var(--ff-sans);
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: rgba(250,248,245,0.6);
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+    @media (max-width: 768px) {
+      .reels-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      #reels { padding: 100px 24px !important; }
+      #reels .insta-follow { display: none; }
+    }
   </style>
 </head>
 <body>
 
   <!-- Custom Cursor -->
   <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
 
   <!-- Navigation -->
   <nav id="nav">
@@ -1710,10 +1746,10 @@
         <em>elevated living</em>
       </h2>
       <p class="about-bio reveal reveal-delay-2">
-        I'm Aastha — a Dubai-based luxury lifestyle and fashion creator, and a licensed lawyer who chose to build a world of beauty instead. From Valentino and Celine to Huda Beauty and Dolce &amp; Gabbana, I curate elevated moments across fashion, premium beauty, and luxury living.
+        I'm Aastha Chopra, a Dubai-based luxury lifestyle and fashion creator with 51.5K followers across the UAE and globally. Trained as a lawyer and now a UAE Media Council licensed creator, I bring the same precision and intentionality to my content as I did to the courtroom. My world spans designer fashion, premium beauty, and elevated living.
       </p>
       <p class="about-bio reveal reveal-delay-2">
-        Through my lens, I share a life thoughtfully composed — where designer pieces meet everyday rituals, and every experience is worth celebrating in style. Luxury, to me, is a state of mind.
+        I work with the brands I genuinely love. From Valentino and Celine to Huda Beauty and Dolce &amp; Gabbana, every piece of content I create is crafted to perform, not just to look good. My audience trusts my taste, and that trust is the most valuable thing I offer any brand partner.
       </p>
       <div class="about-stats reveal reveal-delay-3">
         <div class="stat-item">
@@ -1765,7 +1801,7 @@
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
           <h3 class="pillar-title">Fitness & Wellness</h3>
-          <p class="pillar-desc">Holistic wellbeing as a luxury practice — movement, mindfulness, nourishment, and the journey to feeling as beautiful as you look.</p>
+          <p class="pillar-desc">Holistic wellbeing as a luxury practice. Movement, mindfulness, nourishment, and the journey to feeling as beautiful as you look.</p>
         </div>
 
       </div>
@@ -1846,12 +1882,43 @@
     </div>
   </section>
 
+  <!-- REELS -->
+  <section id="reels" style="padding:120px 60px;background:var(--charcoal);">
+    <div style="max-width:1400px;margin:0 auto;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;">
+        <div>
+          <p class="section-label reveal" style="color:rgba(201,168,76,0.7);">Top Reels</p>
+          <h2 class="section-heading reveal reveal-delay-1">Content that <em>converts</em></h2>
+        </div>
+        <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener" class="insta-follow reveal" style="flex-shrink:0;">Watch on Instagram</a>
+      </div>
+      <div class="reels-grid reveal reveal-delay-1">
+        <a class="reel-item" href="https://www.instagram.com/reel/DYxDAzwMLew/" target="_blank" rel="noopener">
+          <div class="reel-thumb"><img src="https://scontent.cdninstagram.com/v/t51.82787-15/707522518_18592495642012102_203982357873216047_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=104&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=ZbjKQS_VhZMQ7kNvwG7HRYg&oh=00_Af89LIvGJdkorj8ss5r0nhDp6iaNsx5Px7QwM9lz5MYOnA&oe=6A265ED8" alt="Make the money reel" /><div class="reel-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+          <p class="reel-caption">Make the money, say the prayer, wear the outfit</p>
+        </a>
+        <a class="reel-item" href="https://www.instagram.com/reel/DYpNrJXsiiE/" target="_blank" rel="noopener">
+          <div class="reel-thumb"><img src="https://scontent.cdninstagram.com/v/t51.82787-15/706003588_18591561940012102_4043615543403732148_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=9sVFrOhG6t4Q7kNvwHeRjdg&oh=00_Af-7jY2KAS556dDITin2MhS82VBb0e_fzdQZ7sE6Kdk5hw&oe=6A26567A" alt="Dolce Gabbana glow reel" /><div class="reel-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+          <p class="reel-caption">Fresh skin. Fresh look. Dolce kind of glow</p>
+        </a>
+        <a class="reel-item" href="https://www.instagram.com/reel/DYC0gG6sqmB/" target="_blank" rel="noopener">
+          <div class="reel-thumb"><img src="https://scontent.cdninstagram.com/v/t51.82787-15/688355777_18587364826012102_8338258294882322288_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=104&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=KSx7N1G4sjUQ7kNvwE-sYtV&oh=00_Af_fF1kvI6As7OQKSopsVshBEWlS3KVsURQARvTHFjHUwQ&oe=6A2656D6" alt="Unexpected co-star reel" /><div class="reel-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+          <p class="reel-caption">One unexpected co-star. Watch till the end.</p>
+        </a>
+        <a class="reel-item" href="https://www.instagram.com/reel/DX_SCY-sPQQ/" target="_blank" rel="noopener">
+          <div class="reel-thumb"><img src="https://scontent.cdninstagram.com/v/t51.82787-15/687450797_18586998124012102_1173059042777177380_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=e_ZLY1JdWJ8Q7kNvwFthVzT&oh=00_Af8VU_8eMv1D52vHV5r_wIz6tXUs5CtM8I_Td-bqHm8avQ&oe=6A266CC4" alt="Ulta Beauty reel" /><div class="reel-play"><svg viewBox="0 0 24 24" fill="white" width="28" height="28"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+          <p class="reel-caption">21 Days of Beauty. Don't walk, RUN.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── MEDIA KIT STRIP ─── -->
   <section id="mediakit">
     <div class="mediakit-inner">
       <div class="mediakit-stats reveal">
         <div class="mk-stat">
-          <span class="mk-num">50K+</span>
+          <span class="mk-num">51.5K</span>
           <span class="mk-label">Followers</span>
         </div>
         <div class="mk-stat">
@@ -1859,14 +1926,14 @@
           <span class="mk-label">Brand Collabs</span>
         </div>
         <div class="mk-stat">
-          <span class="mk-num">200+</span>
+          <span class="mk-num">2,040</span>
           <span class="mk-label">Posts</span>
         </div>
       </div>
       <div class="mk-divider"></div>
       <div class="mediakit-right reveal reveal-delay-1">
-        <span class="mk-tagline">Dubai-based creator</span>
-        <span class="mk-sub">Available for brand partnerships</span>
+        <span class="mk-tagline">UAE's luxury lifestyle voice</span>
+        <span class="mk-sub">Trusted by 40+ premium brands</span>
         <div class="mk-niches">
           <span class="mk-niche">Fashion</span>
           <span class="mk-niche">Beauty</span>
@@ -1944,7 +2011,7 @@
   <section id="collabs">
     <div class="collabs-inner">
       <p class="section-label reveal" style="justify-content:center;">Brand Partnerships</p>
-      <h2 class="collabs-heading reveal reveal-delay-1">Open to<br><em>collaborations</em></h2>
+      <h2 class="collabs-heading reveal reveal-delay-1">Built for<br><em>brand partnerships</em></h2>
 
       <div class="collab-categories reveal reveal-delay-2">
         <span class="collab-tag">Fashion</span>
@@ -1958,7 +2025,7 @@
       </div>
 
       <p class="collab-desc reveal reveal-delay-3">
-        I partner with brands that align with a vision of elevated, intentional living. Every collaboration is thoughtfully crafted to feel genuine, beautiful, and resonant with my audience.
+        Aastha brings genuine audience trust to every partnership. She only works with brands she uses and believes in, which is why her sponsored content consistently outperforms organic benchmarks. If your brand belongs in a luxury lifestyle context, she is the right voice.
       </p>
 
       <a href="#contact" class="btn-primary reveal reveal-delay-4"><span>Work With Me</span></a>
@@ -2015,9 +2082,9 @@
       </p>
 
       <div class="contact-links reveal reveal-delay-2">
-        <a href="mailto:hello@aasthachopra.com" class="contact-link">
+        <a href="mailto:management@aasthachopra.com" class="contact-link">
           <span class="contact-link-label">Email</span>
-          <span class="contact-link-value">hello@aasthachopra.com</span>
+          <span class="contact-link-value">management@aasthachopra.com</span>
         </a>
         <a href="https://www.instagram.com/aastha_sochic/" target="_blank" class="contact-link">
           <span class="contact-link-label">Instagram</span>
@@ -2084,7 +2151,7 @@
     </div>
     <div class="footer-center">
       © 2026 Aastha Chopra &nbsp;·&nbsp; All rights reserved<br>
-      <span style="margin-top:6px;display:block;">hello@aasthachopra.com</span>
+      <span style="margin-top:6px;display:block;">management@aasthachopra.com</span>
     </div>
     <div class="footer-socials">
       <a href="https://www.instagram.com/aastha_sochic/" target="_blank" class="footer-social-link">Instagram</a>
@@ -2098,8 +2165,7 @@
   <script>
     // Custom Cursor
     const cursor = document.getElementById('cursor');
-    const ring = document.getElementById('cursorRing');
-    let mx = 0, my = 0, rx = 0, ry = 0;
+    let mx = 0, my = 0;
     let parallaxX = 0, parallaxY = 0, targetPX = 0, targetPY = 0;
 
     document.addEventListener('mousemove', e => {
@@ -2115,12 +2181,7 @@
     });
 
     const heroImg = document.getElementById('heroImg');
-    function animateRing() {
-      rx += (mx - rx) * 0.12;
-      ry += (my - ry) * 0.12;
-      ring.style.left = rx + 'px';
-      ring.style.top = ry + 'px';
-
+    function animateFrame() {
       // Smooth parallax
       parallaxX += (targetPX - parallaxX) * 0.06;
       parallaxY += (targetPY - parallaxY) * 0.06;
@@ -2128,9 +2189,9 @@
         heroImg.style.transform = `translate(${parallaxX}px, ${parallaxY}px) scale(1.06)`;
       }
 
-      requestAnimationFrame(animateRing);
+      requestAnimationFrame(animateFrame);
     }
-    animateRing();
+    animateFrame();
 
     // Scroll parallax for hero image
     window.addEventListener('scroll', () => {
@@ -2141,8 +2202,8 @@
     }, { passive: true });
 
     document.querySelectorAll('a, button, .portfolio-item, .pillar-card, .insta-tile, .collab-tag').forEach(el => {
-      el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); ring.classList.add('hover'); });
-      el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); ring.classList.remove('hover'); });
+      el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); });
+      el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); });
     });
 
     // Scroll nav
@@ -2211,8 +2272,8 @@
           </a>`;
         }).join('');
         document.querySelectorAll('.insta-tile').forEach(el => {
-          el.addEventListener('mouseenter', () => { cursor?.classList.add('hover'); ring?.classList.add('hover'); });
-          el.addEventListener('mouseleave', () => { cursor?.classList.remove('hover'); ring?.classList.remove('hover'); });
+          el.addEventListener('mouseenter', () => { cursor?.classList.add('hover'); });
+          el.addEventListener('mouseleave', () => { cursor?.classList.remove('hover'); });
         });
       } catch {}
     }
