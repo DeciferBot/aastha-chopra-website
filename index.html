@@ -246,6 +246,22 @@
       transition: background var(--duration-fast) var(--ease-default), color var(--duration-fast) var(--ease-default);
     }
     .nav-cta:hover { background: var(--color-gold); color: var(--color-bg); }
+    .nav-mediapack {
+      font-family: var(--font-ui);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color var(--duration-fast) var(--ease-default);
+    }
+    .nav-mediapack:hover { color: var(--color-gold); }
+    .nav-mediapack svg { opacity: 0.6; transition: opacity var(--duration-fast); }
+    .nav-mediapack:hover svg { opacity: 1; }
 
     /* Scroll Animations */
     .reveal {
@@ -2199,6 +2215,12 @@
       <li><a href="#collabs">Collabs</a></li>
       <li><a href="#instagram">Instagram</a></li>
     </ul>
+    <a href="/media-pack.pdf" download="Aastha-Chopra-Media-Pack-2026.pdf" class="nav-mediapack">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 1v7M3.5 5.5L6 8l2.5-2.5M2 10h8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Media Pack
+    </a>
     <a href="#contact" class="nav-cta">Work With Me</a>
     <div class="hamburger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
