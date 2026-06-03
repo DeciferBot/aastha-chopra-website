@@ -1,0 +1,12 @@
+{
+  "name": "Aastha Chopra",
+  "short_name": "Aastha Chopra",
+  "description": "Luxury Beauty and Lifestyle Creator, Dubai UAE",
+  "icons": [
+    { "src": "/favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/favicon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#0a0a0a",
+  "background_color": "#0a0a0a",
+  "display": "standalone"
+}
