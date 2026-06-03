@@ -942,7 +942,7 @@
     /* ─── COLLABORATIONS ─── */
     #collabs {
       background: var(--gold-pale);
-      padding: 140px 60px;
+      padding: 100px 60px 80px;
       text-align: center;
     }
     .collabs-inner { max-width: 900px; margin: 0 auto; }
@@ -1802,6 +1802,20 @@
       letter-spacing: 0.3em;
       text-transform: uppercase;
     }
+    .reels-tab {
+      font-family: var(--ff-sans);
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      background: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(250,248,245,0.4);
+      padding: 8px 20px;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .reels-tab:hover { color: var(--gold); border-color: rgba(201,168,76,0.4); }
+    .reels-tab.active { color: var(--gold); border-color: var(--gold); background: rgba(201,168,76,0.06); }
 
     @media (max-width: 768px) {
       .reels-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -2291,15 +2305,25 @@
   <!-- REELS — moved up, right after About -->
   <section id="reels" style="padding:120px 60px;background:var(--charcoal);">
     <div style="max-width:1400px;margin:0 auto;">
-      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;">
         <div>
           <p class="section-label reveal" style="color:rgba(201,168,76,0.7);">Top Reels</p>
           <h2 class="section-heading reveal reveal-delay-1">Content that <em>converts</em></h2>
         </div>
         <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener" class="insta-follow reveal" style="flex-shrink:0;">Watch on Instagram</a>
       </div>
-      <div class="reels-grid reveal reveal-delay-1" id="reelsGrid">
+      <div class="reels-tabs reveal" id="reelsTabs" style="display:flex;gap:8px;margin-bottom:36px;flex-wrap:wrap;">
+        <button class="reels-tab active" data-cat="All">All</button>
+        <button class="reels-tab" data-cat="Luxury">Luxury</button>
+        <button class="reels-tab" data-cat="Beauty">Beauty</button>
+        <button class="reels-tab" data-cat="Fashion">Fashion</button>
+        <button class="reels-tab" data-cat="Wellness">Wellness</button>
+      </div>
+      <div class="reels-grid" id="reelsGrid">
         <div class="reels-loading">Loading reels…</div>
+      </div>
+      <div style="text-align:center;margin-top:40px;" id="reelsShowMore" style="display:none;">
+        <button id="reelsMoreBtn" style="font-family:var(--ff-sans);font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--warm-grey);background:none;border:1px solid rgba(255,255,255,0.15);padding:12px 32px;cursor:pointer;transition:all 0.3s;" onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--gold)'" onmouseout="this.style.color='var(--warm-grey)';this.style.borderColor='rgba(255,255,255,0.15)'">Load More</button>
       </div>
     </div>
   </section>
@@ -2485,12 +2509,6 @@
       <div class="contact-divider reveal"></div>
       <div class="reveal reveal-delay-3" style="margin-top:24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;">
         <a href="mailto:management@aasthachopra.com" class="btn-primary"><span>Start a Conversation</span></a>
-        <a href="/Aastha_Chopra_Media_Kit.pdf" target="_blank" rel="noopener"
-           style="font-family:var(--ff-sans);font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--warm-grey);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.3s;"
-           onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--warm-grey)'">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-          Media Kit
-        </a>
       </div>
     </div>
   </section>
@@ -2563,16 +2581,35 @@
       nav.classList.toggle('scrolled', window.scrollY > 60);
     });
 
-    // Intersection Observer
+    // Reveal any .reveal elements currently in the viewport
+    function revealVisible() {
+      document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight + 60 && r.bottom > -60) {
+          el.classList.add('visible');
+        }
+      });
+    }
+
+    // Intersection Observer for scroll-driven reveals
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.06, rootMargin: '0px 0px -20px 0px' });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Run immediately, then after rAF (browser paint), then after 250ms
+    // — covers: normal load, hash-navigation, and slow scroll-restoration
+    revealVisible();
+    requestAnimationFrame(() => {
+      revealVisible();
+      setTimeout(revealVisible, 250);
+    });
 
     // Newsletter — posts to /api/subscribe (Resend)
     async function handleNewsletterSubmit(e) {
