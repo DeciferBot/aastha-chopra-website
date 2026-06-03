@@ -1873,20 +1873,33 @@
       .instagram-grid { gap: 8px; grid-template-columns: repeat(3, 1fr); }
       .instagram-header { flex-direction: column; align-items: flex-start; gap: 24px; }
 
-      #journal { padding: 80px 20px; }
+      #journal { padding: 80px 16px; }
       .journal-editorial {
         grid-template-columns: 1fr;
         grid-template-rows: auto;
         height: auto;
-        gap: 3px;
+        gap: 12px;
       }
-      .journal-feature { aspect-ratio: 4/5; }
-      .journal-secondary { grid-template-rows: auto auto; }
-      .journal-aside { aspect-ratio: 4/3; }
-      .journal-feature-meta { padding: 28px; }
+      .journal-feature {
+        aspect-ratio: 4/5;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .journal-feature img { object-position: center 20%; }
+      .journal-secondary {
+        grid-template-rows: auto auto;
+        gap: 12px;
+      }
+      .journal-aside {
+        aspect-ratio: 4/3;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .journal-aside img { object-position: center 20%; }
+      .journal-feature-meta { padding: 24px; }
       .journal-aside-meta { padding: 20px; }
-      .journal-title { font-size: 1.5rem; }
-      .journal-aside .journal-title { font-size: 1.1rem; }
+      .journal-title { font-size: 1.4rem; }
+      .journal-aside .journal-title { font-size: 1.15rem; }
 
       #collabs { padding: 80px 20px; }
       #contact { padding: 80px 20px; }
