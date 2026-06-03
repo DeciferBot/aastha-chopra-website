@@ -5,9 +5,10 @@ const MEDIA_FIELDS = [
   'permalink', 'timestamp', 'like_count', 'comments_count',
 ].join(',');
 
-// Metrics differ by media type
-const IMAGE_METRICS = 'reach,impressions,saved,likes,comments,shares,total_interactions';
-const REEL_METRICS  = 'reach,impressions,saved,likes,comments,shares,total_interactions,ig_reels_avg_watch_time,ig_reels_video_view_total_time,views';
+// Metrics per media type (impressions not supported for IMAGE/CAROUSEL)
+const IMAGE_METRICS = 'reach,saved,likes,comments,shares,total_interactions';
+const VIDEO_METRICS = 'reach,impressions,saved,likes,comments,shares,total_interactions';
+const REEL_METRICS  = 'reach,saved,likes,comments,shares,total_interactions,ig_reels_avg_watch_time,ig_reels_video_view_total_time,views';
 
 export default async function handler(req) {
   const token = process.env.INSTAGRAM_ACCESS_TOKEN;
@@ -35,7 +36,11 @@ export default async function handler(req) {
     if (withInsights && posts.length > 0) {
       const insightResults = await Promise.all(
         posts.map(async (post) => {
-          const metrics = post.media_type === 'VIDEO' ? REEL_METRICS : IMAGE_METRICS;
+          const metrics = post.media_type === 'VIDEO'
+            ? REEL_METRICS
+            : post.media_type === 'IMAGE'
+              ? IMAGE_METRICS
+              : IMAGE_METRICS; // CAROUSEL_ALBUM → same as IMAGE
           const res = await fetch(
             `https://graph.instagram.com/v21.0/${post.id}/insights?metric=${metrics}&period=lifetime&access_token=${token}`
           );
