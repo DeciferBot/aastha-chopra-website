@@ -1,0 +1,455 @@
+{
+  "fetched_at": "2026-06-04",
+  "hashtags_top50": {
+    "fashion": 81,
+    "mentalhealth": 75,
+    "positivity": 69,
+    "gratitude": 61,
+    "mentalhealthawareness": 60,
+    "mindfulness": 56,
+    "confidence": 54,
+    "photo": 54,
+    "selflove": 52,
+    "instagood": 52,
+    "healing": 51,
+    "fitmom": 47,
+    "recovery": 46,
+    "igers": 46,
+    "motivation": 45,
+    "selfworth": 44,
+    "loveyourself": 43,
+    "meditation": 43,
+    "bodypositive": 42,
+    "style": 38,
+    "mydubai": 32,
+    "spirituality": 31,
+    "dubaifashion": 29,
+    "positivevibes": 28,
+    "bopo": 26,
+    "selfcare": 26,
+    "spiritjunkie": 25,
+    "love": 23,
+    "selfesteem": 23,
+    "fitnessmotivation": 23,
+    "spiritiunkie": 22,
+    "luxurypret": 20,
+    "healthy": 20,
+    "happy": 19,
+    "ootd": 18,
+    "health": 18,
+    "fitness": 17,
+    "dubai": 15,
+    "photographer": 15,
+    "inspo": 15,
+    "fashionstyle": 14,
+    "dubaiinfluencer": 13,
+    "reelitfeelit": 12,
+    "styleinspiration": 12,
+    "inspiration": 12,
+    "mentalhealthawarness": 12,
+    "reels": 11,
+    "fashiongram": 11,
+    "namshi": 10,
+    "aasthasochic": 10
+  },
+  "posting_frequency_monthly": {
+    "2023-04": 1,
+    "2023-05": 11,
+    "2023-06": 14,
+    "2023-07": 11,
+    "2023-08": 13,
+    "2023-09": 14,
+    "2023-10": 16,
+    "2023-11": 18,
+    "2023-12": 13,
+    "2024-01": 15,
+    "2024-02": 13,
+    "2024-03": 14,
+    "2024-04": 14,
+    "2024-05": 17,
+    "2024-06": 10,
+    "2024-07": 7,
+    "2024-08": 18,
+    "2024-09": 13,
+    "2024-10": 20,
+    "2024-11": 7,
+    "2024-12": 14,
+    "2025-01": 11,
+    "2025-02": 16,
+    "2025-03": 14,
+    "2025-04": 16,
+    "2025-05": 17,
+    "2025-06": 16,
+    "2025-07": 12,
+    "2025-08": 6,
+    "2025-09": 18,
+    "2025-10": 16,
+    "2025-11": 17,
+    "2025-12": 10,
+    "2026-01": 10,
+    "2026-02": 10,
+    "2026-03": 13,
+    "2026-04": 13,
+    "2026-05": 11,
+    "2026-06": 1
+  },
+  "engagement_by_day": {
+    "Monday": {
+      "posts": 82,
+      "avg_engagement": 564
+    },
+    "Friday": {
+      "posts": 68,
+      "avg_engagement": 371
+    },
+    "Thursday": {
+      "posts": 68,
+      "avg_engagement": 395
+    },
+    "Tuesday": {
+      "posts": 73,
+      "avg_engagement": 410
+    },
+    "Wednesday": {
+      "posts": 92,
+      "avg_engagement": 479
+    },
+    "Saturday": {
+      "posts": 57,
+      "avg_engagement": 291
+    },
+    "Sunday": {
+      "posts": 60,
+      "avg_engagement": 435
+    }
+  },
+  "engagement_by_hour_utc": {
+    "2": {
+      "posts": 1,
+      "avg_engagement": 475
+    },
+    "3": {
+      "posts": 1,
+      "avg_engagement": 170
+    },
+    "4": {
+      "posts": 1,
+      "avg_engagement": 67
+    },
+    "5": {
+      "posts": 11,
+      "avg_engagement": 288
+    },
+    "6": {
+      "posts": 41,
+      "avg_engagement": 616
+    },
+    "7": {
+      "posts": 41,
+      "avg_engagement": 719
+    },
+    "8": {
+      "posts": 33,
+      "avg_engagement": 390
+    },
+    "9": {
+      "posts": 42,
+      "avg_engagement": 355
+    },
+    "10": {
+      "posts": 31,
+      "avg_engagement": 330
+    },
+    "11": {
+      "posts": 41,
+      "avg_engagement": 327
+    },
+    "12": {
+      "posts": 35,
+      "avg_engagement": 544
+    },
+    "13": {
+      "posts": 41,
+      "avg_engagement": 389
+    },
+    "14": {
+      "posts": 41,
+      "avg_engagement": 483
+    },
+    "15": {
+      "posts": 31,
+      "avg_engagement": 420
+    },
+    "16": {
+      "posts": 32,
+      "avg_engagement": 369
+    },
+    "17": {
+      "posts": 22,
+      "avg_engagement": 392
+    },
+    "18": {
+      "posts": 14,
+      "avg_engagement": 348
+    },
+    "19": {
+      "posts": 16,
+      "avg_engagement": 216
+    },
+    "20": {
+      "posts": 9,
+      "avg_engagement": 263
+    },
+    "21": {
+      "posts": 8,
+      "avg_engagement": 231
+    },
+    "22": {
+      "posts": 8,
+      "avg_engagement": 533
+    }
+  },
+  "media_type_performance": {
+    "CAROUSEL_ALBUM": {
+      "posts": 232,
+      "avg_engagement": 295,
+      "avg_likes": 221,
+      "avg_comments": 74
+    },
+    "VIDEO": {
+      "posts": 262,
+      "avg_engagement": 557,
+      "avg_likes": 473,
+      "avg_comments": 84
+    },
+    "IMAGE": {
+      "posts": 6,
+      "avg_engagement": 117,
+      "avg_likes": 93,
+      "avg_comments": 25
+    }
+  },
+  "monthly_engagement_trend": {
+    "2023-04": {
+      "posts": 1,
+      "avg_engagement": 216,
+      "engagement_rate_pct": 0.42
+    },
+    "2023-05": {
+      "posts": 11,
+      "avg_engagement": 167,
+      "engagement_rate_pct": 0.32
+    },
+    "2023-06": {
+      "posts": 14,
+      "avg_engagement": 148,
+      "engagement_rate_pct": 0.29
+    },
+    "2023-07": {
+      "posts": 11,
+      "avg_engagement": 162,
+      "engagement_rate_pct": 0.31
+    },
+    "2023-08": {
+      "posts": 13,
+      "avg_engagement": 203,
+      "engagement_rate_pct": 0.39
+    },
+    "2023-09": {
+      "posts": 14,
+      "avg_engagement": 251,
+      "engagement_rate_pct": 0.49
+    },
+    "2023-10": {
+      "posts": 16,
+      "avg_engagement": 182,
+      "engagement_rate_pct": 0.35
+    },
+    "2023-11": {
+      "posts": 18,
+      "avg_engagement": 138,
+      "engagement_rate_pct": 0.27
+    },
+    "2023-12": {
+      "posts": 13,
+      "avg_engagement": 109,
+      "engagement_rate_pct": 0.21
+    },
+    "2024-01": {
+      "posts": 15,
+      "avg_engagement": 860,
+      "engagement_rate_pct": 1.67
+    },
+    "2024-02": {
+      "posts": 13,
+      "avg_engagement": 209,
+      "engagement_rate_pct": 0.41
+    },
+    "2024-03": {
+      "posts": 14,
+      "avg_engagement": 162,
+      "engagement_rate_pct": 0.31
+    },
+    "2024-04": {
+      "posts": 14,
+      "avg_engagement": 197,
+      "engagement_rate_pct": 0.38
+    },
+    "2024-05": {
+      "posts": 17,
+      "avg_engagement": 829,
+      "engagement_rate_pct": 1.61
+    },
+    "2024-06": {
+      "posts": 10,
+      "avg_engagement": 240,
+      "engagement_rate_pct": 0.47
+    },
+    "2024-07": {
+      "posts": 7,
+      "avg_engagement": 200,
+      "engagement_rate_pct": 0.39
+    },
+    "2024-08": {
+      "posts": 18,
+      "avg_engagement": 196,
+      "engagement_rate_pct": 0.38
+    },
+    "2024-09": {
+      "posts": 13,
+      "avg_engagement": 424,
+      "engagement_rate_pct": 0.82
+    },
+    "2024-10": {
+      "posts": 20,
+      "avg_engagement": 480,
+      "engagement_rate_pct": 0.93
+    },
+    "2024-11": {
+      "posts": 7,
+      "avg_engagement": 987,
+      "engagement_rate_pct": 1.92
+    },
+    "2024-12": {
+      "posts": 14,
+      "avg_engagement": 425,
+      "engagement_rate_pct": 0.82
+    },
+    "2025-01": {
+      "posts": 11,
+      "avg_engagement": 1270,
+      "engagement_rate_pct": 2.47
+    },
+    "2025-02": {
+      "posts": 16,
+      "avg_engagement": 652,
+      "engagement_rate_pct": 1.27
+    },
+    "2025-03": {
+      "posts": 14,
+      "avg_engagement": 579,
+      "engagement_rate_pct": 1.12
+    },
+    "2025-04": {
+      "posts": 16,
+      "avg_engagement": 375,
+      "engagement_rate_pct": 0.73
+    },
+    "2025-05": {
+      "posts": 17,
+      "avg_engagement": 337,
+      "engagement_rate_pct": 0.65
+    },
+    "2025-06": {
+      "posts": 16,
+      "avg_engagement": 987,
+      "engagement_rate_pct": 1.92
+    },
+    "2025-07": {
+      "posts": 12,
+      "avg_engagement": 1097,
+      "engagement_rate_pct": 2.13
+    },
+    "2025-08": {
+      "posts": 6,
+      "avg_engagement": 453,
+      "engagement_rate_pct": 0.88
+    },
+    "2025-09": {
+      "posts": 18,
+      "avg_engagement": 379,
+      "engagement_rate_pct": 0.74
+    },
+    "2025-10": {
+      "posts": 16,
+      "avg_engagement": 348,
+      "engagement_rate_pct": 0.68
+    },
+    "2025-11": {
+      "posts": 17,
+      "avg_engagement": 617,
+      "engagement_rate_pct": 1.2
+    },
+    "2025-12": {
+      "posts": 10,
+      "avg_engagement": 532,
+      "engagement_rate_pct": 1.03
+    },
+    "2026-01": {
+      "posts": 10,
+      "avg_engagement": 498,
+      "engagement_rate_pct": 0.97
+    },
+    "2026-02": {
+      "posts": 10,
+      "avg_engagement": 306,
+      "engagement_rate_pct": 0.59
+    },
+    "2026-03": {
+      "posts": 13,
+      "avg_engagement": 523,
+      "engagement_rate_pct": 1.02
+    },
+    "2026-04": {
+      "posts": 13,
+      "avg_engagement": 320,
+      "engagement_rate_pct": 0.62
+    },
+    "2026-05": {
+      "posts": 11,
+      "avg_engagement": 255,
+      "engagement_rate_pct": 0.49
+    },
+    "2026-06": {
+      "posts": 1,
+      "avg_engagement": 224,
+      "engagement_rate_pct": 0.43
+    }
+  },
+  "caption_length_performance": {
+    "short_0_100": {
+      "posts": 28,
+      "avg_engagement": 341
+    },
+    "medium_101_300": {
+      "posts": 191,
+      "avg_engagement": 496
+    },
+    "long_301_600": {
+      "posts": 204,
+      "avg_engagement": 381
+    },
+    "very_long_600+": {
+      "posts": 77,
+      "avg_engagement": 429
+    }
+  },
+  "key_insights": {
+    "best_day": "Monday (avg 564 engagement)",
+    "best_hours_utc": "06:00-07:00 UTC (= 10:00-11:00 UAE time)",
+    "best_format": "Video (avg 557 eng) vs Carousel (avg 295) \u2014 video 2x better",
+    "hashtag_identity_shift": "Top hashtags are mental health, positivity, healing, fitmom \u2014 old wellness identity still dominates hashtag strategy despite luxury pivot",
+    "engagement_rate_now": "~0.5% (May 2026) vs peak 2.47% (Jan 2025) \u2014 declining trend",
+    "caption_sweet_spot": "Medium captions 101-300 chars perform best (avg 496)"
+  }
+}
