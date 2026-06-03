@@ -2269,11 +2269,11 @@
       </p>
       <div class="about-stats reveal reveal-delay-3">
         <div class="stat-item">
-          <div class="stat-num">51.5K</div>
+          <div class="stat-num" id="stat-followers">51.5K</div>
           <div class="stat-label">Followers</div>
         </div>
         <div class="stat-item">
-          <div class="stat-num">2,040</div>
+          <div class="stat-num" id="stat-posts">2,040</div>
           <div class="stat-label">Posts</div>
         </div>
         <div class="stat-item">
@@ -2483,8 +2483,14 @@
         </a>
       </div>
       <div class="contact-divider reveal"></div>
-      <div class="reveal reveal-delay-3" style="margin-top:24px;">
+      <div class="reveal reveal-delay-3" style="margin-top:24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;">
         <a href="mailto:management@aasthachopra.com" class="btn-primary"><span>Start a Conversation</span></a>
+        <a href="/Aastha_Chopra_Media_Kit.pdf" target="_blank" rel="noopener"
+           style="font-family:var(--ff-sans);font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--warm-grey);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.3s;"
+           onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--warm-grey)'">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Media Kit
+        </a>
       </div>
     </div>
   </section>
@@ -2625,6 +2631,32 @@
     loadInstagramFeed();
 
     // Hamburger (mobile)
+    /* ─── LIVE STATS: hydrate from API ─── */
+    (async function hydrateStats() {
+      try {
+        const res = await fetch('/api/instagram');
+        const data = await res.json();
+        const acct = data.account;
+        if (!acct) return;
+
+        const followersEl = document.getElementById('stat-followers');
+        const postsEl     = document.getElementById('stat-posts');
+
+        if (followersEl && acct.followers_count) {
+          const f = acct.followers_count;
+          // Format conservatively: round down to nearest 100 displayed as e.g. "51.5K"
+          followersEl.textContent = f >= 1000
+            ? (Math.floor(f / 100) / 10).toFixed(1) + 'K'
+            : f.toLocaleString();
+        }
+        if (postsEl && acct.media_count) {
+          postsEl.textContent = acct.media_count.toLocaleString();
+        }
+      } catch (e) {
+        // Silently fall back to hardcoded values already in the DOM
+      }
+    })();
+
     /* ─── INSTAGRAM GRID: fetch from API ─── */
     (async function loadInstaGrid() {
       const grid = document.getElementById('instaGrid');
