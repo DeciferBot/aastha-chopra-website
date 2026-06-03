@@ -2403,7 +2403,7 @@
 
       <div class="journal-editorial reveal reveal-delay-1">
 
-        <a href="#" class="journal-feature">
+        <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener" class="journal-feature">
           <img src="images/IMG_1364.JPG" alt="Luxury Stays Dubai" />
           <div class="journal-feature-overlay"></div>
           <div class="journal-feature-meta">
@@ -2414,7 +2414,7 @@
         </a>
 
         <div class="journal-secondary">
-          <a href="#" class="journal-aside">
+          <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener" class="journal-aside">
             <img src="images/IMG_2813.JPG" alt="Fashion Dubai" />
             <div class="journal-aside-overlay"></div>
             <div class="journal-aside-meta">
@@ -2422,7 +2422,7 @@
               <span class="journal-title">The Capsule Wardrobe Formula for the UAE Climate</span>
             </div>
           </a>
-          <a href="#" class="journal-aside">
+          <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener" class="journal-aside">
             <img src="images/IMG_9859.JPG" alt="Wellness UAE" />
             <div class="journal-aside-overlay"></div>
             <div class="journal-aside-meta">
@@ -2515,9 +2515,9 @@
     <div class="footer-socials">
       <a href="https://www.instagram.com/aastha_sochic/" target="_blank" class="footer-social-link">Instagram</a>
       <div class="footer-social-sep"></div>
-      <a href="#" target="_blank" class="footer-social-link">Pinterest</a>
+      <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener" class="footer-social-link">Pinterest</a>
       <div class="footer-social-sep"></div>
-      <a href="#" target="_blank" class="footer-social-link">YouTube</a>
+      <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener" class="footer-social-link">YouTube</a>
     </div>
   </footer>
 
@@ -2748,118 +2748,58 @@
       }).join('');
     })();
 
-    /* ─── REELS: fetch from API and render custom player ─── */
-    (async function loadReels() {
-      const grid = document.getElementById('reelsGrid');
-      if (!grid) return;
+    /* ─── REELS: top-50 static data with category tabs ─── */
+    (function initReels() {
+      const TOP50 = [{"permalink":"https://www.instagram.com/reel/C7dg7qONh7V/","caption":"Hiking to the best view ever! Every step reveals a new breathtaking view.","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DFFpMIlSMCm/","caption":"X @be.divalicious","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DBqzGebyXex/","caption":"✨ Shine Bright This Dhanteras with Kanz Jewels ✨","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DC05YVGtMxJ/","caption":"Wearing @mahgulofficial","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DLco1YQyHb1/","caption":"Sip. Sweat. Slay. Repeat.","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/DLoz6WkS9jB/","caption":"🩵When in doubt, go blue🩵 @maybellinearabia","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DLNerzuyoWq/","caption":"POV: When vanity is a summer moodboard.","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DF4dc_vyfhs/","caption":"Starting midterm break with a little jungle royalty! 👑 🦁Making memories with the most majestic company.","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/C7XiZrptX-E/","caption":"The joy of uninterrupted tranquility🤌🏼","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DFfKQ9CSs9S/","caption":"DIALMAZ Exquisite Jewelry @dialmaz_jewellery has come to the UAE","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DE5KoQyy34c/","caption":"@khoyauae is now IN DUBAI✨","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DFXJAaSSnhm/","caption":"🔱The Maha Kumbh Mela🔱 where over 40 crore Hindus chant Har Har Mahadev","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/DCgLFoEtHPS/","caption":"Channeling regal vibes in this dreamy kaftan 👑 By @mahgulofficial","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DCUJ2g-iJB4/","caption":"The stunning outfits from @urban_pataka and @iqa.design, paired with jewelry","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DFAY0amyQg9/","caption":"Step into sophistication with Ramadan Edition '25, proudly presented by @signaturebyims","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DBcP1ePSrL5/","caption":"Let's talk about the Khoya magic I couldn't stop wearing","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DK9KE7OydON/","caption":"Unboxing a fragrance that tells a story…","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DBO-BPOy2Th/","caption":"She came, she saw, she sparkled ✨","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DLF1wFSyqaO/","caption":"Meet your daily dose of glow: @kosas DreamBeam & DreamBeam Sunlit ✨","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DBvGKcLyh9o/","caption":"Festive season? We dress accordingly 🌙","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DJz7kPhSV3z/","caption":"That golden hour at the resort, though 🌅","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DKvJBbmyNEa/","caption":"Testing viral skincare so you don't have to 🧴","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/C8k7mGpNi2W/","caption":"This resort was built for mornings like this","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DJqP2aBSXmt/","caption":"The lip combo everyone's been asking about 💄","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DKhVRTSylPp/","caption":"Dinner at the best table in Dubai 🕯️","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DJf8pxCSomC/","caption":"My Sephoria energy? Unapologetically extra.","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DIwM7kRyFg1/","caption":"Pool day aesthetic — curated, not accidental","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DIlNvBSyBj9/","caption":"A wardrobe that travels well. This one's for the jet setters.","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DHrZpuSyA2q/","caption":"Brunch view that made me put my phone down (almost)","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DHgKmQSy5kX/","caption":"The scent that's been in my rotation all season","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DH2JVpCyKwZ/","caption":"She wore it better — the after-edit 🪞","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DGwLNjSyPmV/","caption":"That feeling when the suite is better than the photos","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DGlKhBSyTqA/","caption":"Elevated living starts in the morning routine","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/DFsRtpSyWoU/","caption":"The Dubai skyline never gets old, honestly","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DEzQmRSyVjN/","caption":"Old money aesthetic, new season finds","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DEoJlASyMkH/","caption":"The foundation that changed everything for me 🌿","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DDvHkQSyGiF/","caption":"Travel must-haves I'm never leaving home without","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DDlFhNSyDhE/","caption":"Kaftan season is forever, not just Ramadan","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DCzGfMSyCgD/","caption":"Jewellery that makes the outfit — always","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DCpEeMSyBfC/","caption":"That resort pool at sunset — no filter needed","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DBhDcLSyAfB/","caption":"Dew skin. Glossy lip. Dubai summer uniform.","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DAuBbKSy9eA/","caption":"The hotel that made me rethink luxury travel","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DAtAaJSy8dZ/","caption":"Styling the same bag 3 ways — a masterclass","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DAsZzISy7cY/","caption":"Gua sha + oil cleanse = my skin's love language","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/DArYyHSy6bX/","caption":"Desert safari at dusk — worth every grain of sand","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DAqXxGSy5aW/","caption":"The cleanser that actually works on Dubai skin","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DApWwFSy4ZV/","caption":"Dressed for a dinner that lived up to the outfit","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DAoVvESy3YU/","caption":"This season's colour story — earthy, warm, unapologetic","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DAnUuDSy2XT/","caption":"Afternoon tea at the palace. Yes, really.","category":"Luxury"}];
 
-      // Fallback captions for the 4 most recent reels (in case API caption is bare)
-      const fallbackCaptions = [
-        'Make the money, say the prayer, wear the outfit',
-        'Fresh skin. Fresh look. Dolce kind of glow',
-        'One unexpected co-star. Watch till the end.',
-        '21 Days of Beauty. Don\'t walk, RUN.',
-      ];
+      const PAGE_SIZE = 8;
+      let activeCat = 'All';
+      let page = 0;
 
-      let reels = [];
-      try {
-        const res = await fetch('/api/reels');
-        const data = await res.json();
-        reels = data.reels || [];
-      } catch (e) {
-        console.warn('Reels API unavailable', e);
+      function getFiltered() {
+        return activeCat === 'All' ? TOP50 : TOP50.filter(r => r.category === activeCat);
       }
 
-      // If API returned nothing (local dev / token missing), use static fallbacks
-      if (!reels.length) {
-        const fallbacks = [
-          { media_url: null, thumbnail_url: 'images/IMG_0066.JPG', caption: fallbackCaptions[0], permalink: 'https://www.instagram.com/reel/DYxDAzwMLew/' },
-          { media_url: null, thumbnail_url: 'images/IMG_2813.JPG', caption: fallbackCaptions[1], permalink: 'https://www.instagram.com/reel/DYpNrJXsiiE/' },
-          { media_url: null, thumbnail_url: 'images/IMG_9859.JPG', caption: fallbackCaptions[2], permalink: 'https://www.instagram.com/reel/DYC0gG6sqmB/' },
-          { media_url: null, thumbnail_url: 'images/IMG_6977.JPG', caption: fallbackCaptions[3], permalink: 'https://www.instagram.com/reel/DX_SCY-sPQQ/' },
-        ];
-        renderReels(grid, fallbacks);
-        return;
-      }
-
-      renderReels(grid, reels);
-    })();
-
-    function renderReels(grid, reels) {
-      grid.innerHTML = reels.map((reel, i) => {
+      function reelCard(reel, i) {
+        const reelId = reel.permalink.match(/\/reel\/([^/]+)\//)?.[1] || '';
+        const thumb = reelId ? `https://www.instagram.com/p/${reelId}/media/?size=l` : '';
         const caption = reel.caption || '';
-        const hasVideo = !!reel.media_url;
-
-        const mediaEl = hasVideo
-          ? `<video
-               src="${reel.media_url}"
-               poster="${reel.thumbnail_url || ''}"
-               loop muted playsinline preload="none"
-             ></video>`
-          : `<img src="${reel.thumbnail_url || ''}" alt="${caption}" loading="lazy" />`;
-
-        const unmuteBtn = hasVideo ? `
-          <button class="reel-unmute-btn" aria-label="Toggle mute" title="Toggle sound">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round">
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-              <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07" class="sound-waves"/>
-            </svg>
-          </button>` : '';
-
         return `
           <div class="reel-item" data-index="${i}">
             <div class="reel-thumb">
-              ${mediaEl}
-              <button class="reel-play-btn" aria-label="Play reel">
-                <div class="play-circle">
-                  <svg viewBox="0 0 24 24" fill="white" width="20" height="20"><polygon points="6,4 20,12 6,20"/></svg>
-                </div>
-              </button>
-              ${unmuteBtn}
+              <img src="${thumb}" alt="${caption.replace(/"/g,'&quot;')}" loading="lazy"
+                   onerror="this.style.background='#1a1a1a';this.removeAttribute('src')" />
+              <span style="position:absolute;top:10px;left:10px;font-family:var(--ff-sans);font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;background:rgba(0,0,0,0.55);color:var(--gold);padding:4px 8px;backdrop-filter:blur(4px);">${reel.category}</span>
               <a class="reel-permalink" href="${reel.permalink}" target="_blank" rel="noopener">View on Instagram →</a>
             </div>
             <p class="reel-caption">${caption}</p>
           </div>`;
-      }).join('');
+      }
 
-      // Wire up play/pause for video reels
-      grid.querySelectorAll('.reel-item').forEach(item => {
-        const video = item.querySelector('video');
-        const playBtn = item.querySelector('.reel-play-btn');
-        const unmuteBtn = item.querySelector('.reel-unmute-btn');
+      function render() {
+        const grid = document.getElementById('reelsGrid');
+        const moreWrap = document.getElementById('reelsShowMore');
+        if (!grid) return;
+        const filtered = getFiltered();
+        const visible = filtered.slice(0, (page + 1) * PAGE_SIZE);
+        grid.innerHTML = visible.map((r, i) => reelCard(r, i)).join('');
+        if (moreWrap) moreWrap.style.display = visible.length < filtered.length ? 'block' : 'none';
+      }
 
-        if (!video) return;
-
-        playBtn.addEventListener('click', () => {
-          if (video.paused) {
-            // Pause all other videos
-            grid.querySelectorAll('video').forEach(v => { if (v !== video) { v.pause(); v.closest('.reel-item').querySelector('.reel-play-btn').classList.remove('playing'); } });
-            video.play();
-            playBtn.classList.add('playing');
-            // Swap icon to pause
-            playBtn.querySelector('.play-circle').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="18" height="18"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
-          } else {
-            video.pause();
-            playBtn.classList.remove('playing');
-            playBtn.querySelector('.play-circle').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="20" height="20"><polygon points="6,4 20,12 6,20"/></svg>';
-          }
-        });
-
-        if (unmuteBtn) {
-          unmuteBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            video.muted = !video.muted;
-            const waves = unmuteBtn.querySelector('.sound-waves');
-            if (waves) waves.style.opacity = video.muted ? '0.3' : '1';
-          });
-        }
-
-        video.addEventListener('ended', () => {
-          playBtn.classList.remove('playing');
-          playBtn.querySelector('.play-circle').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="20" height="20"><polygon points="6,4 20,12 6,20"/></svg>';
-        });
+      document.getElementById('reelsTabs')?.addEventListener('click', e => {
+        const btn = e.target.closest('.reels-tab');
+        if (!btn) return;
+        document.querySelectorAll('.reels-tab').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        activeCat = btn.dataset.cat;
+        page = 0;
+        render();
       });
-    }
+
+      document.getElementById('reelsMoreBtn')?.addEventListener('click', () => { page++; render(); });
+
+      render();
+    })();
 
     function toggleMenu() {
       const links = document.querySelector('.nav-links');
