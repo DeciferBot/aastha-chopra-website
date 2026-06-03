@@ -4,8 +4,7 @@ export default async function handler(req) {
   const token = process.env.INSTAGRAM_ACCESS_TOKEN;
   if (!token) {
     return new Response(JSON.stringify({ error: 'No token configured' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
+      status: 500, headers: { 'Content-Type': 'application/json' }
     });
   }
 
@@ -25,8 +24,7 @@ export default async function handler(req) {
     });
   } catch (err) {
     return new Response(JSON.stringify({ error: err.message }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' }
+      status: 500, headers: { 'Content-Type': 'application/json' }
     });
   }
 }
