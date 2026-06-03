@@ -1,0 +1,8 @@
+{
+    "error": {
+        "message": "metric[0] must be one of the following values: reach, follower_count, website_clicks, profile_views, online_followers, accounts_engaged, total_interactions, likes, comments, shares, saves, replies, engaged_audience_demographics, reached_audience_demographics, follower_demographics, follows_and_unfollows, profile_links_taps, views, threads_likes, threads_replies, reposts, quotes, threads_followers, threads_follower_demographics, content_views, threads_views, threads_clicks, threads_reposts",
+        "type": "IGApiException",
+        "code": 100,
+        "fbtrace_id": "AItcX-y_LN9h4uXJ1BcVmtM"
+    }
+}
