@@ -9,24 +9,35 @@ export default async function handler(req) {
   }
 
   try {
-    const res = await fetch(
-      `https://graph.instagram.com/v21.0/me/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp&limit=20&access_token=${token}`
-    );
-    const data = await res.json();
+    let allMedia = [];
+    let url = `https://graph.instagram.com/v21.0/me/media?fields=id,media_type,thumbnail_url,permalink&limit=50&access_token=${token}`;
 
-    const reels = (data.data || [])
+    while (url && allMedia.length < 100) {
+      const res = await fetch(url);
+      const data = await res.json();
+      if (data.error) throw new Error(data.error.message);
+      allMedia = allMedia.concat(data.data || []);
+      url = data.paging?.next || null;
+    }
+
+    const thumbMap = {};
+    for (const m of allMedia) {
+      if (m.thumbnail_url && m.permalink) {
+        const match = m.permalink.match(/\/(reel|p)\/([^/]+)\//);
+        if (match) thumbMap[match[2]] = m.thumbnail_url;
+      }
+    }
+
+    const reels = allMedia
       .filter(m => m.media_type === 'VIDEO')
       .slice(0, 4)
       .map(m => ({
         id: m.id,
-        caption: m.caption ? m.caption.split('\n')[0].slice(0, 80) : '',
-        media_url: m.media_url,
         thumbnail_url: m.thumbnail_url || null,
         permalink: m.permalink,
-        timestamp: m.timestamp,
       }));
 
-    return new Response(JSON.stringify({ reels }), {
+    return new Response(JSON.stringify({ reels, thumbMap }), {
       headers: {
         'Content-Type': 'application/json',
         'Cache-Control': 's-maxage=1800, stale-while-revalidate=86400',

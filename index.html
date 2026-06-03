@@ -1132,17 +1132,19 @@
       background: #25D366;
       color: #fff;
       text-decoration: none;
-      padding: 14px 20px 14px 16px;
+      padding: 12px 14px;
       border-radius: 50px;
       box-shadow: 0 4px 24px rgba(37,211,102,0.35);
-      transition: box-shadow 0.25s ease, transform 0.25s ease;
+      transition: box-shadow 0.3s ease, transform 0.3s ease, padding 0.3s ease;
       overflow: hidden;
-      max-width: 52px;
     }
     .wa-float:hover {
-      max-width: 200px;
+      padding: 12px 20px 12px 16px;
       box-shadow: 0 6px 32px rgba(37,211,102,0.5);
       transform: translateY(-2px);
+    }
+    .wa-float svg {
+      flex-shrink: 0;
     }
     .wa-float-label {
       font-family: var(--font-ui);
@@ -1153,11 +1155,12 @@
       white-space: nowrap;
       opacity: 0;
       max-width: 0;
-      transition: opacity 0.2s ease 0.05s, max-width 0.25s ease;
+      overflow: hidden;
+      transition: opacity 0.2s ease 0.1s, max-width 0.3s ease;
     }
     .wa-float:hover .wa-float-label {
       opacity: 1;
-      max-width: 140px;
+      max-width: 160px;
     }
 
     /* ─── INSTAGRAM ─── */
@@ -2580,7 +2583,7 @@
   <!-- ─── FLOATING WHATSAPP ─── -->
   <a href="https://wa.me/971553646723?text=Hi%20Aastha%2C%20I%20represent%20a%20brand%20and%20would%20love%20to%20explore%20a%20collaboration%20with%20you." target="_blank" rel="noopener" class="wa-float" aria-label="Chat on WhatsApp">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28" fill="currentColor"><path d="M16 .5C7.44.5.5 7.44.5 16c0 2.72.7 5.27 1.94 7.5L.5 31.5l8.22-1.9A15.45 15.45 0 0016 31.5C24.56 31.5 31.5 24.56 31.5 16S24.56.5 16 .5zm0 28.1a13.04 13.04 0 01-6.63-1.8l-.47-.28-4.88 1.13 1.17-4.74-.31-.49A13.06 13.06 0 1116 28.6zm7.17-9.77c-.39-.2-2.32-1.14-2.68-1.27-.36-.13-.62-.2-.88.2s-1.01 1.27-1.24 1.53c-.23.26-.46.29-.85.1-.39-.2-1.64-.6-3.13-1.92-1.15-1.03-1.93-2.3-2.16-2.69-.23-.39-.02-.6.17-.79.18-.18.39-.46.59-.69.2-.23.26-.39.39-.65.13-.26.07-.49-.03-.69-.1-.2-.88-2.13-1.21-2.91-.32-.77-.64-.66-.88-.67h-.75c-.26 0-.68.1-1.04.49-.36.39-1.36 1.33-1.36 3.24s1.39 3.76 1.59 4.02c.2.26 2.74 4.18 6.63 5.86.93.4 1.65.64 2.21.82.93.3 1.77.26 2.44.16.74-.11 2.32-.95 2.65-1.87.33-.92.33-1.7.23-1.87-.1-.16-.36-.26-.75-.46z"/></svg>
-    <span class="wa-float-label">Chat with us</span>
+    <span class="wa-float-label">Let's Collab ✦</span>
   </a>
 
   <!-- ─── FOOTER ─── -->
@@ -2841,14 +2844,15 @@
       }
 
       function reelCard(reel, i) {
-        const reelId = reel.permalink.match(/\/reel\/([^/]+)\//)?.[1] || '';
-        const thumb = reelId ? `https://www.instagram.com/p/${reelId}/media/?size=l` : '';
         const caption = reel.caption || '';
+        const thumb = reel.thumbnail_url || '';
+        const imgHtml = thumb
+          ? `<img src="${thumb}" alt="${caption.replace(/"/g,'&quot;')}" loading="lazy" onerror="this.style.opacity='0'" />`
+          : `<div style="width:100%;height:100%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(180,150,80,0.3)" stroke-width="1.5"><polygon points="5,3 19,12 5,21"/></svg></div>`;
         return `
           <div class="reel-item" data-index="${i}">
             <div class="reel-thumb">
-              <img src="${thumb}" alt="${caption.replace(/"/g,'&quot;')}" loading="lazy"
-                   onerror="this.style.background='#1a1a1a';this.removeAttribute('src')" />
+              ${imgHtml}
               <span style="position:absolute;top:10px;left:10px;font-family:var(--ff-sans);font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;background:rgba(0,0,0,0.55);color:var(--gold);padding:4px 8px;backdrop-filter:blur(4px);">${reel.category}</span>
               <a class="reel-permalink" href="${reel.permalink}" target="_blank" rel="noopener">View on Instagram →</a>
             </div>
@@ -2879,6 +2883,18 @@
       document.getElementById('reelsMoreBtn')?.addEventListener('click', () => { page++; render(); });
 
       render();
+
+      fetch('/api/reels')
+        .then(r => r.ok ? r.json() : null)
+        .then(data => {
+          if (!data?.thumbMap) return;
+          TOP50.forEach(reel => {
+            const id = reel.permalink.match(/\/reel\/([^/]+)\//)?.[1];
+            if (id && data.thumbMap[id]) reel.thumbnail_url = data.thumbMap[id];
+          });
+          render();
+        })
+        .catch(() => {});
     })();
 
     function toggleMenu() {
