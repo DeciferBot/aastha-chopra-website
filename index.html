@@ -1701,46 +1701,107 @@
       gap: 16px;
     }
     .reel-item {
-      text-decoration: none;
       display: block;
+      cursor: pointer;
     }
     .reel-thumb {
       position: relative;
       aspect-ratio: 9/16;
       overflow: hidden;
       border-radius: 2px;
+      background: #111;
+    }
+    .reel-thumb video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
     .reel-thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center top;
+      display: block;
       transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-    .reel-thumb iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-    .reel-item:hover .reel-thumb img { transform: scale(1.05); }
-    .reel-play {
+    .reel-item:hover .reel-thumb img { transform: scale(1.04); }
+
+    .reel-play-btn {
       position: absolute;
       inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(0,0,0,0.25);
-      transition: background 0.3s;
+      background: rgba(0,0,0,0.22);
+      transition: background 0.3s, opacity 0.3s;
+      border: none;
+      cursor: pointer;
     }
-    .reel-item:hover .reel-play { background: rgba(201,168,76,0.3); }
+    .reel-play-btn .play-circle {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .reel-item:hover .reel-play-btn { background: rgba(0,0,0,0.35); }
+    .reel-item:hover .play-circle { transform: scale(1.1); background: var(--gold); }
+    .reel-play-btn.playing { background: transparent; opacity: 0; }
+    .reel-thumb:hover .reel-play-btn.playing { opacity: 1; }
+
+    .reel-unmute-btn {
+      position: absolute;
+      bottom: 12px; right: 12px;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .reel-thumb:hover .reel-unmute-btn { opacity: 1; }
+
+    .reel-permalink {
+      position: absolute;
+      bottom: 12px; left: 12px;
+      font-family: var(--ff-sans);
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .reel-thumb:hover .reel-permalink { opacity: 1; }
+
     .reel-caption {
       font-family: var(--ff-sans);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 300;
-      color: rgba(250,248,245,0.6);
+      color: rgba(250,248,245,0.5);
       margin-top: 12px;
       line-height: 1.5;
+      transition: color 0.3s;
     }
+    .reel-item:hover .reel-caption { color: var(--gold-light); }
+
+    .reels-loading {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 0;
+      color: rgba(250,248,245,0.2);
+      font-family: var(--ff-sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+    }
+
     @media (max-width: 768px) {
       .reels-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
       #reels { padding: 100px 24px !important; }
@@ -2253,31 +2314,8 @@
         </div>
         <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener" class="insta-follow reveal" style="flex-shrink:0;">Watch on Instagram</a>
       </div>
-      <div class="reels-grid reveal reveal-delay-1">
-        <div class="reel-item">
-          <div class="reel-thumb">
-            <iframe src="https://www.instagram.com/reel/DYxDAzwMLew/embed/" allowfullscreen scrolling="no" allowtransparency="true"></iframe>
-          </div>
-          <p class="reel-caption">Make the money, say the prayer, wear the outfit</p>
-        </div>
-        <div class="reel-item">
-          <div class="reel-thumb">
-            <iframe src="https://www.instagram.com/reel/DYpNrJXsiiE/embed/" allowfullscreen scrolling="no" allowtransparency="true"></iframe>
-          </div>
-          <p class="reel-caption">Fresh skin. Fresh look. Dolce kind of glow</p>
-        </div>
-        <div class="reel-item">
-          <div class="reel-thumb">
-            <iframe src="https://www.instagram.com/reel/DYC0gG6sqmB/embed/" allowfullscreen scrolling="no" allowtransparency="true"></iframe>
-          </div>
-          <p class="reel-caption">One unexpected co-star. Watch till the end.</p>
-        </div>
-        <div class="reel-item">
-          <div class="reel-thumb">
-            <iframe src="https://www.instagram.com/reel/DX_SCY-sPQQ/embed/" allowfullscreen scrolling="no" allowtransparency="true"></iframe>
-          </div>
-          <p class="reel-caption">21 Days of Beauty. Don't walk, RUN.</p>
-        </div>
+      <div class="reels-grid reveal reveal-delay-1" id="reelsGrid">
+        <div class="reels-loading">Loading reels…</div>
       </div>
     </div>
   </section>
@@ -2637,6 +2675,119 @@
     loadInstagramFeed();
 
     // Hamburger (mobile)
+    /* ─── REELS: fetch from API and render custom player ─── */
+    (async function loadReels() {
+      const grid = document.getElementById('reelsGrid');
+      if (!grid) return;
+
+      // Fallback captions for the 4 most recent reels (in case API caption is bare)
+      const fallbackCaptions = [
+        'Make the money, say the prayer, wear the outfit',
+        'Fresh skin. Fresh look. Dolce kind of glow',
+        'One unexpected co-star. Watch till the end.',
+        '21 Days of Beauty. Don\'t walk, RUN.',
+      ];
+
+      let reels = [];
+      try {
+        const res = await fetch('/api/reels');
+        const data = await res.json();
+        reels = data.reels || [];
+      } catch (e) {
+        console.warn('Reels API unavailable', e);
+      }
+
+      // If API returned nothing (local dev / token missing), use static fallbacks
+      if (!reels.length) {
+        const fallbacks = [
+          { media_url: null, thumbnail_url: 'images/IMG_0066.JPG', caption: fallbackCaptions[0], permalink: 'https://www.instagram.com/reel/DYxDAzwMLew/' },
+          { media_url: null, thumbnail_url: 'images/IMG_2813.JPG', caption: fallbackCaptions[1], permalink: 'https://www.instagram.com/reel/DYpNrJXsiiE/' },
+          { media_url: null, thumbnail_url: 'images/IMG_9859.JPG', caption: fallbackCaptions[2], permalink: 'https://www.instagram.com/reel/DYC0gG6sqmB/' },
+          { media_url: null, thumbnail_url: 'images/IMG_6977.JPG', caption: fallbackCaptions[3], permalink: 'https://www.instagram.com/reel/DX_SCY-sPQQ/' },
+        ];
+        renderReels(grid, fallbacks);
+        return;
+      }
+
+      renderReels(grid, reels);
+    })();
+
+    function renderReels(grid, reels) {
+      grid.innerHTML = reels.map((reel, i) => {
+        const caption = reel.caption || '';
+        const hasVideo = !!reel.media_url;
+
+        const mediaEl = hasVideo
+          ? `<video
+               src="${reel.media_url}"
+               poster="${reel.thumbnail_url || ''}"
+               loop muted playsinline preload="none"
+             ></video>`
+          : `<img src="${reel.thumbnail_url || ''}" alt="${caption}" loading="lazy" />`;
+
+        const unmuteBtn = hasVideo ? `
+          <button class="reel-unmute-btn" aria-label="Toggle mute" title="Toggle sound">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+              <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07" class="sound-waves"/>
+            </svg>
+          </button>` : '';
+
+        return `
+          <div class="reel-item" data-index="${i}">
+            <div class="reel-thumb">
+              ${mediaEl}
+              <button class="reel-play-btn" aria-label="Play reel">
+                <div class="play-circle">
+                  <svg viewBox="0 0 24 24" fill="white" width="20" height="20"><polygon points="6,4 20,12 6,20"/></svg>
+                </div>
+              </button>
+              ${unmuteBtn}
+              <a class="reel-permalink" href="${reel.permalink}" target="_blank" rel="noopener">View on Instagram →</a>
+            </div>
+            <p class="reel-caption">${caption}</p>
+          </div>`;
+      }).join('');
+
+      // Wire up play/pause for video reels
+      grid.querySelectorAll('.reel-item').forEach(item => {
+        const video = item.querySelector('video');
+        const playBtn = item.querySelector('.reel-play-btn');
+        const unmuteBtn = item.querySelector('.reel-unmute-btn');
+
+        if (!video) return;
+
+        playBtn.addEventListener('click', () => {
+          if (video.paused) {
+            // Pause all other videos
+            grid.querySelectorAll('video').forEach(v => { if (v !== video) { v.pause(); v.closest('.reel-item').querySelector('.reel-play-btn').classList.remove('playing'); } });
+            video.play();
+            playBtn.classList.add('playing');
+            // Swap icon to pause
+            playBtn.querySelector('.play-circle').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="18" height="18"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+          } else {
+            video.pause();
+            playBtn.classList.remove('playing');
+            playBtn.querySelector('.play-circle').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="20" height="20"><polygon points="6,4 20,12 6,20"/></svg>';
+          }
+        });
+
+        if (unmuteBtn) {
+          unmuteBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            video.muted = !video.muted;
+            const waves = unmuteBtn.querySelector('.sound-waves');
+            if (waves) waves.style.opacity = video.muted ? '0.3' : '1';
+          });
+        }
+
+        video.addEventListener('ended', () => {
+          playBtn.classList.remove('playing');
+          playBtn.querySelector('.play-circle').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="20" height="20"><polygon points="6,4 20,12 6,20"/></svg>';
+        });
+      });
+    }
+
     function toggleMenu() {
       const links = document.querySelector('.nav-links');
       if (links) {
