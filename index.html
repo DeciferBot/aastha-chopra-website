@@ -797,30 +797,36 @@
 
     /* ─── PORTFOLIO ─── */
     #portfolio {
-      padding: 140px 60px;
+      padding: 120px 0 0;
       background: var(--ivory);
     }
-    .portfolio-inner { max-width: 1400px; margin: 0 auto; }
+    .portfolio-inner { max-width: 960px; margin: 0 auto; padding: 0 60px; }
+    .portfolio-inner .section-header { padding-bottom: 0; }
 
     .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-template-rows: auto;
-      gap: 16px;
-      margin-top: 80px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      margin-top: 48px;
+      margin-left: -60px;
+      margin-right: -60px;
     }
 
     .portfolio-item {
       position: relative;
       overflow: hidden;
       cursor: none;
+      aspect-ratio: 1;
     }
-    .portfolio-item:nth-child(1) { grid-column: 1 / 6; grid-row: 1; aspect-ratio: 4/5; }
-    .portfolio-item:nth-child(2) { grid-column: 6 / 9; grid-row: 1; aspect-ratio: 3/4; }
-    .portfolio-item:nth-child(3) { grid-column: 9 / 13; grid-row: 1; aspect-ratio: 4/5; }
-    .portfolio-item:nth-child(4) { grid-column: 1 / 5; grid-row: 2; aspect-ratio: 1; }
-    .portfolio-item:nth-child(5) { grid-column: 5 / 9; grid-row: 2; aspect-ratio: 1; }
-    .portfolio-item:nth-child(6) { grid-column: 9 / 13; grid-row: 2; aspect-ratio: 1; }
+    .portfolio-item .portfolio-bg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .portfolio-item:hover .portfolio-bg { transform: scale(1.04); }
 
     .portfolio-bg {
       width: 100%;
@@ -963,10 +969,10 @@
 
     /* ─── INSTAGRAM ─── */
     #instagram {
-      padding: 140px 60px;
+      padding: 120px 0 0;
       background: var(--charcoal);
     }
-    .instagram-inner { max-width: 1400px; margin: 0 auto; }
+    .instagram-inner { max-width: 960px; margin: 0 auto; padding: 0 60px; }
 
     .instagram-header {
       display: flex;
@@ -996,14 +1002,27 @@
 
     .instagram-grid {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 3px;
+      margin-top: 40px;
+      margin-left: -60px;
+      margin-right: -60px;
     }
     .insta-tile {
       aspect-ratio: 1;
       overflow: hidden;
       position: relative;
+      display: block;
     }
+    .insta-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .insta-tile:hover img { transform: scale(1.04); }
     .insta-placeholder {
       width: 100%;
       height: 100%;
@@ -1547,8 +1566,17 @@
       .about-number { display: none; }
       .pillars-grid { grid-template-columns: 1fr; }
       .portfolio-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(3, 1fr);
+        margin-left: -24px;
+        margin-right: -24px;
+        gap: 2px;
       }
+      .instagram-grid {
+        margin-left: -24px;
+        margin-right: -24px;
+        gap: 2px;
+      }
+      .portfolio-inner, .instagram-inner { padding: 0 24px; }
       .portfolio-item:nth-child(n) {
         grid-column: auto;
         grid-row: auto;
