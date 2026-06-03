@@ -456,6 +456,41 @@
     }
     .hero-cta-ghost:hover { color: var(--gold); border-color: var(--gold); }
 
+    /* UAE Media Council Badge */
+    .uae-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 28px;
+      opacity: 0;
+      animation: heroFadeRight 1s 1.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .uae-badge-icon {
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(201,168,76,0.5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .uae-badge-icon svg { width: 14px; height: 14px; }
+    .uae-badge-text {
+      font-family: var(--ff-sans);
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+    .uae-badge-text strong {
+      color: var(--gold);
+      display: block;
+      font-weight: 500;
+    }
+    .uae-badge-text span {
+      color: rgba(250,248,245,0.45);
+    }
+
     /* Right side floating stat */
     .hero-stats-float {
       position: absolute;
@@ -1193,6 +1228,24 @@
       border: 1px solid rgba(201,168,76,0.3);
       padding: 5px 12px;
     }
+    .mk-license {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      padding: 8px 14px;
+      border: 1px solid rgba(201,168,76,0.25);
+      background: rgba(201,168,76,0.04);
+    }
+    .mk-license svg { width: 13px; height: 13px; color: var(--gold); flex-shrink: 0; }
+    .mk-license-text {
+      font-family: var(--ff-sans);
+      font-size: 0.56rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(250,248,245,0.5);
+    }
+    .mk-license-text strong { color: var(--gold); font-weight: 500; }
 
     /* ─── JOURNAL ─── */
     #journal {
@@ -1603,6 +1656,18 @@
           <a href="#portfolio" class="hero-cta-ghost">View Portfolio</a>
         </div>
 
+        <div class="uae-badge">
+          <div class="uae-badge-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/>
+            </svg>
+          </div>
+          <div class="uae-badge-text">
+            <strong>UAE Media Council Licensed</strong>
+            <span>Permit No. 6679741 &nbsp;·&nbsp; Valid until Dec 2026</span>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -1826,6 +1891,12 @@
           <span class="mk-niche">Hospitality</span>
           <span class="mk-niche">Jewellery</span>
           <span class="mk-niche">Fine Dining</span>
+        </div>
+        <div class="mk-license">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/>
+          </svg>
+          <span class="mk-license-text"><strong>UAE Media Council</strong> &nbsp;Licensed Creator &nbsp;·&nbsp; Permit 6679741</span>
         </div>
       </div>
     </div>
