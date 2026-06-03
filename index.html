@@ -2203,15 +2203,34 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Newsletter
-    function handleNewsletterSubmit(e) {
+    // Newsletter — posts to /api/subscribe (Resend)
+    async function handleNewsletterSubmit(e) {
       e.preventDefault();
       const input = e.target.querySelector('.newsletter-input');
       const btn = e.target.querySelector('.newsletter-btn span');
-      btn.textContent = 'Thank you ✓';
-      input.value = '';
+      const email = input.value.trim();
+      btn.textContent = 'Subscribing…';
       input.disabled = true;
-      setTimeout(() => { btn.textContent = 'Subscribe'; input.disabled = false; }, 4000);
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        if (res.ok) {
+          btn.textContent = 'You\'re in ✦';
+          input.value = '';
+        } else {
+          const data = await res.json();
+          btn.textContent = data.error || 'Try again';
+          input.disabled = false;
+          setTimeout(() => { btn.textContent = 'Subscribe'; }, 3000);
+        }
+      } catch {
+        btn.textContent = 'Try again';
+        input.disabled = false;
+        setTimeout(() => { btn.textContent = 'Subscribe'; }, 3000);
+      }
     }
 
     // Hamburger (mobile)
