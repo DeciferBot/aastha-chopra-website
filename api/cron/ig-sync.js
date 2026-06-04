@@ -66,24 +66,27 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 // ── 1. Fetch all media pages ──────────────────────────────────────────────────
 async function fetchAllMedia(token) {
   const all = [];
-  let url = `/me/media?fields=${MEDIA_FIELDS}&limit=50`;
+  const seen = new Set();
+  let after = null;
 
-  while (url) {
-    const data = await ig(url, token);
-    all.push(...(data.data || []));
-    url = data.paging?.next
-      ? url.replace(IG_BASE, '').split('?')[0] + '?' + new URL(data.paging.next).searchParams.toString().replace(`access_token=${token}`, '').replace(/^&|&$/, '')
-      : null;
+  while (true) {
+    const qs = after
+      ? `/me/media?fields=${MEDIA_FIELDS}&limit=50&after=${after}`
+      : `/me/media?fields=${MEDIA_FIELDS}&limit=50`;
+    const data = await ig(qs, token);
+    const page = data.data || [];
+    if (!page.length) break;
 
-    // Use cursor-based pagination properly
-    const after = data.paging?.cursors?.after;
-    if (data.paging?.next && after) {
-      url = `/me/media?fields=${MEDIA_FIELDS}&limit=50&after=${after}`;
-    } else {
-      url = null;
-    }
+    // Stop if we've seen this cursor before (loop guard)
+    const cursor = data.paging?.cursors?.after;
+    if (cursor && seen.has(cursor)) break;
+    if (cursor) seen.add(cursor);
 
-    await sleep(200);
+    all.push(...page);
+
+    // No next page
+    if (!data.paging?.next || !cursor) break;
+    after = cursor;
   }
   return all;
 }
@@ -236,26 +239,31 @@ export default async function handler(req, res) {
     }
     log.push(`Upserted ${insightsDone} posts with insights`);
 
-    // ── Step 3: Carousel children (all in parallel) ──
+    // ── Step 3: Carousel children (batches of 20) ──
     const carousels = allMedia.filter(p => p.media_type === 'CAROUSEL_ALBUM');
-    const carouselResults = await Promise.all(carousels.map(async (post) => {
-      const children = await fetchCarouselChildren(post.id, token);
-      if (!children.length) return 0;
-      const rows = children.map((child, idx) => ({
-        id: child.id,
-        parent_id: post.id,
-        sort_order: idx,
-        media_type: child.media_type ?? null,
-        original_url: child.media_url ?? child.thumbnail_url ?? null,
-        synced_at: new Date().toISOString(),
+    let childrenDone = 0;
+    const C_BATCH = 20;
+    for (let i = 0; i < carousels.length; i += C_BATCH) {
+      const batch = carousels.slice(i, i + C_BATCH);
+      const results = await Promise.all(batch.map(async (post) => {
+        const children = await fetchCarouselChildren(post.id, token);
+        if (!children.length) return 0;
+        const rows = children.map((child, idx) => ({
+          id: child.id,
+          parent_id: post.id,
+          sort_order: idx,
+          media_type: child.media_type ?? null,
+          original_url: child.media_url ?? child.thumbnail_url ?? null,
+          synced_at: new Date().toISOString(),
+        }));
+        await sb('/instagram_carousel_children?on_conflict=id', {
+          method: 'POST',
+          body: JSON.stringify(rows),
+        });
+        return rows.length;
       }));
-      await sb('/instagram_carousel_children?on_conflict=id', {
-        method: 'POST',
-        body: JSON.stringify(rows),
-      });
-      return rows.length;
-    }));
-    const childrenDone = carouselResults.reduce((a, b) => a + b, 0);
+      childrenDone += results.reduce((a, b) => a + b, 0);
+    }
     log.push(`Upserted ${childrenDone} carousel children across ${carousels.length} carousels`);
 
     // ── Step 4: Demographics ──
