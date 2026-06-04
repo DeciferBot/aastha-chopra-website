@@ -240,55 +240,66 @@ export default async function handler(req, res) {
     log.push(`Upserted ${insightsDone} posts with insights`);
 
     // ── Step 3: Carousel children (batches of 20) ──
-    const carousels = allMedia.filter(p => p.media_type === 'CAROUSEL_ALBUM');
-    let childrenDone = 0;
-    const C_BATCH = 20;
-    for (let i = 0; i < carousels.length; i += C_BATCH) {
-      const batch = carousels.slice(i, i + C_BATCH);
-      const results = await Promise.all(batch.map(async (post) => {
-        const children = await fetchCarouselChildren(post.id, token);
-        if (!children.length) return 0;
-        const rows = children.map((child, idx) => ({
-          id: child.id,
-          parent_id: post.id,
-          sort_order: idx,
-          media_type: child.media_type ?? null,
-          original_url: child.media_url ?? child.thumbnail_url ?? null,
-          synced_at: new Date().toISOString(),
+    try {
+      const carousels = allMedia.filter(p => p.media_type === 'CAROUSEL_ALBUM');
+      let childrenDone = 0;
+      const C_BATCH = 20;
+      for (let i = 0; i < carousels.length; i += C_BATCH) {
+        const batch = carousels.slice(i, i + C_BATCH);
+        const results = await Promise.all(batch.map(async (post) => {
+          const children = await fetchCarouselChildren(post.id, token);
+          if (!children.length) return 0;
+          const rows = children.map((child, idx) => ({
+            id: child.id,
+            parent_id: post.id,
+            sort_order: idx,
+            media_type: child.media_type ?? null,
+            original_url: child.media_url ?? child.thumbnail_url ?? null,
+            synced_at: new Date().toISOString(),
+          }));
+          await sb('/instagram_carousel_children?on_conflict=id', {
+            method: 'POST',
+            body: JSON.stringify(rows),
+          });
+          return rows.length;
         }));
-        await sb('/instagram_carousel_children?on_conflict=id', {
-          method: 'POST',
-          body: JSON.stringify(rows),
-        });
-        return rows.length;
-      }));
-      childrenDone += results.reduce((a, b) => a + b, 0);
+        childrenDone += results.reduce((a, b) => a + b, 0);
+      }
+      log.push(`Upserted ${childrenDone} carousel children across ${carousels.length} carousels`);
+    } catch (e) {
+      log.push(`Carousel children error: ${e.message}`);
     }
-    log.push(`Upserted ${childrenDone} carousel children across ${carousels.length} carousels`);
 
     // ── Step 4: Demographics ──
-    const demoRows = await fetchDemographics(token);
-    if (demoRows.length > 0) {
-      // Delete today's demographics first, then insert fresh (they are point-in-time)
-      const today = new Date().toISOString().slice(0, 10);
-      await sb(`/instagram_demographics?synced_at=gte.${today}T00:00:00Z`, { method: 'DELETE' });
-      await sb('/instagram_demographics', {
-        method: 'POST',
-        body: JSON.stringify(demoRows),
-      });
-      log.push(`Saved ${demoRows.length} demographic rows`);
-    } else {
-      log.push('Demographics: skipped (no data or permission missing)');
+    try {
+      const demoRows = await fetchDemographics(token);
+      if (demoRows.length > 0) {
+        const today = new Date().toISOString().slice(0, 10);
+        await sb(`/instagram_demographics?synced_at=gte.${today}T00:00:00Z`, { method: 'DELETE' });
+        await sb('/instagram_demographics', {
+          method: 'POST',
+          body: JSON.stringify(demoRows),
+        });
+        log.push(`Saved ${demoRows.length} demographic rows`);
+      } else {
+        log.push('Demographics: skipped (no data or permission missing)');
+      }
+    } catch (e) {
+      log.push(`Demographics error: ${e.message}`);
     }
 
     // ── Step 5: Daily snapshot ──
-    const snapshot = await fetchDailySnapshot(token);
-    if (snapshot) {
-      await sb('/instagram_snapshots?on_conflict=snapshot_date', {
-        method: 'POST',
-        body: JSON.stringify([snapshot]),
-      });
-      log.push(`Snapshot saved for ${snapshot.snapshot_date}: ${snapshot.followers_count} followers`);
+    try {
+      const snapshot = await fetchDailySnapshot(token);
+      if (snapshot) {
+        await sb('/instagram_snapshots?on_conflict=snapshot_date', {
+          method: 'POST',
+          body: JSON.stringify([snapshot]),
+        });
+        log.push(`Snapshot saved for ${snapshot.snapshot_date}: ${snapshot.followers_count} followers`);
+      }
+    } catch (e) {
+      log.push(`Snapshot error: ${e.message}`);
     }
 
     const elapsed = ((Date.now() - start) / 1000).toFixed(1);
