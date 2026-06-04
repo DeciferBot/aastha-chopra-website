@@ -2615,96 +2615,192 @@
       .bf-cards {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 2px;
+        gap: 20px;
         max-width: 1320px;
         margin: 0 auto;
       }
-      @media (max-width: 860px) { .bf-cards { grid-template-columns: 1fr; gap: 12px; } }
+      @media (max-width: 860px) { .bf-cards { grid-template-columns: 1fr; gap: 16px; } }
+
       .bf-card {
         background: var(--color-bg-elevated);
         border: 1px solid var(--color-border);
-        padding: 48px 36px 40px;
+        border-radius: 12px;
         cursor: pointer;
-        transition: border-color 0.3s var(--ease-default), background 0.3s, transform 0.3s var(--ease-spring);
+        transition: border-color 0.4s var(--ease-default);
         position: relative;
         overflow: hidden;
         display: flex;
         flex-direction: column;
+        min-height: 640px;
       }
-      .bf-card::before {
+      @media (max-width: 860px) { .bf-card { min-height: 520px; } }
+      .bf-card:hover { border-color: var(--color-border-strong); }
+      .bf-card.active { border-color: var(--color-gold); }
+
+      /* ── Visual panel ── */
+      .bf-card-visual {
+        position: relative;
+        flex: 0 0 58%;
+        overflow: hidden;
+      }
+      .bf-card-visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+        transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: transform;
+      }
+      .bf-card:hover .bf-card-visual img,
+      .bf-card.active .bf-card-visual img { transform: scale(1.04); }
+
+      /* gradient from image into body */
+      .bf-card-visual::after {
         content: '';
         position: absolute;
         inset: 0;
-        background: linear-gradient(135deg, rgba(196,152,58,0.05) 0%, transparent 60%);
+        background: linear-gradient(to bottom,
+          transparent 30%,
+          rgba(18,18,16,0.45) 65%,
+          rgba(18,18,16,0.92) 100%
+        );
+        pointer-events: none;
+      }
+
+      /* category tag + big stat float on image */
+      .bf-card-tag {
+        position: absolute;
+        top: 22px;
+        left: 24px;
+        z-index: 2;
+        font-family: var(--font-ui);
+        font-size: 0.58rem;
+        font-weight: 500;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.75);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(0,0,0,0.35);
+        padding: 5px 10px;
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .bf-card-stat-overlay {
+        position: absolute;
+        bottom: 20px;
+        left: 24px;
+        z-index: 2;
+      }
+      .bf-card-stat {
+        font-family: var(--font-display);
+        font-size: clamp(3rem, 4.5vw, 4.2rem);
+        font-weight: 400;
+        color: #fff;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        text-shadow: 0 2px 24px rgba(0,0,0,0.6);
+      }
+      .bf-card-stat-label {
+        font-family: var(--font-ui);
+        font-size: 0.58rem;
+        font-weight: 400;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.6);
+        margin-top: 4px;
+        max-width: 220px;
+        line-height: 1.4;
+      }
+
+      /* ── Body panel ── */
+      .bf-card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 36px 32px 32px;
+        background: var(--color-bg-elevated);
+        position: relative;
+      }
+      .bf-card-body::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(196,152,58,0.04) 0%, transparent 60%);
         opacity: 0;
         transition: opacity 0.4s;
         pointer-events: none;
       }
-      .bf-card:hover { border-color: var(--color-border-strong); transform: translateY(-3px); }
-      .bf-card:hover::before, .bf-card.active::before { opacity: 1; }
-      .bf-card.active { border-color: var(--color-gold); background: rgba(196,152,58,0.03); }
-      .bf-card-tag {
-        font-family: var(--font-ui);
-        font-size: 0.62rem;
-        font-weight: 500;
-        letter-spacing: 0.28em;
-        text-transform: uppercase;
-        color: var(--color-gold);
-        margin-bottom: 28px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .bf-card-tag::before { content: ''; width: 16px; height: 1px; background: var(--color-gold); flex-shrink: 0; }
-      .bf-card-stat {
-        font-family: var(--font-display);
-        font-size: 3.4rem;
-        font-weight: 400;
-        color: var(--color-text-primary);
-        line-height: 1;
-        margin-bottom: 4px;
-        letter-spacing: -0.02em;
-      }
-      .bf-card-stat-label {
-        font-family: var(--font-ui);
-        font-size: 0.65rem;
-        font-weight: 400;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--color-text-secondary);
-        margin-bottom: 32px;
-      }
+      .bf-card:hover .bf-card-body::before,
+      .bf-card.active .bf-card-body::before { opacity: 1; }
+
       .bf-card-title {
         font-family: var(--font-display);
-        font-size: 1.55rem;
+        font-size: clamp(1.4rem, 2vw, 1.7rem);
         font-weight: 400;
         color: var(--color-text-primary);
-        line-height: 1.2;
-        margin-bottom: 16px;
+        line-height: 1.15;
+        margin-bottom: 10px;
       }
       .bf-card-title em { font-style: italic; color: var(--color-gold); }
       .bf-card-copy {
         font-family: var(--font-ui);
-        font-size: 0.82rem;
+        font-size: 0.8rem;
         font-weight: 300;
-        line-height: 1.8;
+        line-height: 1.75;
         color: var(--color-text-secondary);
-        margin-bottom: 28px;
+        margin-bottom: 20px;
         flex: 1;
       }
+
+      .bf-card-proof {
+        display: flex;
+        gap: 0;
+        margin-bottom: 20px;
+        border-top: 1px solid var(--color-border);
+        border-bottom: 1px solid var(--color-border);
+      }
+      .bf-proof-item {
+        flex: 1;
+        padding: 12px 0;
+        border-right: 1px solid var(--color-border);
+      }
+      .bf-proof-item:last-child { border-right: none; }
+      .bf-proof-num {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 400;
+        color: var(--color-text-primary);
+        letter-spacing: -0.01em;
+        line-height: 1;
+        margin-bottom: 3px;
+      }
+      .bf-proof-lbl {
+        font-family: var(--font-ui);
+        font-size: 0.55rem;
+        font-weight: 400;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--color-text-secondary);
+        line-height: 1.4;
+      }
+
       .bf-card-brands {
         font-family: var(--font-ui);
-        font-size: 0.6rem;
+        font-size: 0.58rem;
         font-weight: 500;
-        letter-spacing: 0.18em;
+        letter-spacing: 0.16em;
         text-transform: uppercase;
-        color: rgba(196,152,58,0.5);
-        margin-bottom: 32px;
-        line-height: 2;
+        color: rgba(196,152,58,0.45);
+        margin-bottom: 20px;
+        line-height: 1.9;
       }
       .bf-card-cta {
         font-family: var(--font-ui);
-        font-size: 0.68rem;
+        font-size: 0.65rem;
         font-weight: 500;
         letter-spacing: 0.2em;
         text-transform: uppercase;
@@ -2713,6 +2809,7 @@
         align-items: center;
         gap: 8px;
         transition: color 0.2s;
+        margin-top: auto;
       }
       .bf-card:hover .bf-card-cta, .bf-card.active .bf-card-cta { color: var(--color-gold); }
       .bf-card-cta svg { transition: transform 0.3s var(--ease-spring); }
@@ -2764,125 +2861,102 @@
       <p class="bf-sub">Select the space your brand lives in. See exactly how Aastha performs there.</p>
     </div>
 
-    <style>
-      .bf-card-proof {
-        display: flex;
-        gap: 20px;
-        margin-bottom: 28px;
-        padding: 16px 0;
-        border-top: 1px solid var(--color-border);
-        border-bottom: 1px solid var(--color-border);
-      }
-      .bf-proof-item { flex: 1; }
-      .bf-proof-num {
-        font-family: var(--font-display);
-        font-size: 1.3rem;
-        font-weight: 400;
-        color: var(--color-text-primary);
-        letter-spacing: -0.01em;
-        line-height: 1;
-        margin-bottom: 3px;
-      }
-      .bf-proof-lbl {
-        font-family: var(--font-ui);
-        font-size: 0.58rem;
-        font-weight: 400;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: var(--color-text-secondary);
-        line-height: 1.4;
-      }
-      .bf-card-why {
-        font-family: var(--font-ui);
-        font-size: 0.72rem;
-        font-weight: 400;
-        letter-spacing: 0.02em;
-        color: var(--color-gold);
-        opacity: 0.75;
-        margin-bottom: 20px;
-        font-style: italic;
-        line-height: 1.5;
-      }
-    </style>
-
     <div class="bf-cards">
 
       <!-- Card 1: Fashion & Beauty -->
       <div class="bf-card reveal" role="button" tabindex="0" data-avatar="fashion-beauty" data-reels-tab="Beauty">
-        <div class="bf-card-tag">Fashion · Beauty · Fragrance</div>
-        <div class="bf-card-stat">110+</div>
-        <div class="bf-card-stat-label">brand collaborations — category validated at every tier</div>
-        <div class="bf-card-title">The <em>editor's</em> eye.</div>
-        <p class="bf-card-copy">She moves in the world your customer aspires to enter. Fashion-week front rows. Exclusive launches. Editorial content that signals your brand belongs.</p>
-        <div class="bf-card-proof">
-          <div class="bf-proof-item">
-            <div class="bf-proof-num">0.77%</div>
-            <div class="bf-proof-lbl">Engagement rate<br>on beauty content</div>
-          </div>
-          <div class="bf-proof-item">
-            <div class="bf-proof-num">842</div>
-            <div class="bf-proof-lbl">Top post<br>interactions</div>
-          </div>
-          <div class="bf-proof-item">
-            <div class="bf-proof-num">29</div>
-            <div class="bf-proof-lbl">Fashion &amp; beauty<br>posts (last 90d)</div>
+        <div class="bf-card-visual">
+          <img src="images/IMG_4568.JPG" alt="Aastha Chopra — Fashion editorial" loading="lazy" />
+          <div class="bf-card-tag">Fashion · Beauty · Fragrance</div>
+          <div class="bf-card-stat-overlay">
+            <div class="bf-card-stat">110+</div>
+            <div class="bf-card-stat-label">brand collaborations — every tier validated</div>
           </div>
         </div>
-        <div class="bf-card-why">"Industry benchmark for a luxury 50K account: 0.5–0.8%"</div>
-        <div class="bf-card-brands">Chanel · Dior · Valentino · Celine · Hermès<br>Huda Beauty · Dolce &amp; Gabbana · Jimmy Choo</div>
-        <span class="bf-card-cta">See Fashion &amp; Beauty work <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <div class="bf-card-body">
+          <div class="bf-card-title">Fashion Curator</div>
+          <p class="bf-card-copy">Fashion-week front rows. Exclusive launches. Editorial content that signals your brand belongs in the world your customer aspires to enter.</p>
+          <div class="bf-card-proof">
+            <div class="bf-proof-item">
+              <div class="bf-proof-num">0.77%</div>
+              <div class="bf-proof-lbl">Engagement<br>on beauty</div>
+            </div>
+            <div class="bf-proof-item">
+              <div class="bf-proof-num">842</div>
+              <div class="bf-proof-lbl">Top post<br>interactions</div>
+            </div>
+            <div class="bf-proof-item">
+              <div class="bf-proof-num">29</div>
+              <div class="bf-proof-lbl">Posts<br>last 90d</div>
+            </div>
+          </div>
+          <div class="bf-card-brands">Chanel · Dior · Valentino · Hermès · Huda Beauty · Jimmy Choo</div>
+          <span class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
       </div>
 
       <!-- Card 2: Luxury & Experiences -->
       <div class="bf-card reveal reveal-delay-1" role="button" tabindex="0" data-avatar="luxury-experiences" data-reels-tab="Luxury">
-        <div class="bf-card-tag">Hotels · Dining · Travel</div>
-        <div class="bf-card-stat">35%</div>
-        <div class="bf-card-stat-label">of content viewers are based in UAE — Dubai · Abu Dhabi · Sharjah</div>
-        <div class="bf-card-title">The <em>experience</em> curator.</div>
-        <p class="bf-card-copy">Your local market is watching her. She makes places desirable — hotels get Googled, dinners get booked, destinations get added to wishlists the morning after she posts.</p>
-        <div class="bf-card-proof">
-          <div class="bf-proof-item">
-            <div class="bf-proof-num">0.92%</div>
-            <div class="bf-proof-lbl">Engagement rate<br>on travel content</div>
-          </div>
-          <div class="bf-proof-item">
-            <div class="bf-proof-num">31K</div>
-            <div class="bf-proof-lbl">Peak daily reach<br>on a travel post</div>
-          </div>
-          <div class="bf-proof-item">
-            <div class="bf-proof-num">849</div>
-            <div class="bf-proof-lbl">Top post<br>interactions</div>
+        <div class="bf-card-visual">
+          <img src="images/IMG_6977.JPG" alt="Aastha Chopra — Dubai luxury rooftop" loading="lazy" style="object-position: center 25%;" />
+          <div class="bf-card-tag">Hotels · Dining · Travel</div>
+          <div class="bf-card-stat-overlay">
+            <div class="bf-card-stat">35%</div>
+            <div class="bf-card-stat-label">of viewers are UAE-based — Dubai · Abu Dhabi · Sharjah</div>
           </div>
         </div>
-        <div class="bf-card-why">"Her content over-indexes in UAE — reaching your customer through organic discovery, not just followers."</div>
-        <div class="bf-card-brands">Visit Finland · Jumeirah · Madinat · Thailand Tourism<br>Premium Hospitality · Fine Dining · Luxury Travel</div>
-        <span class="bf-card-cta">See Luxury &amp; Travel work <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <div class="bf-card-body">
+          <div class="bf-card-title">Luxury Curator</div>
+          <p class="bf-card-copy">Your local market is watching her. Hotels get Googled, dinners get booked, destinations land on wishlists the morning after she posts.</p>
+          <div class="bf-card-proof">
+            <div class="bf-proof-item">
+              <div class="bf-proof-num">0.92%</div>
+              <div class="bf-proof-lbl">Engagement<br>on travel</div>
+            </div>
+            <div class="bf-proof-item">
+              <div class="bf-proof-num">31K</div>
+              <div class="bf-proof-lbl">Peak daily<br>reach</div>
+            </div>
+            <div class="bf-proof-item">
+              <div class="bf-proof-num">849</div>
+              <div class="bf-proof-lbl">Top post<br>interactions</div>
+            </div>
+          </div>
+          <div class="bf-card-brands">Jumeirah · Madinat · Visit Finland · Thailand Tourism · Fine Dining</div>
+          <span class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
       </div>
 
       <!-- Card 3: Wellness -->
       <div class="bf-card reveal reveal-delay-2" role="button" tabindex="0" data-avatar="wellness" data-reels-tab="Wellness">
-        <div class="bf-card-tag">Wellness · Fitness · Balance</div>
-        <div class="bf-card-stat">0.89%</div>
-        <div class="bf-card-stat-label">engagement rate — her highest-performing category, and almost untapped by brands</div>
-        <div class="bf-card-title">The <em>credible</em> advocate.</div>
-        <p class="bf-card-copy">A practising lawyer who finishes Ironman races and hikes Arctic waterfalls. Almost no wellness brands have worked with her — which is an opportunity. The endorsement your audience believes because she earns it.</p>
-        <div class="bf-card-proof">
-          <div class="bf-proof-item">
-            <div class="bf-proof-num">614</div>
-            <div class="bf-proof-lbl">Top wellness<br>post interactions</div>
-          </div>
-          <div class="bf-proof-item">
-            <div class="bf-proof-num">3</div>
-            <div class="bf-proof-lbl">Wellness posts<br>in portfolio</div>
-          </div>
-          <div class="bf-proof-item">
-            <div class="bf-proof-num">2×</div>
-            <div class="bf-proof-lbl">Higher rate vs.<br>fashion content</div>
+        <div class="bf-card-visual">
+          <img src="images/IMG_9859.JPG" alt="Aastha Chopra — Wellness, desert arches UAE" loading="lazy" style="object-position: center 15%;" />
+          <div class="bf-card-tag">Wellness · Fitness · Balance</div>
+          <div class="bf-card-stat-overlay">
+            <div class="bf-card-stat">0.89%</div>
+            <div class="bf-card-stat-label">engagement — her highest category, almost untouched by brands</div>
           </div>
         </div>
-        <div class="bf-card-why">"Low competition in this category = higher share of voice for your brand."</div>
-        <div class="bf-card-brands">Ironman Dubai · Active Travel · Premium Wellness<br>Athleisure · Mindful Luxury · Balance-Focused Brands</div>
-        <span class="bf-card-cta">See Wellness work <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <div class="bf-card-body">
+          <div class="bf-card-title">Wellness Guru</div>
+          <p class="bf-card-copy">A practising lawyer. Ironman finisher. Arctic waterfall hiker. Almost no wellness brands have worked with her — which makes this the highest-ROI whitespace on her profile.</p>
+          <div class="bf-card-proof">
+            <div class="bf-proof-item">
+              <div class="bf-proof-num">614</div>
+              <div class="bf-proof-lbl">Top wellness<br>interactions</div>
+            </div>
+            <div class="bf-proof-item">
+              <div class="bf-proof-num">2×</div>
+              <div class="bf-proof-lbl">vs. fashion<br>content rate</div>
+            </div>
+            <div class="bf-proof-item">
+              <div class="bf-proof-num">Low</div>
+              <div class="bf-proof-lbl">Brand<br>competition</div>
+            </div>
+          </div>
+          <div class="bf-card-brands">Ironman Dubai · Active Travel · Premium Wellness · Mindful Luxury</div>
+          <span class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </div>
       </div>
     </div>
 
