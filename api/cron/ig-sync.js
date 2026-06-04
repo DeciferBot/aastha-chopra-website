@@ -174,7 +174,7 @@ async function fetchDailySnapshot(token) {
 export default async function handler(req, res) {
   const authHeader = req.headers.authorization;
   const validCron   = authHeader === `Bearer ${process.env.CRON_SECRET}`;
-  const validManual = authHeader === `Bearer ${process.env.SUPABASE_SERVICE_KEY}`;
+  const validManual = authHeader === `Bearer ${process.env.MANUAL_SYNC_KEY}`;
   if (!validCron && !validManual) return res.status(401).end();
 
   const token = process.env.INSTAGRAM_ACCESS_TOKEN;
