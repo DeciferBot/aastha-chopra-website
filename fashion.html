@@ -23,6 +23,8 @@
 </head>
 <body>
 
+  <div id="scroll-progress"></div>
+
   <!-- NAV -->
   <nav class="world-nav">
     <a href="index.html" class="world-nav-logo">Aastha Chopra</a>
@@ -69,6 +71,38 @@
     </div>
   </section>
 
+  <!-- MARQUEE -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-inner">
+      <span class="marquee-item">Chanel</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Dior</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Valentino</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Huda Beauty</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Jimmy Choo</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Maybelline Arabia</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Kosas</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Hermes</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Khoya UAE</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Mahgul</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Kanz Jewels</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Dialmaz</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Signature by IMS</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Chanel</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Dior</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Valentino</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Huda Beauty</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Jimmy Choo</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Maybelline Arabia</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Kosas</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Hermes</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Khoya UAE</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Mahgul</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Kanz Jewels</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Dialmaz</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Signature by IMS</span><span class="marquee-dot">·</span>
+    </div>
+  </div>
+
   <!-- STATS -->
   <section class="world-stats reveal" id="stats">
     <div class="world-stats-inner">
@@ -82,7 +116,7 @@
           <span class="stat-number">51<span>.5K</span></span>
           <span class="stat-label">Instagram followers</span>
         </div>
-        <div class="stat-block">
+        <div class="stat-block stat-accent">
           <span class="stat-number">110<span>+</span></span>
           <span class="stat-label">Brand collaborations</span>
         </div>
@@ -148,6 +182,14 @@
     </div>
   </section>
 
+  <!-- COGNAC BAND -->
+  <section class="cognac-band reveal">
+    <div class="cognac-band-inner">
+      <p>110 partnerships. Every tier. <em>One consistent voice.</em></p>
+      <a href="mailto:management@aasthachopra.com" class="btn-cognac">Work with her</a>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="world-cta">
     <div class="world-cta-inner">
@@ -173,6 +215,26 @@
   </footer>
 
   <script>
+    // Scroll progress
+    var prog = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', function() {
+      var h = document.documentElement;
+      var pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+      prog.style.width = pct + '%';
+    }, {passive: true});
+
+    // Hero title word animation
+    (function() {
+      var title = document.querySelector('.hero-title');
+      if (!title) return;
+      var html = title.innerHTML;
+      var words = html.split(/(\s+)/);
+      title.innerHTML = words.map(function(w, i) {
+        if (/^\s+$/.test(w)) return w;
+        return '<span class="hero-word" style="animation-delay:' + (0.15 + i * 0.06) + 's">' + w + '</span>';
+      }).join('');
+    })();
+
     // Reveal
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);} });

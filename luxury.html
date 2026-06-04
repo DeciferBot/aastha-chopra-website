@@ -23,18 +23,20 @@
 </head>
 <body>
 
+  <div id="scroll-progress"></div>
+
   <!-- ═══════════════════════════════════════════════════════════
        NAV
   ══════════════════════════════════════════════════════════════ -->
   <nav class="world-nav">
-    <a href="index.html" class="nav-logo">Aastha Chopra</a>
-    <ul class="nav-links">
+    <a href="index.html" class="world-nav-logo">Aastha Chopra</a>
+    <ul class="world-nav-links">
       <li><a href="index.html#brand-fit">All Worlds</a></li>
       <li><a href="fashion.html">Fashion</a></li>
       <li><a href="wellness.html">Wellness</a></li>
-      <li><a href="luxury.html" class="active">Luxury</a></li>
+      <li><span class="active">Luxury</span></li>
     </ul>
-    <a href="mailto:management@aasthachopra.com" class="nav-cta">Collaborate</a>
+    <a href="mailto:management@aasthachopra.com" class="world-nav-cta">Collaborate</a>
   </nav>
 
   <!-- ═══════════════════════════════════════════════════════════
@@ -44,7 +46,7 @@
     <div class="world-hero-text">
       <a href="index.html#brand-fit" class="back-link">← All worlds</a>
       <div class="hero-bottom">
-        <p class="eyebrow">Hotels · Dining · Travel</p>
+        <p class="hero-eyebrow">Hotels · Dining · Travel</p>
         <h1 class="hero-title">The <em>Dubai</em> Insider</h1>
         <p class="hero-sub">Your brand, in the market<br>that matters most</p>
       </div>
@@ -58,46 +60,74 @@
        STORY
   ══════════════════════════════════════════════════════════════ -->
   <section class="world-story">
-    <p class="section-label">Her world</p>
-    <h2>Dubai is her backyard.</h2>
-    <p>Aastha lives the life her audience aspires to. She dines at the tables they want to sit at, stays in the suites they save for, and travels to the destinations they put on their lists. When she posts about a hotel or restaurant, people look it up.</p>
-    <p><strong>35% of her audience is UAE-based</strong>, split across Dubai, Abu Dhabi and Sharjah. For any brand trying to reach the Gulf market, that is direct access to people making purchasing decisions on the ground.</p>
-    <p>Her travel and hospitality content carries her highest engagement rate. The category is uncrowded on her profile, which means brands that move first get the full attention of her audience without competition from similar deals.</p>
+    <div class="world-story-inner">
+      <p class="section-label reveal">Her world</p>
+      <h2>Dubai is her backyard.</h2>
+      <p>Aastha lives the life her audience aspires to. She dines at the tables they want to sit at, stays in the suites they save for, and travels to the destinations they put on their lists. When she posts about a hotel or restaurant, people look it up.</p>
+      <p><strong>35% of her audience is UAE-based</strong>, split across Dubai, Abu Dhabi and Sharjah. For any brand trying to reach the Gulf market, that is direct access to people making purchasing decisions on the ground.</p>
+      <p>Her travel and hospitality content carries her highest engagement rate. The category is uncrowded on her profile, which means brands that move first get the full attention of her audience without competition from similar deals.</p>
+    </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════
        GOLD BAND
   ══════════════════════════════════════════════════════════════ -->
   <section class="gold-band reveal">
-    <blockquote>35% of her audience is in the UAE. <em>Right now.</em></blockquote>
-    <cite>Hotels · Dining · Travel · Gulf Market</cite>
+    <div class="gold-band-inner">
+      <blockquote>35% of her audience is in the UAE. <em>Right now.</em></blockquote>
+      <cite>Hotels · Dining · Travel · Gulf Market</cite>
+    </div>
   </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-inner">
+      <span class="marquee-item">Jumeirah</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Burj Al Arab</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Madinat Jumeirah</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Visit Finland</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Thailand Tourism</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Fine Dining Dubai</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Desert Safari UAE</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">UAE Staycations</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Jumeirah</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Burj Al Arab</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Madinat Jumeirah</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Visit Finland</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Thailand Tourism</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Fine Dining Dubai</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Desert Safari UAE</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">UAE Staycations</span><span class="marquee-dot">·</span>
+    </div>
+  </div>
 
   <!-- ═══════════════════════════════════════════════════════════
        STATS
   ══════════════════════════════════════════════════════════════ -->
   <section class="world-stats reveal" id="stats">
-    <div class="stats-header">
-      <p class="section-label">Luxury &amp; Travel — by the numbers</p>
-      <h2>35% of her audience is in the UAE. Right now.</h2>
-      <p>Verified figures · 2025 · UAE reach: Dubai, Abu Dhabi, Sharjah</p>
-    </div>
-    <div class="stats-grid">
-      <div class="stat-block">
-        <span class="stat-number">35<span>%</span></span>
-        <span class="stat-label">UAE audience per post</span>
+    <div class="world-stats-inner">
+      <div class="world-stats-header">
+        <p class="section-label">Luxury &amp; Travel — by the numbers</p>
+        <h2>35% of her audience is in the UAE. Right now.</h2>
+        <p>Verified figures · 2025 · UAE reach: Dubai, Abu Dhabi, Sharjah</p>
       </div>
-      <div class="stat-block">
-        <span class="stat-number">0.92<span>%</span></span>
-        <span class="stat-label">Travel engagement rate</span>
-      </div>
-      <div class="stat-block">
-        <span class="stat-number">31<span>K</span></span>
-        <span class="stat-label">Peak daily reach</span>
-      </div>
-      <div class="stat-block">
-        <span class="stat-number">51<span>.5K</span></span>
-        <span class="stat-label">Instagram followers</span>
+      <div class="world-stats-grid">
+        <div class="stat-block">
+          <span class="stat-number">35<span>%</span></span>
+          <span class="stat-label">UAE audience per post</span>
+        </div>
+        <div class="stat-block stat-accent">
+          <span class="stat-number">0.92<span>%</span></span>
+          <span class="stat-label">Travel engagement rate</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-number">31<span>K</span></span>
+          <span class="stat-label">Peak daily reach</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-number">51<span>.5K</span></span>
+          <span class="stat-label">Instagram followers</span>
+        </div>
       </div>
     </div>
   </section>
@@ -106,11 +136,14 @@
        REELS
   ══════════════════════════════════════════════════════════════ -->
   <section class="world-reels">
-    <div class="reels-header">
-      <h3>Luxury &amp; Travel content</h3>
-      <a href="https://www.instagram.com/aasthachopra/" target="_blank" rel="noopener" class="reels-ig-link">View on Instagram</a>
+    <div class="world-reels-inner">
+      <div class="world-reels-header">
+        <p class="section-label">Content</p>
+        <h2>Luxury &amp; Travel reels</h2>
+        <a href="https://www.instagram.com/aasthachopra/" target="_blank" rel="noopener">View on Instagram</a>
+      </div>
+      <div class="world-reels-grid" id="reels-grid"></div>
     </div>
-    <div class="world-reels-grid" id="reels-grid"></div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════
@@ -140,29 +173,42 @@
        BRANDS
   ══════════════════════════════════════════════════════════════ -->
   <section class="world-brands">
-    <h3>Properties &amp; destinations she has featured</h3>
-    <div class="brand-tags">
-      <span class="brand-tag">Jumeirah</span>
-      <span class="brand-tag">Madinat Jumeirah</span>
-      <span class="brand-tag">Visit Finland</span>
-      <span class="brand-tag">Thailand Tourism</span>
-      <span class="brand-tag">Burj Al Arab</span>
-      <span class="brand-tag">Fine Dining Dubai</span>
-      <span class="brand-tag">Desert Safari UAE</span>
-      <span class="brand-tag">UAE Staycations</span>
+    <div class="world-brands-inner reveal">
+      <h3>Properties &amp; destinations she has featured</h3>
+      <div class="brands-list">
+        <span class="brand-tag">Jumeirah</span>
+        <span class="brand-tag">Madinat Jumeirah</span>
+        <span class="brand-tag">Visit Finland</span>
+        <span class="brand-tag">Thailand Tourism</span>
+        <span class="brand-tag">Burj Al Arab</span>
+        <span class="brand-tag">Fine Dining Dubai</span>
+        <span class="brand-tag">Desert Safari UAE</span>
+        <span class="brand-tag">UAE Staycations</span>
+      </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════
        CTA
   ══════════════════════════════════════════════════════════════ -->
+  <!-- COGNAC BAND -->
+  <section class="cognac-band reveal">
+    <div class="cognac-band-inner">
+      <p>Your property. Her feed. <em>Their booking.</em></p>
+      <a href="mailto:management@aasthachopra.com" class="btn-cognac">Get in touch</a>
+    </div>
+  </section>
+
+  <!-- CTA -->
   <section class="world-cta">
-    <p class="section-label">Work together</p>
-    <h2>Put your property in front of <em>Dubai's audience.</em></h2>
-    <p>Download the media pack for full audience data and rate card, or reach out directly.</p>
-    <div class="cta-btns">
-      <a href="/Aastha_Chopra_Media_Pack.pdf" class="btn-primary" download>Download Media Pack</a>
-      <a href="mailto:management@aasthachopra.com" class="btn-secondary">Get in Touch</a>
+    <div class="world-cta-inner">
+      <p class="section-label">Work together</p>
+      <h2>Put your property in front of <em>Dubai's audience.</em></h2>
+      <p>Download the media pack for full audience data and rate card, or reach out directly.</p>
+      <div class="cta-btns">
+        <a href="/Aastha_Chopra_Media_Pack.pdf" class="btn-primary" download>Download Media Pack</a>
+        <a href="mailto:management@aasthachopra.com" class="btn-outline">Get in Touch</a>
+      </div>
     </div>
   </section>
 
@@ -170,19 +216,39 @@
        FOOTER
   ══════════════════════════════════════════════════════════════ -->
   <footer class="world-footer">
-    <p class="footer-copy">&copy; Aastha Chopra 2025</p>
-    <ul class="footer-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="fashion.html">Fashion</a></li>
-      <li><a href="wellness.html">Wellness</a></li>
-      <li><a href="https://www.instagram.com/aasthachopra/" target="_blank" rel="noopener">Instagram</a></li>
-    </ul>
+    <p>&copy; Aastha Chopra 2025</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="fashion.html">Fashion</a>
+      <a href="wellness.html">Wellness</a>
+      <a href="https://www.instagram.com/aasthachopra/" target="_blank" rel="noopener">Instagram</a>
+    </div>
   </footer>
 
   <!-- ═══════════════════════════════════════════════════════════
        JS
   ══════════════════════════════════════════════════════════════ -->
   <script>
+    // Scroll progress
+    var prog = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', function() {
+      var h = document.documentElement;
+      var pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+      prog.style.width = pct + '%';
+    }, {passive: true});
+
+    // Hero title word animation
+    (function() {
+      var title = document.querySelector('.hero-title');
+      if (!title) return;
+      var html = title.innerHTML;
+      var words = html.split(/(\s+)/);
+      title.innerHTML = words.map(function(w, i) {
+        if (/^\s+$/.test(w)) return w;
+        return '<span class="hero-word" style="animation-delay:' + (0.15 + i * 0.06) + 's">' + w + '</span>';
+      }).join('');
+    })();
+
     var io=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
     document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
