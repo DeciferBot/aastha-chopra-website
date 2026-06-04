@@ -4,6 +4,67 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MNSRF3MYFY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MNSRF3MYFY', {
+      page_title: document.title,
+      page_location: window.location.href
+    });
+
+    // Track outbound social links
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('a[href*="instagram"], a[href*="tiktok"], a[href*="youtube"], a[href*="linkedin"]').forEach(function(el) {
+        el.addEventListener('click', function() {
+          gtag('event', 'social_click', {
+            event_category: 'engagement',
+            event_label: el.href,
+            platform: el.href.match(/instagram|tiktok|youtube|linkedin/)?.[0] || 'unknown'
+          });
+        });
+      });
+
+      // Track media pack / PDF downloads
+      document.querySelectorAll('a[href*=".pdf"], a[href*="media"], a[href*="pack"]').forEach(function(el) {
+        el.addEventListener('click', function() {
+          gtag('event', 'file_download', {
+            event_category: 'engagement',
+            event_label: el.href,
+            file_name: el.href.split('/').pop()
+          });
+        });
+      });
+
+      // Track contact / email clicks
+      document.querySelectorAll('a[href^="mailto"]').forEach(function(el) {
+        el.addEventListener('click', function() {
+          gtag('event', 'contact_click', {
+            event_category: 'engagement',
+            event_label: el.href
+          });
+        });
+      });
+
+      // Track scroll depth (25%, 50%, 75%, 90%)
+      var scrollMarks = {25: false, 50: false, 75: false, 90: false};
+      window.addEventListener('scroll', function() {
+        var pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+        [25, 50, 75, 90].forEach(function(mark) {
+          if (pct >= mark && !scrollMarks[mark]) {
+            scrollMarks[mark] = true;
+            gtag('event', 'scroll_depth', { event_category: 'engagement', percent_scrolled: mark });
+          }
+        });
+      });
+    });
+  </script>
+
+  <!-- Google Search Console Verification -->
+  <meta name="google-site-verification" content="Tznu636rHEfe_TybMDu_184pIbZZqZ-9t0I7y-Iqa7g" />
+
   <!-- Primary SEO -->
   <title>Aastha Chopra | Luxury Beauty and Lifestyle Creator, Dubai UAE</title>
   <meta name="description" content="Aastha Chopra is a Dubai-based creator and practising lawyer specialising in luxury beauty, fashion, and lifestyle. UAE Media Council licensed. Partnering with premium brands across the Gulf and globally." />
@@ -2442,68 +2503,8 @@
         <h2 class="section-heading reveal reveal-delay-1">Selected <em>works</em></h2>
       </div>
 
-      <div class="portfolio-grid">
-
-        <div class="portfolio-item reveal">
-          <img class="portfolio-bg" src="images/IMG_0066.JPG" alt="Fashion" />
-          <div class="portfolio-overlay">
-            <div class="portfolio-meta">
-              <span class="portfolio-tag">Fashion</span>
-              <span class="portfolio-title">Evening in Dubai</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="portfolio-item reveal reveal-delay-1">
-          <img class="portfolio-bg" src="images/IMG_2813.JPG" alt="Fashion" />
-          <div class="portfolio-overlay">
-            <div class="portfolio-meta">
-              <span class="portfolio-tag">Fashion</span>
-              <span class="portfolio-title">Powder Blue Moment</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="portfolio-item reveal reveal-delay-2">
-          <img class="portfolio-bg" src="images/IMG_6977.JPG" alt="Lifestyle" />
-          <div class="portfolio-overlay">
-            <div class="portfolio-meta">
-              <span class="portfolio-tag">Lifestyle</span>
-              <span class="portfolio-title">Dubai Nights</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="portfolio-item reveal">
-          <img class="portfolio-bg" src="images/IMG_9859.JPG" alt="Travel" />
-          <div class="portfolio-overlay">
-            <div class="portfolio-meta">
-              <span class="portfolio-tag">Travel</span>
-              <span class="portfolio-title">Desert Arches</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="portfolio-item reveal reveal-delay-1">
-          <img class="portfolio-bg" src="images/IMG_7280.JPG" alt="Fashion" />
-          <div class="portfolio-overlay">
-            <div class="portfolio-meta">
-              <span class="portfolio-tag">Fashion</span>
-              <span class="portfolio-title">Golden Heritage</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="portfolio-item reveal reveal-delay-2">
-          <img class="portfolio-bg" src="images/IMG_1364.JPG" alt="Lifestyle" />
-          <div class="portfolio-overlay">
-            <div class="portfolio-meta">
-              <span class="portfolio-tag">Lifestyle</span>
-              <span class="portfolio-title">Burj Al Arab Days</span>
-            </div>
-          </div>
-        </div>
-
+      <div class="portfolio-grid" id="portfolio-grid">
+        <!-- items injected by JS from Supabase -->
       </div>
     </div>
   </section>
@@ -2973,6 +2974,45 @@
         links.style.backdropFilter = 'blur(12px)';
       }
     }
+  </script>
+
+  <!-- ─── SUPABASE PORTFOLIO ─── -->
+  <script>
+    (async function loadPortfolio() {
+      const SUPABASE_URL = 'https://uqzvaytvynrglijvwjsz.supabase.co';
+      const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxenZheXR2eW5yZ2xpanZ3anN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NTE1MzMsImV4cCI6MjA5NjEyNzUzM30.gO4SExyBda-iOb5iHNo-2aW_lvmh3_k-SEMLMqyGkbo';
+      const delays = ['', 'reveal-delay-1', 'reveal-delay-2'];
+
+      try {
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/portfolio?select=*&active=eq.true&order=sort_order.asc`,
+          { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } }
+        );
+        const items = await res.json();
+        const grid = document.getElementById('portfolio-grid');
+        if (!grid || !Array.isArray(items)) return;
+
+        grid.innerHTML = items.map((item, i) => `
+          <div class="portfolio-item reveal ${delays[i % 3]}">
+            <img class="portfolio-bg" src="${item.image_path}" alt="${item.alt_text}" />
+            <div class="portfolio-overlay">
+              <div class="portfolio-meta">
+                <span class="portfolio-tag">${item.tag}</span>
+                <span class="portfolio-title">${item.title}</span>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        // Re-run reveal on new elements
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+        }, { threshold: 0, rootMargin: '120px 0px 120px 0px' });
+        document.querySelectorAll('#portfolio-grid .reveal').forEach(el => obs.observe(el));
+      } catch (e) {
+        console.warn('Portfolio fetch failed, keeping fallback', e);
+      }
+    })();
   </script>
 </body>
 </html>
