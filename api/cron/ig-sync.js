@@ -172,9 +172,10 @@ async function fetchDailySnapshot(token) {
 
 // ── Main handler ──────────────────────────────────────────────────────────────
 export default async function handler(req, res) {
-  if (req.headers.authorization !== `Bearer ${process.env.CRON_SECRET}`) {
-    return res.status(401).end();
-  }
+  const authHeader = req.headers.authorization;
+  const validCron   = authHeader === `Bearer ${process.env.CRON_SECRET}`;
+  const validManual = authHeader === `Bearer ${process.env.SUPABASE_SERVICE_KEY}`;
+  if (!validCron && !validManual) return res.status(401).end();
 
   const token = process.env.INSTAGRAM_ACCESS_TOKEN;
   if (!token) return res.status(500).json({ error: 'No INSTAGRAM_ACCESS_TOKEN' });
