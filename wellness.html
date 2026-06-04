@@ -46,6 +46,7 @@
         <p class="hero-sub">Ironman finisher.<br>Practising lawyer. Dubai.</p>
       </div>
     </div>
+    <span class="hero-vertical-tag">Ironman Finisher &nbsp;·&nbsp; 0.89% Wellness Engagement &nbsp;·&nbsp; 51.5K &nbsp;·&nbsp; Dubai</span>
     <div class="world-hero-image">
       <img src="images/IMG_5870.jpg" alt="Aastha Chopra — wellness and fitness" />
     </div>
@@ -69,6 +70,32 @@
       <a href="#stats" class="btn-cognac">See the numbers</a>
     </div>
   </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-inner">
+      <span class="marquee-item">Activewear</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Sports Nutrition</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Running &amp; Triathlon</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Ironman Finisher</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Wellness Retreats</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Clean Beauty</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Mental Wellness</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Health Tech</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Supplements UAE</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Gym &amp; Studio</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Activewear</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Sports Nutrition</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Running &amp; Triathlon</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Ironman Finisher</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Wellness Retreats</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Clean Beauty</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Mental Wellness</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Health Tech</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Supplements UAE</span><span class="marquee-dot">·</span>
+      <span class="marquee-item">Gym &amp; Studio</span><span class="marquee-dot">·</span>
+    </div>
+  </div>
 
   <!-- STATS -->
   <section class="world-stats reveal" id="stats">
@@ -186,6 +213,26 @@
   </footer>
 
   <script>
+    // Scroll progress
+    var prog = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', function() {
+      var h = document.documentElement;
+      var pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+      prog.style.width = pct + '%';
+    }, {passive: true});
+
+    // Hero title word animation
+    (function() {
+      var title = document.querySelector('.hero-title');
+      if (!title) return;
+      var html = title.innerHTML;
+      var words = html.split(/(\s+)/);
+      title.innerHTML = words.map(function(w, i) {
+        if (/^\s+$/.test(w)) return w;
+        return '<span class="hero-word" style="animation-delay:' + (0.15 + i * 0.06) + 's">' + w + '</span>';
+      }).join('');
+    })();
+
     var io=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
     document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 

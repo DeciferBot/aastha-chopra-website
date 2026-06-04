@@ -138,6 +138,17 @@ body::before {
   position: absolute; top: 0; left: 0; bottom: 0; width: 3px;
   background: var(--cognac); opacity: 0.55;
 }
+.hero-vertical-tag {
+  position: absolute;
+  right: 20px; bottom: 56px;
+  font-size: 0.5rem; font-weight: 500; letter-spacing: 0.38em;
+  text-transform: uppercase; color: var(--text-dim); white-space: nowrap;
+  writing-mode: vertical-rl; text-orientation: mixed;
+  transform: rotate(180deg);
+  pointer-events: none;
+}
+@media (max-width: 860px) { .hero-vertical-tag { display: none; } }
+
 .world-hero-image {
   position: relative; overflow: hidden; min-height: 480px;
 }
@@ -455,9 +466,18 @@ body::before {
   font-size: 0.64rem; font-weight: 500; letter-spacing: 0.2em;
   text-transform: uppercase; color: var(--text-mid);
   border: 1px solid var(--border-hi); padding: 9px 18px; background: var(--bg-card);
-  transition: border-color 0.2s, color 0.2s;
+  transition: border-color 0.25s, color 0.25s, padding-left 0.25s var(--ease);
+  position: relative; overflow: hidden;
 }
-.brand-tag:hover { border-color: var(--gold); color: var(--text); }
+.brand-tag::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+  background: var(--gold);
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform 0.25s var(--ease);
+}
+.brand-tag:hover { border-color: var(--gold); color: var(--text); padding-left: 22px; }
+.brand-tag:hover::before { transform: scaleY(1); }
 @media (max-width: 720px) { .world-brands { padding: 48px 24px; } }
 
 /* ── WHITESPACE CALLOUT (wellness only) ─────── */
@@ -513,11 +533,12 @@ body::before {
   border-top: 1px solid var(--border);
   text-align: center;
 }
-.world-cta-inner { max-width: 640px; margin: 0 auto; }
+.world-cta-inner { max-width: 860px; margin: 0 auto; }
 .world-cta h2 {
   font-family: var(--serif);
-  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
-  font-weight: 400; color: var(--text); line-height: 1.15; margin-bottom: 20px;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 300; color: var(--text); line-height: 1.08; margin-bottom: 24px;
+  letter-spacing: -0.02em;
 }
 .world-cta h2 em { font-style: italic; color: var(--gold); }
 .world-cta p {

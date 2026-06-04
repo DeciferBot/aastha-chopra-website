@@ -49,6 +49,14 @@
       });
 
       // Track scroll depth (25%, 50%, 75%, 90%)
+      // Scroll progress bar
+      var _prog = document.getElementById('scroll-progress');
+      window.addEventListener('scroll', function() {
+        var h = document.documentElement;
+        var _pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+        if (_prog) _prog.style.width = _pct + '%';
+      }, {passive: true});
+
       var scrollMarks = {25: false, 50: false, 75: false, 90: false};
       window.addEventListener('scroll', function() {
         var pct = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
@@ -933,7 +941,7 @@
       right: -24px;
       font-family: var(--font-display);
       font-size: 7rem;
-      font-weight: 700;
+      font-weight: 300;
       color: rgba(196,152,58,0.08);
       line-height: 1;
       user-select: none;
@@ -962,10 +970,11 @@
     .about-heading {
       font-family: var(--font-display);
       font-size: clamp(2.8rem, 4vw, 4.2rem);
-      font-weight: 700;
-      line-height: 1.1;
+      font-weight: 300;
+      line-height: 1.08;
       color: var(--color-text-primary);
       margin-bottom: 36px;
+      letter-spacing: -0.02em;
     }
     .about-heading em {
       font-style: italic;
@@ -991,7 +1000,7 @@
     .stat-num {
       font-family: var(--font-display);
       font-size: 2.4rem;
-      font-weight: 700;
+      font-weight: 300;
       color: var(--color-text-primary);
       line-height: 1;
     }
@@ -1022,10 +1031,11 @@
     .section-heading {
       font-family: var(--font-display);
       font-size: clamp(2.5rem, 4vw, 4rem);
-      font-weight: 700;
+      font-weight: 300;
       color: var(--color-text-primary);
-      line-height: 1.1;
+      line-height: 1.08;
       margin-top: 20px;
+      letter-spacing: -0.02em;
     }
     .section-heading em {
       font-style: italic;
@@ -1045,7 +1055,6 @@
       overflow: hidden;
       border: 1px solid var(--color-border);
       border-top: 2px solid var(--color-gold);
-      border-radius: var(--radius-lg);
       box-shadow: var(--shadow-md);
       transition: border-color var(--duration-mid) var(--ease-default),
                   box-shadow var(--duration-mid) var(--ease-default),
@@ -1058,7 +1067,6 @@
       inset: 0;
       background: radial-gradient(circle at top right, rgba(196,152,58,0.06), transparent 70%);
       pointer-events: none;
-      border-radius: var(--radius-lg);
     }
     .pillar-card::after {
       content: '';
@@ -1067,7 +1075,6 @@
       background: radial-gradient(ellipse 60% 60% at 50% 110%, rgba(196,152,58,0.05) 0%, transparent 70%);
       opacity: 0;
       transition: opacity 0.5s;
-      border-radius: var(--radius-lg);
     }
     .pillar-card:hover {
       border-color: var(--color-border-strong);
@@ -1079,7 +1086,7 @@
     .pillar-num {
       font-family: var(--font-display);
       font-size: 5rem;
-      font-weight: 700;
+      font-weight: 300;
       color: rgba(196,152,58,0.12);
       line-height: 1;
       position: absolute;
@@ -1115,7 +1122,7 @@
     .pillar-title {
       font-family: var(--font-display);
       font-size: 2rem;
-      font-weight: 600;
+      font-weight: 400;
       color: var(--color-text-primary);
       margin-bottom: 16px;
       position: relative;
@@ -1152,7 +1159,6 @@
       overflow: hidden;
       cursor: none;
       aspect-ratio: 4/5;
-      border-radius: var(--radius-md);
       box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.3);
       transition: transform 0.4s var(--ease-spring), box-shadow 0.4s var(--ease-spring);
     }
@@ -1243,7 +1249,6 @@
       background: var(--color-bg-surface);
       border: 1px solid var(--color-border);
       border-top: 2px solid var(--color-gold);
-      border-radius: var(--radius-lg);
       box-shadow: var(--shadow-gold);
       padding: var(--space-7);
       position: relative;
@@ -1260,10 +1265,11 @@
     .collabs-heading {
       font-family: var(--font-display);
       font-size: clamp(2.5rem, 5vw, 5rem);
-      font-weight: 700;
+      font-weight: 300;
       color: var(--color-text-primary);
       line-height: 1.05;
       margin: 24px 0 48px;
+      letter-spacing: -0.02em;
     }
     .collabs-heading em {
       font-style: italic;
@@ -1287,7 +1293,6 @@
       color: var(--color-text-secondary);
       border: 1px solid var(--color-border-strong);
       padding: 8px 20px;
-      border-radius: var(--radius-pill);
       transition: border-color var(--duration-fast) var(--ease-default),
                   color var(--duration-fast) var(--ease-default),
                   background var(--duration-fast) var(--ease-default);
@@ -1435,7 +1440,6 @@
       overflow: hidden;
       position: relative;
       display: block;
-      border-radius: var(--radius-md);
       box-shadow: var(--shadow-md);
       transition: transform var(--duration-mid) var(--ease-spring),
                   box-shadow var(--duration-mid) var(--ease-default);
@@ -1496,7 +1500,6 @@
       background: var(--color-bg-surface);
       border: 1px solid var(--color-border);
       border-top: 2px solid var(--color-gold);
-      border-radius: var(--radius-xl);
       box-shadow: var(--shadow-gold);
       padding: var(--space-7);
       position: relative;
@@ -1509,7 +1512,7 @@
       transform: translate(-50%, -50%);
       font-family: var(--font-display);
       font-size: clamp(16vw, 36vw, 36vw);
-      font-weight: 700;
+      font-weight: 300;
       color: rgba(196,152,58,0.025);
       line-height: 1;
       pointer-events: none;
@@ -1520,11 +1523,12 @@
     .contact-heading {
       font-family: var(--font-display);
       font-size: clamp(3rem, 6vw, 6rem);
-      font-weight: 700;
+      font-weight: 300;
       color: var(--color-text-primary);
       line-height: 1;
       margin: 24px 0 48px;
       position: relative;
+      letter-spacing: -0.02em;
     }
     .contact-heading em {
       font-style: italic;
@@ -2429,12 +2433,26 @@
     /* mk-num stat numbers */
     .mk-num {
       font-family: var(--font-display);
-      font-weight: 700;
+      font-weight: 300;
       color: var(--color-text-primary);
+    }
+
+    /* Scroll progress bar */
+    #scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--color-cognac) 0%, var(--color-gold) 60%, #D4B87A 100%);
+      z-index: 10000;
+      transition: width 0.08s linear;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
+
+  <div id="scroll-progress"></div>
 
   <!-- Custom Cursor -->
   <div class="cursor" id="cursor"></div>
