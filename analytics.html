@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aastha · Intelligence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:           #080706;
+      --surface:      #0f0d0b;
+      --elevated:     #161410;
+      --overlay:      #1d1b17;
+      --gold:         #C4983A;
+      --gold-light:   #D4B87A;
+      --gold-lo:      rgba(196,152,58,0.08);
+      --gold-mid:     rgba(196,152,58,0.18);
+      --text:         #F2E8D0;
+      --muted:        #7A6E60;
+      --border:       rgba(196,152,58,0.12);
+      --border-strong:rgba(196,152,58,0.30);
+      --serif:        'Cormorant Garamond', Georgia, serif;
+      --sans:         'Jost', sans-serif;
+      --r-card:       12px;
+      --r-chip:       4px;
+      --amber:        #C4823A;
+      --amber-bg:     rgba(196,130,58,0.10);
+      --slate:        #6A7A8A;
+      --slate-bg:     rgba(106,122,138,0.10);
+      --plum:         #8A6A9A;
+      --plum-bg:      rgba(138,106,154,0.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(8,7,6,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-logo::after { content: '.'; color: var(--gold); }
+
+    .nav-back {
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--gold); }
+
+    .nav-badge {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--border-strong);
+      padding: 3px 10px;
+      border-radius: var(--r-chip);
+    }
+
+    /* ── NORTH STAR ──────────────────────────────────────────────────── */
+    .north-star {
+      position: sticky;
+      top: 64px;
+      z-index: 90;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 48px;
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .ns-stat { display: flex; flex-direction: column; gap: 2px; }
+    .ns-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .ns-number {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1;
+    }
+    .ns-number span { color: var(--gold); }
+
+    .ns-progress-wrap { display: flex; flex-direction: column; gap: 8px; }
+    .ns-progress-track {
+      height: 6px;
+      background: var(--elevated);
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+    }
+    .ns-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 100%);
+      border-radius: 3px;
+      position: relative;
+      transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    .ns-progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+      animation: shimmer 2.4s ease-in-out infinite;
+    }
+    @keyframes shimmer { to { left: 200%; } }
+
+    .ns-progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .ns-pct {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+    }
+    .ns-target {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: right;
+    }
+    .ns-target strong { color: var(--text); font-weight: 400; display: block; font-size: 0.8rem; }
+
+    /* ── MAIN CONTENT ────────────────────────────────────────────────── */
+    main { max-width: 1320px; margin: 0 auto; padding: 64px 48px 120px; }
+
+    /* ── SECTION HEADERS ─────────────────────────────────────────────── */
+    .section-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      max-width: 80px;
+    }
+    .section-heading {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--text);
+      margin-bottom: 36px;
+      line-height: 1.2;
+    }
+    .section-heading em { font-style: italic; color: var(--gold-light); }
+
+    /* ── SKELETON ────────────────────────────────────────────────────── */
+    .skel {
+      background: var(--elevated);
+      border-radius: var(--r-chip);
+      position: relative;
+      overflow: hidden;
+    }
+    .skel::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(196,152,58,0.06) 50%, transparent 100%);
+      animation: skelPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes skelPulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+
+    /* ── TODAY'S BRIEF ───────────────────────────────────────────────── */
+    #brief { margin-bottom: 80px; }
+
+    .brief-date {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .brief-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 36px;
+    }
+
+    .brief-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .brief-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.3);
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s;
+      cursor: default;
+    }
+    .brief-card:hover {
+      transform: translateY(-5px) scale(1.005);
+      box-shadow: 0 20px 56px rgba(0,0,0,0.6), 0 4px 16px rgba(0,0,0,0.4);
+      border-color: var(--border-strong);
+    }
+
+    .card-type-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: var(--r-chip);
+      width: fit-content;
+    }
+    .chip-event  { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(196,130,58,0.2); }
+    .chip-brand  { background: var(--slate-bg);  color: var(--slate);  border: 1px solid rgba(106,122,138,0.2); }
+    .chip-trend  { background: var(--plum-bg);   color: var(--plum);   border: 1px solid rgba(138,106,154,0.2); }
+
+    .card-headline {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--text);
+    }
+
+    .card-context {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .card-divider {
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+      opacity: 0.4;
+    }
+
+    .card-angle-label {
+      font-size: 0.55rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .card-angle {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+
+    .tag-chip {
+      font-size: 0.6rem;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: var(--r-chip);
+      background: var(--gold-lo);
+      color: var(--gold);
+      border: 1px solid var(--border);
+    }
+    .acc-chip {
+      font-size: 0.6rem;
+      letter-spacing: 0.03em;
+      padding: 3px 8px;
+      border-radius: var(--r-chip);
+      background: var(--elevated);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .card-source {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.68rem;
+      color: var(--muted);
+      text-decoration: none;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+    .card-source:hover { color: var(--gold); }
+    .card-source-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #4CAF50;
+      flex-shrink: 0;
+    }
+
+    .brief-empty {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 64px 32px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+    }
+    .brief-empty p { color: var(--muted); font-size: 0.85rem; margin-top: 12px; }
+    .brief-empty .clock { font-family: var(--serif); font-size: 2rem; color: var(--gold); opacity: 0.4; }
+
+    /* ── AUDIENCE ────────────────────────────────────────────────────── */
+    #audience { margin-bottom: 80px; }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .audience-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 36px;
+    }
+
+    .audience-big {
+      font-family: var(--serif);
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .audience-big span { color: var(--gold); }
+
+    .audience-sublabel {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .country-bars { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+
+    .country-row { display: flex; flex-direction: column; gap: 5px; }
+    .country-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .country-name {
+      font-size: 0.78rem;
+      color: var(--text);
+      font-weight: 400;
+    }
+    .country-val {
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-family: var(--serif);
+    }
+    .country-track {
+      height: 4px;
+      background: var(--elevated);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .country-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transition: width 1s cubic-bezier(0.16,1,0.3,1);
+    }
+    .country-fill.uae { background: linear-gradient(90deg, var(--amber), var(--gold-light)); }
+
+    .insight-line {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+      padding: 14px 18px;
+      background: var(--gold-lo);
+      border-left: 2px solid var(--gold);
+      border-radius: 0 var(--r-chip) var(--r-chip) 0;
+    }
+    .insight-line strong { color: var(--text); font-weight: 400; }
+
+    .aud-section-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+      margin-top: 28px;
+    }
+
+    .age-bars { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .age-row { display: flex; align-items: center; gap: 12px; }
+    .age-label { font-size: 0.7rem; color: var(--muted); width: 44px; flex-shrink: 0; }
+    .age-track {
+      flex: 1;
+      height: 6px;
+      background: var(--elevated);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .age-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transition: width 1s cubic-bezier(0.16,1,0.3,1);
+    }
+    .age-val { font-size: 0.68rem; color: var(--muted); width: 44px; text-align: right; flex-shrink: 0; }
+
+    .gender-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .gender-pill {
+      flex: 1;
+      padding: 14px;
+      background: var(--elevated);
+      border-radius: var(--r-chip);
+      text-align: center;
+    }
+    .gender-pct {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--text);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .gender-label { font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+    /* ── CONTENT PERFORMANCE ─────────────────────────────────────────── */
+    #performance { margin-bottom: 80px; }
+
+    .perf-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      margin-bottom: 28px;
+    }
+
+    .perf-item {
+      position: relative;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      border-radius: 8px;
+      cursor: default;
+    }
+    .perf-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+      filter: saturate(0.85);
+      transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    .perf-item:hover img { transform: scale(1.04); }
+
+    .perf-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8,7,6,0.92) 0%, transparent 55%);
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+    .perf-meta { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+    .perf-type-chip {
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: var(--r-chip);
+      background: rgba(196,152,58,0.15);
+      color: var(--gold);
+      width: fit-content;
+    }
+    .perf-stats {
+      display: flex;
+      gap: 12px;
+    }
+    .perf-stat {
+      font-size: 0.7rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .perf-stat svg { opacity: 0.6; }
+
+    .format-row {
+      display: flex;
+      gap: 16px;
+      padding: 20px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+    }
+    .format-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 16px;
+      background: var(--elevated);
+      border-radius: 8px;
+    }
+    .format-count {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--text);
+    }
+    .format-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .format-insight {
+      font-size: 0.72rem;
+      color: var(--gold);
+      text-align: center;
+    }
+
+    /* ── GROWTH ──────────────────────────────────────────────────────── */
+    #growth { margin-bottom: 80px; }
+
+    .growth-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 36px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .growth-stat { display: flex; flex-direction: column; gap: 4px; }
+    .growth-big {
+      font-family: var(--serif);
+      font-size: 4rem;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1;
+    }
+    .growth-delta {
+      font-size: 0.75rem;
+      color: #5DAF6A;
+      letter-spacing: 0.05em;
+    }
+    .growth-sublabel {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .sparkline-wrap { position: relative; width: 100%; }
+    #sparkline { width: 100%; height: 80px; overflow: visible; }
+    .spark-path { fill: none; stroke: var(--gold); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+    .spark-area { fill: url(#sparkGrad); }
+
+    /* ── AGENT STATUS ────────────────────────────────────────────────── */
+    .agent-status-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 80;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 10px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .status-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+    .status-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-success { background: #5DAF6A; box-shadow: 0 0 6px rgba(93,175,106,0.5); }
+    .dot-partial  { background: var(--amber); }
+    .dot-failed   { background: #D05050; }
+
+    .status-right {
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SKELETON CARDS ──────────────────────────────────────────────── */
+    .brief-skel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav, .north-star, main, .agent-status-bar { padding-left: 24px; padding-right: 24px; }
+      .north-star { grid-template-columns: 1fr; gap: 12px; }
+      .brief-grid, .perf-grid, .audience-grid { grid-template-columns: 1fr; }
+      .growth-card { grid-template-columns: 1fr; gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Aastha</a>
+  <span class="nav-badge">Intelligence</span>
+  <a href="index.html" class="nav-back">← Website</a>
+</nav>
+
+<!-- NORTH STAR -->
+<div class="north-star" id="northStar">
+  <div class="ns-stat">
+    <span class="ns-label">UAE Followers</span>
+    <span class="ns-number" id="nsCount"><span class="skel" style="width:80px;height:32px;display:inline-block;"></span></span>
+  </div>
+
+  <div class="ns-progress-wrap">
+    <div class="ns-progress-track">
+      <div class="ns-progress-fill" id="nsFill" style="width:0%"></div>
+    </div>
+    <div class="ns-progress-meta">
+      <span class="ns-pct" id="nsPct">—</span>
+      <span class="ns-target">Target <strong>20,000</strong></span>
+    </div>
+  </div>
+
+  <div class="ns-stat" style="text-align:right;align-items:flex-end">
+    <span class="ns-label">North Star</span>
+    <span class="ns-number"><span style="color:var(--gold)">UAE</span> 20K</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+
+  <!-- TODAY'S BRIEF -->
+  <section id="brief">
+    <div class="brief-header">
+      <div>
+        <p class="section-label">Daily Intelligence</p>
+        <h2 class="section-heading">Today's <em>Brief</em></h2>
+      </div>
+      <span class="brief-date" id="briefDate"></span>
+    </div>
+
+    <div class="brief-grid" id="briefGrid">
+      <!-- skeleton -->
+      <div class="brief-skel">
+        <div class="skel" style="height:22px;width:80px;border-radius:4px"></div>
+        <div class="skel" style="height:28px;width:90%"></div>
+        <div class="skel" style="height:14px;width:100%"></div>
+        <div class="skel" style="height:14px;width:75%"></div>
+        <div class="skel" style="height:1px;width:100%"></div>
+        <div class="skel" style="height:60px;width:100%"></div>
+        <div style="display:flex;gap:6px"><div class="skel" style="height:20px;width:70px;border-radius:4px"></div><div class="skel" style="height:20px;width:70px;border-radius:4px"></div></div>
+      </div>
+      <div class="brief-skel">
+        <div class="skel" style="height:22px;width:80px;border-radius:4px"></div>
+        <div class="skel" style="height:28px;width:85%"></div>
+        <div class="skel" style="height:14px;width:100%"></div>
+        <div class="skel" style="height:14px;width:60%"></div>
+        <div class="skel" style="height:1px;width:100%"></div>
+        <div class="skel" style="height:60px;width:100%"></div>
+        <div style="display:flex;gap:6px"><div class="skel" style="height:20px;width:70px;border-radius:4px"></div><div class="skel" style="height:20px;width:70px;border-radius:4px"></div></div>
+      </div>
+      <div class="brief-skel">
+        <div class="skel" style="height:22px;width:80px;border-radius:4px"></div>
+        <div class="skel" style="height:28px;width:80%"></div>
+        <div class="skel" style="height:14px;width:100%"></div>
+        <div class="skel" style="height:14px;width:70%"></div>
+        <div class="skel" style="height:1px;width:100%"></div>
+        <div class="skel" style="height:60px;width:100%"></div>
+        <div style="display:flex;gap:6px"><div class="skel" style="height:20px;width:70px;border-radius:4px"></div><div class="skel" style="height:20px;width:70px;border-radius:4px"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UAE AUDIENCE -->
+  <section id="audience">
+    <p class="section-label">Who Follows You</p>
+    <h2 class="section-heading">Your <em>Audience</em></h2>
+
+    <div class="audience-grid">
+      <!-- LEFT: Countries -->
+      <div class="audience-card">
+        <div class="audience-big" id="uaeCount"><span class="skel" style="width:120px;height:48px;display:inline-block;"></span></div>
+        <div class="audience-sublabel">Followers in UAE</div>
+        <div class="country-bars" id="countryBars">
+          <div class="skel" style="height:40px;border-radius:4px"></div>
+          <div class="skel" style="height:40px;border-radius:4px"></div>
+          <div class="skel" style="height:40px;border-radius:4px"></div>
+          <div class="skel" style="height:40px;border-radius:4px"></div>
+          <div class="skel" style="height:40px;border-radius:4px"></div>
+        </div>
+        <div class="insight-line">Your UAE audience engages <strong>3× more</strong> on hotel &amp; dining content than fashion-only posts</div>
+      </div>
+
+      <!-- RIGHT: Age & Gender -->
+      <div class="audience-card">
+        <div class="aud-section-label">Age Breakdown</div>
+        <div class="age-bars" id="ageBars">
+          <div class="skel" style="height:20px;border-radius:4px"></div>
+          <div class="skel" style="height:20px;border-radius:4px"></div>
+          <div class="skel" style="height:20px;border-radius:4px"></div>
+          <div class="skel" style="height:20px;border-radius:4px"></div>
+        </div>
+
+        <div class="aud-section-label">Gender Split</div>
+        <div class="gender-row" id="genderRow">
+          <div class="gender-pill skel" style="height:72px"></div>
+          <div class="gender-pill skel" style="height:72px"></div>
+          <div class="gender-pill skel" style="height:72px"></div>
+        </div>
+
+        <div class="insight-line">Core audience: <strong>25–44 women</strong> with spending power — ideal for luxury brand partnerships</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT PERFORMANCE -->
+  <section id="performance">
+    <p class="section-label">What Resonates</p>
+    <h2 class="section-heading">What's <em>Working</em></h2>
+
+    <div class="perf-grid" id="perfGrid">
+      <div class="skel" style="aspect-ratio:4/5;border-radius:8px"></div>
+      <div class="skel" style="aspect-ratio:4/5;border-radius:8px"></div>
+      <div class="skel" style="aspect-ratio:4/5;border-radius:8px"></div>
+      <div class="skel" style="aspect-ratio:4/5;border-radius:8px"></div>
+      <div class="skel" style="aspect-ratio:4/5;border-radius:8px"></div>
+      <div class="skel" style="aspect-ratio:4/5;border-radius:8px"></div>
+    </div>
+
+    <div class="format-row" id="formatRow">
+      <div class="format-item skel" style="height:96px"></div>
+      <div class="format-item skel" style="height:96px"></div>
+      <div class="format-item skel" style="height:96px"></div>
+    </div>
+  </section>
+
+  <!-- GROWTH -->
+  <section id="growth">
+    <p class="section-label">Momentum</p>
+    <h2 class="section-heading">Follower <em>Growth</em></h2>
+
+    <div class="growth-card">
+      <div class="growth-stat">
+        <div class="growth-big" id="growthNum">—</div>
+        <div class="growth-delta" id="growthDelta"></div>
+        <div class="growth-sublabel">Total Followers</div>
+      </div>
+      <div class="sparkline-wrap">
+        <svg id="sparkline" viewBox="0 0 400 80" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="sparkGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="var(--gold)" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="var(--gold)" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path class="spark-area" id="sparkArea" d=""/>
+          <path class="spark-path" id="sparkPath" d=""/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- AGENT STATUS BAR -->
+<div class="agent-status-bar" id="agentBar">
+  <div class="status-left">
+    <div class="status-dot dot-success" id="statusDot"></div>
+    <span id="statusText">Loading agent status…</span>
+  </div>
+  <div class="status-right" id="statusNext">Next update: tomorrow 6:30am Dubai</div>
+</div>
+
+<script>
+  const SUPABASE_URL = 'https://uqzvaytvynrglijvwjsz.supabase.co';
+  const ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxenZheXR2eW5yZ2xpanZ3anN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NTE1MzMsImV4cCI6MjA5NjEyNzUzM30.gO4SExyBda-iOb5iHNo-2aW_lvmh3_k-SEMLMqyGkbo';
+
+  const COUNTRY_NAMES = {
+    AE:'UAE', IN:'India', BR:'Brazil', US:'USA', IR:'Iran',
+    PK:'Pakistan', NG:'Nigeria', TR:'Turkey', GB:'United Kingdom', EG:'Egypt',
+    SA:'Saudi Arabia', ID:'Indonesia', BD:'Bangladesh', DE:'Germany', FR:'France',
+    KZ:'Kazakhstan', AR:'Argentina', PH:'Philippines', MA:'Morocco', IQ:'Iraq',
+    MY:'Malaysia', KG:'Kyrgyzstan', VN:'Vietnam', AM:'Armenia', UZ:'Uzbekistan',
+    MM:'Myanmar', ES:'Spain', IT:'Italy', MX:'Mexico', RU:'Russia',
+    UA:'Ukraine', CO:'Colombia', VE:'Venezuela', AU:'Australia', TH:'Thailand',
+    ZA:'South Africa', DZ:'Algeria', SY:'Syria', CN:'China', FI:'Finland',
+    SE:'Sweden', CA:'Canada', PT:'Portugal', GB:'UK', PL:'Poland',
+  };
+
+  async function sbFetch(table, params = '') {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/${table}?${params}`, {
+      headers: { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` }
+    });
+    return r.json();
+  }
+
+  function fmt(n) { return n ? n.toLocaleString() : '—'; }
+
+  function todayISO() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+
+  // ── Today's date display ─────────────────────────────────────────────
+  document.getElementById('briefDate').textContent =
+    new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+
+  // ── Load North Star ──────────────────────────────────────────────────
+  async function loadNorthStar() {
+    const rows = await sbFetch('instagram_demographics',
+      `metric=eq.follower_demographics&breakdown=eq.country&dimension=eq.AE&select=value`);
+    const uae = rows.reduce((s, r) => s + (r.value || 0), 0);
+    document.getElementById('nsCount').textContent = fmt(uae);
+    const pct = Math.min((uae / 20000) * 100, 100);
+    setTimeout(() => {
+      document.getElementById('nsFill').style.width = pct.toFixed(1) + '%';
+      document.getElementById('nsPct').textContent = pct.toFixed(1) + '% to target';
+    }, 300);
+  }
+
+  // ── Load Brief ───────────────────────────────────────────────────────
+  async function loadBrief() {
+    const today = todayISO();
+    const cards = await sbFetch('uae_daily_brief',
+      `brief_date=eq.${today}&order=card_order.asc`);
+
+    const grid = document.getElementById('briefGrid');
+    grid.innerHTML = '';
+
+    if (!cards.length) {
+      grid.innerHTML = `
+        <div class="brief-empty">
+          <div class="clock">—</div>
+          <p>Today's brief is being prepared — check back after 6:30am Dubai time</p>
+        </div>`;
+      return;
+    }
+
+    const typeClass = { event:'chip-event', brand:'chip-brand', trend:'chip-trend' };
+    const typeLabel = { event:'Event', brand:'Brand', trend:'Trend' };
+
+    cards.forEach(c => {
+      const hashtags = (c.hashtags || []).map(h =>
+        `<span class="tag-chip">${h}</span>`).join('');
+      const accounts = (c.tag_accounts || []).map(a =>
+        `<span class="acc-chip">${a}</span>`).join('');
+      const cls = typeClass[c.card_type] || 'chip-trend';
+      const lbl = typeLabel[c.card_type] || c.card_type;
+
+      const el = document.createElement('div');
+      el.className = 'brief-card';
+      el.innerHTML = `
+        <span class="card-type-chip ${cls}">${lbl}</span>
+        <h3 class="card-headline">${c.headline}</h3>
+        <p class="card-context">${c.context}</p>
+        <div class="card-divider"></div>
+        <span class="card-angle-label">Your angle</span>
+        <p class="card-angle">${c.aastha_angle}</p>
+        <div class="card-tags">${hashtags}</div>
+        <div class="card-tags">${accounts}</div>
+        <a class="card-source" href="${c.source_url}" target="_blank" rel="noopener">
+          <span class="card-source-dot"></span>
+          ${c.source_name} · verified source
+        </a>`;
+      grid.appendChild(el);
+    });
+  }
+
+  // ── Load Audience ────────────────────────────────────────────────────
+  async function loadAudience() {
+    const [countryRows, ageRows, genderRows] = await Promise.all([
+      sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.country&order=value.desc&limit=10'),
+      sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.age&order=value.desc'),
+      sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.gender'),
+    ]);
+
+    // UAE count
+    const uaeRow = countryRows.find(r => r.dimension === 'AE');
+    document.getElementById('uaeCount').innerHTML =
+      `<span style="color:var(--gold)">${fmt(uaeRow?.value || 0)}</span>`;
+
+    // Top countries
+    const maxVal = countryRows[0]?.value || 1;
+    const barsEl = document.getElementById('countryBars');
+    barsEl.innerHTML = countryRows.slice(0, 6).map(r => `
+      <div class="country-row">
+        <div class="country-meta">
+          <span class="country-name">${COUNTRY_NAMES[r.dimension] || r.dimension}</span>
+          <span class="country-val">${fmt(r.value)}</span>
+        </div>
+        <div class="country-track">
+          <div class="country-fill ${r.dimension==='AE'?'uae':''}"
+               style="width:${((r.value/maxVal)*100).toFixed(1)}%"></div>
+        </div>
+      </div>`).join('');
+
+    // Age bars
+    const ageMax = Math.max(...ageRows.map(r => r.value));
+    document.getElementById('ageBars').innerHTML = ageRows.map(r => `
+      <div class="age-row">
+        <span class="age-label">${r.dimension}</span>
+        <div class="age-track">
+          <div class="age-fill" style="width:${((r.value/ageMax)*100).toFixed(1)}%"></div>
+        </div>
+        <span class="age-val">${fmt(r.value)}</span>
+      </div>`).join('');
+
+    // Gender
+    const genderMap = { F:'Female', M:'Male', U:'Unknown' };
+    const gTotal = genderRows.reduce((s,r) => s + r.value, 0) || 1;
+    document.getElementById('genderRow').innerHTML = genderRows.map(r => `
+      <div class="gender-pill">
+        <span class="gender-pct">${((r.value/gTotal)*100).toFixed(0)}%</span>
+        <span class="gender-label">${genderMap[r.dimension] || r.dimension}</span>
+      </div>`).join('');
+  }
+
+  // ── Load Content Performance ─────────────────────────────────────────
+  async function loadPerformance() {
+    const [topPosts, recentPosts] = await Promise.all([
+      sbFetch('instagram_posts',
+        'storage_image_url=not.is.null&order=total_interactions.desc.nullslast&limit=6&select=id,storage_image_url,storage_thumbnail_url,media_type,reach,saved,total_interactions'),
+      sbFetch('instagram_posts',
+        'order=timestamp.desc&limit=30&select=media_type'),
+    ]);
+
+    const grid = document.getElementById('perfGrid');
+    if (topPosts.length) {
+      grid.innerHTML = topPosts.map(p => {
+        const img = p.storage_thumbnail_url || p.storage_image_url;
+        const type = p.media_type === 'VIDEO' ? 'Reel' :
+                     p.media_type === 'CAROUSEL_ALBUM' ? 'Carousel' : 'Image';
+        return `
+          <div class="perf-item">
+            <img src="${img}" alt="${type}" loading="lazy" />
+            <div class="perf-overlay">
+              <div class="perf-meta">
+                <span class="perf-type-chip">${type}</span>
+                <div class="perf-stats">
+                  <span class="perf-stat">
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                      <path d="M6 1C3.24 1 1 3.24 1 6s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 2c.83 0 1.5.67 1.5 1.5S6.83 6 6 6s-1.5-.67-1.5-1.5S5.17 3 6 3zm0 7c-1.25 0-2.36-.58-3.1-1.5.78-.72 1.9-1.17 3.1-1.17 1.2 0 2.32.45 3.1 1.17C8.36 9.42 7.25 10 6 10z" fill="currentColor"/>
+                    </svg>
+                    ${fmt(p.reach)}
+                  </span>
+                  <span class="perf-stat">
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                      <path d="M9 1H3a1 1 0 00-1 1v9l4-2 4 2V2a1 1 0 00-1-1z" fill="currentColor"/>
+                    </svg>
+                    ${fmt(p.saved)}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    // Format breakdown
+    const counts = { VIDEO: 0, CAROUSEL_ALBUM: 0, IMAGE: 0 };
+    recentPosts.forEach(p => { if (counts[p.media_type] !== undefined) counts[p.media_type]++; });
+    const fmtLabel = { VIDEO:'Reels', CAROUSEL_ALBUM:'Carousels', IMAGE:'Images' };
+    const fmtInsight = {
+      VIDEO: counts.VIDEO > counts.CAROUSEL_ALBUM ? 'Top reach format' : '',
+      CAROUSEL_ALBUM: counts.CAROUSEL_ALBUM > counts.VIDEO ? 'Most posted' : '',
+      IMAGE: '',
+    };
+    document.getElementById('formatRow').innerHTML = Object.entries(counts).map(([k, v]) => `
+      <div class="format-item">
+        <span class="format-count">${v}</span>
+        <span class="format-label">${fmtLabel[k]}</span>
+        ${fmtInsight[k] ? `<span class="format-insight">${fmtInsight[k]}</span>` : ''}
+      </div>`).join('');
+  }
+
+  // ── Load Growth ──────────────────────────────────────────────────────
+  async function loadGrowth() {
+    const rows = await sbFetch('instagram_snapshots',
+      'order=snapshot_date.desc&limit=30&select=snapshot_date,followers_count');
+
+    if (!rows.length) return;
+    const sorted = [...rows].reverse();
+    const latest = sorted[sorted.length - 1]?.followers_count || 0;
+    const prev   = sorted.length > 7 ? sorted[sorted.length - 8]?.followers_count : sorted[0]?.followers_count;
+    const delta  = latest - (prev || latest);
+
+    document.getElementById('growthNum').textContent = fmt(latest);
+    document.getElementById('growthDelta').textContent =
+      delta >= 0 ? `+${fmt(delta)} this week` : `${fmt(delta)} this week`;
+
+    // Sparkline
+    const vals = sorted.map(r => r.followers_count).filter(Boolean);
+    if (vals.length < 2) return;
+    const min = Math.min(...vals), max = Math.max(...vals);
+    const range = max - min || 1;
+    const W = 400, H = 80, PAD = 8;
+    const pts = vals.map((v, i) => {
+      const x = (i / (vals.length - 1)) * W;
+      const y = H - PAD - ((v - min) / range) * (H - PAD * 2);
+      return [x, y];
+    });
+    const d = pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
+    const area = d + ` L${W},${H} L0,${H} Z`;
+    document.getElementById('sparkPath').setAttribute('d', d);
+    document.getElementById('sparkArea').setAttribute('d', area);
+  }
+
+  // ── Load Agent Status ────────────────────────────────────────────────
+  async function loadAgentStatus() {
+    const rows = await sbFetch('uae_agent_runs', 'order=ran_at.desc&limit=1');
+    if (!rows.length) return;
+    const run = rows[0];
+
+    const dt = new Date(run.ran_at);
+    // Convert to Dubai time (UTC+4)
+    const dubaiOffset = 4 * 60;
+    const local = new Date(dt.getTime() + (dubaiOffset + dt.getTimezoneOffset()) * 60000);
+    const formatted = local.toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'}) +
+      ', ' + local.toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'}) + ' Dubai';
+
+    document.getElementById('statusText').textContent =
+      `Brief last updated: ${formatted} · ${run.cards_generated} cards · ${run.signals_found} signals`;
+
+    const dot = document.getElementById('statusDot');
+    dot.className = 'status-dot ' + (run.status === 'success' ? 'dot-success' :
+                     run.status === 'partial' ? 'dot-partial' : 'dot-failed');
+  }
+
+  // ── Boot ─────────────────────────────────────────────────────────────
+  Promise.all([
+    loadNorthStar(),
+    loadBrief(),
+    loadAudience(),
+    loadPerformance(),
+    loadGrowth(),
+    loadAgentStatus(),
+  ]).catch(console.error);
+</script>
+
+</body>
+</html>
