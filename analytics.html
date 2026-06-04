@@ -944,7 +944,7 @@
           <div class="gender-pill skel" style="height:72px"></div>
         </div>
 
-        <div class="insight-line">Core audience: <strong>25–44 women</strong> with spending power — ideal for luxury brand partnerships</div>
+        <div class="insight-line" id="ageInsight"></div>
       </div>
     </div>
   </section>
@@ -1030,7 +1030,7 @@
     return r.json();
   }
 
-  function fmt(n) { return n ? n.toLocaleString() : '—'; }
+  function fmt(n) { return (n !== null && n !== undefined && !isNaN(n)) ? Number(n).toLocaleString() : '—'; }
 
   // Deduplicate rows that share the same dimension by summing values
   function dedup(rows) {
@@ -1183,6 +1183,12 @@
     const topAgePct = topAge ? ((topAge.value / ageTotal) * 100).toFixed(0) : '—';
     document.querySelectorAll('.insight-line')[1].innerHTML =
       `Your largest age group is <strong>${topAge?.dimension || '—'}</strong> at <strong>${topAgePct}%</strong> of your audience`;
+    const ageInsightEl = document.getElementById('ageInsight');
+    if (ageInsightEl && topAge) {
+      const top2 = ageRows.slice(0,2).map(r => r.dimension).join(' and ');
+      const top2Pct = ageRows.slice(0,2).reduce((s,r) => s + r.value, 0);
+      ageInsightEl.innerHTML = `<strong>${top2} age groups</strong> make up <strong>${((top2Pct/ageTotal)*100).toFixed(0)}%</strong> of your audience — the core spending demographic`;
+    }
 
     // Gender
     const genderMap = { F:'Female', M:'Male', U:'Unknown' };
@@ -1209,9 +1215,9 @@
         const img = p.storage_thumbnail_url || p.storage_image_url;
         const type = p.media_type === 'VIDEO' ? 'Reel' :
                      p.media_type === 'CAROUSEL_ALBUM' ? 'Carousel' : 'Image';
-        const er = (p.reach && p.total_interactions)
-          ? ((p.total_interactions / p.reach) * 100).toFixed(2) + '%'
-          : null;
+        const erRaw = (p.reach && p.total_interactions)
+          ? (p.total_interactions / p.reach) * 100 : null;
+        const er = erRaw !== null ? (Math.min(erRaw, 99.9)).toFixed(2) + '%' : null;
         return `
           <a class="perf-item" href="${p.permalink || '#'}" target="_blank" rel="noopener" style="display:block;text-decoration:none;">
             <img src="${img}" alt="${type}" loading="lazy" />
@@ -1279,11 +1285,17 @@
 
     document.getElementById('growthNum').textContent = fmt(latest);
     document.getElementById('growthDelta').textContent =
-      delta >= 0 ? `+${fmt(delta)} this week` : `${fmt(delta)} this week`;
+      delta === 0 ? 'No change this week' :
+      delta > 0 ? `+${fmt(delta)} this week` : `${fmt(delta)} this week`;
 
     // Sparkline
-    const vals = sorted.map(r => r.followers_count).filter(Boolean);
-    if (vals.length < 2) return;
+    const vals = sorted.map(r => r.followers_count).filter(v => v != null && v > 0);
+    if (vals.length < 2) {
+      // Single data point — draw a flat line at mid-height
+      const mid = 40;
+      document.getElementById('sparkPath').setAttribute('d', `M0,${mid} L400,${mid}`);
+      return;
+    }
     const min = Math.min(...vals), max = Math.max(...vals);
     const range = max - min || 1;
     const W = 400, H = 80, PAD = 8;
