@@ -19,10 +19,10 @@
       --gold-lo:      rgba(196,152,58,0.10);
       --gold-mid:     rgba(196,152,58,0.22);
 
-      /* ── Text — three clear tones ── */
+      /* ── Text — full opacity throughout ── */
       --text:         #F0E6CC;
-      --text-2:       #B8A890;
-      --muted:        #6E6254;
+      --text-2:       #F0E6CC;
+      --muted:        #C0AE94;
 
       /* ── Borders ── */
       --border:       rgba(255,255,255,0.07);
@@ -928,6 +928,15 @@
 
   function fmt(n) { return n ? n.toLocaleString() : '—'; }
 
+  // Deduplicate rows that share the same dimension by summing values
+  function dedup(rows) {
+    const map = {};
+    rows.forEach(r => { map[r.dimension] = (map[r.dimension] || 0) + (r.value || 0); });
+    return Object.entries(map)
+      .map(([dimension, value]) => ({ dimension, value }))
+      .sort((a, b) => b.value - a.value);
+  }
+
   function todayISO() {
     const d = new Date();
     return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
@@ -1000,11 +1009,15 @@
 
   // ── Load Audience ────────────────────────────────────────────────────
   async function loadAudience() {
-    const [countryRows, ageRows, genderRows] = await Promise.all([
-      sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.country&order=value.desc&limit=10'),
+    const [countryRaw, ageRaw, genderRaw] = await Promise.all([
+      sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.country&order=value.desc&limit=40'),
       sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.age&order=value.desc'),
       sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.gender'),
     ]);
+
+    const countryRows = dedup(countryRaw);
+    const ageRows     = dedup(ageRaw);
+    const genderRows  = dedup(genderRaw);
 
     // UAE count
     const uaeRow = countryRows.find(r => r.dimension === 'AE');
