@@ -951,6 +951,12 @@
       cursor: none;
       aspect-ratio: 4/5;
       border-radius: var(--radius-md);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.3);
+      transition: transform 0.4s var(--ease-spring), box-shadow 0.4s var(--ease-spring);
+    }
+    .portfolio-item:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 20px 56px rgba(0,0,0,0.65), 0 6px 18px rgba(0,0,0,0.4);
     }
     .portfolio-item .portfolio-bg {
       width: 100%;
@@ -992,14 +998,12 @@
     .portfolio-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(26,26,26,0.85) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity 0.5s;
+      background: linear-gradient(to top, rgba(26,26,26,0.88) 0%, rgba(0,0,0,0.08) 55%, transparent 75%);
+      opacity: 1;
       display: flex;
       align-items: flex-end;
       padding: 32px;
     }
-    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
 
     .portfolio-meta {}
     .portfolio-tag {
@@ -2230,11 +2234,10 @@
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="#journal">Journal</a></li>
       <li><a href="#collabs">Collabs</a></li>
       <li><a href="#instagram">Instagram</a></li>
     </ul>
-    <a href="/media-pack.pdf" download="Aastha Chopra Media Pack.pdf" target="_blank" class="nav-mediapack">
+    <a href="Aastha_Chopra_Media_Pack.pdf" download="Aastha Chopra Media Pack.pdf" class="nav-mediapack">
       <svg width="11" height="11" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M6 1v7M3.5 5.5L6 8l2.5-2.5M2 10h8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
@@ -2505,49 +2508,6 @@
     </div>
   </section>
 
-
-  <!-- ─── JOURNAL ─── -->
-  <section id="journal">
-    <div class="journal-inner">
-      <div class="section-header" style="text-align:left;">
-        <p class="section-label reveal">Journal</p>
-        <h2 class="section-heading reveal reveal-delay-1">Stories worth <em>reading</em></h2>
-      </div>
-
-      <div class="journal-editorial reveal reveal-delay-1">
-
-        <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener" class="journal-feature">
-          <img src="images/IMG_1364.JPG" alt="Luxury Stays Dubai" />
-          <div class="journal-feature-overlay"></div>
-          <div class="journal-feature-meta">
-            <span class="journal-num">01</span>
-            <span class="journal-cat">Luxury Stays</span>
-            <span class="journal-title">Inside the World's Most Beautiful Hotel Suites in Dubai</span>
-          </div>
-        </a>
-
-        <div class="journal-secondary">
-          <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener" class="journal-aside">
-            <img src="images/IMG_2813.JPG" alt="Fashion Dubai" />
-            <div class="journal-aside-overlay"></div>
-            <div class="journal-aside-meta">
-              <span class="journal-cat">Fashion Edit</span>
-              <span class="journal-title">The Capsule Wardrobe Formula for the UAE Climate</span>
-            </div>
-          </a>
-          <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener" class="journal-aside">
-            <img src="images/IMG_9859.JPG" alt="Wellness UAE" />
-            <div class="journal-aside-overlay"></div>
-            <div class="journal-aside-meta">
-              <span class="journal-cat">Wellness</span>
-              <span class="journal-title">Skin First: The Beauty Routine Behind the Glow</span>
-            </div>
-          </a>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
   <!-- ─── COLLABORATIONS ─── -->
   <section id="collabs">
