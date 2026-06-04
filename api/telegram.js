@@ -4,12 +4,44 @@
  * POST /api/telegram
  */
 
-const SUPABASE_URL = 'https://uqzvaytvynrglijvwjsz.supabase.co';
-const SERVICE_KEY  = process.env.SUPABASE_SERVICE_KEY;
-const BOT_TOKEN    = process.env.TELEGRAM_BOT_TOKEN;
-const ALLOWED_IDS  = (process.env.TELEGRAM_ALLOWED_IDS || '').split(',').map(s => s.trim()).filter(Boolean);
+const SUPABASE_URL  = 'https://uqzvaytvynrglijvwjsz.supabase.co';
+const SERVICE_KEY   = process.env.SUPABASE_SERVICE_KEY;
+const BOT_TOKEN     = process.env.TELEGRAM_BOT_TOKEN;
+const ALLOWED_IDS   = (process.env.TELEGRAM_ALLOWED_IDS || '').split(',').map(s => s.trim()).filter(Boolean);
 const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;
+const RESEND_KEY    = process.env.RESEND_API_KEY;
+const AASTHA_EMAIL  = 'aasthac8@gmail.com';
 const API = `https://api.telegram.org/bot${BOT_TOKEN}`;
+
+// ── Email via Resend ───────────────────────────────────────────────────────────
+async function emailPitchToAastha(brandName, pitchBody, brandEmail) {
+  await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${RESEND_KEY}`,
+    },
+    body: JSON.stringify({
+      from: 'Outreach Bot <onboarding@resend.dev>',
+      to: AASTHA_EMAIL,
+      subject: `Pitch ready: ${brandName} → ${brandEmail || 'find email'}`,
+      text: [
+        `Hi Aastha,`,
+        ``,
+        `Here is your pitch for ${brandName}.`,
+        `Send it to: ${brandEmail || '(find the contact email)'}`,
+        ``,
+        `---`,
+        ``,
+        pitchBody,
+        ``,
+        `---`,
+        ``,
+        `Copy the pitch above and send from management@aasthachopra.com`,
+      ].join('\n'),
+    }),
+  });
+}
 
 // ── Telegram ───────────────────────────────────────────────────────────────────
 async function send(chatId, text, useMarkdown = true) {
@@ -178,11 +210,12 @@ async function handlePitch(chatId, args) {
   try {
     const brands = await sb(`/outreach_brands?name=ilike.${encodeURIComponent(brandName)}&select=notes,contact_email`);
     const brand = brands[0] || {};
-    const email = await generatePitch(brandName, brand.notes || '');
+    const pitchBody = await generatePitch(brandName, brand.notes || '');
+    const brandEmail = brand.contact_email || null;
 
-    await send(chatId, `📝 Pitch for ${brandName}:`, false);
-    await send(chatId, email, false);
-    await send(chatId, `📬 Send to: ${brand.contact_email || 'find contact email first'}\n\nReply "send ${brandName}" to send it, or "skip" to discard.`, false);
+    await emailPitchToAastha(brandName, pitchBody, brandEmail);
+
+    await send(chatId, `✅ Pitch for *${brandName}* sent to your Gmail.\n\nForward it to: \`${brandEmail || 'find contact email'}\``);
   } catch (e) {
     send(chatId, `❌ Failed: ${e.message}`);
   }
