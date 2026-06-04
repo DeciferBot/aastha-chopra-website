@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luxury & Travel — Aastha Chopra</title>
+  <meta name="description" content="Aastha Chopra's luxury and travel world. 35% UAE audience, 0.92% travel engagement. Trusted by Jumeirah, Madinat, Visit Finland, Thailand Tourism." />
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MNSRF3MYFY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MNSRF3MYFY', {
+      page_title: document.title,
+      page_location: window.location.href
+    });
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-bg: #080706;
+      --color-bg-surface: #0f0d0b;
+      --color-bg-elevated: #161410;
+      --color-bg-overlay: #1d1b17;
+      --color-gold: #C4983A;
+      --color-text-primary: #F2E8D0;
+      --color-text-secondary: #7A6E60;
+      --color-border: rgba(196,152,58,0.12);
+      --color-border-strong: rgba(196,152,58,0.30);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-ui: 'Jost', 'Helvetica Neue', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+      font-family: var(--font-ui);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Film grain */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 128px 128px;
+      opacity: 0.35;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      transition: background 0.4s, backdrop-filter 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(8,7,6,0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--color-text-primary);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--color-text-primary); }
+    .nav-cta {
+      font-family: var(--font-ui);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      text-decoration: none;
+      border: 1px solid var(--color-border-strong);
+      padding: 9px 20px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover {
+      background: var(--color-gold);
+      color: var(--color-bg);
+    }
+    @media (max-width: 680px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+    }
+
+    /* ── HERO ── */
+    .world-hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .world-hero img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 25%;
+    }
+    .world-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(8,7,6,0.1) 0%,
+        rgba(8,7,6,0.15) 40%,
+        rgba(8,7,6,0.65) 75%,
+        rgba(8,7,6,0.88) 100%
+      );
+    }
+    .world-hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 24px 72px;
+    }
+    .world-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-ui);
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(242,232,208,0.5);
+      text-decoration: none;
+      margin-bottom: 24px;
+      transition: color 0.2s;
+    }
+    .world-back:hover { color: var(--color-text-primary); }
+    .world-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      font-weight: 300;
+      line-height: 1;
+      color: var(--color-text-primary);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .world-hero-title em {
+      font-style: italic;
+      color: var(--color-gold);
+    }
+    .world-hero-tagline {
+      font-family: var(--font-ui);
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(242,232,208,0.55);
+    }
+
+    /* ── STORY ── */
+    .world-story {
+      background: var(--color-bg-surface);
+      padding: 100px 24px;
+    }
+    .world-story-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-family: var(--font-ui);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      margin-bottom: 28px;
+    }
+    .world-story h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      color: var(--color-text-primary);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 36px;
+    }
+    .world-story h2 em { font-style: italic; color: var(--color-gold); }
+    .world-story p {
+      font-family: var(--font-ui);
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--color-text-secondary);
+      margin-bottom: 24px;
+    }
+    .world-story p:last-child { margin-bottom: 0; }
+
+    /* ── STATS ── */
+    .world-stats {
+      background: var(--color-bg);
+      padding: 100px 24px;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .world-stats-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .world-stats-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 400;
+      color: var(--color-text-primary);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+    .world-stats-title em { font-style: italic; color: var(--color-gold); }
+    .world-stats-sub {
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: var(--color-text-secondary);
+      letter-spacing: 0.06em;
+      margin-bottom: 56px;
+    }
+    .world-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--color-border);
+    }
+    @media (max-width: 680px) {
+      .world-stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .stat-block {
+      padding: 40px 28px;
+      border-right: 1px solid var(--color-border);
+      text-align: center;
+    }
+    .stat-block:last-child { border-right: none; }
+    @media (max-width: 680px) {
+      .stat-block:nth-child(2) { border-right: none; }
+      .stat-block:nth-child(3),
+      .stat-block:nth-child(4) { border-top: 1px solid var(--color-border); }
+      .stat-block:nth-child(4) { border-right: none; }
+    }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-weight: 400;
+      color: var(--color-gold);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .stat-label {
+      font-family: var(--font-ui);
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+    .world-stats-note {
+      font-family: var(--font-ui);
+      font-size: 0.62rem;
+      font-weight: 300;
+      color: rgba(122,110,96,0.6);
+      letter-spacing: 0.08em;
+      margin-top: 28px;
+      text-align: center;
+    }
+
+    /* ── GALLERY ── */
+    .world-gallery {
+      background: var(--color-bg-surface);
+      padding: 100px 24px;
+    }
+    .world-gallery-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .world-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 680px) {
+      .world-gallery-grid { grid-template-columns: 1fr; }
+    }
+    .world-gallery-grid img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 8px;
+      display: block;
+    }
+
+    /* ── CTA ── */
+    .world-cta {
+      background: var(--color-bg-elevated);
+      padding: 120px 24px;
+      text-align: center;
+      border-top: 1px solid var(--color-border);
+    }
+    .world-cta-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .world-cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      color: var(--color-text-primary);
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+    .world-cta h2 em { font-style: italic; color: var(--color-gold); }
+    .world-cta p {
+      font-family: var(--font-ui);
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--color-text-secondary);
+      margin-bottom: 40px;
+    }
+    .world-cta-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-gold {
+      font-family: var(--font-ui);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      text-decoration: none;
+      border: 1px solid var(--color-border-strong);
+      padding: 14px 28px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-gold:hover {
+      background: var(--color-gold);
+      color: var(--color-bg);
+    }
+    .btn-ghost {
+      font-family: var(--font-ui);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(242,232,208,0.6);
+      text-decoration: none;
+      border: 1px solid rgba(242,232,208,0.15);
+      padding: 14px 28px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(242,232,208,0.4);
+      color: var(--color-text-primary);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--color-bg);
+      border-top: 1px solid var(--color-border);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    footer p {
+      font-family: var(--font-ui);
+      font-size: 0.62rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--color-text-secondary);
+    }
+    footer a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: var(--color-gold); }
+
+    /* ── REVEAL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-delay-1 { transition-delay: 0.12s; }
+    .reveal-delay-2 { transition-delay: 0.24s; }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">Aastha Chopra.</a>
+    <ul class="nav-links">
+      <li><a href="index.html#brand-fit">All Worlds</a></li>
+      <li><a href="fashion.html">Fashion</a></li>
+      <li><a href="wellness.html">Wellness</a></li>
+    </ul>
+    <a href="mailto:management@aasthachopra.com" class="nav-cta">Collaborate</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="world-hero">
+    <img src="images/IMG_6977.JPG" alt="Aastha Chopra — Dubai rooftop at night with Ain Dubai" />
+    <div class="world-hero-overlay"></div>
+    <div class="world-hero-content">
+      <a href="index.html#brand-fit" class="world-back">← All worlds</a>
+      <h1 class="world-hero-title">The <em>Dubai</em> Insider</h1>
+      <p class="world-hero-tagline">Hotels · Dining · Travel</p>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="world-story">
+    <div class="world-story-inner">
+      <p class="section-label reveal">Luxury &amp; Travel</p>
+      <h2 class="reveal">Your local market <em>is watching.</em></h2>
+      <p class="reveal">Aastha Chopra is Dubai — not as a transplant who arrived for the lifestyle, but as a voice that the city's most discerning residents have been following for years. Thirty-five percent of her audience is UAE-based, concentrated in Dubai, Abu Dhabi, and Sharjah: the exact postcodes where luxury spending decisions get made.</p>
+      <p class="reveal">Hotels get Googled the morning after she posts. Restaurant reservations spike. Destinations land on wishlists before a travel brand has even briefed its media agency. She has partnered with Jumeirah, Madinat, Visit Finland, and Thailand Tourism, among others — and each collaboration has produced content that her local audience treats as a personal recommendation, not an advertisement.</p>
+      <p class="reveal">Her travel engagement rate of 0.92% sits well above category benchmarks, with peak daily reach touching 31,000. For any hotel, airline, destination board, or fine dining group that needs a credible voice inside the UAE market, there is no warmer introduction than hers.</p>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="world-stats" id="stats">
+    <div class="world-stats-inner">
+      <p class="section-label reveal">Luxury &amp; Travel — By the numbers</p>
+      <h2 class="world-stats-title reveal"><em>The proof</em> is in the data.</h2>
+      <p class="world-stats-sub reveal">Verified audience and engagement figures · 2025</p>
+      <div class="world-stats-grid">
+        <div class="stat-block reveal">
+          <div class="stat-num">35%</div>
+          <div class="stat-label">UAE<br>audience</div>
+        </div>
+        <div class="stat-block reveal reveal-delay-1">
+          <div class="stat-num">0.92%</div>
+          <div class="stat-label">Travel<br>engagement rate</div>
+        </div>
+        <div class="stat-block reveal reveal-delay-1">
+          <div class="stat-num">31K</div>
+          <div class="stat-label">Peak daily<br>reach</div>
+        </div>
+        <div class="stat-block reveal reveal-delay-2">
+          <div class="stat-num">51.5K</div>
+          <div class="stat-label">Total<br>followers</div>
+        </div>
+      </div>
+      <p class="world-stats-note reveal">Data as of 2025 &nbsp;·&nbsp; UAE audience: Dubai · Abu Dhabi · Sharjah</p>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="world-gallery">
+    <div class="world-gallery-inner">
+      <p class="section-label reveal">Dubai moments</p>
+      <div class="world-gallery-grid">
+        <img src="images/IMG_6776.JPG" alt="Aastha Chopra luxury lifestyle Dubai" loading="lazy" class="reveal" />
+        <img src="images/IMG_6779.JPG" alt="Aastha Chopra Dubai" loading="lazy" class="reveal reveal-delay-1" />
+        <img src="images/IMG_0066.JPG" alt="Aastha Chopra travel content" loading="lazy" class="reveal reveal-delay-2" />
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="world-cta">
+    <div class="world-cta-inner">
+      <p class="section-label reveal">Work together</p>
+      <h2 class="reveal">Work with Aastha in <em>luxury &amp; travel.</em></h2>
+      <p class="reveal">Download her media pack for full audience data, rate card, and case studies — or reach out directly to discuss a campaign.</p>
+      <div class="world-cta-btns reveal">
+        <a href="/Aastha_Chopra_Media_Pack.pdf" class="btn-gold" target="_blank" rel="noopener">Download Media Pack</a>
+        <a href="mailto:management@aasthachopra.com" class="btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© Aastha Chopra 2025 &nbsp;·&nbsp; <a href="index.html">Back to home</a></p>
+  </footer>
+
+  <script>
+    // Nav scroll state
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function() {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Reveal on scroll
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

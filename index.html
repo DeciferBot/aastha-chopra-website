@@ -2631,16 +2631,16 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        min-height: 640px;
+        min-height: 480px;
       }
-      @media (max-width: 860px) { .bf-card { min-height: 520px; } }
+      @media (max-width: 860px) { .bf-card { min-height: 420px; } }
       .bf-card:hover { border-color: var(--color-border-strong); }
       .bf-card.active { border-color: var(--color-gold); }
 
       /* ── Visual panel ── */
       .bf-card-visual {
         position: relative;
-        flex: 0 0 58%;
+        flex: 0 0 65%;
         overflow: hidden;
       }
       .bf-card-visual img {
@@ -2810,6 +2810,7 @@
         gap: 8px;
         transition: color 0.2s;
         margin-top: auto;
+        text-decoration: none;
       }
       .bf-card:hover .bf-card-cta, .bf-card.active .bf-card-cta { color: var(--color-gold); }
       .bf-card-cta svg { transition: transform 0.3s var(--ease-spring); }
@@ -2864,98 +2865,41 @@
     <div class="bf-cards">
 
       <!-- Card 1: Fashion & Beauty -->
-      <div class="bf-card reveal" role="button" tabindex="0" data-avatar="fashion-beauty" data-reels-tab="Beauty">
+      <div class="bf-card reveal">
         <div class="bf-card-visual">
           <img src="images/IMG_4568.JPG" alt="Aastha Chopra — Fashion editorial" loading="lazy" />
           <div class="bf-card-tag">Fashion · Beauty · Fragrance</div>
-          <div class="bf-card-stat-overlay">
-            <div class="bf-card-stat">110+</div>
-            <div class="bf-card-stat-label">brand collaborations — every tier validated</div>
-          </div>
         </div>
-        <div class="bf-card-body">
-          <div class="bf-card-title">Fashion Curator</div>
+        <div class="bf-card-body" style="padding: 28px 28px;">
+          <div class="bf-card-title">The Beauty Insider</div>
           <p class="bf-card-copy">Fashion-week front rows. Exclusive launches. Editorial content that signals your brand belongs in the world your customer aspires to enter.</p>
-          <div class="bf-card-proof">
-            <div class="bf-proof-item">
-              <div class="bf-proof-num">0.77%</div>
-              <div class="bf-proof-lbl">Engagement<br>on beauty</div>
-            </div>
-            <div class="bf-proof-item">
-              <div class="bf-proof-num">842</div>
-              <div class="bf-proof-lbl">Top post<br>interactions</div>
-            </div>
-            <div class="bf-proof-item">
-              <div class="bf-proof-num">29</div>
-              <div class="bf-proof-lbl">Posts<br>last 90d</div>
-            </div>
-          </div>
-          <div class="bf-card-brands">Chanel · Dior · Valentino · Hermès · Huda Beauty · Jimmy Choo</div>
-          <span class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          <a href="/fashion.html" class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
       </div>
 
       <!-- Card 2: Luxury & Experiences -->
-      <div class="bf-card reveal reveal-delay-1" role="button" tabindex="0" data-avatar="luxury-experiences" data-reels-tab="Luxury">
+      <div class="bf-card reveal reveal-delay-1">
         <div class="bf-card-visual">
           <img src="images/IMG_6977.JPG" alt="Aastha Chopra — Dubai luxury rooftop" loading="lazy" style="object-position: center 25%;" />
           <div class="bf-card-tag">Hotels · Dining · Travel</div>
-          <div class="bf-card-stat-overlay">
-            <div class="bf-card-stat">35%</div>
-            <div class="bf-card-stat-label">of viewers are UAE-based — Dubai · Abu Dhabi · Sharjah</div>
-          </div>
         </div>
-        <div class="bf-card-body">
-          <div class="bf-card-title">Luxury Curator</div>
+        <div class="bf-card-body" style="padding: 28px 28px;">
+          <div class="bf-card-title">The Dubai Insider</div>
           <p class="bf-card-copy">Your local market is watching her. Hotels get Googled, dinners get booked, destinations land on wishlists the morning after she posts.</p>
-          <div class="bf-card-proof">
-            <div class="bf-proof-item">
-              <div class="bf-proof-num">0.92%</div>
-              <div class="bf-proof-lbl">Engagement<br>on travel</div>
-            </div>
-            <div class="bf-proof-item">
-              <div class="bf-proof-num">31K</div>
-              <div class="bf-proof-lbl">Peak daily<br>reach</div>
-            </div>
-            <div class="bf-proof-item">
-              <div class="bf-proof-num">849</div>
-              <div class="bf-proof-lbl">Top post<br>interactions</div>
-            </div>
-          </div>
-          <div class="bf-card-brands">Jumeirah · Madinat · Visit Finland · Thailand Tourism · Fine Dining</div>
-          <span class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          <a href="/luxury.html" class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
       </div>
 
       <!-- Card 3: Wellness -->
-      <div class="bf-card reveal reveal-delay-2" role="button" tabindex="0" data-avatar="wellness" data-reels-tab="Wellness">
+      <div class="bf-card reveal reveal-delay-2">
         <div class="bf-card-visual">
-          <img src="images/IMG_9859.JPG" alt="Aastha Chopra — Wellness, desert arches UAE" loading="lazy" style="object-position: center 15%;" />
+          <img src="images/IMG_7273.JPG" alt="Aastha Chopra — Wellness and fitness" loading="lazy" style="object-position: center top;" />
           <div class="bf-card-tag">Wellness · Fitness · Balance</div>
-          <div class="bf-card-stat-overlay">
-            <div class="bf-card-stat">0.89%</div>
-            <div class="bf-card-stat-label">engagement — her highest category, almost untouched by brands</div>
-          </div>
         </div>
-        <div class="bf-card-body">
-          <div class="bf-card-title">Wellness Guru</div>
-          <p class="bf-card-copy">A practising lawyer. Ironman finisher. Arctic waterfall hiker. Almost no wellness brands have worked with her — which makes this the highest-ROI whitespace on her profile.</p>
-          <div class="bf-card-proof">
-            <div class="bf-proof-item">
-              <div class="bf-proof-num">614</div>
-              <div class="bf-proof-lbl">Top wellness<br>interactions</div>
-            </div>
-            <div class="bf-proof-item">
-              <div class="bf-proof-num">2×</div>
-              <div class="bf-proof-lbl">vs. fashion<br>content rate</div>
-            </div>
-            <div class="bf-proof-item">
-              <div class="bf-proof-num">Low</div>
-              <div class="bf-proof-lbl">Brand<br>competition</div>
-            </div>
-          </div>
-          <div class="bf-card-brands">Ironman Dubai · Active Travel · Premium Wellness · Mindful Luxury</div>
-          <span class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <div class="bf-card-body" style="padding: 28px 28px;">
+          <div class="bf-card-title">The Everyday Athlete</div>
+          <p class="bf-card-copy">Practising lawyer. Ironman finisher. Arctic waterfall hiker. The highest-ROI whitespace on her profile — almost no wellness brands have been here yet.</p>
+          <a href="/wellness.html" class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
       </div>
     </div>
