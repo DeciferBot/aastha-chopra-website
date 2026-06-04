@@ -59,6 +59,77 @@
           }
         });
       });
+
+      // Track WhatsApp clicks (primary conversion channel in UAE)
+      document.querySelectorAll('a[href*="wa.me"]').forEach(function(el) {
+        el.addEventListener('click', function() {
+          var loc = el.classList.contains('wa-float') ? 'floating_button'
+                  : el.classList.contains('btn-whatsapp') ? 'contact_section'
+                  : 'unknown';
+          gtag('event', 'whatsapp_click', {
+            event_category: 'conversion',
+            event_label: loc
+          });
+        });
+      });
+
+      // Track nav CTA clicks separately
+      var navCollabCta = document.querySelector('.nav-cta');
+      if (navCollabCta) {
+        navCollabCta.addEventListener('click', function() {
+          gtag('event', 'nav_cta_click', { event_category: 'intent', cta: 'collaborate' });
+        });
+      }
+      var navMediaPack = document.querySelector('.nav-mediapack');
+      if (navMediaPack) {
+        navMediaPack.addEventListener('click', function() {
+          gtag('event', 'nav_cta_click', { event_category: 'intent', cta: 'media_pack' });
+        });
+      }
+
+      // Track section visibility (which sections brands actually read)
+      var sectionNames = ['about', 'reels', 'portfolio', 'collabs', 'instagram', 'contact'];
+      var sectionSeen = {};
+      var sectionObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting && !sectionSeen[entry.target.id]) {
+            sectionSeen[entry.target.id] = true;
+            gtag('event', 'section_view', {
+              event_category: 'engagement',
+              section_name: entry.target.id
+            });
+          }
+        });
+      }, { threshold: 0.3 });
+      sectionNames.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) sectionObserver.observe(el);
+      });
+
+      // Track reels tab filter clicks
+      document.querySelectorAll('.reels-tab').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          gtag('event', 'reel_filter', {
+            event_category: 'engagement',
+            category: btn.dataset.cat || btn.textContent.trim()
+          });
+        });
+      });
+
+      // Track Load More reels button
+      var reelsMoreBtn = document.getElementById('reelsMoreBtn');
+      if (reelsMoreBtn) {
+        reelsMoreBtn.addEventListener('click', function() {
+          gtag('event', 'load_more_reels', { event_category: 'engagement' });
+        });
+      }
+
+      // Qualified visit: user spent >45s AND scrolled >50%
+      var qualifiedTimer = setTimeout(function() {
+        if (scrollMarks[50]) {
+          gtag('event', 'qualified_visit', { event_category: 'intent', time_on_page: 45 });
+        }
+      }, 45000);
     });
   </script>
 
@@ -66,8 +137,8 @@
   <meta name="google-site-verification" content="Tznu636rHEfe_TybMDu_184pIbZZqZ-9t0I7y-Iqa7g" />
 
   <!-- Primary SEO -->
-  <title>Aastha Chopra | Luxury Beauty and Lifestyle Creator, Dubai UAE</title>
-  <meta name="description" content="Aastha Chopra is a Dubai-based creator and practising lawyer specialising in luxury beauty, fashion, and lifestyle. UAE Media Council licensed. Partnering with premium brands across the Gulf and globally." />
+  <title>Aastha Chopra | Dubai Luxury Fashion & Beauty Influencer | Brand Collaborations UAE</title>
+  <meta name="description" content="Dubai luxury fashion & beauty influencer with 51K+ Instagram followers across UAE, India & US. Practising lawyer. UAE Media Council licensed. Fashion, beauty & lifestyle brand partnerships. View media pack →" />
   <meta name="keywords" content="Aastha Chopra, luxury lifestyle creator Dubai, UAE fashion influencer, aastha sochic, luxury wellness Dubai, fashion creator UAE, brand collaborations Dubai, influencer Dubai" />
   <link rel="canonical" href="https://www.aasthachopra.com/" />
 
@@ -82,7 +153,7 @@
   <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.aasthachopra.com/" />
-  <meta property="og:title" content="Aastha Chopra | Luxury Beauty and Lifestyle Creator, Dubai" />
+  <meta property="og:title" content="Aastha Chopra | Dubai Luxury Fashion & Beauty Influencer" />
   <meta property="og:description" content="Dubai-based creator and practising lawyer. Luxury beauty, fashion, and lifestyle. UAE Media Council licensed. Partnering with premium brands across the Gulf and globally." />
   <meta property="og:image" content="https://www.aasthachopra.com/images/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
@@ -115,8 +186,17 @@
         "description": "Practising lawyer and UAE Media Council licensed creator based in Dubai. Luxury beauty, fashion, and lifestyle. Partnering with premium brands across the Gulf and globally.",
         "url": "https://www.aasthachopra.com",
         "image": "https://www.aasthachopra.com/images/hero.jpg",
+        "jobTitle": "Luxury Lifestyle Creator & Content Creator",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Dubai",
+          "addressCountry": "AE"
+        },
         "sameAs": [
-          "https://www.instagram.com/aastha_sochic/"
+          "https://www.instagram.com/aastha_sochic/",
+          "https://www.tiktok.com/@aastha_c8",
+          "https://www.youtube.com/@aastha_sochic",
+          "https://www.pinterest.com/aastha_sochic"
         ],
         "knowsAbout": ["Luxury Lifestyle", "Fashion", "Luxury Beauty", "Skincare", "Travel", "Fine Dining", "Jewellery"]
       },
@@ -272,7 +352,7 @@
     }
     .nav-links a {
       font-family: var(--font-ui);
-      font-size: 0.6rem;
+      font-size: 0.72rem;
       font-weight: 500;
       letter-spacing: 0.22em;
       text-transform: uppercase;
@@ -521,7 +601,7 @@
     .hero-sep-line {
       flex: 1;
       height: 1px;
-      background: linear-gradient(90deg, rgba(201, 168, 76, 0.6), transparent);
+      background: linear-gradient(90deg, var(--color-gold), transparent);
       max-width: 180px;
     }
     .hero-sep-diamond {
@@ -536,7 +616,7 @@
       font-weight: 300;
       letter-spacing: 0.45em;
       text-transform: uppercase;
-      color: rgba(250, 248, 245, 0.45);
+      color: rgba(242,232,208,0.8);
     }
 
     .hero-actions {
@@ -581,9 +661,9 @@
       font-weight: 300;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(250, 248, 245, 0.55);
+      color: rgba(242,232,208,0.8);
       text-decoration: none;
-      border-bottom: 1px solid rgba(250, 248, 245, 0.2);
+      border-bottom: 1px solid rgba(242,232,208,0.8);
       padding-bottom: 2px;
       transition: color 0.3s, border-color 0.3s;
     }
@@ -601,7 +681,7 @@
     .uae-badge-icon {
       width: 28px;
       height: 28px;
-      border: 1px solid rgba(201,168,76,0.5);
+      border: 1px solid var(--color-gold);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -621,7 +701,7 @@
       font-weight: 500;
     }
     .uae-badge-text span {
-      color: rgba(250,248,245,0.45);
+      color: rgba(242,232,208,0.8);
     }
 
     /* Right side floating stat */
@@ -653,7 +733,7 @@
       font-size: 0.58rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(201, 168, 76, 0.6);
+      color: var(--color-gold);
       margin-top: 4px;
       display: block;
     }
@@ -681,7 +761,7 @@
       font-size: 0.58rem;
       letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: rgba(250, 248, 245, 0.3);
+      color: rgba(242,232,208,0.8);
       writing-mode: vertical-rl;
     }
     .scroll-line {
@@ -1073,7 +1153,7 @@
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--gold);
-      border: 1px solid rgba(201, 168, 76, 0.5);
+      border: 1px solid var(--color-gold);
       padding: 5px 12px;
       margin-bottom: 10px;
     }
@@ -1518,7 +1598,7 @@
       font-size: 0.58rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(201, 168, 76, 0.6);
+      color: var(--color-gold);
       margin-top: 6px;
       display: block;
     }
@@ -1542,7 +1622,7 @@
       font-size: 0.65rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(250,248,245,0.35);
+      color: rgba(242,232,208,0.8);
       margin-bottom: 20px;
       display: block;
     }
@@ -1576,7 +1656,7 @@
       font-size: 0.56rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(250,248,245,0.5);
+      color: rgba(242,232,208,0.8);
     }
     .mk-license-text strong { color: var(--gold); font-weight: 500; }
 
@@ -1775,7 +1855,7 @@
     .newsletter-note {
       font-family: var(--font-ui);
       font-size: 0.6rem;
-      color: rgba(196,152,58,0.4);
+      color: rgba(196,152,58,0.7);
       margin-top: 14px;
       letter-spacing: 0.1em;
       position: relative;
@@ -1806,7 +1886,7 @@
       font-size: 0.6rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: rgba(250, 248, 245, 0.25);
+      color: rgba(242,232,208,0.8);
       text-align: center;
     }
     .footer-location {
@@ -1814,7 +1894,7 @@
       font-size: 0.58rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(250,248,245,0.2);
+      color: rgba(242,232,208,0.8);
       margin-top: 6px;
     }
     .footer-socials {
@@ -1827,7 +1907,7 @@
       font-size: 0.6rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(250,248,245,0.4);
+      color: rgba(242,232,208,0.8);
       text-decoration: none;
       transition: color 0.3s;
     }
@@ -2032,7 +2112,7 @@
     .reel-play-btn .play-circle {
       width: 52px; height: 52px;
       border-radius: 50%;
-      background: rgba(201,168,76,0.85);
+      background: var(--color-gold);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -2075,7 +2155,7 @@
       font-family: var(--ff-sans);
       font-size: 0.78rem;
       font-weight: 300;
-      color: rgba(250,248,245,0.5);
+      color: rgba(242,232,208,0.8);
       margin-top: 12px;
       line-height: 1.5;
       transition: color 0.3s;
@@ -2086,7 +2166,7 @@
       grid-column: 1 / -1;
       text-align: center;
       padding: 80px 0;
-      color: rgba(250,248,245,0.2);
+      color: rgba(242,232,208,0.8);
       font-family: var(--ff-sans);
       font-size: 0.65rem;
       letter-spacing: 0.3em;
@@ -2099,12 +2179,12 @@
       text-transform: uppercase;
       background: none;
       border: 1px solid rgba(255,255,255,0.15);
-      color: rgba(250,248,245,0.4);
+      color: rgba(242,232,208,0.8);
       padding: 8px 20px;
       cursor: pointer;
       transition: all 0.25s;
     }
-    .reels-tab:hover { color: var(--gold); border-color: rgba(201,168,76,0.4); }
+    .reels-tab:hover { color: var(--gold); border-color: var(--color-gold); }
     .reels-tab.active { color: var(--gold); border-color: var(--gold); background: rgba(201,168,76,0.06); }
 
     @media (max-width: 768px) {
@@ -2140,7 +2220,7 @@
       font-weight: 400;
       letter-spacing: 0.4em;
       text-transform: uppercase;
-      color: rgba(250,248,245,0.35);
+      color: rgba(242,232,208,0.8);
       padding: 0 40px;
       transition: color 0.3s;
       flex-shrink: 0;
@@ -2315,7 +2395,7 @@
 
     <!-- Photo layer — place your image at images/hero.jpg -->
     <div class="hero-img-wrap" id="heroImgWrap">
-      <img src="images/hero.jpg" alt="Aastha Chopra" id="heroImg" />
+      <img src="images/hero.jpg" alt="Aastha Chopra — Dubai luxury fashion and beauty influencer" id="heroImg" fetchpriority="high" loading="eager" decoding="sync" />
     </div>
 
     <!-- Atmosphere -->
@@ -2464,7 +2544,7 @@
       </div>
       <div class="about-cta-row reveal reveal-delay-4">
         <a href="#contact" class="btn-primary"><span>Work With Me</span></a>
-        <a href="#portfolio" style="font-family:var(--font-ui);font-size:0.6rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-text-secondary);text-decoration:none;border-bottom:1px solid var(--color-border-strong);padding-bottom:2px;transition:color var(--duration-fast);">View Portfolio</a>
+        <a href="#portfolio" style="font-family:var(--font-ui);font-size:0.72rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-text-secondary);text-decoration:none;border-bottom:1px solid var(--color-border-strong);padding-bottom:2px;transition:color var(--duration-fast);">View Portfolio</a>
       </div>
     </div>
   </section>
@@ -2474,7 +2554,7 @@
     <div style="max-width:1320px;margin:0 auto;">
       <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;">
         <div>
-          <p class="section-label reveal" style="color:rgba(201,168,76,0.7);">Top Reels</p>
+          <p class="section-label reveal" style="color:var(--color-gold);">Top Reels</p>
           <h2 class="section-heading reveal reveal-delay-1">Content that <em>resonates</em></h2>
         </div>
         <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener" class="insta-follow reveal" style="flex-shrink:0;">Watch on Instagram</a>
@@ -2540,7 +2620,7 @@
     <div class="instagram-inner">
       <div class="instagram-header reveal">
         <div>
-          <p class="section-label" style="color: rgba(201,168,76,0.7);">On Instagram</p>
+          <p class="section-label" style="color: var(--color-gold);">On Instagram</p>
           <a href="https://www.instagram.com/aastha_sochic/" target="_blank" class="insta-handle">@aastha_sochic</a>
         </div>
         <a href="https://www.instagram.com/aastha_sochic/" target="_blank" class="insta-follow">Follow on Instagram</a>
@@ -2600,9 +2680,9 @@
     <div class="footer-socials">
       <a href="https://www.instagram.com/aastha_sochic/" target="_blank" class="footer-social-link">Instagram</a>
       <div class="footer-social-sep"></div>
-      <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener" class="footer-social-link">Pinterest</a>
+      <a href="https://www.pinterest.com/aastha_sochic" target="_blank" rel="noopener" class="footer-social-link">Pinterest</a>
       <div class="footer-social-sep"></div>
-      <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener" class="footer-social-link">YouTube</a>
+      <a href="https://www.youtube.com/@aastha_sochic" target="_blank" rel="noopener" class="footer-social-link">YouTube</a>
     </div>
   </footer>
 
@@ -2625,14 +2705,19 @@
     });
 
     const heroImg = document.getElementById('heroImg');
+    const heroSection = document.getElementById('hero');
+    let heroVisible = true;
+    const heroVisObserver = new IntersectionObserver(entries => {
+      heroVisible = entries[0].isIntersecting;
+    }, { threshold: 0 });
+    if (heroSection) heroVisObserver.observe(heroSection);
+
     function animateFrame() {
-      // Smooth parallax
-      parallaxX += (targetPX - parallaxX) * 0.06;
-      parallaxY += (targetPY - parallaxY) * 0.06;
-      if (heroImg) {
+      if (heroVisible && heroImg) {
+        parallaxX += (targetPX - parallaxX) * 0.06;
+        parallaxY += (targetPY - parallaxY) * 0.06;
         heroImg.style.transform = `translate(${parallaxX}px, ${parallaxY}px) scale(1.06)`;
       }
-
       requestAnimationFrame(animateFrame);
     }
     animateFrame();
@@ -2835,7 +2920,7 @@
 
     /* ─── REELS: top-50 static data with category tabs ─── */
     (function initReels() {
-      const TOP50 = [{"permalink":"https://www.instagram.com/reel/C7dg7qONh7V/","caption":"Hiking to the best view ever! Every step reveals a new breathtaking view.","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/DFFpMIlSMCm/","caption":"X @be.divalicious","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DBqzGebyXex/","caption":"✨ Shine Bright This Dhanteras with Kanz Jewels ✨","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DC05YVGtMxJ/","caption":"Wearing @mahgulofficial","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DLco1YQyHb1/","caption":"Sip. Sweat. Slay. Repeat.","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/DLoz6WkS9jB/","caption":"🩵When in doubt, go blue🩵 @maybellinearabia","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DLNerzuyoWq/","caption":"POV: When vanity is a summer moodboard.","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DF4dc_vyfhs/","caption":"Starting midterm break with a little jungle royalty! 👑 🦁Making memories with the most majestic company.","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/C7XiZrptX-E/","caption":"The joy of uninterrupted tranquility🤌🏼","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/DFfKQ9CSs9S/","caption":"DIALMAZ Exquisite Jewelry @dialmaz_jewellery has come to the UAE","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DE5KoQyy34c/","caption":"@khoyauae is now IN DUBAI✨","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DFXJAaSSnhm/","caption":"🔱The Maha Kumbh Mela🔱 where over 40 crore Hindus chant Har Har Mahadev","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/DCgLFoEtHPS/","caption":"Channeling regal vibes in this dreamy kaftan 👑 By @mahgulofficial","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DCUJ2g-iJB4/","caption":"The stunning outfits from @urban_pataka and @iqa.design, paired with jewelry","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DFAY0amyQg9/","caption":"Step into sophistication with Ramadan Edition '25, proudly presented by @signaturebyims","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DBcP1ePSrL5/","caption":"Let's talk about the Khoya magic I couldn't stop wearing","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DK9KE7OydON/","caption":"Unboxing a fragrance that tells a story…","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DBO-BPOy2Th/","caption":"She came, she saw, she sparkled ✨","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DLF1wFSyqaO/","caption":"Meet your daily dose of glow: @kosas DreamBeam & DreamBeam Sunlit ✨","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DBvGKcLyh9o/","caption":"Festive season? We dress accordingly 🌙","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DJz7kPhSV3z/","caption":"That golden hour at the resort, though 🌅","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DKvJBbmyNEa/","caption":"Testing viral skincare so you don't have to 🧴","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/C8k7mGpNi2W/","caption":"This resort was built for mornings like this","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DJqP2aBSXmt/","caption":"The lip combo everyone's been asking about 💄","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DKhVRTSylPp/","caption":"Dinner at the best table in Dubai 🕯️","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DJf8pxCSomC/","caption":"My Sephoria energy? Unapologetically extra.","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DIwM7kRyFg1/","caption":"Pool day aesthetic — curated, not accidental","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DIlNvBSyBj9/","caption":"A wardrobe that travels well. This one's for the jet setters.","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DHrZpuSyA2q/","caption":"Brunch view that made me put my phone down (almost)","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DHgKmQSy5kX/","caption":"The scent that's been in my rotation all season","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DH2JVpCyKwZ/","caption":"She wore it better — the after-edit 🪞","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DGwLNjSyPmV/","caption":"That feeling when the suite is better than the photos","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DGlKhBSyTqA/","caption":"Elevated living starts in the morning routine","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/DFsRtpSyWoU/","caption":"The Dubai skyline never gets old, honestly","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DEzQmRSyVjN/","caption":"Old money aesthetic, new season finds","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DEoJlASyMkH/","caption":"The foundation that changed everything for me 🌿","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DDvHkQSyGiF/","caption":"Travel must-haves I'm never leaving home without","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DDlFhNSyDhE/","caption":"Kaftan season is forever, not just Ramadan","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DCzGfMSyCgD/","caption":"Jewellery that makes the outfit — always","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DCpEeMSyBfC/","caption":"That resort pool at sunset — no filter needed","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DBhDcLSyAfB/","caption":"Dew skin. Glossy lip. Dubai summer uniform.","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DAuBbKSy9eA/","caption":"The hotel that made me rethink luxury travel","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DAtAaJSy8dZ/","caption":"Styling the same bag 3 ways — a masterclass","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DAsZzISy7cY/","caption":"Gua sha + oil cleanse = my skin's love language","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/DArYyHSy6bX/","caption":"Desert safari at dusk — worth every grain of sand","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DAqXxGSy5aW/","caption":"The cleanser that actually works on Dubai skin","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DApWwFSy4ZV/","caption":"Dressed for a dinner that lived up to the outfit","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DAoVvESy3YU/","caption":"This season's colour story — earthy, warm, unapologetic","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DAnUuDSy2XT/","caption":"Afternoon tea at the palace. Yes, really.","category":"Luxury"}];
+      const TOP50 = [{"permalink":"https://www.instagram.com/reel/C7dg7qONh7V/","caption":"Hiking to the best view ever! Every step reveals a new breathtaking view.","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/DFFpMIlSMCm/","caption":"X @be.divalicious","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DBqzGebyXex/","caption":"✨ Shine Bright This Dhanteras with Kanz Jewels ✨","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DC05YVGtMxJ/","caption":"Wearing @mahgulofficial","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DLco1YQyHb1/","caption":"Sip. Sweat. Slay. Repeat.","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/DLoz6WkS9jB/","caption":"🩵When in doubt, go blue🩵 @maybellinearabia","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DLNerzuyoWq/","caption":"POV: When vanity is a summer moodboard.","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DF4dc_vyfhs/","caption":"Starting midterm break with a little jungle royalty! 👑 🦁Making memories with the most majestic company.","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/C7XiZrptX-E/","caption":"The joy of uninterrupted tranquility🤌🏼","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/DFfKQ9CSs9S/","caption":"DIALMAZ Exquisite Jewelry @dialmaz_jewellery has come to the UAE","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DE5KoQyy34c/","caption":"@khoyauae is now IN DUBAI✨","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DFXJAaSSnhm/","caption":"🔱The Maha Kumbh Mela🔱 where over 40 crore Hindus chant Har Har Mahadev","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/DCgLFoEtHPS/","caption":"Channeling regal vibes in this dreamy kaftan 👑 By @mahgulofficial","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DCUJ2g-iJB4/","caption":"The stunning outfits from @urban_pataka and @iqa.design, paired with jewelry","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DFAY0amyQg9/","caption":"Step into sophistication with Ramadan Edition '25, proudly presented by @signaturebyims","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DBcP1ePSrL5/","caption":"Let's talk about the Khoya magic I couldn't stop wearing","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DK9KE7OydON/","caption":"Unboxing a fragrance that tells a story…","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DBO-BPOy2Th/","caption":"She came, she saw, she sparkled ✨","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DLF1wFSyqaO/","caption":"Meet your daily dose of glow: @kosas DreamBeam & DreamBeam Sunlit ✨","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DBvGKcLyh9o/","caption":"Festive season? We dress accordingly 🌙","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DJz7kPhSV3z/","caption":"That golden hour at the resort, though 🌅","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DKvJBbmyNEa/","caption":"Testing viral skincare so you don't have to 🧴","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/C8k7mGpNi2W/","caption":"This resort was built for mornings like this","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DJqP2aBSXmt/","caption":"The lip combo everyone's been asking about 💄","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DKhVRTSylPp/","caption":"Dinner at the best table in Dubai 🕯️","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DJf8pxCSomC/","caption":"My Sephoria energy? Unapologetically extra.","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DIwM7kRyFg1/","caption":"Pool day aesthetic: curated, not accidental","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DIlNvBSyBj9/","caption":"A wardrobe that travels well. This one's for the jet setters.","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DHrZpuSyA2q/","caption":"Brunch view that made me put my phone down (almost)","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DHgKmQSy5kX/","caption":"The scent that's been in my rotation all season","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DH2JVpCyKwZ/","caption":"She wore it better. The after-edit 🪞","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DGwLNjSyPmV/","caption":"That feeling when the suite is better than the photos","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DGlKhBSyTqA/","caption":"Elevated living starts in the morning routine","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/DFsRtpSyWoU/","caption":"The Dubai skyline never gets old, honestly","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DEzQmRSyVjN/","caption":"Old money aesthetic, new season finds","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DEoJlASyMkH/","caption":"The foundation that changed everything for me 🌿","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DDvHkQSyGiF/","caption":"Travel must-haves I'm never leaving home without","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DDlFhNSyDhE/","caption":"Kaftan season is forever, not just Ramadan","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DCzGfMSyCgD/","caption":"Jewellery that makes the outfit. Always.","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DCpEeMSyBfC/","caption":"That resort pool at sunset. No filter needed.","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DBhDcLSyAfB/","caption":"Dew skin. Glossy lip. Dubai summer uniform.","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DAuBbKSy9eA/","caption":"The hotel that made me rethink luxury travel","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DAtAaJSy8dZ/","caption":"Styling the same bag 3 ways: a masterclass","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DAsZzISy7cY/","caption":"Gua sha + oil cleanse = my skin's love language","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/DArYyHSy6bX/","caption":"Desert safari at dusk. Worth every grain of sand.","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DAqXxGSy5aW/","caption":"The cleanser that actually works on Dubai skin","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DApWwFSy4ZV/","caption":"Dressed for a dinner that lived up to the outfit","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DAoVvESy3YU/","caption":"This season's colour story: earthy, warm, unapologetic","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DAnUuDSy2XT/","caption":"Afternoon tea at the palace. Yes, really.","category":"Luxury"}];
 
       const PAGE_SIZE = 8;
       let activeCat = 'All';
@@ -2895,6 +2980,11 @@
                 if (v !== video) { v.pause(); v.closest('.reel-item').querySelector('.reel-play-btn').classList.remove('playing'); v.closest('.reel-item').querySelector('.play-circle').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="20" height="20"><polygon points="6,4 20,12 6,20"/></svg>'; }
               });
               video.play();
+              gtag('event', 'reel_play', {
+                event_category: 'engagement',
+                reel_url: video.src,
+                category: video.closest('.reel-item')?.querySelector('[style*="background:var(--gold)"]')?.textContent?.trim() || 'unknown'
+              });
               playBtn.classList.add('playing');
               playBtn.querySelector('.play-circle').innerHTML = '<svg viewBox="0 0 24 24" fill="white" width="18" height="18"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
             } else {
@@ -2983,6 +3073,17 @@
       const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxenZheXR2eW5yZ2xpanZ3anN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NTE1MzMsImV4cCI6MjA5NjEyNzUzM30.gO4SExyBda-iOb5iHNo-2aW_lvmh3_k-SEMLMqyGkbo';
       const delays = ['', 'reveal-delay-1', 'reveal-delay-2'];
 
+      // Add Supabase image transform params for web-optimised delivery
+      function optimiseImg(url, width = 900) {
+        if (!url) return url;
+        // Supabase storage transform API
+        if (url.includes('/storage/v1/object/public/')) {
+          return url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/')
+            + `?width=${width}&quality=80&format=webp`;
+        }
+        return url;
+      }
+
       try {
         const res = await fetch(
           `${SUPABASE_URL}/rest/v1/portfolio?select=*&active=eq.true&order=sort_order.asc`,
@@ -2994,7 +3095,7 @@
 
         grid.innerHTML = items.map((item, i) => `
           <div class="portfolio-item reveal ${delays[i % 3]}">
-            <img class="portfolio-bg" src="${item.image_path}" alt="${item.alt_text}" />
+            <img class="portfolio-bg" src="${optimiseImg(item.image_path)}" alt="${item.alt_text}" loading="lazy" />
             <div class="portfolio-overlay">
               <div class="portfolio-meta">
                 <span class="portfolio-tag">${item.tag}</span>
