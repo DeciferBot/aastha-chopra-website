@@ -705,6 +705,11 @@
       letter-spacing: 0.05em;
     }
 
+    .status-next-time {
+      color: var(--gold);
+      font-weight: 400;
+    }
+
     /* ── SKELETON CARDS ──────────────────────────────────────────────── */
     .brief-skel {
       background: var(--surface);
@@ -1004,7 +1009,7 @@
     <div class="status-dot dot-success" id="statusDot"></div>
     <span id="statusText">Loading agent status…</span>
   </div>
-  <div class="status-right" id="statusNext">Next update: tomorrow 6:30am Dubai</div>
+  <div class="status-right" id="statusNext"></div>
 </div>
 
 <script>
@@ -1313,22 +1318,54 @@
   // ── Load Agent Status ────────────────────────────────────────────────
   async function loadAgentStatus() {
     const rows = await sbFetch('uae_agent_runs', 'order=ran_at.desc&limit=1');
-    if (!rows.length) return;
+    if (!rows.length) {
+      document.getElementById('statusText').textContent = 'Agent has not run yet';
+      document.getElementById('statusNext').innerHTML = 'Next run: <span class="status-next-time">today 6:30am Dubai</span>';
+      return;
+    }
     const run = rows[0];
 
+    const now = new Date();
     const dt = new Date(run.ran_at);
-    // Convert to Dubai time (UTC+4)
+
+    // Relative time
+    const diffMs = now - dt;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHrs = Math.floor(diffMins / 60);
+    const diffDays = Math.floor(diffHrs / 24);
+    let relTime;
+    if (diffMins < 2) relTime = 'just now';
+    else if (diffMins < 60) relTime = `${diffMins}m ago`;
+    else if (diffHrs < 24) relTime = `${diffHrs}h ago`;
+    else relTime = `${diffDays}d ago`;
+
+    // Dubai formatted time (UTC+4)
     const dubaiOffset = 4 * 60;
-    const local = new Date(dt.getTime() + (dubaiOffset + dt.getTimezoneOffset()) * 60000);
-    const formatted = local.toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'}) +
-      ', ' + local.toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'}) + ' Dubai';
+    const dubaiMs = dt.getTime() + (dubaiOffset + dt.getTimezoneOffset()) * 60000;
+    const dubaiDt = new Date(dubaiMs);
+    const formatted = dubaiDt.toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'}) +
+      ' · ' + dubaiDt.toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'}) + ' Dubai';
 
     document.getElementById('statusText').textContent =
-      `Brief last updated: ${formatted} · ${run.cards_generated} cards · ${run.signals_found} signals`;
+      `Last updated ${relTime} · ${formatted} · ${run.cards_generated ?? '—'} cards · ${run.signals_found ?? '—'} signals`;
 
     const dot = document.getElementById('statusDot');
     dot.className = 'status-dot ' + (run.status === 'success' ? 'dot-success' :
                      run.status === 'partial' ? 'dot-partial' : 'dot-failed');
+
+    // Compute next run: daily at 6:30am Dubai time
+    // Find next 6:30am Dubai after now
+    const nowDubaiMs = now.getTime() + (dubaiOffset + now.getTimezoneOffset()) * 60000;
+    const nowDubai = new Date(nowDubaiMs);
+    const nextRun = new Date(nowDubai);
+    nextRun.setHours(6, 30, 0, 0);
+    if (nowDubai >= nextRun) nextRun.setDate(nextRun.getDate() + 1);
+    const hoursUntil = Math.round((nextRun - nowDubai) / 3600000);
+    const nextLabel = hoursUntil <= 1 ? 'in under an hour' :
+                      hoursUntil < 24 ? `in ${hoursUntil}h` : 'tomorrow';
+
+    document.getElementById('statusNext').innerHTML =
+      `Updates daily · Next run: <span class="status-next-time">6:30am Dubai (${nextLabel})</span>`;
   }
 
   // ── Load Trending Creators ───────────────────────────────────────────
