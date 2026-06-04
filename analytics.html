@@ -717,16 +717,108 @@
       gap: 14px;
     }
 
+    /* ── SCROLL PROGRESS ────────────────────────────────────────────── */
+    #scroll-progress {
+      position: fixed; top: 0; left: 0;
+      height: 2px; width: 0%;
+      background: linear-gradient(90deg, var(--amber) 0%, var(--gold) 60%, var(--gold-light) 100%);
+      z-index: 10000; transition: width 0.08s linear; pointer-events: none;
+    }
+
+    /* ── TRENDING CREATORS ───────────────────────────────────────────── */
+    #creators { margin-bottom: 80px; }
+
+    .creators-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .creator-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+      min-width: 180px;
+    }
+    .creator-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+    .creator-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--elevated);
+      border: 1px solid var(--border-warm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem;
+      color: var(--gold);
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+    .creator-handle {
+      font-size: 0.78rem;
+      color: var(--text);
+      font-weight: 400;
+    }
+    .creator-context {
+      font-size: 0.62rem;
+      color: var(--muted);
+      margin-top: 2px;
+      max-width: 160px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .creators-empty {
+      padding: 32px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    /* ── FORMAT INSIGHTS ─────────────────────────────────────────────── */
+    .format-reach {
+      font-size: 0.65rem;
+      color: var(--teal);
+      margin-top: 2px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── ER BADGE ────────────────────────────────────────────────────── */
+    .er-badge {
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      padding: 3px 7px;
+      border-radius: var(--r-chip);
+      background: rgba(93,184,122,0.15);
+      color: var(--green);
+      border: 1px solid rgba(93,184,122,0.28);
+      width: fit-content;
+    }
+
     /* ── RESPONSIVE ──────────────────────────────────────────────────── */
     @media (max-width: 900px) {
       nav, .north-star, main, .agent-status-bar { padding-left: 20px; padding-right: 20px; }
       .north-star { grid-template-columns: 1fr; gap: 12px; }
       .brief-grid, .perf-grid, .audience-grid { grid-template-columns: 1fr; }
       .growth-card { grid-template-columns: 1fr; gap: 24px; }
+      .creator-card { min-width: 140px; }
     }
   </style>
 </head>
 <body>
+
+<div id="scroll-progress"></div>
 
 <!-- NAV -->
 <nav>
@@ -801,6 +893,18 @@
         <div style="display:flex;gap:6px"><div class="skel" style="height:20px;width:70px;border-radius:4px"></div><div class="skel" style="height:20px;width:70px;border-radius:4px"></div></div>
       </div>
     </div>
+  </section>
+
+  <!-- TRENDING CREATORS -->
+  <section id="creators">
+    <p class="section-label">From Your Daily Brief</p>
+    <h2 class="section-heading">Creators to <em>Watch & Tag</em></h2>
+    <div class="creators-strip" id="creatorsStrip">
+      <div class="skel" style="height:64px;width:200px;border-radius:4px"></div>
+      <div class="skel" style="height:64px;width:200px;border-radius:4px"></div>
+      <div class="skel" style="height:64px;width:200px;border-radius:4px"></div>
+    </div>
+    <div class="insight-line" id="creatorsInsight" style="display:none"></div>
   </section>
 
   <!-- UAE AUDIENCE -->
@@ -962,8 +1066,19 @@
   // ── Load Brief ───────────────────────────────────────────────────────
   async function loadBrief() {
     const today = todayISO();
-    const cards = await sbFetch('uae_daily_brief',
-      `brief_date=eq.${today}&order=card_order.asc`);
+    let cards = await sbFetch('uae_daily_brief', `brief_date=eq.${today}&order=card_order.asc`);
+    let briefDate = today;
+    let isToday = true;
+
+    if (!cards.length) {
+      // Fall back to most recent available brief
+      const recent = await sbFetch('uae_daily_brief', 'order=brief_date.desc&limit=1&select=brief_date');
+      if (recent.length) {
+        briefDate = recent[0].brief_date;
+        cards = await sbFetch('uae_daily_brief', `brief_date=eq.${briefDate}&order=card_order.asc`);
+        isToday = false;
+      }
+    }
 
     const grid = document.getElementById('briefGrid');
     grid.innerHTML = '';
@@ -972,9 +1087,15 @@
       grid.innerHTML = `
         <div class="brief-empty">
           <div class="clock">—</div>
-          <p>Today's brief is being prepared — check back after 6:30am Dubai time</p>
+          <p>No brief available yet — check back after 6:30am Dubai time</p>
         </div>`;
       return;
+    }
+
+    if (!isToday) {
+      const d = new Date(briefDate);
+      document.getElementById('briefDate').textContent =
+        'Last brief: ' + d.toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
     }
 
     const typeClass = { event:'chip-event', brand:'chip-brand', trend:'chip-trend' };
@@ -999,10 +1120,9 @@
         <p class="card-angle">${c.aastha_angle}</p>
         <div class="card-tags">${hashtags}</div>
         <div class="card-tags">${accounts}</div>
-        <a class="card-source" href="${c.source_url}" target="_blank" rel="noopener">
-          <span class="card-source-dot"></span>
-          ${c.source_name} · verified source
-        </a>`;
+        ${c.source_url ? `<a class="card-source" href="${c.source_url}" target="_blank" rel="noopener">
+          <span class="card-source-dot"></span>${c.source_name} · source
+        </a>` : ''}`;
       grid.appendChild(el);
     });
   }
@@ -1021,17 +1141,19 @@
 
     // UAE count
     const uaeRow = countryRows.find(r => r.dimension === 'AE');
+    const uaeVal = uaeRow?.value || 0;
     document.getElementById('uaeCount').innerHTML =
-      `<span style="color:var(--gold)">${fmt(uaeRow?.value || 0)}</span>`;
+      `<span style="color:var(--gold)">${fmt(uaeVal)}</span>`;
 
     // Top countries
     const maxVal = countryRows[0]?.value || 1;
+    const totalFollowers = countryRows.reduce((s,r) => s + r.value, 0) || 1;
     const barsEl = document.getElementById('countryBars');
     barsEl.innerHTML = countryRows.slice(0, 6).map(r => `
       <div class="country-row">
         <div class="country-meta">
           <span class="country-name">${COUNTRY_NAMES[r.dimension] || r.dimension}</span>
-          <span class="country-val">${fmt(r.value)}</span>
+          <span class="country-val">${fmt(r.value)} &nbsp;<span style="color:var(--muted);font-size:0.65rem">${((r.value/totalFollowers)*100).toFixed(1)}%</span></span>
         </div>
         <div class="country-track">
           <div class="country-fill ${r.dimension==='AE'?'uae':''}"
@@ -1039,16 +1161,28 @@
         </div>
       </div>`).join('');
 
-    // Age bars
+    // UAE insight — data-driven
+    const uaePct = ((uaeVal / totalFollowers) * 100).toFixed(1);
+    document.querySelector('.insight-line').innerHTML =
+      `<strong>${uaePct}% of your measurable audience is in UAE</strong> — the highest-value market for brand partnerships you post about`;
+
+    // Age bars — find top bracket for insight
     const ageMax = Math.max(...ageRows.map(r => r.value));
+    const ageTotal = ageRows.reduce((s,r) => s + r.value, 0) || 1;
     document.getElementById('ageBars').innerHTML = ageRows.map(r => `
       <div class="age-row">
         <span class="age-label">${r.dimension}</span>
         <div class="age-track">
           <div class="age-fill" style="width:${((r.value/ageMax)*100).toFixed(1)}%"></div>
         </div>
-        <span class="age-val">${fmt(r.value)}</span>
+        <span class="age-val">${((r.value/ageTotal)*100).toFixed(0)}%</span>
       </div>`).join('');
+
+    // Age insight — computed from real data
+    const topAge = ageRows[0];
+    const topAgePct = topAge ? ((topAge.value / ageTotal) * 100).toFixed(0) : '—';
+    document.querySelectorAll('.insight-line')[1].innerHTML =
+      `Your largest age group is <strong>${topAge?.dimension || '—'}</strong> at <strong>${topAgePct}%</strong> of your audience`;
 
     // Gender
     const genderMap = { F:'Female', M:'Male', U:'Unknown' };
@@ -1064,9 +1198,9 @@
   async function loadPerformance() {
     const [topPosts, recentPosts] = await Promise.all([
       sbFetch('instagram_posts',
-        'storage_image_url=not.is.null&order=total_interactions.desc.nullslast&limit=6&select=id,storage_image_url,storage_thumbnail_url,media_type,reach,saved,total_interactions'),
+        'storage_image_url=not.is.null&order=total_interactions.desc.nullslast&limit=6&select=id,permalink,storage_image_url,storage_thumbnail_url,media_type,reach,saved,total_interactions'),
       sbFetch('instagram_posts',
-        'order=timestamp.desc&limit=30&select=media_type'),
+        'order=timestamp.desc&limit=60&select=media_type,reach'),
     ]);
 
     const grid = document.getElementById('perfGrid');
@@ -1075,12 +1209,16 @@
         const img = p.storage_thumbnail_url || p.storage_image_url;
         const type = p.media_type === 'VIDEO' ? 'Reel' :
                      p.media_type === 'CAROUSEL_ALBUM' ? 'Carousel' : 'Image';
+        const er = (p.reach && p.total_interactions)
+          ? ((p.total_interactions / p.reach) * 100).toFixed(2) + '%'
+          : null;
         return `
-          <div class="perf-item">
+          <a class="perf-item" href="${p.permalink || '#'}" target="_blank" rel="noopener" style="display:block;text-decoration:none;">
             <img src="${img}" alt="${type}" loading="lazy" />
             <div class="perf-overlay">
               <div class="perf-meta">
                 <span class="perf-type-chip">${type}</span>
+                ${er ? `<span class="er-badge">ER ${er}</span>` : ''}
                 <div class="perf-stats">
                   <span class="perf-stat">
                     <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
@@ -1097,25 +1235,35 @@
                 </div>
               </div>
             </div>
-          </div>`;
+          </a>`;
       }).join('');
     }
 
-    // Format breakdown
-    const counts = { VIDEO: 0, CAROUSEL_ALBUM: 0, IMAGE: 0 };
-    recentPosts.forEach(p => { if (counts[p.media_type] !== undefined) counts[p.media_type]++; });
+    // Format breakdown — count + avg reach per type from real data
+    const fmtData = { VIDEO: {count:0, totalReach:0}, CAROUSEL_ALBUM: {count:0, totalReach:0}, IMAGE: {count:0, totalReach:0} };
+    recentPosts.forEach(p => {
+      if (fmtData[p.media_type] !== undefined) {
+        fmtData[p.media_type].count++;
+        if (p.reach) fmtData[p.media_type].totalReach += p.reach;
+      }
+    });
+
     const fmtLabel = { VIDEO:'Reels', CAROUSEL_ALBUM:'Carousels', IMAGE:'Images' };
-    const fmtInsight = {
-      VIDEO: counts.VIDEO > counts.CAROUSEL_ALBUM ? 'Top reach format' : '',
-      CAROUSEL_ALBUM: counts.CAROUSEL_ALBUM > counts.VIDEO ? 'Most posted' : '',
-      IMAGE: '',
-    };
-    document.getElementById('formatRow').innerHTML = Object.entries(counts).map(([k, v]) => `
-      <div class="format-item">
-        <span class="format-count">${v}</span>
-        <span class="format-label">${fmtLabel[k]}</span>
-        ${fmtInsight[k] ? `<span class="format-insight">${fmtInsight[k]}</span>` : ''}
-      </div>`).join('');
+
+    // Find best avg-reach format for labelling
+    const avgReach = k => fmtData[k].count ? Math.round(fmtData[k].totalReach / fmtData[k].count) : 0;
+    const best = Object.keys(fmtData).reduce((a,b) => avgReach(a) >= avgReach(b) ? a : b);
+
+    document.getElementById('formatRow').innerHTML = Object.entries(fmtData).map(([k, v]) => {
+      const avg = avgReach(k);
+      return `
+        <div class="format-item">
+          <span class="format-count">${v.count}</span>
+          <span class="format-label">${fmtLabel[k]}</span>
+          ${avg ? `<span class="format-reach">avg reach ${fmt(avg)}</span>` : ''}
+          ${k === best && avg ? `<span class="format-insight">Highest reach</span>` : ''}
+        </div>`;
+    }).join('');
   }
 
   // ── Load Growth ──────────────────────────────────────────────────────
@@ -1171,10 +1319,61 @@
                      run.status === 'partial' ? 'dot-partial' : 'dot-failed');
   }
 
+  // ── Load Trending Creators ───────────────────────────────────────────
+  async function loadTrendingCreators() {
+    // Pull tag_accounts from the most recent 9 brief cards
+    const rows = await sbFetch('uae_daily_brief',
+      'order=brief_date.desc&limit=9&select=tag_accounts,headline,card_type');
+
+    const strip = document.getElementById('creatorsStrip');
+    const insightEl = document.getElementById('creatorsInsight');
+
+    const seen = new Set();
+    const creators = [];
+    rows.forEach(r => {
+      (r.tag_accounts || []).forEach(handle => {
+        if (!seen.has(handle)) {
+          seen.add(handle);
+          creators.push({ handle, headline: r.headline, type: r.card_type });
+        }
+      });
+    });
+
+    if (!creators.length) {
+      strip.innerHTML = `<div class="creators-empty">Creator tags will appear here once the daily brief runs — check back after 6:30am Dubai time</div>`;
+      return;
+    }
+
+    strip.innerHTML = creators.map(c => {
+      const initials = c.handle.replace('@','').slice(0,2).toUpperCase();
+      const igUrl = `https://www.instagram.com/${c.handle.replace('@','')}`;
+      return `
+        <a class="creator-card" href="${igUrl}" target="_blank" rel="noopener">
+          <div class="creator-avatar">${initials}</div>
+          <div>
+            <div class="creator-handle">${c.handle}</div>
+            <div class="creator-context">${c.headline}</div>
+          </div>
+        </a>`;
+    }).join('');
+
+    insightEl.style.display = '';
+    insightEl.innerHTML = `<strong>${creators.length} accounts</strong> surfaced from your last brief — tag them in relevant posts to grow reach`;
+  }
+
+  // ── Scroll Progress ──────────────────────────────────────────────────
+  var _prog = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', function() {
+    var h = document.documentElement;
+    var pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    if (_prog) _prog.style.width = pct + '%';
+  }, {passive: true});
+
   // ── Boot ─────────────────────────────────────────────────────────────
   Promise.all([
     loadNorthStar(),
     loadBrief(),
+    loadTrendingCreators(),
     loadAudience(),
     loadPerformance(),
     loadGrowth(),
