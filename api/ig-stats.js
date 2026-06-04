@@ -27,8 +27,8 @@ export default async function handler(req) {
       // Latest follower count
       sbGet('/instagram_snapshots?order=snapshot_date.desc&limit=1&select=followers_count,snapshot_date'),
 
-      // Aggregate post stats
-      sbGet('/instagram_posts?select=reach,total_interactions,media_type,timestamp&limit=2000'),
+      // Aggregate post stats — fetch up to 3000 rows, Supabase default cap is 1000 so set explicitly
+      sbGet('/instagram_posts?select=reach,total_interactions,media_type,timestamp&limit=3000'),
 
       // Latest demographics (most recent synced_at batch)
       sbGet('/instagram_demographics?order=synced_at.desc&limit=200&select=metric,breakdown,dimension,value,synced_at'),
@@ -41,10 +41,11 @@ export default async function handler(req) {
     const posts = postStats || [];
     const postCount = posts.length;
 
-    // Engagement rate: avg(total_interactions / reach * 100) for posts with reach > 0
-    const erPosts = posts.filter(p => p.reach > 0 && p.total_interactions != null);
-    const avgEngagementRate = erPosts.length
-      ? erPosts.reduce((sum, p) => sum + (p.total_interactions / p.reach) * 100, 0) / erPosts.length
+    // Engagement rate: median of (total_interactions / reach * 100), min reach 200 to exclude outliers
+    const erPosts = posts.filter(p => p.reach >= 200 && p.total_interactions != null);
+    const erRates = erPosts.map(p => (p.total_interactions / p.reach) * 100).sort((a, b) => a - b);
+    const avgEngagementRate = erRates.length
+      ? erRates[Math.floor(erRates.length / 2)]  // median
       : null;
 
     // Peak single-post reach
