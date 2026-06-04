@@ -252,21 +252,18 @@
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      border: 1px solid var(--border-hi);
-      box-shadow: var(--shadow);
+      gap: 12px;
     }
     @media (max-width: 760px) {
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .stat-block:nth-child(odd) { border-right: 1px solid var(--border-hi); }
-      .stat-block:nth-child(n+3) { border-top: 1px solid var(--border-hi); }
     }
     .stat-block {
       background: var(--bg-card);
       padding: 44px 32px 40px;
-      border-right: 1px solid var(--border-hi);
+      border: 1px solid var(--border-hi);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
       position: relative;
     }
-    .stat-block:last-child { border-right: none; }
     .stat-block::before {
       content: '';
       position: absolute; top: 0; left: 0; right: 0;
@@ -398,8 +395,9 @@
     .gallery-item {
       aspect-ratio: 3/4;
       overflow: hidden;
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-lg);
     }
+    .gallery-item a { display: block; width: 100%; height: 100%; }
     .gallery-item img {
       width: 100%; height: 100%;
       object-fit: cover;
@@ -548,7 +546,7 @@
 
   <!-- HERO -->
   <section class="hero">
-    <img src="images/fashion-hero.jpg" alt="Aastha Chopra — fashion editorial" />
+    <img src="images/fashion-hero2.jpg" alt="Aastha Chopra — fashion" />
     <div class="hero-gradient"></div>
     <div class="hero-content">
       <a href="index.html#brand-fit" class="back-link">← All worlds</a>
@@ -615,16 +613,16 @@
   <!-- GALLERY -->
   <section class="gallery">
     <div class="gallery-inner">
-      <p class="label reveal">Editorials</p>
-      <div class="gallery-grid">
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- populated by JS from Instagram API, fallback to local -->
         <div class="gallery-item reveal">
           <img src="images/IMG_4565.JPG" alt="Aastha Chopra fashion" loading="lazy" />
         </div>
         <div class="gallery-item reveal d1">
-          <img src="images/IMG_4568.JPG" alt="Aastha Chopra editorial" loading="lazy" />
+          <img src="images/IMG_2813.JPG" alt="Aastha Chopra style" loading="lazy" />
         </div>
         <div class="gallery-item reveal d2">
-          <img src="images/IMG_2813.JPG" alt="Aastha Chopra beauty" loading="lazy" />
+          <img src="images/IMG_3605.JPG" alt="Aastha Chopra" loading="lazy" />
         </div>
       </div>
     </div>
@@ -722,6 +720,25 @@
     buildGrid(null);
     fetch('/api/reels').then(function(r){ return r.json(); }).then(function(data){
       if (data && data.thumbMap) buildGrid(data.thumbMap);
+    }).catch(function(){});
+
+    // Gallery — pull real images from Instagram API
+    fetch('/api/instagram?limit=24').then(function(r){ return r.json(); }).then(function(data){
+      var posts = (data.data || []).filter(function(p){
+        return p.media_url || p.thumbnail_url;
+      }).slice(0, 6);
+      if (posts.length < 3) return;
+      var gg = document.getElementById('gallery-grid');
+      gg.innerHTML = '';
+      posts.slice(0, 3).forEach(function(p, i) {
+        var src = p.media_url || p.thumbnail_url;
+        var delays = ['', 'd1', 'd2'];
+        var item = document.createElement('div');
+        item.className = 'gallery-item reveal ' + delays[i];
+        item.innerHTML = '<a href="' + p.permalink + '" target="_blank" rel="noopener"><img src="' + src + '" alt="' + (p.caption || 'Aastha Chopra').slice(0,60).replace(/"/g,'') + '" loading="lazy" /></a>';
+        gg.appendChild(item);
+        io.observe(item);
+      });
     }).catch(function(){});
   </script>
 
