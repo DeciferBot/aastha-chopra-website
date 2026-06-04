@@ -1,4 +1,7 @@
 .vercel
+node_modules/
+package-lock.json
+lighthouse-report.*
 
 .DS_Store
 images/.DS_Store
