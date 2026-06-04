@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fashion & Beauty — Aastha Chopra | Dubai Influencer</title>
-  <meta name="description" content="Aastha Chopra's fashion and beauty world. Dubai-based lifestyle creator with 51K followers, 28,893 UAE monthly reach. Brand partnerships in fashion, beauty and fragrance." />
+  <title>Fashion &amp; Beauty — Aastha Chopra | Dubai Influencer</title>
+  <meta name="description" content="Aastha Chopra's fashion and beauty world — Dubai-based lifestyle creator with 110+ brand collaborations across fashion, beauty, and fragrance. Partner with her to reach Dubai's South Asian diaspora." />
   <link rel="canonical" href="https://www.aasthachopra.com/fashion.html" />
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MNSRF3MYFY"></script>
@@ -12,607 +12,107 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-MNSRF3MYFY', { page_title: document.title, page_location: window.location.href });
+    gtag('config', 'G-MNSRF3MYFY');
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:        #080706;
-      --bg-mid:    #0f0d0b;
-      --bg-card:   #111009;
-      --gold:      #C4983A;
-      --gold-dim:  rgba(196,152,58,0.18);
-      --text:      #F2E8D0;
-      --text-mid:  #9A8E80;
-      --text-dim:  #5A5248;
-      --border:    rgba(196,152,58,0.14);
-      --border-hi: rgba(196,152,58,0.35);
-      --serif:     'Cormorant Garamond', Georgia, serif;
-      --sans:      'Jost', 'Helvetica Neue', sans-serif;
-      --shadow:    0 4px 32px rgba(0,0,0,0.6);
-      --shadow-lg: 0 8px 64px rgba(0,0,0,0.75);
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
-      font-weight: 300;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      pointer-events: none;
-      opacity: 0.03;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)'/%3E%3C/svg%3E");
-      background-size: 200px 200px;
-      mix-blend-mode: overlay;
-    }
-
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 200;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px;
-      height: 64px;
-      background: rgba(8,7,6,0.96);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo {
-      font-family: var(--serif);
-      font-size: 1.2rem;
-      font-weight: 400;
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-    }
-    .nav-logo::after { content: '.'; color: var(--gold); }
-    .nav-links {
-      list-style: none;
-      display: flex; gap: 36px;
-    }
-    .nav-links a {
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-mid);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--text); }
-    .nav-links a.active { color: var(--gold); }
-    .nav-cta {
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--bg);
-      text-decoration: none;
-      background: var(--gold);
-      padding: 10px 24px;
-      transition: opacity 0.2s;
-    }
-    .nav-cta:hover { opacity: 0.85; }
-    @media (max-width: 700px) {
-      nav { padding: 0 20px; height: 60px; }
-      .nav-links { display: none; }
-    }
-
-    /* HERO — two-column split */
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: calc(100vh - 64px);
-      margin-top: 64px;
-    }
-    .hero-left {
-      background: var(--bg);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 40px 48px 48px;
-      border-right: 1px solid var(--border);
-    }
-    .hero-right {
-      position: relative;
-      overflow: hidden;
-      min-height: 560px;
-    }
-    .hero-right img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center top;
-    }
-    .back-link {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.6rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .back-link:hover { color: var(--gold); }
-    .hero-text { display: flex; flex-direction: column; gap: 0; }
-    .hero-eyebrow {
-      font-size: 0.62rem;
-      font-weight: 600;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 14px;
-    }
-    .hero-title {
-      font-family: var(--serif);
-      font-size: clamp(2.8rem, 5vw, 5.5rem);
-      font-weight: 300;
-      line-height: 1;
-      color: var(--text);
-      letter-spacing: -0.02em;
-      margin-bottom: 24px;
-    }
-    .hero-title em { font-style: italic; color: var(--gold); }
-    .hero-sub {
-      font-size: 0.72rem;
-      font-weight: 400;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-mid);
-      line-height: 1.7;
-    }
-    @media (max-width: 800px) {
-      .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-right { height: 56vw; min-height: 280px; }
-      .hero-left { padding: 40px 24px; }
-      .back-link { margin-bottom: 28px; }
-    }
-
-    /* STORY */
-    .story {
-      background: var(--bg-mid);
-      padding: 64px 48px;
-    }
-    .story-inner {
-      max-width: 680px;
-    }
-    .label {
-      font-size: 0.6rem;
-      font-weight: 600;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 24px;
-    }
-    .story h2 {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 400;
-      color: var(--text);
-      line-height: 1.15;
-      margin-bottom: 32px;
-    }
-    .story p {
-      font-size: 1rem;
-      font-weight: 300;
-      line-height: 1.85;
-      color: var(--text-mid);
-      margin-bottom: 20px;
-    }
-    .story p strong { color: var(--text); font-weight: 500; }
-    @media (max-width: 700px) {
-      .story { padding: 64px 20px; }
-    }
-
-    /* STATS */
-    .stats {
-      background: var(--bg);
-      padding: 64px 48px;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .stats-inner { max-width: 1100px; margin: 0 auto; }
-    .stats-header { margin-bottom: 56px; }
-    .stats-header h2 {
-      font-family: var(--serif);
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 400;
-      color: var(--text);
-      margin-bottom: 10px;
-    }
-    .stats-header p {
-      font-size: 0.75rem;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      color: var(--text-dim);
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
-    @media (max-width: 760px) {
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    .stat-block {
-      background: var(--bg-card);
-      padding: 44px 32px 40px;
-      border: 1px solid var(--border-hi);
-      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
-      position: relative;
-    }
-    .stat-block::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--gold);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .stat-block:hover::before { opacity: 1; }
-    .stat-num {
-      font-family: var(--serif);
-      font-size: clamp(2.8rem, 5vw, 4.5rem);
-      font-weight: 300;
-      color: var(--text);
-      line-height: 1;
-      margin-bottom: 12px;
-    }
-    .stat-num span { color: var(--gold); }
-    .stat-label {
-      font-size: 0.62rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      line-height: 1.6;
-    }
-    .stats-note {
-      font-size: 0.62rem;
-      color: var(--text-dim);
-      letter-spacing: 0.06em;
-      margin-top: 24px;
-      text-align: center;
-    }
-    @media (max-width: 700px) {
-      .stats { padding: 64px 20px; }
-      .stat-block { padding: 32px 20px; }
-    }
-
-    /* REELS */
-    .reels {
-      background: var(--bg-mid);
-      padding: 64px 48px;
-    }
-    .reels-inner { max-width: 1100px; margin: 0 auto; }
-    .reels-header {
-      display: flex; align-items: baseline; justify-content: space-between;
-      margin-bottom: 40px;
-      gap: 16px; flex-wrap: wrap;
-    }
-    .reels-header h2 {
-      font-family: var(--serif);
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 400;
-      color: var(--text);
-    }
-    .reels-header a {
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-    .reels-header a:hover { opacity: 0.7; }
-    .reels-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-    @media (max-width: 760px) {
-      .reels-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    }
-    @media (max-width: 480px) {
-      .reels-grid { grid-template-columns: 1fr; }
-    }
-    .reel-card {
-      position: relative;
-      aspect-ratio: 9/16;
-      overflow: hidden;
-      background: var(--bg-card);
-      box-shadow: var(--shadow);
-    }
-    .reel-card img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
-    }
-    .reel-card:hover img { transform: scale(1.04); }
-    .reel-card-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(8,7,6,0.8) 0%, transparent 50%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      display: flex; align-items: flex-end;
-      padding: 16px;
-    }
-    .reel-card:hover .reel-card-overlay { opacity: 1; }
-    .reel-card-caption {
-      font-size: 0.72rem;
-      font-weight: 400;
-      color: var(--text);
-      line-height: 1.4;
-    }
-    .reel-card a {
-      position: absolute; inset: 0;
-      z-index: 2;
-    }
-    @media (max-width: 700px) {
-      .reels { padding: 64px 20px; }
-    }
-
-    /* GALLERY */
-    .gallery {
-      background: var(--bg);
-      padding: 64px 48px;
-      border-top: 1px solid var(--border);
-    }
-    .gallery-inner { max-width: 1100px; margin: 0 auto; }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 40px;
-    }
-    @media (max-width: 700px) {
-      .gallery-grid { grid-template-columns: 1fr 1fr; }
-    }
-    .gallery-item {
-      aspect-ratio: 3/4;
-      overflow: hidden;
-      box-shadow: var(--shadow-lg);
-    }
-    .gallery-item a { display: block; width: 100%; height: 100%; }
-    .gallery-item img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
-      display: block;
-    }
-    .gallery-item:hover img { transform: scale(1.04); }
-    @media (max-width: 700px) {
-      .gallery { padding: 64px 20px; }
-    }
-
-    /* BRANDS */
-    .brands {
-      background: var(--bg-mid);
-      padding: 48px 48px;
-      border-top: 1px solid var(--border);
-    }
-    .brands-inner {
-      max-width: 900px; margin: 0 auto;
-      text-align: center;
-    }
-    .brands h3 {
-      font-family: var(--serif);
-      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-      font-weight: 400;
-      color: var(--text);
-      margin-bottom: 32px;
-    }
-    .brands-list {
-      display: flex; flex-wrap: wrap; gap: 12px;
-      justify-content: center;
-    }
-    .brand-tag {
-      font-size: 0.62rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-mid);
-      border: 1px solid var(--border-hi);
-      padding: 8px 16px;
-      background: var(--bg-card);
-    }
-    @media (max-width: 700px) { .brands { padding: 56px 20px; } }
-
-    /* CTA */
-    .cta {
-      background: var(--bg);
-      padding: 72px 48px;
-      border-top: 1px solid var(--border);
-    }
-    .cta-inner {
-      max-width: 600px; margin: 0 auto;
-      text-align: center;
-    }
-    .cta h2 {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 400;
-      color: var(--text);
-      line-height: 1.2;
-      margin-bottom: 16px;
-    }
-    .cta h2 em { font-style: italic; color: var(--gold); }
-    .cta p {
-      font-size: 0.9rem;
-      font-weight: 300;
-      line-height: 1.8;
-      color: var(--text-mid);
-      margin-bottom: 40px;
-    }
-    .cta-btns {
-      display: flex; gap: 12px;
-      justify-content: center; flex-wrap: wrap;
-    }
-    .btn-primary {
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--bg);
-      background: var(--gold);
-      text-decoration: none;
-      padding: 16px 32px;
-      transition: opacity 0.2s;
-    }
-    .btn-primary:hover { opacity: 0.85; }
-    .btn-outline {
-      font-size: 0.65rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--text);
-      background: transparent;
-      text-decoration: none;
-      border: 1px solid var(--border-hi);
-      padding: 16px 32px;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-    @media (max-width: 700px) { .cta { padding: 80px 20px; } }
-
-    /* FOOTER */
-    footer {
-      background: var(--bg);
-      border-top: 1px solid var(--border);
-      padding: 28px 48px;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 12px;
-    }
-    footer p, footer a {
-      font-size: 0.62rem;
-      font-weight: 400;
-      letter-spacing: 0.1em;
-      color: var(--text-dim);
-      text-decoration: none;
-    }
-    footer a:hover { color: var(--gold); }
-    @media (max-width: 700px) {
-      footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
-    }
-
-    /* REVEAL */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-    .d1 { transition-delay: 0.1s; }
-    .d2 { transition-delay: 0.2s; }
-    .d3 { transition-delay: 0.3s; }
-  </style>
+  <link rel="stylesheet" href="css/world.css" />
 </head>
 <body>
 
-  <nav id="nav">
-    <a href="index.html" class="nav-logo">Aastha Chopra</a>
-    <ul class="nav-links">
+  <!-- NAV -->
+  <nav class="world-nav">
+    <a href="index.html" class="world-nav-logo">Aastha Chopra</a>
+    <ul class="world-nav-links">
       <li><a href="index.html#brand-fit">All Worlds</a></li>
       <li><a href="luxury.html">Luxury</a></li>
+      <li><span class="active">Fashion</span></li>
       <li><a href="wellness.html">Wellness</a></li>
     </ul>
-    <a href="mailto:management@aasthachopra.com" class="nav-cta">Collaborate</a>
+    <a href="mailto:management@aasthachopra.com" class="world-nav-cta">Work Together</a>
   </nav>
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-left">
-      <a href="index.html#brand-fit" class="back-link">← All worlds</a>
-      <div class="hero-text">
-        <p class="hero-eyebrow">Fashion · Beauty · Fragrance</p>
-        <h1 class="hero-title">The <em>Beauty</em> Insider</h1>
-        <p class="hero-sub">Dubai's go-to voice for fashion,<br>beauty and fragrance</p>
+  <section class="world-hero">
+    <div class="world-hero-text">
+      <a href="index.html#brand-fit" class="back-link">&larr; All Worlds</a>
+      <div class="hero-bottom">
+        <p class="hero-eyebrow">Fashion &amp; Beauty</p>
+        <h1 class="hero-title">Where style meets substance.</h1>
+        <p class="hero-sub">Dubai's South Asian diaspora, dressed and influenced by Aastha Chopra — 110+ brand collaborations earned through credibility, not clout.</p>
       </div>
     </div>
-    <div class="hero-right">
-      <img src="images/fashion-hero2.jpg" alt="Aastha Chopra — fashion" style="object-position: 60% top;" />
+    <div class="world-hero-image">
+      <img src="images/fashion-hero2.jpg" alt="Aastha Chopra fashion" style="object-position: 55% top;" />
     </div>
   </section>
 
   <!-- STORY -->
-  <section class="story">
-    <div class="story-inner">
-      <p class="label reveal">Her world</p>
-      <h2 class="reveal">Fashion is where she lives.</h2>
-      <p class="reveal">Aastha has been building her fashion and beauty presence in Dubai for years. Her 110+ brand collaborations span every tier of the market, from global luxury houses to UAE-born beauty labels. Brands keep coming back because her audience is genuinely interested, not just scrolling.</p>
-      <p class="reveal">The South Asian diaspora in the UAE is one of the most commercially active audiences in the Gulf. <strong>Aastha reaches them directly.</strong> She styles for the city she lives in, recommends what she actually uses, and her content reflects the Dubai she knows.</p>
-      <p class="reveal">Chanel, Dior, Valentino, Hermes, Huda Beauty, Jimmy Choo. The range reflects an audience that moves between prestige and premium without pause.</p>
+  <section class="world-story">
+    <div class="world-story-inner">
+      <p class="section-label reveal">Her world</p>
+      <h2>Fashion is where she lives.</h2>
+      <p>Aastha Chopra has built her platform at the intersection of South Asian identity and Dubai style. With 51.5K followers and 28,000 UAE-based monthly viewers, she speaks directly to a demographic that luxury and contemporary fashion brands are actively competing for.</p>
+      <p>Her collaborations span every tier of the market — from Chanel, Dior, and Valentino at the top end, to emerging regional designers and accessible beauty brands. That range is not a contradiction; it reflects how her audience actually shops and aspires. She understands the full wardrobe, not just the highlight reel.</p>
+      <p>Over 110 brand partnerships have shaped her content voice: specific, considered, and never performative. She does not wear things she would not wear off camera. That discipline is what makes her recommendations land.</p>
+    </div>
+  </section>
+
+  <!-- GOLD BAND -->
+  <section class="gold-band">
+    <div class="gold-band-inner">
+      <blockquote>110+ brand collaborations. Every tier of the market. <em>All earned.</em></blockquote>
+      <cite>Fashion · Beauty · Fragrance</cite>
     </div>
   </section>
 
   <!-- STATS -->
-  <section class="stats reveal" id="stats">
-    <div class="stats-inner">
-      <div class="stats-header">
-        <p class="label">Fashion &amp; Beauty — by the numbers</p>
-        <h2>The audience is real. The numbers reflect it.</h2>
-        <p>Verified figures · 2025 · UAE reach: Dubai, Abu Dhabi, Sharjah</p>
+  <section class="world-stats reveal" id="stats">
+    <div class="world-stats-inner">
+      <div class="world-stats-header">
+        <p class="section-label">By the numbers</p>
+        <h2>The reach behind the reel.</h2>
+        <p>Real audience. Real engagement. Real Dubai.</p>
       </div>
-      <div class="stats-grid">
+      <div class="world-stats-grid">
         <div class="stat-block">
-          <div class="stat-num">51<span>.5K</span></div>
-          <div class="stat-label">Instagram<br>followers</div>
+          <span class="stat-number">51<span>.5K</span></span>
+          <span class="stat-label">Instagram followers</span>
         </div>
         <div class="stat-block">
-          <div class="stat-num">110<span>+</span></div>
-          <div class="stat-label">Brand<br>collaborations</div>
+          <span class="stat-number">110<span>+</span></span>
+          <span class="stat-label">Brand collaborations</span>
         </div>
         <div class="stat-block">
-          <div class="stat-num">28<span>K</span></div>
-          <div class="stat-label">UAE monthly<br>reach</div>
+          <span class="stat-number">28<span>K</span></span>
+          <span class="stat-label">UAE monthly reach</span>
         </div>
         <div class="stat-block">
-          <div class="stat-num">0.77<span>%</span></div>
-          <div class="stat-label">Beauty<br>engagement rate</div>
+          <span class="stat-number">0.77<span>%</span></span>
+          <span class="stat-label">Beauty engagement rate</span>
         </div>
       </div>
-      <p class="stats-note">Data as of 2025. Reach covers Dubai, Abu Dhabi and Sharjah.</p>
     </div>
   </section>
 
   <!-- REELS -->
-  <section class="reels">
-    <div class="reels-inner">
-      <div class="reels-header reveal">
-        <h2>Fashion &amp; Beauty content</h2>
-        <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener">View on Instagram →</a>
+  <section class="world-reels">
+    <div class="world-reels-inner">
+      <div class="world-reels-header">
+        <p class="section-label">Content</p>
+        <h2>Fashion &amp; Beauty reels</h2>
       </div>
-      <div class="reels-grid" id="reels-grid">
-        <!-- populated by JS -->
-      </div>
+      <div class="world-reels-grid" id="reels-grid"></div>
     </div>
   </section>
 
   <!-- GALLERY -->
-  <section class="gallery">
-    <div class="gallery-inner">
-      <div class="gallery-grid" id="gallery-grid">
-        <!-- populated by JS from Instagram API, fallback to local -->
+  <section class="world-gallery">
+    <div class="world-gallery-inner">
+      <div class="world-gallery-grid" id="gallery-grid">
         <div class="gallery-item reveal">
           <img src="images/IMG_4565.JPG" alt="Aastha Chopra fashion" loading="lazy" />
         </div>
@@ -620,15 +120,15 @@
           <img src="images/IMG_2813.JPG" alt="Aastha Chopra style" loading="lazy" />
         </div>
         <div class="gallery-item reveal d2">
-          <img src="images/IMG_3605.JPG" alt="Aastha Chopra" loading="lazy" />
+          <img src="images/IMG_3605.JPG" alt="Aastha Chopra beauty" loading="lazy" />
         </div>
       </div>
     </div>
   </section>
 
   <!-- BRANDS -->
-  <section class="brands">
-    <div class="brands-inner reveal">
+  <section class="world-brands">
+    <div class="world-brands-inner reveal">
       <h3>Brands she has worked with</h3>
       <div class="brands-list">
         <span class="brand-tag">Chanel</span>
@@ -649,93 +149,67 @@
   </section>
 
   <!-- CTA -->
-  <section class="cta">
-    <div class="cta-inner">
-      <p class="label reveal">Work together</p>
-      <h2 class="reveal">Reach Dubai's fashion audience <em>through her.</em></h2>
-      <p class="reveal">Download the media pack for full audience data and rate card, or get in touch directly.</p>
-      <div class="cta-btns reveal">
+  <section class="world-cta">
+    <div class="world-cta-inner">
+      <p class="section-label">Work together</p>
+      <h2>Reach Dubai's fashion audience <em>through her.</em></h2>
+      <p>Whether you are launching a collection, entering the UAE market, or looking for a creator who knows how to sell — let's talk.</p>
+      <div class="cta-btns">
         <a href="/Aastha_Chopra_Media_Pack.pdf" class="btn-primary" target="_blank" rel="noopener">Download Media Pack</a>
         <a href="mailto:management@aasthachopra.com" class="btn-outline">Get in Touch</a>
       </div>
     </div>
   </section>
 
-  <footer>
-    <p>© Aastha Chopra 2025</p>
-    <div style="display:flex;gap:24px;">
+  <!-- FOOTER -->
+  <footer class="world-footer">
+    <p>&copy; Aastha Chopra 2025</p>
+    <div class="footer-links">
       <a href="index.html">Home</a>
       <a href="luxury.html">Luxury</a>
       <a href="wellness.html">Wellness</a>
-      <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.instagram.com/aasthac8/" target="_blank" rel="noopener">Instagram</a>
     </div>
   </footer>
 
   <script>
-    // Nav scroll
-    var nav = document.getElementById('nav');
-    window.addEventListener('scroll', function() {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    });
-
     // Reveal
-    var io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);} });
+    },{threshold:0.1});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
-    // Reels — filter Fashion + Beauty from the real Instagram data
-    var ALL_REELS = [{"permalink":"https://www.instagram.com/reel/DFFpMIlSMCm/","caption":"X @be.divalicious","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DBqzGebyXex/","caption":"Shine Bright This Dhanteras with Kanz Jewels","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DC05YVGtMxJ/","caption":"Wearing @mahgulofficial","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DLoz6WkS9jB/","caption":"When in doubt, go blue — @maybellinearabia","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DLNerzuyoWq/","caption":"POV: When vanity is a summer moodboard.","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DFfKQ9CSs9S/","caption":"DIALMAZ Exquisite Jewelry has come to the UAE","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DE5KoQyy34c/","caption":"@khoyauae is now in Dubai","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DCgLFoEtHPS/","caption":"Channeling regal vibes in this dreamy kaftan by @mahgulofficial","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DK9KE7OydON/","caption":"Unboxing a fragrance that tells a story","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DBO-BPOy2Th/","caption":"She came, she saw, she sparkled","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DLF1wFSyqaO/","caption":"Meet your daily dose of glow: @kosas DreamBeam","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DJz7kPhSV3z/","caption":"That golden hour at the resort","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DKvJBbmyNEa/","caption":"Testing viral skincare so you don't have to","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DJqP2aBSXmt/","caption":"The lip combo everyone's been asking about","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DJf8pxCSomC/","caption":"My Sephoria energy? Unapologetically extra.","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DHgKmQSy5kX/","caption":"The scent that's been in my rotation all season","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DEoJlASyMkH/","caption":"The foundation that changed everything for me","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DDlFhNSyDhE/","caption":"Kaftan season is forever, not just Ramadan","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DCzGfMSyCgD/","caption":"Jewellery that makes the outfit. Always.","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DBhDcLSyAfB/","caption":"Dew skin. Glossy lip. Dubai summer uniform.","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DAtAaJSy8dZ/","caption":"Styling the same bag 3 ways: a masterclass","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DAqXxGSy5aW/","caption":"Gua sha and oil cleanse — my skin's love language","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/DApWwFSy4ZV/","caption":"Dressed for a dinner that lived up to the outfit","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DAoVvESy3YU/","caption":"This season's colour story: earthy, warm, unapologetic","category":"Fashion"}];
-
-    var fashionReels = ALL_REELS.filter(function(r) {
-      return r.category === 'Fashion' || r.category === 'Beauty';
-    }).slice(0, 6);
-
-    var FALLBACKS = [
-      'images/IMG_4565.JPG','images/IMG_4568.JPG','images/IMG_4572.JPG',
-      'images/IMG_2813.JPG','images/IMG_0066.JPG','images/IMG_7273.JPG'
+    // Fashion & Beauty reels
+    var ALL_REELS = [
+      {permalink:"https://www.instagram.com/reel/DFFpMIlSMCm/",caption:"X @be.divalicious",category:"Fashion"},
+      {permalink:"https://www.instagram.com/reel/DLoz6WkS9jB/",caption:"When in doubt, go blue — @maybellinearabia",category:"Beauty"},
+      {permalink:"https://www.instagram.com/reel/DLNerzuyoWq/",caption:"POV: When vanity is a summer moodboard.",category:"Beauty"},
+      {permalink:"https://www.instagram.com/reel/DFfKQ9CSs9S/",caption:"DIALMAZ Exquisite Jewelry has come to the UAE",category:"Fashion"},
+      {permalink:"https://www.instagram.com/reel/DK9KE7OydON/",caption:"Unboxing a fragrance that tells a story",category:"Beauty"},
+      {permalink:"https://www.instagram.com/reel/DLF1wFSyqaO/",caption:"Meet your daily dose of glow: @kosas DreamBeam",category:"Beauty"}
     ];
-
-    function buildGrid(thumbMap) {
-      var grid = document.getElementById('reels-grid');
-      grid.innerHTML = '';
-      fashionReels.forEach(function(reel, i) {
-        var id = (reel.permalink.match(/\/reel\/([^/]+)\//) || [])[1];
-        var thumb = (thumbMap && id && thumbMap[id]) ? (thumbMap[id].thumbnail_url || thumbMap[id].media_url) : FALLBACKS[i % FALLBACKS.length];
-        var card = document.createElement('div');
-        card.className = 'reel-card';
-        card.innerHTML = [
-          '<img src="' + (thumb || FALLBACKS[i]) + '" alt="' + reel.caption.replace(/"/g,'&quot;') + '" loading="lazy" onerror="this.src=\'' + FALLBACKS[i % FALLBACKS.length] + '\'" />',
-          '<div class="reel-card-overlay"><p class="reel-card-caption">' + reel.caption + '</p></div>',
-          '<a href="' + reel.permalink + '" target="_blank" rel="noopener" aria-label="View on Instagram"></a>'
-        ].join('');
-        grid.appendChild(card);
+    var FALLBACKS=['images/IMG_4565.JPG','images/IMG_4568.JPG','images/IMG_2813.JPG','images/IMG_3605.JPG','images/IMG_2966.JPG','images/IMG_7273.JPG'];
+    function buildGrid(thumbMap){
+      var grid=document.getElementById('reels-grid');grid.innerHTML='';
+      ALL_REELS.forEach(function(r,i){
+        var id=(r.permalink.match(/\/reel\/([^/]+)\//)||[])[1];
+        var thumb=(thumbMap&&id&&thumbMap[id])?(thumbMap[id].thumbnail_url||thumbMap[id].media_url):FALLBACKS[i%FALLBACKS.length];
+        var c=document.createElement('div');c.className='reel-card';
+        c.innerHTML='<img src="'+(thumb||FALLBACKS[i])+'" alt="'+r.caption.replace(/"/g,'&quot;')+'" loading="lazy" onerror="this.src=\''+FALLBACKS[i%FALLBACKS.length]+'\'" /><div class="reel-card-overlay"><p class="reel-card-caption">'+r.caption+'</p></div><a href="'+r.permalink+'" target="_blank" rel="noopener" aria-label="View on Instagram"></a>';
+        grid.appendChild(c);
       });
     }
-
     buildGrid(null);
-    fetch('/api/reels').then(function(r){ return r.json(); }).then(function(data){
-      if (data && data.thumbMap) buildGrid(data.thumbMap);
-    }).catch(function(){});
-
-    // Gallery — pull real images from Instagram API
-    fetch('/api/instagram?limit=24').then(function(r){ return r.json(); }).then(function(data){
-      var posts = (data.data || []).filter(function(p){
-        return p.media_url || p.thumbnail_url;
-      }).slice(0, 6);
-      if (posts.length < 3) return;
-      var gg = document.getElementById('gallery-grid');
-      gg.innerHTML = '';
-      posts.slice(0, 3).forEach(function(p, i) {
-        var src = p.media_url || p.thumbnail_url;
-        var delays = ['', 'd1', 'd2'];
-        var item = document.createElement('div');
-        item.className = 'gallery-item reveal ' + delays[i];
-        item.innerHTML = '<a href="' + p.permalink + '" target="_blank" rel="noopener"><img src="' + src + '" alt="' + (p.caption || 'Aastha Chopra').slice(0,60).replace(/"/g,'') + '" loading="lazy" /></a>';
-        gg.appendChild(item);
-        io.observe(item);
+    fetch('/api/reels').then(function(r){return r.json();}).then(function(d){if(d&&d.thumbMap)buildGrid(d.thumbMap);}).catch(function(){});
+    fetch('/api/instagram?limit=12').then(function(r){return r.json();}).then(function(data){
+      var posts=(data.data||[]).filter(function(p){return p.media_url||p.thumbnail_url;}).slice(0,3);
+      if(posts.length<3)return;
+      var gg=document.getElementById('gallery-grid');gg.innerHTML='';
+      posts.forEach(function(p,i){
+        var src=p.media_url||p.thumbnail_url;
+        var item=document.createElement('div');item.className='gallery-item reveal '+['','d1','d2'][i];
+        item.innerHTML='<a href="'+p.permalink+'" target="_blank" rel="noopener"><img src="'+src+'" alt="'+(p.caption||'Aastha Chopra').slice(0,60).replace(/"/g,'')+'" loading="lazy"/></a>';
+        gg.appendChild(item);io.observe(item);
       });
     }).catch(function(){});
   </script>
