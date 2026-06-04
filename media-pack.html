@@ -212,11 +212,67 @@ table.rc tr:last-child td{border-bottom:none}
 .cp-legal{font-family:var(--sans);font-size:7.5px;letter-spacing:.14em;color:var(--muted);line-height:1.8;max-width:320px;margin:0 auto;padding-top:28px;border-top:1px solid var(--border)}
 
 /* print */
-@media print{body{background:#080706!important;padding:0}.page{margin:0;width:210mm}@page{size:A4;margin:0}body::before{display:none}}
+@media print{body{background:#080706!important;padding:0}.page{margin:0;width:210mm}@page{size:A4;margin:0}body::before{display:none}.mp-nav{display:none}}
 @media screen{body{padding:32px 0;background:#030202}.page{margin:0 auto 20px;box-shadow:0 20px 60px rgba(0,0,0,.7)}}
+
+/* ── TOP NAV (screen only) ── */
+.mp-nav{display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:56px;background:rgba(8,7,6,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;width:100%}
+.mp-nav-logo{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--ivory);text-decoration:none;letter-spacing:.04em}
+.mp-nav-logo span{color:var(--gold);font-style:italic}
+.mp-nav-links{display:flex;align-items:center;gap:24px}
+.mp-nav-links a{font-family:var(--sans);font-size:11px;font-weight:400;letter-spacing:.14em;color:var(--ivory-dim);text-decoration:none;text-transform:uppercase;transition:color .2s}
+.mp-nav-links a:hover{color:var(--ivory)}
+.mp-nav-dl{font-family:var(--sans);font-size:11px;font-weight:400;letter-spacing:.14em;color:var(--gold);text-decoration:none;text-transform:uppercase;border:1px solid var(--gold-mid);padding:7px 16px;transition:all .2s}
+.mp-nav-dl:hover{background:var(--gold-pale);color:var(--gold-hi)}
+
+/* ── WhatsApp CTA on contact page ── */
+.cp-wa{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;text-decoration:none;font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:14px 28px;margin-bottom:32px;transition:opacity .2s}
+.cp-wa:hover{opacity:.88}
+.cp-wa svg{flex-shrink:0}
+.cp-iv a{color:var(--ivory);text-decoration:none}
+.cp-iv a:hover{color:var(--gold-hi)}
+
+/* ── MOBILE RESPONSIVE ── */
+@media(max-width:768px){
+  .mp-nav{padding:0 16px;height:50px}
+  .mp-nav-links a:not(.mp-nav-dl){display:none}
+  body{padding:0}
+  .page{width:100%!important;min-height:auto!important;margin:0 0 1px!important;box-shadow:none!important;border-radius:0;page-break-after:auto}
+  .corner-tl,.corner-br,.pnum{display:none}
+  .pb{padding:28px 20px}
+  .ph{padding:16px 20px}
+  .st{font-size:28px}
+  .ss{font-size:13px}
+  .sl{font-size:9px}
+  /* cover */
+  .cover-photo{width:100%;clip-path:none;position:relative;height:260px}
+  .cover-left{width:100%;min-height:auto;padding:28px 20px}
+  .c-name{font-size:44px}
+  .c-stats{gap:16px}
+  /* stats grid */
+  .sg{grid-template-columns:1fr 1fr!important}
+  /* rate card */
+  .rc{font-size:10px}
+  /* contact page */
+  .cp-title{font-size:34px}
+  .cp-bg-img{height:200px;position:relative}
+  #cpage .pb{padding-top:0}
+}
 </style>
 </head>
 <body>
+
+<nav class="mp-nav">
+  <a href="index.html" class="mp-nav-logo">Aastha<span>.</span></a>
+  <div class="mp-nav-links">
+    <a href="index.html">View Portfolio</a>
+    <a href="index.html#collabs">Brand Work</a>
+    <a href="Aastha_Chopra_Media_Pack.pdf" download="Aastha Chopra Media Pack.pdf" class="mp-nav-dl">
+      <svg width="10" height="10" viewBox="0 0 12 12" fill="none" style="display:inline;vertical-align:middle;margin-right:4px"><path d="M6 1v7M3.5 5.5L6 8l2.5-2.5M2 10h8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Download PDF
+    </a>
+  </div>
+</nav>
 
 <!-- ═══════════════════════════════════════════════════════ -->
 <!-- 1. COVER                                               -->
@@ -581,10 +637,14 @@ table.rc tr:last-child td{border-bottom:none}
     <div class="cp-title">Let's Create<br><em>Something</em><br>Extraordinary</div>
     <div class="cp-sub">Available for brand partnerships, campaign collaborations,<br>ambassador programmes and event appearances.</div>
     <div class="cp-div"></div>
+    <a href="https://wa.me/971553646723?text=Hi%20Aastha%2C%20I%20reviewed%20your%20media%20kit%20and%20would%20love%20to%20discuss%20a%20collaboration." class="cp-wa" target="_blank" rel="noopener" onclick="typeof gtag!=='undefined'&&gtag('event','whatsapp_click',{event_category:'conversion',event_label:'media_pack_contact'})">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.98l6.304-1.654A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.001-1.368l-.359-.213-3.722.976.994-3.63-.234-.373A9.785 9.785 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+      WhatsApp — Start a Conversation
+    </a>
     <div class="cp-details">
-      <div class="cp-item"><span class="cp-il">Email</span><span class="cp-iv">aasthac8@gmail.com</span></div>
-      <div class="cp-item"><span class="cp-il">Instagram</span><span class="cp-iv">@aastha_sochic</span></div>
-      <div class="cp-item"><span class="cp-il">TikTok</span><span class="cp-iv">@aastha_c8</span></div>
+      <div class="cp-item"><span class="cp-il">Email</span><span class="cp-iv"><a href="mailto:aasthac8@gmail.com">aasthac8@gmail.com</a></span></div>
+      <div class="cp-item"><span class="cp-il">Instagram</span><span class="cp-iv"><a href="https://www.instagram.com/aastha_sochic" target="_blank" rel="noopener">@aastha_sochic</a></span></div>
+      <div class="cp-item"><span class="cp-il">TikTok</span><span class="cp-iv"><a href="https://www.tiktok.com/@aastha_c8" target="_blank" rel="noopener">@aastha_c8</a></span></div>
       <div class="cp-item"><span class="cp-il">Based In</span><span class="cp-iv">Dubai, United Arab Emirates</span></div>
     </div>
     <div class="cp-legal">UAE Media Council Licensed Creator · ID 1557678<br>All partnership enquiries are subject to a formal collaboration agreement.<br>Rates valid January–December 2026. All figures in AED exclusive of VAT.<br>© 2026 Aastha Chopra. Confidential — not for redistribution.</div>
