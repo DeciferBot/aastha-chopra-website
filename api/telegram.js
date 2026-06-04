@@ -12,11 +12,15 @@ const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;
 const API = `https://api.telegram.org/bot${BOT_TOKEN}`;
 
 // ── Telegram ───────────────────────────────────────────────────────────────────
-async function send(chatId, text) {
+async function send(chatId, text, useMarkdown = true) {
   await fetch(`${API}/sendMessage`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'Markdown' }),
+    body: JSON.stringify({
+      chat_id: chatId,
+      text,
+      ...(useMarkdown ? { parse_mode: 'Markdown' } : {}),
+    }),
   });
 }
 
@@ -176,8 +180,9 @@ async function handlePitch(chatId, args) {
     const brand = brands[0] || {};
     const email = await generatePitch(brandName, brand.notes || '');
 
-    await send(chatId, `📝 *Pitch for ${brandName}:*\n\n${email}`);
-    await send(chatId, `📬 Send to: \`${brand.contact_email || 'find contact email first'}\`\n\nReply \`send ${brandName}\` to send it, or \`skip\` to discard.`);
+    await send(chatId, `📝 Pitch for ${brandName}:`, false);
+    await send(chatId, email, false);
+    await send(chatId, `📬 Send to: ${brand.contact_email || 'find contact email first'}\n\nReply "send ${brandName}" to send it, or "skip" to discard.`, false);
   } catch (e) {
     send(chatId, `❌ Failed: ${e.message}`);
   }
