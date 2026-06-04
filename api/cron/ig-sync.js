@@ -1,3 +1,5 @@
+export const config = { maxDuration: 300 };
+
 /**
  * Instagram Full Sync — Vercel Cron
  * Runs every 4 hours. Pulls EVERYTHING:
@@ -189,9 +191,9 @@ export default async function handler(req, res) {
     const allMedia = await fetchAllMedia(token);
     log.push(`Found ${allMedia.length} posts`);
 
-    // ── Step 2: Insights + upsert in batches of 10 ──
+    // ── Step 2: Insights + upsert in batches of 25 ──
     let insightsDone = 0;
-    const BATCH = 10;
+    const BATCH = 25;
 
     for (let i = 0; i < allMedia.length; i += BATCH) {
       const batch = allMedia.slice(i, i + BATCH);
@@ -231,18 +233,14 @@ export default async function handler(req, res) {
       });
 
       insightsDone += batch.length;
-      await sleep(500);
     }
     log.push(`Upserted ${insightsDone} posts with insights`);
 
-    // ── Step 3: Carousel children ──
+    // ── Step 3: Carousel children (all in parallel) ──
     const carousels = allMedia.filter(p => p.media_type === 'CAROUSEL_ALBUM');
-    let childrenDone = 0;
-
-    for (const post of carousels) {
+    const carouselResults = await Promise.all(carousels.map(async (post) => {
       const children = await fetchCarouselChildren(post.id, token);
-      if (!children.length) continue;
-
+      if (!children.length) return 0;
       const rows = children.map((child, idx) => ({
         id: child.id,
         parent_id: post.id,
@@ -251,14 +249,13 @@ export default async function handler(req, res) {
         original_url: child.media_url ?? child.thumbnail_url ?? null,
         synced_at: new Date().toISOString(),
       }));
-
       await sb('/instagram_carousel_children?on_conflict=id', {
         method: 'POST',
         body: JSON.stringify(rows),
       });
-      childrenDone += rows.length;
-      await sleep(200);
-    }
+      return rows.length;
+    }));
+    const childrenDone = carouselResults.reduce((a, b) => a + b, 0);
     log.push(`Upserted ${childrenDone} carousel children across ${carousels.length} carousels`);
 
     // ── Step 4: Demographics ──
