@@ -47,7 +47,7 @@
         <p class="hero-sub">Dubai's South Asian diaspora, dressed and influenced by Aastha Chopra — 110+ brand collaborations earned through credibility, not clout.</p>
       </div>
     </div>
-    <span class="hero-vertical-tag">51.5K Instagram &nbsp;·&nbsp; 110+ Brands &nbsp;·&nbsp; 28K UAE Monthly &nbsp;·&nbsp; Dubai</span>
+    <span class="hero-vertical-tag" id="hero-tag-fashion">51.5K Instagram &nbsp;·&nbsp; 110+ Brands &nbsp;·&nbsp; 28K UAE Monthly &nbsp;·&nbsp; Dubai</span>
     <div class="world-hero-image">
       <img src="images/fashion-hero2.jpg" alt="Aastha Chopra fashion" style="object-position: 55% top;" />
     </div>
@@ -114,7 +114,7 @@
       </div>
       <div class="world-stats-grid">
         <div class="stat-block">
-          <span class="stat-number">51<span>.5K</span></span>
+          <span class="stat-number" id="fs-followers">51<span>.5K</span></span>
           <span class="stat-label">Instagram followers</span>
         </div>
         <div class="stat-block stat-accent">
@@ -122,11 +122,11 @@
           <span class="stat-label">Brand collaborations</span>
         </div>
         <div class="stat-block">
-          <span class="stat-number">28<span>K</span></span>
+          <span class="stat-number" id="fs-uae-reach">28<span>K</span></span>
           <span class="stat-label">UAE monthly reach</span>
         </div>
         <div class="stat-block">
-          <span class="stat-number">0.77<span>%</span></span>
+          <span class="stat-number" id="fs-engagement">0.77<span>%</span></span>
           <span class="stat-label">Beauty engagement rate</span>
         </div>
       </div>
@@ -275,6 +275,26 @@
         gg.appendChild(item);io.observe(item);
       });
     }).catch(function(){});
+  </script>
+  <script>
+  (function() {
+    function fmtFollowers(n) { return (Math.floor(n/100)/10).toFixed(1)+'<span>K</span>'; }
+    function fmtK(n) { return Math.round(n/1000)+'<span>K</span>'; }
+    fetch('/api/ig-stats').then(function(r){return r.json();}).then(function(s){
+      var f=document.getElementById('fs-followers');
+      var u=document.getElementById('fs-uae-reach');
+      var e=document.getElementById('fs-engagement');
+      var h=document.getElementById('hero-tag-fashion');
+      if(f&&s.followers) f.innerHTML=fmtFollowers(s.followers);
+      if(u&&s.monthlyReach) u.innerHTML=fmtK(s.monthlyReach);
+      if(e&&s.avgEngagementRate) e.innerHTML=s.avgEngagementRate.toFixed(2)+'<span>%</span>';
+      if(h&&s.followers){
+        var fk=(Math.floor(s.followers/100)/10).toFixed(1)+'K';
+        var uk=s.monthlyReach?Math.round(s.monthlyReach/1000)+'K':'28K';
+        h.innerHTML=fk+' Instagram &nbsp;·&nbsp; 110+ Brands &nbsp;·&nbsp; '+uk+' UAE Monthly &nbsp;·&nbsp; Dubai';
+      }
+    }).catch(function(){});
+  })();
   </script>
 
 </body>

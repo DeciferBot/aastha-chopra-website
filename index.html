@@ -2546,7 +2546,7 @@
     <!-- Floating stats -->
     <div class="hero-stats-float">
       <div class="hero-stat">
-        <span class="hero-stat-num">51.5K</span>
+        <span class="hero-stat-num" id="idx-followers-hero">51.5K</span>
         <span class="hero-stat-label">Followers</span>
       </div>
       <div class="hero-stat-divider"></div>
@@ -2929,7 +2929,7 @@
         <div class="bf-aud-label">UAE audience<br>reached per post</div>
       </div>
       <div class="bf-aud-item">
-        <div class="bf-aud-num">51.5K</div>
+        <div class="bf-aud-num" id="idx-followers-bf">51.5K</div>
         <div class="bf-aud-label">Instagram<br>followers</div>
       </div>
       <div class="bf-aud-item">
@@ -3349,26 +3349,24 @@
     loadInstagramFeed();
 
     // Hamburger (mobile)
-    /* ─── LIVE STATS: hydrate from API ─── */
+    /* ─── LIVE STATS: hydrate from Supabase via /api/ig-stats ─── */
     (async function hydrateStats() {
       try {
-        const res = await fetch('/api/instagram');
-        const data = await res.json();
-        const acct = data.account;
-        if (!acct) return;
+        const res = await fetch('/api/ig-stats');
+        const s = await res.json();
 
         const followersEl = document.getElementById('stat-followers');
         const postsEl     = document.getElementById('stat-posts');
 
-        if (followersEl && acct.followers_count) {
-          const f = acct.followers_count;
-          // Format conservatively: round down to nearest 100 displayed as e.g. "51.5K"
-          followersEl.textContent = f >= 1000
-            ? (Math.floor(f / 100) / 10).toFixed(1) + 'K'
-            : f.toLocaleString();
+        if (s.followers) {
+          const fk = (Math.floor(s.followers / 100) / 10).toFixed(1) + 'K';
+          ['stat-followers','idx-followers-hero','idx-followers-bf'].forEach(function(id) {
+            const el = document.getElementById(id);
+            if (el) el.textContent = fk;
+          });
         }
-        if (postsEl && acct.media_count) {
-          postsEl.textContent = acct.media_count.toLocaleString();
+        if (postsEl && s.postCount) {
+          postsEl.textContent = s.postCount.toLocaleString();
         }
       } catch (e) {
         // Silently fall back to hardcoded values already in the DOM

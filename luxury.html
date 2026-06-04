@@ -51,7 +51,7 @@
         <p class="hero-sub">Your brand, in the market<br>that matters most</p>
       </div>
     </div>
-    <span class="hero-vertical-tag">35% UAE Audience &nbsp;·&nbsp; 0.92% Engagement &nbsp;·&nbsp; 31K Peak Daily Reach &nbsp;·&nbsp; Dubai</span>
+    <span class="hero-vertical-tag" id="hero-tag-luxury">35% UAE Audience &nbsp;·&nbsp; 0.92% Engagement &nbsp;·&nbsp; 31K Peak Daily Reach &nbsp;·&nbsp; Dubai</span>
     <div class="world-hero-image">
       <img src="images/luxury-hero.jpg" alt="Aastha Chopra — luxury Dubai" style="object-position: center 25%;" />
     </div>
@@ -114,19 +114,19 @@
       </div>
       <div class="world-stats-grid">
         <div class="stat-block">
-          <span class="stat-number">35<span>%</span></span>
+          <span class="stat-number" id="lx-uae-pct">35<span>%</span></span>
           <span class="stat-label">UAE audience per post</span>
         </div>
         <div class="stat-block stat-accent">
-          <span class="stat-number">0.92<span>%</span></span>
+          <span class="stat-number" id="lx-engagement">0.92<span>%</span></span>
           <span class="stat-label">Travel engagement rate</span>
         </div>
         <div class="stat-block">
-          <span class="stat-number">31<span>K</span></span>
+          <span class="stat-number" id="lx-peak-reach">31<span>K</span></span>
           <span class="stat-label">Peak daily reach</span>
         </div>
         <div class="stat-block">
-          <span class="stat-number">51<span>.5K</span></span>
+          <span class="stat-number" id="lx-followers">51<span>.5K</span></span>
           <span class="stat-label">Instagram followers</span>
         </div>
       </div>
@@ -285,6 +285,29 @@
         gg.appendChild(item);io.observe(item);
       });
     }).catch(function(){});
+  </script>
+  <script>
+  (function(){
+    function fmtFollowers(n){return(Math.floor(n/100)/10).toFixed(1)+'<span>K</span>';}
+    function fmtK(n){return Math.round(n/1000)+'<span>K</span>';}
+    fetch('/api/ig-stats').then(function(r){return r.json();}).then(function(s){
+      var f=document.getElementById('lx-followers');
+      var u=document.getElementById('lx-uae-pct');
+      var e=document.getElementById('lx-engagement');
+      var p=document.getElementById('lx-peak-reach');
+      var h=document.getElementById('hero-tag-luxury');
+      if(f&&s.followers) f.innerHTML=fmtFollowers(s.followers);
+      if(u&&s.uaePct) u.innerHTML=s.uaePct+'<span>%</span>';
+      if(e&&s.avgEngagementRate) e.innerHTML=s.avgEngagementRate.toFixed(2)+'<span>%</span>';
+      if(p&&s.maxReach) p.innerHTML=fmtK(s.maxReach);
+      if(h&&s.followers){
+        var uae=s.uaePct?s.uaePct+'%':'35%';
+        var er=s.avgEngagementRate?s.avgEngagementRate.toFixed(2)+'%':'0.92%';
+        var pk=s.maxReach?Math.round(s.maxReach/1000)+'K':'31K';
+        h.innerHTML=uae+' UAE Audience &nbsp;·&nbsp; '+er+' Engagement &nbsp;·&nbsp; '+pk+' Peak Daily Reach &nbsp;·&nbsp; Dubai';
+      }
+    }).catch(function(){});
+  })();
   </script>
 
 </body>

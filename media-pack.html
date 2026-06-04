@@ -289,9 +289,9 @@ table.rc tr:last-child td{border-bottom:none}
     <div class="c-div"></div>
     <div class="c-desc">Luxury creator. Practising lawyer. Dubai's most distinctive voice at the intersection of law, style &amp; elevated living.</div>
     <div class="c-stats">
-      <div class="c-stat"><span class="c-snum">51.5K</span><span class="c-slbl">Instagram Followers</span></div>
-      <div class="c-stat"><span class="c-snum">2,040</span><span class="c-slbl">Posts Published</span></div>
-      <div class="c-stat"><span class="c-snum">181K</span><span class="c-slbl">Monthly Reach</span></div>
+      <div class="c-stat"><span class="c-snum" id="mp-followers">51.5K</span><span class="c-slbl">Instagram Followers</span></div>
+      <div class="c-stat"><span class="c-snum" id="mp-posts">2,040</span><span class="c-slbl">Posts Published</span></div>
+      <div class="c-stat"><span class="c-snum" id="mp-monthly-reach">181K</span><span class="c-slbl">Monthly Reach</span></div>
       <div class="c-stat"><span class="c-snum">3 Yrs</span><span class="c-slbl">Consistent Presence</span></div>
     </div>
     <div class="c-pills">
@@ -352,9 +352,9 @@ table.rc tr:last-child td{border-bottom:none}
     <div class="st">A Premium<br><em>Audience</em></div>
     <div class="ss">55% of followers are aged 25–44, the most commercially valuable demographic for luxury, beauty and lifestyle brands.</div>
     <div class="stats-strip">
-      <div class="sc"><span class="sn">51.5K</span><span class="sl2">Followers</span></div>
-      <div class="sc"><span class="sn">181K</span><span class="sl2">Monthly Reach</span></div>
-      <div class="sc"><span class="sn">40.7K</span><span class="sl2">Weekly Active Reach</span></div>
+      <div class="sc"><span class="sn" id="mp-followers2">51.5K</span><span class="sl2">Followers</span></div>
+      <div class="sc"><span class="sn" id="mp-monthly-reach2">181K</span><span class="sl2">Monthly Reach</span></div>
+      <div class="sc"><span class="sn" id="mp-weekly-reach">40.7K</span><span class="sl2">Weekly Active Reach</span></div>
     </div>
     <div class="aud-grid">
       <div class="aud-card">
@@ -651,6 +651,26 @@ table.rc tr:last-child td{border-bottom:none}
   </div>
   <div class="corner-tl"></div><div class="corner-br"></div>
 </div>
+<script>
+(function(){
+  function fmtK(n){return n>=1000?Math.round(n/1000).toLocaleString()+'K':n.toLocaleString();}
+  function fmtFollowers(n){return(Math.floor(n/100)/10).toFixed(1)+'K';}
+  fetch('/api/ig-stats').then(function(r){return r.json();}).then(function(s){
+    var ids={
+      'mp-followers':s.followers?fmtFollowers(s.followers):null,
+      'mp-followers2':s.followers?fmtFollowers(s.followers):null,
+      'mp-posts':s.postCount?s.postCount.toLocaleString():null,
+      'mp-monthly-reach':s.monthlyReach?fmtK(s.monthlyReach):null,
+      'mp-monthly-reach2':s.monthlyReach?fmtK(s.monthlyReach):null,
+      'mp-weekly-reach':s.weeklyReach?fmtK(s.weeklyReach):null,
+    };
+    Object.keys(ids).forEach(function(id){
+      var el=document.getElementById(id);
+      if(el&&ids[id]) el.textContent=ids[id];
+    });
+  }).catch(function(){});
+})();
+</script>
 
 </body>
 </html>

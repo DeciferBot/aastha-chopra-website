@@ -46,7 +46,7 @@
         <p class="hero-sub">Ironman finisher.<br>Practising lawyer. Dubai.</p>
       </div>
     </div>
-    <span class="hero-vertical-tag">Ironman Finisher &nbsp;·&nbsp; 0.89% Wellness Engagement &nbsp;·&nbsp; 51.5K &nbsp;·&nbsp; Dubai</span>
+    <span class="hero-vertical-tag" id="hero-tag-wellness">Ironman Finisher &nbsp;·&nbsp; 0.89% Wellness Engagement &nbsp;·&nbsp; 51.5K &nbsp;·&nbsp; Dubai</span>
     <div class="world-hero-image">
       <img src="images/IMG_5870.jpg" alt="Aastha Chopra — wellness and fitness" />
     </div>
@@ -107,7 +107,7 @@
       </div>
       <div class="world-stats-grid">
         <div class="stat-block">
-          <span class="stat-number">0.89<span>%</span></span>
+          <span class="stat-number" id="wl-engagement">0.89<span>%</span></span>
           <span class="stat-label">Wellness engagement rate</span>
         </div>
         <div class="stat-block stat-accent">
@@ -268,6 +268,20 @@
         gg.appendChild(item);io.observe(item);
       });
     }).catch(function(){});
+  </script>
+  <script>
+  (function(){
+    fetch('/api/ig-stats').then(function(r){return r.json();}).then(function(s){
+      var e=document.getElementById('wl-engagement');
+      var h=document.getElementById('hero-tag-wellness');
+      if(e&&s.avgEngagementRate) e.innerHTML=s.avgEngagementRate.toFixed(2)+'<span>%</span>';
+      if(h&&s.followers){
+        var fk=(Math.floor(s.followers/100)/10).toFixed(1)+'K';
+        var er=s.avgEngagementRate?s.avgEngagementRate.toFixed(2)+'%':'0.89%';
+        h.innerHTML='Ironman Finisher &nbsp;·&nbsp; '+er+' Wellness Engagement &nbsp;·&nbsp; '+fk+' &nbsp;·&nbsp; Dubai';
+      }
+    }).catch(function(){});
+  })();
   </script>
 
 </body>
