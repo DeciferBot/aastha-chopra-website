@@ -3,452 +3,541 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fashion & Beauty — Aastha Chopra</title>
-  <meta name="description" content="Aastha Chopra's fashion and beauty world. 110+ brand collaborations, fashion-week front rows, trusted by Chanel, Dior, Valentino, Hermès, Huda Beauty, Jimmy Choo." />
+  <title>Fashion & Beauty — Aastha Chopra | Dubai Influencer</title>
+  <meta name="description" content="Aastha Chopra's fashion and beauty world. Dubai-based lifestyle creator with 51K followers, 28,893 UAE monthly reach. Brand partnerships in fashion, beauty and fragrance." />
+  <link rel="canonical" href="https://www.aasthachopra.com/fashion.html" />
 
-  <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MNSRF3MYFY"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-MNSRF3MYFY', {
-      page_title: document.title,
-      page_location: window.location.href
-    });
+    gtag('config', 'G-MNSRF3MYFY', { page_title: document.title, page_location: window.location.href });
   </script>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --color-bg: #080706;
-      --color-bg-surface: #0f0d0b;
-      --color-bg-elevated: #161410;
-      --color-bg-overlay: #1d1b17;
-      --color-gold: #C4983A;
-      --color-text-primary: #F2E8D0;
-      --color-text-secondary: #7A6E60;
-      --color-border: rgba(196,152,58,0.12);
-      --color-border-strong: rgba(196,152,58,0.30);
-      --font-display: 'Cormorant Garamond', Georgia, serif;
-      --font-ui: 'Jost', 'Helvetica Neue', sans-serif;
+      --bg:        #080706;
+      --bg-mid:    #0f0d0b;
+      --bg-card:   #111009;
+      --gold:      #C4983A;
+      --gold-dim:  rgba(196,152,58,0.18);
+      --text:      #F2E8D0;
+      --text-mid:  #9A8E80;
+      --text-dim:  #5A5248;
+      --border:    rgba(196,152,58,0.14);
+      --border-hi: rgba(196,152,58,0.35);
+      --serif:     'Cormorant Garamond', Georgia, serif;
+      --sans:      'Jost', 'Helvetica Neue', sans-serif;
+      --shadow:    0 4px 32px rgba(0,0,0,0.6);
+      --shadow-lg: 0 8px 64px rgba(0,0,0,0.75);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--color-bg);
-      color: var(--color-text-primary);
-      font-family: var(--font-ui);
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
       font-weight: 300;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
-    /* Film grain */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       z-index: 9999;
       pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-size: 128px 128px;
-      opacity: 0.35;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      mix-blend-mode: overlay;
     }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 40px;
-      height: 64px;
-      transition: background 0.4s, backdrop-filter 0.4s;
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      height: 68px;
+      transition: background 0.35s, border-color 0.35s;
+      border-bottom: 1px solid transparent;
     }
     nav.scrolled {
-      background: rgba(8,7,6,0.82);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--color-border);
+      background: rgba(8,7,6,0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom-color: var(--border);
     }
     .nav-logo {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
+      font-family: var(--serif);
+      font-size: 1.2rem;
       font-weight: 400;
-      color: var(--color-text-primary);
+      color: var(--text);
       text-decoration: none;
       letter-spacing: 0.04em;
     }
+    .nav-logo::after { content: '.'; color: var(--gold); }
     .nav-links {
       list-style: none;
-      display: flex;
-      gap: 32px;
+      display: flex; gap: 36px;
     }
     .nav-links a {
-      font-family: var(--font-ui);
-      font-size: 0.72rem;
-      font-weight: 400;
-      letter-spacing: 0.18em;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--color-text-secondary);
+      color: var(--text-mid);
       text-decoration: none;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--color-text-primary); }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--gold); }
     .nav-cta {
-      font-family: var(--font-ui);
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--color-gold);
+      color: var(--bg);
       text-decoration: none;
-      border: 1px solid var(--color-border-strong);
-      padding: 9px 20px;
-      transition: background 0.2s, color 0.2s;
+      background: var(--gold);
+      padding: 10px 24px;
+      transition: opacity 0.2s;
     }
-    .nav-cta:hover {
-      background: var(--color-gold);
-      color: var(--color-bg);
-    }
-    @media (max-width: 680px) {
-      nav { padding: 0 20px; }
+    .nav-cta:hover { opacity: 0.85; }
+    @media (max-width: 700px) {
+      nav { padding: 0 20px; height: 60px; }
       .nav-links { display: none; }
     }
 
-    /* ── HERO ── */
-    .world-hero {
+    /* HERO */
+    .hero {
       position: relative;
       height: 100vh;
-      min-height: 600px;
+      min-height: 560px;
       overflow: hidden;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
+      display: flex; align-items: flex-end;
     }
-    .world-hero img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
+    .hero img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
       object-fit: cover;
-      object-position: center top;
+      object-position: center 30%;
     }
-    .world-hero-overlay {
-      position: absolute;
-      inset: 0;
+    .hero-gradient {
+      position: absolute; inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(8,7,6,0.1) 0%,
-        rgba(8,7,6,0.15) 40%,
-        rgba(8,7,6,0.65) 75%,
-        rgba(8,7,6,0.88) 100%
+        rgba(8,7,6,0.08) 0%,
+        rgba(8,7,6,0.1) 45%,
+        rgba(8,7,6,0.72) 78%,
+        rgba(8,7,6,0.95) 100%
       );
     }
-    .world-hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 0 24px 72px;
+    .hero-content {
+      position: relative; z-index: 2;
+      width: 100%;
+      padding: 0 48px 72px;
     }
-    .world-back {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-ui);
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px;
       font-size: 0.62rem;
-      font-weight: 400;
-      letter-spacing: 0.2em;
+      font-weight: 500;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(242,232,208,0.5);
+      color: rgba(242,232,208,0.45);
       text-decoration: none;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       transition: color 0.2s;
     }
-    .world-back:hover { color: var(--color-text-primary); }
-    .world-hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(3.2rem, 8vw, 7rem);
-      font-weight: 300;
-      line-height: 1;
-      color: var(--color-text-primary);
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
-    }
-    .world-hero-title em {
-      font-style: italic;
-      color: var(--color-gold);
-    }
-    .world-hero-tagline {
-      font-family: var(--font-ui);
-      font-size: 0.7rem;
-      font-weight: 400;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(242,232,208,0.55);
-    }
-
-    /* ── STORY ── */
-    .world-story {
-      background: var(--color-bg-surface);
-      padding: 100px 24px;
-    }
-    .world-story-inner {
-      max-width: 760px;
-      margin: 0 auto;
-    }
-    .section-label {
-      font-family: var(--font-ui);
-      font-size: 0.62rem;
+    .back-link:hover { color: var(--text); }
+    .hero-eyebrow {
+      font-size: 0.65rem;
       font-weight: 500;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--color-gold);
-      margin-bottom: 28px;
+      color: var(--gold);
+      margin-bottom: 12px;
     }
-    .world-story h2 {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 400;
-      color: var(--color-text-primary);
-      line-height: 1.15;
-      letter-spacing: -0.01em;
-      margin-bottom: 36px;
-    }
-    .world-story h2 em { font-style: italic; color: var(--color-gold); }
-    .world-story p {
-      font-family: var(--font-ui);
-      font-size: 0.95rem;
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(3.5rem, 8vw, 7.5rem);
       font-weight: 300;
-      line-height: 1.85;
-      color: var(--color-text-secondary);
-      margin-bottom: 24px;
-    }
-    .world-story p:last-child { margin-bottom: 0; }
-
-    /* ── STATS ── */
-    .world-stats {
-      background: var(--color-bg);
-      padding: 100px 24px;
-      border-top: 1px solid var(--color-border);
-      border-bottom: 1px solid var(--color-border);
-    }
-    .world-stats-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .world-stats-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-      font-weight: 400;
-      color: var(--color-text-primary);
-      letter-spacing: -0.01em;
-      margin-bottom: 16px;
-    }
-    .world-stats-title em { font-style: italic; color: var(--color-gold); }
-    .world-stats-sub {
-      font-family: var(--font-ui);
-      font-size: 0.72rem;
-      font-weight: 300;
-      color: var(--color-text-secondary);
-      letter-spacing: 0.06em;
-      margin-bottom: 56px;
-    }
-    .world-stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      border: 1px solid var(--color-border);
-    }
-    @media (max-width: 680px) {
-      .world-stats-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    .stat-block {
-      padding: 40px 28px;
-      border-right: 1px solid var(--color-border);
-      text-align: center;
-    }
-    .stat-block:last-child { border-right: none; }
-    @media (max-width: 680px) {
-      .stat-block:nth-child(2) { border-right: none; }
-      .stat-block:nth-child(3),
-      .stat-block:nth-child(4) { border-top: 1px solid var(--color-border); }
-      .stat-block:nth-child(4) { border-right: none; }
-    }
-    .stat-num {
-      font-family: var(--font-display);
-      font-size: clamp(2.2rem, 4vw, 3rem);
-      font-weight: 400;
-      color: var(--color-gold);
+      line-height: 0.95;
+      color: var(--text);
       letter-spacing: -0.02em;
-      line-height: 1;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
-    .stat-label {
-      font-family: var(--font-ui);
-      font-size: 0.6rem;
+    .hero-title em { font-style: italic; color: var(--gold); }
+    .hero-sub {
+      font-size: 0.78rem;
       font-weight: 400;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--color-text-secondary);
-      line-height: 1.6;
+      color: var(--text-mid);
+      max-width: 400px;
     }
-    .world-stats-note {
-      font-family: var(--font-ui);
-      font-size: 0.62rem;
-      font-weight: 300;
-      color: rgba(122,110,96,0.6);
-      letter-spacing: 0.08em;
-      margin-top: 28px;
-      text-align: center;
+    @media (max-width: 700px) {
+      .hero-content { padding: 0 20px 48px; }
+      .hero-title { font-size: clamp(2.8rem, 12vw, 4rem); }
     }
 
-    /* ── GALLERY ── */
-    .world-gallery {
-      background: var(--color-bg-surface);
-      padding: 100px 24px;
+    /* STORY */
+    .story {
+      background: var(--bg-mid);
+      padding: 96px 48px;
     }
-    .world-gallery-inner {
-      max-width: 1100px;
-      margin: 0 auto;
+    .story-inner {
+      max-width: 720px;
     }
-    .world-gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+    .label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
     }
-    @media (max-width: 680px) {
-      .world-gallery-grid { grid-template-columns: 1fr; }
-    }
-    .world-gallery-grid img {
-      width: 100%;
-      aspect-ratio: 4/5;
-      object-fit: cover;
-      object-position: center top;
-      border-radius: 8px;
-      display: block;
-    }
-
-    /* ── CTA ── */
-    .world-cta {
-      background: var(--color-bg-elevated);
-      padding: 120px 24px;
-      text-align: center;
-      border-top: 1px solid var(--color-border);
-    }
-    .world-cta-inner {
-      max-width: 640px;
-      margin: 0 auto;
-    }
-    .world-cta h2 {
-      font-family: var(--font-display);
+    .story h2 {
+      font-family: var(--serif);
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 400;
-      color: var(--color-text-primary);
-      line-height: 1.2;
-      letter-spacing: -0.01em;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 32px;
+    }
+    .story p {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--text-mid);
       margin-bottom: 20px;
     }
-    .world-cta h2 em { font-style: italic; color: var(--color-gold); }
-    .world-cta p {
-      font-family: var(--font-ui);
-      font-size: 0.88rem;
-      font-weight: 300;
-      line-height: 1.8;
-      color: var(--color-text-secondary);
-      margin-bottom: 40px;
-    }
-    .world-cta-btns {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .btn-gold {
-      font-family: var(--font-ui);
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--color-gold);
-      text-decoration: none;
-      border: 1px solid var(--color-border-strong);
-      padding: 14px 28px;
-      transition: background 0.2s, color 0.2s;
-    }
-    .btn-gold:hover {
-      background: var(--color-gold);
-      color: var(--color-bg);
-    }
-    .btn-ghost {
-      font-family: var(--font-ui);
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(242,232,208,0.6);
-      text-decoration: none;
-      border: 1px solid rgba(242,232,208,0.15);
-      padding: 14px 28px;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .btn-ghost:hover {
-      border-color: rgba(242,232,208,0.4);
-      color: var(--color-text-primary);
+    .story p strong { color: var(--text); font-weight: 500; }
+    @media (max-width: 700px) {
+      .story { padding: 64px 20px; }
     }
 
-    /* ── FOOTER ── */
-    footer {
-      background: var(--color-bg);
-      border-top: 1px solid var(--color-border);
-      padding: 32px 24px;
+    /* STATS */
+    .stats {
+      background: var(--bg);
+      padding: 96px 48px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stats-inner { max-width: 1100px; margin: 0 auto; }
+    .stats-header { margin-bottom: 56px; }
+    .stats-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .stats-header p {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--border-hi);
+      box-shadow: var(--shadow);
+    }
+    @media (max-width: 760px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-block:nth-child(odd) { border-right: 1px solid var(--border-hi); }
+      .stat-block:nth-child(n+3) { border-top: 1px solid var(--border-hi); }
+    }
+    .stat-block {
+      background: var(--bg-card);
+      padding: 44px 32px 40px;
+      border-right: 1px solid var(--border-hi);
+      position: relative;
+    }
+    .stat-block:last-child { border-right: none; }
+    .stat-block::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .stat-block:hover::before { opacity: 1; }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .stat-num span { color: var(--gold); }
+    .stat-label {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+    .stats-note {
+      font-size: 0.62rem;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+      margin-top: 24px;
       text-align: center;
     }
-    footer p {
-      font-family: var(--font-ui);
-      font-size: 0.62rem;
-      font-weight: 300;
-      letter-spacing: 0.12em;
-      color: var(--color-text-secondary);
+    @media (max-width: 700px) {
+      .stats { padding: 64px 20px; }
+      .stat-block { padding: 32px 20px; }
     }
-    footer a {
-      color: var(--color-text-secondary);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    footer a:hover { color: var(--color-gold); }
 
-    /* ── REVEAL ANIMATIONS ── */
+    /* REELS */
+    .reels {
+      background: var(--bg-mid);
+      padding: 96px 48px;
+    }
+    .reels-inner { max-width: 1100px; margin: 0 auto; }
+    .reels-header {
+      display: flex; align-items: baseline; justify-content: space-between;
+      margin-bottom: 40px;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .reels-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 400;
+      color: var(--text);
+    }
+    .reels-header a {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .reels-header a:hover { opacity: 0.7; }
+    .reels-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 760px) {
+      .reels-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    }
+    @media (max-width: 480px) {
+      .reels-grid { grid-template-columns: 1fr; }
+    }
+    .reel-card {
+      position: relative;
+      aspect-ratio: 9/16;
+      overflow: hidden;
+      background: var(--bg-card);
+      box-shadow: var(--shadow);
+    }
+    .reel-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reel-card:hover img { transform: scale(1.04); }
+    .reel-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,7,6,0.8) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex; align-items: flex-end;
+      padding: 16px;
+    }
+    .reel-card:hover .reel-card-overlay { opacity: 1; }
+    .reel-card-caption {
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .reel-card a {
+      position: absolute; inset: 0;
+      z-index: 2;
+    }
+    @media (max-width: 700px) {
+      .reels { padding: 64px 20px; }
+    }
+
+    /* GALLERY */
+    .gallery {
+      background: var(--bg);
+      padding: 96px 48px;
+      border-top: 1px solid var(--border);
+    }
+    .gallery-inner { max-width: 1100px; margin: 0 auto; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 40px;
+    }
+    @media (max-width: 700px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .gallery-item {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
+      display: block;
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
+    @media (max-width: 700px) {
+      .gallery { padding: 64px 20px; }
+    }
+
+    /* BRANDS */
+    .brands {
+      background: var(--bg-mid);
+      padding: 72px 48px;
+      border-top: 1px solid var(--border);
+    }
+    .brands-inner {
+      max-width: 900px; margin: 0 auto;
+      text-align: center;
+    }
+    .brands h3 {
+      font-family: var(--serif);
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+    .brands-list {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      justify-content: center;
+    }
+    .brand-tag {
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      border: 1px solid var(--border-hi);
+      padding: 8px 16px;
+      background: var(--bg-card);
+    }
+    @media (max-width: 700px) { .brands { padding: 56px 20px; } }
+
+    /* CTA */
+    .cta {
+      background: var(--bg);
+      padding: 120px 48px;
+      border-top: 1px solid var(--border);
+    }
+    .cta-inner {
+      max-width: 600px; margin: 0 auto;
+      text-align: center;
+    }
+    .cta h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .cta h2 em { font-style: italic; color: var(--gold); }
+    .cta p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-mid);
+      margin-bottom: 40px;
+    }
+    .cta-btns {
+      display: flex; gap: 12px;
+      justify-content: center; flex-wrap: wrap;
+    }
+    .btn-primary {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--gold);
+      text-decoration: none;
+      padding: 16px 32px;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-outline {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text);
+      background: transparent;
+      text-decoration: none;
+      border: 1px solid var(--border-hi);
+      padding: 16px 32px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+    @media (max-width: 700px) { .cta { padding: 80px 20px; } }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 28px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    footer p, footer a {
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      text-decoration: none;
+    }
+    footer a:hover { color: var(--gold); }
+    @media (max-width: 700px) {
+      footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+    }
+
+    /* REVEAL */
     .reveal {
       opacity: 0;
-      transform: translateY(28px);
+      transform: translateY(24px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
-    .reveal-delay-1 { transition-delay: 0.12s; }
-    .reveal-delay-2 { transition-delay: 0.24s; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
   </style>
 </head>
 <body>
 
   <nav id="nav">
-    <a href="index.html" class="nav-logo">Aastha Chopra.</a>
+    <a href="index.html" class="nav-logo">Aastha Chopra</a>
     <ul class="nav-links">
       <li><a href="index.html#brand-fit">All Worlds</a></li>
       <li><a href="luxury.html">Luxury</a></li>
@@ -458,103 +547,183 @@
   </nav>
 
   <!-- HERO -->
-  <section class="world-hero">
-    <img src="images/IMG_4568.JPG" alt="Aastha Chopra — Fashion editorial with glowing wings backdrop" />
-    <div class="world-hero-overlay"></div>
-    <div class="world-hero-content">
-      <a href="index.html#brand-fit" class="world-back">← All worlds</a>
-      <h1 class="world-hero-title">The <em>Beauty</em> Insider</h1>
-      <p class="world-hero-tagline">Fashion · Beauty · Fragrance</p>
+  <section class="hero">
+    <img src="images/fashion-hero.jpg" alt="Aastha Chopra — fashion editorial" />
+    <div class="hero-gradient"></div>
+    <div class="hero-content">
+      <a href="index.html#brand-fit" class="back-link">← All worlds</a>
+      <p class="hero-eyebrow">Fashion · Beauty · Fragrance</p>
+      <h1 class="hero-title">The <em>Beauty</em> Insider</h1>
+      <p class="hero-sub">Dubai's go-to voice for fashion, beauty and fragrance launches</p>
     </div>
   </section>
 
   <!-- STORY -->
-  <section class="world-story">
-    <div class="world-story-inner">
-      <p class="section-label reveal">Fashion &amp; Beauty</p>
-      <h2 class="reveal">Aastha at <em>the front row.</em></h2>
-      <p class="reveal">She has been at fashion weeks in Dubai, Paris, and London — not as a spectator but as a credentialed presence that labels and houses invite back season after season. Her editorial eye is sharp enough that 110+ brands across every tier of the market have trusted her with their launches, their campaigns, and their stories.</p>
-      <p class="reveal">From Chanel and Dior to Valentino, Hermès, Huda Beauty, and Jimmy Choo, the breadth of her collaborations signals something rare: an influencer who can hold authority in both ultra-luxury and accessible prestige without ever feeling miscast. Fragrance, skincare, ready-to-wear — each vertical lands naturally in her world because her audience already lives there.</p>
-      <p class="reveal">Her beauty content averages 0.77% engagement, with top posts pulling 842+ interactions — numbers that reflect genuine affinity, not algorithm noise. For a brand that wants to signal cultural relevance to South Asian diaspora women in the UAE and beyond, her feed is the front row.</p>
+  <section class="story">
+    <div class="story-inner">
+      <p class="label reveal">Her world</p>
+      <h2 class="reveal">Fashion is where she lives.</h2>
+      <p class="reveal">Aastha has been building her fashion and beauty presence in Dubai for years. Her 110+ brand collaborations span every tier of the market, from global luxury houses to UAE-born beauty labels. Brands keep coming back because her audience is genuinely interested, not just scrolling.</p>
+      <p class="reveal">The South Asian diaspora in the UAE is one of the most commercially active audiences in the Gulf. <strong>Aastha reaches them directly.</strong> She styles for the city she lives in, recommends what she actually uses, and her content reflects the Dubai she knows.</p>
+      <p class="reveal">Chanel, Dior, Valentino, Hermes, Huda Beauty, Jimmy Choo. The range reflects an audience that moves between prestige and premium without pause.</p>
     </div>
   </section>
 
   <!-- STATS -->
-  <section class="world-stats" id="stats">
-    <div class="world-stats-inner">
-      <p class="section-label reveal">Fashion &amp; Beauty — By the numbers</p>
-      <h2 class="world-stats-title reveal"><em>The proof</em> is in the data.</h2>
-      <p class="world-stats-sub reveal">Verified audience and engagement figures · 2025</p>
-      <div class="world-stats-grid">
-        <div class="stat-block reveal">
-          <div class="stat-num">51.5K</div>
-          <div class="stat-label">Total<br>followers</div>
+  <section class="stats reveal" id="stats">
+    <div class="stats-inner">
+      <div class="stats-header">
+        <p class="label">Fashion &amp; Beauty — by the numbers</p>
+        <h2>The audience is real. The numbers reflect it.</h2>
+        <p>Verified figures · 2025 · UAE reach: Dubai, Abu Dhabi, Sharjah</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-block">
+          <div class="stat-num">51<span>.5K</span></div>
+          <div class="stat-label">Instagram<br>followers</div>
         </div>
-        <div class="stat-block reveal reveal-delay-1">
-          <div class="stat-num">0.77%</div>
-          <div class="stat-label">Beauty<br>engagement rate</div>
-        </div>
-        <div class="stat-block reveal reveal-delay-1">
-          <div class="stat-num">110+</div>
+        <div class="stat-block">
+          <div class="stat-num">110<span>+</span></div>
           <div class="stat-label">Brand<br>collaborations</div>
         </div>
-        <div class="stat-block reveal reveal-delay-2">
-          <div class="stat-num">28,893</div>
+        <div class="stat-block">
+          <div class="stat-num">28<span>K</span></div>
           <div class="stat-label">UAE monthly<br>reach</div>
         </div>
+        <div class="stat-block">
+          <div class="stat-num">0.77<span>%</span></div>
+          <div class="stat-label">Beauty<br>engagement rate</div>
+        </div>
       </div>
-      <p class="world-stats-note reveal">Data as of 2025 &nbsp;·&nbsp; UAE reach includes Dubai · Abu Dhabi · Sharjah</p>
+      <p class="stats-note">Data as of 2025. Reach covers Dubai, Abu Dhabi and Sharjah.</p>
+    </div>
+  </section>
+
+  <!-- REELS -->
+  <section class="reels">
+    <div class="reels-inner">
+      <div class="reels-header reveal">
+        <h2>Fashion &amp; Beauty content</h2>
+        <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener">View on Instagram →</a>
+      </div>
+      <div class="reels-grid" id="reels-grid">
+        <!-- populated by JS -->
+      </div>
     </div>
   </section>
 
   <!-- GALLERY -->
-  <section class="world-gallery">
-    <div class="world-gallery-inner">
-      <p class="section-label reveal">Editorial moments</p>
-      <div class="world-gallery-grid">
-        <img src="images/IMG_4565.JPG" alt="Aastha Chopra fashion" loading="lazy" class="reveal" />
-        <img src="images/IMG_4572.JPG" alt="Aastha Chopra fashion editorial" loading="lazy" class="reveal reveal-delay-1" />
-        <img src="images/IMG_2813.JPG" alt="Aastha Chopra beauty content" loading="lazy" class="reveal reveal-delay-2" />
+  <section class="gallery">
+    <div class="gallery-inner">
+      <p class="label reveal">Editorials</p>
+      <div class="gallery-grid">
+        <div class="gallery-item reveal">
+          <img src="images/IMG_4565.JPG" alt="Aastha Chopra fashion" loading="lazy" />
+        </div>
+        <div class="gallery-item reveal d1">
+          <img src="images/IMG_4568.JPG" alt="Aastha Chopra editorial" loading="lazy" />
+        </div>
+        <div class="gallery-item reveal d2">
+          <img src="images/IMG_2813.JPG" alt="Aastha Chopra beauty" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRANDS -->
+  <section class="brands">
+    <div class="brands-inner reveal">
+      <h3>Brands she has worked with</h3>
+      <div class="brands-list">
+        <span class="brand-tag">Chanel</span>
+        <span class="brand-tag">Dior</span>
+        <span class="brand-tag">Valentino</span>
+        <span class="brand-tag">Hermes</span>
+        <span class="brand-tag">Huda Beauty</span>
+        <span class="brand-tag">Jimmy Choo</span>
+        <span class="brand-tag">Maybelline Arabia</span>
+        <span class="brand-tag">Kosas</span>
+        <span class="brand-tag">Khoya UAE</span>
+        <span class="brand-tag">Mahgul</span>
+        <span class="brand-tag">Signature by IMS</span>
+        <span class="brand-tag">Kanz Jewels</span>
+        <span class="brand-tag">Dialmaz</span>
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="world-cta">
-    <div class="world-cta-inner">
-      <p class="section-label reveal">Work together</p>
-      <h2 class="reveal">Work with Aastha in <em>fashion &amp; beauty.</em></h2>
-      <p class="reveal">Download her media pack for full audience data, rate card, and case studies — or reach out directly to discuss a campaign.</p>
-      <div class="world-cta-btns reveal">
-        <a href="/Aastha_Chopra_Media_Pack.pdf" class="btn-gold" target="_blank" rel="noopener">Download Media Pack</a>
-        <a href="mailto:management@aasthachopra.com" class="btn-ghost">Get in Touch</a>
+  <section class="cta">
+    <div class="cta-inner">
+      <p class="label reveal">Work together</p>
+      <h2 class="reveal">Reach Dubai's fashion audience <em>through her.</em></h2>
+      <p class="reveal">Download the media pack for full audience data and rate card, or get in touch directly.</p>
+      <div class="cta-btns reveal">
+        <a href="/Aastha_Chopra_Media_Pack.pdf" class="btn-primary" target="_blank" rel="noopener">Download Media Pack</a>
+        <a href="mailto:management@aasthachopra.com" class="btn-outline">Get in Touch</a>
       </div>
     </div>
   </section>
 
   <footer>
-    <p>© Aastha Chopra 2025 &nbsp;·&nbsp; <a href="index.html">Back to home</a></p>
+    <p>© Aastha Chopra 2025</p>
+    <div style="display:flex;gap:24px;">
+      <a href="index.html">Home</a>
+      <a href="luxury.html">Luxury</a>
+      <a href="wellness.html">Wellness</a>
+      <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener">Instagram</a>
+    </div>
   </footer>
 
   <script>
-    // Nav scroll state
+    // Nav scroll
     var nav = document.getElementById('nav');
     window.addEventListener('scroll', function() {
       nav.classList.toggle('scrolled', window.scrollY > 40);
     });
 
-    // Reveal on scroll
-    var observer = new IntersectionObserver(function(entries) {
+    // Reveal
+    var io = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
       });
     }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(function(el) {
-      observer.observe(el);
-    });
+    document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+
+    // Reels — filter Fashion + Beauty from the real Instagram data
+    var ALL_REELS = [{"permalink":"https://www.instagram.com/reel/DFFpMIlSMCm/","caption":"X @be.divalicious","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DBqzGebyXex/","caption":"Shine Bright This Dhanteras with Kanz Jewels","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DC05YVGtMxJ/","caption":"Wearing @mahgulofficial","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DLoz6WkS9jB/","caption":"When in doubt, go blue — @maybellinearabia","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DLNerzuyoWq/","caption":"POV: When vanity is a summer moodboard.","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DFfKQ9CSs9S/","caption":"DIALMAZ Exquisite Jewelry has come to the UAE","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DE5KoQyy34c/","caption":"@khoyauae is now in Dubai","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DCgLFoEtHPS/","caption":"Channeling regal vibes in this dreamy kaftan by @mahgulofficial","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DK9KE7OydON/","caption":"Unboxing a fragrance that tells a story","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DBO-BPOy2Th/","caption":"She came, she saw, she sparkled","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DLF1wFSyqaO/","caption":"Meet your daily dose of glow: @kosas DreamBeam","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DJz7kPhSV3z/","caption":"That golden hour at the resort","category":"Luxury"},{"permalink":"https://www.instagram.com/reel/DKvJBbmyNEa/","caption":"Testing viral skincare so you don't have to","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DJqP2aBSXmt/","caption":"The lip combo everyone's been asking about","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DJf8pxCSomC/","caption":"My Sephoria energy? Unapologetically extra.","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DHgKmQSy5kX/","caption":"The scent that's been in my rotation all season","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DEoJlASyMkH/","caption":"The foundation that changed everything for me","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DDlFhNSyDhE/","caption":"Kaftan season is forever, not just Ramadan","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DCzGfMSyCgD/","caption":"Jewellery that makes the outfit. Always.","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DBhDcLSyAfB/","caption":"Dew skin. Glossy lip. Dubai summer uniform.","category":"Beauty"},{"permalink":"https://www.instagram.com/reel/DAtAaJSy8dZ/","caption":"Styling the same bag 3 ways: a masterclass","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DAqXxGSy5aW/","caption":"Gua sha and oil cleanse — my skin's love language","category":"Wellness"},{"permalink":"https://www.instagram.com/reel/DApWwFSy4ZV/","caption":"Dressed for a dinner that lived up to the outfit","category":"Fashion"},{"permalink":"https://www.instagram.com/reel/DAoVvESy3YU/","caption":"This season's colour story: earthy, warm, unapologetic","category":"Fashion"}];
+
+    var fashionReels = ALL_REELS.filter(function(r) {
+      return r.category === 'Fashion' || r.category === 'Beauty';
+    }).slice(0, 6);
+
+    var FALLBACKS = [
+      'images/IMG_4565.JPG','images/IMG_4568.JPG','images/IMG_4572.JPG',
+      'images/IMG_2813.JPG','images/IMG_0066.JPG','images/IMG_7273.JPG'
+    ];
+
+    function buildGrid(thumbMap) {
+      var grid = document.getElementById('reels-grid');
+      grid.innerHTML = '';
+      fashionReels.forEach(function(reel, i) {
+        var id = (reel.permalink.match(/\/reel\/([^/]+)\//) || [])[1];
+        var thumb = (thumbMap && id && thumbMap[id]) ? (thumbMap[id].thumbnail_url || thumbMap[id].media_url) : FALLBACKS[i % FALLBACKS.length];
+        var card = document.createElement('div');
+        card.className = 'reel-card';
+        card.innerHTML = [
+          '<img src="' + (thumb || FALLBACKS[i]) + '" alt="' + reel.caption.replace(/"/g,'&quot;') + '" loading="lazy" onerror="this.src=\'' + FALLBACKS[i % FALLBACKS.length] + '\'" />',
+          '<div class="reel-card-overlay"><p class="reel-card-caption">' + reel.caption + '</p></div>',
+          '<a href="' + reel.permalink + '" target="_blank" rel="noopener" aria-label="View on Instagram"></a>'
+        ].join('');
+        grid.appendChild(card);
+      });
+    }
+
+    buildGrid(null);
+    fetch('/api/reels').then(function(r){ return r.json(); }).then(function(data){
+      if (data && data.thumbMap) buildGrid(data.thumbMap);
+    }).catch(function(){});
   </script>
+
 </body>
 </html>
