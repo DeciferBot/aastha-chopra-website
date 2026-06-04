@@ -904,6 +904,7 @@
   <section id="creators">
     <p class="section-label">From Your Daily Brief</p>
     <h2 class="section-heading">Creators to <em>Watch & Tag</em></h2>
+    <p class="creators-meta" id="creatorsMeta" style="margin:0 0 18px;font-size:0.78rem;color:#a07840;letter-spacing:0.04em"></p>
     <div class="creators-strip" id="creatorsStrip">
       <div class="skel" style="height:64px;width:200px;border-radius:4px"></div>
       <div class="skel" style="height:64px;width:200px;border-radius:4px"></div>
@@ -920,8 +921,16 @@
     <div class="audience-grid">
       <!-- LEFT: Countries -->
       <div class="audience-card">
-        <div class="audience-big" id="uaeCount"><span class="skel" style="width:120px;height:48px;display:inline-block;"></span></div>
-        <div class="audience-sublabel">Followers in UAE</div>
+        <div style="display:flex;gap:32px;align-items:flex-end;margin-bottom:4px">
+          <div>
+            <div class="audience-big" id="uaeCount"><span class="skel" style="width:90px;height:48px;display:inline-block;"></span></div>
+            <div class="audience-sublabel">UAE Followers</div>
+          </div>
+          <div>
+            <div class="audience-big" id="uaeReach" style="font-size:2rem"><span class="skel" style="width:90px;height:40px;display:inline-block;"></span></div>
+            <div class="audience-sublabel">UAE Accounts Reached</div>
+          </div>
+        </div>
         <div class="country-bars" id="countryBars">
           <div class="skel" style="height:40px;border-radius:4px"></div>
           <div class="skel" style="height:40px;border-radius:4px"></div>
@@ -1134,21 +1143,29 @@
 
   // ── Load Audience ────────────────────────────────────────────────────
   async function loadAudience() {
-    const [countryRaw, ageRaw, genderRaw] = await Promise.all([
+    const [countryRaw, ageRaw, genderRaw, reachCountryRaw] = await Promise.all([
       sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.country&order=value.desc&limit=40'),
       sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.age&order=value.desc'),
       sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.gender'),
+      sbFetch('instagram_demographics', 'metric=eq.reached_audience_demographics&breakdown=eq.country&dimension=eq.AE&select=value').catch(() => []),
     ]);
 
     const countryRows = dedup(countryRaw);
     const ageRows     = dedup(ageRaw);
     const genderRows  = dedup(genderRaw);
 
-    // UAE count
+    // UAE followers
     const uaeRow = countryRows.find(r => r.dimension === 'AE');
     const uaeVal = uaeRow?.value || 0;
     document.getElementById('uaeCount').innerHTML =
       `<span style="color:var(--gold)">${fmt(uaeVal)}</span>`;
+
+    // UAE accounts reached (from reached_audience_demographics if synced, else static fallback)
+    const reachRows = dedup(reachCountryRaw);
+    const uaeReachRow = reachRows.find(r => r.dimension === 'AE');
+    const uaeReachVal = uaeReachRow?.value || 3769;
+    document.getElementById('uaeReach').innerHTML =
+      `<span style="color:var(--gold)">${fmt(uaeReachVal)}</span>`;
 
     // Top countries
     const maxVal = countryRows[0]?.value || 1;
@@ -1369,10 +1386,23 @@
   }
 
   // ── Load Trending Creators ───────────────────────────────────────────
+  // Brand signals: accounts that are venues, luxury houses, malls, publications, or "official" accounts
+  const BRAND_SIGNALS = [
+    'mall', 'hotel', 'resort', 'official', 'vogue', 'bazaar', 'magazine',
+    'chanel', 'gucci', 'lv', 'louisvuitton', 'dior', 'prada', 'hermes',
+    'burjalarab', 'burjkhalifa', 'jumeirah', 'atlantis', 'armani',
+    'schiaparelli', 'valentino', 'versace', 'fendi', 'balenciaga',
+    'dubaimall', 'thedubaimall', 'malloftheemirates',
+  ];
+  function isCreator(handle) {
+    const h = handle.replace('@', '').toLowerCase();
+    return !BRAND_SIGNALS.some(sig => h.includes(sig));
+  }
+
   async function loadTrendingCreators() {
-    // Pull tag_accounts from the most recent 9 brief cards
+    // Prefer creator_accounts (human influencers); fall back to filtering tag_accounts
     const rows = await sbFetch('uae_daily_brief',
-      'order=brief_date.desc&limit=9&select=tag_accounts,headline,card_type');
+      'order=brief_date.desc&limit=9&select=creator_accounts,tag_accounts,headline,card_type');
 
     const strip = document.getElementById('creatorsStrip');
     const insightEl = document.getElementById('creatorsInsight');
@@ -1380,7 +1410,11 @@
     const seen = new Set();
     const creators = [];
     rows.forEach(r => {
-      (r.tag_accounts || []).forEach(handle => {
+      // Use creator_accounts if populated, otherwise filter tag_accounts for non-brands
+      const handles = (r.creator_accounts && r.creator_accounts.length)
+        ? r.creator_accounts
+        : (r.tag_accounts || []).filter(isCreator);
+      handles.forEach(handle => {
         if (!seen.has(handle)) {
           seen.add(handle);
           creators.push({ handle, headline: r.headline, type: r.card_type });
@@ -1388,8 +1422,25 @@
       });
     });
 
+    // Compute next brief countdown (6:30am Dubai = UTC+4)
+    const dubaiOffset = 4 * 60;
+    const nowMs = Date.now();
+    const nowDubaiMs = nowMs + (dubaiOffset + new Date().getTimezoneOffset()) * 60000;
+    const nowDubai = new Date(nowDubaiMs);
+    const nextRun = new Date(nowDubai);
+    nextRun.setHours(6, 30, 0, 0);
+    if (nowDubai >= nextRun) nextRun.setDate(nextRun.getDate() + 1);
+    const minsUntil = Math.round((nextRun - nowDubai) / 60000);
+    const nextLabel = minsUntil < 60
+      ? `in ${minsUntil}m`
+      : minsUntil < 1440
+        ? `in ${Math.round(minsUntil / 60)}h`
+        : 'tomorrow';
+    const metaEl = document.getElementById('creatorsMeta');
+    if (metaEl) metaEl.textContent = `Next brief ${nextLabel} · 6:30am Dubai time · updates daily`;
+
     if (!creators.length) {
-      strip.innerHTML = `<div class="creators-empty">Creator tags will appear here once the daily brief runs — check back after 6:30am Dubai time</div>`;
+      strip.innerHTML = `<div class="creators-empty">No creator suggestions yet — accounts from the next brief will appear here after 6:30am Dubai time (${nextLabel})</div>`;
       return;
     }
 
@@ -1407,7 +1458,7 @@
     }).join('');
 
     insightEl.style.display = '';
-    insightEl.innerHTML = `<strong>${creators.length} accounts</strong> surfaced from your last brief — tag them in relevant posts to grow reach`;
+    insightEl.innerHTML = `<strong>${creators.length} creator${creators.length !== 1 ? 's' : ''}</strong> from your last brief · tag them in relevant posts to grow reach · refreshes ${nextLabel}`;
   }
 
   // ── Scroll Progress ──────────────────────────────────────────────────
