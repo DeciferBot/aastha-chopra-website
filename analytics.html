@@ -624,6 +624,21 @@
       text-align: center;
     }
 
+
+    .format-directive {
+      margin-top: 16px;
+      padding: 18px 22px;
+      background: var(--elevated);
+      border: 1px solid var(--border-warm);
+      border-left: 3px solid var(--gold);
+      border-radius: var(--r-card);
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .format-directive-icon { font-size: 1rem; line-height: 1.5; flex-shrink: 0; }
+    .format-directive-text { font-size: 0.85rem; color: var(--text); line-height: 1.6; }
+    .format-directive-text strong { color: var(--gold-light); font-weight: 500; }
     /* ── GROWTH ──────────────────────────────────────────────────────── */
     #growth { margin-bottom: 80px; }
 
@@ -730,66 +745,6 @@
       z-index: 10000; transition: width 0.08s linear; pointer-events: none;
     }
 
-    /* ── TRENDING CREATORS ───────────────────────────────────────────── */
-    #creators { margin-bottom: 80px; }
-
-    .creators-strip {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .creator-card {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 18px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--r-card);
-      text-decoration: none;
-      transition: border-color 0.2s, transform 0.2s;
-      min-width: 180px;
-    }
-    .creator-card:hover {
-      border-color: var(--gold);
-      transform: translateY(-2px);
-    }
-    .creator-avatar {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: var(--elevated);
-      border: 1px solid var(--border-warm);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.7rem;
-      color: var(--gold);
-      font-weight: 500;
-      flex-shrink: 0;
-    }
-    .creator-handle {
-      font-size: 0.78rem;
-      color: var(--text);
-      font-weight: 400;
-    }
-    .creator-context {
-      font-size: 0.62rem;
-      color: var(--muted);
-      margin-top: 2px;
-      max-width: 160px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .creators-empty {
-      padding: 32px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--r-card);
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
 
     /* ── FORMAT INSIGHTS ─────────────────────────────────────────────── */
     .format-reach {
@@ -900,18 +855,6 @@
     </div>
   </section>
 
-  <!-- TRENDING CREATORS -->
-  <section id="creators">
-    <p class="section-label">From Your Daily Brief</p>
-    <h2 class="section-heading">Creators to <em>Watch & Tag</em></h2>
-    <p class="creators-meta" id="creatorsMeta" style="margin:0 0 18px;font-size:0.78rem;color:#a07840;letter-spacing:0.04em"></p>
-    <div class="creators-strip" id="creatorsStrip">
-      <div class="skel" style="height:64px;width:200px;border-radius:4px"></div>
-      <div class="skel" style="height:64px;width:200px;border-radius:4px"></div>
-      <div class="skel" style="height:64px;width:200px;border-radius:4px"></div>
-    </div>
-    <div class="insight-line" id="creatorsInsight" style="display:none"></div>
-  </section>
 
   <!-- UAE AUDIENCE -->
   <section id="audience">
@@ -982,6 +925,7 @@
       <div class="format-item skel" style="height:96px"></div>
       <div class="format-item skel" style="height:96px"></div>
     </div>
+    <div class="format-directive" id="formatDirective" style="display:none"></div>
   </section>
 
   <!-- GROWTH -->
@@ -1299,6 +1243,31 @@
           ${k === best && avg ? `<span class="format-insight">Highest reach</span>` : ''}
         </div>`;
     }).join('');
+
+    // ── Format directive: translate data into an action for Aastha ───
+    const reelAvg = avgReach('VIDEO');
+    const carAvg  = avgReach('CAROUSEL_ALBUM');
+    const reelCt  = fmtData.VIDEO.count;
+    const carCt   = fmtData.CAROUSEL_ALBUM.count;
+    const imgCt   = fmtData.IMAGE.count;
+
+    let msg = '';
+    if (reelCt === 0 && carCt === 0) {
+      msg = 'No reach data yet. Check back once a few posts have synced.';
+    } else if (reelAvg > carAvg * 1.1) {
+      const lift = Math.round(((reelAvg - carAvg) / carAvg) * 100);
+      msg = `<strong>Reels are your growth engine.</strong> Every Reel reaches ${fmt(reelAvg - carAvg)} more people on average, a ${lift}% lift over Carousels. Post Reels when you want new eyes on your account. Save Carousels for content that earns saves and needs depth, like tutorials and outfit breakdowns. That is not what you use them for when you want growth.${imgCt === 0 ? ' Static images are not worth posting. Your numbers make that clear.' : ''}`;
+    } else if (carAvg > reelAvg * 1.1) {
+      const lift = Math.round(((carAvg - reelAvg) / reelAvg) * 100);
+      msg = `<strong>Carousels are outperforming Reels right now,</strong> with ${lift}% more reach per post. Lean into multi-slide content, outfit sequences, moment dumps, tutorials. Reels still matter for discovery but Carousels are your strongest format at the moment.`;
+    } else {
+      const ratio = reelCt && carCt ? Math.round(reelCt / (reelCt + carCt) * 100) : null;
+      msg = `<strong>Reels and Carousels are performing at the same level.</strong>${ratio !== null ? ` Right now ${ratio}% of your posts are Reels.` : ''} Keep mixing both. Use Reels to pull in new followers and Carousels for saves and deeper engagement.${imgCt === 0 ? ' You have moved away from static images entirely and that is the right call.' : ''}`;
+    }
+
+    const el = document.getElementById('formatDirective');
+    el.innerHTML = `<div class="format-directive-icon">→</div><div class="format-directive-text">${msg}</div>`;
+    el.style.display = 'flex';
   }
 
   // ── Load Growth ──────────────────────────────────────────────────────
