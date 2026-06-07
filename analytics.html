@@ -1224,12 +1224,20 @@
 
   // ── Load Content Performance ─────────────────────────────────────────
   async function loadPerformance() {
-    const [topPosts, recentPosts] = await Promise.all([
+    const cutoff = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString();
+    const [recentWithImg, recentPosts] = await Promise.all([
       sbFetch('instagram_posts',
-        'storage_image_url=not.is.null&order=total_interactions.desc.nullslast&limit=6&select=id,permalink,storage_image_url,storage_thumbnail_url,media_type,reach,saved,total_interactions'),
+        `storage_image_url=not.is.null&timestamp=gte.${cutoff}&reach=gt.100&total_interactions=not.is.null&select=id,permalink,storage_image_url,storage_thumbnail_url,media_type,reach,saved,total_interactions,timestamp`),
       sbFetch('instagram_posts',
-        'order=timestamp.desc&limit=60&select=media_type,reach'),
+        `timestamp=gte.${cutoff}&select=media_type,reach`),
     ]);
+
+    // Rank by engagement rate, excluding posts where ER > 95% (data artifact)
+    const scored = recentWithImg
+      .map(p => ({ ...p, er: p.reach ? (p.total_interactions / p.reach) * 100 : 0 }))
+      .filter(p => p.er <= 95)
+      .sort((a, b) => b.er - a.er);
+    const topPosts = scored.slice(0, 6);
 
     const grid = document.getElementById('perfGrid');
     if (topPosts.length) {
@@ -1237,9 +1245,7 @@
         const img = p.storage_thumbnail_url || p.storage_image_url;
         const type = p.media_type === 'VIDEO' ? 'Reel' :
                      p.media_type === 'CAROUSEL_ALBUM' ? 'Carousel' : 'Image';
-        const erRaw = (p.reach && p.total_interactions)
-          ? (p.total_interactions / p.reach) * 100 : null;
-        const er = erRaw !== null ? (Math.min(erRaw, 99.9)).toFixed(2) + '%' : null;
+        const er = p.er ? p.er.toFixed(2) + '%' : null;
         return `
           <a class="perf-item" href="${p.permalink || '#'}" target="_blank" rel="noopener" style="display:block;text-decoration:none;">
             <img src="${img}" alt="${type}" loading="lazy" />
