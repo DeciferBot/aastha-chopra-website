@@ -1145,9 +1145,9 @@
   async function loadAudience() {
     const [countryRaw, ageRaw, genderRaw, reachCountryRaw] = await Promise.all([
       sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.country&order=synced_at.desc,value.desc&limit=200'),
-      sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.age&order=synced_at.desc,value.desc'),
-      sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.gender&order=synced_at.desc'),
-      sbFetch('instagram_demographics', 'metric=eq.reached_audience_demographics&breakdown=eq.country&dimension=eq.AE&select=value').catch(() => []),
+      sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.age&order=synced_at.desc,value.desc&limit=50'),
+      sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.gender&order=synced_at.desc&limit=20'),
+      sbFetch('instagram_demographics', 'metric=eq.reached_audience_demographics&breakdown=eq.country&dimension=eq.AE&order=synced_at.desc&limit=1&select=value').catch(() => []),
     ]);
 
     const countryRows = dedup(countryRaw);
@@ -1163,9 +1163,10 @@
     // UAE accounts reached (from reached_audience_demographics if synced, else static fallback)
     const reachRows = dedup(reachCountryRaw);
     const uaeReachRow = reachRows.find(r => r.dimension === 'AE');
-    const uaeReachVal = uaeReachRow?.value || 3769;
-    document.getElementById('uaeReach').innerHTML =
-      `<span style="color:var(--gold)">${fmt(uaeReachVal)}</span>`;
+    const uaeReachVal = uaeReachRow?.value ?? null;
+    document.getElementById('uaeReach').innerHTML = uaeReachVal !== null
+      ? `<span style="color:var(--gold)">${fmt(uaeReachVal)}</span>`
+      : `<span style="color:var(--muted);font-size:1rem">Not synced</span>`;
 
     // Top countries
     const maxVal = countryRows[0]?.value || 1;
@@ -1224,12 +1225,12 @@
 
   // ── Load Content Performance ─────────────────────────────────────────
   async function loadPerformance() {
-    const cutoff = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString();
+    const cutoff = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString().split('.')[0] + 'Z';
     const [recentWithImg, recentPosts] = await Promise.all([
       sbFetch('instagram_posts',
-        `storage_image_url=not.is.null&timestamp=gte.${cutoff}&reach=gt.100&total_interactions=not.is.null&select=id,permalink,storage_image_url,storage_thumbnail_url,media_type,reach,saved,total_interactions,timestamp`),
+        `storage_image_url=not.is.null&timestamp=gte.${cutoff}&reach=gt.100&total_interactions=not.is.null&order=timestamp.desc&limit=100&select=id,permalink,storage_image_url,storage_thumbnail_url,media_type,reach,saved,total_interactions,timestamp`),
       sbFetch('instagram_posts',
-        `timestamp=gte.${cutoff}&select=media_type,reach`),
+        `timestamp=gte.${cutoff}&order=timestamp.desc&limit=300&select=media_type,reach`),
     ]);
 
     // Rank by engagement rate, excluding posts where ER > 95% (data artifact)
@@ -1245,7 +1246,7 @@
         const img = p.storage_thumbnail_url || p.storage_image_url;
         const type = p.media_type === 'VIDEO' ? 'Reel' :
                      p.media_type === 'CAROUSEL_ALBUM' ? 'Carousel' : 'Image';
-        const er = p.er ? p.er.toFixed(2) + '%' : null;
+        const er = p.er > 0 ? p.er.toFixed(2) + '%' : null;
         return `
           <a class="perf-item" href="${p.permalink || '#'}" target="_blank" rel="noopener" style="display:block;text-decoration:none;">
             <img src="${img}" alt="${type}" loading="lazy" />
