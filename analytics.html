@@ -1049,7 +1049,7 @@
   // Deduplicate rows that share the same dimension by summing values
   function dedup(rows) {
     const map = {};
-    rows.forEach(r => { map[r.dimension] = (map[r.dimension] || 0) + (r.value || 0); });
+    rows.forEach(r => { if (!(r.dimension in map)) map[r.dimension] = r.value || 0; });
     return Object.entries(map)
       .map(([dimension, value]) => ({ dimension, value }))
       .sort((a, b) => b.value - a.value);
@@ -1144,9 +1144,9 @@
   // ── Load Audience ────────────────────────────────────────────────────
   async function loadAudience() {
     const [countryRaw, ageRaw, genderRaw, reachCountryRaw] = await Promise.all([
-      sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.country&order=value.desc&limit=40'),
-      sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.age&order=value.desc'),
-      sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.gender'),
+      sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.country&order=synced_at.desc,value.desc&limit=200'),
+      sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.age&order=synced_at.desc,value.desc'),
+      sbFetch('instagram_demographics', 'metric=eq.follower_demographics&breakdown=eq.gender&order=synced_at.desc'),
       sbFetch('instagram_demographics', 'metric=eq.reached_audience_demographics&breakdown=eq.country&dimension=eq.AE&select=value').catch(() => []),
     ]);
 
