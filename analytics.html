@@ -3,7 +3,64 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
   <title>Aastha · Intelligence</title>
+  <script>
+    (function() {
+      function getCookie(name) {
+        return document.cookie.split('; ').some(c => c === name + '=1');
+      }
+      if (!getCookie('analytics_auth')) {
+        document.addEventListener('DOMContentLoaded', function() {
+          document.body.style.overflow = 'hidden';
+          var overlay = document.createElement('div');
+          overlay.id = 'auth-gate';
+          overlay.style.cssText = [
+            'position:fixed','inset:0','z-index:99999',
+            'background:#0B0908','display:flex','align-items:center',
+            'justify-content:center','font-family:Jost,sans-serif'
+          ].join(';');
+          overlay.innerHTML = `
+            <div style="text-align:center;max-width:320px;width:90%">
+              <p style="color:#C4983A;letter-spacing:.2em;font-size:.7rem;text-transform:uppercase;margin-bottom:2rem">Private Access</p>
+              <input id="pw-input" type="password" placeholder="Password"
+                style="width:100%;box-sizing:border-box;background:#1C1814;border:1px solid rgba(196,152,58,.3);
+                       color:#F0E6CC;padding:.8rem 1rem;font-family:inherit;font-size:.9rem;
+                       border-radius:2px;outline:none;margin-bottom:.75rem" />
+              <p id="pw-error" style="color:#c0392b;font-size:.75rem;min-height:1rem;margin-bottom:.5rem"></p>
+              <button id="pw-btn"
+                style="width:100%;background:#C4983A;color:#0B0908;border:none;padding:.8rem;
+                       font-family:inherit;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;
+                       cursor:pointer;border-radius:2px">Enter</button>
+            </div>`;
+          document.body.prepend(overlay);
+
+          function attempt() {
+            fetch('/api/analytics-auth', {
+              method: 'POST',
+              headers: {'Content-Type':'application/json'},
+              body: JSON.stringify({password: document.getElementById('pw-input').value})
+            }).then(function(r) {
+              if (r.ok) {
+                overlay.remove();
+                document.body.style.overflow = '';
+              } else {
+                document.getElementById('pw-error').textContent = 'Incorrect password';
+                document.getElementById('pw-input').value = '';
+                document.getElementById('pw-input').focus();
+              }
+            });
+          }
+
+          document.getElementById('pw-btn').addEventListener('click', attempt);
+          document.getElementById('pw-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') attempt();
+          });
+          document.getElementById('pw-input').focus();
+        });
+      }
+    })();
+  </script>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
