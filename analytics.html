@@ -625,6 +625,13 @@
     }
 
 
+    .format-period-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
     .format-directive {
       margin-top: 16px;
       padding: 18px 22px;
@@ -920,6 +927,7 @@
       <div class="skel" style="aspect-ratio:4/5;border-radius:8px"></div>
     </div>
 
+    <p class="format-period-label" id="formatPeriodLabel"></p>
     <div class="format-row" id="formatRow">
       <div class="format-item skel" style="height:96px"></div>
       <div class="format-item skel" style="height:96px"></div>
@@ -1228,6 +1236,11 @@
     });
 
     const fmtLabel = { VIDEO:'Reels', CAROUSEL_ALBUM:'Carousels', IMAGE:'Images' };
+
+    // Label the time window
+    const cutoffDate = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000);
+    const periodStr = cutoffDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long' }) + ' to today';
+    document.getElementById('formatPeriodLabel').textContent = periodStr;
 
     // Find best avg-reach format for labelling
     const avgReach = k => fmtData[k].count ? Math.round(fmtData[k].totalReach / fmtData[k].count) : 0;
