@@ -1,14 +1,6 @@
 {
   "crons": [
-    {
-      "path": "/api/cron/daily-agent",
-      "schedule": "0 2 * * *"
-    },
-    {
-      "path": "/api/cron/daily-brief",
-      "schedule": "30 2 * * *"
-    },
-    {
+{
       "path": "/api/cron/ig-sync",
       "schedule": "0 */4 * * *"
     }
