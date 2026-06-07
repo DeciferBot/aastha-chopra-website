@@ -1,25 +1,28 @@
 /**
  * Daily Outreach Agent — Vercel Cron
  * Runs at 2:00 UTC (6:00 AM UAE time) every day.
- * Scores brands, sends Telegram digest.
+ * Scores brands, generates pitches for top 3, emails digest to Aastha.
  * GET /api/cron/daily-agent
  */
 
 const SUPABASE_URL  = 'https://uqzvaytvynrglijvwjsz.supabase.co';
 const SERVICE_KEY   = process.env.SUPABASE_SERVICE_KEY;
-const BOT_TOKEN     = process.env.TELEGRAM_BOT_TOKEN;
-const CHAT_ID       = process.env.TELEGRAM_CHAT_ID;
 const FB_TOKEN      = process.env.FB_ACCESS_TOKEN;
 const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;
-const API           = `https://api.telegram.org/bot${BOT_TOKEN}`;
+const RESEND_KEY    = process.env.RESEND_API_KEY;
+const AASTHA_EMAIL  = 'aasthac8@gmail.com';
 
-async function sendTg(text) {
-  await fetch(`${API}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'Markdown' }),
-  });
-}
+const PROFILE = {
+  name: 'Aastha Chopra',
+  handle: '@aastha_sochic',
+  followers: 51552,
+  uaeReach: 28893,
+  topAge: '18-34',
+  niches: 'lifestyle, fashion, beauty, fitness',
+  whatsapp: '+97153646723',
+  mediaPackUrl: 'https://www.aasthachopra.com/Aastha_Chopra_Media_Pack.pdf',
+  location: 'Dubai, UAE',
+};
 
 async function sb(path, opts = {}) {
   const res = await fetch(`${SUPABASE_URL}/rest/v1${path}`, {
@@ -63,24 +66,129 @@ async function checkAdLibrary(brandName) {
 
 function scoreBrand(brand, adData) {
   let score = 0;
-  if (adData?.active)         score += 3;
-  if (adData?.recentCount > 0) score += 2;
+  if (adData?.active)            score += 3;
+  if (adData?.recentCount > 0)   score += 2;
   if (brand.niche_fit === 'high')   score += 3;
   if (brand.niche_fit === 'medium') score += 1;
-  if (brand.contact_email)   score += 1;
+  if (brand.contact_email)       score += 1;
   return Math.min(score, 10);
 }
 
+async function generatePitch(brandName, brandNotes = '') {
+  const systemPrompt = `You write outreach emails from Aastha Chopra, a Dubai-based lifestyle creator, to brand managers.
+
+VOICE: Confident, warm, direct. Reads like a real person wrote it — not a template, not a tool.
+
+STRUCTURE — three parts, no headers, no bullet points:
+1. HOOK: One sentence showing you know this brand and why you're reaching out specifically.
+2. BODY: Who Aastha is and why she's relevant. Lead with Dubai reach and UAE audience quality.
+3. ACTION: Soft collaborative close — open a door, not close a deal.
+
+HARD RULES:
+- Zero em dashes. Not one.
+- Zero "not just X" constructions. Write what something IS, never what it is NOT.
+- Every sentence is a positive statement.
+- Zero "if X then Y" logic structures.
+- No words: synergy, authentic, leverage, elevate, resonate, curated, align, journey, space, narrative
+- No lists or bullet points in the email body
+- Under 130 words total
+- Sign off as Aastha only
+- Aastha's voice is warm and forward-looking. She says things like "it's always a pleasure working with brands you actually use" — genuine enthusiasm, positive framing.`;
+
+  const userPrompt = `Write a pitch email from Aastha Chopra to a brand manager at ${brandName}.
+
+About Aastha:
+- Dubai-based lifestyle creator, ${PROFILE.followers.toLocaleString()} Instagram followers
+- ${PROFILE.uaeReach.toLocaleString()} people reached monthly across Dubai, Abu Dhabi and Sharjah
+- Audience is ${PROFILE.topAge} year olds, strong South Asian diaspora in UAE
+- Niches: ${PROFILE.niches}
+- WhatsApp: ${PROFILE.whatsapp}
+- Media pack: ${PROFILE.mediaPackUrl}
+
+${brandNotes ? `Brand context: ${brandNotes}` : `${brandName} is active in the UAE lifestyle market.`}
+
+Write the email. Hook (why this brand) → body (Aastha's UAE reach and audience quality) → action (open a door).
+No lists. No em dashes. Human voice.`;
+
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': ANTHROPIC_KEY,
+      'anthropic-version': '2023-06-01',
+    },
+    body: JSON.stringify({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 400,
+      system: systemPrompt,
+      messages: [{ role: 'user', content: userPrompt }],
+    }),
+  });
+  const data = await res.json();
+  if (data.error) throw new Error(data.error.message);
+  return data.content[0].text;
+}
+
+async function sendDigestEmail(top) {
+  const date = new Date().toLocaleDateString('en-GB', {
+    weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Asia/Dubai',
+  });
+
+  const pitchSections = top.map((r, i) => {
+    const adNote = r.adData?.active
+      ? `Currently running ${r.adData.count} active UAE ads${r.adData.recentCount ? ` (${r.adData.recentCount} in the last 2 weeks)` : ''}.`
+      : 'No Meta ad activity detected yet.';
+
+    return [
+      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+      `#${i + 1} — ${r.brand.name} (${r.score}/10)`,
+      `Category: ${r.brand.category}`,
+      `Score reason: ${r.brand.niche_fit} niche fit. ${adNote}`,
+      `Send to: ${r.brand.contact_email || '(find contact email)'}`,
+      ``,
+      r.pitch,
+    ].join('\n');
+  }).join('\n\n');
+
+  const body = [
+    `Good morning Aastha,`,
+    ``,
+    `Here are your top 3 brand opportunities for ${date}.`,
+    `Copy each pitch and send from management@aasthachopra.com`,
+    ``,
+    pitchSections,
+    ``,
+    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`,
+    ``,
+    `See you tomorrow,`,
+    `Outreach Bot`,
+  ].join('\n');
+
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${RESEND_KEY}`,
+    },
+    body: JSON.stringify({
+      from: 'Outreach Bot <onboarding@resend.dev>',
+      to: AASTHA_EMAIL,
+      subject: `Your top 3 brand pitches — ${date}`,
+      text: body,
+    }),
+  });
+
+  if (!res.ok) throw new Error(`Resend: ${await res.text()}`);
+}
+
 export default async function handler(req, res) {
-  // Verify this is called by Vercel cron
   if (req.headers.authorization !== `Bearer ${process.env.CRON_SECRET}`) {
     return res.status(401).end();
   }
 
   const brands = await sb('/outreach_brands?is_agency=eq.false&select=*');
   if (!brands.length) {
-    await sendTg('⚠️ Brand watchlist is empty. Add brands with `add BrandName`');
-    return res.status(200).end();
+    return res.status(200).json({ ok: true, note: 'No brands in watchlist' });
   }
 
   const today = new Date().toISOString().slice(0, 10);
@@ -105,33 +213,14 @@ export default async function handler(req, res) {
   }
 
   scored.sort((a, b) => b.score - a.score);
-
-  // Urgent alerts (score 7+, not alerted today)
-  for (const r of scored.filter(r => r.score >= 7)) {
-    if (r.brand.last_alerted_date === today) continue;
-    await sendTg([
-      `🎯 *URGENT: ${r.brand.name}* — ${r.score}/10`,
-      r.adData?.active ? `Running ${r.adData.count} active UAE ads${r.adData.recentCount ? ` (${r.adData.recentCount} new this week)` : ''}` : '',
-      ``,
-      `Reply \`pitch ${r.brand.name}\` to generate pitch.`,
-    ].filter(Boolean).join('\n'));
-    await sb(`/outreach_brands?id=eq.${r.brand.id}`, {
-      method: 'PATCH',
-      body: JSON.stringify({ last_alerted_date: today }),
-    });
-  }
-
-  // Morning digest — top 3
   const top = scored.slice(0, 3);
-  const lines = [`☀️ *Good morning! Top ${top.length} opportunities today*\n`];
-  top.forEach((r, i) => {
-    const adNote = r.adData?.active ? `${r.adData.count} active UAE ads` : 'No ad data yet';
-    lines.push(`*${i + 1}. ${r.brand.name}* — ${r.score}/10`);
-    lines.push(`   ${r.brand.category} · ${adNote}`);
-    lines.push('');
-  });
-  lines.push(`Reply *1*, *2*, or *3* — or \`pitch BrandName\` for any brand.`);
 
-  await sendTg(lines.join('\n'));
-  res.status(200).json({ ok: true, brandsChecked: brands.length });
+  // Generate pitches for top 3 in parallel
+  await Promise.all(top.map(async (r) => {
+    r.pitch = await generatePitch(r.brand.name, r.brand.notes || '');
+  }));
+
+  await sendDigestEmail(top);
+
+  res.status(200).json({ ok: true, brandsChecked: brands.length, emailedTo: AASTHA_EMAIL });
 }
