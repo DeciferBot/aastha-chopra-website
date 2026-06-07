@@ -1363,79 +1363,6 @@
 
   // ── Load Trending Creators ───────────────────────────────────────────
   // Brand signals: accounts that are venues, luxury houses, malls, publications, or "official" accounts
-  const BRAND_SIGNALS = [
-    'mall', 'hotel', 'resort', 'official', 'vogue', 'bazaar', 'magazine',
-    'chanel', 'gucci', 'lv', 'louisvuitton', 'dior', 'prada', 'hermes',
-    'burjalarab', 'burjkhalifa', 'jumeirah', 'atlantis', 'armani',
-    'schiaparelli', 'valentino', 'versace', 'fendi', 'balenciaga',
-    'dubaimall', 'thedubaimall', 'malloftheemirates',
-  ];
-  function isCreator(handle) {
-    const h = handle.replace('@', '').toLowerCase();
-    return !BRAND_SIGNALS.some(sig => h.includes(sig));
-  }
-
-  async function loadTrendingCreators() {
-    // Prefer creator_accounts (human influencers); fall back to filtering tag_accounts
-    const rows = await sbFetch('uae_daily_brief',
-      'order=brief_date.desc&limit=9&select=creator_accounts,tag_accounts,headline,card_type');
-
-    const strip = document.getElementById('creatorsStrip');
-    const insightEl = document.getElementById('creatorsInsight');
-
-    const seen = new Set();
-    const creators = [];
-    rows.forEach(r => {
-      // Use creator_accounts if populated, otherwise filter tag_accounts for non-brands
-      const handles = (r.creator_accounts && r.creator_accounts.length)
-        ? r.creator_accounts
-        : (r.tag_accounts || []).filter(isCreator);
-      handles.forEach(handle => {
-        if (!seen.has(handle)) {
-          seen.add(handle);
-          creators.push({ handle, headline: r.headline, type: r.card_type });
-        }
-      });
-    });
-
-    // Compute next brief countdown (6:30am Dubai = UTC+4)
-    const dubaiOffset = 4 * 60;
-    const nowMs = Date.now();
-    const nowDubaiMs = nowMs + (dubaiOffset + new Date().getTimezoneOffset()) * 60000;
-    const nowDubai = new Date(nowDubaiMs);
-    const nextRun = new Date(nowDubai);
-    nextRun.setHours(6, 30, 0, 0);
-    if (nowDubai >= nextRun) nextRun.setDate(nextRun.getDate() + 1);
-    const minsUntil = Math.round((nextRun - nowDubai) / 60000);
-    const nextLabel = minsUntil < 60
-      ? `in ${minsUntil}m`
-      : minsUntil < 1440
-        ? `in ${Math.round(minsUntil / 60)}h`
-        : 'tomorrow';
-    const metaEl = document.getElementById('creatorsMeta');
-    if (metaEl) metaEl.textContent = `Next brief ${nextLabel} · 6:30am Dubai time · updates daily`;
-
-    if (!creators.length) {
-      strip.innerHTML = `<div class="creators-empty">No creator suggestions yet — accounts from the next brief will appear here after 6:30am Dubai time (${nextLabel})</div>`;
-      return;
-    }
-
-    strip.innerHTML = creators.map(c => {
-      const initials = c.handle.replace('@','').slice(0,2).toUpperCase();
-      const igUrl = `https://www.instagram.com/${c.handle.replace('@','')}`;
-      return `
-        <a class="creator-card" href="${igUrl}" target="_blank" rel="noopener">
-          <div class="creator-avatar">${initials}</div>
-          <div>
-            <div class="creator-handle">${c.handle}</div>
-            <div class="creator-context">${c.headline}</div>
-          </div>
-        </a>`;
-    }).join('');
-
-    insightEl.style.display = '';
-    insightEl.innerHTML = `<strong>${creators.length} creator${creators.length !== 1 ? 's' : ''}</strong> from your last brief · tag them in relevant posts to grow reach · refreshes ${nextLabel}`;
-  }
 
   // ── Scroll Progress ──────────────────────────────────────────────────
   var _prog = document.getElementById('scroll-progress');
@@ -1449,7 +1376,6 @@
   Promise.all([
     loadNorthStar(),
     loadBrief(),
-    loadTrendingCreators(),
     loadAudience(),
     loadPerformance(),
     loadGrowth(),
