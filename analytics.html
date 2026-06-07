@@ -1067,8 +1067,8 @@
   // ── Load North Star ──────────────────────────────────────────────────
   async function loadNorthStar() {
     const rows = await sbFetch('instagram_demographics',
-      `metric=eq.follower_demographics&breakdown=eq.country&dimension=eq.AE&select=value`);
-    const uae = rows.reduce((s, r) => s + (r.value || 0), 0);
+      `metric=eq.follower_demographics&breakdown=eq.country&dimension=eq.AE&order=synced_at.desc&limit=1&select=value`);
+    const uae = rows[0]?.value || 0;
     document.getElementById('nsCount').textContent = fmt(uae);
     const pct = Math.min((uae / 20000) * 100, 100);
     setTimeout(() => {
