@@ -1161,10 +1161,10 @@
     .portfolio-inner { max-width: 960px; margin: 0 auto; padding: 0 clamp(24px,4vw,60px); }
     .portfolio-inner .section-header { padding-bottom: 0; }
 
+    /* Masonry via CSS columns: each post keeps its natural aspect ratio (no crop). */
     .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
+      columns: 3;
+      column-gap: 4px;
       margin-top: 48px;
       margin-left: -60px;
       margin-right: -60px;
@@ -1174,7 +1174,9 @@
       position: relative;
       overflow: hidden;
       cursor: none;
-      aspect-ratio: 4/5;
+      display: block;
+      break-inside: avoid;
+      margin-bottom: 4px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.3);
       transition: transform 0.4s var(--ease-spring), box-shadow 0.4s var(--ease-spring);
     }
@@ -1184,9 +1186,7 @@
     }
     .portfolio-item .portfolio-bg {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 20%;
+      height: auto;
       display: block;
       filter: saturate(0.82) contrast(1.06);
       transition: transform 0.7s var(--ease-spring);
@@ -1195,9 +1195,8 @@
 
     .portfolio-bg {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 20%;
+      height: auto;
+      display: block;
       transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
@@ -2097,11 +2096,12 @@
       #portfolio { padding: 80px 0 0; }
       .portfolio-inner { padding: 0 20px; }
       .portfolio-grid {
-        grid-template-columns: 1fr;
+        columns: 2;
+        column-gap: 3px;
         margin-left: -20px;
         margin-right: -20px;
-        gap: 2px;
       }
+      .portfolio-item { margin-bottom: 3px; }
 
       #instagram { padding: 80px 0 60px; }
       .instagram-inner { padding: 0 20px; }
@@ -3609,54 +3609,98 @@
     (async function loadPortfolio() {
       const SUPABASE_URL = 'https://uqzvaytvynrglijvwjsz.supabase.co';
       const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxenZheXR2eW5yZ2xpanZ3anN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NTE1MzMsImV4cCI6MjA5NjEyNzUzM30.gO4SExyBda-iOb5iHNo-2aW_lvmh3_k-SEMLMqyGkbo';
+      const grid = document.getElementById('portfolio-grid');
+      if (!grid) return;
       const delays = ['', 'reveal-delay-1', 'reveal-delay-2'];
+      const FEATURE = 6;     // how many tiles to show
+      const POOL = 30;       // randomise among the top-N performers
 
-      // Add Supabase image transform params for web-optimised delivery
-      function optimiseImg(url, width = 900) {
-        if (!url) return url;
-        // Supabase storage transform API
-        if (url.includes('/storage/v1/object/public/')) {
-          return url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/')
-            + `?width=${width}&quality=80&format=webp`;
-        }
-        return url;
+      const esc = (s) => String(s == null ? '' : s)
+        .replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+      // Turn an Instagram caption into a short, clean title.
+      function cleanTitle(caption) {
+        if (!caption) return 'Featured Moment';
+        let t = caption.split('\n')[0]
+          .replace(/@[\w.]+/g, '')
+          .replace(/#[^\s#]+/g, '')
+          .replace(/https?:\/\/\S+/g, '')
+          .replace(/\s{2,}/g, ' ')
+          .trim();
+        if (t.length > 46) t = t.slice(0, 44).trim() + '…';
+        return t || 'Featured Moment';
       }
 
-      try {
-        const res = await fetch(
-          `${SUPABASE_URL}/rest/v1/portfolio?select=*&active=eq.true&order=sort_order.asc`,
-          { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } }
-        );
-        const items = await res.json();
-        const grid = document.getElementById('portfolio-grid');
-        if (!grid || !Array.isArray(items)) return;
+      const TYPE_LABEL = { VIDEO: 'Reel', CAROUSEL_ALBUM: 'Series', IMAGE: 'Photo' };
 
-        // Shuffle on each load so the featured set rotates for every visitor
-        for (let i = items.length - 1; i > 0; i--) {
+      // Videos only carry a thumbnail; photos/carousels carry the media itself.
+      const imgFor = (p) => p.media_type === 'VIDEO'
+        ? (p.original_thumbnail_url || p.original_media_url)
+        : (p.original_media_url || p.original_thumbnail_url);
+
+      function shuffle(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
-          [items[i], items[j]] = [items[j], items[i]];
+          [arr[i], arr[j]] = [arr[j], arr[i]];
         }
+        return arr;
+      }
 
-        grid.innerHTML = items.map((item, i) => `
-          <div class="portfolio-item reveal ${delays[i % 3]}">
-            <img class="portfolio-bg" src="${optimiseImg(item.image_path)}" alt="${item.alt_text}" loading="lazy" style="object-position:${item.focal_point || 'center 35%'};" />
+      function renderTiles(list) {
+        grid.innerHTML = list.map((item, i) => `
+          <a class="portfolio-item reveal ${delays[i % 3]}" href="${esc(item.permalink || 'https://www.instagram.com/aastha_sochic/')}" target="_blank" rel="noopener">
+            <img class="portfolio-bg" src="${esc(item.src)}" alt="${esc(item.title)}" loading="lazy" />
             <div class="portfolio-overlay">
               <div class="portfolio-meta">
-                <span class="portfolio-tag">${item.tag}</span>
-                <span class="portfolio-title">${item.title}</span>
+                <span class="portfolio-tag">${esc(item.tag)}</span>
+                <span class="portfolio-title">${esc(item.title)}</span>
               </div>
             </div>
-          </div>
+          </a>
         `).join('');
 
-        // Re-run reveal on new elements
+        // A stale CDN link (rare — synced every 4h) just drops its tile.
+        grid.querySelectorAll('.portfolio-item img').forEach(img => {
+          img.addEventListener('error', () => { const t = img.closest('.portfolio-item'); if (t) t.remove(); });
+        });
+
         const obs = new IntersectionObserver((entries) => {
           entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
         }, { threshold: 0, rootMargin: '120px 0px 120px 0px' });
-        document.querySelectorAll('#portfolio-grid .reveal').forEach(el => obs.observe(el));
-      } catch (e) {
-        console.warn('Portfolio fetch failed, keeping fallback', e);
+        grid.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       }
+
+      // Local fallback — only used if the live query fails or returns nothing.
+      const FALLBACK = [
+        { src: 'images/IMG_0066.JPG', title: 'Evening in Dubai',   tag: 'Lifestyle', permalink: 'https://www.instagram.com/aastha_sochic/' },
+        { src: 'images/IMG_2813.JPG', title: 'Powder Blue Moment', tag: 'Fashion',   permalink: 'https://www.instagram.com/aastha_sochic/' },
+        { src: 'images/IMG_6977.JPG', title: 'Dubai Nights',       tag: 'Lifestyle', permalink: 'https://www.instagram.com/aastha_sochic/' },
+        { src: 'images/IMG_9859.JPG', title: 'Desert Arches',      tag: 'Travel',    permalink: 'https://www.instagram.com/aastha_sochic/' },
+        { src: 'images/IMG_7280.JPG', title: 'Golden Heritage',    tag: 'Fashion',   permalink: 'https://www.instagram.com/aastha_sochic/' },
+        { src: 'images/IMG_1364.JPG', title: 'Burj Al Arab Days',  tag: 'Lifestyle', permalink: 'https://www.instagram.com/aastha_sochic/' },
+      ];
+
+      try {
+        // Top performers by total engagement; randomise among them so the
+        // featured set rotates per visitor while always staying "best of".
+        const res = await fetch(
+          `${SUPABASE_URL}/rest/v1/instagram_posts?select=id,media_type,caption,permalink,original_media_url,original_thumbnail_url,total_interactions&order=total_interactions.desc.nullslast&limit=${POOL}`,
+          { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } }
+        );
+        let posts = await res.json();
+        if (!Array.isArray(posts)) posts = [];
+        posts = posts.filter(imgFor);
+        const picked = shuffle(posts).slice(0, FEATURE).map(p => ({
+          src: imgFor(p),
+          title: cleanTitle(p.caption),
+          tag: TYPE_LABEL[p.media_type] || 'Featured',
+          permalink: p.permalink,
+        }));
+        if (picked.length) { renderTiles(picked); return; }
+      } catch (e) {
+        console.warn('Portfolio (top posts) fetch failed, using local fallback', e);
+      }
+      renderTiles(FALLBACK);
     })();
   </script>
   <script src="/js/meta-events.js" defer></script>
