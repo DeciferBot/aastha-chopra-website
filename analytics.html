@@ -1034,6 +1034,10 @@
   const SUPABASE_URL = 'https://uqzvaytvynrglijvwjsz.supabase.co';
   const ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxenZheXR2eW5yZ2xpanZ3anN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NTE1MzMsImV4cCI6MjA5NjEyNzUzM30.gO4SExyBda-iOb5iHNo-2aW_lvmh3_k-SEMLMqyGkbo';
 
+  function esc(str) {
+    return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
   const COUNTRY_NAMES = {
     AE:'UAE', IN:'India', BR:'Brazil', US:'USA', IR:'Iran',
     PK:'Pakistan', NG:'Nigeria', TR:'Turkey', GB:'United Kingdom', EG:'Egypt',
@@ -1135,16 +1139,16 @@
       const el = document.createElement('div');
       el.className = `brief-card type-${c.card_type || 'trend'}`;
       el.innerHTML = `
-        <span class="card-type-chip ${cls}">${lbl}</span>
-        <h3 class="card-headline">${c.headline}</h3>
-        <p class="card-context">${c.context}</p>
+        <span class="card-type-chip ${cls}">${esc(lbl)}</span>
+        <h3 class="card-headline">${esc(c.headline)}</h3>
+        <p class="card-context">${esc(c.context)}</p>
         <div class="card-divider"></div>
         <span class="card-angle-label">Your angle</span>
-        <p class="card-angle">${c.aastha_angle}</p>
+        <p class="card-angle">${esc(c.aastha_angle)}</p>
         <div class="card-tags">${hashtags}</div>
         <div class="card-tags">${accounts}</div>
-        ${c.source_url ? `<a class="card-source" href="${c.source_url}" target="_blank" rel="noopener">
-          <span class="card-source-dot"></span>${c.source_name} · source
+        ${c.source_url ? `<a class="card-source" href="${esc(c.source_url)}" target="_blank" rel="noopener">
+          <span class="card-source-dot"></span>${esc(c.source_name)} · source
         </a>` : ''}`;
       grid.appendChild(el);
     });

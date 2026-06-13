@@ -597,3 +597,10 @@ body::before {
 .d1 { transition-delay: 0.1s; }
 .d2 { transition-delay: 0.2s; }
 .d3 { transition-delay: 0.3s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .hero-word { opacity: 1; animation: none; }
+  .marquee-inner { animation: none; }
+  .gallery-item img, .reel-card img, .brand-tag { transition: none; }
+}

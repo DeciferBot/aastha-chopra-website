@@ -5,8 +5,8 @@ export default function handler(req, res) {
 
   const { password } = req.body || {};
 
-  if (password === 'Aastha123!') {
-    res.setHeader('Set-Cookie', 'analytics_auth=1; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=86400');
+  if (password === process.env.ANALYTICS_PASSWORD) {
+    res.setHeader('Set-Cookie', 'analytics_auth=1; Path=/; Secure; SameSite=Strict; Max-Age=86400');
     return res.status(200).json({ ok: true });
   }
 

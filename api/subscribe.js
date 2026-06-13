@@ -77,7 +77,7 @@ export default async function handler(req, res) {
     <div class="footer">
       You're receiving this because you signed up at aasthachopra.com.<br>
       <a href="https://www.instagram.com/aastha_sochic/">@aastha_sochic</a> &nbsp;·&nbsp; Dubai, UAE<br><br>
-      <a href="#">Unsubscribe</a>
+      <a href="mailto:management@aasthachopra.com?subject=Unsubscribe%20request">Unsubscribe</a>
     </div>
   </div>
 </body>
