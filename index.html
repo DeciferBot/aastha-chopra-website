@@ -3631,9 +3631,15 @@
         const grid = document.getElementById('portfolio-grid');
         if (!grid || !Array.isArray(items)) return;
 
+        // Shuffle on each load so the featured set rotates for every visitor
+        for (let i = items.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [items[i], items[j]] = [items[j], items[i]];
+        }
+
         grid.innerHTML = items.map((item, i) => `
           <div class="portfolio-item reveal ${delays[i % 3]}">
-            <img class="portfolio-bg" src="${optimiseImg(item.image_path)}" alt="${item.alt_text}" loading="lazy" />
+            <img class="portfolio-bg" src="${optimiseImg(item.image_path)}" alt="${item.alt_text}" loading="lazy" style="object-position:${item.focal_point || 'center 35%'};" />
             <div class="portfolio-overlay">
               <div class="portfolio-meta">
                 <span class="portfolio-tag">${item.tag}</span>
