@@ -189,6 +189,21 @@
                 event_label: data.category || 'unknown',
                 brand: data.brand
               });
+              // Meta Lead conversion — browser pixel + Conversions API, deduped by eventId.
+              var leadEventId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+                : 'e' + Date.now() + Math.random().toString(36).slice(2);
+              if (window.fbq) fbq('track', 'Lead', { content_name: 'Brand Inquiry', content_category: data.category || '' }, { eventID: leadEventId });
+              fetch('/api/capi-event', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  eventName: 'Lead',
+                  eventId: leadEventId,
+                  email: data.email,
+                  firstName: (data.name || '').split(' ')[0],
+                  customData: { content_name: 'Brand Inquiry', content_category: data.category || '' }
+                })
+              }).catch(function(){});
             } else {
               throw new Error('Submit failed: ' + res.status);
             }
@@ -3319,13 +3334,17 @@
       const email = input.value.trim();
       btn.textContent = 'Subscribing…';
       input.disabled = true;
+      // Shared id so the browser pixel + Conversions API event deduplicate.
+      const eventId = (window.crypto && crypto.randomUUID) ? crypto.randomUUID()
+        : 'e' + Date.now() + Math.random().toString(36).slice(2);
       try {
         const res = await fetch('/api/subscribe', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
+          body: JSON.stringify({ email, eventId }),
         });
         if (res.ok) {
+          if (window.fbq) fbq('track', 'Subscribe', { content_name: 'Newsletter' }, { eventID: eventId });
           btn.textContent = 'You\'re in ✦';
           input.value = '';
         } else {

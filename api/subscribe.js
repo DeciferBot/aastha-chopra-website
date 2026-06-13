@@ -1,9 +1,11 @@
+import { sendCapiEvent } from './_capi.js';
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { email } = req.body;
+  const { email, eventId } = req.body;
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: 'Valid email required' });
   }
@@ -84,6 +86,18 @@ export default async function handler(req, res) {
 </html>`,
         text: `Welcome to the edit — Aastha Chopra\n\nThank you for subscribing. You'll receive monthly drops of my favourite finds — style notes, travel edits from Dubai and beyond, wellness rituals, and the occasional exclusive from the brands I love.\n\nVisit the site: https://www.aasthachopra.com\n\n@aastha_sochic · Dubai, UAE`,
       }),
+    });
+
+    // 3. Mirror the conversion to Meta via the Conversions API (server-side).
+    //    Deduplicated against the browser pixel by the shared eventId.
+    //    Non-blocking: a CAPI hiccup must never fail the subscription.
+    await sendCapiEvent({
+      eventName: 'Subscribe',
+      eventId,
+      req,
+      email,
+      eventSourceUrl: req.headers?.referer,
+      customData: { content_name: 'Newsletter' },
     });
 
     return res.status(200).json({ success: true });
