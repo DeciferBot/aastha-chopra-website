@@ -9,7 +9,7 @@
       "source_file": "generate-pdf.js",
       "source_location": "L1",
       "id": "generate_pdf_js",
-      "community": 14,
+      "community": 15,
       "norm_label": "generate-pdf.js"
     },
     {
@@ -180,7 +180,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L1",
       "id": "js_meta_events_js",
-      "community": 8,
+      "community": 9,
       "norm_label": "meta-events.js"
     },
     {
@@ -189,7 +189,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L11",
       "id": "meta_events_fbqready",
-      "community": 8,
+      "community": 9,
       "norm_label": "fbqready()"
     },
     {
@@ -198,7 +198,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L12",
       "id": "meta_events_eventid",
-      "community": 8,
+      "community": 9,
       "norm_label": "eventid()"
     },
     {
@@ -207,7 +207,7 @@
       "source_file": "api/analytics-auth.js",
       "source_location": "L1",
       "id": "api_analytics_auth_js",
-      "community": 9,
+      "community": 10,
       "norm_label": "analytics-auth.js"
     },
     {
@@ -216,7 +216,7 @@
       "source_file": "api/analytics-auth.js",
       "source_location": "L1",
       "id": "analytics_auth_handler",
-      "community": 9,
+      "community": 10,
       "norm_label": "handler()"
     },
     {
@@ -225,7 +225,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L1",
       "id": "api_telegram_js",
-      "community": 1,
+      "community": 2,
       "norm_label": "telegram.js"
     },
     {
@@ -234,7 +234,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L17",
       "id": "telegram_emailpitchtoaastha",
-      "community": 1,
+      "community": 2,
       "norm_label": "emailpitchtoaastha()"
     },
     {
@@ -243,7 +243,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L47",
       "id": "telegram_send",
-      "community": 1,
+      "community": 2,
       "norm_label": "send()"
     },
     {
@@ -252,7 +252,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L60",
       "id": "telegram_sb",
-      "community": 1,
+      "community": 2,
       "norm_label": "sb()"
     },
     {
@@ -261,7 +261,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L89",
       "id": "telegram_generatepitch",
-      "community": 1,
+      "community": 2,
       "norm_label": "generatepitch()"
     },
     {
@@ -270,7 +270,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L145",
       "id": "telegram_handleadd",
-      "community": 1,
+      "community": 2,
       "norm_label": "handleadd()"
     },
     {
@@ -279,7 +279,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L164",
       "id": "telegram_handleremove",
-      "community": 1,
+      "community": 2,
       "norm_label": "handleremove()"
     },
     {
@@ -288,7 +288,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L170",
       "id": "telegram_handlelist",
-      "community": 1,
+      "community": 2,
       "norm_label": "handlelist()"
     },
     {
@@ -297,7 +297,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L183",
       "id": "telegram_handlestatus",
-      "community": 1,
+      "community": 2,
       "norm_label": "handlestatus()"
     },
     {
@@ -306,7 +306,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L204",
       "id": "telegram_handlepitch",
-      "community": 1,
+      "community": 2,
       "norm_label": "handlepitch()"
     },
     {
@@ -315,7 +315,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L224",
       "id": "telegram_handlehelp",
-      "community": 1,
+      "community": 2,
       "norm_label": "handlehelp()"
     },
     {
@@ -324,8 +324,53 @@
       "source_file": "api/telegram.js",
       "source_location": "L240",
       "id": "telegram_handler",
-      "community": 1,
+      "community": 2,
       "norm_label": "handler()"
+    },
+    {
+      "label": "_profile.js",
+      "file_type": "code",
+      "source_file": "api/_profile.js",
+      "source_location": "L1",
+      "id": "api_profile_js",
+      "community": 3,
+      "norm_label": "_profile.js"
+    },
+    {
+      "label": "sbGet()",
+      "file_type": "code",
+      "source_file": "api/_profile.js",
+      "source_location": "L29",
+      "id": "profile_sbget",
+      "community": 3,
+      "norm_label": "sbget()"
+    },
+    {
+      "label": "latestGeneration()",
+      "file_type": "code",
+      "source_file": "api/_profile.js",
+      "source_location": "L39",
+      "id": "profile_latestgeneration",
+      "community": 3,
+      "norm_label": "latestgeneration()"
+    },
+    {
+      "label": "cleanCity()",
+      "file_type": "code",
+      "source_file": "api/_profile.js",
+      "source_location": "L45",
+      "id": "profile_cleancity",
+      "community": 3,
+      "norm_label": "cleancity()"
+    },
+    {
+      "label": "getLiveProfile()",
+      "file_type": "code",
+      "source_file": "api/_profile.js",
+      "source_location": "L56",
+      "id": "profile_getliveprofile",
+      "community": 3,
+      "norm_label": "getliveprofile()"
     },
     {
       "label": "capi-event.js",
@@ -333,7 +378,7 @@
       "source_file": "api/capi-event.js",
       "source_location": "L1",
       "id": "api_capi_event_js",
-      "community": 3,
+      "community": 5,
       "norm_label": "capi-event.js"
     },
     {
@@ -342,7 +387,7 @@
       "source_file": "api/capi-event.js",
       "source_location": "L10",
       "id": "capi_event_handler",
-      "community": 3,
+      "community": 5,
       "norm_label": "handler()"
     },
     {
@@ -351,7 +396,7 @@
       "source_file": "api/subscribe.js",
       "source_location": "L1",
       "id": "api_subscribe_js",
-      "community": 3,
+      "community": 5,
       "norm_label": "subscribe.js"
     },
     {
@@ -360,7 +405,7 @@
       "source_file": "api/subscribe.js",
       "source_location": "L3",
       "id": "subscribe_handler",
-      "community": 3,
+      "community": 5,
       "norm_label": "handler()"
     },
     {
@@ -369,7 +414,7 @@
       "source_file": "api/ig-profile.js",
       "source_location": "L1",
       "id": "api_ig_profile_js",
-      "community": 10,
+      "community": 11,
       "norm_label": "ig-profile.js"
     },
     {
@@ -378,7 +423,97 @@
       "source_file": "api/ig-profile.js",
       "source_location": "L1",
       "id": "ig_profile_handler",
-      "community": 10,
+      "community": 11,
+      "norm_label": "handler()"
+    },
+    {
+      "label": "refresh-live.js",
+      "file_type": "code",
+      "source_file": "api/refresh-live.js",
+      "source_location": "L1",
+      "id": "api_refresh_live_js",
+      "community": 7,
+      "norm_label": "refresh-live.js"
+    },
+    {
+      "label": "ig()",
+      "file_type": "code",
+      "source_file": "api/refresh-live.js",
+      "source_location": "L22",
+      "id": "refresh_live_ig",
+      "community": 7,
+      "norm_label": "ig()"
+    },
+    {
+      "label": "sb()",
+      "file_type": "code",
+      "source_file": "api/refresh-live.js",
+      "source_location": "L30",
+      "id": "refresh_live_sb",
+      "community": 7,
+      "norm_label": "sb()"
+    },
+    {
+      "label": "sleep()",
+      "file_type": "code",
+      "source_file": "api/refresh-live.js",
+      "source_location": "L46",
+      "id": "refresh_live_sleep",
+      "community": 7,
+      "norm_label": "sleep()"
+    },
+    {
+      "label": "fetchDemo()",
+      "file_type": "code",
+      "source_file": "api/refresh-live.js",
+      "source_location": "L49",
+      "id": "refresh_live_fetchdemo",
+      "community": 7,
+      "norm_label": "fetchdemo()"
+    },
+    {
+      "label": "handler()",
+      "file_type": "code",
+      "source_file": "api/refresh-live.js",
+      "source_location": "L72",
+      "id": "refresh_live_handler",
+      "community": 7,
+      "norm_label": "handler()"
+    },
+    {
+      "label": "pitch-now.js",
+      "file_type": "code",
+      "source_file": "api/pitch-now.js",
+      "source_location": "L1",
+      "id": "api_pitch_now_js",
+      "community": 1,
+      "norm_label": "pitch-now.js"
+    },
+    {
+      "label": "sb()",
+      "file_type": "code",
+      "source_file": "api/pitch-now.js",
+      "source_location": "L20",
+      "id": "pitch_now_sb",
+      "community": 1,
+      "norm_label": "sb()"
+    },
+    {
+      "label": "enc()",
+      "file_type": "code",
+      "source_file": "api/pitch-now.js",
+      "source_location": "L35",
+      "id": "pitch_now_enc",
+      "community": 1,
+      "norm_label": "enc()"
+    },
+    {
+      "label": "handler()",
+      "file_type": "code",
+      "source_file": "api/pitch-now.js",
+      "source_location": "L37",
+      "id": "pitch_now_handler",
+      "community": 1,
       "norm_label": "handler()"
     },
     {
@@ -387,7 +522,7 @@
       "source_file": "api/_capi.js",
       "source_location": "L1",
       "id": "api_capi_js",
-      "community": 3,
+      "community": 5,
       "norm_label": "_capi.js"
     },
     {
@@ -396,7 +531,7 @@
       "source_file": "api/_capi.js",
       "source_location": "L14",
       "id": "capi_hash",
-      "community": 3,
+      "community": 5,
       "norm_label": "hash()"
     },
     {
@@ -405,7 +540,7 @@
       "source_file": "api/_capi.js",
       "source_location": "L23",
       "id": "capi_readfbcookies",
-      "community": 3,
+      "community": 5,
       "norm_label": "readfbcookies()"
     },
     {
@@ -414,7 +549,7 @@
       "source_file": "api/_capi.js",
       "source_location": "L48",
       "id": "capi_sendcapievent",
-      "community": 3,
+      "community": 5,
       "norm_label": "sendcapievent()"
     },
     {
@@ -423,7 +558,7 @@
       "source_file": "api/reels.js",
       "source_location": "L1",
       "id": "api_reels_js",
-      "community": 11,
+      "community": 12,
       "norm_label": "reels.js"
     },
     {
@@ -432,7 +567,7 @@
       "source_file": "api/reels.js",
       "source_location": "L3",
       "id": "reels_handler",
-      "community": 11,
+      "community": 12,
       "norm_label": "handler()"
     },
     {
@@ -441,7 +576,7 @@
       "source_file": "api/instagram.js",
       "source_location": "L1",
       "id": "api_instagram_js",
-      "community": 12,
+      "community": 13,
       "norm_label": "instagram.js"
     },
     {
@@ -450,7 +585,7 @@
       "source_file": "api/instagram.js",
       "source_location": "L13",
       "id": "instagram_handler",
-      "community": 12,
+      "community": 13,
       "norm_label": "handler()"
     },
     {
@@ -459,7 +594,7 @@
       "source_file": "api/ig-stats.js",
       "source_location": "L1",
       "id": "api_ig_stats_js",
-      "community": 13,
+      "community": 14,
       "norm_label": "ig-stats.js"
     },
     {
@@ -468,8 +603,89 @@
       "source_file": "api/ig-stats.js",
       "source_location": "L11",
       "id": "ig_stats_handler",
-      "community": 13,
+      "community": 14,
       "norm_label": "handler()"
+    },
+    {
+      "label": "_pitch.js",
+      "file_type": "code",
+      "source_file": "api/_pitch.js",
+      "source_location": "L1",
+      "id": "api_pitch_js",
+      "community": 1,
+      "norm_label": "_pitch.js"
+    },
+    {
+      "label": "buildFactSheet()",
+      "file_type": "code",
+      "source_file": "api/_pitch.js",
+      "source_location": "L18",
+      "id": "pitch_buildfactsheet",
+      "community": 1,
+      "norm_label": "buildfactsheet()"
+    },
+    {
+      "label": "generatePitch()",
+      "file_type": "code",
+      "source_file": "api/_pitch.js",
+      "source_location": "L36",
+      "id": "pitch_generatepitch",
+      "community": 1,
+      "norm_label": "generatepitch()"
+    },
+    {
+      "label": "esc()",
+      "file_type": "code",
+      "source_file": "api/_pitch.js",
+      "source_location": "L102",
+      "id": "pitch_esc",
+      "community": 1,
+      "norm_label": "esc()"
+    },
+    {
+      "label": "renderPitchEmailHtml()",
+      "file_type": "code",
+      "source_file": "api/_pitch.js",
+      "source_location": "L111",
+      "id": "pitch_renderpitchemailhtml",
+      "community": 1,
+      "norm_label": "renderpitchemailhtml()"
+    },
+    {
+      "label": "sendPitchEmail()",
+      "file_type": "code",
+      "source_file": "api/_pitch.js",
+      "source_location": "L138",
+      "id": "pitch_sendpitchemail",
+      "community": 1,
+      "norm_label": "sendpitchemail()"
+    },
+    {
+      "label": "autosendEnabled()",
+      "file_type": "code",
+      "source_file": "api/_pitch.js",
+      "source_location": "L161",
+      "id": "pitch_autosendenabled",
+      "community": 1,
+      "norm_label": "autosendenabled()"
+    },
+    {
+      "label": "renderBrandEmailHtml()",
+      "file_type": "code",
+      "source_file": "api/_pitch.js",
+      "source_location": "L166",
+      "id": "pitch_renderbrandemailhtml",
+      "community": 1,
+      "norm_label": "renderbrandemailhtml()"
+    },
+    {
+      "label": "sendBrandPitch()",
+      "file_type": "code",
+      "source_file": "api/_pitch.js",
+      "source_location": "L184",
+      "id": "pitch_sendbrandpitch",
+      "community": 1,
+      "norm_label": "sendbrandpitch()"
     },
     {
       "label": "daily-agent.js",
@@ -477,124 +693,52 @@
       "source_file": "api/cron/daily-agent.js",
       "source_location": "L1",
       "id": "api_cron_daily_agent_js",
-      "community": 5,
+      "community": 3,
       "norm_label": "daily-agent.js"
     },
     {
       "label": "sb()",
       "file_type": "code",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L27",
+      "source_location": "L29",
       "id": "daily_agent_sb",
-      "community": 5,
+      "community": 3,
       "norm_label": "sb()"
     },
     {
       "label": "checkAdLibrary()",
       "file_type": "code",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L42",
+      "source_location": "L44",
       "id": "daily_agent_checkadlibrary",
-      "community": 5,
+      "community": 3,
       "norm_label": "checkadlibrary()"
     },
     {
       "label": "scoreBrand()",
       "file_type": "code",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L67",
+      "source_location": "L69",
       "id": "daily_agent_scorebrand",
-      "community": 5,
+      "community": 3,
       "norm_label": "scorebrand()"
     },
     {
-      "label": "generatePitch()",
+      "label": "storePitch()",
       "file_type": "code",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L77",
-      "id": "daily_agent_generatepitch",
-      "community": 5,
-      "norm_label": "generatepitch()"
-    },
-    {
-      "label": "sendDigestEmail()",
-      "file_type": "code",
-      "source_file": "api/cron/daily-agent.js",
-      "source_location": "L132",
-      "id": "daily_agent_senddigestemail",
-      "community": 5,
-      "norm_label": "senddigestemail()"
+      "source_location": "L84",
+      "id": "daily_agent_storepitch",
+      "community": 3,
+      "norm_label": "storepitch()"
     },
     {
       "label": "handler()",
       "file_type": "code",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L184",
+      "source_location": "L105",
       "id": "daily_agent_handler",
-      "community": 5,
-      "norm_label": "handler()"
-    },
-    {
-      "label": "discover-brands.js",
-      "file_type": "code",
-      "source_file": "api/cron/discover-brands.js",
-      "source_location": "L1",
-      "id": "api_cron_discover_brands_js",
-      "community": 6,
-      "norm_label": "discover-brands.js"
-    },
-    {
-      "label": "sb()",
-      "file_type": "code",
-      "source_file": "api/cron/discover-brands.js",
-      "source_location": "L50",
-      "id": "discover_brands_sb",
-      "community": 6,
-      "norm_label": "sb()"
-    },
-    {
-      "label": "searchAdLibrary()",
-      "file_type": "code",
-      "source_file": "api/cron/discover-brands.js",
-      "source_location": "L66",
-      "id": "discover_brands_searchadlibrary",
-      "community": 6,
-      "norm_label": "searchadlibrary()"
-    },
-    {
-      "label": "isJunk()",
-      "file_type": "code",
-      "source_file": "api/cron/discover-brands.js",
-      "source_location": "L82",
-      "id": "discover_brands_isjunk",
-      "community": 6,
-      "norm_label": "isjunk()"
-    },
-    {
-      "label": "collapseToBrands()",
-      "file_type": "code",
-      "source_file": "api/cron/discover-brands.js",
-      "source_location": "L87",
-      "id": "discover_brands_collapsetobrands",
-      "community": 6,
-      "norm_label": "collapsetobrands()"
-    },
-    {
-      "label": "emailSummary()",
-      "file_type": "code",
-      "source_file": "api/cron/discover-brands.js",
-      "source_location": "L108",
-      "id": "discover_brands_emailsummary",
-      "community": 6,
-      "norm_label": "emailsummary()"
-    },
-    {
-      "label": "handler()",
-      "file_type": "code",
-      "source_file": "api/cron/discover-brands.js",
-      "source_location": "L138",
-      "id": "discover_brands_handler",
-      "community": 6,
+      "community": 3,
       "norm_label": "handler()"
     },
     {
@@ -603,7 +747,7 @@
       "source_file": "api/cron/ad-autopilot.js",
       "source_location": "L1",
       "id": "api_cron_ad_autopilot_js",
-      "community": 4,
+      "community": 6,
       "norm_label": "ad-autopilot.js"
     },
     {
@@ -612,7 +756,7 @@
       "source_file": "api/cron/ad-autopilot.js",
       "source_location": "L46",
       "id": "ad_autopilot_sb",
-      "community": 4,
+      "community": 6,
       "norm_label": "sb()"
     },
     {
@@ -621,7 +765,7 @@
       "source_file": "api/cron/ad-autopilot.js",
       "source_location": "L62",
       "id": "ad_autopilot_fbget",
-      "community": 4,
+      "community": 6,
       "norm_label": "fbget()"
     },
     {
@@ -630,7 +774,7 @@
       "source_file": "api/cron/ad-autopilot.js",
       "source_location": "L71",
       "id": "ad_autopilot_fbpost",
-      "community": 4,
+      "community": 6,
       "norm_label": "fbpost()"
     },
     {
@@ -639,7 +783,7 @@
       "source_file": "api/cron/ad-autopilot.js",
       "source_location": "L84",
       "id": "ad_autopilot_pickwinner",
-      "community": 4,
+      "community": 6,
       "norm_label": "pickwinner()"
     },
     {
@@ -648,7 +792,7 @@
       "source_file": "api/cron/ad-autopilot.js",
       "source_location": "L117",
       "id": "ad_autopilot_getimageurl",
-      "community": 4,
+      "community": 6,
       "norm_label": "getimageurl()"
     },
     {
@@ -657,7 +801,7 @@
       "source_file": "api/cron/ad-autopilot.js",
       "source_location": "L126",
       "id": "ad_autopilot_currentactiveads",
-      "community": 4,
+      "community": 6,
       "norm_label": "currentactiveads()"
     },
     {
@@ -666,7 +810,7 @@
       "source_file": "api/cron/ad-autopilot.js",
       "source_location": "L132",
       "id": "ad_autopilot_handler",
-      "community": 4,
+      "community": 6,
       "norm_label": "handler()"
     },
     {
@@ -675,7 +819,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L1",
       "id": "api_cron_ig_sync_js",
-      "community": 2,
+      "community": 4,
       "norm_label": "ig-sync.js"
     },
     {
@@ -684,7 +828,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L34",
       "id": "ig_sync_ig",
-      "community": 2,
+      "community": 4,
       "norm_label": "ig()"
     },
     {
@@ -693,7 +837,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L42",
       "id": "ig_sync_sb",
-      "community": 2,
+      "community": 4,
       "norm_label": "sb()"
     },
     {
@@ -702,7 +846,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L64",
       "id": "ig_sync_sleep",
-      "community": 2,
+      "community": 4,
       "norm_label": "sleep()"
     },
     {
@@ -711,7 +855,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L67",
       "id": "ig_sync_fetchallmedia",
-      "community": 2,
+      "community": 4,
       "norm_label": "fetchallmedia()"
     },
     {
@@ -720,7 +864,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L95",
       "id": "ig_sync_fetchinsights",
-      "community": 2,
+      "community": 4,
       "norm_label": "fetchinsights()"
     },
     {
@@ -729,7 +873,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L111",
       "id": "ig_sync_fetchcarouselchildren",
-      "community": 2,
+      "community": 4,
       "norm_label": "fetchcarouselchildren()"
     },
     {
@@ -738,25 +882,34 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L121",
       "id": "ig_sync_fetchdemographics",
-      "community": 2,
+      "community": 4,
       "norm_label": "fetchdemographics()"
+    },
+    {
+      "label": "fetchReachedDemographics()",
+      "file_type": "code",
+      "source_file": "api/cron/ig-sync.js",
+      "source_location": "L155",
+      "id": "ig_sync_fetchreacheddemographics",
+      "community": 4,
+      "norm_label": "fetchreacheddemographics()"
     },
     {
       "label": "fetchDailySnapshot()",
       "file_type": "code",
       "source_file": "api/cron/ig-sync.js",
-      "source_location": "L152",
+      "source_location": "L185",
       "id": "ig_sync_fetchdailysnapshot",
-      "community": 2,
+      "community": 4,
       "norm_label": "fetchdailysnapshot()"
     },
     {
       "label": "handler()",
       "file_type": "code",
       "source_file": "api/cron/ig-sync.js",
-      "source_location": "L179",
+      "source_location": "L212",
       "id": "ig_sync_handler",
-      "community": 2,
+      "community": 4,
       "norm_label": "handler()"
     },
     {
@@ -765,7 +918,7 @@
       "source_file": "api/cron/daily-brief.js",
       "source_location": "L1",
       "id": "api_cron_daily_brief_js",
-      "community": 7,
+      "community": 8,
       "norm_label": "daily-brief.js"
     },
     {
@@ -774,7 +927,7 @@
       "source_file": "api/cron/daily-brief.js",
       "source_location": "L13",
       "id": "daily_brief_sb",
-      "community": 7,
+      "community": 8,
       "norm_label": "sb()"
     },
     {
@@ -783,7 +936,7 @@
       "source_file": "api/cron/daily-brief.js",
       "source_location": "L28",
       "id": "daily_brief_claude",
-      "community": 7,
+      "community": 8,
       "norm_label": "claude()"
     },
     {
@@ -792,7 +945,7 @@
       "source_file": "api/cron/daily-brief.js",
       "source_location": "L47",
       "id": "daily_brief_handler",
-      "community": 7,
+      "community": 8,
       "norm_label": "handler()"
     },
     {
@@ -801,7 +954,7 @@
       "source_file": "api/cron/daily-brief.js",
       "source_location": "L177",
       "id": "daily_brief_logrun",
-      "community": 7,
+      "community": 8,
       "norm_label": "logrun()"
     }
   ],
@@ -1433,6 +1586,102 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "api/_profile.js",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_src": "api_profile_js",
+      "_tgt": "profile_sbget",
+      "source": "api_profile_js",
+      "target": "profile_sbget",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_profile.js",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_src": "api_profile_js",
+      "_tgt": "profile_latestgeneration",
+      "source": "api_profile_js",
+      "target": "profile_latestgeneration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_profile.js",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_src": "api_profile_js",
+      "_tgt": "profile_cleancity",
+      "source": "api_profile_js",
+      "target": "profile_cleancity",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_profile.js",
+      "source_location": "L56",
+      "weight": 1.0,
+      "_src": "api_profile_js",
+      "_tgt": "profile_getliveprofile",
+      "source": "api_profile_js",
+      "target": "profile_getliveprofile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_profile.js",
+      "source_location": "L64",
+      "weight": 1.0,
+      "_src": "profile_getliveprofile",
+      "_tgt": "profile_sbget",
+      "source": "profile_sbget",
+      "target": "profile_getliveprofile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_profile.js",
+      "source_location": "L71",
+      "weight": 1.0,
+      "_src": "profile_getliveprofile",
+      "_tgt": "profile_latestgeneration",
+      "source": "profile_latestgeneration",
+      "target": "profile_getliveprofile",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/pitch-now.js",
+      "source_location": "L61",
+      "weight": 1.0,
+      "_src": "profile_getliveprofile",
+      "_tgt": "pitch_now_handler",
+      "source": "profile_getliveprofile",
+      "target": "pitch_now_handler"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/daily-agent.js",
+      "source_location": "L248",
+      "weight": 1.0,
+      "_src": "profile_getliveprofile",
+      "_tgt": "daily_agent_handler",
+      "source": "profile_getliveprofile",
+      "target": "daily_agent_handler"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "api/capi-event.js",
       "source_location": "L10",
       "weight": 1.0,
@@ -1489,6 +1738,210 @@
       "source": "api_ig_profile_js",
       "target": "ig_profile_handler",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/refresh-live.js",
+      "source_location": "L22",
+      "weight": 1.0,
+      "_src": "api_refresh_live_js",
+      "_tgt": "refresh_live_ig",
+      "source": "api_refresh_live_js",
+      "target": "refresh_live_ig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/refresh-live.js",
+      "source_location": "L30",
+      "weight": 1.0,
+      "_src": "api_refresh_live_js",
+      "_tgt": "refresh_live_sb",
+      "source": "api_refresh_live_js",
+      "target": "refresh_live_sb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/refresh-live.js",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_src": "api_refresh_live_js",
+      "_tgt": "refresh_live_sleep",
+      "source": "api_refresh_live_js",
+      "target": "refresh_live_sleep",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/refresh-live.js",
+      "source_location": "L49",
+      "weight": 1.0,
+      "_src": "api_refresh_live_js",
+      "_tgt": "refresh_live_fetchdemo",
+      "source": "api_refresh_live_js",
+      "target": "refresh_live_fetchdemo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/refresh-live.js",
+      "source_location": "L72",
+      "weight": 1.0,
+      "_src": "api_refresh_live_js",
+      "_tgt": "refresh_live_handler",
+      "source": "api_refresh_live_js",
+      "target": "refresh_live_handler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/refresh-live.js",
+      "source_location": "L54",
+      "weight": 1.0,
+      "_src": "refresh_live_fetchdemo",
+      "_tgt": "refresh_live_ig",
+      "source": "refresh_live_ig",
+      "target": "refresh_live_fetchdemo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/refresh-live.js",
+      "source_location": "L96",
+      "weight": 1.0,
+      "_src": "refresh_live_handler",
+      "_tgt": "refresh_live_ig",
+      "source": "refresh_live_ig",
+      "target": "refresh_live_handler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/refresh-live.js",
+      "source_location": "L86",
+      "weight": 1.0,
+      "_src": "refresh_live_handler",
+      "_tgt": "refresh_live_sb",
+      "source": "refresh_live_sb",
+      "target": "refresh_live_handler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/refresh-live.js",
+      "source_location": "L66",
+      "weight": 1.0,
+      "_src": "refresh_live_fetchdemo",
+      "_tgt": "refresh_live_sleep",
+      "source": "refresh_live_sleep",
+      "target": "refresh_live_fetchdemo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/refresh-live.js",
+      "source_location": "L115",
+      "weight": 1.0,
+      "_src": "refresh_live_handler",
+      "_tgt": "refresh_live_fetchdemo",
+      "source": "refresh_live_fetchdemo",
+      "target": "refresh_live_handler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/pitch-now.js",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_src": "api_pitch_now_js",
+      "_tgt": "pitch_now_sb",
+      "source": "api_pitch_now_js",
+      "target": "pitch_now_sb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/pitch-now.js",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_src": "api_pitch_now_js",
+      "_tgt": "pitch_now_enc",
+      "source": "api_pitch_now_js",
+      "target": "pitch_now_enc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/pitch-now.js",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_src": "api_pitch_now_js",
+      "_tgt": "pitch_now_handler",
+      "source": "api_pitch_now_js",
+      "target": "pitch_now_handler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/pitch-now.js",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_src": "pitch_now_handler",
+      "_tgt": "pitch_now_sb",
+      "source": "pitch_now_sb",
+      "target": "pitch_now_handler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/pitch-now.js",
+      "source_location": "L53",
+      "weight": 1.0,
+      "_src": "pitch_now_handler",
+      "_tgt": "pitch_now_enc",
+      "source": "pitch_now_enc",
+      "target": "pitch_now_handler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/pitch-now.js",
+      "source_location": "L62",
+      "weight": 1.0,
+      "_src": "pitch_now_handler",
+      "_tgt": "pitch_generatepitch",
+      "source": "pitch_now_handler",
+      "target": "pitch_generatepitch"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/pitch-now.js",
+      "source_location": "L87",
+      "weight": 1.0,
+      "_src": "pitch_now_handler",
+      "_tgt": "pitch_sendpitchemail",
+      "source": "pitch_now_handler",
+      "target": "pitch_sendpitchemail"
     },
     {
       "relation": "contains",
@@ -1589,8 +2042,188 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "api/_pitch.js",
+      "source_location": "L18",
+      "weight": 1.0,
+      "_src": "api_pitch_js",
+      "_tgt": "pitch_buildfactsheet",
+      "source": "api_pitch_js",
+      "target": "pitch_buildfactsheet",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_pitch.js",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_src": "api_pitch_js",
+      "_tgt": "pitch_generatepitch",
+      "source": "api_pitch_js",
+      "target": "pitch_generatepitch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_pitch.js",
+      "source_location": "L102",
+      "weight": 1.0,
+      "_src": "api_pitch_js",
+      "_tgt": "pitch_esc",
+      "source": "api_pitch_js",
+      "target": "pitch_esc",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_pitch.js",
+      "source_location": "L111",
+      "weight": 1.0,
+      "_src": "api_pitch_js",
+      "_tgt": "pitch_renderpitchemailhtml",
+      "source": "api_pitch_js",
+      "target": "pitch_renderpitchemailhtml",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_pitch.js",
+      "source_location": "L138",
+      "weight": 1.0,
+      "_src": "api_pitch_js",
+      "_tgt": "pitch_sendpitchemail",
+      "source": "api_pitch_js",
+      "target": "pitch_sendpitchemail",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_pitch.js",
+      "source_location": "L161",
+      "weight": 1.0,
+      "_src": "api_pitch_js",
+      "_tgt": "pitch_autosendenabled",
+      "source": "api_pitch_js",
+      "target": "pitch_autosendenabled",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_pitch.js",
+      "source_location": "L166",
+      "weight": 1.0,
+      "_src": "api_pitch_js",
+      "_tgt": "pitch_renderbrandemailhtml",
+      "source": "api_pitch_js",
+      "target": "pitch_renderbrandemailhtml",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_pitch.js",
+      "source_location": "L184",
+      "weight": 1.0,
+      "_src": "api_pitch_js",
+      "_tgt": "pitch_sendbrandpitch",
+      "source": "api_pitch_js",
+      "target": "pitch_sendbrandpitch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_pitch.js",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_src": "pitch_generatepitch",
+      "_tgt": "pitch_buildfactsheet",
+      "source": "pitch_buildfactsheet",
+      "target": "pitch_generatepitch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_pitch.js",
+      "source_location": "L116",
+      "weight": 1.0,
+      "_src": "pitch_renderpitchemailhtml",
+      "_tgt": "pitch_esc",
+      "source": "pitch_esc",
+      "target": "pitch_renderpitchemailhtml",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_pitch.js",
+      "source_location": "L170",
+      "weight": 1.0,
+      "_src": "pitch_renderbrandemailhtml",
+      "_tgt": "pitch_esc",
+      "source": "pitch_esc",
+      "target": "pitch_renderbrandemailhtml",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_pitch.js",
+      "source_location": "L139",
+      "weight": 1.0,
+      "_src": "pitch_sendpitchemail",
+      "_tgt": "pitch_renderpitchemailhtml",
+      "source": "pitch_renderpitchemailhtml",
+      "target": "pitch_sendpitchemail",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_pitch.js",
+      "source_location": "L185",
+      "weight": 1.0,
+      "_src": "pitch_sendbrandpitch",
+      "_tgt": "pitch_autosendenabled",
+      "source": "pitch_autosendenabled",
+      "target": "pitch_sendbrandpitch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L27",
+      "source_location": "L151",
+      "weight": 1.0,
+      "_src": "pitch_autosendenabled",
+      "_tgt": "daily_agent_handler",
+      "source": "pitch_autosendenabled",
+      "target": "daily_agent_handler"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_pitch.js",
+      "source_location": "L186",
+      "weight": 1.0,
+      "_src": "pitch_sendbrandpitch",
+      "_tgt": "pitch_renderbrandemailhtml",
+      "source": "pitch_renderbrandemailhtml",
+      "target": "pitch_sendbrandpitch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/daily-agent.js",
+      "source_location": "L29",
       "weight": 1.0,
       "_src": "api_cron_daily_agent_js",
       "_tgt": "daily_agent_sb",
@@ -1602,7 +2235,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L42",
+      "source_location": "L44",
       "weight": 1.0,
       "_src": "api_cron_daily_agent_js",
       "_tgt": "daily_agent_checkadlibrary",
@@ -1614,7 +2247,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L67",
+      "source_location": "L69",
       "weight": 1.0,
       "_src": "api_cron_daily_agent_js",
       "_tgt": "daily_agent_scorebrand",
@@ -1626,31 +2259,19 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L77",
+      "source_location": "L84",
       "weight": 1.0,
       "_src": "api_cron_daily_agent_js",
-      "_tgt": "daily_agent_generatepitch",
+      "_tgt": "daily_agent_storepitch",
       "source": "api_cron_daily_agent_js",
-      "target": "daily_agent_generatepitch",
+      "target": "daily_agent_storepitch",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L132",
-      "weight": 1.0,
-      "_src": "api_cron_daily_agent_js",
-      "_tgt": "daily_agent_senddigestemail",
-      "source": "api_cron_daily_agent_js",
-      "target": "daily_agent_senddigestemail",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/daily-agent.js",
-      "source_location": "L184",
+      "source_location": "L105",
       "weight": 1.0,
       "_src": "api_cron_daily_agent_js",
       "_tgt": "daily_agent_handler",
@@ -1662,7 +2283,19 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L189",
+      "source_location": "L85",
+      "weight": 1.0,
+      "_src": "daily_agent_storepitch",
+      "_tgt": "daily_agent_sb",
+      "source": "daily_agent_sb",
+      "target": "daily_agent_storepitch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/daily-agent.js",
+      "source_location": "L114",
       "weight": 1.0,
       "_src": "daily_agent_handler",
       "_tgt": "daily_agent_sb",
@@ -1674,7 +2307,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L198",
+      "source_location": "L126",
       "weight": 1.0,
       "_src": "daily_agent_handler",
       "_tgt": "daily_agent_checkadlibrary",
@@ -1686,156 +2319,12 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L199",
+      "source_location": "L127",
       "weight": 1.0,
       "_src": "daily_agent_handler",
       "_tgt": "daily_agent_scorebrand",
       "source": "daily_agent_scorebrand",
       "target": "daily_agent_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/daily-agent.js",
-      "source_location": "L223",
-      "weight": 1.0,
-      "_src": "daily_agent_handler",
-      "_tgt": "daily_agent_senddigestemail",
-      "source": "daily_agent_senddigestemail",
-      "target": "daily_agent_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/discover-brands.js",
-      "source_location": "L50",
-      "weight": 1.0,
-      "_src": "api_cron_discover_brands_js",
-      "_tgt": "discover_brands_sb",
-      "source": "api_cron_discover_brands_js",
-      "target": "discover_brands_sb",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/discover-brands.js",
-      "source_location": "L66",
-      "weight": 1.0,
-      "_src": "api_cron_discover_brands_js",
-      "_tgt": "discover_brands_searchadlibrary",
-      "source": "api_cron_discover_brands_js",
-      "target": "discover_brands_searchadlibrary",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/discover-brands.js",
-      "source_location": "L82",
-      "weight": 1.0,
-      "_src": "api_cron_discover_brands_js",
-      "_tgt": "discover_brands_isjunk",
-      "source": "api_cron_discover_brands_js",
-      "target": "discover_brands_isjunk",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/discover-brands.js",
-      "source_location": "L87",
-      "weight": 1.0,
-      "_src": "api_cron_discover_brands_js",
-      "_tgt": "discover_brands_collapsetobrands",
-      "source": "api_cron_discover_brands_js",
-      "target": "discover_brands_collapsetobrands",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/discover-brands.js",
-      "source_location": "L108",
-      "weight": 1.0,
-      "_src": "api_cron_discover_brands_js",
-      "_tgt": "discover_brands_emailsummary",
-      "source": "api_cron_discover_brands_js",
-      "target": "discover_brands_emailsummary",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/discover-brands.js",
-      "source_location": "L138",
-      "weight": 1.0,
-      "_src": "api_cron_discover_brands_js",
-      "_tgt": "discover_brands_handler",
-      "source": "api_cron_discover_brands_js",
-      "target": "discover_brands_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/discover-brands.js",
-      "source_location": "L168",
-      "weight": 1.0,
-      "_src": "discover_brands_handler",
-      "_tgt": "discover_brands_sb",
-      "source": "discover_brands_sb",
-      "target": "discover_brands_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/discover-brands.js",
-      "source_location": "L156",
-      "weight": 1.0,
-      "_src": "discover_brands_handler",
-      "_tgt": "discover_brands_searchadlibrary",
-      "source": "discover_brands_searchadlibrary",
-      "target": "discover_brands_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/discover-brands.js",
-      "source_location": "L92",
-      "weight": 1.0,
-      "_src": "discover_brands_collapsetobrands",
-      "_tgt": "discover_brands_isjunk",
-      "source": "discover_brands_isjunk",
-      "target": "discover_brands_collapsetobrands",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/discover-brands.js",
-      "source_location": "L157",
-      "weight": 1.0,
-      "_src": "discover_brands_handler",
-      "_tgt": "discover_brands_collapsetobrands",
-      "source": "discover_brands_collapsetobrands",
-      "target": "discover_brands_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/discover-brands.js",
-      "source_location": "L200",
-      "weight": 1.0,
-      "_src": "discover_brands_handler",
-      "_tgt": "discover_brands_emailsummary",
-      "source": "discover_brands_emailsummary",
-      "target": "discover_brands_handler",
       "confidence_score": 1.0
     },
     {
@@ -2106,7 +2595,19 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/ig-sync.js",
-      "source_location": "L152",
+      "source_location": "L155",
+      "weight": 1.0,
+      "_src": "api_cron_ig_sync_js",
+      "_tgt": "ig_sync_fetchreacheddemographics",
+      "source": "api_cron_ig_sync_js",
+      "target": "ig_sync_fetchreacheddemographics",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/ig-sync.js",
+      "source_location": "L185",
       "weight": 1.0,
       "_src": "api_cron_ig_sync_js",
       "_tgt": "ig_sync_fetchdailysnapshot",
@@ -2118,7 +2619,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/ig-sync.js",
-      "source_location": "L179",
+      "source_location": "L212",
       "weight": 1.0,
       "_src": "api_cron_ig_sync_js",
       "_tgt": "ig_sync_handler",
@@ -2178,7 +2679,19 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/ig-sync.js",
-      "source_location": "L155",
+      "source_location": "L160",
+      "weight": 1.0,
+      "_src": "ig_sync_fetchreacheddemographics",
+      "_tgt": "ig_sync_ig",
+      "source": "ig_sync_ig",
+      "target": "ig_sync_fetchreacheddemographics",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/ig-sync.js",
+      "source_location": "L188",
       "weight": 1.0,
       "_src": "ig_sync_fetchdailysnapshot",
       "_tgt": "ig_sync_ig",
@@ -2190,7 +2703,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/ig-sync.js",
-      "source_location": "L233",
+      "source_location": "L266",
       "weight": 1.0,
       "_src": "ig_sync_handler",
       "_tgt": "ig_sync_sb",
@@ -2214,7 +2727,19 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/ig-sync.js",
-      "source_location": "L194",
+      "source_location": "L176",
+      "weight": 1.0,
+      "_src": "ig_sync_fetchreacheddemographics",
+      "_tgt": "ig_sync_sleep",
+      "source": "ig_sync_sleep",
+      "target": "ig_sync_fetchreacheddemographics",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/ig-sync.js",
+      "source_location": "L227",
       "weight": 1.0,
       "_src": "ig_sync_handler",
       "_tgt": "ig_sync_fetchallmedia",
@@ -2226,7 +2751,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/ig-sync.js",
-      "source_location": "L275",
+      "source_location": "L309",
       "weight": 1.0,
       "_src": "ig_sync_handler",
       "_tgt": "ig_sync_fetchdemographics",
@@ -2238,7 +2763,19 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/ig-sync.js",
-      "source_location": "L293",
+      "source_location": "L310",
+      "weight": 1.0,
+      "_src": "ig_sync_handler",
+      "_tgt": "ig_sync_fetchreacheddemographics",
+      "source": "ig_sync_fetchreacheddemographics",
+      "target": "ig_sync_handler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/ig-sync.js",
+      "source_location": "L330",
       "weight": 1.0,
       "_src": "ig_sync_handler",
       "_tgt": "ig_sync_fetchdailysnapshot",
