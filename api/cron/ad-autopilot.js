@@ -95,7 +95,7 @@ async function pickWinner() {
   // computed eng-rate ordering cleanly here).
   const rows = await sb(
     `/instagram_posts?timestamp=gte.${since}&reach=gte.${REACH_FLOOR}` +
-    `&select=id,permalink,media_type,caption,original_media_url,timestamp,reach,like_count,comments_count,saved,shares` +
+    `&select=id,permalink,media_type,caption,storage_image_url,original_media_url,timestamp,reach,like_count,comments_count,saved,shares` +
     `&order=reach.desc&limit=60`
   );
   const scored = (rows || [])
@@ -115,10 +115,14 @@ async function pickWinner() {
 // the proven-working path. Social proof does NOT carry over. For carousels the
 // post-level media_url is null, so fall back to the first child image.
 async function getImageUrl(winner) {
-  if (winner.original_media_url) return winner.original_media_url;
+  // Prefer the stable Supabase-hosted copy — IG CDN URLs expire (~2 weeks) and
+  // intermittently fail Meta's image fetch. Fall back to IG CDN only if needed.
+  if (winner.storage_image_url) return winner.storage_image_url;
   const kids = await sb(
-    `/instagram_carousel_children?parent_id=eq.${winner.id}&select=original_url&order=sort_order.asc&limit=1`
+    `/instagram_carousel_children?parent_id=eq.${winner.id}&select=storage_url,original_url&order=sort_order.asc&limit=1`
   );
+  if (kids?.[0]?.storage_url) return kids[0].storage_url;
+  if (winner.original_media_url) return winner.original_media_url;
   return kids?.[0]?.original_url || null;
 }
 
@@ -187,9 +191,19 @@ export default async function handler(req, res) {
     // 3. Re-assert the hard budget cap before anything goes live.
     await fbPost(`/${CAMPAIGN_ID}`, { daily_budget: DAILY_BUDGET_CENTS });
 
-    // 4. Build a single-image creative from the synced feed image, delivering on
-    //    Facebook + Instagram (instagram_user_id). The original post's likes/
-    //    comments do NOT carry — Marketing API can't promote an existing IG post.
+    // 4. Upload the feed image to the ad account to obtain an image_hash. Meta's
+    //    link_data requires image_hash (NOT image_url) — passing a URL here fails
+    //    with "Invalid parameter". We fetch the image bytes and upload them.
+    const imgResp = await fetch(imageUrl);
+    if (!imgResp.ok) throw new Error(`Image fetch failed: HTTP ${imgResp.status}`);
+    const imgB64 = Buffer.from(await imgResp.arrayBuffer()).toString('base64');
+    const uploaded = await fbPost(`/act_${AD_ACCOUNT}/adimages`, { bytes: imgB64 });
+    const imageHash = Object.values(uploaded.images || {})[0]?.hash;
+    if (!imageHash) throw new Error('adimages upload returned no hash');
+
+    // 5. Build a single-image creative from that image, delivering on Facebook +
+    //    Instagram (instagram_user_id). The original post's likes/comments do NOT
+    //    carry — Marketing API can't promote an existing IG post.
     const caption = (winner.caption || '').replace(/\s+/g, ' ').trim().slice(0, 280);
     const creative = await fbPost(`/act_${AD_ACCOUNT}/adcreatives`, {
       name: `Autopilot creative — ${winner.permalink}`,
@@ -197,7 +211,7 @@ export default async function handler(req, res) {
         page_id: PAGE_ID,
         instagram_user_id: IG_USER_ID,
         link_data: {
-          image_url: imageUrl,
+          image_hash: imageHash,
           link: PROFILE_LINK,
           message: caption || 'Follow @aastha_sochic ✨',
         },
