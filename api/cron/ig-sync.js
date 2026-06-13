@@ -148,6 +148,39 @@ async function fetchDemographics(token) {
   return rows;
 }
 
+// ── 4b. Fetch reached-audience demographics (powers honest UAE *reach* stats) ──
+// follower_demographics tells us who follows her; reached_audience_demographics
+// tells us who her content actually reaches (followers + non-followers), which is
+// the stronger, larger number a brand cares about. Best-effort: skipped on error.
+async function fetchReachedDemographics(token) {
+  const rows = [];
+  const now = new Date().toISOString();
+  for (const breakdown of ['country', 'city']) {
+    try {
+      const data = await ig(
+        `/me/insights?metric=reached_audience_demographics&period=lifetime&timeframe=last_30_days&breakdown=${breakdown}&metric_type=total_value`,
+        token
+      );
+      const metric = data.data?.[0];
+      if (!metric) continue;
+      const breakdownData = metric.total_value?.breakdowns?.[0]?.results || [];
+      breakdownData.forEach(item => {
+        rows.push({
+          synced_at: now,
+          metric: 'reached_audience_demographics',
+          breakdown,
+          dimension: item.dimension_values?.[0] ?? item.dimension_value ?? String(item.value),
+          value: item.value,
+        });
+      });
+      await sleep(300);
+    } catch {
+      // Requires the metric to be available for the account — skip if not.
+    }
+  }
+  return rows;
+}
+
 // ── 5. Fetch daily account metrics ───────────────────────────────────────────
 async function fetchDailySnapshot(token) {
   try {
@@ -270,9 +303,13 @@ export default async function handler(req, res) {
       log.push(`Carousel children error: ${e.message}`);
     }
 
-    // ── Step 4: Demographics ──
+    // ── Step 4: Demographics (follower + reached, written in one generation) ──
     try {
-      const demoRows = await fetchDemographics(token);
+      const [followerRows, reachedRows] = await Promise.all([
+        fetchDemographics(token),
+        fetchReachedDemographics(token),
+      ]);
+      const demoRows = [...followerRows, ...reachedRows];
       if (demoRows.length > 0) {
         const today = new Date().toISOString().slice(0, 10);
         await sb(`/instagram_demographics?synced_at=gte.${today}T00:00:00Z`, { method: 'DELETE' });
@@ -280,7 +317,7 @@ export default async function handler(req, res) {
           method: 'POST',
           body: JSON.stringify(demoRows),
         });
-        log.push(`Saved ${demoRows.length} demographic rows`);
+        log.push(`Saved ${followerRows.length} follower + ${reachedRows.length} reached demographic rows`);
       } else {
         log.push('Demographics: skipped (no data or permission missing)');
       }

@@ -231,9 +231,13 @@ async function sendForwardReadyEmail({ brand, subject, body, score, adData }) {
 }
 
 export default async function handler(req, res) {
-  if (req.headers.authorization !== `Bearer ${process.env.CRON_SECRET}`) {
-    return res.status(401).end();
-  }
+  const auth = req.headers.authorization;
+  const allowed = auth === `Bearer ${process.env.CRON_SECRET}` || auth === `Bearer ${process.env.MANUAL_SYNC_KEY}`;
+  if (!allowed) return res.status(401).end();
+
+  // dryRun: ground + generate the real pitches and return them, but write nothing
+  // and email nothing. Use this to preview a forward-ready pitch before the live cron.
+  const dryRun = req.query?.dryRun === '1';
 
   const brands = await sb('/outreach_brands?is_agency=eq.false&select=*');
   if (!brands.length) {
@@ -250,18 +254,20 @@ export default async function handler(req, res) {
     const adData = await checkAdLibrary(brand.name);
     const score = scoreBrand(brand, adData);
 
-    await sb(`/outreach_brands?id=eq.${brand.id}`, {
-      method: 'PATCH',
-      body: JSON.stringify({
-        ad_status: adData?.active ? 'active' : adData === null ? 'unknown' : 'none',
-        fit_score: score,
-        last_checked: today,
-        last_ad_data: adData,
-      }),
-    });
+    if (!dryRun) {
+      await sb(`/outreach_brands?id=eq.${brand.id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          ad_status: adData?.active ? 'active' : adData === null ? 'unknown' : 'none',
+          fit_score: score,
+          last_checked: today,
+          last_ad_data: adData,
+        }),
+      });
+    }
 
     scored.push({ brand, adData, score });
-    await new Promise(r => setTimeout(r, 300));
+    await new Promise(r => setTimeout(r, dryRun ? 0 : 300));
   }
 
   scored.sort((a, b) => b.score - a.score);
@@ -272,6 +278,7 @@ export default async function handler(req, res) {
     const { subject, body } = await generatePitch(r.brand.name, profile, r.brand.notes || '');
     r.subject = subject;
     r.body = body;
+    if (dryRun) return;
     r.pitchId = await storePitch({ brand: r.brand, subject, body, score: r.score, adData: r.adData, profile });
     await sendForwardReadyEmail({ brand: r.brand, subject, body, score: r.score, adData: r.adData });
     await sb(`/brand_pitches?id=eq.${r.pitchId}`, {
@@ -279,6 +286,17 @@ export default async function handler(req, res) {
       body: JSON.stringify({ status: 'emailed', emailed_at: new Date().toISOString() }),
     });
   }));
+
+  if (dryRun) {
+    return res.status(200).json({
+      ok: true, dryRun: true, groundedOn: profile,
+      pitches: top.map((r) => ({
+        brand: r.brand.name, score: r.score,
+        recipient: r.brand.contact_email || '(no contact on file)',
+        subject: r.subject, body: r.body,
+      })),
+    });
+  }
 
   res.status(200).json({
     ok: true,
