@@ -1550,11 +1550,14 @@
       grid.innerHTML = `<div class="brief-empty"><p>No target brands yet — add them to the watchlist and they'll appear here.</p></div>`;
       return;
     }
-    // Order warmest-first, then by fit, then name.
+    // Order warmest-first, then by niche fit (high>medium>low), then name.
+    // niche_fit is populated on every brand; fit_score is sparse, so we don't
+    // sort by it (that made the order look random).
     const tierRank = { warm:0, paid:1, reach:2 };
+    const fitRank = { high:0, medium:1, low:2 };
     rows.sort((a, b) =>
       (tierRank[a.tier] ?? 9) - (tierRank[b.tier] ?? 9) ||
-      (b.fit_score ?? -1) - (a.fit_score ?? -1) ||
+      (fitRank[a.niche_fit] ?? 3) - (fitRank[b.niche_fit] ?? 3) ||
       (a.name || '').localeCompare(b.name || ''));
 
     grid.innerHTML = rows.map(r => {
