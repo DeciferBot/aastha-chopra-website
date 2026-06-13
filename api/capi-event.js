@@ -4,8 +4,8 @@
 // pixel event with the same eventId, so Meta deduplicates the pair.
 import { sendCapiEvent } from './_capi.js';
 
-// Only allow conversion events we actually use — never an open relay.
-const ALLOWED = new Set(['Lead', 'Contact', 'Subscribe']);
+// Only allow events we actually fire — never an open relay.
+const ALLOWED = new Set(['Lead', 'Contact', 'Subscribe', 'ViewContent']);
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
