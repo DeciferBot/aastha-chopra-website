@@ -1,3 +1,5 @@
+import { getIgToken } from './_igtoken.js';
+
 export const config = { runtime: 'edge' };
 
 const MEDIA_FIELDS = [
@@ -11,7 +13,7 @@ const VIDEO_METRICS = 'reach,impressions,saved,likes,comments,shares,total_inter
 const REEL_METRICS  = 'reach,saved,likes,comments,shares,total_interactions,ig_reels_avg_watch_time,ig_reels_video_view_total_time,views';
 
 export default async function handler(req) {
-  const token = process.env.INSTAGRAM_ACCESS_TOKEN;
+  const token = await getIgToken();
   if (!token) {
     return new Response(JSON.stringify({ error: 'No token configured' }), {
       status: 500, headers: { 'Content-Type': 'application/json' }

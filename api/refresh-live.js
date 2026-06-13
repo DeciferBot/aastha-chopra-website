@@ -14,6 +14,8 @@
  * Auth: the analytics_auth cookie (same gate as the tab). POST.
  */
 
+import { getIgToken } from './_igtoken.js';
+
 const SUPABASE_URL = 'https://uqzvaytvynrglijvwjsz.supabase.co';
 const SERVICE_KEY  = process.env.SUPABASE_SERVICE_KEY;
 const IG_BASE      = 'https://graph.instagram.com/v21.0';
@@ -77,7 +79,7 @@ export default async function handler(req, res) {
     return res.status(401).json({ ok: false, error: 'unauthorized' });
   }
 
-  const token = process.env.INSTAGRAM_ACCESS_TOKEN;
+  const token = await getIgToken();
   if (!token) return res.status(200).json({ ok: false, refreshed: false, error: 'no token' });
 
   try {

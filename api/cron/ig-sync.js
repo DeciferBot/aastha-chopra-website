@@ -1,3 +1,5 @@
+import { getIgToken } from '../_igtoken.js';
+
 export const config = { maxDuration: 300 };
 
 /**
@@ -215,7 +217,7 @@ export default async function handler(req, res) {
   const validManual = authHeader === `Bearer ${process.env.MANUAL_SYNC_KEY}`;
   if (!validCron && !validManual) return res.status(401).end();
 
-  const token = process.env.INSTAGRAM_ACCESS_TOKEN;
+  const token = await getIgToken();
   if (!token) return res.status(500).json({ error: 'No INSTAGRAM_ACCESS_TOKEN' });
 
   const log = [];

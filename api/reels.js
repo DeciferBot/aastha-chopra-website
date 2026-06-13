@@ -1,7 +1,9 @@
+import { getIgToken } from './_igtoken.js';
+
 export const config = { runtime: 'edge' };
 
 export default async function handler(req) {
-  const token = process.env.INSTAGRAM_ACCESS_TOKEN;
+  const token = await getIgToken();
   if (!token) {
     return new Response(JSON.stringify({ error: 'No token configured' }), {
       status: 500, headers: { 'Content-Type': 'application/json' }
