@@ -1045,6 +1045,16 @@
     .opp-link:hover { color: var(--gold-light); }
     .opp-link .arr { transition: transform 0.2s; }
     .opp-link:hover .arr { transform: translateX(3px); }
+    .opp-pitch-btn {
+      margin-top: 12px; width: 100%; font-family: inherit; font-size: 0.72rem;
+      letter-spacing: 0.04em; cursor: pointer; padding: 10px 12px; border-radius: 8px;
+      border: 1px solid var(--gold-mid); background: var(--gold-lo); color: var(--gold);
+      transition: background 0.2s, color 0.2s, border-color 0.2s; text-align: center;
+    }
+    .opp-pitch-btn:hover { background: var(--gold-mid); }
+    .opp-pitch-btn:disabled { cursor: default; opacity: 0.75; }
+    .opp-pitch-btn.is-done  { background: rgba(40,140,90,0.12);  border-color: rgba(40,140,90,0.45); color: #2c8c5a; }
+    .opp-pitch-btn.is-error { background: rgba(190,60,60,0.10);  border-color: rgba(190,60,60,0.45); color: #b3413b; }
     @media (max-width: 760px) { .opp-grid { grid-template-columns: 1fr; } }
   </style>
   <section id="opportunities">
@@ -1547,9 +1557,42 @@
             </div>
             <span class="opp-fit">Fit: <b>${esc(fitLabel)}</b></span>
             ${link}
+            <button class="opp-pitch-btn" data-name="${esc(r.name)}" data-page="${esc(r.page_id || '')}" data-cat="${esc(r.category || '')}">📧 Send me this pitch</button>
           </div>
         </div>`;
     }).join('');
+
+    // Delegated handler: generate + email a forward-ready pitch on demand.
+    grid.querySelectorAll('.opp-pitch-btn').forEach(btn => {
+      btn.addEventListener('click', () => sendPitch(btn));
+    });
+  }
+
+  async function sendPitch(btn) {
+    if (btn.disabled) return;
+    const original = btn.textContent;
+    btn.disabled = true;
+    btn.classList.remove('is-error', 'is-done');
+    btn.textContent = 'Writing your pitch…';
+    try {
+      const res = await fetch('/api/pitch-now', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: btn.dataset.name,
+          page_id: btn.dataset.page || undefined,
+          category: btn.dataset.cat || undefined,
+        }),
+      });
+      if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || res.status);
+      btn.classList.add('is-done');
+      btn.textContent = '✓ Sent to your inbox';
+    } catch (e) {
+      btn.classList.add('is-error');
+      btn.textContent = 'Could not send — tap to retry';
+      btn.disabled = false;
+    }
   }
 
   // ── Load Trending Creators ───────────────────────────────────────────
