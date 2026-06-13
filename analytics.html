@@ -1044,6 +1044,16 @@
     }
     .opp-fit { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
     .opp-fit b { color: var(--gold-light); font-weight: 600; }
+    .opp-meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .opp-tier { font-size: 0.58rem; letter-spacing: 0.09em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; font-weight: 600; }
+    .opp-tier.tier-warm  { color: #d4843a; background: rgba(212,132,58,0.12); border: 1px solid rgba(212,132,58,0.4); }
+    .opp-tier.tier-paid  { color: var(--green); background: rgba(74,173,168,0.12); border: 1px solid rgba(74,173,168,0.38); }
+    .opp-tier.tier-reach { color: var(--muted); background: rgba(255,255,255,0.04); border: 1px solid var(--border-warm); }
+    .opp-media.opp-mono { display: flex; align-items: center; justify-content: center;
+      background: radial-gradient(circle at 32% 24%, color-mix(in srgb, var(--mono) 40%, transparent), transparent 72%), var(--elevated); }
+    .opp-media.opp-mono::before { content: attr(data-mono); position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-size: 3.4rem; font-weight: 400; color: var(--mono); opacity: 0.95; letter-spacing: 0.04em; }
+    .opp-media.opp-mono img { position: relative; z-index: 1; }
     .opp-link {
       margin-top: auto; font-size: 0.72rem; letter-spacing: 0.04em; color: var(--teal);
       text-decoration: none; border-top: 1px solid var(--border); padding-top: 14px;
@@ -1067,7 +1077,7 @@
   <section id="opportunities">
     <p class="section-label">Ready to Pitch</p>
     <h2 class="section-heading">Brand <em>Opportunities</em></h2>
-    <p class="opp-sub">UAE brands running active Meta ads right now that fit your niche. Ranked by how many ads they're running — the harder a brand is spending, the more budget it has and the warmer the lead.</p>
+    <p class="opp-sub">Your curated target brands, ordered warmest first. Warm leads already feature in your content; paid targets are the realistic next deals. Tap "See their UAE ads" on any card to view what they're running live, or generate a ready-to-send pitch.</p>
     <div class="opp-grid" id="oppGrid">
       <div class="skel" style="height:172px;border-radius:8px"></div>
       <div class="skel" style="height:172px;border-radius:8px"></div>
@@ -1520,51 +1530,65 @@
   // ── Load Brand Opportunities ─────────────────────────────────────────
   async function loadOpportunities() {
     const CAT_LABEL = {
-      'modest-fashion':'Modest Fashion', 'fashion':'Fashion', 'beauty':'Beauty',
-      'fragrance':'Fragrance', 'jewellery':'Jewellery', 'wellness':'Wellness',
-      'fitness-fashion':'Activewear', 'skincare':'Skincare', 'agency':'Agency',
+      'beauty':'Beauty', 'fragrance':'Fragrance', 'fashion':'Fashion', 'jewellery':'Jewellery',
+      'automobile':'Automobile', 'travel':'Travel', 'wellness':'Wellness', 'luxury':'Luxury',
+      'retail':'Retail', 'modest-fashion':'Modest Fashion', 'skincare':'Skincare',
+      'fitness-fashion':'Activewear', 'athleisure':'Activewear',
     };
+    const SEG_COLOR = {
+      beauty:'#c98ba0', fragrance:'#b07fa0', fashion:'#b08d57', jewellery:'#c2a14d',
+      automobile:'#6b8fb0', travel:'#4aada8', wellness:'#7fae6b', luxury:'#9a7b2e', retail:'#9b8a78',
+    };
+    const TIER_LABEL = { warm:'Warm lead', paid:'Paid target', reach:'Aspirational' };
     let rows;
     try {
-      rows = await sbFetch('discovered_opportunities',
-        'select=name,category,niche_fit,sample_ad,creative_image,page_id,active_ad_count&order=active_ad_count.desc.nullslast,niche_fit.asc,name.asc&limit=60');
+      rows = await sbFetch('target_opportunities',
+        'select=id,name,segment,tier,category,niche_fit,fit_score,page_id,active_ad_count,sample_ad,creative_image&limit=90');
     } catch (e) { rows = []; }
     const grid = document.getElementById('oppGrid');
     if (!rows || !rows.length) {
-      grid.innerHTML = `<div class="brief-empty"><p>No active brand opportunities yet — the discovery agent will surface them here.</p></div>`;
+      grid.innerHTML = `<div class="brief-empty"><p>No target brands yet — add them to the watchlist and they'll appear here.</p></div>`;
       return;
     }
+    // Order warmest-first, then by fit, then name.
+    const tierRank = { warm:0, paid:1, reach:2 };
+    rows.sort((a, b) =>
+      (tierRank[a.tier] ?? 9) - (tierRank[b.tier] ?? 9) ||
+      (b.fit_score ?? -1) - (a.fit_score ?? -1) ||
+      (a.name || '').localeCompare(b.name || ''));
+
     grid.innerHTML = rows.map(r => {
-      const fitMed = r.niche_fit === 'medium';
-      const cat = CAT_LABEL[r.category] || (r.category || 'Brand');
+      const seg = r.segment || r.category || '';
+      const cat = CAT_LABEL[seg] || CAT_LABEL[r.category] || (seg || 'Brand');
       const fitLabel = r.niche_fit ? r.niche_fit.charAt(0).toUpperCase() + r.niche_fit.slice(1) : '—';
-      const link = r.sample_ad
-        ? `<a class="opp-link" href="${esc(r.sample_ad)}" target="_blank" rel="noopener"><span>See their live ad</span><span class="arr">→</span></a>`
-        : '';
+      const color = SEG_COLOR[seg] || '#9a7b2e';
+      const initials = (r.name || '?').replace(/[^A-Za-z0-9 ]/g, '').trim().split(/\s+/).slice(0, 2).map(w => w[0] || '').join('').toUpperCase() || '★';
+      // Live UAE ads for this brand in the Meta Ad Library (always current, no capture needed).
+      const adsUrl = `https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=AE&q=${encodeURIComponent(r.name)}&search_type=keyword_unordered&media_type=all`;
       const fallback = r.page_id ? `https://graph.facebook.com/${esc(r.page_id)}/picture?type=large` : '';
       const imgSrc = r.creative_image || fallback;
       const n = Number(r.active_ad_count) || 0;
       const hot = n >= 20;
-      const adsLabel = n > 0 ? `<b>${n}</b> active ad${n === 1 ? '' : 's'}` : 'Running UAE ads';
-      const pill = `<span class="opp-live-pill${hot ? ' opp-live-pill--hot' : ''}"><span class="dot"></span>${hot ? '🔥 ' : ''}${adsLabel}</span>`;
-      const media = imgSrc
-        ? `<div class="opp-media">
-             ${pill}
-             <img src="${esc(imgSrc)}" alt="${esc(r.name)} ad creative" loading="lazy"
-                  onerror="this.onerror=null;${fallback ? `this.src='${esc(fallback)}'` : 'this.closest(\'.opp-media\').style.display=\'none\''}">
-           </div>`
+      const pill = n > 0
+        ? `<span class="opp-live-pill${hot ? ' opp-live-pill--hot' : ''}"><span class="dot"></span>${hot ? '🔥 ' : ''}<b>${n}</b> active ad${n === 1 ? '' : 's'}</span>`
         : '';
+      // Monogram tile is always the base; the creative/avatar (if any) overlays it and reveals the monogram on error.
+      const media = `<div class="opp-media opp-mono" data-mono="${esc(initials)}" style="--mono:${color}">
+             ${pill}
+             ${imgSrc ? `<img src="${esc(imgSrc)}" alt="${esc(r.name)}" loading="lazy" onerror="this.remove()">` : ''}
+           </div>`;
+      const tierBadge = r.tier ? `<span class="opp-tier tier-${esc(r.tier)}">${TIER_LABEL[r.tier] || r.tier}</span>` : '';
       return `
-        <div class="opp-card${fitMed ? ' fit-medium' : ''}">
+        <div class="opp-card${r.niche_fit === 'medium' && r.tier !== 'warm' ? ' fit-medium' : ''}">
           ${media}
           <div class="opp-body">
             <div class="opp-top">
               <div class="opp-name">${esc(r.name)}</div>
               <span class="opp-cat">${esc(cat)}</span>
             </div>
-            <span class="opp-fit">Fit: <b>${esc(fitLabel)}</b></span>
-            ${link}
-            <button class="opp-pitch-btn" data-name="${esc(r.name)}" data-page="${esc(r.page_id || '')}" data-cat="${esc(r.category || '')}">📧 Send me this pitch</button>
+            <div class="opp-meta-row">${tierBadge}<span class="opp-fit">Fit: <b>${esc(fitLabel)}</b></span></div>
+            <a class="opp-link" href="${adsUrl}" target="_blank" rel="noopener"><span>${n > 0 ? 'See their live ads' : 'See their UAE ads'}</span><span class="arr">→</span></a>
+            <button class="opp-pitch-btn" data-name="${esc(r.name)}" data-page="${esc(r.page_id || '')}" data-cat="${esc(r.category || r.segment || '')}">📧 Send me this pitch</button>
           </div>
         </div>`;
     }).join('');
