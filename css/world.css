@@ -194,6 +194,10 @@ body::before {
   .world-hero { grid-template-columns: 1fr; min-height: auto; }
   .world-hero-image { height: 55vw; min-height: 260px; }
   .world-hero-text { padding: 36px 24px 44px; }
+  /* Portrait hero: show the full tall image instead of a cropped band */
+  .world-hero.hero-portrait .world-hero-image {
+    height: auto; aspect-ratio: 4 / 5; min-height: 0;
+  }
 }
 
 /* ── SECTION BASE ──────────────────────────── */
