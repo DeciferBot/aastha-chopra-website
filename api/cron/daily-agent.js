@@ -7,12 +7,24 @@
  */
 
 import { getLiveProfile } from '../_profile.js';
-import { generatePitch, sendPitchEmail } from '../_pitch.js';
+import { generatePitch, sendPitchEmail, sendBrandPitch, autosendEnabled } from '../_pitch.js';
 
 const SUPABASE_URL  = 'https://uqzvaytvynrglijvwjsz.supabase.co';
 const SERVICE_KEY   = process.env.SUPABASE_SERVICE_KEY;
 const FB_TOKEN      = process.env.FB_ACCESS_TOKEN;
-const AASTHA_EMAIL  = 'aasthac8@gmail.com';
+// REVIEW MODE: when OUTREACH_REDIRECT_TO is set, every pitch is delivered to that
+// single inbox (forward-ready) and NOTHING goes to a brand — Aastha reviews/forwards.
+// Unset it to let autosend deliver straight to brands.
+const REDIRECT_TO   = process.env.OUTREACH_REDIRECT_TO || '';
+const AASTHA_EMAIL  = REDIRECT_TO || 'aasthac8@gmail.com';
+
+// Autonomy controls (all overridable via env, sane defaults baked in)
+const DAILY_LIMIT   = Number(process.env.OUTREACH_DAILY_LIMIT  || 3);   // fresh pitches per run
+const COOLDOWN_DAYS = Number(process.env.OUTREACH_COOLDOWN_DAYS || 30);  // don't re-pitch within N days
+const MIN_AUTOSEND  = Number(process.env.OUTREACH_MIN_SCORE     || 5);   // min fit score to send to brand
+// Which tiers may be auto-sent to the brand directly. Default warm+paid; reach is
+// never cold-emailed. Set e.g. OUTREACH_TIERS=warm to restrict the first wave.
+const AUTOSEND_TIERS = (process.env.OUTREACH_TIERS || 'warm,paid').split(',').map((t) => t.trim());
 
 async function sb(path, opts = {}) {
   const res = await fetch(`${SUPABASE_URL}/rest/v1${path}`, {
@@ -131,28 +143,58 @@ export default async function handler(req, res) {
   }
 
   scored.sort((a, b) => b.score - a.score);
-  const top = scored.slice(0, 3);
 
-  // Generate, store, and deliver one forward-ready pitch per top brand.
+  // Cadence guard: never re-pitch a brand already contacted within the cooldown.
+  // Rotates the agent through the watchlist instead of spamming the same top names.
+  const since = new Date(Date.now() - COOLDOWN_DAYS * 86400000).toISOString();
+  const recent = await sb(`/brand_pitches?select=brand_id&created_at=gte.${since}`).catch(() => []);
+  const onCooldown = new Set((recent || []).map((p) => p.brand_id));
+  const eligible = scored.filter((r) => !onCooldown.has(r.brand.id));
+  const top = eligible.slice(0, DAILY_LIMIT);
+
+  // Route each pitch. AUTOSEND (verified sender + not paused + has a contact +
+  // a real fit score + not a reach/seeding-tier brand) → straight to the brand,
+  // replies + BCC to management. Otherwise fall back to Aastha's forward-ready inbox.
+  // Review mode (OUTREACH_REDIRECT_TO set) forces every pitch to the one inbox.
+  const canAutosend = autosendEnabled() && !REDIRECT_TO;
   await Promise.all(top.map(async (r) => {
     const { subject, body } = await generatePitch(r.brand.name, profile, r.brand.notes || '');
     r.subject = subject;
     r.body = body;
+
+    const toBrand = canAutosend
+      && !!r.brand.contact_email
+      && r.brand.tier !== 'reach'
+      && AUTOSEND_TIERS.includes(r.brand.tier)
+      && r.score >= MIN_AUTOSEND;
+    r.route = toBrand ? 'brand' : 'aastha';
+
     if (dryRun) return;
+
     r.pitchId = await storePitch({ brand: r.brand, subject, body, score: r.score, adData: r.adData, profile });
-    await sendPitchEmail({ to: AASTHA_EMAIL, brand: r.brand, subject, body, score: r.score, adData: r.adData });
-    await sb(`/brand_pitches?id=eq.${r.pitchId}`, {
-      method: 'PATCH',
-      body: JSON.stringify({ status: 'emailed', emailed_at: new Date().toISOString() }),
-    });
+
+    if (toBrand) {
+      await sendBrandPitch({ to: r.brand.contact_email, subject, body });
+      await sb(`/brand_pitches?id=eq.${r.pitchId}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ status: 'sent', to_email: r.brand.contact_email, emailed_at: new Date().toISOString() }),
+      });
+    } else {
+      await sendPitchEmail({ to: AASTHA_EMAIL, brand: r.brand, subject, body, score: r.score, adData: r.adData });
+      await sb(`/brand_pitches?id=eq.${r.pitchId}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ status: 'emailed', emailed_at: new Date().toISOString() }),
+      });
+    }
   }));
 
   if (dryRun) {
     return res.status(200).json({
-      ok: true, dryRun: true, groundedOn: profile,
+      ok: true, dryRun: true, autosend: canAutosend, groundedOn: profile,
+      eligibleAfterCooldown: eligible.length,
       pitches: top.map((r) => ({
-        brand: r.brand.name, score: r.score,
-        recipient: r.brand.contact_email || '(no contact on file)',
+        brand: r.brand.name, tier: r.brand.tier, score: r.score, route: r.route,
+        recipient: r.route === 'brand' ? r.brand.contact_email : `${AASTHA_EMAIL} (forward-ready)`,
         subject: r.subject, body: r.body,
       })),
     });
@@ -161,8 +203,10 @@ export default async function handler(req, res) {
   res.status(200).json({
     ok: true,
     brandsChecked: brands.length,
-    emailedTo: AASTHA_EMAIL,
-    pitches: top.map((r) => ({ brand: r.brand.name, score: r.score, subject: r.subject })),
+    autosend: canAutosend,
+    onCooldown: onCooldown.size,
+    sentToBrand: top.filter((r) => r.route === 'brand').map((r) => r.brand.name),
+    forwardedToAastha: top.filter((r) => r.route === 'aastha').map((r) => r.brand.name),
     groundedOn: { followers: profile.followers, uaeFollowers: profile.uaeFollowers, uaeReach: profile.uaeReach, asOf: profile.asOf },
   });
 }

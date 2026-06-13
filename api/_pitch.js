@@ -144,3 +144,59 @@ export async function sendPitchEmail({ to, brand, subject, body, score, adData }
   });
   if (!res.ok) throw new Error(`Resend: ${await res.text()}`);
 }
+
+// ── Autonomous brand-facing send ─────────────────────────────────────────────
+//
+// The agent sends the pitch straight to the brand from Aastha's verified domain,
+// with replies + a blind copy routed to her management inbox. This path stays
+// dormant until OUTREACH_FROM is set to a Resend-verified sender (e.g.
+// "Aastha Chopra <management@aasthachopra.com>"); the resend.dev test sender
+// can only deliver to the account owner, so autosend self-disables without it.
+// OUTREACH_PAUSE=1 is a global kill switch.
+
+const VERIFIED_FROM   = process.env.OUTREACH_FROM || '';
+const MANAGEMENT_EMAIL = process.env.MANAGEMENT_EMAIL || 'management@aasthachopra.com';
+
+/** True only when we have a verified sender and the kill switch is off. */
+export function autosendEnabled() {
+  return process.env.OUTREACH_PAUSE !== '1' && /\S+@\S+/.test(VERIFIED_FROM);
+}
+
+/** Clean, brand-facing email — no internal banner, real signature, media pack link. */
+export function renderBrandEmailHtml({ body }) {
+  const sig = STATIC_PROFILE;
+  return `
+  <div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:600px;margin:0 auto;color:#1a1a1a;line-height:1.6">
+    <div style="white-space:pre-wrap;font-size:15px">${esc(body)}</div>
+    <div style="margin-top:20px;padding-top:14px;border-top:1px solid #eee;font-size:14px;color:#333">
+      <strong>${esc(sig.name)}</strong><br>
+      ${esc(sig.handle)} &middot; ${esc(sig.location)}<br>
+      Media pack: <a href="${sig.mediaPackUrl}" style="color:#9a7b2e">${sig.mediaPackUrl.replace('https://www.', '')}</a><br>
+      WhatsApp: ${esc(sig.whatsapp)}
+    </div>
+  </div>`;
+}
+
+/**
+ * Send the pitch directly to the brand. Replies go to Aastha's management inbox,
+ * which is also BCC'd so she sees every send. Returns the Resend message id.
+ */
+export async function sendBrandPitch({ to, subject, body }) {
+  if (!autosendEnabled()) throw new Error('autosend disabled (no verified OUTREACH_FROM or paused)');
+  const html = renderBrandEmailHtml({ body });
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${RESEND_KEY}` },
+    body: JSON.stringify({
+      from: VERIFIED_FROM,
+      to,
+      bcc: MANAGEMENT_EMAIL,
+      reply_to: MANAGEMENT_EMAIL,
+      subject,
+      html,
+    }),
+  });
+  if (!res.ok) throw new Error(`Resend: ${await res.text()}`);
+  const data = await res.json().catch(() => ({}));
+  return data?.id ?? null;
+}

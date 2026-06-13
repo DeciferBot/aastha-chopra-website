@@ -8,3 +8,11 @@ images/.DS_Store
 images/IMG_6776.JPG
 images/IMG_6779.JPG
 .env*
+
+# Outreach intelligence — brand contacts, target list, pitch strategy.
+# This repo is PUBLIC; keep all of it out of git (Supabase is the source of truth).
+outreach/
+# Ad creatives now live in Supabase Storage, not the repo.
+images/ad-creatives/
+# graphify build cache
+graphify-out/cache/
