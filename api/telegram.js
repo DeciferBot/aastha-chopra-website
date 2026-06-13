@@ -22,7 +22,7 @@ async function emailPitchToAastha(brandName, pitchBody, brandEmail) {
       Authorization: `Bearer ${RESEND_KEY}`,
     },
     body: JSON.stringify({
-      from: 'Outreach Bot <onboarding@resend.dev>',
+      from: 'Outreach Bot <hello@aasthachopra.com>',
       to: AASTHA_EMAIL,
       subject: `Pitch ready: ${brandName} → ${brandEmail || 'find email'}`,
       text: [
