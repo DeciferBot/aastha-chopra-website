@@ -993,6 +993,71 @@
     <div class="format-directive" id="formatDirective" style="display:none"></div>
   </section>
 
+  <!-- BRAND OPPORTUNITIES -->
+  <style>
+    #opportunities { margin-bottom: 80px; }
+    .opp-sub {
+      font-size: 0.82rem; color: var(--muted); margin: -22px 0 30px;
+      line-height: 1.55; max-width: 560px;
+    }
+    .opp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .opp-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r-card); border-top: 3px solid var(--teal);
+      overflow: hidden; display: flex; flex-direction: column;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s, border-color 0.2s;
+    }
+    .opp-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.65); border-top-color: var(--gold); }
+    .opp-card.fit-medium { border-top-color: var(--border-warm); }
+    .opp-media { position: relative; width: 100%; height: 188px; overflow: hidden; background: var(--elevated); }
+    .opp-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+    .opp-card:hover .opp-media img { transform: scale(1.045); }
+    .opp-media::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to bottom, transparent 50%, rgba(28,24,20,0.78) 100%); }
+    .opp-live-pill {
+      position: absolute; top: 12px; left: 12px; z-index: 2;
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(11,9,8,0.7); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+      border: 1px solid var(--green-bg); border-radius: 20px; padding: 5px 10px;
+      font-size: 0.62rem; letter-spacing: 0.05em; color: var(--green);
+    }
+    .opp-live-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: oppPulse 2s infinite; }
+    .opp-live-pill b { font-weight: 600; }
+    .opp-live-pill--hot { color: var(--amber); border-color: var(--amber-border); background: rgba(11,9,8,0.76); }
+    .opp-live-pill--hot .dot { background: var(--amber); box-shadow: 0 0 0 0 rgba(212,132,58,0.5); animation: oppPulseHot 2s infinite; }
+    @keyframes oppPulseHot { 0%{box-shadow:0 0 0 0 rgba(212,132,58,0.55)} 70%{box-shadow:0 0 0 6px rgba(212,132,58,0)} 100%{box-shadow:0 0 0 0 rgba(212,132,58,0)} }
+    @keyframes oppPulse { 0%{box-shadow:0 0 0 0 rgba(93,184,122,0.5)} 70%{box-shadow:0 0 0 6px rgba(93,184,122,0)} 100%{box-shadow:0 0 0 0 rgba(93,184,122,0)} }
+    .opp-body { padding: 20px 22px; display: flex; flex-direction: column; gap: 11px; flex: 1; }
+    .opp-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .opp-name { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; color: var(--text); line-height: 1.15; }
+    .opp-cat {
+      font-size: 0.56rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--gold); background: var(--gold-lo); border: 1px solid var(--border-warm);
+      border-radius: var(--r-chip); padding: 4px 8px; white-space: nowrap; flex-shrink: 0;
+    }
+    .opp-fit { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .opp-fit b { color: var(--gold-light); font-weight: 600; }
+    .opp-link {
+      margin-top: auto; font-size: 0.72rem; letter-spacing: 0.04em; color: var(--teal);
+      text-decoration: none; border-top: 1px solid var(--border); padding-top: 14px;
+      display: flex; align-items: center; justify-content: space-between; transition: color 0.2s;
+    }
+    .opp-link:hover { color: var(--gold-light); }
+    .opp-link .arr { transition: transform 0.2s; }
+    .opp-link:hover .arr { transform: translateX(3px); }
+    @media (max-width: 760px) { .opp-grid { grid-template-columns: 1fr; } }
+  </style>
+  <section id="opportunities">
+    <p class="section-label">Ready to Pitch</p>
+    <h2 class="section-heading">Brand <em>Opportunities</em></h2>
+    <p class="opp-sub">UAE brands running active Meta ads right now that fit your niche. Ranked by how many ads they're running — the harder a brand is spending, the more budget it has and the warmer the lead.</p>
+    <div class="opp-grid" id="oppGrid">
+      <div class="skel" style="height:172px;border-radius:8px"></div>
+      <div class="skel" style="height:172px;border-radius:8px"></div>
+      <div class="skel" style="height:172px;border-radius:8px"></div>
+    </div>
+  </section>
+
   <!-- GROWTH -->
   <section id="growth">
     <p class="section-label">Momentum</p>
@@ -1435,6 +1500,58 @@
       `Updates daily · Next run: <span class="status-next-time">6:30am Dubai (${nextLabel})</span>`;
   }
 
+  // ── Load Brand Opportunities ─────────────────────────────────────────
+  async function loadOpportunities() {
+    const CAT_LABEL = {
+      'modest-fashion':'Modest Fashion', 'fashion':'Fashion', 'beauty':'Beauty',
+      'fragrance':'Fragrance', 'jewellery':'Jewellery', 'wellness':'Wellness',
+      'fitness-fashion':'Activewear', 'skincare':'Skincare', 'agency':'Agency',
+    };
+    let rows;
+    try {
+      rows = await sbFetch('discovered_opportunities',
+        'select=name,category,niche_fit,sample_ad,creative_image,page_id,active_ad_count&order=active_ad_count.desc.nullslast,niche_fit.asc,name.asc&limit=60');
+    } catch (e) { rows = []; }
+    const grid = document.getElementById('oppGrid');
+    if (!rows || !rows.length) {
+      grid.innerHTML = `<div class="brief-empty"><p>No active brand opportunities yet — the discovery agent will surface them here.</p></div>`;
+      return;
+    }
+    grid.innerHTML = rows.map(r => {
+      const fitMed = r.niche_fit === 'medium';
+      const cat = CAT_LABEL[r.category] || (r.category || 'Brand');
+      const fitLabel = r.niche_fit ? r.niche_fit.charAt(0).toUpperCase() + r.niche_fit.slice(1) : '—';
+      const link = r.sample_ad
+        ? `<a class="opp-link" href="${esc(r.sample_ad)}" target="_blank" rel="noopener"><span>See their live ad</span><span class="arr">→</span></a>`
+        : '';
+      const fallback = r.page_id ? `https://graph.facebook.com/${esc(r.page_id)}/picture?type=large` : '';
+      const imgSrc = r.creative_image || fallback;
+      const n = Number(r.active_ad_count) || 0;
+      const hot = n >= 20;
+      const adsLabel = n > 0 ? `<b>${n}</b> active ad${n === 1 ? '' : 's'}` : 'Running UAE ads';
+      const pill = `<span class="opp-live-pill${hot ? ' opp-live-pill--hot' : ''}"><span class="dot"></span>${hot ? '🔥 ' : ''}${adsLabel}</span>`;
+      const media = imgSrc
+        ? `<div class="opp-media">
+             ${pill}
+             <img src="${esc(imgSrc)}" alt="${esc(r.name)} ad creative" loading="lazy"
+                  onerror="this.onerror=null;${fallback ? `this.src='${esc(fallback)}'` : 'this.closest(\'.opp-media\').style.display=\'none\''}">
+           </div>`
+        : '';
+      return `
+        <div class="opp-card${fitMed ? ' fit-medium' : ''}">
+          ${media}
+          <div class="opp-body">
+            <div class="opp-top">
+              <div class="opp-name">${esc(r.name)}</div>
+              <span class="opp-cat">${esc(cat)}</span>
+            </div>
+            <span class="opp-fit">Fit: <b>${esc(fitLabel)}</b></span>
+            ${link}
+          </div>
+        </div>`;
+    }).join('');
+  }
+
   // ── Load Trending Creators ───────────────────────────────────────────
   // Brand signals: accounts that are venues, luxury houses, malls, publications, or "official" accounts
 
@@ -1452,6 +1569,7 @@
     loadBrief(),
     loadAudience(),
     loadPerformance(),
+    loadOpportunities(),
     loadGrowth(),
     loadAgentStatus(),
   ]).catch(console.error);
