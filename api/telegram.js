@@ -203,6 +203,38 @@ async function handleStatus(chatId) {
   ].join('\n'));
 }
 
+async function handleLeads(chatId) {
+  // Open inbound briefs only — real leads awaiting a reply (test rows excluded).
+  const leads = await sb('/contact_briefs?status=eq.new&order=created_at.desc&select=brand,email,category,budget,collab_type,message,created_at');
+  if (!leads.length) return send(chatId, '📥 No open inbound leads. You are all caught up.');
+
+  const blocks = leads.map((l) => {
+    const date = (l.created_at || '').slice(0, 10);
+    const budget = l.budget ? l.budget : 'not specified';
+    const msg = (l.message || '').replace(/\s+/g, ' ').slice(0, 220);
+    return [
+      `🟡 ${l.brand}  (${date})`,
+      `${l.collab_type || 'collab'} · ${l.category || '—'} · budget: ${budget}`,
+      `reply to: ${l.email || '—'}`,
+      msg ? `“${msg}”` : '',
+      `mark done: done ${l.brand}`,
+    ].filter(Boolean).join('\n');
+  });
+
+  send(chatId, `📥 ${leads.length} open inbound lead${leads.length === 1 ? '' : 's'}\n\n${blocks.join('\n\n')}`, false);
+}
+
+async function handleLeadDone(chatId, args) {
+  const name = args.trim();
+  if (!name) return send(chatId, '❌ Usage: done BrandName', false);
+  const updated = await sb(
+    `/contact_briefs?status=eq.new&brand=ilike.${encodeURIComponent('%' + name + '%')}`,
+    { method: 'PATCH', body: JSON.stringify({ status: 'replied', handled_at: new Date().toISOString() }) },
+  );
+  if (!updated.length) return send(chatId, `⚠️ No open lead matching “${name}”. Type \`leads\` to see them.`);
+  send(chatId, `✅ Marked ${updated.map((u) => u.brand).join(', ')} as replied.`, false);
+}
+
 async function handlePitch(chatId, args) {
   const brandName = args.trim();
   if (!brandName) return send(chatId, '❌ Usage: `pitch BrandName`');
@@ -231,6 +263,8 @@ async function handleHelp(chatId) {
     `\`remove BrandName\` — remove brand`,
     `\`list\` — show watchlist`,
     `\`pitch BrandName\` — generate pitch now`,
+    `\`leads\` — open inbound brand enquiries`,
+    `\`done BrandName\` — mark an inbound lead replied`,
     `\`status\` — pipeline summary`,
     `\`help\` — this message`,
     ``,
@@ -264,6 +298,8 @@ export default async function handler(req, res) {
     else if (cmd === 'remove') await handleRemove(chatId, originalArgs);
     else if (cmd === 'list')   await handleList(chatId);
     else if (cmd === 'status') await handleStatus(chatId);
+    else if (cmd === 'leads')  await handleLeads(chatId);
+    else if (cmd === 'done')   await handleLeadDone(chatId, originalArgs);
     else if (cmd === 'pitch')  await handlePitch(chatId, originalArgs);
     else if (cmd === '/start' || cmd === 'help' || cmd === '/help') await handleHelp(chatId);
     else if (text.startsWith('@')) await handleAdd(chatId, text);
