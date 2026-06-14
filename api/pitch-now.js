@@ -60,7 +60,7 @@ export default async function handler(req, res) {
 
     // 2. Ground + generate.
     const profile = await getLiveProfile();
-    const { subject, body: pitchBody } = await generatePitch(brand.name, profile, brand.notes || '');
+    const { subject, body: pitchBody } = await generatePitch(brand.name, profile, brand.notes || '', brand.segment || '');
 
     // 3. Persist.
     let pitchId = null;

@@ -12,6 +12,23 @@ const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;
 const RESEND_KEY    = process.env.RESEND_API_KEY;
 
 /**
+ * Per-segment audience/positioning angle. Lets each pitch lead with the part of
+ * Aastha's audience that matters to that category, instead of a generic intro.
+ * Keep these as plain audience truths — the STATS block still gates real numbers.
+ */
+const SEGMENT_ANGLES = {
+  fashion:     'Lead with her UAE fashion audience and her track record of fashion collaborations.',
+  beauty:      'Lead with her premium-beauty content and how engaged her beauty audience is.',
+  fragrance:   'Lead with how strongly fragrance content performs with her Gulf audience, who love perfume.',
+  jewellery:   'Lead with her gold and fine-jewellery audience and the South Asian wedding and festive demographic in the UAE.',
+  wellness:    'Lead with her everyday-athlete positioning and her active UAE women audience aged 25 to 44.',
+  hospitality: 'Lead with her Dubai staycation and dining audience and her hosted-experience content.',
+  travel:      'Lead with her hosted-trip experience and her UAE plus diaspora travel audience.',
+  automobile:  'Lead with her luxury-lifestyle audience and aspirational drive and travel content.',
+  retail:      'Lead with her broad UAE shopping audience and wide reach across the Emirates.',
+};
+
+/**
  * Build the ONLY stats block a pitch may cite. Every line is a real number pulled
  * live from Instagram, so nothing the model writes can drift from what a brand sees.
  */
@@ -33,8 +50,9 @@ export function buildFactSheet(profile) {
 /**
  * @returns {Promise<{subject:string, body:string}>}
  */
-export async function generatePitch(brandName, profile, brandNotes = '') {
+export async function generatePitch(brandName, profile, brandNotes = '', segment = '') {
   const factSheet = buildFactSheet(profile);
+  const angle = SEGMENT_ANGLES[segment] || '';
 
   const systemPrompt = `You write outreach emails from Aastha Chopra, a Dubai-based lifestyle creator, to brand managers.
 
@@ -69,6 +87,7 @@ Other facts:
 - Based in ${STATIC_PROFILE.location}
 
 ${brandNotes ? `Brand context: ${brandNotes}` : `${brandName} is active in the UAE lifestyle market.`}
+${angle ? `Audience angle for this category: ${angle}` : ''}
 
 Hook (why this brand) -> body (her UAE audience quality, using only the STATS above) -> action (open a door).
 Return JSON only.`;
