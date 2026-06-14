@@ -179,7 +179,11 @@ export async function sendPitchEmail({ to, brand, subject, body, score, adData }
 // OUTREACH_PAUSE=1 is a global kill switch.
 
 const VERIFIED_FROM   = process.env.OUTREACH_FROM || '';
+// Replies route here (the creator owns brand conversations).
 const MANAGEMENT_EMAIL = process.env.MANAGEMENT_EMAIL || 'management@aasthachopra.com';
+// A blind copy of every send goes here so the operator has visibility (separate
+// from reply-to). Falls back to the reply-to inbox if unset.
+const OUTREACH_BCC     = process.env.OUTREACH_BCC || MANAGEMENT_EMAIL;
 
 /** True only when we have a verified sender and the kill switch is off. */
 export function autosendEnabled() {
@@ -202,8 +206,9 @@ export function renderBrandEmailHtml({ body }) {
 }
 
 /**
- * Send the pitch directly to the brand. Replies go to Aastha's management inbox,
- * which is also BCC'd so she sees every send. Returns the Resend message id.
+ * Send the pitch directly to the brand. Replies route to MANAGEMENT_EMAIL (the
+ * creator's inbox); a blind copy goes to OUTREACH_BCC (the operator) for
+ * visibility. Returns the Resend message id.
  */
 export async function sendBrandPitch({ to, subject, body }) {
   if (!autosendEnabled()) throw new Error('autosend disabled (no verified OUTREACH_FROM or paused)');
@@ -214,7 +219,7 @@ export async function sendBrandPitch({ to, subject, body }) {
     body: JSON.stringify({
       from: VERIFIED_FROM,
       to,
-      bcc: MANAGEMENT_EMAIL,
+      bcc: OUTREACH_BCC,
       reply_to: MANAGEMENT_EMAIL,
       subject,
       html,
