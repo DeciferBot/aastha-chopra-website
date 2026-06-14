@@ -213,6 +213,11 @@ export default async function handler(req, res) {
 
     const toBrand = canAutosend
       && !!r.brand.contact_email
+      // Deliverability gate: only ever auto-send to an address whose domain can
+      // receive mail (mx_ok) or that we've confirmed (verified). Anything unknown,
+      // mx_fail, or previously bounced routes to Aastha so a dead address can never
+      // hard-bounce off her sending domain. See email_status on outreach_brands.
+      && ['mx_ok', 'verified'].includes(r.brand.email_status)
       && r.brand.tier !== 'reach'
       && AUTOSEND_TIERS.includes(r.brand.tier)
       && r.score >= MIN_AUTOSEND;
