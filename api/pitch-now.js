@@ -12,6 +12,7 @@
 
 import { getLiveProfile } from './_profile.js';
 import { generatePitch, sendPitchEmail } from './_pitch.js';
+import { recordPipeline } from './_pipeline.js';
 
 const SUPABASE_URL = 'https://uqzvaytvynrglijvwjsz.supabase.co';
 const SERVICE_KEY  = process.env.SUPABASE_SERVICE_KEY;
@@ -84,7 +85,10 @@ export default async function handler(req, res) {
     } catch { /* non-fatal: still deliver the email */ }
 
     // 4. Deliver the forward-ready pitch to her inbox.
-    await sendPitchEmail({ to: AASTHA_EMAIL, brand, subject, body: pitchBody, score: brand.fit_score, adData });
+    const resendId = await sendPitchEmail({ to: AASTHA_EMAIL, brand, subject, body: pitchBody, score: brand.fit_score, adData });
+
+    // 5. Track it in the pipeline ('queued' = awaiting her forward).
+    await recordPipeline({ brandName: brand.name, contactEmail: brand.contact_email, subject, body: pitchBody, status: 'queued', resendId, route: 'aastha-ondemand' });
 
     return res.status(200).json({ ok: true, brand: brand.name, subject, pitchId, groundedOn: { followers: profile.followers, uaeFollowers: profile.uaeFollowers, uaeReach: profile.uaeReach } });
   } catch (e) {

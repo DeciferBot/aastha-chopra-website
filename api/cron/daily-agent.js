@@ -8,6 +8,7 @@
 
 import { getLiveProfile } from '../_profile.js';
 import { generatePitch, sendPitchEmail, sendBrandPitch, autosendEnabled } from '../_pitch.js';
+import { recordPipeline } from '../_pipeline.js';
 
 const SUPABASE_URL  = 'https://uqzvaytvynrglijvwjsz.supabase.co';
 const SERVICE_KEY   = process.env.SUPABASE_SERVICE_KEY;
@@ -222,17 +223,21 @@ export default async function handler(req, res) {
     r.pitchId = await storePitch({ brand: r.brand, subject, body, score: r.score, adData: r.adData, profile });
 
     if (toBrand) {
-      await sendBrandPitch({ to: r.brand.contact_email, subject, body });
+      const resendId = await sendBrandPitch({ to: r.brand.contact_email, subject, body });
       await sb(`/brand_pitches?id=eq.${r.pitchId}`, {
         method: 'PATCH',
         body: JSON.stringify({ status: 'sent', to_email: r.brand.contact_email, emailed_at: new Date().toISOString() }),
       });
+      // Brand-facing send → track opens/clicks via the Resend webhook (keyed on resendId).
+      await recordPipeline({ brandName: r.brand.name, contactEmail: r.brand.contact_email, subject, body, status: 'sent', resendId, route: 'brand' });
     } else {
-      await sendPitchEmail({ to: AASTHA_EMAIL, brand: r.brand, subject, body, score: r.score, adData: r.adData });
+      const resendId = await sendPitchEmail({ to: AASTHA_EMAIL, brand: r.brand, subject, body, score: r.score, adData: r.adData });
       await sb(`/brand_pitches?id=eq.${r.pitchId}`, {
         method: 'PATCH',
         body: JSON.stringify({ status: 'emailed', emailed_at: new Date().toISOString() }),
       });
+      // Forwarded to Aastha for manual send → 'queued' until she forwards it on.
+      await recordPipeline({ brandName: r.brand.name, contactEmail: r.brand.contact_email, subject, body, status: 'queued', resendId, route: 'aastha' });
     }
   }));
 

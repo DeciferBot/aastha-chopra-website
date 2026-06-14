@@ -134,7 +134,10 @@ export function renderPitchEmailHtml({ brand, body, score, adData }) {
   </div>`;
 }
 
-/** Send one forward-ready pitch email to a recipient (always Aastha's own inbox). */
+/**
+ * Send one forward-ready pitch email to a recipient (always Aastha's own inbox).
+ * Returns the Resend message id so the caller can record it in the pipeline.
+ */
 export async function sendPitchEmail({ to, brand, subject, body, score, adData }) {
   const html = renderPitchEmailHtml({ brand, body, score, adData });
   const res = await fetch('https://api.resend.com/emails', {
@@ -143,6 +146,8 @@ export async function sendPitchEmail({ to, brand, subject, body, score, adData }
     body: JSON.stringify({ from: 'Aastha Outreach <hello@aasthachopra.com>', to, subject, html }),
   });
   if (!res.ok) throw new Error(`Resend: ${await res.text()}`);
+  const data = await res.json().catch(() => ({}));
+  return data?.id ?? null;
 }
 
 // ── Autonomous brand-facing send ─────────────────────────────────────────────

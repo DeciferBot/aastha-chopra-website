@@ -183,6 +183,7 @@ async function handleList(chatId) {
 async function handleStatus(chatId) {
   const contacts = await sb('/outreach_pipeline?select=status,opens');
   const total   = contacts.length;
+  const queued  = contacts.filter(c => c.status === 'queued').length;
   const sent    = contacts.filter(c => c.status === 'sent').length;
   const opened  = contacts.filter(c => c.opens > 0).length;
   const warm    = contacts.filter(c => c.opens >= 2).length;
@@ -192,8 +193,9 @@ async function handleStatus(chatId) {
   send(chatId, [
     `📊 *Pipeline Summary*`,
     ``,
-    `Total contacted: ${total}`,
-    `📨 Emails sent: ${sent}`,
+    `Total pitches: ${total}`,
+    `📥 Queued (awaiting your forward): ${queued}`,
+    `📨 Sent to brand: ${sent}`,
     `👀 Opened: ${opened}`,
     `🔥 Warm (2+ opens): ${warm}`,
     `💬 Replied: ${replied}`,
