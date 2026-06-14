@@ -11,7 +11,12 @@ import { generatePitch, sendPitchEmail, sendBrandPitch, autosendEnabled } from '
 
 const SUPABASE_URL  = 'https://uqzvaytvynrglijvwjsz.supabase.co';
 const SERVICE_KEY   = process.env.SUPABASE_SERVICE_KEY;
-const FB_TOKEN      = process.env.FB_ACCESS_TOKEN;
+// Ad Library lookups accept any valid app/user token. FB_ACCESS_TOKEN can quietly
+// expire and take the whole timing signal down with it, so we keep the ads-autopilot
+// token (which is exercised weekly and stays fresh) as a fallback. First working one wins.
+const AD_TOKENS = [...new Set(
+  [process.env.FB_ACCESS_TOKEN, process.env.META_ADS_ACCESS_TOKEN].filter(Boolean)
+)];
 // REVIEW MODE: when OUTREACH_REDIRECT_TO is set, every pitch is delivered to that
 // single inbox (forward-ready) and NOTHING goes to a brand — Aastha reviews/forwards.
 // Unset it to let autosend deliver straight to brands.
@@ -41,35 +46,66 @@ async function sb(path, opts = {}) {
   return res.json();
 }
 
-async function checkAdLibrary(brandName) {
-  if (!FB_TOKEN) return null;
+async function adArchive(searchTerms, token, limit = 10) {
+  const params = new URLSearchParams({
+    search_terms: searchTerms,
+    ad_type: 'ALL',
+    ad_reached_countries: '["AE"]',
+    ad_active_status: 'ACTIVE',
+    limit: String(limit),
+    fields: 'id,page_name,ad_delivery_start_time',
+    access_token: token,
+  });
+  const res = await fetch(`https://graph.facebook.com/v21.0/ads_archive?${params}`);
+  return res.json();
+}
+
+/**
+ * Resolve a token that actually works against the Ad Library, once per run.
+ * Returns { token, reason }. reason is 'ok', 'no_token', or the API error message —
+ * so the run surfaces *why* the timing signal is dark instead of silently blanking it.
+ */
+async function resolveAdToken() {
+  if (!AD_TOKENS.length) return { token: null, reason: 'no_token' };
+  let reason = 'no_token';
+  for (const t of AD_TOKENS) {
+    try {
+      const data = await adArchive('Nike', t, 1); // cheap liveness probe
+      if (!data.error) return { token: t, reason: 'ok' };
+      reason = data.error.message || 'api_error';
+    } catch (e) {
+      reason = String(e?.message || e);
+    }
+  }
+  return { token: null, reason };
+}
+
+/**
+ * Per-brand Ad Library check. Always returns a structured result:
+ *   { ok:true, active, count, recentCount }  — call succeeded
+ *   { ok:false, reason }                     — call failed (token/api)
+ * Never returns null, so a failed lookup is recorded as 'error' (recoverable),
+ * never confused with 'none' (genuinely no active ads).
+ */
+async function checkAdLibrary(brandName, token) {
+  if (!token) return { ok: false, reason: 'no_token' };
   try {
-    const params = new URLSearchParams({
-      search_terms: brandName,
-      ad_type: 'ALL',
-      ad_reached_countries: '["AE"]',
-      ad_active_status: 'ACTIVE',
-      limit: '10',
-      fields: 'id,page_name,ad_delivery_start_time',
-      access_token: FB_TOKEN,
-    });
-    const res = await fetch(`https://graph.facebook.com/v21.0/ads_archive?${params}`);
-    const data = await res.json();
-    if (data.error || !data.data) return null;
-    const ads = data.data;
+    const data = await adArchive(brandName, token, 10);
+    if (data.error) return { ok: false, reason: data.error.message || 'api_error' };
+    const ads = Array.isArray(data.data) ? data.data : [];
     const now = Date.now();
-    const recentAds = ads.filter(ad => {
-      if (!ad.ad_delivery_start_time) return false;
-      return (now - new Date(ad.ad_delivery_start_time).getTime()) < 14 * 24 * 60 * 60 * 1000;
-    });
-    return { active: ads.length > 0, count: ads.length, recentCount: recentAds.length };
-  } catch { return null; }
+    const recentCount = ads.filter(ad => ad.ad_delivery_start_time &&
+      (now - new Date(ad.ad_delivery_start_time).getTime()) < 14 * 24 * 60 * 60 * 1000).length;
+    return { ok: true, active: ads.length > 0, count: ads.length, recentCount };
+  } catch (e) {
+    return { ok: false, reason: String(e?.message || e) };
+  }
 }
 
 function scoreBrand(brand, adData) {
   let score = 0;
-  if (adData?.active)            score += 3;
-  if (adData?.recentCount > 0)   score += 2;
+  if (adData?.ok && adData.active)          score += 3;
+  if (adData?.ok && adData.recentCount > 0) score += 2;
   if (brand.niche_fit === 'high')   score += 3;
   if (brand.niche_fit === 'medium') score += 1;
   if (brand.contact_email)       score += 1;
@@ -122,15 +158,21 @@ export default async function handler(req, res) {
   const today = new Date().toISOString().slice(0, 10);
   const scored = [];
 
+  // Resolve a working Ad Library token once. If none works, the run still proceeds
+  // (scores fall back to niche_fit) but records ad_status='error' + the reason.
+  const { token: adToken, reason: adTokenReason } = await resolveAdToken();
+
   for (const brand of brands) {
-    const adData = await checkAdLibrary(brand.name);
+    const adData = adToken
+      ? await checkAdLibrary(brand.name, adToken)
+      : { ok: false, reason: adTokenReason };
     const score = scoreBrand(brand, adData);
 
     if (!dryRun) {
       await sb(`/outreach_brands?id=eq.${brand.id}`, {
         method: 'PATCH',
         body: JSON.stringify({
-          ad_status: adData?.active ? 'active' : adData === null ? 'unknown' : 'none',
+          ad_status: adData.ok ? (adData.active ? 'active' : 'none') : 'error',
           fit_score: score,
           last_checked: today,
           last_ad_data: adData,
@@ -139,15 +181,21 @@ export default async function handler(req, res) {
     }
 
     scored.push({ brand, adData, score });
-    await new Promise(r => setTimeout(r, dryRun ? 0 : 300));
+    if (adToken && !dryRun) await new Promise(r => setTimeout(r, 300));
   }
+
+  // Visibility into the timing signal: tokenReason + how brands resolved this run.
+  const adSignal = scored.reduce((a, r) => {
+    const k = r.adData.ok ? (r.adData.active ? 'active' : 'none') : 'error';
+    a[k] = (a[k] || 0) + 1; return a;
+  }, { tokenReason: adTokenReason });
 
   scored.sort((a, b) => b.score - a.score);
 
   // Cadence guard: never re-pitch a brand already contacted within the cooldown.
   // Rotates the agent through the watchlist instead of spamming the same top names.
   const since = new Date(Date.now() - COOLDOWN_DAYS * 86400000).toISOString();
-  const recent = await sb(`/brand_pitches?select=brand_id&created_at=gte.${since}`).catch(() => []);
+  const recent = await sb(`/brand_pitches?select=brand_id&generated_at=gte.${since}`).catch(() => []);
   const onCooldown = new Set((recent || []).map((p) => p.brand_id));
   const eligible = scored.filter((r) => !onCooldown.has(r.brand.id));
   const top = eligible.slice(0, DAILY_LIMIT);
@@ -191,6 +239,7 @@ export default async function handler(req, res) {
   if (dryRun) {
     return res.status(200).json({
       ok: true, dryRun: true, autosend: canAutosend, groundedOn: profile,
+      adSignal,
       eligibleAfterCooldown: eligible.length,
       pitches: top.map((r) => ({
         brand: r.brand.name, tier: r.brand.tier, score: r.score, route: r.route,
@@ -203,6 +252,7 @@ export default async function handler(req, res) {
   res.status(200).json({
     ok: true,
     brandsChecked: brands.length,
+    adSignal,
     autosend: canAutosend,
     onCooldown: onCooldown.size,
     sentToBrand: top.filter((r) => r.route === 'brand').map((r) => r.brand.name),
