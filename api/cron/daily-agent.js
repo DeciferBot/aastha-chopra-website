@@ -207,7 +207,9 @@ export default async function handler(req, res) {
   // Review mode (OUTREACH_REDIRECT_TO set) forces every pitch to the one inbox.
   const canAutosend = autosendEnabled() && !REDIRECT_TO;
   await Promise.all(top.map(async (r) => {
-    const { subject, body } = await generatePitch(r.brand.name, profile, r.brand.notes || '', r.brand.segment || '');
+    // Prefer the clean, researched brand_brief for pitch context; fall back to
+    // operational notes only if no brief has been captured yet.
+    const { subject, body } = await generatePitch(r.brand.name, profile, r.brand.brand_brief || r.brand.notes || '', r.brand.segment || '');
     r.subject = subject;
     r.body = body;
 

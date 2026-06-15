@@ -12,20 +12,21 @@ const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;
 const RESEND_KEY    = process.env.RESEND_API_KEY;
 
 /**
- * Per-segment audience/positioning angle. Lets each pitch lead with the part of
- * Aastha's audience that matters to that category, instead of a generic intro.
- * Keep these as plain audience truths — the STATS block still gates real numbers.
+ * Per-segment CONTENT angle: how Aastha would actually create for this category.
+ * The email should be about the work she would make, not the size of her audience,
+ * so each angle describes a way of telling the brand's story through her content.
+ * (Avoids the banned words; the STATS block still gates any real numbers.)
  */
 const SEGMENT_ANGLES = {
-  fashion:     'Lead with her UAE fashion audience and her track record of fashion collaborations.',
-  beauty:      'Lead with her premium-beauty content and how engaged her beauty audience is.',
-  fragrance:   'Lead with how strongly fragrance content performs with her Gulf audience, who love perfume.',
-  jewellery:   'Lead with her gold and fine-jewellery audience and the South Asian wedding and festive demographic in the UAE.',
-  wellness:    'Lead with her everyday-athlete positioning and her active UAE women audience aged 25 to 44.',
-  hospitality: 'Lead with her Dubai staycation and dining audience and her hosted-experience content.',
-  travel:      'Lead with her hosted-trip experience and her UAE plus diaspora travel audience.',
-  automobile:  'Lead with her luxury-lifestyle audience and aspirational drive and travel content.',
-  retail:      'Lead with her broad UAE shopping audience and wide reach across the Emirates.',
+  fashion:     'Show how she would style the pieces into real Dubai life so the clothes read as worn and wanted, not just photographed.',
+  beauty:      'Show how she would feature the products in honest daily use, the texture and the wear that make a beauty audience trust a recommendation.',
+  fragrance:   'Show how she would tell a scent as a feeling and a memory, the kind of storytelling that makes Gulf fragrance lovers want to try it.',
+  jewellery:   'Show how she would frame each piece around the moments and occasions it is worn for, so it carries meaning instead of sitting as a product shot.',
+  wellness:    'Show how she would fold the brand into a believable daily routine so it reads as part of real life.',
+  hospitality: 'Show how she would turn a stay or a meal into something her audience wants to recreate, capturing the feeling of being hosted.',
+  travel:      'Show how she would build a destination into a story with a clear arc that makes people save it and plan their own.',
+  automobile:  'Show how she would place the car inside an aspirational lifestyle story rather than a list of specs.',
+  retail:      'Show how she would make a wide range feel personal and shoppable across everyday city life.',
 };
 
 /**
@@ -43,7 +44,7 @@ export function buildFactSheet(profile) {
   if (profile.topCities?.length) {
     facts.push(`top cities are ${profile.topCities.map((c) => c.city).join(', ')}`);
   }
-  if (profile.coreAge) facts.push(`core audience is ${profile.coreAge} year olds with a strong South Asian diaspora in the UAE`);
+  if (profile.coreAge) facts.push(`core audience is ${profile.coreAge} year olds`);
   return facts.map((f) => `- ${f}`).join('\n');
 }
 
@@ -56,41 +57,48 @@ export async function generatePitch(brandName, profile, brandNotes = '', segment
 
   const systemPrompt = `You write outreach emails from Aastha Chopra, a Dubai-based lifestyle creator, to brand managers.
 
-VOICE: Confident, warm, direct. Reads like a real person wrote it — not a template, not a tool.
+WHO SHE IS: A content creator whose real strength is understanding her audience and telling a brand's story well. She is warm, assured, and good at her craft. This email should make a brand feel that she gets them and could bring their work to life. It is not a pitch about reach.
 
-STRUCTURE — three parts, no headers, no bullet points:
-1. HOOK: One sentence showing you know this brand and why you're reaching out specifically.
-2. BODY: Who Aastha is and why she's relevant. Lead with her UAE audience quality.
-3. ACTION: Soft collaborative close — open a door, not close a deal.
+WHAT THE EMAIL IS ABOUT, in order of importance:
+1. THE BRAND. Show genuine understanding of what this brand is and what makes it good: its work, its look, what it stands for.
+2. HOW SHE WOULD CREATE FOR IT. A concrete, believable picture of how she would feature the brand and tell its story through her content. This is the heart of the email.
+3. HER AUTHORITY AS A STORYTELLER. She knows the UAE audience and knows how to show a product so people feel it. Her value is judgment and craft.
+
+STRUCTURE — three short paragraphs, no headers, no bullet points:
+1. OPEN: One or two sentences showing you truly know this brand and admire something specific about it.
+2. MIDDLE: How she pictures creating with the brand, and why her read on the audience makes that work.
+3. CLOSE: A warm, confident invitation to talk.
 
 HARD RULES:
-- ONLY cite numbers that appear in the STATS block provided. Never invent or round to a bigger figure. If a number is not in STATS, do not state it.
-- Zero em dashes. Not one.
-- Zero "not just X" constructions. Write what something IS, never what it is NOT.
-- Every sentence is a positive statement.
-- Zero "if X then Y" logic structures.
-- No words: synergy, authentic, leverage, elevate, resonate, curated, align, journey, space, narrative
-- No lists or bullet points in the email body
-- Under 130 words total
-- Sign off as Aastha only
-- Warm, forward-looking voice. She says things like "it's always a pleasure working with brands you actually use" — genuine enthusiasm, positive framing.
+- Do NOT lead with or headline follower counts or audience size. This email is about storytelling and audience understanding, not reach. Leaving numbers out entirely is fine and often better.
+- If you reference any number, it must appear verbatim in the STATS block below. Never invent or round up. A number is background, never the selling point.
+- Do NOT default to a "South Asian diaspora" framing. Mention it ONLY if the brand context clearly shows the brand has a South Asian line or audience. Otherwise speak to her broad Dubai and UAE lifestyle audience.
+- Zero em dashes anywhere. Use commas, full stops, or "and". Not one.
+- Zero "not just X" constructions. Write what something IS.
+- Every sentence is a positive statement. No "if X then Y" logic.
+- Banned words: synergy, authentic, leverage, elevate, resonate, curated, align, journey, space, narrative.
+- No lists or bullet points in the body. Under 140 words total.
+- Warm, assured, genuinely enthusiastic. She sounds like someone who loves making content and is good at it.
+- Sign off as Aastha only.
 
-OUTPUT: Return ONLY valid JSON: {"subject": "...", "body": "..."}. The subject is under 60 characters, specific to the brand, no clickbait. The body is the email text with real line breaks (use \\n).`;
+OUTPUT: Return ONLY valid JSON: {"subject": "...", "body": "..."}. The subject is under 60 characters, specific to the brand, warm, no clickbait, no em dash. The body is the email text with real line breaks between paragraphs (use \\n).`;
 
   const userPrompt = `Write a pitch email from Aastha Chopra to a brand manager at ${brandName}.
 
-STATS (the only numbers you may cite):
-${factSheet || '- Dubai-based lifestyle creator with an engaged UAE audience'}
+THE BRAND: ${brandNotes
+    ? brandNotes
+    : `${brandName}, active in the UAE lifestyle market. Draw on what you genuinely know about ${brandName}. If you are unsure of specifics, speak to its category and what brands like it do well, and do not invent particular facts, products, or claims.`}
 
-Other facts:
-- Niches: ${STATIC_PROFILE.niches}
-- Based in ${STATIC_PROFILE.location}
+HOW SHE WOULD CREATE FOR THIS CATEGORY: ${angle || 'Show concretely how she would feature the brand and tell its story through her content.'}
 
-${brandNotes ? `Brand context: ${brandNotes}` : `${brandName} is active in the UAE lifestyle market.`}
-${angle ? `Audience angle for this category: ${angle}` : ''}
+ABOUT AASTHA (background, not the headline):
+- Lifestyle creator based in ${STATIC_PROFILE.location}; niches: ${STATIC_PROFILE.niches}.
+- Her edge is reading the UAE audience and depicting a product so people feel it.
 
-Hook (why this brand) -> body (her UAE audience quality, using only the STATS above) -> action (open a door).
-Return JSON only.`;
+STATS (the ONLY numbers you may cite, and only if one genuinely strengthens a point; the email should not be about numbers):
+${factSheet || '- (no numbers needed; lead with story and craft)'}
+
+Lead with the brand and how she would bring it to life. Treat her audience understanding as the proof of her authority, not a stats dump. Return JSON only.`;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -100,8 +108,8 @@ Return JSON only.`;
       'anthropic-version': '2023-06-01',
     },
     body: JSON.stringify({
-      model: 'claude-haiku-4-5-20251001',
-      max_tokens: 600,
+      model: 'claude-sonnet-4-6',
+      max_tokens: 700,
       system: systemPrompt,
       messages: [{ role: 'user', content: userPrompt }],
     }),
@@ -115,7 +123,7 @@ Return JSON only.`;
     const parsed = JSON.parse(match ? match[0] : raw);
     if (parsed.subject && parsed.body) return { subject: parsed.subject.trim(), body: parsed.body.trim() };
   } catch { /* fall through */ }
-  return { subject: `Aastha Chopra x ${brandName} — Dubai creator collab`, body: raw };
+  return { subject: `Collab idea for ${brandName}`, body: raw };
 }
 
 function esc(s) {
