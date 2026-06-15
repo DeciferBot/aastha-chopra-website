@@ -17,7 +17,7 @@ import { refreshIgToken } from '../_igtoken.js';
 export default async function handler(req, res) {
   const authHeader = req.headers.authorization;
   const validCron   = authHeader === `Bearer ${process.env.CRON_SECRET}`;
-  const validManual = authHeader === `Bearer ${process.env.MANUAL_SYNC_KEY}`;
+  const validManual = !!process.env.MANUAL_SYNC_KEY && authHeader === `Bearer ${process.env.MANUAL_SYNC_KEY}`;
   if (!validCron && !validManual) return res.status(401).end();
 
   try {

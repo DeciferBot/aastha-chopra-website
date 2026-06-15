@@ -136,7 +136,7 @@ async function currentActiveAds() {
 export default async function handler(req, res) {
   const auth = req.headers.authorization;
   const ok = auth === `Bearer ${process.env.CRON_SECRET}` ||
-             auth === `Bearer ${process.env.MANUAL_SYNC_KEY}`;
+             (!!process.env.MANUAL_SYNC_KEY && auth === `Bearer ${process.env.MANUAL_SYNC_KEY}`);
   if (!ok) return res.status(401).end();
 
   const enabled = process.env.AD_AUTOPILOT_ENABLED === 'true';

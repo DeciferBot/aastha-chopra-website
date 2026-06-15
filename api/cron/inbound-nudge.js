@@ -31,7 +31,7 @@ async function tg(chatId, text) {
 
 export default async function handler(req, res) {
   const auth = req.headers.authorization;
-  const allowed = auth === `Bearer ${process.env.CRON_SECRET}` || auth === `Bearer ${process.env.MANUAL_SYNC_KEY}`;
+  const allowed = auth === `Bearer ${process.env.CRON_SECRET}` || (!!process.env.MANUAL_SYNC_KEY && auth === `Bearer ${process.env.MANUAL_SYNC_KEY}`);
   if (!allowed) return res.status(401).end();
 
   const leads = await sb('/contact_briefs?status=eq.new&order=created_at.desc&select=brand,email,category,budget,collab_type,created_at');

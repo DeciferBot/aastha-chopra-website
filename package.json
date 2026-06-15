@@ -1,6 +1,6 @@
 {
   "name": "aastha-chopra-website",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "Official website and media pack for Aastha Chopra (@aastha_sochic)",
   "dependencies": {
     "docx": "^9.7.1",
