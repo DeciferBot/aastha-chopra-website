@@ -119,9 +119,19 @@ Lead with the brand and how she would bring it to life. Treat her audience under
 
   const raw = data.content[0].text.trim();
   const parsed = parsePitchResponse(raw);
-  if (parsed) return parsed;
+  if (parsed) return { subject: dedash(parsed.subject), body: dedash(parsed.body) };
   // Never email raw model text: strip any fences/JSON noise for the fallback body.
-  return { subject: `Collab idea for ${brandName}`, body: stripToText(raw) };
+  return { subject: `Collab idea for ${brandName}`, body: dedash(stripToText(raw)) };
+}
+
+/**
+ * Hard-enforce the no-em-dash voice rule: the prompt forbids them, but the model
+ * still slips one in occasionally (usually in the subject). Replace em/en dashes
+ * with a comma so a dash can never reach a brand. Hyphens (e.g. "25-44") are left
+ * untouched.
+ */
+function dedash(s) {
+  return String(s).replace(/\s*[—–]\s*/g, ', ');
 }
 
 /**
