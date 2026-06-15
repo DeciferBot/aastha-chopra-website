@@ -206,7 +206,13 @@ export default async function handler(req, res) {
   // replies + BCC to management. Otherwise fall back to Aastha's forward-ready inbox.
   // Review mode (OUTREACH_REDIRECT_TO set) forces every pitch to the one inbox.
   const canAutosend = autosendEnabled() && !REDIRECT_TO;
-  await Promise.all(top.map(async (r) => {
+  // Sequential, NOT Promise.all: sends share one Resend account that rate-limits
+  // (~2 req/s), and in review mode every pitch hits the same inbox — concurrent
+  // POSTs 429 and previously crashed the whole run. Each pitch is isolated in a
+  // try/catch so one failed send can never abort the others, with a small gap
+  // between sends to stay under the rate limit.
+  for (let i = 0; i < top.length; i++) {
+    const r = top[i];
     // Prefer the clean, researched brand_brief for pitch context; fall back to
     // operational notes only if no brief has been captured yet.
     const { subject, body } = await generatePitch(r.brand.name, profile, r.brand.brand_brief || r.brand.notes || '', r.brand.segment || '');
@@ -225,28 +231,36 @@ export default async function handler(req, res) {
       && r.score >= MIN_AUTOSEND;
     r.route = toBrand ? 'brand' : 'aastha';
 
-    if (dryRun) return;
+    if (dryRun) continue;
 
-    r.pitchId = await storePitch({ brand: r.brand, subject, body, score: r.score, adData: r.adData, profile });
+    try {
+      r.pitchId = await storePitch({ brand: r.brand, subject, body, score: r.score, adData: r.adData, profile });
 
-    if (toBrand) {
-      const resendId = await sendBrandPitch({ to: r.brand.contact_email, subject, body });
-      await sb(`/brand_pitches?id=eq.${r.pitchId}`, {
-        method: 'PATCH',
-        body: JSON.stringify({ status: 'sent', to_email: r.brand.contact_email, emailed_at: new Date().toISOString() }),
-      });
-      // Brand-facing send → track opens/clicks via the Resend webhook (keyed on resendId).
-      await recordPipeline({ brandName: r.brand.name, contactEmail: r.brand.contact_email, subject, body, status: 'sent', resendId, route: 'brand' });
-    } else {
-      const resendId = await sendPitchEmail({ to: AASTHA_EMAIL, brand: r.brand, subject, body, score: r.score, adData: r.adData });
-      await sb(`/brand_pitches?id=eq.${r.pitchId}`, {
-        method: 'PATCH',
-        body: JSON.stringify({ status: 'emailed', emailed_at: new Date().toISOString() }),
-      });
-      // Forwarded to Aastha for manual send → 'queued' until she forwards it on.
-      await recordPipeline({ brandName: r.brand.name, contactEmail: r.brand.contact_email, subject, body, status: 'queued', resendId, route: 'aastha' });
+      if (toBrand) {
+        const resendId = await sendBrandPitch({ to: r.brand.contact_email, subject, body });
+        await sb(`/brand_pitches?id=eq.${r.pitchId}`, {
+          method: 'PATCH',
+          body: JSON.stringify({ status: 'sent', to_email: r.brand.contact_email, emailed_at: new Date().toISOString() }),
+        });
+        // Brand-facing send → track opens/clicks via the Resend webhook (keyed on resendId).
+        await recordPipeline({ brandName: r.brand.name, contactEmail: r.brand.contact_email, subject, body, status: 'sent', resendId, route: 'brand' });
+      } else {
+        const resendId = await sendPitchEmail({ to: AASTHA_EMAIL, brand: r.brand, subject, body, score: r.score, adData: r.adData });
+        await sb(`/brand_pitches?id=eq.${r.pitchId}`, {
+          method: 'PATCH',
+          body: JSON.stringify({ status: 'emailed', emailed_at: new Date().toISOString() }),
+        });
+        // Forwarded to Aastha for manual send → 'queued' until she forwards it on.
+        await recordPipeline({ brandName: r.brand.name, contactEmail: r.brand.contact_email, subject, body, status: 'queued', resendId, route: 'aastha' });
+      }
+    } catch (e) {
+      r.sendError = String(e?.message || e);
+      console.error(`pitch send failed for ${r.brand.name}:`, r.sendError);
     }
-  }));
+
+    // Stay under Resend's rate limit between consecutive sends.
+    if (i < top.length - 1) await new Promise((res) => setTimeout(res, 600));
+  }
 
   if (dryRun) {
     return res.status(200).json({
@@ -267,8 +281,9 @@ export default async function handler(req, res) {
     adSignal,
     autosend: canAutosend,
     onCooldown: onCooldown.size,
-    sentToBrand: top.filter((r) => r.route === 'brand').map((r) => r.brand.name),
-    forwardedToAastha: top.filter((r) => r.route === 'aastha').map((r) => r.brand.name),
+    sentToBrand: top.filter((r) => r.route === 'brand' && !r.sendError).map((r) => r.brand.name),
+    forwardedToAastha: top.filter((r) => r.route === 'aastha' && !r.sendError).map((r) => r.brand.name),
+    failed: top.filter((r) => r.sendError).map((r) => ({ brand: r.brand.name, error: r.sendError })),
     groundedOn: { followers: profile.followers, uaeFollowers: profile.uaeFollowers, uaeReach: profile.uaeReach, asOf: profile.asOf },
   });
 }
