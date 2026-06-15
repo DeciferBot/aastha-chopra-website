@@ -167,10 +167,12 @@ export function renderPitchEmailHtml({ brand, body, score, adData }) {
  */
 export async function sendPitchEmail({ to, brand, subject, body, score, adData }) {
   const html = renderPitchEmailHtml({ brand, body, score, adData });
+  // Review/forward path also blind-copies the operator inbox for visibility,
+  // mirroring the brand-facing send. OUTREACH_BCC defaults to MANAGEMENT_EMAIL.
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${RESEND_KEY}` },
-    body: JSON.stringify({ from: 'Aastha Outreach <hello@aasthachopra.com>', to, subject, html }),
+    body: JSON.stringify({ from: 'Aastha Outreach <hello@aasthachopra.com>', to, bcc: OUTREACH_BCC, subject, html }),
   });
   if (!res.ok) throw new Error(`Resend: ${await res.text()}`);
   const data = await res.json().catch(() => ({}));
