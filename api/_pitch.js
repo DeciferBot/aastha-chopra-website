@@ -81,7 +81,7 @@ HARD RULES:
 - Warm, assured, genuinely enthusiastic. She sounds like someone who loves making content and is good at it.
 - Sign off as Aastha only.
 
-OUTPUT: Return ONLY valid JSON: {"subject": "...", "body": "..."}. The subject is under 60 characters, specific to the brand, warm, no clickbait, no em dash. The body is the email text with real line breaks between paragraphs (use \\n).`;
+OUTPUT: Return ONLY a single valid JSON object: {"subject": "...", "body": "..."}. Output nothing else — no markdown code fences, no backticks, no commentary, no corrections, nothing before or after the object, and never more than one object. The subject is under 60 characters, specific to the brand, warm, no clickbait, no em dash. The body is the email text with real line breaks between paragraphs (use \\n) and ends with the single sign-off "Aastha".`;
 
   const userPrompt = `Write a pitch email from Aastha Chopra to a brand manager at ${brandName}.
 
@@ -118,12 +118,43 @@ Lead with the brand and how she would bring it to life. Treat her audience under
   if (data.error) throw new Error(data.error.message);
 
   const raw = data.content[0].text.trim();
-  const match = raw.match(/\{[\s\S]*\}/);
-  try {
-    const parsed = JSON.parse(match ? match[0] : raw);
-    if (parsed.subject && parsed.body) return { subject: parsed.subject.trim(), body: parsed.body.trim() };
-  } catch { /* fall through */ }
-  return { subject: `Collab idea for ${brandName}`, body: raw };
+  const parsed = parsePitchResponse(raw);
+  if (parsed) return parsed;
+  // Never email raw model text: strip any fences/JSON noise for the fallback body.
+  return { subject: `Collab idea for ${brandName}`, body: stripToText(raw) };
+}
+
+/**
+ * Robustly pull {subject, body} from a model reply that may be wrapped in ```json
+ * fences, prefixed with commentary, or contain more than one JSON object (e.g. a
+ * self-correction). Prefers the content of the last fenced block, then scans for
+ * balanced top-level objects and returns the LAST valid one with both fields, so a
+ * corrected block always wins over a buggy first attempt. Returns null if none parse.
+ */
+function parsePitchResponse(raw) {
+  let text = raw;
+  const fences = [...raw.matchAll(/```(?:json)?\s*([\s\S]*?)```/gi)];
+  if (fences.length) text = fences[fences.length - 1][1];
+
+  const objects = [];
+  let depth = 0, start = -1;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (c === '{') { if (depth === 0) start = i; depth++; }
+    else if (c === '}' && depth > 0) { depth--; if (depth === 0 && start >= 0) { objects.push(text.slice(start, i + 1)); start = -1; } }
+  }
+  for (let i = objects.length - 1; i >= 0; i--) {
+    try {
+      const p = JSON.parse(objects[i]);
+      if (p && p.subject && p.body) return { subject: String(p.subject).trim(), body: String(p.body).trim() };
+    } catch { /* try the next candidate */ }
+  }
+  return null;
+}
+
+/** Strip code fences and bare brace lines so a fallback body is never raw JSON noise. */
+function stripToText(raw) {
+  return raw.replace(/```[\s\S]*?```/g, '').replace(/^\s*[{}]\s*$/gm, '').trim();
 }
 
 function esc(s) {
