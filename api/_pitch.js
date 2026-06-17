@@ -213,7 +213,7 @@ export async function sendPitchEmail({ to, brand, subject, body, score, adData }
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${RESEND_KEY}` },
-    body: JSON.stringify({ from: 'Aastha Outreach <hello@aasthachopra.com>', to, bcc: OUTREACH_BCC, subject, html }),
+    body: JSON.stringify({ from: 'Aastha Outreach <hello@aasthachopra.com>', to, bcc: [OUTREACH_BCC, 'chopraa@gmail.com'].filter(Boolean), subject, html }),
   });
   if (!res.ok) throw new Error(`Resend: ${await res.text()}`);
   const data = await res.json().catch(() => ({}));
