@@ -41,6 +41,20 @@ async function sbGet(path) {
   return res.json();
 }
 
+// Persist the day's window aggregate (upsert by date) → analytics dashboard reads it.
+async function sbUpsertDaily(row) {
+  const key = process.env.SUPABASE_SERVICE_KEY;
+  if (!key) return;
+  await fetch(`${SUPABASE_URL}/rest/v1/ads_scoreboard_daily?on_conflict=date`, {
+    method: 'POST',
+    headers: {
+      apikey: key, Authorization: `Bearer ${key}`,
+      'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates',
+    },
+    body: JSON.stringify(row),
+  }).catch(() => {});
+}
+
 // Pull the profile-visit + any follow value out of an insights actions[] array.
 function readActions(actions = []) {
   const map = {};
@@ -101,6 +115,18 @@ export default async function handler(req, res) {
     const followerDelta = first && last ? last.followers_count - first.followers_count : null;
     const costPerNetFollower = followerDelta && followerDelta > 0
       ? Number((totalSpend / followerDelta).toFixed(2)) : null;
+
+    // 3. Persist the day's window aggregate for the analytics dashboard.
+    if (req.query?.nostore !== '1' && last) {
+      await sbUpsertDaily({
+        date: ymd(until),
+        followers_count: last.followers_count,
+        spend_aed: totalSpend,
+        profile_visits: totalVisits,
+        cost_per_visit: totalVisits ? Number((totalSpend / totalVisits).toFixed(4)) : null,
+        campaigns,
+      });
+    }
 
     return res.status(200).json({
       ok: true,

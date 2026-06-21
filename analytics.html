@@ -756,6 +756,43 @@
     .spark-path { fill: none; stroke: var(--teal); stroke-width: 2; vector-effect: non-scaling-stroke; }
     .spark-area { fill: url(#sparkGrad); }
 
+    /* ── AD IMPACT ─────────────────────────────────────────────────────── */
+    .ad-impact {
+      margin-top: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 32px 40px;
+    }
+    .ad-impact-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 16px; flex-wrap: wrap; margin-bottom: 22px;
+    }
+    .ad-impact-title {
+      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted);
+    }
+    .ai-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .ai-metric { display: flex; flex-direction: column; gap: 6px; }
+    .ai-big {
+      font-family: var(--serif); font-size: 2.2rem; font-weight: 300;
+      color: var(--text); line-height: 1;
+    }
+    .ai-label {
+      font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
+    }
+    .ai-campaigns { margin-top: 24px; border-top: 1px solid var(--border); padding-top: 14px; }
+    .ai-camp-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 6px 0; font-size: 0.82rem;
+    }
+    .ai-camp-name { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 64%; }
+    .ai-camp-val { font-variant-numeric: tabular-nums; color: var(--text); }
+    .ai-caveat { margin-top: 16px; font-size: 0.66rem; line-height: 1.5; color: var(--muted); }
+    @media (max-width: 700px) {
+      .ai-grid { grid-template-columns: 1fr; gap: 18px; }
+      .ad-impact { padding: 24px 20px; }
+    }
+
     /* ── AGENT STATUS ────────────────────────────────────────────────── */
     .agent-status-bar {
       position: fixed;
@@ -1108,6 +1145,20 @@
           <path class="spark-path" id="sparkPath" d=""/>
         </svg>
       </div>
+    </div>
+
+    <div class="ad-impact" id="adImpact" style="display:none">
+      <div class="ad-impact-head">
+        <span class="ad-impact-title">Ad Impact · last 7 days</span>
+        <span class="ad-impact-title" id="aiWindow"></span>
+      </div>
+      <div class="ai-grid">
+        <div class="ai-metric"><div class="ai-big" id="aiCpf">—</div><div class="ai-label">Cost / net follower</div></div>
+        <div class="ai-metric"><div class="ai-big" id="aiSpend">—</div><div class="ai-label">Ad spend</div></div>
+        <div class="ai-metric"><div class="ai-big" id="aiDelta">—</div><div class="ai-label">Net followers</div></div>
+      </div>
+      <div class="ai-campaigns" id="aiCampaigns"></div>
+      <div class="ai-caveat" id="aiCaveat"></div>
     </div>
   </section>
 
@@ -1474,6 +1525,41 @@
     document.getElementById('sparkArea').setAttribute('d', area);
   }
 
+  // ── Load Ad Impact (follower-growth scoreboard) ──────────────────────
+  async function loadAdImpact() {
+    const [sb, snaps] = await Promise.all([
+      sbFetch('ads_scoreboard_daily', 'order=date.desc&limit=1'),
+      sbFetch('instagram_snapshots', 'order=snapshot_date.desc&limit=8&select=snapshot_date,followers_count'),
+    ]);
+    const card = document.getElementById('adImpact');
+    if (!card || !Array.isArray(sb) || !sb.length) return;  // stays hidden until first cron row
+    const row = sb[0];
+    const snapSorted = [...(snaps || [])].reverse();
+    const fLatest = snapSorted.length ? snapSorted[snapSorted.length - 1].followers_count : null;
+    const fPrev   = snapSorted.length ? snapSorted[0].followers_count : null;
+    const delta   = (fLatest != null && fPrev != null) ? fLatest - fPrev : null;
+    const spend   = Number(row.spend_aed) || 0;
+    const cpf     = (delta && delta > 0) ? spend / delta : null;
+
+    document.getElementById('aiWindow').textContent = row.date || '';
+    document.getElementById('aiSpend').textContent  = 'AED ' + fmt(Math.round(spend));
+    document.getElementById('aiDelta').textContent  = (delta == null ? '—' : (delta > 0 ? '+' : '') + fmt(delta));
+    document.getElementById('aiCpf').textContent    = cpf ? ('AED ' + cpf.toFixed(1)) : '—';
+
+    const camps = (Array.isArray(row.campaigns) ? row.campaigns : [])
+      .filter(c => (Number(c.spend) || 0) > 0.5)
+      .sort((a, b) => (Number(b.spend) || 0) - (Number(a.spend) || 0));
+    document.getElementById('aiCampaigns').innerHTML = camps.map(c =>
+      `<div class="ai-camp-row"><span class="ai-camp-name">${esc(c.campaign)}</span>` +
+      `<span class="ai-camp-val">${c.cost_per_visit != null ? ('AED ' + Number(c.cost_per_visit).toFixed(2) + ' / visit') : '—'}</span></div>`
+    ).join('');
+
+    document.getElementById('aiCaveat').innerHTML =
+      'Cost / net follower is account-wide — Meta does not report follows per campaign, ' +
+      'so per-campaign figures show cost per profile visit (a proxy, not follows).';
+    card.style.display = '';
+  }
+
   // ── Load Agent Status ────────────────────────────────────────────────
   async function loadAgentStatus() {
     const rows = await sbFetch('uae_agent_runs', 'order=ran_at.desc&limit=1');
@@ -1685,6 +1771,7 @@
     loadPerformance(),
     loadOpportunities(),
     loadGrowth(),
+    loadAdImpact(),
     loadAgentStatus(),
   ]).catch(console.error);
 
