@@ -3,12 +3,16 @@ import { getIgToken } from '../_igtoken.js';
 export const config = { maxDuration: 300 };
 
 /**
- * Instagram Full Sync — Vercel Cron
- * Runs every 4 hours. Pulls EVERYTHING:
- *   - All posts + reels (paginated, no cap)
- *   - Per-post insights (reach, saves, watch time, views, etc.)
- *   - Carousel children
- *   - Follower demographics (age, gender, city, country)
+ * Instagram Incremental Sync — Vercel Cron
+ * Runs every 4 hours. Bounded work per run so runtime stays ~constant as the
+ * post catalogue grows (no more full-catalogue sweep that creeps toward the 300s
+ * function limit):
+ *   - Newest RECENT_LIMIT posts: metadata + insights + carousel children (always
+ *     captures brand-new posts and keeps recent insights fresh every run)
+ *   - Rolling ROLL_LIMIT older posts: insights-only refresh, ordered by stalest
+ *     insights_synced_at first, so the whole catalogue cycles through over a few
+ *     days without ever re-syncing everything at once
+ *   - Follower + reached demographics (age, gender, city, country)
  *   - Daily account snapshot (followers, reach, profile views, website clicks)
  *
  * GET /api/cron/ig-sync
@@ -16,6 +20,19 @@ export const config = { maxDuration: 300 };
 
 const SUPABASE_URL = 'https://uqzvaytvynrglijvwjsz.supabase.co';
 const IG_BASE = 'https://graph.instagram.com/v21.0';
+
+// Bounded work per run. RECENT_LIMIT newest posts are fully synced (metadata +
+// insights); ROLL_LIMIT older posts get an insights-only refresh on rotation.
+const RECENT_LIMIT = 150;
+const ROLL_LIMIT = 150;
+
+// Insight columns we read back for the rolling refresh, so a failed/empty insight
+// fetch preserves the existing values instead of nulling them out.
+const INSIGHT_COLS = [
+  'id', 'media_type', 'reach', 'likes', 'comments', 'shares', 'saved',
+  'total_interactions', 'views', 'ig_reels_avg_watch_time',
+  'ig_reels_video_view_total_time',
+].join(',');
 
 const MEDIA_FIELDS = [
   'id', 'media_type', 'caption', 'permalink', 'timestamp',
@@ -65,13 +82,13 @@ async function sb(path, opts = {}) {
 // Pause between batches to stay well under rate limits
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
-// ── 1. Fetch all media pages ──────────────────────────────────────────────────
-async function fetchAllMedia(token) {
+// ── 1. Fetch the newest media (bounded pagination, newest-first) ───────────────
+async function fetchRecentMedia(token, limit) {
   const all = [];
   const seen = new Set();
   let after = null;
 
-  while (true) {
+  while (all.length < limit) {
     const qs = after
       ? `/me/media?fields=${MEDIA_FIELDS}&limit=50&after=${after}`
       : `/me/media?fields=${MEDIA_FIELDS}&limit=50`;
@@ -79,18 +96,26 @@ async function fetchAllMedia(token) {
     const page = data.data || [];
     if (!page.length) break;
 
-    // Stop if we've seen this cursor before (loop guard)
-    const cursor = data.paging?.cursors?.after;
-    if (cursor && seen.has(cursor)) break;
-    if (cursor) seen.add(cursor);
-
     all.push(...page);
 
-    // No next page
-    if (!data.paging?.next || !cursor) break;
+    // Stop at the last page or if the cursor repeats (loop guard)
+    const cursor = data.paging?.cursors?.after;
+    if (!cursor || seen.has(cursor) || !data.paging?.next) break;
+    seen.add(cursor);
     after = cursor;
   }
-  return all;
+  return all.slice(0, limit);
+}
+
+// ── 1b. Pull the posts whose insights are stalest, for a rolling refresh ───────
+// Ordered oldest-insights-first (NULLS FIRST), so over successive runs the whole
+// catalogue cycles through. Insight columns come back too, so an empty/failed
+// insight fetch can fall back to the stored value rather than nulling it.
+async function fetchStaleInsightPosts(limit) {
+  const rows = await sb(
+    `/instagram_posts?select=${INSIGHT_COLS}&order=insights_synced_at.asc.nullsfirst&limit=${limit}`
+  );
+  return rows || [];
 }
 
 // ── 2. Fetch insights for one post ───────────────────────────────────────────
@@ -224,17 +249,18 @@ export default async function handler(req, res) {
   const start = Date.now();
 
   try {
-    // ── Step 1: All posts ──
-    log.push('Fetching all media pages...');
-    const allMedia = await fetchAllMedia(token);
-    log.push(`Found ${allMedia.length} posts`);
+    // ── Step 1: Newest posts (bounded) ──
+    log.push(`Fetching newest ${RECENT_LIMIT} posts...`);
+    const recent = await fetchRecentMedia(token, RECENT_LIMIT);
+    const recentIds = new Set(recent.map(p => p.id));
+    log.push(`Fetched ${recent.length} recent posts`);
 
-    // ── Step 2: Insights + upsert in batches of 25 ──
+    // ── Step 2: Insights + upsert for recent posts (full rows), batches of 25 ──
     let insightsDone = 0;
     const BATCH = 25;
 
-    for (let i = 0; i < allMedia.length; i += BATCH) {
-      const batch = allMedia.slice(i, i + BATCH);
+    for (let i = 0; i < recent.length; i += BATCH) {
+      const batch = recent.slice(i, i + BATCH);
       const now = new Date().toISOString();
 
       const upserts = await Promise.all(batch.map(async (post) => {
@@ -272,11 +298,51 @@ export default async function handler(req, res) {
 
       insightsDone += batch.length;
     }
-    log.push(`Upserted ${insightsDone} posts with insights`);
+    log.push(`Synced ${insightsDone} recent posts with insights`);
 
-    // ── Step 3: Carousel children (batches of 20) ──
+    // ── Step 2b: Rolling insights-only refresh for older posts ──
+    // Keeps the rest of the catalogue's lifetime insights from going fully stale,
+    // a bounded slice at a time, without touching post metadata. Insight-only
+    // payload → on conflict PostgREST updates just these columns, leaving
+    // caption/permalink/timestamp/synced_at intact.
     try {
-      const carousels = allMedia.filter(p => p.media_type === 'CAROUSEL_ALBUM');
+      const stale = (await fetchStaleInsightPosts(ROLL_LIMIT)).filter(r => !recentIds.has(r.id));
+      let rolledDone = 0;
+      for (let i = 0; i < stale.length; i += BATCH) {
+        const batch = stale.slice(i, i + BATCH);
+        const now = new Date().toISOString();
+        const upserts = await Promise.all(batch.map(async (row) => {
+          const insights = await fetchInsights(row.id, row.media_type, token);
+          return {
+            id: row.id,
+            reach: insights.reach ?? row.reach ?? null,
+            likes: insights.likes ?? row.likes ?? null,
+            comments: insights.comments ?? row.comments ?? null,
+            shares: insights.shares ?? row.shares ?? null,
+            saved: insights.saved ?? row.saved ?? null,
+            total_interactions: insights.total_interactions ?? row.total_interactions ?? null,
+            views: insights.views ?? row.views ?? null,
+            ig_reels_avg_watch_time: insights.ig_reels_avg_watch_time ?? row.ig_reels_avg_watch_time ?? null,
+            ig_reels_video_view_total_time: insights.ig_reels_video_view_total_time ?? row.ig_reels_video_view_total_time ?? null,
+            // Stamp even on empty fetch so deleted/insightless posts rotate out of
+            // the stale queue instead of blocking it forever.
+            insights_synced_at: now,
+          };
+        }));
+        await sb('/instagram_posts?on_conflict=id', {
+          method: 'POST',
+          body: JSON.stringify(upserts),
+        });
+        rolledDone += batch.length;
+      }
+      log.push(`Rolling-refreshed insights for ${rolledDone} older posts`);
+    } catch (e) {
+      log.push(`Rolling insights error: ${e.message}`);
+    }
+
+    // ── Step 3: Carousel children for recent carousels (batches of 20) ──
+    try {
+      const carousels = recent.filter(p => p.media_type === 'CAROUSEL_ALBUM');
       let childrenDone = 0;
       const C_BATCH = 20;
       for (let i = 0; i < carousels.length; i += C_BATCH) {
