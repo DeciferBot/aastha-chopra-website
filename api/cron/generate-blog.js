@@ -26,6 +26,20 @@ const SEG_KEYS = Object.keys(SEGMENTS);
 // near-instant discovery. Google does not use IndexNow; it relies on the sitemap.
 const INDEXNOW_KEY = 'b4bd21537f724b699428afa92452c614';
 
+// Curated high-intent UAE query seeds per pillar, so the cron deliberately
+// targets winnable evergreen terms, not only whatever is trending today.
+const CURATED_SEEDS = {
+  fashion:     ['what to wear in dubai summer', 'where to buy abayas in dubai', 'dubai wedding guest outfit ideas', 'modest fashion brands dubai', 'best malls for fashion in dubai'],
+  beauty:      ['best skincare for dubai weather', 'where to get a facial in dubai', 'best salons in dubai', 'how to protect skin in dubai sun', 'best makeup for hot humid weather'],
+  fragrance:   ['where to buy perfume in dubai', 'best arabic perfumes for women', 'how to make perfume last in the heat', 'best oud perfumes in dubai', 'is dubai perfume authentic'],
+  jewellery:   ['where to buy gold in dubai', 'dubai gold souk tips for buyers', 'is gold cheaper in dubai', 'best place to buy diamond jewellery dubai', 'how to buy gold jewellery in dubai'],
+  wellness:    ['best gyms in dubai', 'best yoga studios in dubai', 'healthy restaurants in dubai', 'how to stay fit in dubai summer', 'best wellness retreats in the uae'],
+  hospitality: ['best brunch in dubai', 'best staycation deals in dubai', 'best afternoon tea in dubai', 'best hotels in dubai for residents', 'best rooftop restaurants dubai'],
+  travel:      ['best day trips from dubai', 'things to do in dubai in summer', 'weekend getaways from dubai', 'best beaches in dubai', 'dubai to abu dhabi day trip'],
+  automobile:  ['best cars for dubai weather', 'tips for renting a car in dubai', 'best road trips from dubai', 'electric cars in the uae', 'driving in dubai for new residents'],
+  retail:      ['best things to buy in dubai', 'dubai shopping festival tips', 'best outlet malls in dubai', 'where to shop in dubai on a budget', 'best souvenirs to buy in dubai'],
+};
+
 export default async function handler(req, res) {
   // Cron uses the Bearer header; ?key= lets it be triggered by tapping a link
   // from a phone during the dry-run review phase. Both gate on CRON_SECRET.
@@ -77,12 +91,14 @@ export default async function handler(req, res) {
     topic = signal.title;
 
     // ── 3. Real questions from Google autocomplete (UAE locale) ───────────
+    const curated = CURATED_SEEDS[segment] || [];
     const seeds = [
+      ...curated,
       `best ${matchTerm} dubai`,
       `${matchTerm} dubai`,
       ...['how', 'what', 'where', 'which', 'is'].map((q) => `${q} ${matchTerm} dubai`),
     ];
-    const suggestions = new Set();
+    const suggestions = new Set(curated);
     for (const seed of seeds) {
       for (const s of await autocomplete(seed)) {
         if (s.length > 8) suggestions.add(s);
