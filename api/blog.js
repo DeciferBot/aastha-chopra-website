@@ -9,7 +9,7 @@
 
 import {
   SITE, sb, esc, renderShell, ctaBlock, segmentMeta,
-  renderHeroSVG, renderAuthorBox, renderPostCard, personSchema,
+  renderHeroSVG, renderAuthorBox, renderPostCard, personSchema, renderInstagramBlock,
 } from './_blog.js';
 
 export default async function handler(req, res) {
@@ -182,6 +182,7 @@ function renderArticle({ post, url, seg, published, faq, sources, related }) {
       <p class="bmeta">By ${esc(SITE.name)} &nbsp;·&nbsp; ${dateStr} &nbsp;·&nbsp; ${readMins} min read</p>
       ${heroHtml}
       ${post.body_html || ''}
+      ${renderInstagramBlock(post.instagram_refs)}
       <p style="margin-top:36px;color:var(--text-mid);">More from Aastha's ${esc(seg.label.toLowerCase())} world: <a href="${esc(seg.page)}">explore here</a>.</p>
       ${renderAuthorBox()}
     </article>

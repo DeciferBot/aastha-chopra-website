@@ -212,6 +212,29 @@ export function renderAuthorBox() {
     </aside>`;
 }
 
+/** "As seen on my Instagram" block: links a post to Aastha's real reels. */
+export function renderInstagramBlock(refs) {
+  if (!Array.isArray(refs) || !refs.length) return '';
+  const cards = refs.slice(0, 3).map((r) => {
+    if (!r || !r.permalink) return '';
+    const isReel = String(r.type || '').toLowerCase() === 'reel' || /\/reel\//.test(r.permalink);
+    const cap = esc(String(r.caption || '').replace(/\s+/g, ' ').slice(0, 150));
+    return `<a class="bigram-card" href="${esc(r.permalink)}" target="_blank" rel="noopener">
+        <span class="bigram-badge">${isReel ? '&#9658;&nbsp;Reel' : 'Post'}</span>
+        <span class="bigram-cap">${cap}</span>
+        <span class="bigram-cta">Watch on Instagram &rsaquo;</span>
+      </a>`;
+  }).filter(Boolean).join('\n      ');
+  if (!cards) return '';
+  return `
+    <aside class="binsta">
+      <p class="binsta-head">As seen on my Instagram</p>
+      <div class="binsta-grid">
+      ${cards}
+      </div>
+    </aside>`;
+}
+
 /** Person entity for JSON-LD. Referenced by Article author and listed in @graph. */
 export function personSchema() {
   return {
@@ -345,4 +368,14 @@ const BLOG_CSS = `
   .bfeature .seg{font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);}
   .bfeature h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.15;margin:10px 0;color:var(--text);}
   .bfeature p{color:var(--text-mid);max-width:60ch;}
+
+  .binsta{margin:40px 0 0;padding:24px;background:var(--bg-card);border:1px solid var(--border);}
+  .binsta-head{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+  .binsta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+  .bigram-card{display:flex;flex-direction:column;gap:8px;padding:16px;background:var(--bg);border:1px solid var(--border);transition:border-color .2s,transform .2s;}
+  .bigram-card:hover{border-color:var(--border-hi);transform:translateY(-2px);}
+  .bigram-badge{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);}
+  .bigram-cap{font-size:.95rem;color:var(--text);line-height:1.5;font-style:italic;font-family:var(--serif);}
+  .bigram-cta{font-size:.72rem;letter-spacing:.08em;color:var(--text-mid);margin-top:auto;}
+  .bigram-card:hover .bigram-cta{color:var(--gold);}
 `;
