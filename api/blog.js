@@ -1,12 +1,16 @@
 /**
  * Single blog post — GET /blog/:slug  (rewritten to /api/blog?slug=:slug)
  *
- * Reads one PUBLISHED post from blog_posts and renders an SEO-complete page:
- * canonical, OG/Twitter, JSON-LD Article + FAQPage, a direct answer up top,
- * internal links back into the funnel, and the follow/newsletter CTA.
+ * Reads one PUBLISHED post and renders an SEO-complete page: canonical,
+ * OG/Twitter, a JSON-LD @graph (Person + Article + BreadcrumbList + FAQPage),
+ * a branded hero, the direct answer up top, an author box for E-E-A-T,
+ * related posts in the same pillar (cluster linking), and the newsletter CTA.
  */
 
-import { SITE, sb, esc, renderShell, ctaBlock, segmentMeta } from './_blog.js';
+import {
+  SITE, sb, esc, renderShell, ctaBlock, segmentMeta,
+  renderHeroSVG, renderAuthorBox, renderPostCard, personSchema,
+} from './_blog.js';
 
 export default async function handler(req, res) {
   const slug = String(req.query.slug || '').toLowerCase().replace(/[^a-z0-9-]/g, '');
@@ -44,6 +48,17 @@ export default async function handler(req, res) {
     body: JSON.stringify({ views: (post.views || 0) + 1 }),
   }).catch(() => {});
 
+  // Related posts in the same pillar (cluster linking) for topical authority.
+  let related = [];
+  try {
+    related = await sb(
+      `/blog_posts?select=slug,segment,title,excerpt,meta_description`
+      + `&status=eq.published&segment=eq.${encodeURIComponent(post.segment)}`
+      + `&slug=neq.${encodeURIComponent(post.slug)}`
+      + `&order=published_at.desc.nullslast,created_at.desc&limit=3`
+    ) || [];
+  } catch { related = []; }
+
   const url = `${SITE.base}${SITE.blogPath}/${post.slug}`;
   const seg = segmentMeta(post.segment);
   const image = post.og_image || post.hero_image_url || SITE.ogImage;
@@ -55,7 +70,7 @@ export default async function handler(req, res) {
     ? '  <meta name="robots" content="noindex, nofollow" />\n'
     : '';
   const head = noindex + renderHead({ post, url, image, seg, published, faq });
-  const body = renderArticle({ post, url, seg, published, faq, sources });
+  const body = renderArticle({ post, url, seg, published, faq, sources, related });
 
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate=86400');
@@ -71,34 +86,43 @@ export default async function handler(req, res) {
 
 function renderHead({ post, url, image, seg, published, faq }) {
   const desc = post.meta_description || post.excerpt || '';
-  const articleLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: post.title,
-    description: desc,
-    image: [image],
-    datePublished: published,
-    dateModified: post.updated_at || published,
-    inLanguage: 'en-AE',
-    author: { '@type': 'Person', name: SITE.name, url: SITE.base, sameAs: [SITE.ig] },
-    publisher: {
-      '@type': 'Person', name: SITE.name,
-      logo: { '@type': 'ImageObject', url: SITE.ogImage },
-    },
-    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-    articleSection: seg.label,
-    keywords: (post.seo_keywords || []).join(', '),
-  };
 
-  const faqLd = faq.length ? {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faq.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  } : null;
+  const graph = [
+    personSchema(),
+    {
+      '@type': 'Article',
+      headline: post.title,
+      description: desc,
+      image: [image],
+      datePublished: published,
+      dateModified: post.updated_at || published,
+      inLanguage: 'en-AE',
+      author: { '@id': `${SITE.base}/#aastha` },
+      publisher: { '@id': `${SITE.base}/#aastha` },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+      articleSection: seg.label,
+      keywords: (post.seo_keywords || []).join(', '),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Journal', item: `${SITE.base}/blog` },
+        { '@type': 'ListItem', position: 2, name: seg.label, item: `${SITE.base}/blog?segment=${post.segment}` },
+        { '@type': 'ListItem', position: 3, name: post.title, item: url },
+      ],
+    },
+  ];
+  if (faq.length) {
+    graph.push({
+      '@type': 'FAQPage',
+      mainEntity: faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    });
+  }
+  const jsonLd = { '@context': 'https://schema.org', '@graph': graph };
 
   return `  <meta name="keywords" content="${esc((post.seo_keywords || []).join(', '))}" />
   <meta property="og:type" content="article" />
@@ -114,20 +138,31 @@ function renderHead({ post, url, image, seg, published, faq }) {
   <meta name="twitter:title" content="${esc(post.title)}" />
   <meta name="twitter:description" content="${esc(desc)}" />
   <meta name="twitter:image" content="${esc(image)}" />
-  <script type="application/ld+json">${JSON.stringify(articleLd)}</script>
-${faqLd ? `  <script type="application/ld+json">${JSON.stringify(faqLd)}</script>` : ''}`;
+  <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`;
 }
 
-function renderArticle({ post, url, seg, published, faq, sources }) {
+function renderArticle({ post, url, seg, published, faq, sources, related }) {
   const dateStr = new Date(published).toLocaleDateString('en-GB', {
     day: 'numeric', month: 'long', year: 'numeric',
   });
   const readMins = Math.max(2, Math.round((post.word_count || 0) / 220));
 
+  const heroHtml = post.hero_image_url
+    ? `<img class="bhero" src="${esc(post.hero_image_url)}" alt="${esc(post.title)}" loading="lazy" />`
+    : renderHeroSVG(post.segment);
+
   const faqHtml = faq.length ? `
     <section class="bfaq">
       <h2>Questions people also ask</h2>
       ${faq.map((f) => `<details><summary>${esc(f.q)}</summary><p>${esc(f.a)}</p></details>`).join('\n      ')}
+    </section>` : '';
+
+  const relatedHtml = (related && related.length) ? `
+    <section class="brelated">
+      <h2>More in ${esc(seg.label)}</h2>
+      <div class="bgrid">
+      ${related.map(renderPostCard).join('\n      ')}
+      </div>
     </section>` : '';
 
   const sourcesHtml = sources.length ? `
@@ -145,11 +180,13 @@ function renderArticle({ post, url, seg, published, faq, sources }) {
       <h1>${esc(post.title)}</h1>
       ${post.excerpt ? `<p class="bdek">${esc(post.excerpt)}</p>` : ''}
       <p class="bmeta">By ${esc(SITE.name)} &nbsp;·&nbsp; ${dateStr} &nbsp;·&nbsp; ${readMins} min read</p>
-      ${post.hero_image_url ? `<img class="bhero" src="${esc(post.hero_image_url)}" alt="${esc(post.title)}" loading="lazy" />` : ''}
+      ${heroHtml}
       ${post.body_html || ''}
       <p style="margin-top:36px;color:var(--text-mid);">More from Aastha's ${esc(seg.label.toLowerCase())} world: <a href="${esc(seg.page)}">explore here</a>.</p>
+      ${renderAuthorBox()}
     </article>
     ${faqHtml}
+    ${relatedHtml}
     ${ctaBlock()}
     ${sourcesHtml}`;
 }

@@ -21,6 +21,21 @@ export const SITE = {
   blogPath: '/blog',
 };
 
+// Author identity for E-E-A-T: connects every post to a credentialed real
+// person. Facts are stable and verifiable (UAE Media Council licensed creator).
+export const AUTHOR = {
+  name: 'Aastha Chopra',
+  url: `${SITE.base}/`,
+  image: `${SITE.base}/images/aastha-chopra-dubai-luxury-fashion-beauty.jpg`,
+  jobTitle: 'Lifestyle, Fashion and Beauty Creator',
+  bio: 'Aastha is a Dubai based lifestyle, fashion and beauty creator and a UAE Media Council licensed creator. She writes from years of living, shopping and getting ready in the UAE, with more than 110 brand collaborations behind her.',
+  sameAs: [
+    'https://www.instagram.com/aastha_sochic/',
+    'https://www.pinterest.com/aastha_sochic',
+    'https://www.youtube.com/@aastha_sochic',
+  ],
+};
+
 /**
  * The 9 brand pillars, mirrored from _pitch.js SEGMENT_ANGLES. Each maps to a
  * related landing page on the static site so every post links back into the
@@ -144,6 +159,70 @@ export function ctaBlock() {
     </script>`;
 }
 
+/** Per-pillar branded hero. Decorative, on-brand, no external image needed. */
+export function renderHeroSVG(segmentKey) {
+  const seg = segmentMeta(segmentKey);
+  const idx = Object.keys(SEGMENTS).indexOf(segmentKey);
+  const cx = 22 + ((idx * 9) % 56); // shift the glow per pillar for variety
+  const id = `bh${idx < 0 ? 0 : idx}`;
+  const label = seg.label;
+  return `<svg class="bhero-svg" viewBox="0 0 1200 360" role="img" aria-label="${esc(label)}" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <radialGradient id="${id}" cx="${cx}%" cy="26%" r="78%">
+        <stop offset="0%" stop-color="#C4983A" stop-opacity="0.30"/>
+        <stop offset="52%" stop-color="#8B3020" stop-opacity="0.12"/>
+        <stop offset="100%" stop-color="#080706" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="1200" height="360" fill="#0b0908"/>
+    <rect width="1200" height="360" fill="url(#${id})"/>
+    <text x="56" y="252" font-family="'Cormorant Garamond',Georgia,serif" font-style="italic" font-size="232" fill="#C4983A" fill-opacity="0.07">${esc(label)}</text>
+    <rect x="60" y="296" width="84" height="2" fill="#C4983A"/>
+    <text x="60" y="332" font-family="'Jost',sans-serif" font-size="17" letter-spacing="6" fill="#C4983A" fill-opacity="0.85">${esc(label.toUpperCase())}</text>
+  </svg>`;
+}
+
+/** Reusable post card, used by the Journal home and by related-post blocks. */
+export function renderPostCard(p) {
+  const seg = segmentMeta(p.segment);
+  const dek = p.excerpt || p.meta_description || '';
+  const short = dek.length > 130 ? dek.slice(0, 130).trim() + '…' : dek;
+  return `<a class="bcard" href="/blog/${esc(p.slug)}">
+        <span class="seg">${esc(seg.label)}</span>
+        <h3>${esc(p.title)}</h3>
+        <p>${esc(short)}</p>
+      </a>`;
+}
+
+/** Author bio box for E-E-A-T, shown at the foot of every post. */
+export function renderAuthorBox() {
+  return `
+    <aside class="bauthor">
+      <img class="bauthor-img" src="${esc(AUTHOR.image)}" alt="${esc(AUTHOR.name)}" loading="lazy" width="72" height="72" />
+      <div class="bauthor-body">
+        <p class="bauthor-kicker">Written by</p>
+        <p class="bauthor-name">${esc(AUTHOR.name)}</p>
+        <p class="bauthor-role">${esc(AUTHOR.jobTitle)}</p>
+        <p class="bauthor-bio">${esc(AUTHOR.bio)}</p>
+        <a class="bauthor-follow" href="${SITE.ig}" target="_blank" rel="noopener">Follow @${SITE.handle} &rsaquo;</a>
+      </div>
+    </aside>`;
+}
+
+/** Person entity for JSON-LD. Referenced by Article author and listed in @graph. */
+export function personSchema() {
+  return {
+    '@type': 'Person',
+    '@id': `${SITE.base}/#aastha`,
+    name: AUTHOR.name,
+    url: AUTHOR.url,
+    image: AUTHOR.image,
+    jobTitle: AUTHOR.jobTitle,
+    description: AUTHOR.bio,
+    sameAs: AUTHOR.sameAs,
+  };
+}
+
 const BLOG_CSS = `
   :root{
     --bg:#080706;--bg-raised:#0f0d0b;--bg-card:#131109;
@@ -231,4 +310,36 @@ const BLOG_CSS = `
   .bfoot-logo span{color:var(--gold);}
   .bfoot p{margin-bottom:8px;}
   .bfoot-links a{color:var(--text-mid);}
+
+  .bhero-svg{width:100%;height:auto;display:block;margin:0 0 34px;border:1px solid var(--border);}
+
+  .bauthor{display:flex;gap:18px;align-items:flex-start;margin:48px 0 0;padding:26px 24px;
+    background:var(--bg-card);border:1px solid var(--border);}
+  .bauthor-img{width:72px;height:72px;border-radius:50%;object-fit:cover;flex:none;border:1px solid var(--border-hi);}
+  .bauthor-kicker{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;}
+  .bauthor-name{font-family:var(--serif);font-size:1.4rem;color:var(--text);line-height:1.1;}
+  .bauthor-role{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:4px 0 10px;}
+  .bauthor-bio{font-size:.92rem;color:var(--text-mid);margin-bottom:10px;}
+  .bauthor-follow{font-size:.78rem;letter-spacing:.08em;color:var(--gold);}
+  @media(max-width:520px){.bauthor{flex-direction:column;gap:14px;}}
+
+  .brelated{margin:56px 0 0;border-top:1px solid var(--border);padding-top:8px;}
+  .brelated h2{font-family:var(--serif);font-weight:500;font-size:1.5rem;color:var(--gold-light);margin:16px 0 18px;}
+
+  .bfilter{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:32px 0 8px;}
+  .bfilter a{font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-mid);
+    border:1px solid var(--border);padding:7px 14px;transition:border-color .2s,color .2s;}
+  .bfilter a:hover{color:var(--gold);border-color:var(--border-hi);}
+  .bfilter a.active{color:var(--text-on-gold);background:var(--gold);border-color:var(--gold);}
+  .bsection{margin-top:48px;}
+  .bsection-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+    border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:22px;}
+  .bsection-head h2{font-family:var(--serif);font-weight:500;font-size:1.6rem;color:var(--text);}
+  .bsection-head a{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
+  .bfeature{display:block;margin-top:28px;padding:36px 32px;background:linear-gradient(135deg,var(--bg-card),var(--bg-raised));
+    border:1px solid var(--border-hi);transition:transform .2s;}
+  .bfeature:hover{transform:translateY(-2px);}
+  .bfeature .seg{font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);}
+  .bfeature h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.15;margin:10px 0;color:var(--text);}
+  .bfeature p{color:var(--text-mid);max-width:60ch;}
 `;
