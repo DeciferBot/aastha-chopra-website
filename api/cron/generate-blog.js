@@ -109,8 +109,11 @@ export default async function handler(req, res) {
       .slice(0, 25);
     queriesFound = questions.length;
 
+    // ── 3b. Aastha's real Instagram posts for this pillar (lived experience) ──
+    const igPosts = await fetchInstagramContext(segment);
+
     // ── 4. Deep research + write ─────────────────────────────────────────
-    const { post, sources } = await researchAndWrite({ seg, segment, signal, questions });
+    const { post, sources } = await researchAndWrite({ seg, segment, signal, questions, igPosts });
     sourcesUsed = sources.length;
 
     // ── 5. Sanitise + dedupe slug ────────────────────────────────────────
@@ -135,6 +138,10 @@ export default async function handler(req, res) {
       target_queries: (post.target_queries && arr(post.target_queries).length ? arr(post.target_queries) : questions).slice(0, 20),
       faq: arr(post.faq).filter((f) => f && f.q && f.a).map((f) => ({ q: noDash(f.q), a: noDash(f.a) })).slice(0, 6),
       research_sources: sources.slice(0, 8),
+      instagram_refs: arr(post.instagram_refs)
+        .filter((r) => r && r.permalink && /instagram\.com/.test(r.permalink))
+        .map((r) => ({ permalink: r.permalink, caption: noDash(String(r.caption || '')).slice(0, 200), type: r.type || '' }))
+        .slice(0, 3),
       word_count: wordCount,
       source_signal_id: signal.id,
       status: dryRun ? 'draft' : 'published',
@@ -188,6 +195,36 @@ async function autocomplete(query) {
   }
 }
 
+// ── Aastha's Instagram (lived-experience grounding) ────────────────────────
+const SEGMENT_IG_KEYWORDS = {
+  fashion:     ['outfit', 'fashion', 'style', 'abaya', 'wear', 'dress', 'linen'],
+  beauty:      ['skincare', 'beauty', 'makeup', 'glow', 'facial', 'spf', 'lip'],
+  fragrance:   ['perfume', 'fragrance', 'oud', 'scent', 'kayali', 'ajmal'],
+  jewellery:   ['jewellery', 'jewelry', 'gold', 'diamond', 'jewels'],
+  wellness:    ['yoga', 'gym', 'fitness', 'workout', 'padel', 'protein', 'wellness'],
+  hospitality: ['brunch', 'restaurant', 'dinner', 'dining', 'feast', 'hotel', 'suhoor'],
+  travel:      ['travel', 'trip', 'staycation', 'hotel', 'hike', 'getaway', 'beach'],
+  automobile:  ['car', 'drive', 'road trip'],
+  retail:      ['shopping', 'mall', 'haul', 'pop-up', 'store'],
+};
+
+// Pull her highest-engagement posts whose captions match the pillar, so the
+// writer can ground the article in things she has genuinely done.
+async function fetchInstagramContext(segment) {
+  const kws = SEGMENT_IG_KEYWORDS[segment] || [segment];
+  const orFilter = kws.map((k) => `caption.ilike.*${encodeURIComponent(k)}*`).join(',');
+  try {
+    const rows = await sb(
+      `/instagram_posts?select=permalink,caption,media_type,total_interactions`
+      + `&caption=not.is.null&or=(${orFilter})`
+      + `&order=total_interactions.desc.nullslast&limit=8`
+    ) || [];
+    return rows.filter((r) => r.permalink && r.caption);
+  } catch {
+    return [];
+  }
+}
+
 // ── IndexNow (Bing/Yandex) ─────────────────────────────────────────────────
 async function indexNowPing(url) {
   await fetch('https://api.indexnow.org/indexnow', {
@@ -203,7 +240,7 @@ async function indexNowPing(url) {
 }
 
 // ── Claude: research with web_search, then write ───────────────────────────
-async function researchAndWrite({ seg, segment, signal, questions }) {
+async function researchAndWrite({ seg, segment, signal, questions, igPosts }) {
   const system = `You are Aastha Chopra, a Dubai-based lifestyle creator (fashion, beauty, fragrance, wellness). You are writing a post for your OWN website, aasthachopra.com, for women in the UAE aged 25 to 44, many of them South Asian expats in Dubai.
 
 Your job is to answer a real question people search on Google, completely and usefully, so the post earns its ranking.
@@ -213,6 +250,7 @@ NON-NEGOTIABLE RULES:
 - Be specific to the UAE: real neighbourhoods, malls, venues, AED prices, the climate and seasons, local context. Never invent facts, names or prices. If you are not sure, leave it out.
 - Use the web_search tool to research current, accurate details BEFORE writing. Search a few times. Prefer recent, reputable sources.
 - Voice: first person, honest, warm, confident, a little personal. Write like a real person talking, not a brand.
+- Where it fits, weave in Aastha's REAL Instagram experiences listed below, in first person and naturally (a launch she attended, a product she featured, a place she visited). Never invent an experience she did not have.
 - NEVER use em dashes. Not once. Use commas, full stops, or rewrite the sentence.
 - Structure: a short direct answer first, then depth under question-style H2 headings (the related things people also ask). Keep paragraphs short.
 - The body is clean semantic HTML only: <p>, <h2>, <h3>, <ul>/<li>, <ol>/<li>, <blockquote>, and <table> when it genuinely helps. No <h1>, no inline styles, no <script>, no images, no markdown.
@@ -226,7 +264,10 @@ Source: ${signal.source_name || 'n/a'}
 REAL QUESTIONS PEOPLE SEARCH (from Google autocomplete, UAE). Pick the single most valuable, rankable question as your title, and use the related ones as H2s and FAQ:
 ${questions.length ? questions.map((q) => `- ${q}`).join('\n') : '- (none returned; choose a strong question yourself for this pillar in a UAE context)'}
 
-Research the topic with web_search, then return ONLY a JSON object (no prose, no code fences) with exactly these keys:
+${igPosts && igPosts.length ? `AASTHA'S REAL INSTAGRAM POSTS (her genuine lived experience). Weave the most relevant one or two into the article naturally, in first person, then list those you referenced in instagram_refs:
+${igPosts.map((p) => `- [${/\/reel\//.test(p.permalink) ? 'Reel' : 'Post'}] ${String(p.caption || '').replace(/\s+/g, ' ').slice(0, 160)} (${p.permalink})`).join('\n')}
+
+` : ''}Research the topic with web_search, then return ONLY a JSON object (no prose, no code fences) with exactly these keys:
 {
   "title": "the question as people type it",
   "slug": "kebab-case-url-slug",
@@ -236,6 +277,7 @@ Research the topic with web_search, then return ONLY a JSON object (no prose, no
   "faq": [{"q":"question","a":"answer"}],
   "seo_keywords": ["keyword", "..."],
   "target_queries": ["the real queries this post targets"],
+  "instagram_refs": [{"permalink":"https://www.instagram.com/reel/...","caption":"short caption snippet","type":"Reel"}],
   "sources": [{"title":"source title","url":"https://..."}]
 }`;
 
