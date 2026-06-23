@@ -29,10 +29,13 @@ export const AUTHOR = {
   image: `${SITE.base}/images/aastha-chopra-dubai-luxury-fashion-beauty.jpg`,
   jobTitle: 'Lifestyle, Fashion and Beauty Creator',
   bio: 'Aastha is a Dubai based lifestyle, fashion and beauty creator and a UAE Media Council licensed creator. She writes from years of living, shopping and getting ready in the UAE, with more than 110 brand collaborations behind her.',
+  // Keep in sync with the homepage Person sameAs (index.html #aastha) so the
+  // same entity is declared consistently across every page Google crawls.
   sameAs: [
     'https://www.instagram.com/aastha_sochic/',
-    'https://www.pinterest.com/aastha_sochic',
+    'https://www.tiktok.com/@aastha_c8',
     'https://www.youtube.com/@aastha_sochic',
+    'https://www.pinterest.com/aastha_sochic',
   ],
 };
 
