@@ -25,6 +25,10 @@
     {
       "path": "/api/cron/ads-scoreboard",
       "schedule": "0 7 * * *"
+    },
+    {
+      "path": "/api/cron/generate-blog?publish=1",
+      "schedule": "0 3 * * 1,4,6"
     }
   ]
 }
