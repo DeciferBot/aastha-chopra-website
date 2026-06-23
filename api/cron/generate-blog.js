@@ -22,6 +22,10 @@ export const config = { maxDuration: 300 };
 const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;
 const SEG_KEYS = Object.keys(SEGMENTS);
 
+// IndexNow key (also hosted at /<KEY>.txt). Pings Bing/Yandex on publish for
+// near-instant discovery. Google does not use IndexNow; it relies on the sitemap.
+const INDEXNOW_KEY = 'b4bd21537f724b699428afa92452c614';
+
 export default async function handler(req, res) {
   // Cron uses the Bearer header; ?key= lets it be triggered by tapping a link
   // from a phone during the dry-run review phase. Both gate on CRON_SECRET.
@@ -128,6 +132,11 @@ export default async function handler(req, res) {
     });
     created = { slug: saved.slug, title: saved.title, status: saved.status, words: saved.word_count };
 
+    // Ping IndexNow (Bing/Yandex) on publish for near-instant discovery. Non-blocking.
+    if (!dryRun) {
+      await indexNowPing(`${SITE.base}/blog/${saved.slug}`).catch(() => {});
+    }
+
     await logRun({
       startMs, segment, topic, status: errors.length ? 'partial' : 'success',
       dryRun, postsCreated: 1, queriesFound, sourcesUsed, errors,
@@ -161,6 +170,20 @@ async function autocomplete(query) {
   } catch {
     return [];
   }
+}
+
+// ── IndexNow (Bing/Yandex) ─────────────────────────────────────────────────
+async function indexNowPing(url) {
+  await fetch('https://api.indexnow.org/indexnow', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      host: 'www.aasthachopra.com',
+      key: INDEXNOW_KEY,
+      keyLocation: `${SITE.base}/${INDEXNOW_KEY}.txt`,
+      urlList: [url],
+    }),
+  });
 }
 
 // ── Claude: research with web_search, then write ───────────────────────────
