@@ -43,6 +43,8 @@
 }
 html{font-size:16px}
 body{background:var(--bg);color:var(--ivory);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+:focus:not(:focus-visible){outline:none}
 /* grain */
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23g)' opacity='0.04'/%3E%3C/svg%3E");background-size:200px;pointer-events:none;z-index:1000}
 

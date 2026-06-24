@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>document.documentElement.className += ' js';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Preload the LCP hero so it fetches before CSS parses -->
   <link rel="preload" as="image" href="images/aastha-chopra-dubai-luxury-fashion-beauty.jpg" fetchpriority="high" />
@@ -496,21 +497,26 @@
     .nav-mediapack svg { opacity: 0.7; transition: opacity var(--duration-fast); flex-shrink: 0; }
     .nav-mediapack:hover svg { opacity: 1; }
 
-    /* Scroll Animations */
-    .reveal {
+    /* Scroll Animations — default visible (no-JS / headless safe); the
+       hidden-then-animate state only kicks in once html.js is set in <head>. */
+    .reveal { opacity: 1; transform: none; }
+    html.js .reveal {
       opacity: 0;
       transform: translateY(28px);
       transition: opacity 0.9s var(--ease-spring),
                   transform 0.9s var(--ease-spring);
     }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    html.js .reveal.visible { opacity: 1; transform: translateY(0); }
     .reveal-delay-1 { transition-delay: 0.15s; }
     .reveal-delay-2 { transition-delay: 0.3s; }
     .reveal-delay-3 { transition-delay: 0.45s; }
     .reveal-delay-4 { transition-delay: 0.6s; }
     @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
+      .reveal, html.js .reveal { opacity: 1; transform: none; transition: none; }
     }
+    /* Keyboard focus visibility */
+    :focus-visible { outline: 2px solid var(--color-gold); outline-offset: 3px; border-radius: 2px; }
+    :focus:not(:focus-visible) { outline: none; }
 
     /* ─── HERO ─── */
     #hero {
