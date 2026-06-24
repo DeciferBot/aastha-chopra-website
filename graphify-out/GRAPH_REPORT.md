@@ -1,7 +1,7 @@
 # Graph Report - .  (2026-06-24)
 
 ## Corpus Check
-- 35 files · ~1,026,621 words
+- 35 files · ~1,026,894 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -53,10 +53,10 @@
   api/sitemap.js → api/_pitch.js
 - `handler()` --calls--> `sb()`  [INFERRED]
   api/sitemap.js → api/cron/daily-brief.js
-- `handler()` --calls--> `send()`  [INFERRED]
-  api/blog-index.js → api/telegram.js
-- `handler()` --calls--> `send()`  [INFERRED]
-  api/blog.js → api/telegram.js
+- `send()` --calls--> `handler()`  [INFERRED]
+  api/telegram.js → api/blog-index.js
+- `send()` --calls--> `handler()`  [INFERRED]
+  api/telegram.js → api/blog.js
 - `handler()` --calls--> `sb()`  [INFERRED]
   api/blog-index.js → api/cron/daily-brief.js
 
