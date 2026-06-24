@@ -122,12 +122,17 @@
   ══════════════════════════════════════════════════════════════ -->
   <nav class="world-nav">
     <a href="index.html" class="world-nav-logo">Aastha Chopra</a>
-    <ul class="world-nav-links">
+    <button class="world-nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="world-nav-links">
+      <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+    <ul class="world-nav-links" id="world-nav-links">
       <li><a href="index.html#brand-fit">All Worlds</a></li>
       <li><a href="fashion.html">Fashion</a></li>
       <li><a href="wellness.html">Wellness</a></li>
       <li><span class="active">Luxury</span></li>
       <li><a href="/blog">Journal</a></li>
+      <li><a class="nav-cta-mobile" href="mailto:management@aasthachopra.com">Collaborate</a></li>
     </ul>
     <a href="mailto:management@aasthachopra.com" class="world-nav-cta">Collaborate</a>
   </nav>
@@ -158,30 +163,34 @@
       <div class="feature-reel-copy">
         <p class="section-label">Watch in full</p>
         <h2>Inside the world's largest <em>Hermès</em> Parfumeur.</h2>
-        <p class="feature-reel-sub">A walk through the largest Hermès Parfumeur in the world — one of her signature luxury reels, playing in full right here.</p>
-        <a class="feature-reel-ig" href="https://www.instagram.com/reel/DQFBjejj7Ko/" target="_blank" rel="noopener">View on Instagram &rarr;</a>
+        <p class="feature-reel-sub">A walk through the largest Hermès Parfumeur in the world — one of her signature luxury reels. Tap to play it right here.</p>
+        <a class="feature-reel-ig" href="https://www.instagram.com/reel/DQFBjejj7Ko/" target="_blank" rel="noopener">Open on Instagram &rarr;</a>
       </div>
-      <figure class="feature-reel-player"
-              style="background-image:url('https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/render/image/public/instagram-media/thumbnails/2025-10/17864973993416569.jpg?width=720&amp;quality=70')"
-              data-video="https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/videos/2025-10/17864973993416569.mp4"
-              data-permalink="https://www.instagram.com/reel/DQFBjejj7Ko/">
-        <video class="feature-reel-video" muted loop playsinline preload="none"
-               poster="https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/render/image/public/instagram-media/thumbnails/2025-10/17864973993416569.jpg?width=720&amp;quality=70"
-               aria-label="Aastha Chopra — Hermès Parfumeur Dubai reel"></video>
-      </figure>
+      <div class="reel-feature" data-permalink="https://www.instagram.com/reel/DQFBjejj7Ko/">
+        <button class="reel-feature-poster" type="button" aria-label="Play this reel inline">
+          <img src="images/aastha-chopra-dubai-luxury-rooftop.jpg" alt="Aastha Chopra — Hermès Parfumeur Dubai luxury reel" />
+          <span class="reel-play-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="reel-tap-hint">Tap to play</span>
+        </button>
+      </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════
        STORY
   ══════════════════════════════════════════════════════════════ -->
-  <section class="world-story">
+  <section class="world-story reveal">
     <div class="world-story-inner">
-      <p class="section-label reveal">Her world</p>
-      <h2>Dubai is her backyard.</h2>
-      <p>Aastha lives the life her audience aspires to. She dines at the tables they want to sit at, stays in the suites they save for, and travels to the destinations they put on their lists. When she posts about a hotel or restaurant, people look it up.</p>
-      <p><strong>35% of her audience is UAE-based</strong>, split across Dubai, Abu Dhabi and Sharjah. For any brand trying to reach the Gulf market, that is direct access to people making purchasing decisions on the ground.</p>
-      <p>Her travel and hospitality content carries her highest engagement rate. The category is uncrowded on her profile, which means brands that move first get the full attention of her audience without competition from similar deals.</p>
+      <div class="world-story-copy">
+        <p class="section-label">Her world</p>
+        <h2>Dubai is her backyard.</h2>
+        <p>Aastha lives the life her audience aspires to. She dines at the tables they want to sit at, stays in the suites they save for, and travels to the destinations they put on their lists. When she posts about a hotel or restaurant, people look it up.</p>
+        <p><strong>35% of her audience is UAE-based</strong>, split across Dubai, Abu Dhabi and Sharjah. For any brand trying to reach the Gulf market, that is direct access to people making purchasing decisions on the ground.</p>
+        <p>Her travel and hospitality content carries her highest engagement rate. The category is uncrowded on her profile, which means brands that move first get the full attention of her audience without competition from similar deals.</p>
+      </div>
+      <figure class="world-story-media">
+        <img src="images/aastha-chopra-dubai-luxury-travel-hero.jpg" alt="Aastha Chopra — luxury travel in Dubai" loading="lazy" />
+      </figure>
     </div>
   </section>
 
@@ -266,21 +275,17 @@
        GALLERY
   ══════════════════════════════════════════════════════════════ -->
   <section class="world-gallery">
-    <div class="world-gallery-grid" id="gallery-grid">
-      <div class="gallery-item reveal">
-        <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener">
-          <img src="images/aastha-chopra-dubai-luxury-rooftop.jpg" alt="Aastha Chopra — luxury lifestyle" loading="lazy" />
-        </a>
-      </div>
-      <div class="gallery-item reveal d1">
-        <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener">
-          <img src="images/aastha-chopra-dubai-travel.jpg" alt="Aastha Chopra — Dubai travel" loading="lazy" />
-        </a>
-      </div>
-      <div class="gallery-item reveal d2">
-        <a href="https://www.instagram.com/aastha_sochic/" target="_blank" rel="noopener">
-          <img src="images/aastha-chopra-dubai-hotel-content.jpg" alt="Aastha Chopra — hotel content" loading="lazy" />
-        </a>
+    <div class="world-gallery-inner">
+      <div class="world-gallery-grid" id="gallery-grid">
+        <div class="gallery-item reveal">
+          <img src="images/aastha-chopra-dubai-luxury-rooftop.jpg" alt="Aastha Chopra — luxury lifestyle in Dubai" loading="lazy" />
+        </div>
+        <div class="gallery-item reveal d1">
+          <img src="images/aastha-chopra-dubai-travel.jpg" alt="Aastha Chopra — Dubai and international travel" loading="lazy" />
+        </div>
+        <div class="gallery-item reveal d2">
+          <img src="images/aastha-chopra-dubai-hotel-content.jpg" alt="Aastha Chopra — luxury hotel content" loading="lazy" />
+        </div>
       </div>
     </div>
   </section>
@@ -369,43 +374,27 @@
     var io=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
     document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
-    var REELS=[
-      {permalink:"https://www.instagram.com/reel/DJz7kPhSV3z/",caption:"That golden hour at the resort"},
-      {permalink:"https://www.instagram.com/reel/C8k7mGpNi2W/",caption:"This resort was built for mornings like this"},
-      {permalink:"https://www.instagram.com/reel/DKhVRTSylPp/",caption:"Dinner at the best table in Dubai"},
-      {permalink:"https://www.instagram.com/reel/DIwM7kRyFg1/",caption:"Pool day aesthetic: curated, not accidental"},
-      {permalink:"https://www.instagram.com/reel/DHrZpuSyA2q/",caption:"Brunch view that made me put my phone down (almost)"},
-      {permalink:"https://www.instagram.com/reel/DGwLNjSyPmV/",caption:"That feeling when the suite is better than the photos"}
-    ];
-    var FB=['images/aastha-chopra-dubai-luxury-rooftop.jpg','images/aastha-chopra-dubai-travel.jpg','images/aastha-chopra-dubai-hotel-content.jpg','images/aastha-chopra-dubai-fashion-luxury-1.jpg','images/aastha-chopra-madinat-jumeirah-dubai.jpg','images/aastha-chopra-dubai-lifestyle.jpg'];
-    function buildGrid(tm){
-      var g=document.getElementById('reels-grid');g.innerHTML='';
-      REELS.forEach(function(r,i){
-        var id=(r.permalink.match(/\/reel\/([^/]+)\//)||[])[1];
-        var th=r.thumbnail||((tm&&id&&tm[id])?(tm[id].thumbnail_url||tm[id].media_url):FB[i%FB.length]);
-        var c=document.createElement('div');c.className='reel-card';
-        c.innerHTML='<img src="'+th+'" alt="'+r.caption+'" loading="lazy" onerror="this.src=\''+FB[i%FB.length]+'\'"/><div class="reel-card-overlay"><p class="reel-card-caption">'+r.caption+'</p></div><a href="'+r.permalink+'" target="_blank" rel="noopener"></a>';
-        g.appendChild(c);
-      });
-    }
-    buildGrid(null);
-    // Durable, view-ranked reels from Supabase Storage (scripts/sync-reels.mjs).
-    fetch('data/reels.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null;}).then(function(d){
-      if(!d||!d.reels)return;
-      var list=d.reels.filter(function(r){return r.category==='Luxury';}).slice(0,6);
-      if(list.length){REELS=list;buildGrid(null);}
-    }).catch(function(){});
-    fetch('/api/instagram?limit=12').then(function(r){return r.json();}).then(function(data){
-      var posts=(data.data||[]).filter(function(p){return p.media_url||p.thumbnail_url;}).slice(0,3);
-      if(posts.length<3)return;
-      var gg=document.getElementById('gallery-grid');gg.innerHTML='';
-      posts.forEach(function(p,i){
-        var src=p.media_url||p.thumbnail_url;
-        var item=document.createElement('div');item.className='gallery-item reveal '+['','d1','d2'][i];
-        item.innerHTML='<a href="'+p.permalink+'" target="_blank" rel="noopener"><img src="'+src+'" alt="'+(p.caption||'').slice(0,60).replace(/"/g,'')+'" loading="lazy"/></a>';
-        gg.appendChild(item);io.observe(item);
-      });
-    }).catch(function(){});
+    // Luxury & Travel reels — local posters, metadata from data/reels.json,
+    // playback inline (featured = in place, grid = lightbox) via js/reels.js.
+    window.WORLD = {
+      categories: ['Luxury'],
+      posters: [
+        'images/aastha-chopra-dubai-luxury-rooftop.jpg',
+        'images/aastha-chopra-dubai-travel.jpg',
+        'images/aastha-chopra-dubai-hotel-content.jpg',
+        'images/aastha-chopra-madinat-jumeirah-dubai.jpg',
+        'images/aastha-chopra-dubai-luxury-fashion-beauty.jpg',
+        'images/aastha-chopra-dubai-lifestyle.jpg'
+      ],
+      fallback: [
+        {permalink:'https://www.instagram.com/reel/DUBXflljC91/',caption:'POV: You attend a vodka launch in Dubai… and Jason Momoa is there',views:72520},
+        {permalink:'https://www.instagram.com/reel/DGLIc3qSgjc/',caption:'A new era of luxury on the horizon with Burj Azizi',views:58687},
+        {permalink:'https://www.instagram.com/reel/DGSaaq2SfCz/',caption:'Celebrating Ramadan and Eid in elegance',views:55289},
+        {permalink:'https://www.instagram.com/reel/DOGMe1CD4SF/',caption:'Unleash your inner diva',views:46814},
+        {permalink:'https://www.instagram.com/reel/DU2pRgajMct/',caption:'Some people go to galleries.',views:39167},
+        {permalink:'https://www.instagram.com/reel/DQb-maGj9CR/',caption:'A day with my family at Sheraton Mall of the Emirates',views:37229}
+      ]
+    };
   </script>
   <script>
   (function(){
@@ -431,7 +420,7 @@
   })();
   </script>
 
-  <script src="/js/feature-reel.js" defer></script>
+  <script src="/js/reels.js" defer></script>
   <script src="/js/meta-events.js" defer></script>
 </body>
 </html>

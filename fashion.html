@@ -116,18 +116,23 @@
   <!-- NAV -->
   <nav class="world-nav">
     <a href="index.html" class="world-nav-logo">Aastha Chopra</a>
-    <ul class="world-nav-links">
+    <button class="world-nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="world-nav-links">
+      <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+    <ul class="world-nav-links" id="world-nav-links">
       <li><a href="index.html#brand-fit">All Worlds</a></li>
       <li><a href="luxury.html">Luxury</a></li>
       <li><span class="active">Fashion</span></li>
       <li><a href="/blog">Journal</a></li>
       <li><a href="wellness.html">Wellness</a></li>
+      <li><a class="nav-cta-mobile" href="mailto:management@aasthachopra.com">Work Together</a></li>
     </ul>
     <a href="mailto:management@aasthachopra.com" class="world-nav-cta">Work Together</a>
   </nav>
 
   <!-- HERO -->
-  <section class="world-hero hero-portrait">
+  <section class="world-hero">
     <div class="world-hero-text">
       <a href="index.html#brand-fit" class="back-link">&larr; All Worlds</a>
       <div class="hero-bottom">
@@ -138,7 +143,7 @@
     </div>
     <span class="hero-vertical-tag" id="hero-tag-fashion">51.5K Instagram &nbsp;·&nbsp; 110+ Brands &nbsp;·&nbsp; 28K UAE Monthly &nbsp;·&nbsp; Dubai</span>
     <div class="world-hero-image">
-      <img src="images/aastha-chopra-dubai-fashion.jpg" alt="Aastha Chopra fashion" style="object-position: center top;" />
+      <img src="images/aastha-chopra-dubai-fashion.jpg" alt="Aastha Chopra — Dubai fashion and beauty creator" />
     </div>
   </section>
 
@@ -148,28 +153,32 @@
       <div class="feature-reel-copy">
         <p class="section-label">Watch in full</p>
         <h2>Street style, made <em>chic</em>.</h2>
-        <p class="feature-reel-sub">Dubai street style in motion — one of her signature fashion reels, playing in full right here.</p>
-        <a class="feature-reel-ig" href="https://www.instagram.com/reel/C_kWOKeSTOC/" target="_blank" rel="noopener">View on Instagram &rarr;</a>
+        <p class="feature-reel-sub">Dubai street style in motion — one of her signature fashion reels. Tap to play it right here, no app-hopping.</p>
+        <a class="feature-reel-ig" href="https://www.instagram.com/reel/C_kWOKeSTOC/" target="_blank" rel="noopener">Open on Instagram &rarr;</a>
       </div>
-      <figure class="feature-reel-player"
-              style="background-image:url('https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/render/image/public/instagram-media/thumbnails/2024-09/17981299715726595.jpg?width=720&amp;quality=70')"
-              data-video="https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/videos/2024-09/17981299715726595.mp4"
-              data-permalink="https://www.instagram.com/reel/C_kWOKeSTOC/">
-        <video class="feature-reel-video" muted loop playsinline preload="none"
-               poster="https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/render/image/public/instagram-media/thumbnails/2024-09/17981299715726595.jpg?width=720&amp;quality=70"
-               aria-label="Aastha Chopra — chic Dubai street style reel"></video>
-      </figure>
+      <div class="reel-feature" data-permalink="https://www.instagram.com/reel/C_kWOKeSTOC/">
+        <button class="reel-feature-poster" type="button" aria-label="Play this reel inline">
+          <img src="images/aastha-chopra-fashion-editorial-dubai.jpg" alt="Aastha Chopra — chic Dubai street style reel" />
+          <span class="reel-play-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="reel-tap-hint">Tap to play</span>
+        </button>
+      </div>
     </div>
   </section>
 
   <!-- STORY -->
-  <section class="world-story">
+  <section class="world-story reveal">
     <div class="world-story-inner">
-      <p class="section-label reveal">Her world</p>
-      <h2>Fashion is where she lives.</h2>
-      <p>Aastha Chopra has built her platform at the intersection of South Asian identity and Dubai style. With 51.5K followers and 28,000 UAE-based monthly viewers, she speaks directly to a demographic that luxury and contemporary fashion brands are actively competing for.</p>
-      <p>Her collaborations span every tier of the market — from Chanel, Dior, and Valentino at the top end, to emerging regional designers and accessible beauty brands. That range is not a contradiction; it reflects how her audience actually shops and aspires. She understands the full wardrobe, not just the highlight reel.</p>
-      <p>Over 110 brand partnerships have shaped her content voice: specific, considered, and never performative. She does not wear things she would not wear off camera. That discipline is what makes her recommendations land.</p>
+      <div class="world-story-copy">
+        <p class="section-label">Her world</p>
+        <h2>Fashion is where she lives.</h2>
+        <p>Aastha Chopra has built her platform at the intersection of South Asian identity and Dubai style. With 51.5K followers and 28,000 UAE-based monthly viewers, she speaks directly to a demographic that luxury and contemporary fashion brands are actively competing for.</p>
+        <p>Her collaborations span every tier of the market — from Chanel, Dior, and Valentino at the top end, to emerging regional designers and accessible beauty brands. That range is not a contradiction; it reflects how her audience actually shops and aspires. She understands the full wardrobe, not just the highlight reel.</p>
+        <p>Over 110 brand partnerships have shaped her content voice: specific, considered, and never performative. She does not wear things she would not wear off camera. That discipline is what makes her recommendations land.</p>
+      </div>
+      <figure class="world-story-media">
+        <img src="images/aastha-chopra-evening-editorial-style.jpg" alt="Aastha Chopra — evening editorial style in Dubai" loading="lazy" />
+      </figure>
     </div>
   </section>
 
@@ -352,45 +361,27 @@
     },{threshold:0.1});
     document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
-    // Fashion & Beauty reels
-    var ALL_REELS = [
-      {permalink:"https://www.instagram.com/reel/DFFpMIlSMCm/",caption:"X @be.divalicious",category:"Fashion"},
-      {permalink:"https://www.instagram.com/reel/DLoz6WkS9jB/",caption:"When in doubt, go blue — @maybellinearabia",category:"Beauty"},
-      {permalink:"https://www.instagram.com/reel/DLNerzuyoWq/",caption:"POV: When vanity is a summer moodboard.",category:"Beauty"},
-      {permalink:"https://www.instagram.com/reel/DFfKQ9CSs9S/",caption:"DIALMAZ Exquisite Jewelry has come to the UAE",category:"Fashion"},
-      {permalink:"https://www.instagram.com/reel/DK9KE7OydON/",caption:"Unboxing a fragrance that tells a story",category:"Beauty"},
-      {permalink:"https://www.instagram.com/reel/DLF1wFSyqaO/",caption:"Meet your daily dose of glow: @kosas DreamBeam",category:"Beauty"}
-    ];
-    var FALLBACKS=['images/aastha-chopra-dubai-fashion-luxury-1.jpg','images/aastha-chopra-dubai-creator-portrait.jpg','images/aastha-chopra-dubai-fashion-creator-2.jpg','images/aastha-chopra-dubai-fashion-creator-1.jpg','images/aastha-chopra-dubai-fitness.jpg','images/aastha-chopra-dubai-hotel-content.jpg'];
-    function buildGrid(thumbMap){
-      var grid=document.getElementById('reels-grid');grid.innerHTML='';
-      ALL_REELS.forEach(function(r,i){
-        var id=(r.permalink.match(/\/reel\/([^/]+)\//)||[])[1];
-        var thumb=r.thumbnail||((thumbMap&&id&&thumbMap[id])?(thumbMap[id].thumbnail_url||thumbMap[id].media_url):FALLBACKS[i%FALLBACKS.length]);
-        var c=document.createElement('div');c.className='reel-card';
-        c.innerHTML='<img src="'+(thumb||FALLBACKS[i])+'" alt="'+r.caption.replace(/"/g,'&quot;')+'" loading="lazy" onerror="this.src=\''+FALLBACKS[i%FALLBACKS.length]+'\'" /><div class="reel-card-overlay"><p class="reel-card-caption">'+r.caption+'</p></div><a href="'+r.permalink+'" target="_blank" rel="noopener" aria-label="View on Instagram"></a>';
-        grid.appendChild(c);
-      });
-    }
-    buildGrid(null);
-    // Durable, view-ranked reels from Supabase Storage (scripts/sync-reels.mjs).
-    fetch('data/reels.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null;}).then(function(d){
-      if(!d||!d.reels)return;
-      var want={Fashion:1,Beauty:1};
-      var list=d.reels.filter(function(r){return want[r.category];}).slice(0,6);
-      if(list.length){ALL_REELS=list;buildGrid(null);}
-    }).catch(function(){});
-    fetch('/api/instagram?limit=12').then(function(r){return r.json();}).then(function(data){
-      var posts=(data.data||[]).filter(function(p){return p.media_url||p.thumbnail_url;}).slice(0,3);
-      if(posts.length<3)return;
-      var gg=document.getElementById('gallery-grid');gg.innerHTML='';
-      posts.forEach(function(p,i){
-        var src=p.media_url||p.thumbnail_url;
-        var item=document.createElement('div');item.className='gallery-item reveal '+['','d1','d2'][i];
-        item.innerHTML='<a href="'+p.permalink+'" target="_blank" rel="noopener"><img src="'+src+'" alt="'+(p.caption||'Aastha Chopra').slice(0,60).replace(/"/g,'')+'" loading="lazy"/></a>';
-        gg.appendChild(item);io.observe(item);
-      });
-    }).catch(function(){});
+    // Fashion & Beauty reels — posters local, metadata from data/reels.json,
+    // playback inline (featured = in place, grid = lightbox) via js/reels.js.
+    window.WORLD = {
+      categories: ['Fashion', 'Beauty'],
+      posters: [
+        'images/aastha-chopra-dubai-fashion-creator-1.jpg',
+        'images/aastha-chopra-premium-beauty-dubai.jpg',
+        'images/aastha-chopra-dubai-fashion-creator-2.jpg',
+        'images/aastha-chopra-dubai-luxury-fashion-beauty.jpg',
+        'images/aastha-chopra-dubai-fashion-luxury-1.jpg',
+        'images/aastha-chopra-dubai-creator-portrait.jpg'
+      ],
+      fallback: [
+        {permalink:'https://www.instagram.com/reel/DWMEDgnDJ91/',caption:'Good skin, good glow, good mood',views:63878},
+        {permalink:'https://www.instagram.com/reel/DGcufa-yTKL/',caption:'A little shimmer, a little sass, and a whole lot of glam',views:55681},
+        {permalink:'https://www.instagram.com/reel/DFFpMIlSMCm/',caption:'Festive glam with be.divalicious',views:49735},
+        {permalink:'https://www.instagram.com/reel/DPETHOdj5Ph/',caption:'The ultimate festive vibe is back',views:48672},
+        {permalink:'https://www.instagram.com/reel/DOiCRc5jKOf/',caption:'Falling for all things fresh — Autumn layers, winter vibes',views:42830},
+        {permalink:'https://www.instagram.com/reel/DNiysWKyVTv/',caption:'POV: Trying to play it cool with Charlotte Tilbury',views:39053}
+      ]
+    };
   </script>
   <script>
   (function() {
@@ -413,7 +404,7 @@
   })();
   </script>
 
-  <script src="/js/feature-reel.js" defer></script>
+  <script src="/js/reels.js" defer></script>
   <script src="/js/meta-events.js" defer></script>
 </body>
 </html>

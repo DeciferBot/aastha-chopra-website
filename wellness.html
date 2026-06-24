@@ -116,12 +116,17 @@
   <!-- NAV -->
   <nav class="world-nav">
     <a href="index.html" class="world-nav-logo">Aastha Chopra</a>
-    <ul class="world-nav-links">
+    <button class="world-nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="world-nav-links">
+      <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+    <ul class="world-nav-links" id="world-nav-links">
       <li><a href="index.html#brand-fit">All Worlds</a></li>
       <li><a href="fashion.html">Fashion</a></li>
       <li><a href="luxury.html">Luxury</a></li>
       <li><span class="active">Wellness</span></li>
       <li><a href="/blog">Journal</a></li>
+      <li><a class="nav-cta-mobile" href="mailto:management@aasthachopra.com">Collaborate</a></li>
     </ul>
     <a href="mailto:management@aasthachopra.com" class="world-nav-cta">Collaborate</a>
   </nav>
@@ -148,28 +153,32 @@
       <div class="feature-reel-copy">
         <p class="section-label">Watch in full</p>
         <h2>Hiking to the <em>best view</em> ever.</h2>
-        <p class="feature-reel-sub">A Swiss alpine hike, every step a new view — one of her signature adventure reels, playing in full right here.</p>
-        <a class="feature-reel-ig" href="https://www.instagram.com/reel/C7dg7qONh7V/" target="_blank" rel="noopener">View on Instagram &rarr;</a>
+        <p class="feature-reel-sub">A Swiss alpine hike, every step a new view — one of her signature adventure reels. Tap to play it right here.</p>
+        <a class="feature-reel-ig" href="https://www.instagram.com/reel/C7dg7qONh7V/" target="_blank" rel="noopener">Open on Instagram &rarr;</a>
       </div>
-      <figure class="feature-reel-player"
-              style="background-image:url('https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/render/image/public/instagram-media/thumbnails/2024-05/18049988218732844.jpg?width=720&amp;quality=70')"
-              data-video="https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/videos/2024-05/18049988218732844.mp4"
-              data-permalink="https://www.instagram.com/reel/C7dg7qONh7V/">
-        <video class="feature-reel-video" muted loop playsinline preload="none"
-               poster="https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/render/image/public/instagram-media/thumbnails/2024-05/18049988218732844.jpg?width=720&amp;quality=70"
-               aria-label="Aastha Chopra — Switzerland alpine hike reel"></video>
-      </figure>
+      <div class="reel-feature" data-permalink="https://www.instagram.com/reel/C7dg7qONh7V/">
+        <button class="reel-feature-poster" type="button" aria-label="Play this reel inline">
+          <img src="images/aastha-chopra-dubai-wellness-fitness-hero.jpg" alt="Aastha Chopra — Swiss alpine hike adventure reel" />
+          <span class="reel-play-badge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="reel-tap-hint">Tap to play</span>
+        </button>
+      </div>
     </div>
   </section>
 
   <!-- STORY -->
-  <section class="world-story">
+  <section class="world-story reveal">
     <div class="world-story-inner">
-      <p class="section-label reveal">Her world</p>
-      <h2>She doesn't just talk about wellness. She does it.</h2>
-      <p>Aastha is a practising lawyer who trains hard, skis, and hikes Arctic waterfalls for holiday. Her active, adventurous life is not content strategy — it is how she lives. That makes her wellness credibility genuine in a way that scripted brand deals rarely are.</p>
-      <p>Her audience is 18 to 34, South Asian diaspora in the UAE, overwhelmingly professional women balancing ambition with health. They see themselves in her — and that is exactly who wellness brands want to reach.</p>
-      <p>Almost no wellness brands have worked with her yet. Her engagement in this category is her highest across all content. The whitespace is real and it is available now.</p>
+      <div class="world-story-copy">
+        <p class="section-label">Her world</p>
+        <h2>She doesn't just talk about wellness. She does it.</h2>
+        <p>Aastha is a practising lawyer who trains hard, skis, and hikes Arctic waterfalls for holiday. Her active, adventurous life is not content strategy — it is how she lives. That makes her wellness credibility genuine in a way that scripted brand deals rarely are.</p>
+        <p>Her audience is 18 to 34, South Asian diaspora in the UAE, overwhelmingly professional women balancing ambition with health. They see themselves in her — and that is exactly who wellness brands want to reach.</p>
+        <p>Almost no wellness brands have worked with her yet. Her engagement in this category is her highest across all content. The whitespace is real and it is available now.</p>
+      </div>
+      <figure class="world-story-media">
+        <img src="images/aastha-chopra-dubai-wellness-fitness-2.jpg" alt="Aastha Chopra — wellness and fitness in Dubai" loading="lazy" />
+      </figure>
     </div>
   </section>
 
@@ -347,43 +356,27 @@
     var io=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
     document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
-    var REELS=[
-      {permalink:"https://www.instagram.com/reel/C7dg7qONh7V/",caption:"Hiking to the best view ever. Every step reveals a new breathtaking view."},
-      {permalink:"https://www.instagram.com/reel/DLco1YQyHb1/",caption:"Sip. Sweat. Slay. Repeat."},
-      {permalink:"https://www.instagram.com/reel/DF4dc_vyfhs/",caption:"Starting midterm break with a little jungle royalty."},
-      {permalink:"https://www.instagram.com/reel/C7XiZrptX-E/",caption:"The joy of uninterrupted tranquility"},
-      {permalink:"https://www.instagram.com/reel/DFXJAaSSnhm/",caption:"The Maha Kumbh Mela — where over 40 crore Hindus chant Har Har Mahadev"},
-      {permalink:"https://www.instagram.com/reel/DGlKhBSyTqA/",caption:"Elevated living starts in the morning routine"}
-    ];
-    var FB=['images/aastha-chopra-evening-editorial-style.jpg','images/aastha-chopra-dubai-fitness.jpg','images/aastha-chopra-dubai-active-fitness.jpg','images/aastha-chopra-dubai-wellness-fitness-1.jpg','images/aastha-chopra-dubai-wellness-fitness-2.jpg','images/aastha-chopra-dubai-lifestyle.jpg'];
-    function buildGrid(tm){
-      var g=document.getElementById('reels-grid');g.innerHTML='';
-      REELS.forEach(function(r,i){
-        var id=(r.permalink.match(/\/reel\/([^/]+)\//)||[])[1];
-        var th=r.thumbnail||((tm&&id&&tm[id])?(tm[id].thumbnail_url||tm[id].media_url):FB[i%FB.length]);
-        var c=document.createElement('div');c.className='reel-card';
-        c.innerHTML='<img src="'+th+'" alt="'+r.caption.slice(0,60)+'" loading="lazy" onerror="this.src=\''+FB[i%FB.length]+'\'"/><div class="reel-card-overlay"><p class="reel-card-caption">'+r.caption.slice(0,80)+'</p></div><a href="'+r.permalink+'" target="_blank" rel="noopener"></a>';
-        g.appendChild(c);
-      });
-    }
-    buildGrid(null);
-    // Durable, view-ranked reels from Supabase Storage (scripts/sync-reels.mjs).
-    fetch('data/reels.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null;}).then(function(d){
-      if(!d||!d.reels)return;
-      var list=d.reels.filter(function(r){return r.category==='Wellness';}).slice(0,6);
-      if(list.length){REELS=list;buildGrid(null);}
-    }).catch(function(){});
-    fetch('/api/instagram?limit=12').then(function(r){return r.json();}).then(function(data){
-      var posts=(data.data||[]).filter(function(p){return p.media_url||p.thumbnail_url;}).slice(0,3);
-      if(posts.length<3)return;
-      var gg=document.getElementById('gallery-grid');gg.innerHTML='';
-      posts.forEach(function(p,i){
-        var src=p.media_url||p.thumbnail_url;
-        var item=document.createElement('div');item.className='gallery-item reveal '+['','d1','d2'][i];
-        item.innerHTML='<a href="'+p.permalink+'" target="_blank" rel="noopener"><img src="'+src+'" alt="'+(p.caption||'').slice(0,60).replace(/"/g,'')+'" loading="lazy"/></a>';
-        gg.appendChild(item);io.observe(item);
-      });
-    }).catch(function(){});
+    // Wellness & Fitness reels — local posters, metadata from data/reels.json,
+    // playback inline (featured = in place, grid = lightbox) via js/reels.js.
+    window.WORLD = {
+      categories: ['Wellness'],
+      posters: [
+        'images/aastha-chopra-dubai-wellness-fitness-1.jpg',
+        'images/aastha-chopra-dubai-active-fitness.jpg',
+        'images/aastha-chopra-dubai-wellness-3.jpg',
+        'images/aastha-chopra-dubai-fitness.jpg',
+        'images/aastha-chopra-dubai-wellness-fitness-2.jpg',
+        'images/aastha-chopra-dubai-wellness.jpg'
+      ],
+      fallback: [
+        {permalink:'https://www.instagram.com/reel/DF4dc_vyfhs/',caption:'Starting midterm break with a little jungle royalty',views:55310},
+        {permalink:'https://www.instagram.com/reel/DVOrW4UjPrG/',caption:'Bucket list, but make it couture',views:41431},
+        {permalink:'https://www.instagram.com/reel/DVjF5J1DEq4/',caption:'Unlike any other hike I have ever done',views:36115},
+        {permalink:'https://www.instagram.com/reel/DVwLD3RjIJ-/',caption:'Me trying to ski while my brain chants…',views:34310},
+        {permalink:'https://www.instagram.com/reel/DVoTxaxjGzK/',caption:'How often do you walk an alpaca through the mountains?',views:29896},
+        {permalink:'https://www.instagram.com/reel/DT49H9BjAcF/',caption:'Discover your new perfect set',views:28319}
+      ]
+    };
   </script>
   <script>
   (function(){
@@ -400,7 +393,7 @@
   })();
   </script>
 
-  <script src="/js/feature-reel.js" defer></script>
+  <script src="/js/reels.js" defer></script>
   <script src="/js/meta-events.js" defer></script>
 </body>
 </html>
