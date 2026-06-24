@@ -120,6 +120,15 @@ export function postImage(p) {
   return (p && (p.hero_image_url || p._igImage)) || segmentImage(p && p.segment);
 }
 
+/** Serve Supabase Storage images resized via the on-the-fly transform endpoint
+ *  (smaller + faster + WhatsApp-safe). Non-Supabase URLs (local /images, etc.)
+ *  pass through untouched. */
+export function sbImg(url, width, quality = 72) {
+  if (!url || typeof url !== 'string' || !url.includes('/storage/v1/object/public/')) return url;
+  const rendered = url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/');
+  return `${rendered}${rendered.includes('?') ? '&' : '?'}width=${width}&quality=${quality}`;
+}
+
 /** Supabase REST helper (service key, server-side only). */
 export async function sb(path, opts = {}) {
   const key = process.env.SUPABASE_SERVICE_KEY;
@@ -251,7 +260,7 @@ export function renderPostCard(p) {
   const dek = p.excerpt || p.meta_description || '';
   const short = dek.length > 130 ? dek.slice(0, 130).trim() + '…' : dek;
   return `<a class="bcard" href="/blog/${esc(p.slug)}">
-        <div class="bcard-media"><img src="${postImage(p)}" alt="" loading="lazy" /></div>
+        <div class="bcard-media"><img src="${sbImg(postImage(p), 720)}" alt="" loading="lazy" /></div>
         <div class="bcard-body">
           <span class="seg">${esc(seg.label)}</span>
           <h3>${esc(p.title)}</h3>

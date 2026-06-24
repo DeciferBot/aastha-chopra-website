@@ -18,6 +18,10 @@ const RULES = [
   ['Luxury', /\b(hotel|resort|suite|igloo|lapland|finland|italy|rome|naples|phuket|thailand|travel|getaway|staycation|dining|restaurant|dinner|brunch|feast|burj|tower|penthouse|supercar|porsche|yacht|vodka|golden hour|metro station|sheraton|lana|fountain|khaleeji|vip|luxury|first class|jet)\b/i],
 ];
 const classify = (c = '') => { for (const [cat, re] of RULES) if (re.test(c)) return cat; return 'Fashion'; };
+const sbImg = (url, w, q = 70) =>
+  (typeof url === 'string' && url.includes('/storage/v1/object/public/'))
+    ? `${url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/')}?width=${w}&quality=${q}`
+    : url;
 function cardCaption(caption = '') {
   let s = caption.split('\n').map(l => l.trim()).find(l => l && !l.startsWith('#') && !l.startsWith('@')) || caption.split('\n')[0] || '';
   s = s.replace(/https?:\/\/\S+/g, '').replace(/[@#][\w.]+/g, '').replace(/\s+/g, ' ').trim();
@@ -45,7 +49,7 @@ export default async function handler() {
 
     const reels = rows.map(r => ({
       permalink: r.permalink,
-      thumbnail: r.storage_thumbnail_url,
+      thumbnail: sbImg(r.storage_thumbnail_url, 720),
       caption: cardCaption(r.caption),
       category: classify(r.caption),
       views: r.views,

@@ -86,9 +86,14 @@ async function main() {
     process.exit(1);
   }
 
+  const sbImg = (url, w, q = 70) =>
+    (typeof url === 'string' && url.includes('/storage/v1/object/public/'))
+      ? `${url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/')}?width=${w}&quality=${q}`
+      : url;
+
   const reels = rows.map(r => ({
     permalink: r.permalink,
-    thumbnail: r.storage_thumbnail_url,
+    thumbnail: sbImg(r.storage_thumbnail_url, 720),
     caption: cardCaption(r.caption),
     category: classify(r.caption),
     views: r.views,
