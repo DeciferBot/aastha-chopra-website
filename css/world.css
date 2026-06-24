@@ -481,7 +481,7 @@ body::before {
   font-size: 0.64rem; font-weight: 500; letter-spacing: 0.2em;
   text-transform: uppercase; color: var(--text-mid);
   border: 1px solid var(--border-hi); padding: 9px 18px; background: var(--bg-card);
-  transition: border-color 0.25s, color 0.25s, padding-left 0.25s var(--ease);
+  transition: border-color 0.25s, color 0.25s, transform 0.25s var(--ease);
   position: relative; overflow: hidden;
 }
 .brand-tag::before {
@@ -491,7 +491,7 @@ body::before {
   transform: scaleY(0); transform-origin: bottom;
   transition: transform 0.25s var(--ease);
 }
-.brand-tag:hover { border-color: var(--gold); color: var(--text); padding-left: 22px; }
+.brand-tag:hover { border-color: var(--gold); color: var(--text); transform: translateX(3px); }
 .brand-tag:hover::before { transform: scaleY(1); }
 @media (max-width: 720px) { .world-brands { padding: 48px 24px; } }
 
@@ -622,4 +622,25 @@ html.js .reveal.visible { opacity: 1; transform: none; }
   .hero-word { opacity: 1; animation: none; }
   .marquee-inner { animation: none; }
   .gallery-item img, .reel-card img, .brand-tag { transition: none; }
+}
+
+/* ── MOTION POLISH (Emil-style: strong ease-out, press feedback, hero reveal) ── */
+.btn-primary, .btn-outline, .world-nav-cta, .cognac-band .btn-cognac, .back-link,
+.world-reels-header a, .world-brands .brand-tag {
+  transition: transform 0.18s var(--ease), opacity 0.2s var(--ease),
+              background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.btn-primary:active, .btn-outline:active, .world-nav-cta:active,
+.cognac-band .btn-cognac:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover, .world-nav-cta:hover, .cognac-band .btn-cognac:hover { transform: translateY(-1px); }
+}
+
+/* One-time hero image settle on load (JS-gated so it never blocks content) */
+@keyframes hero-img-settle { from { transform: scale(1.06); } to { transform: scale(1); } }
+html.js .world-hero-image img { animation: hero-img-settle 1.3s var(--ease) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .world-hero-image img { animation: none; }
+  .btn-primary, .btn-outline, .world-nav-cta, .cognac-band .btn-cognac, .brand-tag { transition: none; }
 }

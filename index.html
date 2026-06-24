@@ -518,6 +518,22 @@
     :focus-visible { outline: 2px solid var(--color-gold); outline-offset: 3px; border-radius: 2px; }
     :focus:not(:focus-visible) { outline: none; }
 
+    /* Press feedback + interactive motion (Emil-style: scale on press, lift on hover) */
+    .nav-cta, .hero-cta, .hero-cta-ghost, .reels-tab, .bf-card-cta, .form-submit,
+    .reels-more, .insta-cta, button, .wa-float {
+      transition: transform 0.18s var(--ease-spring), background 0.2s ease,
+                  border-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+    }
+    .nav-cta:active, .hero-cta:active, .hero-cta-ghost:active, .reels-tab:active,
+    .bf-card-cta:active, .form-submit:active, button:active, .wa-float:active { transform: scale(0.97); }
+    @media (hover: hover) and (pointer: fine) {
+      .nav-cta:hover, .hero-cta:hover, .form-submit:hover { transform: translateY(-1px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .nav-cta, .hero-cta, .hero-cta-ghost, .reels-tab, .bf-card-cta, .form-submit,
+      .reels-more, .insta-cta, button, .wa-float { transition: none; }
+    }
+
     /* ─── HERO ─── */
     #hero {
       position: relative;
