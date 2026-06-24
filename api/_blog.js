@@ -77,6 +77,49 @@ export function segmentImage(key) {
   return SEGMENT_IMG[key] || '/images/aastha-chopra-dubai-creator-portrait.jpg';
 }
 
+/** Resolve each post's image from the Instagram content it is linked to
+ *  (instagram_refs → instagram_posts durable Supabase Storage URL), so every
+ *  card/hero is unique and tied to the real piece. Batched + chunked; posts whose
+ *  refs aren't synced yet fall back to the pillar photo via postImage(). Mutates
+ *  posts in place (sets p._igImage) and returns them. */
+export async function attachInstagramImages(posts) {
+  const list = Array.isArray(posts) ? posts : [posts];
+  const perPost = list.map((p) =>
+    (Array.isArray(p && p.instagram_refs) ? p.instagram_refs : [])
+      .map((r) => r && r.permalink)
+      .filter(Boolean)
+  );
+  const all = [...new Set(perPost.flat())];
+  if (!all.length) return posts;
+
+  const map = {};
+  const CHUNK = 40;
+  for (let i = 0; i < all.length; i += CHUNK) {
+    const value = `in.(${all.slice(i, i + CHUNK).map((u) => `"${String(u).replace(/"/g, '')}"`).join(',')})`;
+    try {
+      const rows = await sb(`/instagram_posts?select=permalink,storage_image_url,storage_thumbnail_url&permalink=${encodeURIComponent(value)}`);
+      for (const r of rows || []) {
+        const img = r.storage_image_url || r.storage_thumbnail_url;
+        if (img && r.permalink && !map[r.permalink]) map[r.permalink] = img;
+      }
+    } catch {
+      /* leave unresolved — postImage() falls back to the pillar photo */
+    }
+  }
+  list.forEach((p, i) => {
+    if (!p) return;
+    for (const link of perPost[i]) {
+      if (map[link]) { p._igImage = map[link]; break; }
+    }
+  });
+  return posts;
+}
+
+/** Image priority: explicit hero → linked Instagram content → pillar photo. */
+export function postImage(p) {
+  return (p && (p.hero_image_url || p._igImage)) || segmentImage(p && p.segment);
+}
+
 /** Supabase REST helper (service key, server-side only). */
 export async function sb(path, opts = {}) {
   const key = process.env.SUPABASE_SERVICE_KEY;
@@ -208,7 +251,7 @@ export function renderPostCard(p) {
   const dek = p.excerpt || p.meta_description || '';
   const short = dek.length > 130 ? dek.slice(0, 130).trim() + '…' : dek;
   return `<a class="bcard" href="/blog/${esc(p.slug)}">
-        <div class="bcard-media"><img src="${segmentImage(p.segment)}" alt="" loading="lazy" /></div>
+        <div class="bcard-media"><img src="${postImage(p)}" alt="" loading="lazy" /></div>
         <div class="bcard-body">
           <span class="seg">${esc(seg.label)}</span>
           <h3>${esc(p.title)}</h3>

@@ -9,7 +9,7 @@
 
 import {
   SITE, sb, esc, renderShell, ctaBlock, segmentMeta,
-  renderHeroSVG, renderAuthorBox, renderPostCard, personSchema, renderInstagramBlock, segmentImage,
+  renderHeroSVG, renderAuthorBox, renderPostCard, personSchema, renderInstagramBlock, postImage, attachInstagramImages,
 } from './_blog.js';
 
 export default async function handler(req, res) {
@@ -52,12 +52,16 @@ export default async function handler(req, res) {
   let related = [];
   try {
     related = await sb(
-      `/blog_posts?select=slug,segment,title,excerpt,meta_description`
+      `/blog_posts?select=slug,segment,title,excerpt,meta_description,instagram_refs,hero_image_url`
       + `&status=eq.published&segment=eq.${encodeURIComponent(post.segment)}`
       + `&slug=neq.${encodeURIComponent(post.slug)}`
       + `&order=published_at.desc.nullslast,created_at.desc&limit=3`
     ) || [];
   } catch { related = []; }
+
+  // Resolve hero + related-card images from the linked Instagram content (durable
+  // Supabase Storage), batched in one query. Falls back to the pillar photo.
+  try { await attachInstagramImages([post, ...related]); } catch {}
 
   const url = `${SITE.base}${SITE.blogPath}/${post.slug}`;
   const seg = segmentMeta(post.segment);
@@ -147,7 +151,7 @@ function renderArticle({ post, url, seg, published, faq, sources, related }) {
   });
   const readMins = Math.max(2, Math.round((post.word_count || 0) / 220));
 
-  const heroHtml = `<img class="bhero" src="${esc(post.hero_image_url || segmentImage(post.segment))}" alt="${esc(post.title)}" loading="eager" />`;
+  const heroHtml = `<img class="bhero" src="${esc(postImage(post))}" alt="${esc(post.title)}" loading="eager" />`;
 
   const faqHtml = faq.length ? `
     <section class="bfaq">
