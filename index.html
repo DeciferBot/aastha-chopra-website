@@ -2415,10 +2415,19 @@
       color: rgba(242,232,208,0.8);
       padding: 8px 20px;
       cursor: pointer;
-      transition: all 0.25s;
+      border-radius: var(--radius-pill);
+      transition: color 0.25s var(--ease-default), border-color 0.25s var(--ease-default),
+                  background 0.25s var(--ease-default), transform 0.18s var(--ease-spring);
     }
     .reels-tab:hover { color: var(--gold); border-color: var(--color-gold); }
-    .reels-tab.active { color: var(--gold); border-color: var(--gold); background: rgba(201,168,76,0.06); }
+    /* Active filter reads as a confident filled pill, not a faint tint */
+    .reels-tab.active {
+      color: var(--color-bg);
+      border-color: var(--gold);
+      background: var(--gold);
+      box-shadow: 0 4px 18px rgba(196,152,58,0.28);
+    }
+    .reels-tab.active:hover { color: var(--color-bg); }
 
     @media (max-width: 768px) {
       .reels-grid { grid-template-columns: 1fr; gap: 10px; }
