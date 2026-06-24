@@ -70,7 +70,7 @@ function cardCaption(caption = '') {
 }
 
 async function main() {
-  const select = 'permalink,caption,views,like_count,comments_count,storage_thumbnail_url';
+  const select = 'permalink,caption,views,like_count,comments_count,storage_thumbnail_url,storage_video_url';
   const url = `${SUPABASE_URL}/rest/v1/instagram_posts?media_type=eq.VIDEO`
     + `&storage_thumbnail_url=not.is.null&views=not.is.null`
     + `&select=${select}&order=views.desc&limit=${LIMIT}`;
@@ -96,6 +96,7 @@ async function main() {
     thumbnail: sbImg(r.storage_thumbnail_url, 720),
     caption: cardCaption(r.caption),
     category: classify(r.caption),
+    media_url: r.storage_video_url || null,
     views: r.views,
     likes: r.like_count ?? null,
   })).filter(r => r.permalink && r.thumbnail);

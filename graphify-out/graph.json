@@ -9,7 +9,7 @@
       "source_file": "generate-pdf.js",
       "source_location": "L1",
       "id": "generate_pdf_js",
-      "community": 24,
+      "community": 25,
       "norm_label": "generate-pdf.js"
     },
     {
@@ -315,7 +315,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L1",
       "id": "js_meta_events_js",
-      "community": 19,
+      "community": 20,
       "norm_label": "meta-events.js"
     },
     {
@@ -324,7 +324,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L11",
       "id": "meta_events_fbqready",
-      "community": 19,
+      "community": 20,
       "norm_label": "fbqready()"
     },
     {
@@ -333,7 +333,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L12",
       "id": "meta_events_eventid",
-      "community": 19,
+      "community": 20,
       "norm_label": "eventid()"
     },
     {
@@ -369,7 +369,7 @@
       "source_file": "api/analytics-auth.js",
       "source_location": "L1",
       "id": "api_analytics_auth_js",
-      "community": 20,
+      "community": 21,
       "norm_label": "analytics-auth.js"
     },
     {
@@ -378,7 +378,7 @@
       "source_file": "api/analytics-auth.js",
       "source_location": "L1",
       "id": "analytics_auth_handler",
-      "community": 20,
+      "community": 21,
       "norm_label": "handler()"
     },
     {
@@ -603,7 +603,7 @@
       "source_file": "api/resend-webhook.js",
       "source_location": "L1",
       "id": "api_resend_webhook_js",
-      "community": 16,
+      "community": 17,
       "norm_label": "resend-webhook.js"
     },
     {
@@ -612,7 +612,7 @@
       "source_file": "api/resend-webhook.js",
       "source_location": "L25",
       "id": "resend_webhook_readraw",
-      "community": 16,
+      "community": 17,
       "norm_label": "readraw()"
     },
     {
@@ -621,7 +621,7 @@
       "source_file": "api/resend-webhook.js",
       "source_location": "L32",
       "id": "resend_webhook_verify",
-      "community": 16,
+      "community": 17,
       "norm_label": "verify()"
     },
     {
@@ -630,7 +630,7 @@
       "source_file": "api/resend-webhook.js",
       "source_location": "L49",
       "id": "resend_webhook_applyevent",
-      "community": 16,
+      "community": 17,
       "norm_label": "applyevent()"
     },
     {
@@ -639,7 +639,7 @@
       "source_file": "api/resend-webhook.js",
       "source_location": "L62",
       "id": "resend_webhook_handler",
-      "community": 16,
+      "community": 17,
       "norm_label": "handler()"
     },
     {
@@ -684,7 +684,7 @@
       "source_file": "api/ig-profile.js",
       "source_location": "L1",
       "id": "api_ig_profile_js",
-      "community": 21,
+      "community": 22,
       "norm_label": "ig-profile.js"
     },
     {
@@ -693,7 +693,7 @@
       "source_file": "api/ig-profile.js",
       "source_location": "L3",
       "id": "ig_profile_handler",
-      "community": 21,
+      "community": 22,
       "norm_label": "handler()"
     },
     {
@@ -702,7 +702,7 @@
       "source_file": "api/refresh-live.js",
       "source_location": "L1",
       "id": "api_refresh_live_js",
-      "community": 15,
+      "community": 16,
       "norm_label": "refresh-live.js"
     },
     {
@@ -711,7 +711,7 @@
       "source_file": "api/refresh-live.js",
       "source_location": "L24",
       "id": "refresh_live_ig",
-      "community": 15,
+      "community": 16,
       "norm_label": "ig()"
     },
     {
@@ -720,7 +720,7 @@
       "source_file": "api/refresh-live.js",
       "source_location": "L32",
       "id": "refresh_live_sb",
-      "community": 15,
+      "community": 16,
       "norm_label": "sb()"
     },
     {
@@ -729,7 +729,7 @@
       "source_file": "api/refresh-live.js",
       "source_location": "L48",
       "id": "refresh_live_sleep",
-      "community": 15,
+      "community": 16,
       "norm_label": "sleep()"
     },
     {
@@ -738,7 +738,7 @@
       "source_file": "api/refresh-live.js",
       "source_location": "L51",
       "id": "refresh_live_fetchdemo",
-      "community": 15,
+      "community": 16,
       "norm_label": "fetchdemo()"
     },
     {
@@ -747,7 +747,7 @@
       "source_file": "api/refresh-live.js",
       "source_location": "L74",
       "id": "refresh_live_handler",
-      "community": 15,
+      "community": 16,
       "norm_label": "handler()"
     },
     {
@@ -1026,7 +1026,7 @@
       "source_file": "api/reels.js",
       "source_location": "L1",
       "id": "api_reels_js",
-      "community": 17,
+      "community": 18,
       "norm_label": "reels.js"
     },
     {
@@ -1035,7 +1035,7 @@
       "source_file": "api/reels.js",
       "source_location": "L20",
       "id": "reels_classify",
-      "community": 17,
+      "community": 18,
       "norm_label": "classify()"
     },
     {
@@ -1053,7 +1053,7 @@
       "source_file": "api/reels.js",
       "source_location": "L25",
       "id": "reels_cardcaption",
-      "community": 17,
+      "community": 18,
       "norm_label": "cardcaption()"
     },
     {
@@ -1062,7 +1062,7 @@
       "source_file": "api/reels.js",
       "source_location": "L34",
       "id": "reels_handler",
-      "community": 17,
+      "community": 18,
       "norm_label": "handler()"
     },
     {
@@ -1071,7 +1071,7 @@
       "source_file": "api/instagram.js",
       "source_location": "L1",
       "id": "api_instagram_js",
-      "community": 22,
+      "community": 23,
       "norm_label": "instagram.js"
     },
     {
@@ -1080,7 +1080,7 @@
       "source_file": "api/instagram.js",
       "source_location": "L15",
       "id": "instagram_handler",
-      "community": 22,
+      "community": 23,
       "norm_label": "handler()"
     },
     {
@@ -1089,7 +1089,7 @@
       "source_file": "api/ig-stats.js",
       "source_location": "L1",
       "id": "api_ig_stats_js",
-      "community": 23,
+      "community": 24,
       "norm_label": "ig-stats.js"
     },
     {
@@ -1098,7 +1098,7 @@
       "source_file": "api/ig-stats.js",
       "source_location": "L11",
       "id": "ig_stats_handler",
-      "community": 23,
+      "community": 24,
       "norm_label": "handler()"
     },
     {
@@ -1701,7 +1701,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L1",
       "id": "api_cron_inbound_nudge_js",
-      "community": 18,
+      "community": 19,
       "norm_label": "inbound-nudge.js"
     },
     {
@@ -1710,7 +1710,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L16",
       "id": "inbound_nudge_sb",
-      "community": 18,
+      "community": 19,
       "norm_label": "sb()"
     },
     {
@@ -1719,7 +1719,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L24",
       "id": "inbound_nudge_tg",
-      "community": 18,
+      "community": 19,
       "norm_label": "tg()"
     },
     {
@@ -1728,7 +1728,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L32",
       "id": "inbound_nudge_handler",
-      "community": 18,
+      "community": 19,
       "norm_label": "handler()"
     },
     {
@@ -1792,6 +1792,69 @@
       "source_location": "L72",
       "id": "ads_scoreboard_handler",
       "community": 14,
+      "norm_label": "handler()"
+    },
+    {
+      "label": "backfill-videos.js",
+      "file_type": "code",
+      "source_file": "api/cron/backfill-videos.js",
+      "source_location": "L1",
+      "id": "api_cron_backfill_videos_js",
+      "community": 15,
+      "norm_label": "backfill-videos.js"
+    },
+    {
+      "label": "ig()",
+      "file_type": "code",
+      "source_file": "api/cron/backfill-videos.js",
+      "source_location": "L25",
+      "id": "backfill_videos_ig",
+      "community": 15,
+      "norm_label": "ig()"
+    },
+    {
+      "label": "sb()",
+      "file_type": "code",
+      "source_file": "api/cron/backfill-videos.js",
+      "source_location": "L33",
+      "id": "backfill_videos_sb",
+      "community": 15,
+      "norm_label": "sb()"
+    },
+    {
+      "label": "storageExists()",
+      "file_type": "code",
+      "source_file": "api/cron/backfill-videos.js",
+      "source_location": "L50",
+      "id": "backfill_videos_storageexists",
+      "community": 15,
+      "norm_label": "storageexists()"
+    },
+    {
+      "label": "publicUrl()",
+      "file_type": "code",
+      "source_file": "api/cron/backfill-videos.js",
+      "source_location": "L59",
+      "id": "backfill_videos_publicurl",
+      "community": 15,
+      "norm_label": "publicurl()"
+    },
+    {
+      "label": "remainingCount()",
+      "file_type": "code",
+      "source_file": "api/cron/backfill-videos.js",
+      "source_location": "L62",
+      "id": "backfill_videos_remainingcount",
+      "community": 15,
+      "norm_label": "remainingcount()"
+    },
+    {
+      "label": "handler()",
+      "file_type": "code",
+      "source_file": "api/cron/backfill-videos.js",
+      "source_location": "L71",
+      "id": "backfill_videos_handler",
+      "community": 15,
       "norm_label": "handler()"
     },
     {
@@ -6498,6 +6561,102 @@
       "_tgt": "ads_scoreboard_sbupsertdaily",
       "source": "ads_scoreboard_sbupsertdaily",
       "target": "ads_scoreboard_handler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/backfill-videos.js",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_src": "api_cron_backfill_videos_js",
+      "_tgt": "backfill_videos_ig",
+      "source": "api_cron_backfill_videos_js",
+      "target": "backfill_videos_ig",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/backfill-videos.js",
+      "source_location": "L33",
+      "weight": 1.0,
+      "_src": "api_cron_backfill_videos_js",
+      "_tgt": "backfill_videos_sb",
+      "source": "api_cron_backfill_videos_js",
+      "target": "backfill_videos_sb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/backfill-videos.js",
+      "source_location": "L50",
+      "weight": 1.0,
+      "_src": "api_cron_backfill_videos_js",
+      "_tgt": "backfill_videos_storageexists",
+      "source": "api_cron_backfill_videos_js",
+      "target": "backfill_videos_storageexists",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/backfill-videos.js",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_src": "api_cron_backfill_videos_js",
+      "_tgt": "backfill_videos_publicurl",
+      "source": "api_cron_backfill_videos_js",
+      "target": "backfill_videos_publicurl",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/backfill-videos.js",
+      "source_location": "L62",
+      "weight": 1.0,
+      "_src": "api_cron_backfill_videos_js",
+      "_tgt": "backfill_videos_remainingcount",
+      "source": "api_cron_backfill_videos_js",
+      "target": "backfill_videos_remainingcount",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/backfill-videos.js",
+      "source_location": "L71",
+      "weight": 1.0,
+      "_src": "api_cron_backfill_videos_js",
+      "_tgt": "backfill_videos_handler",
+      "source": "api_cron_backfill_videos_js",
+      "target": "backfill_videos_handler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/backfill-videos.js",
+      "source_location": "L87",
+      "weight": 1.0,
+      "_src": "backfill_videos_handler",
+      "_tgt": "backfill_videos_sb",
+      "source": "backfill_videos_sb",
+      "target": "backfill_videos_handler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/backfill-videos.js",
+      "source_location": "L85",
+      "weight": 1.0,
+      "_src": "backfill_videos_handler",
+      "_tgt": "backfill_videos_remainingcount",
+      "source": "backfill_videos_remainingcount",
+      "target": "backfill_videos_handler",
       "confidence_score": 1.0
     },
     {
