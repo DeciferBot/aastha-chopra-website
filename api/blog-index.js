@@ -6,7 +6,7 @@
  * Segment view: a flat archive of that pillar. Emits Blog + Person JSON-LD.
  */
 
-import { SITE, sb, esc, renderShell, segmentMeta, SEGMENTS, renderPostCard, personSchema, segmentImage } from './_blog.js';
+import { SITE, sb, esc, renderShell, segmentMeta, SEGMENTS, renderPostCard, personSchema, postImage, attachInstagramImages } from './_blog.js';
 
 const SEG_KEYS = Object.keys(SEGMENTS);
 
@@ -16,10 +16,11 @@ export default async function handler(req, res) {
 
   let posts = [];
   try {
-    let path = '/blog_posts?select=slug,segment,title,excerpt,meta_description,published_at,created_at'
+    let path = '/blog_posts?select=slug,segment,title,excerpt,meta_description,published_at,created_at,instagram_refs,hero_image_url'
       + '&status=eq.published&order=published_at.desc.nullslast,created_at.desc&limit=120';
     if (filtered) path += `&segment=eq.${filtered}`;
     posts = (await sb(path)) || [];
+    await attachInstagramImages(posts);
   } catch {
     posts = [];
   }
@@ -98,7 +99,7 @@ function renderHomeView({ heading, sub, posts }) {
   const fseg = segmentMeta(featured.segment);
   const featuredHtml = `
     <a class="bfeature" href="/blog/${esc(featured.slug)}">
-      <div class="bfeature-media"><img src="${segmentImage(featured.segment)}" alt="" loading="eager" /></div>
+      <div class="bfeature-media"><img src="${postImage(featured)}" alt="" loading="eager" /></div>
       <div class="bfeature-body">
         <span class="seg">${esc(fseg.label)} &nbsp;·&nbsp; Latest</span>
         <h2>${esc(featured.title)}</h2>
