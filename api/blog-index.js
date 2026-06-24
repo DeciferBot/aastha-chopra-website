@@ -6,7 +6,7 @@
  * Segment view: a flat archive of that pillar. Emits Blog + Person JSON-LD.
  */
 
-import { SITE, sb, esc, renderShell, segmentMeta, SEGMENTS, renderPostCard, personSchema } from './_blog.js';
+import { SITE, sb, esc, renderShell, segmentMeta, SEGMENTS, renderPostCard, personSchema, segmentImage } from './_blog.js';
 
 const SEG_KEYS = Object.keys(SEGMENTS);
 
@@ -67,6 +67,7 @@ export default async function handler(req, res) {
     head,
     body,
     activeNav: 'blog',
+    wide: true,
   }));
 }
 
@@ -97,9 +98,13 @@ function renderHomeView({ heading, sub, posts }) {
   const fseg = segmentMeta(featured.segment);
   const featuredHtml = `
     <a class="bfeature" href="/blog/${esc(featured.slug)}">
-      <span class="seg">${esc(fseg.label)} &nbsp;·&nbsp; Latest</span>
-      <h2>${esc(featured.title)}</h2>
-      <p>${esc((featured.excerpt || featured.meta_description || '').slice(0, 180))}</p>
+      <div class="bfeature-media"><img src="${segmentImage(featured.segment)}" alt="" loading="eager" /></div>
+      <div class="bfeature-body">
+        <span class="seg">${esc(fseg.label)} &nbsp;·&nbsp; Latest</span>
+        <h2>${esc(featured.title)}</h2>
+        <p>${esc((featured.excerpt || featured.meta_description || '').slice(0, 180))}</p>
+        <span class="bfeature-cta">Read the story &rsaquo;</span>
+      </div>
     </a>`;
 
   // Group the remaining posts by pillar, in pillar order, skipping empties.
