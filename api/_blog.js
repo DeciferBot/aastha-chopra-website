@@ -253,9 +253,10 @@ const BLOG_CSS = `
   :root{
     --bg:#080706;--bg-raised:#0f0d0b;--bg-card:#131109;
     --gold:#C4983A;--gold-light:#D4B87A;--gold-dim:rgba(196,152,58,0.12);
-    --text:#F2E8D0;--text-mid:#8A7E70;--text-dim:#50463C;--text-on-gold:#080706;
-    --border:rgba(196,152,58,0.12);--border-hi:rgba(196,152,58,0.32);
+    --text:#F4ECD8;--text-mid:#B0A18C;--text-dim:#8B7E6D;--text-on-gold:#080706;
+    --border:rgba(196,152,58,0.14);--border-hi:rgba(196,152,58,0.34);
     --serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost','Helvetica Neue',sans-serif;
+    --ease-out:cubic-bezier(0.23,1,0.32,1);
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.75;-webkit-font-smoothing:antialiased;}
@@ -378,4 +379,28 @@ const BLOG_CSS = `
   .bigram-cap{font-size:.95rem;color:var(--text);line-height:1.5;font-style:italic;font-family:var(--serif);}
   .bigram-cta{font-size:.72rem;letter-spacing:.08em;color:var(--text-mid);margin-top:auto;}
   .bigram-card:hover .bigram-cta{color:var(--gold);}
+
+  /* ── Motion & focus — strong ease-out, press feedback, reduced-motion safe ── */
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px;}
+  :focus:not(:focus-visible){outline:none;}
+  .bnav-cta,.bcta-submit,.bcard,.bfeature,.bigram-card,.bfilter a,.bcrumb a,.bcard h3{
+    transition:transform .22s var(--ease-out),border-color .22s var(--ease-out),color .2s ease,background .2s ease;}
+  .bnav-cta:active,.bcta-submit:active{transform:scale(.97);}
+  @media (hover:hover) and (pointer:fine){
+    .bcard:hover,.bigram-card:hover{transform:translateY(-3px);}
+    .bfeature:hover{transform:translateY(-2px);}
+    .bnav-cta:hover{transform:translateY(-1px);}
+    .bcard:hover h3{color:var(--gold-light);}
+  }
+  @keyframes brise{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+  article,.bhubhead,.bfeature,.bfilter{animation:brise .55s var(--ease-out) both;}
+  .bgrid .bcard{animation:brise .5s var(--ease-out) both;}
+  .bgrid .bcard:nth-child(2){animation-delay:.05s;}
+  .bgrid .bcard:nth-child(3){animation-delay:.1s;}
+  .bgrid .bcard:nth-child(4){animation-delay:.15s;}
+  .bgrid .bcard:nth-child(5){animation-delay:.2s;}
+  .bgrid .bcard:nth-child(6){animation-delay:.25s;}
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important;}
+  }
 `;
