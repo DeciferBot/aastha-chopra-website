@@ -316,8 +316,10 @@
       --color-gold-lo:       rgba(196,152,58,0.08);
       --color-cognac:        #8B3020;
 
-      --color-text-primary:  #F2E8D0;
-      --color-text-secondary:#7A6E60;
+      --color-text-primary:  #F4ECD8;
+      --color-text-secondary:#B0A18C;   /* ≈8:1 on bg — was #7A6E60 (~4:1, hard to read) */
+      --color-text-tertiary: #8B7E6D;   /* ≈5:1 — fine print, footer, eyebrow tags */
+      --color-text-faint:    #6E6354;   /* decorative only, never load-bearing */
 
       --color-border:        rgba(196,152,58,0.12);
       --color-border-strong: rgba(196,152,58,0.30);
@@ -1634,7 +1636,7 @@
       -webkit-appearance: none;
     }
     .form-group input::placeholder,
-    .form-group textarea::placeholder { color: rgba(242,232,208,0.2); }
+    .form-group textarea::placeholder { color: var(--color-text-tertiary); opacity: 1; }
     .form-group input:focus,
     .form-group textarea:focus,
     .form-group select:focus { border-bottom-color: var(--color-gold); }
@@ -1923,7 +1925,7 @@
       outline: none;
       transition: border-color var(--duration-fast) var(--ease-default);
     }
-    .newsletter-input::placeholder { color: rgba(242,232,208,0.25); }
+    .newsletter-input::placeholder { color: var(--color-text-tertiary); opacity: 1; }
     .newsletter-input:focus { border-color: var(--color-border-focus); }
     .newsletter-btn {
       background: var(--color-gold);
