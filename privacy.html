@@ -7,55 +7,90 @@
   <title>Privacy Policy — Aastha Chopra</title>
   <meta name="description" content="Privacy Policy for aasthachopra.com — what data we collect, how it is used, and your choices." />
   <meta name="robots" content="index, follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #faf8f5;
-      --ink: #1d1a17;
-      --muted: #6b6357;
-      --accent: #9a7b4f;
-      --line: #e7e0d6;
+      --bg: #080706;
+      --surface: #0f0d0b;
+      --ink: #F4ECD8;          /* headings */
+      --body: #C9BCA6;          /* body copy — ~9:1 on bg */
+      --muted: #8B7E6D;         /* fine print — ~5:1 */
+      --accent: #C4983A;        /* gold */
+      --line: rgba(196,152,58,0.18);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
       background: var(--bg);
-      color: var(--ink);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.7;
+      color: var(--body);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.75;
       -webkit-font-smoothing: antialiased;
     }
-    .wrap { max-width: 760px; margin: 0 auto; padding: 72px 24px 96px; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 32px; border-bottom: 1px solid var(--line);
+      position: sticky; top: 0; background: rgba(8,7,6,0.92);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); z-index: 10;
+    }
+    .topbar a.logo {
+      font-family: var(--serif); font-size: 1.25rem; font-weight: 500;
+      color: var(--ink); text-decoration: none; letter-spacing: 0.04em;
+    }
+    .topbar a.logo::after { content: '.'; color: var(--accent); }
+    .topbar a.back {
+      font-size: 0.66rem; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .topbar a.back:hover { color: var(--accent); }
+
+    .wrap { max-width: 720px; margin: 0 auto; padding: 64px 24px 112px; }
     .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      font-size: 12px;
-      color: var(--accent);
-      margin: 0 0 12px;
+      display: inline-flex; align-items: center; gap: 14px;
+      text-transform: uppercase; letter-spacing: 0.3em;
+      font-size: 0.66rem; font-weight: 600; color: var(--accent); margin: 0 0 18px;
     }
+    .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--accent); }
     h1 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: 500;
-      font-size: clamp(32px, 6vw, 46px);
-      line-height: 1.1;
-      margin: 0 0 8px;
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(2.6rem, 6vw, 4rem); line-height: 1.04;
+      color: var(--ink); letter-spacing: -0.01em; margin: 0 0 12px;
+      text-wrap: balance;
     }
-    .updated { color: var(--muted); font-size: 14px; margin: 0 0 40px; }
+    .updated { color: var(--muted); font-size: 0.82rem; letter-spacing: 0.04em; margin: 0 0 44px; }
     h2 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: 500;
-      font-size: 22px;
-      margin: 40px 0 10px;
+      font-family: var(--serif); font-weight: 500;
+      font-size: clamp(1.5rem, 3vw, 1.9rem); line-height: 1.15;
+      color: var(--ink); margin: 48px 0 12px;
     }
-    p, li { color: #322d27; font-size: 16px; }
-    a { color: var(--accent); }
-    ul { padding-left: 20px; }
-    li { margin-bottom: 8px; }
-    .divider { height: 1px; background: var(--line); border: 0; margin: 48px 0; }
-    footer { color: var(--muted); font-size: 14px; }
-    footer a { color: var(--muted); }
+    p, li { color: var(--body); font-size: 1.02rem; }
+    p { margin: 0 0 14px; }
+    strong { color: var(--ink); font-weight: 500; }
+    a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+    a:hover { color: #D4B87A; }
+    ul { padding-left: 20px; margin: 0 0 14px; }
+    li { margin-bottom: 10px; }
+    .divider { height: 1px; background: var(--line); border: 0; margin: 56px 0 28px; }
+    footer { color: var(--muted); font-size: 0.82rem; letter-spacing: 0.04em; }
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+    @media (max-width: 600px) { .topbar { padding: 18px 20px; } .wrap { padding: 48px 22px 88px; } }
   </style>
 </head>
 <body>
+  <header class="topbar">
+    <a class="logo" href="/">Aastha</a>
+    <a class="back" href="/">← Back to site</a>
+  </header>
+
   <main class="wrap">
     <p class="eyebrow">Aastha Chopra</p>
     <h1>Privacy Policy</h1>

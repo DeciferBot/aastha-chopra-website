@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>document.documentElement.className += ' js';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wellness &amp; Fitness — Aastha Chopra | The Everyday Athlete</title>
   <meta name="description" content="Aastha Chopra's wellness world — adventure athlete, practising lawyer, Dubai-based creator with 51K+ Instagram followers. High-engagement wellness content with almost no brand competition. First-mover opportunity for activewear, nutrition, and health brands." />
@@ -339,14 +340,19 @@
       var g=document.getElementById('reels-grid');g.innerHTML='';
       REELS.forEach(function(r,i){
         var id=(r.permalink.match(/\/reel\/([^/]+)\//)||[])[1];
-        var th=(tm&&id&&tm[id])?(tm[id].thumbnail_url||tm[id].media_url):FB[i%FB.length];
+        var th=r.thumbnail||((tm&&id&&tm[id])?(tm[id].thumbnail_url||tm[id].media_url):FB[i%FB.length]);
         var c=document.createElement('div');c.className='reel-card';
         c.innerHTML='<img src="'+th+'" alt="'+r.caption.slice(0,60)+'" loading="lazy" onerror="this.src=\''+FB[i%FB.length]+'\'"/><div class="reel-card-overlay"><p class="reel-card-caption">'+r.caption.slice(0,80)+'</p></div><a href="'+r.permalink+'" target="_blank" rel="noopener"></a>';
         g.appendChild(c);
       });
     }
     buildGrid(null);
-    fetch('/api/reels').then(function(r){return r.json();}).then(function(d){if(d&&d.thumbMap)buildGrid(d.thumbMap);}).catch(function(){});
+    // Durable, view-ranked reels from Supabase Storage (scripts/sync-reels.mjs).
+    fetch('data/reels.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null;}).then(function(d){
+      if(!d||!d.reels)return;
+      var list=d.reels.filter(function(r){return r.category==='Wellness';}).slice(0,6);
+      if(list.length){REELS=list;buildGrid(null);}
+    }).catch(function(){});
     fetch('/api/instagram?limit=12').then(function(r){return r.json();}).then(function(data){
       var posts=(data.data||[]).filter(function(p){return p.media_url||p.thumbnail_url;}).slice(0,3);
       if(posts.length<3)return;

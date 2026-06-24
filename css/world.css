@@ -25,10 +25,13 @@
   --wine:       #5C1220;
   --crimson:    #3D0C11;
 
-  /* Text */
-  --text:       #F2E8D0;
-  --text-mid:   #8A7E70;
-  --text-dim:   #50463C;
+  /* Text — tuned for WCAG AA on the near-black bg.
+     --text-mid  ≈ 8:1  (body copy, labels, captions)
+     --text-dim  ≈ 5:1  (footer, fine print, eyebrow tags) */
+  --text:       #F4ECD8;
+  --text-mid:   #B0A18C;
+  --text-dim:   #8B7E6D;
+  --text-faint: #6E6354; /* decorative only — never load-bearing text */
   --text-on-gold: #080706;
 
   /* Borders */
@@ -51,6 +54,14 @@
 }
 
 html { scroll-behavior: smooth; }
+
+/* Keyboard focus — visible on every interactive element */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+:focus:not(:focus-visible) { outline: none; }
 
 body {
   background: var(--bg);
@@ -593,17 +604,21 @@ body::before {
 }
 
 /* ── REVEAL ANIMATIONS ─────────────────────── */
-.reveal {
+/* Default visible so content survives with JS disabled / blocked / on a headless
+   renderer. The hidden-then-animate state only applies once JS confirms it can
+   reveal (html.js, set in <head> before paint → no flash). */
+.reveal { opacity: 1; transform: none; }
+html.js .reveal {
   opacity: 0; transform: translateY(28px);
   transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
 }
-.reveal.visible { opacity: 1; transform: none; }
+html.js .reveal.visible { opacity: 1; transform: none; }
 .d1 { transition-delay: 0.1s; }
 .d2 { transition-delay: 0.2s; }
 .d3 { transition-delay: 0.3s; }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal, html.js .reveal { opacity: 1; transform: none; transition: none; }
   .hero-word { opacity: 1; animation: none; }
   .marquee-inner { animation: none; }
   .gallery-item img, .reel-card img, .brand-tag { transition: none; }

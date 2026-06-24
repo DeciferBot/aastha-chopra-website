@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>document.documentElement.className += ' js';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fashion &amp; Beauty — Aastha Chopra | Dubai Influencer</title>
   <meta name="description" content="Aastha Chopra's fashion and beauty world — Dubai-based lifestyle creator with 110+ brand collaborations across fashion, beauty, and fragrance. Partner with her to reach Dubai's South Asian diaspora." />
@@ -345,14 +346,20 @@
       var grid=document.getElementById('reels-grid');grid.innerHTML='';
       ALL_REELS.forEach(function(r,i){
         var id=(r.permalink.match(/\/reel\/([^/]+)\//)||[])[1];
-        var thumb=(thumbMap&&id&&thumbMap[id])?(thumbMap[id].thumbnail_url||thumbMap[id].media_url):FALLBACKS[i%FALLBACKS.length];
+        var thumb=r.thumbnail||((thumbMap&&id&&thumbMap[id])?(thumbMap[id].thumbnail_url||thumbMap[id].media_url):FALLBACKS[i%FALLBACKS.length]);
         var c=document.createElement('div');c.className='reel-card';
         c.innerHTML='<img src="'+(thumb||FALLBACKS[i])+'" alt="'+r.caption.replace(/"/g,'&quot;')+'" loading="lazy" onerror="this.src=\''+FALLBACKS[i%FALLBACKS.length]+'\'" /><div class="reel-card-overlay"><p class="reel-card-caption">'+r.caption+'</p></div><a href="'+r.permalink+'" target="_blank" rel="noopener" aria-label="View on Instagram"></a>';
         grid.appendChild(c);
       });
     }
     buildGrid(null);
-    fetch('/api/reels').then(function(r){return r.json();}).then(function(d){if(d&&d.thumbMap)buildGrid(d.thumbMap);}).catch(function(){});
+    // Durable, view-ranked reels from Supabase Storage (scripts/sync-reels.mjs).
+    fetch('data/reels.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null;}).then(function(d){
+      if(!d||!d.reels)return;
+      var want={Fashion:1,Beauty:1};
+      var list=d.reels.filter(function(r){return want[r.category];}).slice(0,6);
+      if(list.length){ALL_REELS=list;buildGrid(null);}
+    }).catch(function(){});
     fetch('/api/instagram?limit=12').then(function(r){return r.json();}).then(function(data){
       var posts=(data.data||[]).filter(function(p){return p.media_url||p.thumbnail_url;}).slice(0,3);
       if(posts.length<3)return;
