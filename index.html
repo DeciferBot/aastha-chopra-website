@@ -1323,6 +1323,30 @@
       display: block;
     }
 
+    /* ═══ BOLD: portfolio hover storytelling — scrim deepens, meta lifts,
+       tag fills gold, an Instagram cue rises in. ═══ */
+    .portfolio-overlay { transition: background 0.5s var(--ease-spring); }
+    .portfolio-meta { transition: transform 0.5s var(--ease-spring); }
+    .portfolio-tag { transition: background 0.3s var(--ease-default), color 0.3s var(--ease-default); }
+    .portfolio-meta::after {
+      content: 'View on Instagram →';
+      display: block; max-height: 0; margin-top: 0; overflow: hidden; opacity: 0;
+      font-family: var(--ff-sans); font-size: 0.58rem; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-light);
+      transition: opacity 0.4s var(--ease-spring), max-height 0.45s var(--ease-spring), margin-top 0.45s var(--ease-spring);
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .portfolio-item:hover .portfolio-overlay {
+        background: linear-gradient(to top, rgba(18,14,9,0.94) 0%, rgba(0,0,0,0.25) 58%, rgba(0,0,0,0.04) 85%);
+      }
+      .portfolio-item:hover .portfolio-meta { transform: translateY(-4px); }
+      .portfolio-item:hover .portfolio-tag { background: var(--gold); color: var(--color-bg); }
+      .portfolio-item:hover .portfolio-meta::after { opacity: 1; max-height: 22px; margin-top: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .portfolio-overlay, .portfolio-meta, .portfolio-tag, .portfolio-meta::after { transition: none; }
+    }
+
     .ph-icon {
       opacity: 0.15;
       color: var(--charcoal-soft);
@@ -2330,6 +2354,28 @@
       transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
     .reel-item:hover .reel-thumb img { transform: scale(1.04); }
+
+    /* ═══ BOLD: editorial reels — featured top tile + staggered entrance ═══ */
+    @media (min-width: 900px) {
+      .reels-grid { grid-auto-flow: row dense; }
+      .reels-grid .reel-item:first-child { grid-column: span 2; grid-row: span 2; }
+      .reels-grid .reel-item:first-child .reel-thumb { aspect-ratio: auto; height: 100%; }
+    }
+    @keyframes reelIn {
+      from { opacity: 0; transform: translateY(18px) scale(0.985); filter: blur(5px); }
+      to   { opacity: 1; transform: none; filter: blur(0); }
+    }
+    .reels-grid .reel-item { opacity: 0; animation: reelIn 0.6s var(--ease-spring) forwards; }
+    .reels-grid .reel-item:nth-child(1) { animation-delay: 0ms; }
+    .reels-grid .reel-item:nth-child(2) { animation-delay: 60ms; }
+    .reels-grid .reel-item:nth-child(3) { animation-delay: 120ms; }
+    .reels-grid .reel-item:nth-child(4) { animation-delay: 180ms; }
+    .reels-grid .reel-item:nth-child(5) { animation-delay: 240ms; }
+    .reels-grid .reel-item:nth-child(6) { animation-delay: 300ms; }
+    .reels-grid .reel-item:nth-child(n+7) { animation-delay: 360ms; }
+    @media (prefers-reduced-motion: reduce) {
+      .reels-grid .reel-item { opacity: 1; animation: none; }
+    }
 
     .reel-play-btn {
       position: absolute;
@@ -3480,44 +3526,42 @@
   </footer>
 
   <script>
-    let mx = 0, my = 0;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let parallaxX = 0, parallaxY = 0, targetPX = 0, targetPY = 0;
 
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-
-      // Mouse parallax for hero image
-      const cx = window.innerWidth / 2;
-      const cy = window.innerHeight / 2;
-      targetPX = (e.clientX - cx) / cx * -18;
-      targetPY = (e.clientY - cy) / cy * -12;
-    });
+    if (!prefersReducedMotion) {
+      document.addEventListener('mousemove', e => {
+        // Mouse parallax target for hero image
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
+        targetPX = (e.clientX - cx) / cx * -18;
+        targetPY = (e.clientY - cy) / cy * -12;
+      });
+    }
 
     const heroImg = document.getElementById('heroImg');
-    const heroSection = document.getElementById('hero');
-    let heroVisible = true;
-    const heroVisObserver = new IntersectionObserver(entries => {
-      heroVisible = entries[0].isIntersecting;
-    }, { threshold: 0 });
-    if (heroSection) heroVisObserver.observe(heroSection);
+    const heroOrn = document.querySelector('.hero-ornaments');
 
+    // ONE composed transform: scroll-recede + mouse-drift, so they never fight.
+    // Foreground ornaments drift up faster and fade — parallax depth on scroll.
+    // Reads scrollY directly each frame (no scroll-event dependency) and idles
+    // cheaply once scrolled past the first viewport (hero only shows there).
     function animateFrame() {
-      if (heroVisible && heroImg) {
+      const winScrollY = window.scrollY || window.pageYOffset || 0;
+      if (heroImg && !prefersReducedMotion && winScrollY <= window.innerHeight) {
         parallaxX += (targetPX - parallaxX) * 0.06;
         parallaxY += (targetPY - parallaxY) * 0.06;
-        heroImg.style.transform = `translate(${parallaxX}px, ${parallaxY}px) scale(1.06)`;
+        const sy = Math.min(winScrollY, window.innerHeight);
+        heroImg.style.transform = `translate(${parallaxX}px, ${parallaxY + sy * 0.35}px) scale(1.06)`;
+        if (heroOrn) {
+          const p = Math.min(sy / window.innerHeight, 1);
+          heroOrn.style.transform = `translateY(${-sy * 0.18}px)`;
+          heroOrn.style.opacity = `${1 - p * 0.85}`;
+        }
       }
       requestAnimationFrame(animateFrame);
     }
     animateFrame();
-
-    // Scroll parallax for hero image
-    window.addEventListener('scroll', () => {
-      const sy = window.scrollY;
-      if (heroImg && sy < window.innerHeight) {
-        heroImg.style.transform = `translateY(${sy * 0.35}px) scale(1.06)`;
-      }
-    }, { passive: true });
 
     // Scroll nav
     const nav = document.getElementById('nav');
