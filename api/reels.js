@@ -20,7 +20,7 @@ const RULES = [
 const classify = (c = '') => { for (const [cat, re] of RULES) if (re.test(c)) return cat; return 'Fashion'; };
 const sbImg = (url, w, q = 70) =>
   (typeof url === 'string' && url.includes('/storage/v1/object/public/'))
-    ? `${url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/')}?width=${w}&quality=${q}`
+    ? `${url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/')}?width=${w}&quality=${q}&resize=contain`
     : url;
 function cardCaption(caption = '') {
   let s = caption.split('\n').map(l => l.trim()).find(l => l && !l.startsWith('#') && !l.startsWith('@')) || caption.split('\n')[0] || '';

@@ -88,7 +88,7 @@ async function main() {
 
   const sbImg = (url, w, q = 70) =>
     (typeof url === 'string' && url.includes('/storage/v1/object/public/'))
-      ? `${url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/')}?width=${w}&quality=${q}`
+      ? `${url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/')}?width=${w}&quality=${q}&resize=contain`
       : url;
 
   const reels = rows.map(r => ({

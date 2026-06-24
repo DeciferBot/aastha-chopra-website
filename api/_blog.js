@@ -108,6 +108,11 @@ export async function attachInstagramImages(posts) {
   }
   list.forEach((p, i) => {
     if (!p) return;
+    // Per-ref image so renderInstagramBlock can show a thumbnail on each card…
+    for (const r of (Array.isArray(p.instagram_refs) ? p.instagram_refs : [])) {
+      if (r && r.permalink && map[r.permalink]) r._img = map[r.permalink];
+    }
+    // …and the post's primary image (first resolved ref) for cards/hero.
     for (const link of perPost[i]) {
       if (map[link]) { p._igImage = map[link]; break; }
     }
@@ -162,7 +167,7 @@ export function postImage(p) {
 export function sbImg(url, width, quality = 72) {
   if (!url || typeof url !== 'string' || !url.includes('/storage/v1/object/public/')) return url;
   const rendered = url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/');
-  return `${rendered}${rendered.includes('?') ? '&' : '?'}width=${width}&quality=${quality}`;
+  return `${rendered}${rendered.includes('?') ? '&' : '?'}width=${width}&quality=${quality}&resize=contain`;
 }
 
 /** Supabase REST helper (service key, server-side only). */
@@ -328,10 +333,17 @@ export function renderInstagramBlock(refs) {
     if (!r || !r.permalink) return '';
     const isReel = String(r.type || '').toLowerCase() === 'reel' || /\/reel\//.test(r.permalink);
     const cap = esc(String(r.caption || '').replace(/\s+/g, ' ').slice(0, 150));
-    return `<a class="bigram-card" href="${esc(r.permalink)}" target="_blank" rel="noopener">
-        <span class="bigram-badge">${isReel ? '&#9658;&nbsp;Reel' : 'Post'}</span>
-        <span class="bigram-cap">${cap}</span>
-        <span class="bigram-cta">Watch on Instagram &rsaquo;</span>
+    const imgUrl = r._img ? sbImg(r._img, 480) : '';
+    const thumb = imgUrl
+      ? `<span class="bigram-thumb"><img src="${esc(imgUrl)}" alt="${cap || (isReel ? 'Reel' : 'Post')}" loading="lazy" />${isReel ? '<span class="bigram-play">&#9658;</span>' : ''}</span>`
+      : '';
+    return `<a class="bigram-card${imgUrl ? ' has-thumb' : ''}" href="${esc(r.permalink)}" target="_blank" rel="noopener">
+        ${thumb}
+        <span class="bigram-body">
+          <span class="bigram-badge">${isReel ? '&#9658;&nbsp;Reel' : 'Post'}</span>
+          <span class="bigram-cap">${cap}</span>
+          <span class="bigram-cta">Watch on Instagram &rsaquo;</span>
+        </span>
       </a>`;
   }).filter(Boolean).join('\n      ');
   if (!cards) return '';
@@ -507,8 +519,15 @@ const BLOG_CSS = `
   .binsta{margin:40px 0 0;padding:24px;background:var(--bg-card);border:1px solid var(--border);}
   .binsta-head{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
   .binsta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
-  .bigram-card{display:flex;flex-direction:column;gap:8px;padding:16px;background:var(--bg);border:1px solid var(--border);transition:border-color .2s,transform .2s;}
+  .bigram-card{display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--border);overflow:hidden;transition:border-color .2s,transform .2s;}
   .bigram-card:hover{border-color:var(--border-hi);transform:translateY(-2px);}
+  .bigram-thumb{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:#0c0a08;}
+  .bigram-thumb img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .5s ease;}
+  .bigram-card:hover .bigram-thumb img{transform:scale(1.05);}
+  .bigram-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(196,152,58,0.92);color:#080706;display:flex;align-items:center;justify-content:center;font-size:15px;padding-left:3px;opacity:.92;transition:transform .25s,opacity .25s;}
+  .bigram-card:hover .bigram-play{transform:translate(-50%,-50%) scale(1.08);opacity:1;}
+  .bigram-body{display:flex;flex-direction:column;gap:8px;padding:16px;}
+  .bigram-card:not(.has-thumb) .bigram-body{min-height:120px;}
   .bigram-badge{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);}
   .bigram-cap{font-size:.95rem;color:var(--text);line-height:1.5;font-style:italic;font-family:var(--serif);}
   .bigram-cta{font-size:.72rem;letter-spacing:.08em;color:var(--text-mid);margin-top:auto;}
