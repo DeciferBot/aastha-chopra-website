@@ -115,9 +115,45 @@ export async function attachInstagramImages(posts) {
   return posts;
 }
 
-/** Image priority: explicit hero → linked Instagram content → pillar photo. */
+/**
+ * Editorial image overrides — an explicit, human-curated layer that wins over the
+ * automatic resolver below. Use it when a published post's auto-picked image
+ * (usually a linked Instagram reel) is topically wrong and we can't edit the DB
+ * row quickly. `bySlug` pins one exact post; `byTopic` is a narrow self-healing
+ * safety net so the right photo shows even if the published slug differs from the
+ * guess, and so future posts on the same topic don't repeat the mistake.
+ *
+ * Example fixed here: the "best gyms in Dubai" wellness piece was rendering a
+ * Finland ski-resort reel; both rules pin it to a real Dubai fitness photo.
+ */
+export const IMAGE_OVERRIDES = {
+  bySlug: {
+    'best-gyms-in-dubai': '/images/aastha-chopra-dubai-fitness.jpg',
+    // On-brand healthy-Dubai-dining flatlay generated for this post (the repo has
+    // no food photo). Egress policy blocked downloading it into /images from this
+    // environment, so it is referenced from the generator CDN for now — replace
+    // with a self-hosted /images/ copy when convenient for long-term durability.
+    'healthy-food-in-dubai': 'https://d8j0ntlcm91z4.cloudfront.net/user_3F8jJ8z0wHCOBoiF5N79bKVkexP/hf_20260624_081152_efe1c1d6-8f85-4659-b439-0da6bd492d45.png',
+  },
+  byTopic: [
+    { test: /\bgyms?\b/i, segment: 'wellness', img: '/images/aastha-chopra-dubai-fitness.jpg' },
+  ],
+};
+
+/** Resolve an editorial override for a post, or '' if none applies. */
+export function overrideImage(p) {
+  if (!p) return '';
+  if (p.slug && IMAGE_OVERRIDES.bySlug[p.slug]) return IMAGE_OVERRIDES.bySlug[p.slug];
+  const title = String(p.title || '');
+  for (const r of IMAGE_OVERRIDES.byTopic) {
+    if (r.test.test(title) && (!r.segment || r.segment === p.segment)) return r.img;
+  }
+  return '';
+}
+
+/** Image priority: editorial override → explicit hero → linked Instagram → pillar photo. */
 export function postImage(p) {
-  return (p && (p.hero_image_url || p._igImage)) || segmentImage(p && p.segment);
+  return overrideImage(p) || (p && (p.hero_image_url || p._igImage)) || segmentImage(p && p.segment);
 }
 
 /** Serve Supabase Storage images resized via the on-the-fly transform endpoint
@@ -259,8 +295,9 @@ export function renderPostCard(p) {
   const seg = segmentMeta(p.segment);
   const dek = p.excerpt || p.meta_description || '';
   const short = dek.length > 130 ? dek.slice(0, 130).trim() + '…' : dek;
+  const img = sbImg(postImage(p), 720);
   return `<a class="bcard" href="/blog/${esc(p.slug)}">
-        <div class="bcard-media"><img src="${sbImg(postImage(p), 720)}" alt="" loading="lazy" /></div>
+        <div class="bcard-media" style="--img:url('${esc(img)}')"><img src="${esc(img)}" alt="" loading="lazy" /></div>
         <div class="bcard-body">
           <span class="seg">${esc(seg.label)}</span>
           <h3>${esc(p.title)}</h3>
@@ -366,7 +403,9 @@ const BLOG_CSS = `
   article table{width:100%;border-collapse:collapse;margin:24px 0;font-size:.92rem;}
   article th,article td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);}
   article th{color:var(--gold);text-transform:uppercase;font-size:.66rem;letter-spacing:.14em;}
-  .bhero{width:100%;aspect-ratio:16/9;object-fit:cover;margin:0 0 32px;border:1px solid var(--border);}
+  .bhero{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;margin:0 0 32px;border:1px solid var(--border);background:var(--bg-raised);}
+  .bhero::before{content:'';position:absolute;inset:0;background:var(--img) center/cover no-repeat;filter:blur(34px) brightness(.45) saturate(1.05);transform:scale(1.18);}
+  .bhero img{position:relative;width:100%;height:100%;object-fit:contain;object-position:center;display:block;}
 
   .bfaq{margin:56px 0 0;border-top:1px solid var(--border);padding-top:8px;}
   .bfaq h2{font-size:1.5rem;}
@@ -394,11 +433,19 @@ const BLOG_CSS = `
   .bcta-note{min-height:18px;margin-top:12px;font-size:.8rem;color:var(--gold-light);}
   .bcta-ig{display:inline-block;margin-top:8px;font-size:.78rem;letter-spacing:.1em;color:var(--text-mid);}
 
-  .bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-top:30px;}
+  .bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-top:30px;}
+  /* On the wide hub (home + pillar pages) lock to a clean 3-up, stepping down
+     gracefully; the narrower single-post container keeps the auto-fill above. */
+  .bwrap-wide .bgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;}
+  @media(max-width:920px){.bwrap-wide .bgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;}}
+  @media(max-width:560px){.bwrap-wide .bgrid{grid-template-columns:1fr;}}
   .bcard{display:flex;flex-direction:column;overflow:hidden;background:var(--bg-card);border:1px solid var(--border);transition:border-color .25s var(--ease-out),transform .25s var(--ease-out),box-shadow .25s var(--ease-out);}
   .bcard:hover{border-color:var(--border-hi);transform:translateY(-3px);box-shadow:var(--shadow,0 16px 50px rgba(0,0,0,.5));}
-  .bcard-media{aspect-ratio:3/2;overflow:hidden;background:var(--bg-raised);}
-  .bcard-media img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .6s var(--ease-out);}
+  .bcard-media{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--bg-raised);}
+  /* Show the full image (no crop): a blurred, dimmed enlargement of the same
+     photo fills the frame so any aspect ratio sits cleanly with no dead bars. */
+  .bcard-media::before{content:'';position:absolute;inset:0;background:var(--img) center/cover no-repeat;filter:blur(28px) brightness(.5) saturate(1.05);transform:scale(1.18);}
+  .bcard-media img{position:relative;width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .6s var(--ease-out);}
   .bcard-body{padding:20px 22px 24px;display:flex;flex-direction:column;flex:1;}
   .bcard .seg{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);}
   .bcard h3{font-family:var(--serif);font-weight:400;font-size:1.4rem;line-height:1.22;margin:9px 0 9px;color:var(--text);}
@@ -440,15 +487,16 @@ const BLOG_CSS = `
     border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:22px;}
   .bsection-head h2{font-family:var(--serif);font-weight:500;font-size:1.6rem;color:var(--text);}
   .bsection-head a{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
-  .bfeature{display:grid;grid-template-columns:1.05fr 0.95fr;margin-top:30px;overflow:hidden;
+  .bfeature{display:grid;grid-template-columns:1.2fr 0.8fr;margin-top:36px;overflow:hidden;
     background:linear-gradient(135deg,var(--bg-card),var(--bg-raised));
     border:1px solid var(--border-hi);transition:transform .25s var(--ease-out),box-shadow .25s var(--ease-out);}
   .bfeature:hover{transform:translateY(-2px);box-shadow:0 20px 60px rgba(0,0,0,.5);}
-  .bfeature-media{position:relative;min-height:300px;overflow:hidden;}
-  .bfeature-media img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .7s var(--ease-out);}
-  .bfeature-body{padding:44px 44px;display:flex;flex-direction:column;justify-content:center;}
+  .bfeature-media{position:relative;min-height:460px;overflow:hidden;background:var(--bg-raised);}
+  .bfeature-media::before{content:'';position:absolute;inset:0;background:var(--img) center/cover no-repeat;filter:blur(34px) brightness(.45) saturate(1.05);transform:scale(1.18);}
+  .bfeature-media img{position:relative;width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .7s var(--ease-out);}
+  .bfeature-body{padding:52px 52px;display:flex;flex-direction:column;justify-content:center;}
   .bfeature .seg{font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);}
-  .bfeature h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,3.4vw,2.7rem);line-height:1.12;margin:12px 0;color:var(--text);}
+  .bfeature h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.1rem,3.8vw,3.1rem);line-height:1.1;margin:14px 0;color:var(--text);}
   .bfeature p{color:var(--text-mid);max-width:50ch;line-height:1.65;}
   .bfeature-cta{margin-top:20px;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);}
   @media(hover:hover) and (pointer:fine){.bfeature:hover .bfeature-media img{transform:scale(1.04);}}

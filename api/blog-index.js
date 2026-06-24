@@ -103,9 +103,10 @@ function renderHomeView({ heading, sub, posts }) {
   const available = new Set(posts.map((p) => p.segment));
   const featured = posts[0];
   const fseg = segmentMeta(featured.segment);
+  const fimg = sbImg(postImage(featured), 1000);
   const featuredHtml = `
     <a class="bfeature" href="/blog/${esc(featured.slug)}">
-      <div class="bfeature-media"><img src="${sbImg(postImage(featured), 1000)}" alt="" loading="eager" /></div>
+      <div class="bfeature-media" style="--img:url('${esc(fimg)}')"><img src="${esc(fimg)}" alt="" loading="eager" /></div>
       <div class="bfeature-body">
         <span class="seg">${esc(fseg.label)} &nbsp;·&nbsp; Latest</span>
         <h2>${esc(featured.title)}</h2>
