@@ -271,6 +271,14 @@ table.rc tr:last-child td{border-bottom:none}
   .cp-bg-img{height:200px;position:relative}
   #cpage .pb{padding-top:0}
 }
+
+/* ═══ BOLD PASS — cohesive with site (document-appropriate restraint) ═══ */
+/* Primary action: download CTA fills to gold on hover with a soft sheen */
+.mp-nav-dl{position:relative;overflow:hidden}
+.mp-nav-dl:hover{background:linear-gradient(110deg,var(--gold) 0%,var(--gold-hi) 50%,var(--gold) 100%);color:var(--bg);border-color:var(--gold);box-shadow:0 6px 22px rgba(196,152,58,0.28)}
+/* Proof figures align cleanly */
+.c-snum,.stats-strip .num,.stat-num,.metric-num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+@media (prefers-reduced-motion:reduce){.mp-nav-dl{transition:none}}
 </style>
 
   <!-- Meta Pixel Code -->
