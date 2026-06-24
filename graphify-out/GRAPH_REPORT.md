@@ -1,12 +1,12 @@
-# Graph Report - .  (2026-06-14)
+# Graph Report - .  (2026-06-24)
 
 ## Corpus Check
-- 22 files · ~7,962,367 words
+- 35 files · ~1,026,621 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 116 nodes · 179 edges · 18 communities detected
-- Extraction: 95% EXTRACTED · 5% INFERRED · 0% AMBIGUOUS · INFERRED: 9 edges (avg confidence: 0.8)
+- 243 nodes · 450 edges · 25 communities detected
+- Extraction: 88% EXTRACTED · 12% INFERRED · 0% AMBIGUOUS · INFERRED: 55 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
@@ -28,131 +28,166 @@
 - [[_COMMUNITY_Community 15|Community 15]]
 - [[_COMMUNITY_Community 16|Community 16]]
 - [[_COMMUNITY_Community 17|Community 17]]
+- [[_COMMUNITY_Community 18|Community 18]]
+- [[_COMMUNITY_Community 19|Community 19]]
+- [[_COMMUNITY_Community 20|Community 20]]
+- [[_COMMUNITY_Community 21|Community 21]]
+- [[_COMMUNITY_Community 22|Community 22]]
+- [[_COMMUNITY_Community 23|Community 23]]
+- [[_COMMUNITY_Community 24|Community 24]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `send()` - 10 edges
-2. `handler()` - 10 edges
-3. `sb()` - 8 edges
-4. `handler()` - 7 edges
-5. `handler()` - 7 edges
-6. `ig()` - 7 edges
-7. `handlePitch()` - 6 edges
-8. `handler()` - 6 edges
-9. `handler()` - 6 edges
-10. `getLiveProfile()` - 5 edges
+1. `handler()` - 14 edges
+2. `send()` - 13 edges
+3. `handler()` - 12 edges
+4. `handler()` - 12 edges
+5. `handler()` - 11 edges
+6. `esc()` - 11 edges
+7. `handler()` - 10 edges
+8. `sb()` - 10 edges
+9. `segmentMeta()` - 9 edges
+10. `sb()` - 8 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `getLiveProfile()` --calls--> `handler()`  [INFERRED]
-  api/_profile.js → api/cron/daily-agent.js
-- `handler()` --calls--> `sendCapiEvent()`  [INFERRED]
-  api/capi-event.js → api/_capi.js
-- `handler()` --calls--> `sendCapiEvent()`  [INFERRED]
-  api/subscribe.js → api/_capi.js
-- `handler()` --calls--> `generatePitch()`  [INFERRED]
-  api/pitch-now.js → api/_pitch.js
-- `handler()` --calls--> `sendPitchEmail()`  [INFERRED]
-  api/pitch-now.js → api/_pitch.js
+- `urlEntry()` --calls--> `esc()`  [INFERRED]
+  api/sitemap.js → api/_pitch.js
+- `handler()` --calls--> `sb()`  [INFERRED]
+  api/sitemap.js → api/cron/daily-brief.js
+- `handler()` --calls--> `send()`  [INFERRED]
+  api/blog-index.js → api/telegram.js
+- `handler()` --calls--> `send()`  [INFERRED]
+  api/blog.js → api/telegram.js
+- `handler()` --calls--> `sb()`  [INFERRED]
+  api/blog-index.js → api/cron/daily-brief.js
 
 ## Communities
 
 ### Community 0 - "Community 0"
 Cohesion: 0.12
-Nodes (2): barChart(), noBorder()
+Nodes (24): adArchive(), checkAdLibrary(), handler(), resolveAdToken(), sb(), scoreBrand(), storePitch(), recordPipeline() (+16 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.43
-Nodes (13): emailPitchToAastha(), generatePitch(), handleAdd(), handleHelp(), handleLeadDone(), handleLeads(), handleList(), handlePitch() (+5 more)
+Cohesion: 0.2
+Nodes (25): attachInstagramImages(), ctaBlock(), esc(), handler(), filterBar(), handler(), renderHomeView(), renderSegmentView() (+17 more)
 
 ### Community 2 - "Community 2"
-Cohesion: 0.25
-Nodes (7): recordPipeline(), enc(), handler(), sb(), getLiveProfile(), latestGeneration(), sbGet()
+Cohesion: 0.19
+Nodes (20): claude(), handler(), logRun(), sb(), arr(), autocomplete(), callClaude(), countWords() (+12 more)
 
 ### Community 3 - "Community 3"
-Cohesion: 0.42
-Nodes (10): fetchAllMedia(), fetchCarouselChildren(), fetchDailySnapshot(), fetchDemographics(), fetchInsights(), fetchReachedDemographics(), handler(), ig() (+2 more)
+Cohesion: 0.12
+Nodes (2): barChart(), noBorder()
 
 ### Community 4 - "Community 4"
-Cohesion: 0.39
-Nodes (8): autosendEnabled(), buildFactSheet(), esc(), generatePitch(), renderBrandEmailHtml(), renderPitchEmailHtml(), sendBrandPitch(), sendPitchEmail()
+Cohesion: 0.31
+Nodes (15): handler(), urlEntry(), emailPitchToAastha(), generatePitch(), handleAdd(), handleHelp(), handleLeadDone(), handleLeads() (+7 more)
 
 ### Community 5 - "Community 5"
+Cohesion: 0.28
+Nodes (13): blockquote(), buildLightbox(), closeLightbox(), ensureEmbedScript(), esc(), init(), loadReels(), num() (+5 more)
+
+### Community 6 - "Community 6"
+Cohesion: 0.34
+Nodes (13): ensureHeroReels(), fetchCarouselChildren(), fetchDailySnapshot(), fetchDemographics(), fetchInsights(), fetchReachedDemographics(), fetchRecentMedia(), fetchStaleInsightPosts() (+5 more)
+
+### Community 7 - "Community 7"
+Cohesion: 0.38
+Nodes (10): buildTargeting(), cleanupOldCampaigns(), fbDelete(), fbGet(), fbPost(), handler(), resolveReels(), sleep() (+2 more)
+
+### Community 8 - "Community 8"
+Cohesion: 0.44
+Nodes (9): buildTargeting(), fbDelete(), fbGet(), fbPost(), handler(), resolveReel(), sleep(), uploadThumb() (+1 more)
+
+### Community 9 - "Community 9"
+Cohesion: 0.47
+Nodes (8): buildTargeting(), cleanupOldCampaigns(), fbDelete(), fbGet(), fbPost(), handler(), resolveCarousel(), uploadImage()
+
+### Community 10 - "Community 10"
 Cohesion: 0.32
 Nodes (5): handler(), hash(), readFbCookies(), sendCapiEvent(), handler()
 
-### Community 6 - "Community 6"
-Cohesion: 0.5
-Nodes (7): adArchive(), checkAdLibrary(), handler(), resolveAdToken(), sb(), scoreBrand(), storePitch()
+### Community 11 - "Community 11"
+Cohesion: 0.46
+Nodes (7): fbGet(), fbPost(), handler(), sbGet(), sbUpsert(), visitsFrom(), ymd()
 
-### Community 7 - "Community 7"
+### Community 12 - "Community 12"
+Cohesion: 0.5
+Nodes (6): cleanupOldCampaigns(), fbDelete(), fbGet(), fbPost(), findAudience(), handler()
+
+### Community 13 - "Community 13"
 Cohesion: 0.5
 Nodes (7): currentActiveAds(), fbGet(), fbPost(), getImageUrl(), handler(), pickWinner(), sb()
 
-### Community 8 - "Community 8"
+### Community 14 - "Community 14"
+Cohesion: 0.48
+Nodes (5): fbGet(), handler(), sbGet(), sbUpsertDaily(), ymd()
+
+### Community 15 - "Community 15"
 Cohesion: 0.67
 Nodes (5): fetchDemo(), handler(), ig(), sb(), sleep()
 
-### Community 9 - "Community 9"
-Cohesion: 0.8
-Nodes (4): claude(), handler(), logRun(), sb()
+### Community 16 - "Community 16"
+Cohesion: 0.7
+Nodes (4): applyEvent(), handler(), readRaw(), verify()
 
-### Community 10 - "Community 10"
+### Community 17 - "Community 17"
+Cohesion: 0.5
+Nodes (0): 
+
+### Community 18 - "Community 18"
 Cohesion: 0.67
 Nodes (2): handler(), sb()
 
-### Community 11 - "Community 11"
+### Community 19 - "Community 19"
 Cohesion: 0.67
 Nodes (0): 
 
-### Community 12 - "Community 12"
+### Community 20 - "Community 20"
 Cohesion: 1.0
 Nodes (0): 
 
-### Community 13 - "Community 13"
+### Community 21 - "Community 21"
 Cohesion: 1.0
 Nodes (0): 
 
-### Community 14 - "Community 14"
+### Community 22 - "Community 22"
 Cohesion: 1.0
 Nodes (0): 
 
-### Community 15 - "Community 15"
+### Community 23 - "Community 23"
 Cohesion: 1.0
 Nodes (0): 
 
-### Community 16 - "Community 16"
-Cohesion: 1.0
-Nodes (0): 
-
-### Community 17 - "Community 17"
+### Community 24 - "Community 24"
 Cohesion: 1.0
 Nodes (0): 
 
 ## Knowledge Gaps
-- **Thin community `Community 12`** (2 nodes): `handler()`, `analytics-auth.js`
+- **Thin community `Community 20`** (2 nodes): `handler()`, `analytics-auth.js`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 13`** (2 nodes): `ig-profile.js`, `handler()`
+- **Thin community `Community 21`** (2 nodes): `ig-profile.js`, `handler()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 14`** (2 nodes): `reels.js`, `handler()`
+- **Thin community `Community 22`** (2 nodes): `instagram.js`, `handler()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 15`** (2 nodes): `instagram.js`, `handler()`
+- **Thin community `Community 23`** (2 nodes): `ig-stats.js`, `handler()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 16`** (2 nodes): `ig-stats.js`, `handler()`
-  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 17`** (1 nodes): `generate-pdf.js`
+- **Thin community `Community 24`** (1 nodes): `generate-pdf.js`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `handler()` connect `Community 6` to `Community 2`, `Community 4`?**
-  _High betweenness centrality (0.024) - this node is a cross-community bridge._
-- **Why does `handler()` connect `Community 2` to `Community 4`?**
-  _High betweenness centrality (0.024) - this node is a cross-community bridge._
-- **Why does `getLiveProfile()` connect `Community 2` to `Community 6`?**
-  _High betweenness centrality (0.023) - this node is a cross-community bridge._
-- **Are the 4 inferred relationships involving `handler()` (e.g. with `getLiveProfile()` and `generatePitch()`) actually correct?**
-  _`handler()` has 4 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 2 inferred relationships involving `handler()` (e.g. with `getLiveProfile()` and `autosendEnabled()`) actually correct?**
+- **Why does `esc()` connect `Community 1` to `Community 0`, `Community 4`?**
+  _High betweenness centrality (0.083) - this node is a cross-community bridge._
+- **Why does `handler()` connect `Community 1` to `Community 2`, `Community 4`?**
+  _High betweenness centrality (0.067) - this node is a cross-community bridge._
+- **Why does `sb()` connect `Community 2` to `Community 1`, `Community 4`?**
+  _High betweenness centrality (0.060) - this node is a cross-community bridge._
+- **Are the 2 inferred relationships involving `handler()` (e.g. with `segmentMeta()` and `sb()`) actually correct?**
   _`handler()` has 2 INFERRED edges - model-reasoned connections that need verification._
-- **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.12 - nodes in this community are weakly interconnected._
+- **Are the 3 inferred relationships involving `send()` (e.g. with `handler()` and `handler()`) actually correct?**
+  _`send()` has 3 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 9 inferred relationships involving `handler()` (e.g. with `sb()` and `attachInstagramImages()`) actually correct?**
+  _`handler()` has 9 INFERRED edges - model-reasoned connections that need verification._
+- **Are the 6 inferred relationships involving `handler()` (e.g. with `getLiveProfile()` and `autosendEnabled()`) actually correct?**
+  _`handler()` has 6 INFERRED edges - model-reasoned connections that need verification._

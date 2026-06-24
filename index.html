@@ -2711,6 +2711,8 @@
         display: flex;
         flex-direction: column;
         min-height: 480px;
+        text-decoration: none;
+        color: inherit;
       }
       @media (max-width: 860px) { .bf-card { min-height: 420px; } }
       .bf-card:hover { border-color: var(--color-border-strong); }
@@ -2944,7 +2946,7 @@
     <div class="bf-cards">
 
       <!-- Card 1: Fashion & Beauty -->
-      <div class="bf-card reveal">
+      <a href="/fashion.html" class="bf-card reveal">
         <div class="bf-card-visual">
           <img src="images/aastha-chopra-fashion-editorial-dubai.jpg" alt="Aastha Chopra — Fashion editorial" loading="lazy" />
           <div class="bf-card-tag">Fashion · Beauty · Fragrance</div>
@@ -2952,12 +2954,12 @@
         <div class="bf-card-body" style="padding: 28px 28px;">
           <div class="bf-card-title">The Style Authority</div>
           <p class="bf-card-copy">Fashion-week front rows. Exclusive launches. Editorial content that signals your brand belongs in the world your customer aspires to enter.</p>
-          <a href="/fashion.html" class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <span class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
-      </div>
+      </a>
 
       <!-- Card 2: Luxury & Experiences -->
-      <div class="bf-card reveal reveal-delay-1">
+      <a href="/luxury.html" class="bf-card reveal reveal-delay-1">
         <div class="bf-card-visual">
           <img src="images/aastha-chopra-dubai-luxury-rooftop.jpg" alt="Aastha Chopra — Dubai luxury rooftop" loading="lazy" style="object-position: center 25%;" />
           <div class="bf-card-tag">Hotels · Dining · Travel</div>
@@ -2965,12 +2967,12 @@
         <div class="bf-card-body" style="padding: 28px 28px;">
           <div class="bf-card-title">The Dubai Insider</div>
           <p class="bf-card-copy">Your local market is watching her. Hotels get Googled, dinners get booked, destinations land on wishlists the morning after she posts.</p>
-          <a href="/luxury.html" class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <span class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
-      </div>
+      </a>
 
       <!-- Card 3: Wellness -->
-      <div class="bf-card reveal reveal-delay-2">
+      <a href="/wellness.html" class="bf-card reveal reveal-delay-2">
         <div class="bf-card-visual">
           <img src="images/aastha-chopra-dubai-wellness-fitness-hero.jpg" alt="Aastha Chopra — Wellness and fitness" loading="lazy" style="object-position: center center;" />
           <div class="bf-card-tag">Wellness · Fitness · Balance</div>
@@ -2978,9 +2980,9 @@
         <div class="bf-card-body" style="padding: 28px 28px;">
           <div class="bf-card-title">The Everyday Athlete</div>
           <p class="bf-card-copy">Practising lawyer. Adventure athlete. Arctic waterfall hiker. The highest-ROI whitespace on her profile — almost no wellness brands have been here yet.</p>
-          <a href="/wellness.html" class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <span class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
-      </div>
+      </a>
     </div>
 
     <!-- Audience snapshot — what a media planner puts in their brief -->
@@ -3004,24 +3006,13 @@
     </div>
 
     <script>
+      // World cards are now real links to /fashion.html, /luxury.html, /wellness.html.
+      // Fire a lightweight analytics event on click without blocking navigation.
       document.querySelectorAll('.bf-card').forEach(function(card) {
-        function activate() {
-          document.querySelectorAll('.bf-card').forEach(function(c) { c.classList.remove('active'); });
-          card.classList.add('active');
-          var tab = card.dataset.reelsTab;
-          var tabBtn = document.querySelector('.reels-tab[data-cat="' + tab + '"]');
-          if (tabBtn) tabBtn.click();
-          setTimeout(function() {
-            var reelsSec = document.getElementById('reels');
-            if (reelsSec) reelsSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }, 80);
+        card.addEventListener('click', function() {
           if (typeof gtag !== 'undefined') {
-            gtag('event', 'avatar_selected', { event_category: 'brand_fit', avatar: card.dataset.avatar });
+            gtag('event', 'world_selected', { event_category: 'brand_fit', destination: card.getAttribute('href') });
           }
-        }
-        card.addEventListener('click', activate);
-        card.addEventListener('keydown', function(e) {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
         });
       });
     </script>
