@@ -194,7 +194,7 @@ export function esc(s) {
 }
 
 /** Render the full HTML document with shared chrome around inner body markup. */
-export function renderShell({ title, description, canonical, head = '', body, activeNav = '', wide = false }) {
+export function renderShell({ title, description, canonical, head = '', body, activeNav = '', wide = false, post = false }) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -225,7 +225,7 @@ ${head}
     </ul>
     <a href="${SITE.ig}" class="bnav-cta" target="_blank" rel="noopener">Follow</a>
   </nav>
-  <main class="bwrap${wide ? ' bwrap-wide' : ''}">
+  <main class="bwrap${wide ? ' bwrap-wide' : ''}${post ? ' bwrap-post' : ''}">
 ${body}
   </main>
   <footer class="bfoot">
@@ -420,6 +420,34 @@ const BLOG_CSS = `
   .bhero{position:relative;width:100%;aspect-ratio:4/5;max-height:80vh;overflow:hidden;margin:0 0 32px;border:1px solid var(--border);background:var(--bg-raised);}
   .bhero::before{content:'';position:absolute;inset:0;background:var(--img) center/cover no-repeat;filter:blur(34px) brightness(.45) saturate(1.05);transform:scale(1.18);}
   .bhero img{position:relative;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+
+  /* ── Single-post editorial layout ──────────────────────────────────────────
+     On desktop the post uses the full width: a two-column header that pairs the
+     title + intro with the (portrait) hero — which also keeps the 4/5 reel image
+     a sensible size instead of huge and centred — then a centred reading column
+     for the body so prose stays a comfortable measure. Sub-sections (FAQ, CTA,
+     sources) match that measure; related posts get a roomy 3-up. Below the
+     breakpoint everything collapses back to the original single column. */
+  .bwrap-post{max-width:1180px;padding-left:40px;padding-right:40px;}
+  .post-head{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-bottom:12px;}
+  .post-head-text,.post-head-media{min-width:0;}
+  .post-head .bdek{margin-bottom:18px;}
+  .post-head .bmeta{margin-bottom:0;}
+  .post-head-media .bhero{margin:0;}
+  .post-body{max-width:720px;margin:44px auto 0;}
+  .bwrap-post .bfaq,
+  .bwrap-post .bcta,
+  .bwrap-post .bsources{max-width:720px;margin-left:auto;margin-right:auto;}
+  .bwrap-post .brelated .bgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;}
+  @media(max-width:980px){
+    .post-head{grid-template-columns:1fr;gap:28px;}
+    .post-body{margin-top:28px;}
+    .bwrap-post .brelated .bgrid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  }
+  @media(max-width:600px){
+    .bwrap-post{padding-left:20px;padding-right:20px;}
+    .bwrap-post .brelated .bgrid{grid-template-columns:1fr;}
+  }
 
   .bfaq{margin:56px 0 0;border-top:1px solid var(--border);padding-top:8px;}
   .bfaq h2{font-size:1.5rem;}

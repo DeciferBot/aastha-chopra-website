@@ -88,6 +88,7 @@ export default async function handler(req, res) {
     head,
     body,
     activeNav: 'blog',
+    post: true,
   }));
 }
 
@@ -180,17 +181,25 @@ function renderArticle({ post, url, seg, published, faq, sources, related }) {
     </section>` : '';
 
   return `
-    <article>
+    <article class="post">
       <p class="bcrumb"><a href="/blog">Journal</a> &rsaquo; <a href="/blog?segment=${esc(post.segment)}">${esc(seg.label)}</a></p>
-      <p class="bkicker">${esc(seg.label)}</p>
-      <h1>${esc(post.title)}</h1>
-      ${post.excerpt ? `<p class="bdek">${esc(post.excerpt)}</p>` : ''}
-      <p class="bmeta">By ${esc(SITE.name)} &nbsp;·&nbsp; ${dateStr} &nbsp;·&nbsp; ${readMins} min read</p>
-      ${heroHtml}
-      ${post.body_html || ''}
-      ${renderInstagramBlock(post.instagram_refs)}
-      <p style="margin-top:36px;color:var(--text-mid);">More from Aastha's ${esc(seg.label.toLowerCase())} world: <a href="${esc(seg.page)}">explore here</a>.</p>
-      ${renderAuthorBox()}
+      <header class="post-head">
+        <div class="post-head-text">
+          <p class="bkicker">${esc(seg.label)}</p>
+          <h1>${esc(post.title)}</h1>
+          ${post.excerpt ? `<p class="bdek">${esc(post.excerpt)}</p>` : ''}
+          <p class="bmeta">By ${esc(SITE.name)} &nbsp;·&nbsp; ${dateStr} &nbsp;·&nbsp; ${readMins} min read</p>
+        </div>
+        <div class="post-head-media">
+          ${heroHtml}
+        </div>
+      </header>
+      <div class="post-body">
+        ${post.body_html || ''}
+        ${renderInstagramBlock(post.instagram_refs)}
+        <p style="margin-top:36px;color:var(--text-mid);">More from Aastha's ${esc(seg.label.toLowerCase())} world: <a href="${esc(seg.page)}">explore here</a>.</p>
+        ${renderAuthorBox()}
+      </div>
     </article>
     ${faqHtml}
     ${relatedHtml}
