@@ -334,11 +334,31 @@ body::before {
   width: 100%; height: 100%; object-fit: cover;
   transition: transform 0.8s var(--ease), filter 0.3s ease;
 }
-.reel-feature-poster::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(8,7,6,0.55), transparent 55%);
-}
 .reel-feature-poster:hover img { transform: scale(1.04); }
+/* Native player — real cover, no artificial overlay. */
+.reel-feature-video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block; background: #000; cursor: pointer;
+}
+.reel-feature-play {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 2;
+  width: 62px; height: 62px; border-radius: 50%; padding: 0;
+  background: rgba(8,7,6,0.5); border: 1px solid rgba(244,236,216,0.7);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  transition: background 0.2s, transform 0.2s var(--ease), opacity 0.25s;
+}
+.reel-feature:hover .reel-feature-play { background: var(--gold); }
+.reel-feature-play svg { width: 22px; height: 22px; fill: var(--text); margin-left: 3px; }
+.reel-feature:hover .reel-feature-play svg { fill: var(--text-on-gold); }
+.reel-feature-play.playing { opacity: 0; }
+.reel-feature:hover .reel-feature-play.playing { opacity: 1; }
+.reel-feature-mute {
+  position: absolute; bottom: 14px; right: 14px; z-index: 2;
+  width: 36px; height: 36px; border-radius: 50%; padding: 0; font-size: 14px;
+  background: rgba(8,7,6,0.55); border: 1px solid rgba(244,236,216,0.4);
+  cursor: pointer; line-height: 1;
+}
 .reel-play-badge {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
   width: 62px; height: 62px; border-radius: 50%; z-index: 2;
@@ -555,30 +575,37 @@ body::before {
   background: var(--bg-card); box-shadow: var(--shadow);
   border-radius: 10px;
 }
-.reel-card img {
-  width: 100%; height: 100%; object-fit: cover;
+.reel-card img, .reel-card video {
+  width: 100%; height: 100%; object-fit: cover; display: block;
   transition: transform 0.7s var(--ease);
 }
+.reel-card video { background: #000; }
 .reel-card:hover img, .reel-card:focus-visible img { transform: scale(1.05); }
-.reel-card::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(8,7,6,0.86) 0%, rgba(8,7,6,0.05) 52%);
-}
 .reel-card-play {
-  position: absolute; top: 14px; right: 14px; z-index: 2;
-  width: 38px; height: 38px; border-radius: 50%;
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 2;
+  width: 46px; height: 46px; border-radius: 50%; padding: 0; cursor: pointer;
   background: rgba(8,7,6,0.45); border: 1px solid rgba(244,236,216,0.6);
   -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
   display: flex; align-items: center; justify-content: center;
-  transition: background 0.2s, transform 0.2s var(--ease);
+  transition: background 0.2s, transform 0.2s var(--ease), opacity 0.25s;
 }
-.reel-card:hover .reel-card-play { background: var(--gold); transform: scale(1.06); }
-.reel-card-play svg { width: 15px; height: 15px; fill: var(--text); margin-left: 2px; }
+.reel-card:hover .reel-card-play { background: var(--gold); }
+.reel-card-play svg { width: 16px; height: 16px; fill: var(--text); margin-left: 2px; }
 .reel-card:hover .reel-card-play svg { fill: var(--text-on-gold); }
+.reel-card-play.playing { opacity: 0; }
+.reel-card:hover .reel-card-play.playing { opacity: 1; }
+.reel-card-mute {
+  position: absolute; bottom: 12px; right: 12px; z-index: 2;
+  width: 30px; height: 30px; border-radius: 50%; padding: 0; font-size: 12px;
+  background: rgba(8,7,6,0.55); border: 1px solid rgba(244,236,216,0.4);
+  cursor: pointer; line-height: 1;
+}
 .reel-card-cap {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
-  padding: 16px 16px 15px;
+  padding: 26px 14px 13px;
   display: flex; flex-direction: column; gap: 6px;
+  background: linear-gradient(to top, rgba(8,7,6,0.78) 12%, transparent);
+  pointer-events: none;
 }
 .reel-card-caption {
   font-size: 0.76rem; font-weight: 400; color: var(--text); line-height: 1.4;
