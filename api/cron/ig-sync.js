@@ -235,6 +235,53 @@ async function fetchDailySnapshot(token) {
   }
 }
 
+// ── 6. Hero reels: mirror the 3 featured world-page reels into Storage ─────────
+// fashion/luxury/wellness each play one reel inline, served from durable Storage
+// URLs (raw IG CDN links carry a short-lived signature and can't be hot-linked).
+// Idempotent: once an MP4 is present, the run is just a cheap existence check.
+const STORAGE_BUCKET = 'instagram-media';
+const HERO_REELS = [
+  { id: '17981299715726595', date: '2024-09' }, // fashion  — C_kWOKeSTOC
+  { id: '17864973993416569', date: '2025-10' }, // luxury   — DQFBjejj7Ko
+  { id: '18049988218732844', date: '2024-05' }, // wellness — C7dg7qONh7V
+];
+
+async function storageExists(path) {
+  const key = process.env.SUPABASE_SERVICE_KEY;
+  const res = await fetch(
+    `${SUPABASE_URL}/storage/v1/object/info/public/${STORAGE_BUCKET}/${path}`,
+    { headers: { apikey: key, Authorization: `Bearer ${key}` } }
+  );
+  return res.ok;
+}
+
+async function ensureHeroReels(token) {
+  const key = process.env.SUPABASE_SERVICE_KEY;
+  let present = 0, mirrored = 0;
+  for (const reel of HERO_REELS) {
+    const path = `videos/${reel.date}/${reel.id}.mp4`;
+    if (await storageExists(path)) { present++; continue; }
+    // Resolve a fresh, signed CDN url for the reel, then copy it into Storage.
+    const meta = await ig(`/${reel.id}?fields=media_url`, token);
+    if (!meta.media_url) continue;
+    const media = await fetch(meta.media_url);
+    if (!media.ok) continue;
+    const buffer = await media.arrayBuffer();
+    const up = await fetch(`${SUPABASE_URL}/storage/v1/object/${STORAGE_BUCKET}/${path}`, {
+      method: 'POST',
+      headers: {
+        apikey: key,
+        Authorization: `Bearer ${key}`,
+        'Content-Type': 'video/mp4',
+        'Cache-Control': '31536000',
+      },
+      body: buffer,
+    });
+    if (up.ok) mirrored++;
+  }
+  return { present, mirrored };
+}
+
 // ── Main handler ──────────────────────────────────────────────────────────────
 export default async function handler(req, res) {
   const authHeader = req.headers.authorization;
@@ -405,6 +452,14 @@ export default async function handler(req, res) {
       }
     } catch (e) {
       log.push(`Snapshot error: ${e.message}`);
+    }
+
+    // ── Step 6: Mirror featured world-page reels into Storage (idempotent) ──
+    try {
+      const { present, mirrored } = await ensureHeroReels(token);
+      log.push(`Hero reels: ${present} already present, ${mirrored} newly mirrored`);
+    } catch (e) {
+      log.push(`Hero reels error: ${e.message}`);
     }
 
     const elapsed = ((Date.now() - start) / 1000).toFixed(1);
