@@ -32,6 +32,7 @@
   });
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/site-nav.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -293,15 +294,40 @@ table.rc tr:last-child td{border-bottom:none}
 </head>
 <body>
 
-<nav class="mp-nav">
-  <a href="index.html" class="mp-nav-logo">Aastha<span>.</span></a>
-  <div class="mp-nav-links">
-    <a href="index.html">View Portfolio</a>
-    <a href="index.html#collabs">Brand Work</a>
-    <a href="Aastha_Chopra_Media_Pack.pdf" download="Aastha Chopra Media Pack.pdf" class="mp-nav-dl">
-      <svg width="10" height="10" viewBox="0 0 12 12" fill="none" style="display:inline;vertical-align:middle;margin-right:4px"><path d="M6 1v7M3.5 5.5L6 8l2.5-2.5M2 10h8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      Download PDF
-    </a>
+<!-- Universal navigation — markup mirrored on every page; styled by /css/site-nav.css, wired by /js/site-nav.js -->
+<nav class="site-nav" id="nav" aria-label="Primary">
+  <a href="/" class="site-nav__logo">Aastha</a>
+  <button class="site-nav__toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="siteNavMenu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="site-nav__menu" id="siteNavMenu">
+    <ul class="site-nav__links">
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#portfolio">Portfolio</a></li>
+      <li class="site-nav__has-dropdown">
+        <button type="button" class="site-nav__dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+          Worlds
+          <svg class="site-nav__chev" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <ul class="site-nav__dropdown">
+          <li><a href="/fashion.html">Fashion &amp; Beauty</a></li>
+          <li><a href="/luxury.html">Luxury &amp; Travel</a></li>
+          <li><a href="/wellness.html">Wellness &amp; Fitness</a></li>
+        </ul>
+      </li>
+      <li><a href="/#collabs">Collabs</a></li>
+      <li><a href="/#instagram">Instagram</a></li>
+      <li><a href="/blog">Journal</a></li>
+    </ul>
+    <div class="site-nav__actions">
+      <a href="/media-pack.html" class="site-nav__mediapack">
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M6 1v7M3.5 5.5L6 8l2.5-2.5M2 10h8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Media Pack
+      </a>
+      <a href="/#contact" class="site-nav__cta">Work With Me</a>
+    </div>
   </div>
 </nav>
 
@@ -704,5 +730,6 @@ table.rc tr:last-child td{border-bottom:none}
 </script>
 
   <script src="/js/meta-events.js" defer></script>
+  <script src="/js/site-nav.js" defer></script>
 </body>
 </html>

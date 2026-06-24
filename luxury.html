@@ -94,6 +94,7 @@
 
   <!-- Shared design system -->
   <link rel="stylesheet" href="css/world.css" />
+  <link rel="stylesheet" href="/css/site-nav.css" />
 
   <!-- Meta Pixel Code -->
   <script>
@@ -120,21 +121,41 @@
   <!-- ═══════════════════════════════════════════════════════════
        NAV
   ══════════════════════════════════════════════════════════════ -->
-  <nav class="world-nav">
-    <a href="index.html" class="world-nav-logo">Aastha Chopra</a>
-    <button class="world-nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="world-nav-links">
-      <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
-      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+  <!-- Universal navigation — markup mirrored on every page; styled by /css/site-nav.css, wired by /js/site-nav.js -->
+  <nav class="site-nav" id="nav" aria-label="Primary">
+    <a href="/" class="site-nav__logo">Aastha</a>
+    <button class="site-nav__toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="siteNavMenu">
+      <span></span><span></span><span></span>
     </button>
-    <ul class="world-nav-links" id="world-nav-links">
-      <li><a href="index.html#brand-fit">All Worlds</a></li>
-      <li><a href="fashion.html">Fashion</a></li>
-      <li><a href="wellness.html">Wellness</a></li>
-      <li><span class="active">Luxury</span></li>
-      <li><a href="/blog">Journal</a></li>
-      <li><a class="nav-cta-mobile" href="mailto:management@aasthachopra.com">Collaborate</a></li>
-    </ul>
-    <a href="mailto:management@aasthachopra.com" class="world-nav-cta">Collaborate</a>
+    <div class="site-nav__menu" id="siteNavMenu">
+      <ul class="site-nav__links">
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#portfolio">Portfolio</a></li>
+        <li class="site-nav__has-dropdown">
+          <button type="button" class="site-nav__dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+            Worlds
+            <svg class="site-nav__chev" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 4.5L6 8l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="site-nav__dropdown">
+            <li><a href="/fashion.html">Fashion &amp; Beauty</a></li>
+            <li><a href="/luxury.html">Luxury &amp; Travel</a></li>
+            <li><a href="/wellness.html">Wellness &amp; Fitness</a></li>
+          </ul>
+        </li>
+        <li><a href="/#collabs">Collabs</a></li>
+        <li><a href="/#instagram">Instagram</a></li>
+        <li><a href="/blog">Journal</a></li>
+      </ul>
+      <div class="site-nav__actions">
+        <a href="/media-pack.html" class="site-nav__mediapack">
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6 1v7M3.5 5.5L6 8l2.5-2.5M2 10h8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Media Pack
+        </a>
+        <a href="/#contact" class="site-nav__cta">Work With Me</a>
+      </div>
+    </div>
   </nav>
 
   <!-- ═══════════════════════════════════════════════════════════
@@ -425,5 +446,6 @@
 
   <script src="/js/reels.js" defer></script>
   <script src="/js/meta-events.js" defer></script>
+  <script src="/js/site-nav.js" defer></script>
 </body>
 </html>

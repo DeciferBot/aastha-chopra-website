@@ -9,7 +9,7 @@
       "source_file": "generate-pdf.js",
       "source_location": "L1",
       "id": "generate_pdf_js",
-      "community": 24,
+      "community": 26,
       "norm_label": "generate-pdf.js"
     },
     {
@@ -175,6 +175,24 @@
       "norm_label": "barchart()"
     },
     {
+      "label": "site-nav.js",
+      "file_type": "code",
+      "source_file": "js/site-nav.js",
+      "source_location": "L1",
+      "id": "js_site_nav_js",
+      "community": 21,
+      "norm_label": "site-nav.js"
+    },
+    {
+      "label": "init()",
+      "file_type": "code",
+      "source_file": "js/site-nav.js",
+      "source_location": "L12",
+      "id": "site_nav_init",
+      "community": 21,
+      "norm_label": "init()"
+    },
+    {
       "label": "reels.js",
       "file_type": "code",
       "source_file": "js/reels.js",
@@ -333,7 +351,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L1",
       "id": "js_meta_events_js",
-      "community": 19,
+      "community": 20,
       "norm_label": "meta-events.js"
     },
     {
@@ -342,7 +360,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L11",
       "id": "meta_events_fbqready",
-      "community": 19,
+      "community": 20,
       "norm_label": "fbqready()"
     },
     {
@@ -351,7 +369,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L12",
       "id": "meta_events_eventid",
-      "community": 19,
+      "community": 20,
       "norm_label": "eventid()"
     },
     {
@@ -387,7 +405,7 @@
       "source_file": "api/analytics-auth.js",
       "source_location": "L1",
       "id": "api_analytics_auth_js",
-      "community": 20,
+      "community": 22,
       "norm_label": "analytics-auth.js"
     },
     {
@@ -396,7 +414,7 @@
       "source_file": "api/analytics-auth.js",
       "source_location": "L1",
       "id": "analytics_auth_handler",
-      "community": 20,
+      "community": 22,
       "norm_label": "handler()"
     },
     {
@@ -531,7 +549,7 @@
       "source_file": "api/blog-index.js",
       "source_location": "L1",
       "id": "api_blog_index_js",
-      "community": 0,
+      "community": 1,
       "norm_label": "blog-index.js"
     },
     {
@@ -540,7 +558,7 @@
       "source_file": "api/blog-index.js",
       "source_location": "L13",
       "id": "blog_index_handler",
-      "community": 0,
+      "community": 1,
       "norm_label": "handler()"
     },
     {
@@ -549,7 +567,7 @@
       "source_file": "api/blog-index.js",
       "source_location": "L82",
       "id": "blog_index_filterbar",
-      "community": 0,
+      "community": 1,
       "norm_label": "filterbar()"
     },
     {
@@ -558,7 +576,7 @@
       "source_file": "api/blog-index.js",
       "source_location": "L92",
       "id": "blog_index_renderhomeview",
-      "community": 0,
+      "community": 1,
       "norm_label": "renderhomeview()"
     },
     {
@@ -567,7 +585,7 @@
       "source_file": "api/blog-index.js",
       "source_location": "L153",
       "id": "blog_index_rendersegmentview",
-      "community": 0,
+      "community": 1,
       "norm_label": "rendersegmentview()"
     },
     {
@@ -576,7 +594,7 @@
       "source_file": "api/_profile.js",
       "source_location": "L1",
       "id": "api_profile_js",
-      "community": 1,
+      "community": 0,
       "norm_label": "_profile.js"
     },
     {
@@ -585,7 +603,7 @@
       "source_file": "api/_profile.js",
       "source_location": "L29",
       "id": "profile_sbget",
-      "community": 1,
+      "community": 0,
       "norm_label": "sbget()"
     },
     {
@@ -594,7 +612,7 @@
       "source_file": "api/_profile.js",
       "source_location": "L39",
       "id": "profile_latestgeneration",
-      "community": 1,
+      "community": 0,
       "norm_label": "latestgeneration()"
     },
     {
@@ -603,7 +621,7 @@
       "source_file": "api/_profile.js",
       "source_location": "L45",
       "id": "profile_cleancity",
-      "community": 1,
+      "community": 0,
       "norm_label": "cleancity()"
     },
     {
@@ -612,7 +630,7 @@
       "source_file": "api/_profile.js",
       "source_location": "L56",
       "id": "profile_getliveprofile",
-      "community": 1,
+      "community": 0,
       "norm_label": "getliveprofile()"
     },
     {
@@ -702,7 +720,7 @@
       "source_file": "api/ig-profile.js",
       "source_location": "L1",
       "id": "api_ig_profile_js",
-      "community": 21,
+      "community": 23,
       "norm_label": "ig-profile.js"
     },
     {
@@ -711,7 +729,7 @@
       "source_file": "api/ig-profile.js",
       "source_location": "L3",
       "id": "ig_profile_handler",
-      "community": 21,
+      "community": 23,
       "norm_label": "handler()"
     },
     {
@@ -774,7 +792,7 @@
       "source_file": "api/pitch-now.js",
       "source_location": "L1",
       "id": "api_pitch_now_js",
-      "community": 1,
+      "community": 0,
       "norm_label": "pitch-now.js"
     },
     {
@@ -783,7 +801,7 @@
       "source_file": "api/pitch-now.js",
       "source_location": "L21",
       "id": "pitch_now_sb",
-      "community": 1,
+      "community": 0,
       "norm_label": "sb()"
     },
     {
@@ -792,7 +810,7 @@
       "source_file": "api/pitch-now.js",
       "source_location": "L36",
       "id": "pitch_now_enc",
-      "community": 1,
+      "community": 0,
       "norm_label": "enc()"
     },
     {
@@ -801,7 +819,7 @@
       "source_file": "api/pitch-now.js",
       "source_location": "L38",
       "id": "pitch_now_handler",
-      "community": 1,
+      "community": 0,
       "norm_label": "handler()"
     },
     {
@@ -810,7 +828,7 @@
       "source_file": "api/blog.js",
       "source_location": "L1",
       "id": "api_blog_js",
-      "community": 0,
+      "community": 1,
       "norm_label": "blog.js"
     },
     {
@@ -819,7 +837,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L59",
       "id": "blog_segmentmeta",
-      "community": 0,
+      "community": 1,
       "norm_label": "segmentmeta()"
     },
     {
@@ -828,7 +846,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L76",
       "id": "blog_segmentimage",
-      "community": 0,
+      "community": 1,
       "norm_label": "segmentimage()"
     },
     {
@@ -837,7 +855,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L85",
       "id": "blog_attachinstagramimages",
-      "community": 0,
+      "community": 1,
       "norm_label": "attachinstagramimages()"
     },
     {
@@ -846,7 +864,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L149",
       "id": "blog_overrideimage",
-      "community": 0,
+      "community": 1,
       "norm_label": "overrideimage()"
     },
     {
@@ -855,7 +873,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L160",
       "id": "blog_postimage",
-      "community": 0,
+      "community": 1,
       "norm_label": "postimage()"
     },
     {
@@ -864,7 +882,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L167",
       "id": "blog_sbimg",
-      "community": 0,
+      "community": 1,
       "norm_label": "sbimg()"
     },
     {
@@ -873,7 +891,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L174",
       "id": "blog_sb",
-      "community": 0,
+      "community": 1,
       "norm_label": "sb()"
     },
     {
@@ -882,7 +900,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L192",
       "id": "blog_esc",
-      "community": 0,
+      "community": 1,
       "norm_label": "esc()"
     },
     {
@@ -891,7 +909,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L197",
       "id": "blog_rendershell",
-      "community": 0,
+      "community": 1,
       "norm_label": "rendershell()"
     },
     {
@@ -900,7 +918,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L246",
       "id": "blog_ctablock",
-      "community": 0,
+      "community": 1,
       "norm_label": "ctablock()"
     },
     {
@@ -909,7 +927,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L276",
       "id": "blog_renderherosvg",
-      "community": 0,
+      "community": 1,
       "norm_label": "renderherosvg()"
     },
     {
@@ -918,7 +936,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L299",
       "id": "blog_renderpostcard",
-      "community": 0,
+      "community": 1,
       "norm_label": "renderpostcard()"
     },
     {
@@ -927,7 +945,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L315",
       "id": "blog_renderauthorbox",
-      "community": 0,
+      "community": 1,
       "norm_label": "renderauthorbox()"
     },
     {
@@ -936,7 +954,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L330",
       "id": "blog_renderinstagramblock",
-      "community": 0,
+      "community": 1,
       "norm_label": "renderinstagramblock()"
     },
     {
@@ -945,7 +963,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L360",
       "id": "blog_personschema",
-      "community": 0,
+      "community": 1,
       "norm_label": "personschema()"
     },
     {
@@ -954,7 +972,7 @@
       "source_file": "api/blog.js",
       "source_location": "L15",
       "id": "blog_handler",
-      "community": 0,
+      "community": 1,
       "norm_label": "handler()"
     },
     {
@@ -963,7 +981,7 @@
       "source_file": "api/blog.js",
       "source_location": "L94",
       "id": "blog_renderhead",
-      "community": 0,
+      "community": 1,
       "norm_label": "renderhead()"
     },
     {
@@ -972,7 +990,7 @@
       "source_file": "api/blog.js",
       "source_location": "L151",
       "id": "blog_renderarticle",
-      "community": 0,
+      "community": 1,
       "norm_label": "renderarticle()"
     },
     {
@@ -981,7 +999,7 @@
       "source_file": "api/blog.js",
       "source_location": "L201",
       "id": "blog_notfound",
-      "community": 0,
+      "community": 1,
       "norm_label": "notfound()"
     },
     {
@@ -1026,7 +1044,7 @@
       "source_file": "api/_pipeline.js",
       "source_location": "L1",
       "id": "api_pipeline_js",
-      "community": 1,
+      "community": 0,
       "norm_label": "_pipeline.js"
     },
     {
@@ -1035,7 +1053,7 @@
       "source_file": "api/_pipeline.js",
       "source_location": "L18",
       "id": "pipeline_recordpipeline",
-      "community": 1,
+      "community": 0,
       "norm_label": "recordpipeline()"
     },
     {
@@ -1044,7 +1062,7 @@
       "source_file": "api/reels.js",
       "source_location": "L1",
       "id": "api_reels_js",
-      "community": 0,
+      "community": 18,
       "norm_label": "reels.js"
     },
     {
@@ -1053,7 +1071,7 @@
       "source_file": "api/reels.js",
       "source_location": "L20",
       "id": "reels_classify",
-      "community": 0,
+      "community": 18,
       "norm_label": "classify()"
     },
     {
@@ -1062,7 +1080,7 @@
       "source_file": "api/reels.js",
       "source_location": "L21",
       "id": "reels_sbimg",
-      "community": 0,
+      "community": 1,
       "norm_label": "sbimg()"
     },
     {
@@ -1071,7 +1089,7 @@
       "source_file": "api/reels.js",
       "source_location": "L25",
       "id": "reels_cardcaption",
-      "community": 0,
+      "community": 18,
       "norm_label": "cardcaption()"
     },
     {
@@ -1080,7 +1098,7 @@
       "source_file": "api/reels.js",
       "source_location": "L34",
       "id": "reels_handler",
-      "community": 0,
+      "community": 18,
       "norm_label": "handler()"
     },
     {
@@ -1089,7 +1107,7 @@
       "source_file": "api/instagram.js",
       "source_location": "L1",
       "id": "api_instagram_js",
-      "community": 22,
+      "community": 24,
       "norm_label": "instagram.js"
     },
     {
@@ -1098,7 +1116,7 @@
       "source_file": "api/instagram.js",
       "source_location": "L15",
       "id": "instagram_handler",
-      "community": 22,
+      "community": 24,
       "norm_label": "handler()"
     },
     {
@@ -1107,7 +1125,7 @@
       "source_file": "api/ig-stats.js",
       "source_location": "L1",
       "id": "api_ig_stats_js",
-      "community": 23,
+      "community": 25,
       "norm_label": "ig-stats.js"
     },
     {
@@ -1116,7 +1134,7 @@
       "source_file": "api/ig-stats.js",
       "source_location": "L11",
       "id": "ig_stats_handler",
-      "community": 23,
+      "community": 25,
       "norm_label": "handler()"
     },
     {
@@ -1125,7 +1143,7 @@
       "source_file": "api/_pitch.js",
       "source_location": "L1",
       "id": "api_pitch_js",
-      "community": 1,
+      "community": 0,
       "norm_label": "_pitch.js"
     },
     {
@@ -1134,7 +1152,7 @@
       "source_file": "api/_pitch.js",
       "source_location": "L36",
       "id": "pitch_buildfactsheet",
-      "community": 1,
+      "community": 0,
       "norm_label": "buildfactsheet()"
     },
     {
@@ -1143,7 +1161,7 @@
       "source_file": "api/_pitch.js",
       "source_location": "L54",
       "id": "pitch_generatepitch",
-      "community": 1,
+      "community": 0,
       "norm_label": "generatepitch()"
     },
     {
@@ -1152,7 +1170,7 @@
       "source_file": "api/_pitch.js",
       "source_location": "L133",
       "id": "pitch_dedash",
-      "community": 1,
+      "community": 0,
       "norm_label": "dedash()"
     },
     {
@@ -1161,7 +1179,7 @@
       "source_file": "api/_pitch.js",
       "source_location": "L144",
       "id": "pitch_parsepitchresponse",
-      "community": 1,
+      "community": 0,
       "norm_label": "parsepitchresponse()"
     },
     {
@@ -1170,7 +1188,7 @@
       "source_file": "api/_pitch.js",
       "source_location": "L166",
       "id": "pitch_striptotext",
-      "community": 1,
+      "community": 0,
       "norm_label": "striptotext()"
     },
     {
@@ -1179,7 +1197,7 @@
       "source_file": "api/_pitch.js",
       "source_location": "L170",
       "id": "pitch_esc",
-      "community": 0,
+      "community": 1,
       "norm_label": "esc()"
     },
     {
@@ -1188,7 +1206,7 @@
       "source_file": "api/_pitch.js",
       "source_location": "L179",
       "id": "pitch_renderpitchemailhtml",
-      "community": 1,
+      "community": 0,
       "norm_label": "renderpitchemailhtml()"
     },
     {
@@ -1197,7 +1215,7 @@
       "source_file": "api/_pitch.js",
       "source_location": "L209",
       "id": "pitch_sendpitchemail",
-      "community": 1,
+      "community": 0,
       "norm_label": "sendpitchemail()"
     },
     {
@@ -1206,7 +1224,7 @@
       "source_file": "api/_pitch.js",
       "source_location": "L240",
       "id": "pitch_autosendenabled",
-      "community": 1,
+      "community": 0,
       "norm_label": "autosendenabled()"
     },
     {
@@ -1215,7 +1233,7 @@
       "source_file": "api/_pitch.js",
       "source_location": "L245",
       "id": "pitch_renderbrandemailhtml",
-      "community": 1,
+      "community": 0,
       "norm_label": "renderbrandemailhtml()"
     },
     {
@@ -1224,7 +1242,7 @@
       "source_file": "api/_pitch.js",
       "source_location": "L264",
       "id": "pitch_sendbrandpitch",
-      "community": 1,
+      "community": 0,
       "norm_label": "sendbrandpitch()"
     },
     {
@@ -1494,7 +1512,7 @@
       "source_file": "api/cron/daily-agent.js",
       "source_location": "L1",
       "id": "api_cron_daily_agent_js",
-      "community": 1,
+      "community": 0,
       "norm_label": "daily-agent.js"
     },
     {
@@ -1503,7 +1521,7 @@
       "source_file": "api/cron/daily-agent.js",
       "source_location": "L35",
       "id": "daily_agent_sb",
-      "community": 1,
+      "community": 0,
       "norm_label": "sb()"
     },
     {
@@ -1512,7 +1530,7 @@
       "source_file": "api/cron/daily-agent.js",
       "source_location": "L50",
       "id": "daily_agent_adarchive",
-      "community": 1,
+      "community": 0,
       "norm_label": "adarchive()"
     },
     {
@@ -1521,7 +1539,7 @@
       "source_file": "api/cron/daily-agent.js",
       "source_location": "L69",
       "id": "daily_agent_resolveadtoken",
-      "community": 1,
+      "community": 0,
       "norm_label": "resolveadtoken()"
     },
     {
@@ -1530,7 +1548,7 @@
       "source_file": "api/cron/daily-agent.js",
       "source_location": "L91",
       "id": "daily_agent_checkadlibrary",
-      "community": 1,
+      "community": 0,
       "norm_label": "checkadlibrary()"
     },
     {
@@ -1539,7 +1557,7 @@
       "source_file": "api/cron/daily-agent.js",
       "source_location": "L106",
       "id": "daily_agent_scorebrand",
-      "community": 1,
+      "community": 0,
       "norm_label": "scorebrand()"
     },
     {
@@ -1548,7 +1566,7 @@
       "source_file": "api/cron/daily-agent.js",
       "source_location": "L121",
       "id": "daily_agent_storepitch",
-      "community": 1,
+      "community": 0,
       "norm_label": "storepitch()"
     },
     {
@@ -1557,7 +1575,7 @@
       "source_file": "api/cron/daily-agent.js",
       "source_location": "L142",
       "id": "daily_agent_handler",
-      "community": 1,
+      "community": 0,
       "norm_label": "handler()"
     },
     {
@@ -1719,7 +1737,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L1",
       "id": "api_cron_inbound_nudge_js",
-      "community": 18,
+      "community": 19,
       "norm_label": "inbound-nudge.js"
     },
     {
@@ -1728,7 +1746,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L16",
       "id": "inbound_nudge_sb",
-      "community": 18,
+      "community": 19,
       "norm_label": "sb()"
     },
     {
@@ -1737,7 +1755,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L24",
       "id": "inbound_nudge_tg",
-      "community": 18,
+      "community": 19,
       "norm_label": "tg()"
     },
     {
@@ -1746,7 +1764,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L32",
       "id": "inbound_nudge_handler",
-      "community": 18,
+      "community": 19,
       "norm_label": "handler()"
     },
     {
@@ -2487,6 +2505,18 @@
       "_tgt": "build_audit_doc_noborder",
       "source": "build_audit_doc_noborder",
       "target": "build_audit_doc_barchart",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "js/site-nav.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_src": "js_site_nav_js",
+      "_tgt": "site_nav_init",
+      "source": "js_site_nav_js",
+      "target": "site_nav_init",
       "confidence_score": 1.0
     },
     {
