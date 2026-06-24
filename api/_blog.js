@@ -115,9 +115,40 @@ export async function attachInstagramImages(posts) {
   return posts;
 }
 
-/** Image priority: explicit hero → linked Instagram content → pillar photo. */
+/**
+ * Editorial image overrides — an explicit, human-curated layer that wins over the
+ * automatic resolver below. Use it when a published post's auto-picked image
+ * (usually a linked Instagram reel) is topically wrong and we can't edit the DB
+ * row quickly. `bySlug` pins one exact post; `byTopic` is a narrow self-healing
+ * safety net so the right photo shows even if the published slug differs from the
+ * guess, and so future posts on the same topic don't repeat the mistake.
+ *
+ * Example fixed here: the "best gyms in Dubai" wellness piece was rendering a
+ * Finland ski-resort reel; both rules pin it to a real Dubai fitness photo.
+ */
+export const IMAGE_OVERRIDES = {
+  bySlug: {
+    'best-gyms-in-dubai': '/images/aastha-chopra-dubai-fitness.jpg',
+  },
+  byTopic: [
+    { test: /\bgyms?\b/i, segment: 'wellness', img: '/images/aastha-chopra-dubai-fitness.jpg' },
+  ],
+};
+
+/** Resolve an editorial override for a post, or '' if none applies. */
+export function overrideImage(p) {
+  if (!p) return '';
+  if (p.slug && IMAGE_OVERRIDES.bySlug[p.slug]) return IMAGE_OVERRIDES.bySlug[p.slug];
+  const title = String(p.title || '');
+  for (const r of IMAGE_OVERRIDES.byTopic) {
+    if (r.test.test(title) && (!r.segment || r.segment === p.segment)) return r.img;
+  }
+  return '';
+}
+
+/** Image priority: editorial override → explicit hero → linked Instagram → pillar photo. */
 export function postImage(p) {
-  return (p && (p.hero_image_url || p._igImage)) || segmentImage(p && p.segment);
+  return overrideImage(p) || (p && (p.hero_image_url || p._igImage)) || segmentImage(p && p.segment);
 }
 
 /** Serve Supabase Storage images resized via the on-the-fly transform endpoint
@@ -259,8 +290,9 @@ export function renderPostCard(p) {
   const seg = segmentMeta(p.segment);
   const dek = p.excerpt || p.meta_description || '';
   const short = dek.length > 130 ? dek.slice(0, 130).trim() + '…' : dek;
+  const img = sbImg(postImage(p), 720);
   return `<a class="bcard" href="/blog/${esc(p.slug)}">
-        <div class="bcard-media"><img src="${sbImg(postImage(p), 720)}" alt="" loading="lazy" /></div>
+        <div class="bcard-media" style="--img:url('${esc(img)}')"><img src="${esc(img)}" alt="" loading="lazy" /></div>
         <div class="bcard-body">
           <span class="seg">${esc(seg.label)}</span>
           <h3>${esc(p.title)}</h3>
@@ -397,8 +429,11 @@ const BLOG_CSS = `
   .bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-top:30px;}
   .bcard{display:flex;flex-direction:column;overflow:hidden;background:var(--bg-card);border:1px solid var(--border);transition:border-color .25s var(--ease-out),transform .25s var(--ease-out),box-shadow .25s var(--ease-out);}
   .bcard:hover{border-color:var(--border-hi);transform:translateY(-3px);box-shadow:var(--shadow,0 16px 50px rgba(0,0,0,.5));}
-  .bcard-media{aspect-ratio:3/2;overflow:hidden;background:var(--bg-raised);}
-  .bcard-media img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .6s var(--ease-out);}
+  .bcard-media{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--bg-raised);}
+  /* Show the full image (no crop): a blurred, dimmed enlargement of the same
+     photo fills the frame so any aspect ratio sits cleanly with no dead bars. */
+  .bcard-media::before{content:'';position:absolute;inset:0;background:var(--img) center/cover no-repeat;filter:blur(28px) brightness(.5) saturate(1.05);transform:scale(1.18);}
+  .bcard-media img{position:relative;width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .6s var(--ease-out);}
   .bcard-body{padding:20px 22px 24px;display:flex;flex-direction:column;flex:1;}
   .bcard .seg{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);}
   .bcard h3{font-family:var(--serif);font-weight:400;font-size:1.4rem;line-height:1.22;margin:9px 0 9px;color:var(--text);}
@@ -444,8 +479,9 @@ const BLOG_CSS = `
     background:linear-gradient(135deg,var(--bg-card),var(--bg-raised));
     border:1px solid var(--border-hi);transition:transform .25s var(--ease-out),box-shadow .25s var(--ease-out);}
   .bfeature:hover{transform:translateY(-2px);box-shadow:0 20px 60px rgba(0,0,0,.5);}
-  .bfeature-media{position:relative;min-height:300px;overflow:hidden;}
-  .bfeature-media img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .7s var(--ease-out);}
+  .bfeature-media{position:relative;min-height:300px;overflow:hidden;background:var(--bg-raised);}
+  .bfeature-media::before{content:'';position:absolute;inset:0;background:var(--img) center/cover no-repeat;filter:blur(34px) brightness(.45) saturate(1.05);transform:scale(1.18);}
+  .bfeature-media img{position:relative;width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .7s var(--ease-out);}
   .bfeature-body{padding:44px 44px;display:flex;flex-direction:column;justify-content:center;}
   .bfeature .seg{font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);}
   .bfeature h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,3.4vw,2.7rem);line-height:1.12;margin:12px 0;color:var(--text);}
