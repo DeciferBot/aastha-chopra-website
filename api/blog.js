@@ -154,7 +154,8 @@ function renderArticle({ post, url, seg, published, faq, sources, related }) {
   });
   const readMins = Math.max(2, Math.round((post.word_count || 0) / 220));
 
-  const heroHtml = `<img class="bhero" src="${esc(sbImg(postImage(post), 1200))}" alt="${esc(post.title)}" loading="eager" />`;
+  const himg = esc(sbImg(postImage(post), 1200));
+  const heroHtml = `<div class="bhero" style="--img:url('${himg}')"><img src="${himg}" alt="${esc(post.title)}" loading="eager" /></div>`;
 
   const faqHtml = faq.length ? `
     <section class="bfaq">

@@ -398,7 +398,9 @@ const BLOG_CSS = `
   article table{width:100%;border-collapse:collapse;margin:24px 0;font-size:.92rem;}
   article th,article td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);}
   article th{color:var(--gold);text-transform:uppercase;font-size:.66rem;letter-spacing:.14em;}
-  .bhero{width:100%;aspect-ratio:16/9;object-fit:cover;margin:0 0 32px;border:1px solid var(--border);}
+  .bhero{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;margin:0 0 32px;border:1px solid var(--border);background:var(--bg-raised);}
+  .bhero::before{content:'';position:absolute;inset:0;background:var(--img) center/cover no-repeat;filter:blur(34px) brightness(.45) saturate(1.05);transform:scale(1.18);}
+  .bhero img{position:relative;width:100%;height:100%;object-fit:contain;object-position:center;display:block;}
 
   .bfaq{margin:56px 0 0;border-top:1px solid var(--border);padding-top:8px;}
   .bfaq h2{font-size:1.5rem;}
