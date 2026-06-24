@@ -9,7 +9,7 @@
 
 import {
   SITE, sb, esc, renderShell, ctaBlock, segmentMeta,
-  renderHeroSVG, renderAuthorBox, renderPostCard, personSchema, renderInstagramBlock, postImage, attachInstagramImages,
+  renderHeroSVG, renderAuthorBox, renderPostCard, personSchema, renderInstagramBlock, postImage, attachInstagramImages, sbImg,
 } from './_blog.js';
 
 export default async function handler(req, res) {
@@ -68,7 +68,7 @@ export default async function handler(req, res) {
   // Share preview image = the post's own image (linked IG content), made absolute
   // for OG/Twitter; falls back to og_image then the site image.
   const ogRaw = post.og_image || postImage(post);
-  const image = ogRaw.startsWith('http') ? ogRaw : `${SITE.base}${ogRaw}`;
+  const image = sbImg(ogRaw.startsWith('http') ? ogRaw : `${SITE.base}${ogRaw}`, 1200);
   const published = post.published_at || post.created_at;
   const faq = Array.isArray(post.faq) ? post.faq : [];
   const sources = Array.isArray(post.research_sources) ? post.research_sources : [];
@@ -154,7 +154,7 @@ function renderArticle({ post, url, seg, published, faq, sources, related }) {
   });
   const readMins = Math.max(2, Math.round((post.word_count || 0) / 220));
 
-  const heroHtml = `<img class="bhero" src="${esc(postImage(post))}" alt="${esc(post.title)}" loading="eager" />`;
+  const heroHtml = `<img class="bhero" src="${esc(sbImg(postImage(post), 1200))}" alt="${esc(post.title)}" loading="eager" />`;
 
   const faqHtml = faq.length ? `
     <section class="bfaq">

@@ -6,7 +6,7 @@
  * Segment view: a flat archive of that pillar. Emits Blog + Person JSON-LD.
  */
 
-import { SITE, sb, esc, renderShell, segmentMeta, SEGMENTS, renderPostCard, personSchema, postImage, attachInstagramImages } from './_blog.js';
+import { SITE, sb, esc, renderShell, segmentMeta, SEGMENTS, renderPostCard, personSchema, postImage, attachInstagramImages, sbImg } from './_blog.js';
 
 const SEG_KEYS = Object.keys(SEGMENTS);
 
@@ -52,7 +52,7 @@ export default async function handler(req, res) {
   const jsonLd = { '@context': 'https://schema.org', '@graph': [personSchema(), blogLd] };
 
   const ogRaw = posts.length ? postImage(posts[0]) : SITE.ogImage;
-  const ogImg = ogRaw.startsWith('http') ? ogRaw : `${SITE.base}${ogRaw}`;
+  const ogImg = sbImg(ogRaw.startsWith('http') ? ogRaw : `${SITE.base}${ogRaw}`, 1200);
   const head = `  <meta property="og:type" content="website" />
   <meta property="og:url" content="${esc(url)}" />
   <meta property="og:title" content="${esc(heading)} | Aastha Chopra" />
@@ -105,7 +105,7 @@ function renderHomeView({ heading, sub, posts }) {
   const fseg = segmentMeta(featured.segment);
   const featuredHtml = `
     <a class="bfeature" href="/blog/${esc(featured.slug)}">
-      <div class="bfeature-media"><img src="${postImage(featured)}" alt="" loading="eager" /></div>
+      <div class="bfeature-media"><img src="${sbImg(postImage(featured), 1000)}" alt="" loading="eager" /></div>
       <div class="bfeature-body">
         <span class="seg">${esc(fseg.label)} &nbsp;·&nbsp; Latest</span>
         <h2>${esc(featured.title)}</h2>
