@@ -60,21 +60,120 @@ export function segmentMeta(key) {
   return SEGMENTS[key] || { label: 'Journal', page: '/', blurb: '' };
 }
 
-/** On-brand local photography per pillar, so hub cards carry a real image
- *  (absolute paths — the blog is served from /blog). */
-export const SEGMENT_IMG = {
-  fashion:     '/images/aastha-chopra-fashion-editorial-dubai.jpg',
-  beauty:      '/images/aastha-chopra-premium-beauty-dubai.jpg',
-  fragrance:   '/images/aastha-chopra-evening-editorial-style.jpg',
-  jewellery:   '/images/aastha-chopra-dubai-luxury-fashion-beauty.jpg',
-  wellness:    '/images/aastha-chopra-dubai-wellness-fitness-hero.jpg',
-  hospitality: '/images/aastha-chopra-dubai-hotel-content.jpg',
-  travel:      '/images/aastha-chopra-dubai-luxury-travel-hero.jpg',
-  automobile:  '/images/aastha-chopra-dubai-luxury-rooftop.jpg',
-  retail:      '/images/aastha-chopra-dubai-fashion.jpg',
+/** On-brand local photography per pillar. A POOL (not one photo) per pillar so
+ *  posts that don't yet have a linked Instagram image don't all collapse onto
+ *  the same fallback — every card on a page can show a different, on-brand,
+ *  segment-appropriate photo (absolute paths — the blog is served from /blog).
+ *  The first entry stays the canonical pillar photo (used as the simple
+ *  back-compat fallback and by hub cards). */
+export const SEGMENT_POOL = {
+  fashion: [
+    '/images/aastha-chopra-fashion-editorial-dubai.jpg',
+    '/images/aastha-chopra-dubai-fashion-creator-1.jpg',
+    '/images/aastha-chopra-dubai-fashion-creator-2.jpg',
+    '/images/aastha-chopra-dubai-fashion-luxury-1.jpg',
+    '/images/aastha-chopra-evening-editorial-style.jpg',
+    '/images/aastha-chopra-dubai-fashion-beauty-hero.jpg',
+    '/images/aastha-chopra-dubai-lifestyle.jpg',
+  ],
+  beauty: [
+    '/images/aastha-chopra-premium-beauty-dubai.jpg',
+    '/images/aastha-chopra-mac-sephora-portrait.jpg',
+    '/images/aastha-chopra-mac-sephora-event-1.jpg',
+    '/images/aastha-chopra-mac-sephora-event-2.jpg',
+    '/images/aastha-chopra-mac-sephora-launch.jpg',
+    '/images/aastha-chopra-dubai-fashion-beauty-hero.jpg',
+  ],
+  fragrance: [
+    '/images/aastha-chopra-evening-editorial-style.jpg',
+    '/images/aastha-chopra-dubai-luxury-fashion-beauty.jpg',
+    '/images/aastha-chopra-premium-beauty-dubai.jpg',
+    '/images/aastha-chopra-mac-sephora-portrait.jpg',
+  ],
+  jewellery: [
+    '/images/aastha-chopra-dubai-luxury-fashion-beauty.jpg',
+    '/images/aastha-chopra-dubai-luxury-rooftop.jpg',
+    '/images/aastha-chopra-dubai-fashion-luxury-1.jpg',
+    '/images/aastha-chopra-evening-editorial-style.jpg',
+  ],
+  wellness: [
+    '/images/aastha-chopra-dubai-wellness-fitness-hero.jpg',
+    '/images/aastha-chopra-dubai-wellness.jpg',
+    '/images/aastha-chopra-dubai-wellness-3.jpg',
+    '/images/aastha-chopra-dubai-wellness-fitness-1.jpg',
+    '/images/aastha-chopra-dubai-wellness-fitness-2.jpg',
+    '/images/aastha-chopra-dubai-fitness.jpg',
+    '/images/aastha-chopra-dubai-active-fitness.jpg',
+  ],
+  hospitality: [
+    '/images/aastha-chopra-dubai-hotel-content.jpg',
+    '/images/aastha-chopra-madinat-jumeirah-dubai.jpg',
+    '/images/aastha-chopra-dubai-luxury-rooftop.jpg',
+    '/images/aastha-chopra-dubai-lifestyle.jpg',
+  ],
+  travel: [
+    '/images/aastha-chopra-dubai-luxury-travel-hero.jpg',
+    '/images/aastha-chopra-dubai-travel.jpg',
+    '/images/aastha-chopra-madinat-jumeirah-dubai.jpg',
+    '/images/aastha-chopra-dubai-luxury-rooftop.jpg',
+  ],
+  automobile: [
+    '/images/aastha-chopra-dubai-luxury-rooftop.jpg',
+    '/images/aastha-chopra-dubai-luxury-fashion-beauty.jpg',
+    '/images/aastha-chopra-dubai-lifestyle.jpg',
+    '/images/aastha-chopra-dubai-creator-portrait.jpg',
+  ],
+  retail: [
+    '/images/aastha-chopra-dubai-fashion.jpg',
+    '/images/aastha-chopra-dubai-fashion-creator-1.jpg',
+    '/images/aastha-chopra-dubai-fashion-creator-2.jpg',
+    '/images/aastha-chopra-dubai-fashion-luxury-1.jpg',
+    '/images/aastha-chopra-dubai-lifestyle.jpg',
+  ],
 };
+
+/** Broad on-brand set used when a pillar pool is exhausted during de-duplication. */
+const GLOBAL_POOL = [
+  '/images/aastha-chopra-dubai-creator-portrait.jpg',
+  '/images/aastha-chopra-dubai-lifestyle.jpg',
+  '/images/aastha-chopra-dubai-fashion.jpg',
+  '/images/aastha-chopra-fashion-editorial-dubai.jpg',
+  '/images/aastha-chopra-dubai-luxury-fashion-beauty.jpg',
+  '/images/aastha-chopra-premium-beauty-dubai.jpg',
+  '/images/aastha-chopra-dubai-wellness.jpg',
+  '/images/aastha-chopra-dubai-travel.jpg',
+  '/images/aastha-chopra-dubai-hotel-content.jpg',
+  '/images/aastha-chopra-evening-editorial-style.jpg',
+  '/images/aastha-chopra-dubai-fashion-creator-1.jpg',
+  '/images/aastha-chopra-dubai-fashion-creator-2.jpg',
+  '/images/aastha-chopra-madinat-jumeirah-dubai.jpg',
+  '/images/aastha-chopra-dubai-luxury-rooftop.jpg',
+];
+
+/** Back-compat: the single canonical photo per pillar (first of the pool). */
+export const SEGMENT_IMG = Object.fromEntries(
+  Object.entries(SEGMENT_POOL).map(([k, v]) => [k, v[0]])
+);
 export function segmentImage(key) {
-  return SEGMENT_IMG[key] || '/images/aastha-chopra-dubai-creator-portrait.jpg';
+  const pool = SEGMENT_POOL[key];
+  return (pool && pool[0]) || '/images/aastha-chopra-dubai-creator-portrait.jpg';
+}
+
+/** Tiny stable string hash (FNV-ish) — same slug always maps the same way. */
+function hashStr(s) {
+  let h = 0;
+  const str = String(s || '');
+  for (let i = 0; i < str.length; i++) h = (Math.imul(h, 31) + str.charCodeAt(i)) >>> 0;
+  return h;
+}
+
+/** Deterministic per-post pick from its pillar pool, so posts without a linked
+ *  Instagram image still spread across the pool instead of all sharing pool[0].
+ *  Stable per slug (good for caching + OG). */
+export function segmentImageFor(p) {
+  const pool = SEGMENT_POOL[p && p.segment];
+  if (!pool || !pool.length) return segmentImage(p && p.segment);
+  return pool[hashStr(p && p.slug) % pool.length];
 }
 
 /** Resolve each post's image from the Instagram content it is linked to
@@ -156,9 +255,40 @@ export function overrideImage(p) {
   return '';
 }
 
-/** Image priority: editorial override → explicit hero → linked Instagram → pillar photo. */
+/** The image a post would naturally show, ignoring any de-dup reassignment.
+ *  Priority: editorial override → explicit hero → linked Instagram → pillar pool. */
+function naturalImage(p) {
+  return overrideImage(p) || (p && (p.hero_image_url || p._igImage)) || segmentImageFor(p);
+}
+
+/** Image priority: editorial override → de-dup reassignment → explicit hero →
+ *  linked Instagram → pillar pool. (_dedupImg is only set on a page where the
+ *  natural image collided with another post — see dedupePostImages.) */
 export function postImage(p) {
-  return overrideImage(p) || (p && (p.hero_image_url || p._igImage)) || segmentImage(p && p.segment);
+  return overrideImage(p) || (p && p._dedupImg) || (p && (p.hero_image_url || p._igImage)) || segmentImageFor(p);
+}
+
+/** Guarantee every post in `posts` resolves to a DIFFERENT image on the page.
+ *  Many posts fall back to a pillar photo (no synced IG image yet) and several
+ *  can link the same reel, so without this the hub shows the same photo 3–4×
+ *  per section. First occurrence keeps its natural image; later collisions are
+ *  reassigned to an unused photo from the pillar pool (then a global pool).
+ *  Mutates posts in place (sets p._dedupImg) and returns them. `seedUsed` lets
+ *  callers reserve images already shown elsewhere on the page. */
+export function dedupePostImages(posts, seedUsed) {
+  const list = Array.isArray(posts) ? posts : [posts];
+  const used = new Set(seedUsed || []);
+  for (const p of list) {
+    if (!p) continue;
+    delete p._dedupImg;
+    const img = naturalImage(p);
+    if (!used.has(img)) { used.add(img); continue; }
+    const pool = [...(SEGMENT_POOL[p.segment] || []), ...GLOBAL_POOL];
+    const pick = pool.find((im) => !used.has(im));
+    if (pick) { p._dedupImg = pick; used.add(pick); }
+    else used.add(img); // every candidate already used — accept the repeat
+  }
+  return posts;
 }
 
 /** Serve Supabase Storage images resized via the on-the-fly transform endpoint

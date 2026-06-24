@@ -9,7 +9,7 @@
 
 import {
   SITE, sb, esc, renderShell, ctaBlock, segmentMeta,
-  renderHeroSVG, renderAuthorBox, renderPostCard, personSchema, renderInstagramBlock, postImage, attachInstagramImages, sbImg,
+  renderHeroSVG, renderAuthorBox, renderPostCard, personSchema, renderInstagramBlock, postImage, attachInstagramImages, dedupePostImages, sbImg,
 } from './_blog.js';
 
 export default async function handler(req, res) {
@@ -61,7 +61,12 @@ export default async function handler(req, res) {
 
   // Resolve hero + related-card images from the linked Instagram content (durable
   // Supabase Storage), batched in one query. Falls back to the pillar photo.
-  try { await attachInstagramImages([post, ...related]); } catch {}
+  try {
+    await attachInstagramImages([post, ...related]);
+    // Keep the post's own hero, then ensure each related card shows a different
+    // photo (so the "More in …" row never repeats the hero or itself).
+    dedupePostImages([post, ...related]);
+  } catch {}
 
   const url = `${SITE.base}${SITE.blogPath}/${post.slug}`;
   const seg = segmentMeta(post.segment);

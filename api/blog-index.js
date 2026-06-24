@@ -6,7 +6,7 @@
  * Segment view: a flat archive of that pillar. Emits Blog + Person JSON-LD.
  */
 
-import { SITE, sb, esc, renderShell, segmentMeta, SEGMENTS, renderPostCard, personSchema, postImage, attachInstagramImages, sbImg } from './_blog.js';
+import { SITE, sb, esc, renderShell, segmentMeta, SEGMENTS, renderPostCard, personSchema, postImage, attachInstagramImages, dedupePostImages, sbImg } from './_blog.js';
 
 const SEG_KEYS = Object.keys(SEGMENTS);
 
@@ -21,6 +21,10 @@ export default async function handler(req, res) {
     if (filtered) path += `&segment=eq.${filtered}`;
     posts = (await sb(path)) || [];
     await attachInstagramImages(posts);
+    // Posts render in this order (featured = posts[0], then pillar sections are
+    // subsets in order), so de-duping the whole list guarantees no repeated
+    // photo on the page — including within each section.
+    dedupePostImages(posts);
   } catch {
     posts = [];
   }
