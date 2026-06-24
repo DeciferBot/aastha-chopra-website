@@ -65,7 +65,10 @@ export default async function handler(req, res) {
 
   const url = `${SITE.base}${SITE.blogPath}/${post.slug}`;
   const seg = segmentMeta(post.segment);
-  const image = post.og_image || post.hero_image_url || SITE.ogImage;
+  // Share preview image = the post's own image (linked IG content), made absolute
+  // for OG/Twitter; falls back to og_image then the site image.
+  const ogRaw = post.og_image || postImage(post);
+  const image = ogRaw.startsWith('http') ? ogRaw : `${SITE.base}${ogRaw}`;
   const published = post.published_at || post.created_at;
   const faq = Array.isArray(post.faq) ? post.faq : [];
   const sources = Array.isArray(post.research_sources) ? post.research_sources : [];

@@ -51,12 +51,18 @@ export default async function handler(req, res) {
   };
   const jsonLd = { '@context': 'https://schema.org', '@graph': [personSchema(), blogLd] };
 
+  const ogRaw = posts.length ? postImage(posts[0]) : SITE.ogImage;
+  const ogImg = ogRaw.startsWith('http') ? ogRaw : `${SITE.base}${ogRaw}`;
   const head = `  <meta property="og:type" content="website" />
   <meta property="og:url" content="${esc(url)}" />
   <meta property="og:title" content="${esc(heading)} | Aastha Chopra" />
-  <meta property="og:image" content="${esc(SITE.ogImage)}" />
+  <meta property="og:description" content="${esc(sub)}" />
+  <meta property="og:image" content="${esc(ogImg)}" />
   <meta property="og:locale" content="en_AE" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="${esc(heading)} | Aastha Chopra" />
+  <meta name="twitter:description" content="${esc(sub)}" />
+  <meta name="twitter:image" content="${esc(ogImg)}" />
   <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`;
 
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
