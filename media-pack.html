@@ -279,6 +279,23 @@ table.rc tr:last-child td{border-bottom:none}
 /* Proof figures align cleanly */
 .c-snum,.stats-strip .num,.stat-num,.metric-num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
 @media (prefers-reduced-motion:reduce){.mp-nav-dl{transition:none}}
+
+/* Scroll-told reveal — ON SCREEN ONLY. The PDF is generated via page.pdf()
+   (print-media emulation), so @media print force-shows everything: the
+   downloadable deck is never affected. Base state is visible too, so the
+   page degrades gracefully if JS never runs. */
+@media screen {
+  html.mp-anim .mp-rv {
+    opacity: 0; transform: translateY(22px);
+    transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+    will-change: opacity, transform;
+  }
+  html.mp-anim .mp-rv.in { opacity: 1; transform: none; }
+}
+@media print { .mp-rv { opacity: 1 !important; transform: none !important; } }
+@media (prefers-reduced-motion: reduce) {
+  html.mp-anim .mp-rv { opacity: 1 !important; transform: none !important; transition: none; }
+}
 </style>
 
   <!-- Meta Pixel Code -->
@@ -710,6 +727,35 @@ table.rc tr:last-child td{border-bottom:none}
   }).catch(function(){});
 })();
 </script>
+
+  <script>
+  /* Scroll-told reveal for the on-screen media pack. Progressive enhancement:
+     content is visible by default; we only opt into the hidden→reveal flow
+     when JS runs and motion is allowed. The PDF (print media) is unaffected. */
+  (function(){
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var docEl = document.documentElement;
+    var sel = '.sl, .st, .ss, .c-eye, .c-name, .c-desc, .c-stat, .stat-block, .pillar, .p-card, blockquote';
+    var nodes = document.querySelectorAll(sel);
+    if (!nodes.length) return;
+    docEl.classList.add('mp-anim');
+    nodes.forEach(function(el){ el.classList.add('mp-rv'); });
+    if (!('IntersectionObserver' in window)) {
+      nodes.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    nodes.forEach(function(el){ io.observe(el); });
+    // Safety net: anything still hidden but on-screen after fonts settle gets revealed.
+    setTimeout(function(){
+      document.querySelectorAll('.mp-rv:not(.in)').forEach(function(el){
+        if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in');
+      });
+    }, 2400);
+  })();
+  </script>
 
   <script src="/js/meta-events.js" defer></script>
 </body>
