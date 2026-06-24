@@ -403,9 +403,11 @@ const BLOG_CSS = `
   article table{width:100%;border-collapse:collapse;margin:24px 0;font-size:.92rem;}
   article th,article td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);}
   article th{color:var(--gold);text-transform:uppercase;font-size:.66rem;letter-spacing:.14em;}
-  .bhero{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;margin:0 0 32px;border:1px solid var(--border);background:var(--bg-raised);}
+  /* Reels are native 9:16 — too tall to show whole. Crop to a 4/5 portrait
+     (capped to the viewport), anchored to the top so faces stay in frame. */
+  .bhero{position:relative;width:100%;aspect-ratio:4/5;max-height:80vh;overflow:hidden;margin:0 0 32px;border:1px solid var(--border);background:var(--bg-raised);}
   .bhero::before{content:'';position:absolute;inset:0;background:var(--img) center/cover no-repeat;filter:blur(34px) brightness(.45) saturate(1.05);transform:scale(1.18);}
-  .bhero img{position:relative;width:100%;height:100%;object-fit:contain;object-position:center;display:block;}
+  .bhero img{position:relative;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
 
   .bfaq{margin:56px 0 0;border-top:1px solid var(--border);padding-top:8px;}
   .bfaq h2{font-size:1.5rem;}
@@ -433,7 +435,7 @@ const BLOG_CSS = `
   .bcta-note{min-height:18px;margin-top:12px;font-size:.8rem;color:var(--gold-light);}
   .bcta-ig{display:inline-block;margin-top:8px;font-size:.78rem;letter-spacing:.1em;color:var(--text-mid);}
 
-  .bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;margin-top:30px;}
+  .bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px;margin-top:30px;}
   /* On the wide hub (home + pillar pages) lock to a clean 3-up, stepping down
      gracefully; the narrower single-post container keeps the auto-fill above. */
   .bwrap-wide .bgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;}
@@ -441,11 +443,10 @@ const BLOG_CSS = `
   @media(max-width:560px){.bwrap-wide .bgrid{grid-template-columns:1fr;}}
   .bcard{display:flex;flex-direction:column;overflow:hidden;background:var(--bg-card);border:1px solid var(--border);transition:border-color .25s var(--ease-out),transform .25s var(--ease-out),box-shadow .25s var(--ease-out);}
   .bcard:hover{border-color:var(--border-hi);transform:translateY(-3px);box-shadow:var(--shadow,0 16px 50px rgba(0,0,0,.5));}
-  .bcard-media{position:relative;aspect-ratio:3/2;overflow:hidden;background:var(--bg-raised);}
-  /* Show the full image (no crop): a blurred, dimmed enlargement of the same
-     photo fills the frame so any aspect ratio sits cleanly with no dead bars. */
-  .bcard-media::before{content:'';position:absolute;inset:0;background:var(--img) center/cover no-repeat;filter:blur(28px) brightness(.5) saturate(1.05);transform:scale(1.18);}
-  .bcard-media img{position:relative;width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .6s var(--ease-out);}
+  /* Reels are native 9:16 — too tall to show whole in a tidy grid. Crop each to
+     a consistent 4/5 portrait, anchored to the top so faces/subjects stay. */
+  .bcard-media{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--bg-raised);}
+  .bcard-media img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .6s var(--ease-out);}
   .bcard-body{padding:20px 22px 24px;display:flex;flex-direction:column;flex:1;}
   .bcard .seg{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);}
   .bcard h3{font-family:var(--serif);font-weight:400;font-size:1.4rem;line-height:1.22;margin:9px 0 9px;color:var(--text);}
@@ -487,20 +488,21 @@ const BLOG_CSS = `
     border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:22px;}
   .bsection-head h2{font-family:var(--serif);font-weight:500;font-size:1.6rem;color:var(--text);}
   .bsection-head a{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
-  .bfeature{display:grid;grid-template-columns:1.2fr 0.8fr;margin-top:36px;overflow:hidden;
+  .bfeature{display:grid;grid-template-columns:0.85fr 1.15fr;margin-top:36px;overflow:hidden;
     background:linear-gradient(135deg,var(--bg-card),var(--bg-raised));
     border:1px solid var(--border-hi);transition:transform .25s var(--ease-out),box-shadow .25s var(--ease-out);}
   .bfeature:hover{transform:translateY(-2px);box-shadow:0 20px 60px rgba(0,0,0,.5);}
-  .bfeature-media{position:relative;min-height:460px;overflow:hidden;background:var(--bg-raised);}
+  /* Portrait 4/5 frame so the (usually vertical) lead image sits almost full. */
+  .bfeature-media{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--bg-raised);}
   .bfeature-media::before{content:'';position:absolute;inset:0;background:var(--img) center/cover no-repeat;filter:blur(34px) brightness(.45) saturate(1.05);transform:scale(1.18);}
-  .bfeature-media img{position:relative;width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .7s var(--ease-out);}
+  .bfeature-media img{position:relative;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .7s var(--ease-out);}
   .bfeature-body{padding:52px 52px;display:flex;flex-direction:column;justify-content:center;}
   .bfeature .seg{font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);}
   .bfeature h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.1rem,3.8vw,3.1rem);line-height:1.1;margin:14px 0;color:var(--text);}
   .bfeature p{color:var(--text-mid);max-width:50ch;line-height:1.65;}
   .bfeature-cta{margin-top:20px;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);}
   @media(hover:hover) and (pointer:fine){.bfeature:hover .bfeature-media img{transform:scale(1.04);}}
-  @media(max-width:680px){.bfeature{grid-template-columns:1fr;}.bfeature-media{aspect-ratio:16/9;min-height:0;}.bfeature-body{padding:32px 26px;}}
+  @media(max-width:680px){.bfeature{grid-template-columns:1fr;}.bfeature-media{aspect-ratio:4/5;}.bfeature-body{padding:32px 26px;}}
 
   .binsta{margin:40px 0 0;padding:24px;background:var(--bg-card);border:1px solid var(--border);}
   .binsta-head{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
