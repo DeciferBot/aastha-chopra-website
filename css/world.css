@@ -824,3 +824,56 @@ html.js .world-hero-image img { animation: hero-img-settle 1.3s var(--ease) both
   .gallery-item img, .reel-card img, .reel-feature-poster img, .brand-tag,
   html.js .world-hero-image img { transition: none; animation: none; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   BOLD PASS — cohesive with the homepage: cinematic reveals +
+   premium CTA sheen. Hover-gated, reduced-motion-safe.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Cinematic scroll-reveal — blur + micro-scale settle */
+html.js .reveal {
+  transform: translateY(34px) scale(0.985);
+  filter: blur(7px);
+  will-change: opacity, transform, filter;
+  transition: opacity 0.9s var(--ease), transform 1s var(--ease), filter 0.7s var(--ease);
+}
+html.js .reveal.visible { transform: none; filter: blur(0); }
+
+/* Conversion CTA — light sheen sweeps across the gold + a real lift.
+   Uses background-position (not an overlay) so button text stays crisp. */
+.btn-primary, .world-nav-cta {
+  background-image: linear-gradient(110deg, var(--gold) 0%, var(--gold-light) 46%, var(--gold) 92%);
+  background-size: 220% 100%;
+  background-position: 100% 0;
+  box-shadow: 0 2px 14px rgba(196,152,58,0.14);
+  transition: background-position 0.6s var(--ease), transform 0.18s var(--ease),
+              box-shadow 0.4s ease, opacity 0.2s;
+}
+.btn-primary:hover, .world-nav-cta:hover { opacity: 1; background-position: 0 0; }
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(196,152,58,0.30); }
+  .world-nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(196,152,58,0.28); }
+}
+
+/* Outline CTA — warm wash + lift instead of just a colour swap */
+.btn-outline {
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease),
+              background 0.3s var(--ease), transform 0.18s var(--ease);
+}
+.btn-outline:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .btn-outline:hover { background: var(--gold-dim); transform: translateY(-2px); }
+}
+
+/* Cognac band CTA — subtle lift to match */
+@media (hover: hover) and (pointer: fine) {
+  .cognac-band .btn-cognac:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(0,0,0,0.4); }
+}
+
+/* Proof figures — tabular alignment */
+.stat-num, .stat-number, .whitespace-stat .big { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal { transform: none; filter: none; transition: none; }
+  .btn-primary, .world-nav-cta, .btn-outline, .cognac-band .btn-cognac { transition: none; }
+}
