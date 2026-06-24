@@ -9,7 +9,7 @@
 
 import {
   SITE, sb, esc, renderShell, ctaBlock, segmentMeta,
-  renderHeroSVG, renderAuthorBox, renderPostCard, personSchema, renderInstagramBlock,
+  renderHeroSVG, renderAuthorBox, renderPostCard, personSchema, renderInstagramBlock, segmentImage,
 } from './_blog.js';
 
 export default async function handler(req, res) {
@@ -147,9 +147,7 @@ function renderArticle({ post, url, seg, published, faq, sources, related }) {
   });
   const readMins = Math.max(2, Math.round((post.word_count || 0) / 220));
 
-  const heroHtml = post.hero_image_url
-    ? `<img class="bhero" src="${esc(post.hero_image_url)}" alt="${esc(post.title)}" loading="lazy" />`
-    : renderHeroSVG(post.segment);
+  const heroHtml = `<img class="bhero" src="${esc(post.hero_image_url || segmentImage(post.segment))}" alt="${esc(post.title)}" loading="eager" />`;
 
   const faqHtml = faq.length ? `
     <section class="bfaq">

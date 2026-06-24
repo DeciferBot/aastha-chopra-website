@@ -60,6 +60,23 @@ export function segmentMeta(key) {
   return SEGMENTS[key] || { label: 'Journal', page: '/', blurb: '' };
 }
 
+/** On-brand local photography per pillar, so hub cards carry a real image
+ *  (absolute paths — the blog is served from /blog). */
+export const SEGMENT_IMG = {
+  fashion:     '/images/aastha-chopra-fashion-editorial-dubai.jpg',
+  beauty:      '/images/aastha-chopra-premium-beauty-dubai.jpg',
+  fragrance:   '/images/aastha-chopra-evening-editorial-style.jpg',
+  jewellery:   '/images/aastha-chopra-dubai-luxury-fashion-beauty.jpg',
+  wellness:    '/images/aastha-chopra-dubai-wellness-fitness-hero.jpg',
+  hospitality: '/images/aastha-chopra-dubai-hotel-content.jpg',
+  travel:      '/images/aastha-chopra-dubai-luxury-travel-hero.jpg',
+  automobile:  '/images/aastha-chopra-dubai-luxury-rooftop.jpg',
+  retail:      '/images/aastha-chopra-dubai-fashion.jpg',
+};
+export function segmentImage(key) {
+  return SEGMENT_IMG[key] || '/images/aastha-chopra-dubai-creator-portrait.jpg';
+}
+
 /** Supabase REST helper (service key, server-side only). */
 export async function sb(path, opts = {}) {
   const key = process.env.SUPABASE_SERVICE_KEY;
@@ -84,7 +101,7 @@ export function esc(s) {
 }
 
 /** Render the full HTML document with shared chrome around inner body markup. */
-export function renderShell({ title, description, canonical, head = '', body, activeNav = '' }) {
+export function renderShell({ title, description, canonical, head = '', body, activeNav = '', wide = false }) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -115,7 +132,7 @@ ${head}
     </ul>
     <a href="${SITE.ig}" class="bnav-cta" target="_blank" rel="noopener">Follow</a>
   </nav>
-  <main class="bwrap">
+  <main class="bwrap${wide ? ' bwrap-wide' : ''}">
 ${body}
   </main>
   <footer class="bfoot">
@@ -191,9 +208,12 @@ export function renderPostCard(p) {
   const dek = p.excerpt || p.meta_description || '';
   const short = dek.length > 130 ? dek.slice(0, 130).trim() + '…' : dek;
   return `<a class="bcard" href="/blog/${esc(p.slug)}">
-        <span class="seg">${esc(seg.label)}</span>
-        <h3>${esc(p.title)}</h3>
-        <p>${esc(short)}</p>
+        <div class="bcard-media"><img src="${segmentImage(p.segment)}" alt="" loading="lazy" /></div>
+        <div class="bcard-body">
+          <span class="seg">${esc(seg.label)}</span>
+          <h3>${esc(p.title)}</h3>
+          <p>${esc(short)}</p>
+        </div>
       </a>`;
 }
 
@@ -273,7 +293,8 @@ const BLOG_CSS = `
     background:var(--gold);padding:9px 20px;}
   .bnav-cta:hover{color:var(--text-on-gold);opacity:.9;}
   .bwrap{max-width:720px;margin:0 auto;padding:64px 24px 24px;}
-  @media(max-width:600px){.bnav-links{display:none;}.bwrap{padding-top:44px;}}
+  .bwrap-wide{max-width:1200px;padding-left:40px;padding-right:40px;}
+  @media(max-width:600px){.bnav-links{display:none;}.bwrap{padding-top:44px;}.bwrap-wide{padding-left:20px;padding-right:20px;}}
 
   .bkicker{font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;}
   .bcrumb{font-size:.66rem;letter-spacing:.1em;color:var(--text-dim);margin-bottom:22px;}
@@ -321,12 +342,16 @@ const BLOG_CSS = `
   .bcta-note{min-height:18px;margin-top:12px;font-size:.8rem;color:var(--gold-light);}
   .bcta-ig{display:inline-block;margin-top:8px;font-size:.78rem;letter-spacing:.1em;color:var(--text-mid);}
 
-  .bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;margin-top:32px;}
-  .bcard{display:block;background:var(--bg-card);border:1px solid var(--border);padding:24px;transition:border-color .2s,transform .2s;}
-  .bcard:hover{border-color:var(--border-hi);transform:translateY(-2px);}
-  .bcard .seg{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);}
-  .bcard h3{font-family:var(--serif);font-weight:400;font-size:1.35rem;line-height:1.25;margin:10px 0;color:var(--text);}
-  .bcard p{font-size:.88rem;color:var(--text-mid);}
+  .bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-top:30px;}
+  .bcard{display:flex;flex-direction:column;overflow:hidden;background:var(--bg-card);border:1px solid var(--border);transition:border-color .25s var(--ease-out),transform .25s var(--ease-out),box-shadow .25s var(--ease-out);}
+  .bcard:hover{border-color:var(--border-hi);transform:translateY(-3px);box-shadow:var(--shadow,0 16px 50px rgba(0,0,0,.5));}
+  .bcard-media{aspect-ratio:3/2;overflow:hidden;background:var(--bg-raised);}
+  .bcard-media img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .6s var(--ease-out);}
+  .bcard-body{padding:20px 22px 24px;display:flex;flex-direction:column;flex:1;}
+  .bcard .seg{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);}
+  .bcard h3{font-family:var(--serif);font-weight:400;font-size:1.4rem;line-height:1.22;margin:9px 0 9px;color:var(--text);}
+  .bcard p{font-size:.9rem;color:var(--text-mid);line-height:1.6;}
+  @media(hover:hover) and (pointer:fine){.bcard:hover .bcard-media img{transform:scale(1.05);}}
   .bhubhead{text-align:center;margin-bottom:8px;}
   .bhubhead h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,6vw,3.4rem);}
   .bhubhead p{color:var(--text-mid);max-width:560px;margin:14px auto 0;}
@@ -363,12 +388,19 @@ const BLOG_CSS = `
     border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:22px;}
   .bsection-head h2{font-family:var(--serif);font-weight:500;font-size:1.6rem;color:var(--text);}
   .bsection-head a{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);}
-  .bfeature{display:block;margin-top:28px;padding:36px 32px;background:linear-gradient(135deg,var(--bg-card),var(--bg-raised));
-    border:1px solid var(--border-hi);transition:transform .2s;}
-  .bfeature:hover{transform:translateY(-2px);}
+  .bfeature{display:grid;grid-template-columns:1.05fr 0.95fr;margin-top:30px;overflow:hidden;
+    background:linear-gradient(135deg,var(--bg-card),var(--bg-raised));
+    border:1px solid var(--border-hi);transition:transform .25s var(--ease-out),box-shadow .25s var(--ease-out);}
+  .bfeature:hover{transform:translateY(-2px);box-shadow:0 20px 60px rgba(0,0,0,.5);}
+  .bfeature-media{position:relative;min-height:300px;overflow:hidden;}
+  .bfeature-media img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .7s var(--ease-out);}
+  .bfeature-body{padding:44px 44px;display:flex;flex-direction:column;justify-content:center;}
   .bfeature .seg{font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);}
-  .bfeature h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.15;margin:10px 0;color:var(--text);}
-  .bfeature p{color:var(--text-mid);max-width:60ch;}
+  .bfeature h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.8rem,3.4vw,2.7rem);line-height:1.12;margin:12px 0;color:var(--text);}
+  .bfeature p{color:var(--text-mid);max-width:50ch;line-height:1.65;}
+  .bfeature-cta{margin-top:20px;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);}
+  @media(hover:hover) and (pointer:fine){.bfeature:hover .bfeature-media img{transform:scale(1.04);}}
+  @media(max-width:680px){.bfeature{grid-template-columns:1fr;}.bfeature-media{aspect-ratio:16/9;min-height:0;}.bfeature-body{padding:32px 26px;}}
 
   .binsta{margin:40px 0 0;padding:24px;background:var(--bg-card);border:1px solid var(--border);}
   .binsta-head{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
