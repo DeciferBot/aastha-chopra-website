@@ -403,12 +403,11 @@ const BLOG_CSS = `
   article table{width:100%;border-collapse:collapse;margin:24px 0;font-size:.92rem;}
   article th,article td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);}
   article th{color:var(--gold);text-transform:uppercase;font-size:.66rem;letter-spacing:.14em;}
-  /* Portrait-friendly hero: most heroes are vertical reels, so a 4/5 frame
-     (capped to the viewport) lets them sit almost full with only a soft blur
-     edge, instead of a thin strip lost in a 16/9 letterbox. */
-  .bhero{position:relative;width:100%;aspect-ratio:4/5;max-height:78vh;overflow:hidden;margin:0 0 32px;border:1px solid var(--border);background:var(--bg-raised);}
+  /* Reels are native 9:16 — too tall to show whole. Crop to a 4/5 portrait
+     (capped to the viewport), anchored to the top so faces stay in frame. */
+  .bhero{position:relative;width:100%;aspect-ratio:4/5;max-height:80vh;overflow:hidden;margin:0 0 32px;border:1px solid var(--border);background:var(--bg-raised);}
   .bhero::before{content:'';position:absolute;inset:0;background:var(--img) center/cover no-repeat;filter:blur(34px) brightness(.45) saturate(1.05);transform:scale(1.18);}
-  .bhero img{position:relative;width:100%;height:100%;object-fit:contain;object-position:center;display:block;}
+  .bhero img{position:relative;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
 
   .bfaq{margin:56px 0 0;border-top:1px solid var(--border);padding-top:8px;}
   .bfaq h2{font-size:1.5rem;}
@@ -436,18 +435,18 @@ const BLOG_CSS = `
   .bcta-note{min-height:18px;margin-top:12px;font-size:.8rem;color:var(--gold-light);}
   .bcta-ig{display:inline-block;margin-top:8px;font-size:.78rem;letter-spacing:.1em;color:var(--text-mid);}
 
-  /* Masonry via CSS columns. The images are mostly vertical reels of differing
-     heights, so each card flows to its own image height — full image, no crop,
-     no blurred side-bars. Cards stay intact with break-inside:avoid. */
-  .bgrid{column-count:2;column-gap:24px;margin-top:30px;}
-  .bwrap-wide .bgrid{column-count:3;column-gap:28px;}
-  @media(max-width:920px){.bwrap-wide .bgrid{column-count:2;}}
-  @media(max-width:560px){.bgrid,.bwrap-wide .bgrid{column-count:1;}}
-  .bcard{display:block;break-inside:avoid;-webkit-column-break-inside:avoid;margin:0 0 24px;overflow:hidden;background:var(--bg-card);border:1px solid var(--border);transition:border-color .25s var(--ease-out),transform .25s var(--ease-out),box-shadow .25s var(--ease-out);}
+  .bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px;margin-top:30px;}
+  /* On the wide hub (home + pillar pages) lock to a clean 3-up, stepping down
+     gracefully; the narrower single-post container keeps the auto-fill above. */
+  .bwrap-wide .bgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;}
+  @media(max-width:920px){.bwrap-wide .bgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;}}
+  @media(max-width:560px){.bwrap-wide .bgrid{grid-template-columns:1fr;}}
+  .bcard{display:flex;flex-direction:column;overflow:hidden;background:var(--bg-card);border:1px solid var(--border);transition:border-color .25s var(--ease-out),transform .25s var(--ease-out),box-shadow .25s var(--ease-out);}
   .bcard:hover{border-color:var(--border-hi);transform:translateY(-3px);box-shadow:var(--shadow,0 16px 50px rgba(0,0,0,.5));}
-  /* Media height follows the image itself — the whole photo shows, nothing cropped. */
-  .bcard-media{position:relative;overflow:hidden;background:var(--bg-raised);line-height:0;}
-  .bcard-media img{width:100%;height:auto;display:block;transition:transform .6s var(--ease-out);}
+  /* Reels are native 9:16 — too tall to show whole in a tidy grid. Crop each to
+     a consistent 4/5 portrait, anchored to the top so faces/subjects stay. */
+  .bcard-media{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--bg-raised);}
+  .bcard-media img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .6s var(--ease-out);}
   .bcard-body{padding:20px 22px 24px;display:flex;flex-direction:column;flex:1;}
   .bcard .seg{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);}
   .bcard h3{font-family:var(--serif);font-weight:400;font-size:1.4rem;line-height:1.22;margin:9px 0 9px;color:var(--text);}
@@ -496,7 +495,7 @@ const BLOG_CSS = `
   /* Portrait 4/5 frame so the (usually vertical) lead image sits almost full. */
   .bfeature-media{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--bg-raised);}
   .bfeature-media::before{content:'';position:absolute;inset:0;background:var(--img) center/cover no-repeat;filter:blur(34px) brightness(.45) saturate(1.05);transform:scale(1.18);}
-  .bfeature-media img{position:relative;width:100%;height:100%;object-fit:contain;object-position:center;display:block;transition:transform .7s var(--ease-out);}
+  .bfeature-media img{position:relative;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .7s var(--ease-out);}
   .bfeature-body{padding:52px 52px;display:flex;flex-direction:column;justify-content:center;}
   .bfeature .seg{font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);}
   .bfeature h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.1rem,3.8vw,3.1rem);line-height:1.1;margin:14px 0;color:var(--text);}
