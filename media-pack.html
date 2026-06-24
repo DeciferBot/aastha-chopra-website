@@ -230,8 +230,13 @@ table.rc tr:last-child td{border-bottom:none}
 .mp-nav-links{display:flex;align-items:center;gap:24px}
 .mp-nav-links a{font-family:var(--sans);font-size:11px;font-weight:400;letter-spacing:.14em;color:var(--ivory-dim);text-decoration:none;text-transform:uppercase;transition:color .2s}
 .mp-nav-links a:hover{color:var(--ivory)}
-.mp-nav-dl{font-family:var(--sans);font-size:11px;font-weight:400;letter-spacing:.14em;color:var(--gold);text-decoration:none;text-transform:uppercase;border:1px solid var(--gold-mid);padding:7px 16px;transition:all .2s}
-.mp-nav-dl:hover{background:var(--gold-pale);color:var(--gold-hi)}
+.mp-nav-dl{font-family:var(--sans);font-size:11px;font-weight:400;letter-spacing:.14em;color:var(--gold);text-decoration:none;text-transform:uppercase;border:1px solid var(--gold-mid);padding:7px 16px;transition:background .2s ease,color .2s ease,border-color .2s ease,transform .18s cubic-bezier(0.22,1,0.36,1)}
+.mp-nav-dl:hover{background:var(--gold-pale);color:var(--gold-hi);border-color:var(--gold)}
+@media (hover:hover) and (pointer:fine){.mp-nav-dl:hover{transform:translateY(-1px)}}
+.mp-nav-dl:active{transform:scale(.97)}
+.mp-nav-links a{transition:color .2s ease,transform .18s cubic-bezier(0.22,1,0.36,1)}
+.mp-nav-links a:active{transform:scale(.97)}
+@media (prefers-reduced-motion:reduce){.mp-nav-dl,.mp-nav-links a{transition:none}}
 
 /* ── WhatsApp CTA on contact page ── */
 .cp-wa{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;text-decoration:none;font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:14px 28px;margin-bottom:32px;transition:opacity .2s}
