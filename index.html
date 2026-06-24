@@ -390,20 +390,6 @@
       overflow-x: hidden;
     }
 
-    /* Custom Cursor */
-    .cursor {
-      position: fixed;
-      width: 8px;
-      height: 8px;
-      background: var(--gold);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s, width 0.3s, height 0.3s, opacity 0.3s;
-    }
-    .cursor.hover { width: 16px; height: 16px; }
-
     /* Nav */
     nav {
       position: fixed;
@@ -2091,9 +2077,6 @@
 
     /* ─── MOBILE (<768px) ─── */
     @media (max-width: 768px) {
-      body { cursor: auto; }
-      .cursor { display: none; }
-
       nav { padding: 18px 20px; }
       nav.scrolled { padding: 14px 20px; }
       .nav-links { display: none; }
@@ -3242,8 +3225,6 @@
   </footer>
 
   <script>
-    // Custom Cursor
-    const cursor = document.getElementById('cursor');
     let mx = 0, my = 0;
     let parallaxX = 0, parallaxY = 0, targetPX = 0, targetPY = 0;
 
@@ -3390,10 +3371,6 @@
             <div class="insta-overlay"><svg class="insta-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></div>
           </a>`;
         }).join('');
-        document.querySelectorAll('.insta-tile').forEach(el => {
-          el.addEventListener('mouseenter', () => { cursor?.classList.add('hover'); });
-          el.addEventListener('mouseleave', () => { cursor?.classList.remove('hover'); });
-        });
       } catch {}
     }
     loadInstagramFeed();
