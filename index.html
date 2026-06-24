@@ -388,22 +388,7 @@
       font-family: var(--font-ui);
       font-weight: 300;
       overflow-x: hidden;
-      cursor: none;
     }
-
-    /* Custom Cursor */
-    .cursor {
-      position: fixed;
-      width: 8px;
-      height: 8px;
-      background: var(--gold);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s, width 0.3s, height 0.3s, opacity 0.3s;
-    }
-    .cursor.hover { width: 16px; height: 16px; }
 
     /* Nav */
     nav {
@@ -1199,7 +1184,7 @@
     .portfolio-item {
       position: relative;
       overflow: hidden;
-      cursor: none;
+      cursor: pointer;
       display: block;
       break-inside: avoid;
       margin-bottom: 4px;
@@ -2046,7 +2031,7 @@
       display: none;
       flex-direction: column;
       gap: 5px;
-      cursor: none;
+      cursor: pointer;
       padding: 4px;
     }
     .hamburger span {
@@ -2092,9 +2077,6 @@
 
     /* ─── MOBILE (<768px) ─── */
     @media (max-width: 768px) {
-      body { cursor: auto; }
-      .cursor { display: none; }
-
       nav { padding: 18px 20px; }
       nav.scrolled { padding: 14px 20px; }
       .nav-links { display: none; }
@@ -2621,8 +2603,6 @@
 
   <div id="scroll-progress"></div>
 
-  <!-- Custom Cursor -->
-  <div class="cursor" id="cursor"></div>
 
   <!-- Navigation -->
   <nav id="nav">
@@ -2818,6 +2798,8 @@
         display: flex;
         flex-direction: column;
         min-height: 480px;
+        text-decoration: none;
+        color: inherit;
       }
       @media (max-width: 860px) { .bf-card { min-height: 420px; } }
       .bf-card:hover { border-color: var(--color-border-strong); }
@@ -3051,7 +3033,7 @@
     <div class="bf-cards">
 
       <!-- Card 1: Fashion & Beauty -->
-      <div class="bf-card reveal">
+      <a href="/fashion.html" class="bf-card reveal">
         <div class="bf-card-visual">
           <img src="images/aastha-chopra-fashion-editorial-dubai.jpg" alt="Aastha Chopra — Fashion editorial" loading="lazy" />
           <div class="bf-card-tag">Fashion · Beauty · Fragrance</div>
@@ -3059,12 +3041,12 @@
         <div class="bf-card-body" style="padding: 28px 28px;">
           <div class="bf-card-title">The Style Authority</div>
           <p class="bf-card-copy">Fashion-week front rows. Exclusive launches. Editorial content that signals your brand belongs in the world your customer aspires to enter.</p>
-          <a href="/fashion.html" class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <span class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
-      </div>
+      </a>
 
       <!-- Card 2: Luxury & Experiences -->
-      <div class="bf-card reveal reveal-delay-1">
+      <a href="/luxury.html" class="bf-card reveal reveal-delay-1">
         <div class="bf-card-visual">
           <img src="images/aastha-chopra-dubai-luxury-rooftop.jpg" alt="Aastha Chopra — Dubai luxury rooftop" loading="lazy" style="object-position: center 25%;" />
           <div class="bf-card-tag">Hotels · Dining · Travel</div>
@@ -3072,12 +3054,12 @@
         <div class="bf-card-body" style="padding: 28px 28px;">
           <div class="bf-card-title">The Dubai Insider</div>
           <p class="bf-card-copy">Your local market is watching her. Hotels get Googled, dinners get booked, destinations land on wishlists the morning after she posts.</p>
-          <a href="/luxury.html" class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <span class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
-      </div>
+      </a>
 
       <!-- Card 3: Wellness -->
-      <div class="bf-card reveal reveal-delay-2">
+      <a href="/wellness.html" class="bf-card reveal reveal-delay-2">
         <div class="bf-card-visual">
           <img src="images/aastha-chopra-dubai-wellness-fitness-hero.jpg" alt="Aastha Chopra — Wellness and fitness" loading="lazy" style="object-position: center center;" />
           <div class="bf-card-tag">Wellness · Fitness · Balance</div>
@@ -3085,9 +3067,9 @@
         <div class="bf-card-body" style="padding: 28px 28px;">
           <div class="bf-card-title">The Everyday Athlete</div>
           <p class="bf-card-copy">Practising lawyer. Adventure athlete. Arctic waterfall hiker. The highest-ROI whitespace on her profile — almost no wellness brands have been here yet.</p>
-          <a href="/wellness.html" class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <span class="bf-card-cta">Enter this world <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </div>
-      </div>
+      </a>
     </div>
 
     <!-- Audience snapshot — what a media planner puts in their brief -->
@@ -3111,24 +3093,13 @@
     </div>
 
     <script>
+      // World cards are now real links to /fashion.html, /luxury.html, /wellness.html.
+      // Fire a lightweight analytics event on click without blocking navigation.
       document.querySelectorAll('.bf-card').forEach(function(card) {
-        function activate() {
-          document.querySelectorAll('.bf-card').forEach(function(c) { c.classList.remove('active'); });
-          card.classList.add('active');
-          var tab = card.dataset.reelsTab;
-          var tabBtn = document.querySelector('.reels-tab[data-cat="' + tab + '"]');
-          if (tabBtn) tabBtn.click();
-          setTimeout(function() {
-            var reelsSec = document.getElementById('reels');
-            if (reelsSec) reelsSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }, 80);
+        card.addEventListener('click', function() {
           if (typeof gtag !== 'undefined') {
-            gtag('event', 'avatar_selected', { event_category: 'brand_fit', avatar: card.dataset.avatar });
+            gtag('event', 'world_selected', { event_category: 'brand_fit', destination: card.getAttribute('href') });
           }
-        }
-        card.addEventListener('click', activate);
-        card.addEventListener('keydown', function(e) {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
         });
       });
     </script>
@@ -3361,15 +3332,11 @@
   </footer>
 
   <script>
-    // Custom Cursor
-    const cursor = document.getElementById('cursor');
     let mx = 0, my = 0;
     let parallaxX = 0, parallaxY = 0, targetPX = 0, targetPY = 0;
 
     document.addEventListener('mousemove', e => {
       mx = e.clientX; my = e.clientY;
-      cursor.style.left = mx + 'px';
-      cursor.style.top = my + 'px';
 
       // Mouse parallax for hero image
       const cx = window.innerWidth / 2;
@@ -3403,11 +3370,6 @@
         heroImg.style.transform = `translateY(${sy * 0.35}px) scale(1.06)`;
       }
     }, { passive: true });
-
-    document.querySelectorAll('a, button, .portfolio-item, .pillar-card, .insta-tile, .collab-tag').forEach(el => {
-      el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); });
-      el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); });
-    });
 
     // Scroll nav
     const nav = document.getElementById('nav');
@@ -3516,10 +3478,6 @@
             <div class="insta-overlay"><svg class="insta-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></div>
           </a>`;
         }).join('');
-        document.querySelectorAll('.insta-tile').forEach(el => {
-          el.addEventListener('mouseenter', () => { cursor?.classList.add('hover'); });
-          el.addEventListener('mouseleave', () => { cursor?.classList.remove('hover'); });
-        });
       } catch {}
     }
     loadInstagramFeed();
