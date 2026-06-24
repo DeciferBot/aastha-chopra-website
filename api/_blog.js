@@ -129,6 +129,11 @@ export async function attachInstagramImages(posts) {
 export const IMAGE_OVERRIDES = {
   bySlug: {
     'best-gyms-in-dubai': '/images/aastha-chopra-dubai-fitness.jpg',
+    // On-brand healthy-Dubai-dining flatlay generated for this post (the repo has
+    // no food photo). Egress policy blocked downloading it into /images from this
+    // environment, so it is referenced from the generator CDN for now — replace
+    // with a self-hosted /images/ copy when convenient for long-term durability.
+    'healthy-food-in-dubai': 'https://d8j0ntlcm91z4.cloudfront.net/user_3F8jJ8z0wHCOBoiF5N79bKVkexP/hf_20260624_081152_efe1c1d6-8f85-4659-b439-0da6bd492d45.png',
   },
   byTopic: [
     { test: /\bgyms?\b/i, segment: 'wellness', img: '/images/aastha-chopra-dubai-fitness.jpg' },
