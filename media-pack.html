@@ -293,6 +293,9 @@ table.rc tr:last-child td{border-bottom:none}
   html.mp-anim .mp-rv.in { opacity: 1; transform: none; }
 }
 @media print { .mp-rv { opacity: 1 !important; transform: none !important; } }
+/* Belt-and-suspenders: keep the on-screen nav out of the printed/PDF deck so
+   page 1 is the cover, not the floating nav bar. */
+@media print { .mp-nav { display: none !important; } }
 @media (prefers-reduced-motion: reduce) {
   html.mp-anim .mp-rv { opacity: 1 !important; transform: none !important; transition: none; }
 }
