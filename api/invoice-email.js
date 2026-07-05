@@ -1,3 +1,18 @@
+function escapeHtml(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// Subjects go through JSON, not raw SMTP headers, but strip control
+// characters as cheap defense-in-depth against header injection.
+function sanitizeSubject(s) {
+  return String(s || '').replace(/[\r\n]+/g, ' ').trim();
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -13,7 +28,7 @@ export default async function handler(req, res) {
   }
 
   const RESEND_API_KEY = process.env.RESEND_API_KEY;
-  const subjectBits = [invoiceNumber, campaign || agencyName].filter(Boolean).join(' — ');
+  const subjectBits = sanitizeSubject([invoiceNumber, campaign || agencyName].filter(Boolean).join(' — '));
 
   const cc = ccEmail && ccEmail.toLowerCase() !== agencyEmail.toLowerCase() ? [ccEmail] : undefined;
 
@@ -29,7 +44,7 @@ export default async function handler(req, res) {
         to: [agencyEmail],
         ...(cc ? { cc } : {}),
         subject: `Invoice ${subjectBits}`,
-        html: `<p>Hi,</p><p>Please find attached invoice ${invoiceNumber ? '<strong>' + invoiceNumber + '</strong>' : ''}${campaign ? ' for <strong>' + campaign + '</strong>' : ''}.</p><p>Thank you,<br/>Aastha Chopra</p>`,
+        html: `<p>Hi,</p><p>Please find attached invoice ${invoiceNumber ? '<strong>' + escapeHtml(invoiceNumber) + '</strong>' : ''}${campaign ? ' for <strong>' + escapeHtml(campaign) + '</strong>' : ''}.</p><p>Thank you,<br/>Aastha Chopra</p>`,
         attachments: [{ filename, content: pdfBase64 }],
       }),
     });

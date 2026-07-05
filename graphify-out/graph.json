@@ -9,7 +9,7 @@
       "source_file": "generate-pdf.js",
       "source_location": "L1",
       "id": "generate_pdf_js",
-      "community": 22,
+      "community": 28,
       "norm_label": "generate-pdf.js"
     },
     {
@@ -333,7 +333,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L1",
       "id": "js_meta_events_js",
-      "community": 17,
+      "community": 19,
       "norm_label": "meta-events.js"
     },
     {
@@ -342,7 +342,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L11",
       "id": "meta_events_fbqready",
-      "community": 17,
+      "community": 19,
       "norm_label": "fbqready()"
     },
     {
@@ -351,7 +351,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L12",
       "id": "meta_events_eventid",
-      "community": 17,
+      "community": 19,
       "norm_label": "eventid()"
     },
     {
@@ -387,7 +387,7 @@
       "source_file": "api/analytics-auth.js",
       "source_location": "L1",
       "id": "api_analytics_auth_js",
-      "community": 18,
+      "community": 20,
       "norm_label": "analytics-auth.js"
     },
     {
@@ -396,7 +396,25 @@
       "source_file": "api/analytics-auth.js",
       "source_location": "L1",
       "id": "analytics_auth_handler",
-      "community": 18,
+      "community": 20,
+      "norm_label": "handler()"
+    },
+    {
+      "label": "invoice-save.js",
+      "file_type": "code",
+      "source_file": "api/invoice-save.js",
+      "source_location": "L1",
+      "id": "api_invoice_save_js",
+      "community": 21,
+      "norm_label": "invoice-save.js"
+    },
+    {
+      "label": "handler()",
+      "file_type": "code",
+      "source_file": "api/invoice-save.js",
+      "source_location": "L1",
+      "id": "invoice_save_handler",
+      "community": 21,
       "norm_label": "handler()"
     },
     {
@@ -571,6 +589,24 @@
       "norm_label": "rendersegmentview()"
     },
     {
+      "label": "invoice-auth.js",
+      "file_type": "code",
+      "source_file": "api/invoice-auth.js",
+      "source_location": "L1",
+      "id": "api_invoice_auth_js",
+      "community": 22,
+      "norm_label": "invoice-auth.js"
+    },
+    {
+      "label": "handler()",
+      "file_type": "code",
+      "source_file": "api/invoice-auth.js",
+      "source_location": "L1",
+      "id": "invoice_auth_handler",
+      "community": 22,
+      "norm_label": "handler()"
+    },
+    {
       "label": "_profile.js",
       "file_type": "code",
       "source_file": "api/_profile.js",
@@ -661,6 +697,42 @@
       "norm_label": "handler()"
     },
     {
+      "label": "invoice-email.js",
+      "file_type": "code",
+      "source_file": "api/invoice-email.js",
+      "source_location": "L1",
+      "id": "api_invoice_email_js",
+      "community": 16,
+      "norm_label": "invoice-email.js"
+    },
+    {
+      "label": "escapeHtml()",
+      "file_type": "code",
+      "source_file": "api/invoice-email.js",
+      "source_location": "L1",
+      "id": "invoice_email_escapehtml",
+      "community": 16,
+      "norm_label": "escapehtml()"
+    },
+    {
+      "label": "sanitizeSubject()",
+      "file_type": "code",
+      "source_file": "api/invoice-email.js",
+      "source_location": "L12",
+      "id": "invoice_email_sanitizesubject",
+      "community": 16,
+      "norm_label": "sanitizesubject()"
+    },
+    {
+      "label": "handler()",
+      "file_type": "code",
+      "source_file": "api/invoice-email.js",
+      "source_location": "L16",
+      "id": "invoice_email_handler",
+      "community": 16,
+      "norm_label": "handler()"
+    },
+    {
       "label": "capi-event.js",
       "file_type": "code",
       "source_file": "api/capi-event.js",
@@ -676,6 +748,24 @@
       "source_location": "L10",
       "id": "capi_event_handler",
       "community": 9,
+      "norm_label": "handler()"
+    },
+    {
+      "label": "invoice-list.js",
+      "file_type": "code",
+      "source_file": "api/invoice-list.js",
+      "source_location": "L1",
+      "id": "api_invoice_list_js",
+      "community": 23,
+      "norm_label": "invoice-list.js"
+    },
+    {
+      "label": "handler()",
+      "file_type": "code",
+      "source_file": "api/invoice-list.js",
+      "source_location": "L1",
+      "id": "invoice_list_handler",
+      "community": 23,
       "norm_label": "handler()"
     },
     {
@@ -702,7 +792,7 @@
       "source_file": "api/ig-profile.js",
       "source_location": "L1",
       "id": "api_ig_profile_js",
-      "community": 19,
+      "community": 24,
       "norm_label": "ig-profile.js"
     },
     {
@@ -711,7 +801,7 @@
       "source_file": "api/ig-profile.js",
       "source_location": "L3",
       "id": "ig_profile_handler",
-      "community": 19,
+      "community": 24,
       "norm_label": "handler()"
     },
     {
@@ -1080,7 +1170,7 @@
       "source_file": "api/reels.js",
       "source_location": "L1",
       "id": "api_reels_js",
-      "community": 0,
+      "community": 17,
       "norm_label": "reels.js"
     },
     {
@@ -1089,7 +1179,7 @@
       "source_file": "api/reels.js",
       "source_location": "L20",
       "id": "reels_classify",
-      "community": 0,
+      "community": 17,
       "norm_label": "classify()"
     },
     {
@@ -1107,7 +1197,7 @@
       "source_file": "api/reels.js",
       "source_location": "L25",
       "id": "reels_cardcaption",
-      "community": 0,
+      "community": 17,
       "norm_label": "cardcaption()"
     },
     {
@@ -1116,7 +1206,7 @@
       "source_file": "api/reels.js",
       "source_location": "L34",
       "id": "reels_handler",
-      "community": 0,
+      "community": 17,
       "norm_label": "handler()"
     },
     {
@@ -1125,7 +1215,7 @@
       "source_file": "api/instagram.js",
       "source_location": "L1",
       "id": "api_instagram_js",
-      "community": 20,
+      "community": 25,
       "norm_label": "instagram.js"
     },
     {
@@ -1134,7 +1224,25 @@
       "source_file": "api/instagram.js",
       "source_location": "L15",
       "id": "instagram_handler",
-      "community": 20,
+      "community": 25,
+      "norm_label": "handler()"
+    },
+    {
+      "label": "invoice-next.js",
+      "file_type": "code",
+      "source_file": "api/invoice-next.js",
+      "source_location": "L1",
+      "id": "api_invoice_next_js",
+      "community": 26,
+      "norm_label": "invoice-next.js"
+    },
+    {
+      "label": "handler()",
+      "file_type": "code",
+      "source_file": "api/invoice-next.js",
+      "source_location": "L1",
+      "id": "invoice_next_handler",
+      "community": 26,
       "norm_label": "handler()"
     },
     {
@@ -1143,7 +1251,7 @@
       "source_file": "api/ig-stats.js",
       "source_location": "L1",
       "id": "api_ig_stats_js",
-      "community": 21,
+      "community": 27,
       "norm_label": "ig-stats.js"
     },
     {
@@ -1152,7 +1260,7 @@
       "source_file": "api/ig-stats.js",
       "source_location": "L11",
       "id": "ig_stats_handler",
-      "community": 21,
+      "community": 27,
       "norm_label": "handler()"
     },
     {
@@ -1764,7 +1872,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L1",
       "id": "api_cron_inbound_nudge_js",
-      "community": 16,
+      "community": 18,
       "norm_label": "inbound-nudge.js"
     },
     {
@@ -1773,7 +1881,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L16",
       "id": "inbound_nudge_sb",
-      "community": 16,
+      "community": 18,
       "norm_label": "sb()"
     },
     {
@@ -1782,7 +1890,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L24",
       "id": "inbound_nudge_tg",
-      "community": 16,
+      "community": 18,
       "norm_label": "tg()"
     },
     {
@@ -1791,7 +1899,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L32",
       "id": "inbound_nudge_handler",
-      "community": 16,
+      "community": 18,
       "norm_label": "handler()"
     },
     {
@@ -3050,6 +3158,18 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "api/invoice-save.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "api_invoice_save_js",
+      "_tgt": "invoice_save_handler",
+      "source": "api_invoice_save_js",
+      "target": "invoice_save_handler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "api/telegram.js",
       "source_location": "L17",
       "weight": 1.0,
@@ -3842,6 +3962,18 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "api/invoice-auth.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "api_invoice_auth_js",
+      "_tgt": "invoice_auth_handler",
+      "source": "api_invoice_auth_js",
+      "target": "invoice_auth_handler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "api/_profile.js",
       "source_location": "L29",
       "weight": 1.0,
@@ -4022,6 +4154,66 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "api/invoice-email.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "api_invoice_email_js",
+      "_tgt": "invoice_email_escapehtml",
+      "source": "api_invoice_email_js",
+      "target": "invoice_email_escapehtml",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/invoice-email.js",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_src": "api_invoice_email_js",
+      "_tgt": "invoice_email_sanitizesubject",
+      "source": "api_invoice_email_js",
+      "target": "invoice_email_sanitizesubject",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/invoice-email.js",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_src": "api_invoice_email_js",
+      "_tgt": "invoice_email_handler",
+      "source": "api_invoice_email_js",
+      "target": "invoice_email_handler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/invoice-email.js",
+      "source_location": "L47",
+      "weight": 1.0,
+      "_src": "invoice_email_handler",
+      "_tgt": "invoice_email_escapehtml",
+      "source": "invoice_email_escapehtml",
+      "target": "invoice_email_handler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/invoice-email.js",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_src": "invoice_email_handler",
+      "_tgt": "invoice_email_sanitizesubject",
+      "source": "invoice_email_sanitizesubject",
+      "target": "invoice_email_handler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "api/capi-event.js",
       "source_location": "L10",
       "weight": 1.0,
@@ -4042,6 +4234,18 @@
       "_tgt": "capi_sendcapievent",
       "source": "capi_event_handler",
       "target": "capi_sendcapievent"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/invoice-list.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "api_invoice_list_js",
+      "_tgt": "invoice_list_handler",
+      "source": "api_invoice_list_js",
+      "target": "invoice_list_handler",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -5157,6 +5361,18 @@
       "_tgt": "instagram_handler",
       "source": "api_instagram_js",
       "target": "instagram_handler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/invoice-next.js",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_src": "api_invoice_next_js",
+      "_tgt": "invoice_next_handler",
+      "source": "api_invoice_next_js",
+      "target": "invoice_next_handler",
       "confidence_score": 1.0
     },
     {
