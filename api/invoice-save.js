@@ -3,7 +3,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { invoiceNumber, agencyName, billToText, campaign, poNumber, currency, total, lineItems } = req.body || {};
+  const { invoiceNumber, agencyName, billToText, campaign, poNumber, currency, total, lineItems, profile } = req.body || {};
 
   if (!invoiceNumber || !agencyName || !billToText) {
     return res.status(400).json({ error: 'invoiceNumber, agencyName and billToText are required' });
@@ -59,6 +59,27 @@ export default async function handler(req, res) {
         method: 'PATCH',
         headers,
         body: JSON.stringify({ last_number: invoiceNumber, updated_at: new Date().toISOString() }),
+      });
+    }
+
+    // Keep her business/bank profile current so it's the same on any device next time.
+    if (profile && typeof profile === 'object') {
+      await fetch(`${SUPABASE_URL}/rest/v1/invoice_profile?id=eq.1`, {
+        method: 'PATCH',
+        headers,
+        body: JSON.stringify({
+          business_name: profile.businessName || null,
+          license_number: profile.licenseNumber || null,
+          email: profile.yourEmail || null,
+          phone: profile.yourPhone || null,
+          instagram_url: profile.instagramUrl || null,
+          bank_name: profile.bankName || null,
+          account_name: profile.accountName || null,
+          account_number: profile.accountNumber || null,
+          swift: profile.swift || null,
+          iban: profile.iban || null,
+          updated_at: new Date().toISOString(),
+        }),
       });
     }
 

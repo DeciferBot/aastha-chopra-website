@@ -164,53 +164,56 @@
 
   #preview-wrap{ display:none; }
   #preview-scroll{
-    overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:10px; border:1px solid var(--border);
-    margin-bottom:1rem;
+    overflow:hidden; border-radius:10px; border:1px solid var(--border);
+    margin-bottom:1rem; background:#0a0908; padding:14px 0;
+    display:flex; justify-content:center;
+    box-shadow: inset 0 2px 24px rgba(0,0,0,.5);
   }
   #action-row{ display:flex; gap:.6rem; }
   #action-row .btn{ margin-top:0; }
   .hint{ color:var(--text-dim); font-size:.75rem; margin-top:.6rem; text-align:center; }
   .error-msg{ color:#c0392b; font-size:.8rem; margin-top:.5rem; display:none; }
+  input:invalid, textarea:invalid{ border-color: rgba(192,57,43,.5); }
 
   /* ---- The actual invoice document, rendered for html2canvas/jsPDF ---- */
   #invoicePreview{
-    width:794px; background:#ffffff; color:#1a1a1a; font-family:'Jost',Helvetica,Arial,sans-serif;
+    width:794px; background:#ffffff; color:#242220; font-family:'Jost',Helvetica,Arial,sans-serif;
+    transform-origin: top center;
   }
+  #preview-scroll #invoicePreview{ box-shadow: 0 12px 48px rgba(0,0,0,.5); }
   .inv-header{
-    background:#131109; color:#F4ECD8; padding:28px 40px; display:flex;
-    justify-content:space-between; align-items:center;
+    background:#131109; color:#F4ECD8; padding:36px 48px 30px; display:flex;
+    justify-content:space-between; align-items:flex-start; border-bottom:3px solid #C4983A;
   }
-  .inv-header .brand{ font-family:'Cormorant Garamond',Georgia,serif; font-size:22px; font-weight:600; }
-  .inv-header .brand small{ display:block; font-family:'Jost',sans-serif; font-size:10px; letter-spacing:.15em; color:#C4983A; text-transform:uppercase; margin-top:4px; }
-  .inv-header .doctitle{ font-size:26px; letter-spacing:.1em; color:#C4983A; font-weight:500; }
-  .inv-license{ padding:10px 40px; font-size:11px; color:#666; }
-  .inv-meta-bar{ display:flex; justify-content:space-between; padding:0 40px; margin-top:14px; }
-  .inv-meta-bar table td{ padding:1px 8px 1px 0; font-size:12px; vertical-align:top; }
-  .inv-meta-bar table td:first-child{ color:#666; white-space:nowrap; }
-  .inv-body{ padding:20px 40px 32px; }
-  .inv-to-row{ display:flex; justify-content:space-between; gap:24px; margin-bottom:18px; }
-  .inv-to-row .box{ font-size:12px; line-height:1.6; }
-  .inv-to-row .box strong{ display:block; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:#999; margin-bottom:4px; }
-  .inv-details table td{ font-size:12px; padding:2px 8px 2px 0; }
-  .inv-details table td:first-child{ color:#999; white-space:nowrap; }
-  .inv-terms{ background:#C4983A; color:#0B0908; display:flex; justify-content:space-between; padding:8px 40px; margin-top:10px; font-size:11px; text-transform:uppercase; letter-spacing:.05em; }
-  table.inv-items{ width:100%; border-collapse:collapse; margin-top:16px; }
+  .inv-header .brand{ font-family:'Cormorant Garamond',Georgia,serif; font-size:26px; font-weight:600; letter-spacing:.01em; }
+  .inv-header .brand small{ display:block; font-family:'Jost',sans-serif; font-size:10px; letter-spacing:.18em; color:#C4983A; text-transform:uppercase; margin-top:6px; font-weight:500; }
+  .inv-header .doctitle{ font-size:30px; letter-spacing:.14em; color:#C4983A; font-weight:500; text-align:right; }
+  .inv-license{ padding:12px 48px; font-size:10.5px; color:#9a9a9a; letter-spacing:.03em; border-bottom:1px solid #eee; }
+  .inv-body{ padding:28px 48px 36px; }
+  .inv-to-row{ display:flex; justify-content:space-between; gap:32px; margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid #eee; }
+  .inv-to-row .box{ font-size:12.5px; line-height:1.7; max-width:280px; }
+  .inv-to-row .box strong{ display:block; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#C4983A; margin-bottom:6px; font-weight:600; }
+  .inv-details table td{ font-size:12.5px; padding:2.5px 0 2.5px 14px; }
+  .inv-details table td:first-child{ color:#9a9a9a; white-space:nowrap; padding-left:0; }
+  .inv-terms{ background:#C4983A; color:#0B0908; display:flex; justify-content:space-between; padding:10px 48px; margin:0 -48px 20px; font-size:11px; text-transform:uppercase; letter-spacing:.08em; font-weight:600; }
+  table.inv-items{ width:100%; border-collapse:collapse; margin-top:4px; }
   table.inv-items thead th{
     background:#131109; color:#F4ECD8; text-align:left; font-size:10px; text-transform:uppercase;
-    letter-spacing:.06em; padding:8px 10px; font-weight:500;
+    letter-spacing:.08em; padding:10px 12px; font-weight:600;
   }
   table.inv-items thead th:last-child, table.inv-items tbody td:last-child{ text-align:right; }
   table.inv-items thead th:nth-child(2), table.inv-items tbody td:nth-child(2){ text-align:center; width:60px; }
-  table.inv-items tbody td{ font-size:12px; padding:9px 10px; border-bottom:1px solid #eee; }
-  .inv-total-row{ display:flex; justify-content:flex-end; margin-top:14px; }
-  .inv-total-row table td{ font-size:13px; padding:3px 0 3px 24px; }
-  .inv-total-row table tr.grand td{ font-weight:600; font-size:16px; border-top:2px solid #131109; padding-top:8px; }
-  .inv-notes{ font-size:11px; color:#666; margin-top:16px; white-space:pre-wrap; }
-  .inv-pay{ margin-top:22px; font-size:12px; }
-  .inv-pay strong{ display:block; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:#999; margin-bottom:6px; }
-  .inv-pay table td{ padding:1px 10px 1px 0; }
-  .inv-pay table td:first-child{ color:#999; }
-  .inv-footer{ background:#131109; color:#F4ECD8; text-align:center; padding:14px; font-size:11px; letter-spacing:.15em; text-transform:uppercase; margin-top:26px; }
+  table.inv-items tbody td{ font-size:12.5px; padding:11px 12px; border-bottom:1px solid #eee; }
+  table.inv-items tbody tr:nth-child(even){ background:#faf8f4; }
+  .inv-total-row{ display:flex; justify-content:flex-end; margin-top:16px; }
+  .inv-total-row table td{ font-size:13px; padding:4px 0 4px 28px; color:#666; }
+  .inv-total-row table tr.grand td{ font-weight:700; font-size:19px; color:#131109; border-top:2px solid #C4983A; padding-top:12px; }
+  .inv-notes{ font-size:11.5px; color:#8a8a8a; margin-top:18px; white-space:pre-wrap; line-height:1.6; }
+  .inv-pay{ margin-top:28px; padding-top:22px; border-top:1px solid #eee; font-size:12.5px; }
+  .inv-pay strong{ display:block; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#C4983A; margin-bottom:8px; font-weight:600; }
+  .inv-pay table td{ padding:2.5px 12px 2.5px 0; }
+  .inv-pay table td:first-child{ color:#9a9a9a; }
+  .inv-footer{ background:#131109; color:#F4ECD8; text-align:center; padding:18px; font-size:11px; letter-spacing:.22em; text-transform:uppercase; font-weight:500; }
 </style>
 </head>
 <body>
@@ -238,7 +241,7 @@
       </div>
       <div class="field">
         <label for="clientAddress">Address, TRN, finance contact</label>
-        <textarea id="clientAddress" placeholder="1st Floor, Villa 11, Boutique Offices&#10;Dubai Media City, Dubai, UAE&#10;TRN: 104020498200003&#10;finance@imfluence.ae" required></textarea>
+        <textarea id="clientAddress" placeholder="1st Floor, Villa 11, Boutique Offices&#10;Dubai Media City, Dubai, UAE&#10;TRN: 104020498200003&#10;finance@imfluence.ae" minlength="5" required></textarea>
       </div>
       <div class="field">
         <label for="poNumber">PO number (if given)</label>
@@ -263,7 +266,7 @@
       <div class="row2">
         <div class="field">
           <label for="invNumber">Invoice number</label>
-          <input id="invNumber" type="text" required />
+          <input id="invNumber" type="text" pattern="^\S*\d+\S*$" title="Must include a number, e.g. AC#004" required />
         </div>
         <div class="field">
           <label for="invDate">Date</label>
@@ -273,11 +276,11 @@
       <div class="row2">
         <div class="field">
           <label for="paymentTerms">Payment terms</label>
-          <input id="paymentTerms" type="text" value="100% on delivery" />
+          <input id="paymentTerms" type="text" value="100% on delivery" required />
         </div>
         <div class="field">
           <label for="dueDate">Due date</label>
-          <input id="dueDate" type="date" />
+          <input id="dueDate" type="date" required />
         </div>
       </div>
       <div class="field">
@@ -315,7 +318,7 @@
       <div class="field"><label for="licenseNumber">License number</label><input id="licenseNumber" /></div>
       <div class="row2">
         <div class="field"><label for="yourEmail">Email</label><input id="yourEmail" type="email" /></div>
-        <div class="field"><label for="yourPhone">Phone</label><input id="yourPhone" /></div>
+        <div class="field"><label for="yourPhone">Phone</label><input id="yourPhone" type="tel" pattern="[0-9+\-\s]{6,}" title="Digits, spaces, + and - only" /></div>
       </div>
       <div class="field"><label for="instagramUrl">Instagram URL</label><input id="instagramUrl" /></div>
     </details>
@@ -325,10 +328,10 @@
       <div class="field"><label for="bankName">Bank</label><input id="bankName" /></div>
       <div class="field"><label for="accountName">Account name</label><input id="accountName" /></div>
       <div class="row2">
-        <div class="field"><label for="accountNumber">Account number</label><input id="accountNumber" /></div>
-        <div class="field"><label for="swift">SWIFT code</label><input id="swift" /></div>
+        <div class="field"><label for="accountNumber">Account number</label><input id="accountNumber" pattern="[0-9A-Za-z\-]{4,34}" title="4-34 letters/numbers" /></div>
+        <div class="field"><label for="swift">SWIFT code</label><input id="swift" style="text-transform:uppercase" pattern="[A-Za-z0-9]{8,11}" title="8 or 11 character SWIFT/BIC code, e.g. EBILAEAD" /></div>
       </div>
-      <div class="field"><label for="iban">IBAN</label><input id="iban" /></div>
+      <div class="field"><label for="iban">IBAN</label><input id="iban" style="text-transform:uppercase" pattern="[A-Za-z]{2}[0-9]{2}[A-Za-z0-9]{4,30}" title="e.g. AE210260001014115296601" /></div>
     </details>
 
     <button type="submit" class="btn">Generate Invoice</button>
@@ -413,6 +416,13 @@
       document.getElementById('invNumber').value = 'AC#' + String(data.nextNumber).padStart(3, '0');
       savedAgencies = data.agencies || [];
       populateAgencySelect();
+      // DB is the source of truth for her own business/bank details — known fields win over local guesses.
+      if (data.profile) {
+        Object.keys(data.profile).forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el && data.profile[id]) el.value = data.profile[id];
+        });
+      }
     }).catch(function(){
       // Offline / DB unreachable — fall back to the last number this phone remembers.
       document.getElementById('invNumber').value = offlineNextInvoiceNumber();
@@ -445,8 +455,17 @@
       document.getElementById('companyNameField').style.display = e.target.checked ? '' : 'none';
     });
 
+    ['iban', 'swift'].forEach(function(id){
+      document.getElementById(id).addEventListener('input', function(e){
+        var pos = e.target.selectionStart;
+        e.target.value = e.target.value.toUpperCase();
+        e.target.setSelectionRange(pos, pos);
+      });
+    });
+
     addLineItem();
     updateTotal();
+    window.addEventListener('resize', fitPreviewScale);
   });
 
   // --- line items ---
@@ -460,11 +479,11 @@
     wrap.innerHTML =
       '<div class="field" style="margin-bottom:.5rem">' +
         '<label>Description</label>' +
-        '<input class="li-desc" type="text" placeholder="e.g. 1 x IG Reel and 1 x IG Story Set" value="'+ (desc||'') +'" />' +
+        '<input class="li-desc" type="text" placeholder="e.g. 1 x IG Reel and 1 x IG Story Set" value="'+ (desc||'') +'" required />' +
       '</div>' +
       '<div class="row2">' +
-        '<div class="field" style="margin-bottom:0"><label>Qty</label><input class="li-qty" type="number" min="0" step="1" value="'+ (qty||1) +'" /></div>' +
-        '<div class="field" style="margin-bottom:0"><label>Unit price</label><input class="li-price" type="number" min="0" step="0.01" value="'+ (price||'') +'" /></div>' +
+        '<div class="field" style="margin-bottom:0"><label>Qty</label><input class="li-qty" type="number" min="1" step="1" value="'+ (qty||1) +'" required /></div>' +
+        '<div class="field" style="margin-bottom:0"><label>Unit price</label><input class="li-price" type="number" min="0.01" step="0.01" value="'+ (price||'') +'" required /></div>' +
         '<button type="button" class="li-remove">✕</button>' +
       '</div>';
     document.getElementById('lineItems').appendChild(wrap);
@@ -504,6 +523,18 @@
     document.getElementById('liveTotal').textContent = items.length ? (currencySymbolCode() + ' ' + fmt(total)) : '—';
   }
   document.getElementById('currency').addEventListener('change', updateTotal);
+
+  // The invoice document is a fixed 794px "page" (so it captures identically on every
+  // device); on a phone screen we scale it down visually to fit without horizontal scrolling.
+  function fitPreviewScale() {
+    var el = document.getElementById('invoicePreview');
+    var container = document.getElementById('preview-scroll');
+    if (!el.firstChild) return;
+    var available = container.clientWidth - 24;
+    var scale = Math.min(1, available / 794);
+    el.style.transform = 'scale(' + scale + ')';
+    container.style.height = (el.scrollHeight * scale + 28) + 'px';
+  }
 
   // --- build the printable invoice ---
   function esc(s) {
@@ -611,6 +642,12 @@
       errEl.style.display = 'block';
       return;
     }
+    if (document.getElementById('dueDate').value && document.getElementById('invDate').value &&
+        document.getElementById('dueDate').value < document.getElementById('invDate').value) {
+      errEl.textContent = 'Due date can\'t be before the invoice date.';
+      errEl.style.display = 'block';
+      return;
+    }
 
     saveProfile();
     var num = document.getElementById('invNumber').value.trim();
@@ -620,12 +657,16 @@
 
     document.getElementById('invoicePreview').innerHTML = buildInvoiceHTML();
     document.getElementById('preview-wrap').style.display = 'block';
+    fitPreviewScale();
     document.getElementById('preview-wrap').scrollIntoView({behavior:'smooth', block:'start'});
 
     var saveStatus = document.getElementById('saveStatus');
     if (invoiceNumberInt) {
       var items2 = getLineItems();
       var total = items2.reduce(function(sum, li){ return sum + li.total; }, 0);
+      var profilePayload = {};
+      ['businessName','licenseNumber','yourEmail','yourPhone','instagramUrl','bankName','accountName','accountNumber','swift','iban']
+        .forEach(function(id){ profilePayload[id] = document.getElementById(id).value.trim(); });
       saveStatus.textContent = 'Saving to your records…';
       fetch('/api/invoice-save', {
         method: 'POST',
@@ -639,6 +680,7 @@
           currency: currencySymbolCode(),
           total: total,
           lineItems: items2,
+          profile: profilePayload,
         }),
       }).then(function(r){
         if (!r.ok) throw new Error('save failed');
@@ -657,8 +699,18 @@
   }
 
   function renderToPdfBlob() {
-    var node = document.getElementById('invoicePreview');
-    return html2canvas(node, {scale: 2, backgroundColor: '#ffffff'}).then(function(canvas){
+    // Capture from an untransformed, off-screen clone so the on-screen mobile
+    // scale-to-fit never affects what actually gets rendered into the PDF.
+    var original = document.getElementById('invoicePreview');
+    var clone = original.cloneNode(true);
+    clone.style.transform = 'none';
+    clone.style.position = 'fixed';
+    clone.style.left = '-9999px';
+    clone.style.top = '0';
+    document.body.appendChild(clone);
+
+    return html2canvas(clone, {scale: 2, backgroundColor: '#ffffff'}).then(function(canvas){
+      document.body.removeChild(clone);
       var img = canvas.toDataURL('image/jpeg', 0.95);
       var pdf = new window.jspdf.jsPDF('p', 'pt', 'a4');
       var pageWidth = pdf.internal.pageSize.getWidth();
@@ -675,6 +727,9 @@
         heightLeft -= pageHeight;
       }
       return pdf.output('blob');
+    }).catch(function(err){
+      if (clone.parentNode) document.body.removeChild(clone);
+      throw err;
     });
   }
 
