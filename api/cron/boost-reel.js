@@ -3,29 +3,36 @@ export const config = { maxDuration: 300 };
 /**
  * Boost Reel — one-shot manual endpoint
  *
- * Promotes ONE chosen organic REEL of @aastha_sochic as a fresh video ad
- * (profile-visit goal) for follower growth. The Marketing API can't "boost" an
- * existing IG post, so we rebuild it from the reel's video file — same proven
- * path as launch-reels.js, but for a single caller-chosen reel.
+ * Promotes ONE chosen organic reel/post of @aastha_sochic as an ad
+ * (profile-visit goal) for follower growth.
  *
- * Identity + correctness-by-cloning: clones the known-good reel profile-visit
- * reference (ad set + creative object_story_spec), swapping in this reel's
- * video + thumbnail + caption, audience AE+SA · women · 25–45.
+ * Engagement stays on the REAL post: the ad promotes the EXISTING Instagram post
+ * by id (object_id + instagram_user_id + source_instagram_media_id) rather than
+ * re-uploading its video, so likes/comments/views consolidate onto the actual
+ * post as social proof. Shared mechanism lives in ../_igpromote.js.
+ *
+ * Correctness by cloning: clones the known-good reel profile-visit reference ad
+ * set (optimization_goal / destination_type / promoted_object / targeting),
+ * audience AE+SA · women · 25–45.
  *
  * Safety: builds PAUSED. ?activate=1 to go live. ?dryrun=1 plans only.
  * GET /api/cron/boost-reel?code=SHORTCODE[&dryrun=1][&activate=1][&budget=1500]
- *   Auth: Bearer CRON_SECRET | MANUAL_SYNC_KEY | LAUNCH_KEY
+ *   Auth: Bearer CRON_SECRET | MANUAL_SYNC_KEY
  */
 
-import { getIgToken } from '../_igtoken.js';
+import {
+  resolveIgUserId,
+  resolveMediaByShortcode,
+  existingPostCreativeBody,
+} from '../_igpromote.js';
 
 const FB_BASE = 'https://graph.facebook.com/v21.0';
-const IG_GRAPH = 'https://graph.instagram.com/v21.0';
 
-const AD_ACCOUNT   = '1508208884141959';
-const REF_ADSET    = '120247276442590261'; // proven VISIT_INSTAGRAM_PROFILE reel ad set
-const REF_CREATIVE = '2237800353684636';   // proven reel video creative (identity + CTA)
-const REF_CAMPAIGN = '120247276440520261';
+const AD_ACCOUNT       = '1508208884141959';
+const PAGE_ID          = '109895657605220';
+const IG_USER_FALLBACK = '17841400363033312'; // @aastha_sochic, if the Page lookup is empty
+const REF_ADSET        = '120247276442590261'; // proven VISIT_INSTAGRAM_PROFILE reel ad set
+const REF_CAMPAIGN     = '120247276440520261';
 
 const DEFAULT_BUDGET_CENTS = 1500; // 15 AED/day
 
@@ -62,61 +69,6 @@ async function fbDelete(path) {
   return res.json().catch(() => ({}));
 }
 
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
-async function resolveReel(code) {
-  const token = await getIgToken();
-  if (!token) throw new Error('No Instagram token available');
-  let media = [];
-  let url = `${IG_GRAPH}/me/media?fields=id,media_type,media_url,thumbnail_url,permalink,caption&limit=100&access_token=${token}`;
-  while (url && media.length < 500) {
-    const res = await fetch(url);
-    const data = await res.json();
-    if (data.error) throw new Error(`IG media: ${data.error.message}`);
-    media = media.concat(data.data || []);
-    url = data.paging?.next || null;
-  }
-  const m = media.find((x) => {
-    const mt = (x.permalink || '').match(/\/(?:reel|p|tv)\/([^/]+)\//);
-    return mt && mt[1] === code;
-  });
-  if (!m) throw new Error(`Reel ${code} not found in last 500 media`);
-  if (m.media_type !== 'VIDEO') throw new Error(`Post ${code} is ${m.media_type}, not VIDEO`);
-  if (!m.media_url) throw new Error(`Reel ${code} has no media_url`);
-  return {
-    media_id: m.id,
-    media_url: m.media_url,
-    thumbnail_url: m.thumbnail_url || null,
-    permalink: m.permalink,
-    caption: (m.caption || '').replace(/\s+/g, ' ').trim().slice(0, 280),
-  };
-}
-
-async function uploadVideo(reel) {
-  const up = await fbPost(`/act_${AD_ACCOUNT}/advideos`, {
-    file_url: reel.media_url, name: `Reel boost (${reel.media_id})`,
-  });
-  const videoId = up.id;
-  if (!videoId) throw new Error('advideos returned no id');
-  for (let i = 0; i < 40; i++) {
-    const s = await fbGet(`/${videoId}?fields=status`);
-    const vs = s.status?.video_status;
-    if (vs === 'ready') return videoId;
-    if (vs === 'error') throw new Error('video processing error');
-    await sleep(4000);
-  }
-  throw new Error('video not ready after ~160s');
-}
-
-async function uploadThumb(reel) {
-  if (!reel.thumbnail_url) return null;
-  const r = await fetch(reel.thumbnail_url);
-  if (!r.ok) return null;
-  const b64 = Buffer.from(await r.arrayBuffer()).toString('base64');
-  const up = await fbPost(`/act_${AD_ACCOUNT}/adimages`, { bytes: b64 });
-  return Object.values(up.images || {})[0]?.hash || null;
-}
-
 function buildTargeting(t = {}) {
   const out = {
     geo_locations: { countries: ['AE', 'SA'] },
@@ -144,16 +96,16 @@ export default async function handler(req, res) {
   const campaignName = `Boost Reel — ${code} (Jun 2026)`;
 
   try {
-    const [reel, refAdset, refCreative, refCampaign] = await Promise.all([
-      resolveReel(code),
+    const igUserId = await resolveIgUserId(PAGE_ID, IG_USER_FALLBACK);
+    const [media, refAdset, refCampaign] = await Promise.all([
+      resolveMediaByShortcode(igUserId, code),
       fbGet(`/${REF_ADSET}?fields=optimization_goal,billing_event,bid_strategy,destination_type,promoted_object,targeting,attribution_spec`),
-      fbGet(`/${REF_CREATIVE}?fields=object_story_spec`),
       fbGet(`/${REF_CAMPAIGN}?fields=objective`),
     ]);
 
     if (dryRun) {
       return res.status(200).json({ ok: true, status: 'dry-run', plan: {
-        code, permalink: reel.permalink, caption_preview: reel.caption.slice(0, 100),
+        code, ig_user_id: igUserId, media_id: media.id, media_type: media.media_type, permalink: media.permalink,
         optimization_goal: refAdset.optimization_goal, budget: `${budget / 100} AED/day`, activate,
       } });
     }
@@ -163,8 +115,6 @@ export default async function handler(req, res) {
     for (const c of (camps.data || []).filter((x) => x.name === campaignName)) {
       await fbDelete(`/${c.id}`).catch(() => {});
     }
-
-    const [videoId, imageHash] = await Promise.all([uploadVideo(reel), uploadThumb(reel)]);
 
     const campaign = await fbPost(`/act_${AD_ACCOUNT}/campaigns`, {
       name: campaignName,
@@ -189,15 +139,13 @@ export default async function handler(req, res) {
     if (refAdset.attribution_spec) adsetBody.attribution_spec = refAdset.attribution_spec;
     const adset = await fbPost(`/act_${AD_ACCOUNT}/adsets`, adsetBody);
 
-    // Clone the proven reel creative's identity/CTA, swap in this reel's media.
-    const oss = JSON.parse(JSON.stringify(refCreative.object_story_spec || {}));
-    oss.video_data = oss.video_data || {};
-    oss.video_data.video_id = videoId;
-    if (imageHash) { oss.video_data.image_hash = imageHash; delete oss.video_data.image_url; }
-    oss.video_data.message = reel.caption || 'Follow @aastha_sochic ✨';
-    const creative = await fbPost(`/act_${AD_ACCOUNT}/adcreatives`, {
-      name: `Reel boost creative (${code})`, object_story_spec: oss,
-    });
+    // Promote the EXISTING post — engagement lands on the real reel.
+    const creative = await fbPost(`/act_${AD_ACCOUNT}/adcreatives`, existingPostCreativeBody({
+      name: `Reel boost creative (${code})`,
+      pageId: PAGE_ID,
+      igUserId,
+      mediaId: media.id,
+    }));
 
     const ad = await fbPost(`/act_${AD_ACCOUNT}/ads`, {
       name: `Boost Reel — ${code}`, adset_id: adset.id, creative: { creative_id: creative.id }, status: 'PAUSED',
@@ -212,8 +160,8 @@ export default async function handler(req, res) {
 
     return res.status(200).json({
       ok: true, status: activate ? 'launched-live' : 'built-paused',
-      code, permalink: reel.permalink,
-      campaign_id: campaign.id, adset_id: adset.id, creative_id: creative.id, ad_id: ad.id, video_id: videoId,
+      code, permalink: media.permalink,
+      campaign_id: campaign.id, adset_id: adset.id, creative_id: creative.id, ad_id: ad.id, media_id: media.id,
     });
   } catch (err) {
     return res.status(500).json({ error: err.message });
