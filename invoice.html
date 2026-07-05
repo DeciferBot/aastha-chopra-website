@@ -227,8 +227,18 @@
     <div class="card">
       <h2>Bill To</h2>
       <div class="field">
-        <label for="clientBlock">Company / agency details</label>
-        <textarea id="clientBlock" placeholder="Imfluence Digital Marketing&#10;1st Floor, Villa 11, Boutique Offices&#10;Dubai Media City, Dubai, UAE&#10;TRN: 104020498200003&#10;finance@imfluence.ae" required></textarea>
+        <label for="agencySelect">Worked with them before?</label>
+        <select id="agencySelect">
+          <option value="">— New agency / brand —</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="agencyName">Agency / brand name</label>
+        <input id="agencyName" type="text" placeholder="e.g. Imfluence Digital Marketing" required />
+      </div>
+      <div class="field">
+        <label for="clientAddress">Address, TRN, finance contact</label>
+        <textarea id="clientAddress" placeholder="1st Floor, Villa 11, Boutique Offices&#10;Dubai Media City, Dubai, UAE&#10;TRN: 104020498200003&#10;finance@imfluence.ae" required></textarea>
       </div>
       <div class="field">
         <label for="poNumber">PO number (if given)</label>
@@ -334,6 +344,7 @@
       <button class="btn btn-ghost btn-sm" id="downloadBtn">Download</button>
     </div>
     <p class="hint">Share sends the PDF straight to WhatsApp, Mail, or any app that takes files. Download saves it to your phone.</p>
+    <p class="hint" id="saveStatus"></p>
   </div>
 
 </main>
@@ -343,7 +354,8 @@
 <script>
 (function(){
   var STORAGE_KEY = 'invoiceBuilderProfile';
-  var COUNTER_KEY = 'invoiceBuilderLastNumber';
+  var COUNTER_KEY = 'invoiceBuilderLastNumber'; // offline fallback only; the server (Supabase) is the source of truth
+  var savedAgencies = [];
 
   var DEFAULTS = {
     businessName: 'Aastha Chopra Blogging Services',
@@ -376,10 +388,35 @@
     return d.toISOString().slice(0,10);
   }
 
-  function nextInvoiceNumber() {
+  function offlineNextInvoiceNumber() {
     var last = parseInt(localStorage.getItem(COUNTER_KEY), 10);
     if (isNaN(last)) last = 3; // seed matching the last known invoice, AC#003
     return 'AC#' + String(last + 1).padStart(3, '0');
+  }
+
+  function populateAgencySelect() {
+    var sel = document.getElementById('agencySelect');
+    while (sel.options.length > 1) sel.remove(1);
+    savedAgencies.forEach(function(a, i) {
+      var opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = a.name;
+      sel.appendChild(opt);
+    });
+  }
+
+  function loadFromServer() {
+    fetch('/api/invoice-next').then(function(r){
+      if (!r.ok) throw new Error('bad status');
+      return r.json();
+    }).then(function(data){
+      document.getElementById('invNumber').value = 'AC#' + String(data.nextNumber).padStart(3, '0');
+      savedAgencies = data.agencies || [];
+      populateAgencySelect();
+    }).catch(function(){
+      // Offline / DB unreachable — fall back to the last number this phone remembers.
+      document.getElementById('invNumber').value = offlineNextInvoiceNumber();
+    });
   }
 
   // --- populate defaults on load ---
@@ -389,9 +426,20 @@
       var el = document.getElementById(id);
       if (el) el.value = profile[id];
     });
-    document.getElementById('invNumber').value = nextInvoiceNumber();
     document.getElementById('invDate').value = todayISO(0);
     document.getElementById('dueDate').value = todayISO(0);
+    loadFromServer();
+
+    document.getElementById('agencySelect').addEventListener('change', function(e){
+      var idx = e.target.value;
+      if (idx === '') return;
+      var a = savedAgencies[parseInt(idx, 10)];
+      if (!a) return;
+      document.getElementById('agencyName').value = a.name;
+      document.getElementById('clientAddress').value = a.billToText;
+      if (a.currency) document.getElementById('currency').value = a.currency;
+      updateTotal();
+    });
 
     document.getElementById('viaCompany').addEventListener('change', function(e){
       document.getElementById('companyNameField').style.display = e.target.checked ? '' : 'none';
@@ -432,6 +480,11 @@
 
   function currencySymbolCode() { return document.getElementById('currency').value; }
 
+  function agencyNameValue() { return document.getElementById('agencyName').value.trim(); }
+  function billToText() {
+    return agencyNameValue() + '\n' + document.getElementById('clientAddress').value.trim();
+  }
+
   function getLineItems() {
     return Array.prototype.map.call(document.querySelectorAll('.line-item'), function(row){
       var desc = row.querySelector('.li-desc').value.trim();
@@ -469,7 +522,7 @@
     var terms = document.getElementById('paymentTerms').value.trim();
     var po = document.getElementById('poNumber').value.trim();
     var campaign = document.getElementById('campaignName').value.trim();
-    var clientBlock = document.getElementById('clientBlock').value.trim();
+    var clientBlock = billToText();
     var notes = document.getElementById('notes').value.trim();
     var viaCompany = document.getElementById('viaCompany').checked;
     var companyName = document.getElementById('billingCompanyName').value.trim();
@@ -553,15 +606,48 @@
       errEl.style.display = 'block';
       return;
     }
+    if (!agencyNameValue()) {
+      errEl.textContent = 'Add the agency / brand name.';
+      errEl.style.display = 'block';
+      return;
+    }
 
     saveProfile();
     var num = document.getElementById('invNumber').value.trim();
     var numMatch = num.match(/(\d+)\s*$/);
-    if (numMatch) localStorage.setItem(COUNTER_KEY, parseInt(numMatch[1], 10));
+    var invoiceNumberInt = numMatch ? parseInt(numMatch[1], 10) : null;
+    if (invoiceNumberInt) localStorage.setItem(COUNTER_KEY, invoiceNumberInt); // offline fallback
 
     document.getElementById('invoicePreview').innerHTML = buildInvoiceHTML();
     document.getElementById('preview-wrap').style.display = 'block';
     document.getElementById('preview-wrap').scrollIntoView({behavior:'smooth', block:'start'});
+
+    var saveStatus = document.getElementById('saveStatus');
+    if (invoiceNumberInt) {
+      var items2 = getLineItems();
+      var total = items2.reduce(function(sum, li){ return sum + li.total; }, 0);
+      saveStatus.textContent = 'Saving to your records…';
+      fetch('/api/invoice-save', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          invoiceNumber: invoiceNumberInt,
+          agencyName: agencyNameValue(),
+          billToText: billToText(),
+          campaign: document.getElementById('campaignName').value.trim(),
+          poNumber: document.getElementById('poNumber').value.trim(),
+          currency: currencySymbolCode(),
+          total: total,
+          lineItems: items2,
+        }),
+      }).then(function(r){
+        if (!r.ok) throw new Error('save failed');
+        saveStatus.textContent = 'Saved — this agency and invoice number are on record.';
+        loadFromServer(); // refresh the agency list + next-number suggestion for the next invoice
+      }).catch(function(){
+        saveStatus.textContent = 'Could not reach the database — this invoice was generated but not saved to your records.';
+      });
+    }
   });
 
   // --- PDF generation ---
