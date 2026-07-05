@@ -93,7 +93,10 @@ export default async function handler(req, res) {
   const dryRun = req.query?.dryrun === '1';
   const activate = req.query?.activate === '1';
   const budget = Math.max(369, parseInt(req.query?.budget, 10) || DEFAULT_BUDGET_CENTS);
-  const campaignName = `Boost Reel — ${code} (Jun 2026)`;
+  // Optional ?suffix= tags the campaign name so a rebuild sits alongside an
+  // existing live campaign for the same reel instead of colliding with it.
+  const suffix = (req.query?.suffix || '').toString().trim();
+  const campaignName = `Boost Reel — ${code} (Jun 2026)${suffix ? ` [${suffix}]` : ''}`;
 
   try {
     const igUserId = await resolveIgUserId(PAGE_ID, IG_USER_FALLBACK);
@@ -110,9 +113,10 @@ export default async function handler(req, res) {
       } });
     }
 
-    // Idempotency: remove any prior campaign with this exact name.
-    const camps = await fbGet(`/act_${AD_ACCOUNT}/campaigns?fields=name&limit=200`);
-    for (const c of (camps.data || []).filter((x) => x.name === campaignName)) {
+    // Idempotency: remove any prior PAUSED campaign with this exact name. Never
+    // deletes an ACTIVE (live, spending) campaign — that would be destructive.
+    const camps = await fbGet(`/act_${AD_ACCOUNT}/campaigns?fields=name,effective_status&limit=200`);
+    for (const c of (camps.data || []).filter((x) => x.name === campaignName && x.effective_status !== 'ACTIVE')) {
       await fbDelete(`/${c.id}`).catch(() => {});
     }
 
