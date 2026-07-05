@@ -1,11 +1,11 @@
-# Graph Report - .  (2026-06-25)
+# Graph Report - .  (2026-07-05)
 
 ## Corpus Check
-- 36 files · ~1,086,859 words
+- 36 files · ~1,087,280 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 256 nodes · 474 edges · 26 communities detected
+- 258 nodes · 481 edges · 25 communities detected
 - Extraction: 88% EXTRACTED · 12% INFERRED · 0% AMBIGUOUS · INFERRED: 57 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
@@ -35,7 +35,6 @@
 - [[_COMMUNITY_Community 22|Community 22]]
 - [[_COMMUNITY_Community 23|Community 23]]
 - [[_COMMUNITY_Community 24|Community 24]]
-- [[_COMMUNITY_Community 25|Community 25]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `handler()` - 14 edges
@@ -64,7 +63,7 @@
 ## Communities
 
 ### Community 0 - "Community 0"
-Cohesion: 0.18
+Cohesion: 0.14
 Nodes (29): attachInstagramImages(), ctaBlock(), dedupePostImages(), esc(), handler(), hashStr(), filterBar(), handler() (+21 more)
 
 ### Community 1 - "Community 1"
@@ -73,7 +72,7 @@ Nodes (24): adArchive(), checkAdLibrary(), handler(), resolveAdToken(), sb(), sc
 
 ### Community 2 - "Community 2"
 Cohesion: 0.19
-Nodes (20): claude(), handler(), logRun(), sb(), arr(), autocomplete(), callClaude(), countWords() (+12 more)
+Nodes (22): claude(), handler(), logRun(), sb(), arr(), autocomplete(), callClaude(), countWords() (+14 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.12
@@ -136,15 +135,15 @@ Cohesion: 0.7
 Nodes (4): applyEvent(), handler(), readRaw(), verify()
 
 ### Community 18 - "Community 18"
-Cohesion: 0.5
-Nodes (0): 
-
-### Community 19 - "Community 19"
 Cohesion: 0.67
 Nodes (2): handler(), sb()
 
-### Community 20 - "Community 20"
+### Community 19 - "Community 19"
 Cohesion: 0.67
+Nodes (0): 
+
+### Community 20 - "Community 20"
+Cohesion: 1.0
 Nodes (0): 
 
 ### Community 21 - "Community 21"
@@ -163,31 +162,27 @@ Nodes (0):
 Cohesion: 1.0
 Nodes (0): 
 
-### Community 25 - "Community 25"
-Cohesion: 1.0
-Nodes (0): 
-
 ## Knowledge Gaps
-- **Thin community `Community 21`** (2 nodes): `handler()`, `analytics-auth.js`
+- **Thin community `Community 20`** (2 nodes): `handler()`, `analytics-auth.js`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 22`** (2 nodes): `ig-profile.js`, `handler()`
+- **Thin community `Community 21`** (2 nodes): `ig-profile.js`, `handler()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 23`** (2 nodes): `instagram.js`, `handler()`
+- **Thin community `Community 22`** (2 nodes): `instagram.js`, `handler()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 24`** (2 nodes): `ig-stats.js`, `handler()`
+- **Thin community `Community 23`** (2 nodes): `ig-stats.js`, `handler()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 25`** (1 nodes): `generate-pdf.js`
+- **Thin community `Community 24`** (1 nodes): `generate-pdf.js`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `esc()` connect `Community 0` to `Community 1`, `Community 5`?**
-  _High betweenness centrality (0.078) - this node is a cross-community bridge._
+  _High betweenness centrality (0.079) - this node is a cross-community bridge._
 - **Why does `handler()` connect `Community 0` to `Community 2`, `Community 5`?**
-  _High betweenness centrality (0.063) - this node is a cross-community bridge._
+  _High betweenness centrality (0.064) - this node is a cross-community bridge._
 - **Why does `sb()` connect `Community 2` to `Community 0`, `Community 5`?**
-  _High betweenness centrality (0.056) - this node is a cross-community bridge._
+  _High betweenness centrality (0.059) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `handler()` (e.g. with `segmentMeta()` and `sb()`) actually correct?**
   _`handler()` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 3 inferred relationships involving `send()` (e.g. with `handler()` and `handler()`) actually correct?**
