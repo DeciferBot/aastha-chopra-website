@@ -9,7 +9,7 @@
       "source_file": "generate-pdf.js",
       "source_location": "L1",
       "id": "generate_pdf_js",
-      "community": 24,
+      "community": 22,
       "norm_label": "generate-pdf.js"
     },
     {
@@ -18,7 +18,7 @@
       "source_file": "build-audit-doc.js",
       "source_location": "L1",
       "id": "build_audit_doc_js",
-      "community": 3,
+      "community": 4,
       "norm_label": "build-audit-doc.js"
     },
     {
@@ -27,7 +27,7 @@
       "source_file": "build-audit-doc.js",
       "source_location": "L24",
       "id": "build_audit_doc_sp",
-      "community": 3,
+      "community": 4,
       "norm_label": "sp()"
     },
     {
@@ -36,7 +36,7 @@
       "source_file": "build-audit-doc.js",
       "source_location": "L25",
       "id": "build_audit_doc_cellborder",
-      "community": 3,
+      "community": 4,
       "norm_label": "cellborder()"
     },
     {
@@ -45,7 +45,7 @@
       "source_file": "build-audit-doc.js",
       "source_location": "L29",
       "id": "build_audit_doc_noborder",
-      "community": 3,
+      "community": 4,
       "norm_label": "noborder()"
     },
     {
@@ -54,7 +54,7 @@
       "source_file": "build-audit-doc.js",
       "source_location": "L34",
       "id": "build_audit_doc_h1",
-      "community": 3,
+      "community": 4,
       "norm_label": "h1()"
     },
     {
@@ -63,7 +63,7 @@
       "source_file": "build-audit-doc.js",
       "source_location": "L42",
       "id": "build_audit_doc_h2",
-      "community": 3,
+      "community": 4,
       "norm_label": "h2()"
     },
     {
@@ -72,7 +72,7 @@
       "source_file": "build-audit-doc.js",
       "source_location": "L49",
       "id": "build_audit_doc_h3",
-      "community": 3,
+      "community": 4,
       "norm_label": "h3()"
     },
     {
@@ -81,7 +81,7 @@
       "source_file": "build-audit-doc.js",
       "source_location": "L56",
       "id": "build_audit_doc_body",
-      "community": 3,
+      "community": 4,
       "norm_label": "body()"
     },
     {
@@ -90,7 +90,7 @@
       "source_file": "build-audit-doc.js",
       "source_location": "L63",
       "id": "build_audit_doc_bullet",
-      "community": 3,
+      "community": 4,
       "norm_label": "bullet()"
     },
     {
@@ -99,7 +99,7 @@
       "source_file": "build-audit-doc.js",
       "source_location": "L70",
       "id": "build_audit_doc_flagbullet",
-      "community": 3,
+      "community": 4,
       "norm_label": "flagbullet()"
     },
     {
@@ -108,7 +108,7 @@
       "source_file": "build-audit-doc.js",
       "source_location": "L79",
       "id": "build_audit_doc_pagebreak",
-      "community": 3,
+      "community": 4,
       "norm_label": "pagebreak()"
     },
     {
@@ -117,7 +117,7 @@
       "source_file": "build-audit-doc.js",
       "source_location": "L82",
       "id": "build_audit_doc_spacer",
-      "community": 3,
+      "community": 4,
       "norm_label": "spacer()"
     },
     {
@@ -126,7 +126,7 @@
       "source_file": "build-audit-doc.js",
       "source_location": "L87",
       "id": "build_audit_doc_headerrow",
-      "community": 3,
+      "community": 4,
       "norm_label": "headerrow()"
     },
     {
@@ -135,7 +135,7 @@
       "source_file": "build-audit-doc.js",
       "source_location": "L100",
       "id": "build_audit_doc_datarow",
-      "community": 3,
+      "community": 4,
       "norm_label": "datarow()"
     },
     {
@@ -144,7 +144,7 @@
       "source_file": "build-audit-doc.js",
       "source_location": "L111",
       "id": "build_audit_doc_calloutbox",
-      "community": 3,
+      "community": 4,
       "norm_label": "calloutbox()"
     },
     {
@@ -153,7 +153,7 @@
       "source_file": "build-audit-doc.js",
       "source_location": "L134",
       "id": "build_audit_doc_kpicard",
-      "community": 3,
+      "community": 4,
       "norm_label": "kpicard()"
     },
     {
@@ -162,7 +162,7 @@
       "source_file": "build-audit-doc.js",
       "source_location": "L153",
       "id": "build_audit_doc_kpirow",
-      "community": 3,
+      "community": 4,
       "norm_label": "kpirow()"
     },
     {
@@ -171,7 +171,7 @@
       "source_file": "build-audit-doc.js",
       "source_location": "L174",
       "id": "build_audit_doc_barchart",
-      "community": 3,
+      "community": 4,
       "norm_label": "barchart()"
     },
     {
@@ -180,7 +180,7 @@
       "source_file": "js/reels.js",
       "source_location": "L1",
       "id": "js_reels_js",
-      "community": 4,
+      "community": 5,
       "norm_label": "reels.js"
     },
     {
@@ -189,7 +189,7 @@
       "source_file": "js/reels.js",
       "source_location": "L21",
       "id": "reels_num",
-      "community": 4,
+      "community": 5,
       "norm_label": "num()"
     },
     {
@@ -198,7 +198,7 @@
       "source_file": "js/reels.js",
       "source_location": "L25",
       "id": "reels_esc",
-      "community": 4,
+      "community": 5,
       "norm_label": "esc()"
     },
     {
@@ -207,7 +207,7 @@
       "source_file": "js/reels.js",
       "source_location": "L31",
       "id": "reels_ensureembedscript",
-      "community": 4,
+      "community": 5,
       "norm_label": "ensureembedscript()"
     },
     {
@@ -216,7 +216,7 @@
       "source_file": "js/reels.js",
       "source_location": "L45",
       "id": "reels_processembeds",
-      "community": 4,
+      "community": 5,
       "norm_label": "processembeds()"
     },
     {
@@ -225,7 +225,7 @@
       "source_file": "js/reels.js",
       "source_location": "L46",
       "id": "reels_blockquote",
-      "community": 4,
+      "community": 5,
       "norm_label": "blockquote()"
     },
     {
@@ -234,7 +234,7 @@
       "source_file": "js/reels.js",
       "source_location": "L55",
       "id": "reels_buildlightbox",
-      "community": 4,
+      "community": 5,
       "norm_label": "buildlightbox()"
     },
     {
@@ -243,7 +243,7 @@
       "source_file": "js/reels.js",
       "source_location": "L74",
       "id": "reels_openlightbox",
-      "community": 4,
+      "community": 5,
       "norm_label": "openlightbox()"
     },
     {
@@ -252,7 +252,7 @@
       "source_file": "js/reels.js",
       "source_location": "L84",
       "id": "reels_closelightbox",
-      "community": 4,
+      "community": 5,
       "norm_label": "closelightbox()"
     },
     {
@@ -261,7 +261,7 @@
       "source_file": "js/reels.js",
       "source_location": "L92",
       "id": "reels_pauseothers",
-      "community": 4,
+      "community": 5,
       "norm_label": "pauseothers()"
     },
     {
@@ -270,7 +270,7 @@
       "source_file": "js/reels.js",
       "source_location": "L97",
       "id": "reels_setbtn",
-      "community": 4,
+      "community": 5,
       "norm_label": "setbtn()"
     },
     {
@@ -279,7 +279,7 @@
       "source_file": "js/reels.js",
       "source_location": "L104",
       "id": "reels_rendergrid",
-      "community": 4,
+      "community": 5,
       "norm_label": "rendergrid()"
     },
     {
@@ -288,7 +288,7 @@
       "source_file": "js/reels.js",
       "source_location": "L161",
       "id": "reels_wirefeatured",
-      "community": 4,
+      "community": 5,
       "norm_label": "wirefeatured()"
     },
     {
@@ -297,7 +297,7 @@
       "source_file": "js/reels.js",
       "source_location": "L216",
       "id": "reels_loadreels",
-      "community": 4,
+      "community": 5,
       "norm_label": "loadreels()"
     },
     {
@@ -306,7 +306,7 @@
       "source_file": "js/reels.js",
       "source_location": "L238",
       "id": "reels_track",
-      "community": 4,
+      "community": 5,
       "norm_label": "track()"
     },
     {
@@ -315,7 +315,7 @@
       "source_file": "js/reels.js",
       "source_location": "L241",
       "id": "reels_wirenav",
-      "community": 4,
+      "community": 5,
       "norm_label": "wirenav()"
     },
     {
@@ -324,7 +324,7 @@
       "source_file": "js/reels.js",
       "source_location": "L254",
       "id": "reels_init",
-      "community": 4,
+      "community": 5,
       "norm_label": "init()"
     },
     {
@@ -333,7 +333,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L1",
       "id": "js_meta_events_js",
-      "community": 19,
+      "community": 17,
       "norm_label": "meta-events.js"
     },
     {
@@ -342,7 +342,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L11",
       "id": "meta_events_fbqready",
-      "community": 19,
+      "community": 17,
       "norm_label": "fbqready()"
     },
     {
@@ -351,7 +351,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L12",
       "id": "meta_events_eventid",
-      "community": 19,
+      "community": 17,
       "norm_label": "eventid()"
     },
     {
@@ -360,7 +360,7 @@
       "source_file": "api/sitemap.js",
       "source_location": "L1",
       "id": "api_sitemap_js",
-      "community": 5,
+      "community": 6,
       "norm_label": "sitemap.js"
     },
     {
@@ -369,7 +369,7 @@
       "source_file": "api/sitemap.js",
       "source_location": "L30",
       "id": "sitemap_handler",
-      "community": 5,
+      "community": 6,
       "norm_label": "handler()"
     },
     {
@@ -378,7 +378,7 @@
       "source_file": "api/sitemap.js",
       "source_location": "L70",
       "id": "sitemap_urlentry",
-      "community": 5,
+      "community": 6,
       "norm_label": "urlentry()"
     },
     {
@@ -387,7 +387,7 @@
       "source_file": "api/analytics-auth.js",
       "source_location": "L1",
       "id": "api_analytics_auth_js",
-      "community": 20,
+      "community": 18,
       "norm_label": "analytics-auth.js"
     },
     {
@@ -396,7 +396,7 @@
       "source_file": "api/analytics-auth.js",
       "source_location": "L1",
       "id": "analytics_auth_handler",
-      "community": 20,
+      "community": 18,
       "norm_label": "handler()"
     },
     {
@@ -405,7 +405,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L1",
       "id": "api_telegram_js",
-      "community": 5,
+      "community": 6,
       "norm_label": "telegram.js"
     },
     {
@@ -414,7 +414,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L17",
       "id": "telegram_emailpitchtoaastha",
-      "community": 5,
+      "community": 6,
       "norm_label": "emailpitchtoaastha()"
     },
     {
@@ -423,7 +423,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L47",
       "id": "telegram_send",
-      "community": 5,
+      "community": 6,
       "norm_label": "send()"
     },
     {
@@ -432,7 +432,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L60",
       "id": "telegram_sb",
-      "community": 5,
+      "community": 6,
       "norm_label": "sb()"
     },
     {
@@ -441,7 +441,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L89",
       "id": "telegram_generatepitch",
-      "community": 5,
+      "community": 6,
       "norm_label": "generatepitch()"
     },
     {
@@ -450,7 +450,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L145",
       "id": "telegram_handleadd",
-      "community": 5,
+      "community": 6,
       "norm_label": "handleadd()"
     },
     {
@@ -459,7 +459,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L164",
       "id": "telegram_handleremove",
-      "community": 5,
+      "community": 6,
       "norm_label": "handleremove()"
     },
     {
@@ -468,7 +468,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L170",
       "id": "telegram_handlelist",
-      "community": 5,
+      "community": 6,
       "norm_label": "handlelist()"
     },
     {
@@ -477,7 +477,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L183",
       "id": "telegram_handlestatus",
-      "community": 5,
+      "community": 6,
       "norm_label": "handlestatus()"
     },
     {
@@ -486,7 +486,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L206",
       "id": "telegram_handleleads",
-      "community": 5,
+      "community": 6,
       "norm_label": "handleleads()"
     },
     {
@@ -495,7 +495,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L227",
       "id": "telegram_handleleaddone",
-      "community": 5,
+      "community": 6,
       "norm_label": "handleleaddone()"
     },
     {
@@ -504,7 +504,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L238",
       "id": "telegram_handlepitch",
-      "community": 5,
+      "community": 6,
       "norm_label": "handlepitch()"
     },
     {
@@ -513,7 +513,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L258",
       "id": "telegram_handlehelp",
-      "community": 5,
+      "community": 6,
       "norm_label": "handlehelp()"
     },
     {
@@ -522,7 +522,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L276",
       "id": "telegram_handler",
-      "community": 5,
+      "community": 6,
       "norm_label": "handler()"
     },
     {
@@ -621,7 +621,7 @@
       "source_file": "api/resend-webhook.js",
       "source_location": "L1",
       "id": "api_resend_webhook_js",
-      "community": 17,
+      "community": 15,
       "norm_label": "resend-webhook.js"
     },
     {
@@ -630,7 +630,7 @@
       "source_file": "api/resend-webhook.js",
       "source_location": "L25",
       "id": "resend_webhook_readraw",
-      "community": 17,
+      "community": 15,
       "norm_label": "readraw()"
     },
     {
@@ -639,7 +639,7 @@
       "source_file": "api/resend-webhook.js",
       "source_location": "L32",
       "id": "resend_webhook_verify",
-      "community": 17,
+      "community": 15,
       "norm_label": "verify()"
     },
     {
@@ -648,7 +648,7 @@
       "source_file": "api/resend-webhook.js",
       "source_location": "L49",
       "id": "resend_webhook_applyevent",
-      "community": 17,
+      "community": 15,
       "norm_label": "applyevent()"
     },
     {
@@ -657,7 +657,7 @@
       "source_file": "api/resend-webhook.js",
       "source_location": "L62",
       "id": "resend_webhook_handler",
-      "community": 17,
+      "community": 15,
       "norm_label": "handler()"
     },
     {
@@ -666,7 +666,7 @@
       "source_file": "api/capi-event.js",
       "source_location": "L1",
       "id": "api_capi_event_js",
-      "community": 10,
+      "community": 9,
       "norm_label": "capi-event.js"
     },
     {
@@ -675,7 +675,7 @@
       "source_file": "api/capi-event.js",
       "source_location": "L10",
       "id": "capi_event_handler",
-      "community": 10,
+      "community": 9,
       "norm_label": "handler()"
     },
     {
@@ -684,7 +684,7 @@
       "source_file": "api/subscribe.js",
       "source_location": "L1",
       "id": "api_subscribe_js",
-      "community": 10,
+      "community": 9,
       "norm_label": "subscribe.js"
     },
     {
@@ -693,7 +693,7 @@
       "source_file": "api/subscribe.js",
       "source_location": "L3",
       "id": "subscribe_handler",
-      "community": 10,
+      "community": 9,
       "norm_label": "handler()"
     },
     {
@@ -702,7 +702,7 @@
       "source_file": "api/ig-profile.js",
       "source_location": "L1",
       "id": "api_ig_profile_js",
-      "community": 21,
+      "community": 19,
       "norm_label": "ig-profile.js"
     },
     {
@@ -711,7 +711,7 @@
       "source_file": "api/ig-profile.js",
       "source_location": "L3",
       "id": "ig_profile_handler",
-      "community": 21,
+      "community": 19,
       "norm_label": "handler()"
     },
     {
@@ -720,7 +720,7 @@
       "source_file": "api/refresh-live.js",
       "source_location": "L1",
       "id": "api_refresh_live_js",
-      "community": 16,
+      "community": 14,
       "norm_label": "refresh-live.js"
     },
     {
@@ -729,7 +729,7 @@
       "source_file": "api/refresh-live.js",
       "source_location": "L24",
       "id": "refresh_live_ig",
-      "community": 16,
+      "community": 14,
       "norm_label": "ig()"
     },
     {
@@ -738,7 +738,7 @@
       "source_file": "api/refresh-live.js",
       "source_location": "L32",
       "id": "refresh_live_sb",
-      "community": 16,
+      "community": 14,
       "norm_label": "sb()"
     },
     {
@@ -747,7 +747,7 @@
       "source_file": "api/refresh-live.js",
       "source_location": "L48",
       "id": "refresh_live_sleep",
-      "community": 16,
+      "community": 14,
       "norm_label": "sleep()"
     },
     {
@@ -756,7 +756,7 @@
       "source_file": "api/refresh-live.js",
       "source_location": "L51",
       "id": "refresh_live_fetchdemo",
-      "community": 16,
+      "community": 14,
       "norm_label": "fetchdemo()"
     },
     {
@@ -765,7 +765,7 @@
       "source_file": "api/refresh-live.js",
       "source_location": "L74",
       "id": "refresh_live_handler",
-      "community": 16,
+      "community": 14,
       "norm_label": "handler()"
     },
     {
@@ -1026,7 +1026,7 @@
       "source_file": "api/_capi.js",
       "source_location": "L1",
       "id": "api_capi_js",
-      "community": 10,
+      "community": 9,
       "norm_label": "_capi.js"
     },
     {
@@ -1035,7 +1035,7 @@
       "source_file": "api/_capi.js",
       "source_location": "L14",
       "id": "capi_hash",
-      "community": 10,
+      "community": 9,
       "norm_label": "hash()"
     },
     {
@@ -1044,7 +1044,7 @@
       "source_file": "api/_capi.js",
       "source_location": "L23",
       "id": "capi_readfbcookies",
-      "community": 10,
+      "community": 9,
       "norm_label": "readfbcookies()"
     },
     {
@@ -1053,7 +1053,7 @@
       "source_file": "api/_capi.js",
       "source_location": "L48",
       "id": "capi_sendcapievent",
-      "community": 10,
+      "community": 9,
       "norm_label": "sendcapievent()"
     },
     {
@@ -1125,7 +1125,7 @@
       "source_file": "api/instagram.js",
       "source_location": "L1",
       "id": "api_instagram_js",
-      "community": 22,
+      "community": 20,
       "norm_label": "instagram.js"
     },
     {
@@ -1134,7 +1134,7 @@
       "source_file": "api/instagram.js",
       "source_location": "L15",
       "id": "instagram_handler",
-      "community": 22,
+      "community": 20,
       "norm_label": "handler()"
     },
     {
@@ -1143,7 +1143,7 @@
       "source_file": "api/ig-stats.js",
       "source_location": "L1",
       "id": "api_ig_stats_js",
-      "community": 23,
+      "community": 21,
       "norm_label": "ig-stats.js"
     },
     {
@@ -1152,7 +1152,7 @@
       "source_file": "api/ig-stats.js",
       "source_location": "L11",
       "id": "ig_stats_handler",
-      "community": 23,
+      "community": 21,
       "norm_label": "handler()"
     },
     {
@@ -1264,12 +1264,84 @@
       "norm_label": "sendbrandpitch()"
     },
     {
+      "label": "_igpromote.js",
+      "file_type": "code",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L1",
+      "id": "api_igpromote_js",
+      "community": 2,
+      "norm_label": "_igpromote.js"
+    },
+    {
+      "label": "adsToken()",
+      "file_type": "code",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L31",
+      "id": "igpromote_adstoken",
+      "community": 2,
+      "norm_label": "adstoken()"
+    },
+    {
+      "label": "fbGet()",
+      "file_type": "code",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L37",
+      "id": "igpromote_fbget",
+      "community": 2,
+      "norm_label": "fbget()"
+    },
+    {
+      "label": "shortcodeOf()",
+      "file_type": "code",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L46",
+      "id": "igpromote_shortcodeof",
+      "community": 2,
+      "norm_label": "shortcodeof()"
+    },
+    {
+      "label": "resolveIgUserId()",
+      "file_type": "code",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L59",
+      "id": "igpromote_resolveiguserid",
+      "community": 2,
+      "norm_label": "resolveiguserid()"
+    },
+    {
+      "label": "fetchIgMediaMap()",
+      "file_type": "code",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L75",
+      "id": "igpromote_fetchigmediamap",
+      "community": 2,
+      "norm_label": "fetchigmediamap()"
+    },
+    {
+      "label": "resolveMediaByShortcode()",
+      "file_type": "code",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L100",
+      "id": "igpromote_resolvemediabyshortcode",
+      "community": 2,
+      "norm_label": "resolvemediabyshortcode()"
+    },
+    {
+      "label": "existingPostCreativeBody()",
+      "file_type": "code",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L119",
+      "id": "igpromote_existingpostcreativebody",
+      "community": 2,
+      "norm_label": "existingpostcreativebody()"
+    },
+    {
       "label": "complete-campaign.js",
       "file_type": "code",
       "source_file": "api/cron/complete-campaign.js",
       "source_location": "L1",
       "id": "api_cron_complete_campaign_js",
-      "community": 11,
+      "community": 10,
       "norm_label": "complete-campaign.js"
     },
     {
@@ -1278,7 +1350,7 @@
       "source_file": "api/cron/complete-campaign.js",
       "source_location": "L19",
       "id": "complete_campaign_ymd",
-      "community": 11,
+      "community": 10,
       "norm_label": "ymd()"
     },
     {
@@ -1287,7 +1359,7 @@
       "source_file": "api/cron/complete-campaign.js",
       "source_location": "L21",
       "id": "complete_campaign_fbget",
-      "community": 11,
+      "community": 10,
       "norm_label": "fbget()"
     },
     {
@@ -1296,7 +1368,7 @@
       "source_file": "api/cron/complete-campaign.js",
       "source_location": "L30",
       "id": "complete_campaign_fbpost",
-      "community": 11,
+      "community": 10,
       "norm_label": "fbpost()"
     },
     {
@@ -1305,7 +1377,7 @@
       "source_file": "api/cron/complete-campaign.js",
       "source_location": "L42",
       "id": "complete_campaign_sbget",
-      "community": 11,
+      "community": 10,
       "norm_label": "sbget()"
     },
     {
@@ -1314,7 +1386,7 @@
       "source_file": "api/cron/complete-campaign.js",
       "source_location": "L51",
       "id": "complete_campaign_sbupsert",
-      "community": 11,
+      "community": 10,
       "norm_label": "sbupsert()"
     },
     {
@@ -1323,7 +1395,7 @@
       "source_file": "api/cron/complete-campaign.js",
       "source_location": "L66",
       "id": "complete_campaign_visitsfrom",
-      "community": 11,
+      "community": 10,
       "norm_label": "visitsfrom()"
     },
     {
@@ -1332,7 +1404,7 @@
       "source_file": "api/cron/complete-campaign.js",
       "source_location": "L72",
       "id": "complete_campaign_handler",
-      "community": 11,
+      "community": 10,
       "norm_label": "handler()"
     },
     {
@@ -1341,44 +1413,35 @@
       "source_file": "api/cron/launch-reels.js",
       "source_location": "L1",
       "id": "api_cron_launch_reels_js",
-      "community": 7,
+      "community": 2,
       "norm_label": "launch-reels.js"
     },
     {
       "label": "fbGet()",
       "file_type": "code",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L61",
+      "source_location": "L63",
       "id": "launch_reels_fbget",
-      "community": 7,
+      "community": 2,
       "norm_label": "fbget()"
     },
     {
       "label": "fbPost()",
       "file_type": "code",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L70",
+      "source_location": "L72",
       "id": "launch_reels_fbpost",
-      "community": 7,
+      "community": 2,
       "norm_label": "fbpost()"
     },
     {
       "label": "fbDelete()",
       "file_type": "code",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L87",
+      "source_location": "L89",
       "id": "launch_reels_fbdelete",
-      "community": 7,
+      "community": 2,
       "norm_label": "fbdelete()"
-    },
-    {
-      "label": "sleep()",
-      "file_type": "code",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L95",
-      "id": "launch_reels_sleep",
-      "community": 7,
-      "norm_label": "sleep()"
     },
     {
       "label": "cleanupOldCampaigns()",
@@ -1386,7 +1449,7 @@
       "source_file": "api/cron/launch-reels.js",
       "source_location": "L102",
       "id": "launch_reels_cleanupoldcampaigns",
-      "community": 7,
+      "community": 2,
       "norm_label": "cleanupoldcampaigns()"
     },
     {
@@ -1395,43 +1458,25 @@
       "source_file": "api/cron/launch-reels.js",
       "source_location": "L110",
       "id": "launch_reels_resolvereels",
-      "community": 7,
+      "community": 2,
       "norm_label": "resolvereels()"
     },
     {
       "label": "buildTargeting()",
       "file_type": "code",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L147",
+      "source_location": "L126",
       "id": "launch_reels_buildtargeting",
-      "community": 7,
+      "community": 2,
       "norm_label": "buildtargeting()"
-    },
-    {
-      "label": "uploadVideo()",
-      "file_type": "code",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L167",
-      "id": "launch_reels_uploadvideo",
-      "community": 7,
-      "norm_label": "uploadvideo()"
-    },
-    {
-      "label": "uploadThumb()",
-      "file_type": "code",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L187",
-      "id": "launch_reels_uploadthumb",
-      "community": 7,
-      "norm_label": "uploadthumb()"
     },
     {
       "label": "handler()",
       "file_type": "code",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L197",
+      "source_location": "L146",
       "id": "launch_reels_handler",
-      "community": 7,
+      "community": 2,
       "norm_label": "handler()"
     },
     {
@@ -1440,88 +1485,52 @@
       "source_file": "api/cron/boost-reel.js",
       "source_location": "L1",
       "id": "api_cron_boost_reel_js",
-      "community": 8,
+      "community": 2,
       "norm_label": "boost-reel.js"
     },
     {
       "label": "fbGet()",
       "file_type": "code",
       "source_file": "api/cron/boost-reel.js",
-      "source_location": "L32",
+      "source_location": "L39",
       "id": "boost_reel_fbget",
-      "community": 8,
+      "community": 2,
       "norm_label": "fbget()"
     },
     {
       "label": "fbPost()",
       "file_type": "code",
       "source_file": "api/cron/boost-reel.js",
-      "source_location": "L41",
+      "source_location": "L48",
       "id": "boost_reel_fbpost",
-      "community": 8,
+      "community": 2,
       "norm_label": "fbpost()"
     },
     {
       "label": "fbDelete()",
       "file_type": "code",
       "source_file": "api/cron/boost-reel.js",
-      "source_location": "L58",
-      "id": "boost_reel_fbdelete",
-      "community": 8,
-      "norm_label": "fbdelete()"
-    },
-    {
-      "label": "sleep()",
-      "file_type": "code",
-      "source_file": "api/cron/boost-reel.js",
       "source_location": "L65",
-      "id": "boost_reel_sleep",
-      "community": 8,
-      "norm_label": "sleep()"
-    },
-    {
-      "label": "resolveReel()",
-      "file_type": "code",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L67",
-      "id": "boost_reel_resolvereel",
-      "community": 8,
-      "norm_label": "resolvereel()"
-    },
-    {
-      "label": "uploadVideo()",
-      "file_type": "code",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L95",
-      "id": "boost_reel_uploadvideo",
-      "community": 8,
-      "norm_label": "uploadvideo()"
-    },
-    {
-      "label": "uploadThumb()",
-      "file_type": "code",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L111",
-      "id": "boost_reel_uploadthumb",
-      "community": 8,
-      "norm_label": "uploadthumb()"
+      "id": "boost_reel_fbdelete",
+      "community": 2,
+      "norm_label": "fbdelete()"
     },
     {
       "label": "buildTargeting()",
       "file_type": "code",
       "source_file": "api/cron/boost-reel.js",
-      "source_location": "L120",
+      "source_location": "L72",
       "id": "boost_reel_buildtargeting",
-      "community": 8,
+      "community": 2,
       "norm_label": "buildtargeting()"
     },
     {
       "label": "handler()",
       "file_type": "code",
       "source_file": "api/cron/boost-reel.js",
-      "source_location": "L132",
+      "source_location": "L84",
       "id": "boost_reel_handler",
-      "community": 8,
+      "community": 2,
       "norm_label": "handler()"
     },
     {
@@ -1602,7 +1611,7 @@
       "source_file": "api/cron/launch-carousel.js",
       "source_location": "L1",
       "id": "api_cron_launch_carousel_js",
-      "community": 9,
+      "community": 8,
       "norm_label": "launch-carousel.js"
     },
     {
@@ -1611,7 +1620,7 @@
       "source_file": "api/cron/launch-carousel.js",
       "source_location": "L61",
       "id": "launch_carousel_fbget",
-      "community": 9,
+      "community": 8,
       "norm_label": "fbget()"
     },
     {
@@ -1620,7 +1629,7 @@
       "source_file": "api/cron/launch-carousel.js",
       "source_location": "L70",
       "id": "launch_carousel_fbpost",
-      "community": 9,
+      "community": 8,
       "norm_label": "fbpost()"
     },
     {
@@ -1629,7 +1638,7 @@
       "source_file": "api/cron/launch-carousel.js",
       "source_location": "L87",
       "id": "launch_carousel_fbdelete",
-      "community": 9,
+      "community": 8,
       "norm_label": "fbdelete()"
     },
     {
@@ -1638,7 +1647,7 @@
       "source_file": "api/cron/launch-carousel.js",
       "source_location": "L95",
       "id": "launch_carousel_cleanupoldcampaigns",
-      "community": 9,
+      "community": 8,
       "norm_label": "cleanupoldcampaigns()"
     },
     {
@@ -1647,7 +1656,7 @@
       "source_file": "api/cron/launch-carousel.js",
       "source_location": "L103",
       "id": "launch_carousel_resolvecarousel",
-      "community": 9,
+      "community": 8,
       "norm_label": "resolvecarousel()"
     },
     {
@@ -1656,7 +1665,7 @@
       "source_file": "api/cron/launch-carousel.js",
       "source_location": "L144",
       "id": "launch_carousel_uploadimage",
-      "community": 9,
+      "community": 8,
       "norm_label": "uploadimage()"
     },
     {
@@ -1665,7 +1674,7 @@
       "source_file": "api/cron/launch-carousel.js",
       "source_location": "L154",
       "id": "launch_carousel_buildtargeting",
-      "community": 9,
+      "community": 8,
       "norm_label": "buildtargeting()"
     },
     {
@@ -1674,7 +1683,7 @@
       "source_file": "api/cron/launch-carousel.js",
       "source_location": "L173",
       "id": "launch_carousel_handler",
-      "community": 9,
+      "community": 8,
       "norm_label": "handler()"
     },
     {
@@ -1683,7 +1692,7 @@
       "source_file": "api/cron/setup-audiences.js",
       "source_location": "L1",
       "id": "api_cron_setup_audiences_js",
-      "community": 12,
+      "community": 11,
       "norm_label": "setup-audiences.js"
     },
     {
@@ -1692,7 +1701,7 @@
       "source_file": "api/cron/setup-audiences.js",
       "source_location": "L46",
       "id": "setup_audiences_fbget",
-      "community": 12,
+      "community": 11,
       "norm_label": "fbget()"
     },
     {
@@ -1701,7 +1710,7 @@
       "source_file": "api/cron/setup-audiences.js",
       "source_location": "L55",
       "id": "setup_audiences_fbpost",
-      "community": 12,
+      "community": 11,
       "norm_label": "fbpost()"
     },
     {
@@ -1710,7 +1719,7 @@
       "source_file": "api/cron/setup-audiences.js",
       "source_location": "L72",
       "id": "setup_audiences_fbdelete",
-      "community": 12,
+      "community": 11,
       "norm_label": "fbdelete()"
     },
     {
@@ -1719,7 +1728,7 @@
       "source_file": "api/cron/setup-audiences.js",
       "source_location": "L80",
       "id": "setup_audiences_findaudience",
-      "community": 12,
+      "community": 11,
       "norm_label": "findaudience()"
     },
     {
@@ -1728,7 +1737,7 @@
       "source_file": "api/cron/setup-audiences.js",
       "source_location": "L85",
       "id": "setup_audiences_cleanupoldcampaigns",
-      "community": 12,
+      "community": 11,
       "norm_label": "cleanupoldcampaigns()"
     },
     {
@@ -1737,7 +1746,7 @@
       "source_file": "api/cron/setup-audiences.js",
       "source_location": "L92",
       "id": "setup_audiences_targetingfor",
-      "community": 12,
+      "community": 11,
       "norm_label": "targetingfor()"
     },
     {
@@ -1746,7 +1755,7 @@
       "source_file": "api/cron/setup-audiences.js",
       "source_location": "L108",
       "id": "setup_audiences_handler",
-      "community": 12,
+      "community": 11,
       "norm_label": "handler()"
     },
     {
@@ -1755,7 +1764,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L1",
       "id": "api_cron_inbound_nudge_js",
-      "community": 18,
+      "community": 16,
       "norm_label": "inbound-nudge.js"
     },
     {
@@ -1764,7 +1773,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L16",
       "id": "inbound_nudge_sb",
-      "community": 18,
+      "community": 16,
       "norm_label": "sb()"
     },
     {
@@ -1773,7 +1782,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L24",
       "id": "inbound_nudge_tg",
-      "community": 18,
+      "community": 16,
       "norm_label": "tg()"
     },
     {
@@ -1782,7 +1791,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L32",
       "id": "inbound_nudge_handler",
-      "community": 18,
+      "community": 16,
       "norm_label": "handler()"
     },
     {
@@ -1791,7 +1800,7 @@
       "source_file": "api/cron/ads-scoreboard.js",
       "source_location": "L1",
       "id": "api_cron_ads_scoreboard_js",
-      "community": 14,
+      "community": 12,
       "norm_label": "ads-scoreboard.js"
     },
     {
@@ -1800,7 +1809,7 @@
       "source_file": "api/cron/ads-scoreboard.js",
       "source_location": "L24",
       "id": "ads_scoreboard_ymd",
-      "community": 14,
+      "community": 12,
       "norm_label": "ymd()"
     },
     {
@@ -1809,7 +1818,7 @@
       "source_file": "api/cron/ads-scoreboard.js",
       "source_location": "L26",
       "id": "ads_scoreboard_fbget",
-      "community": 14,
+      "community": 12,
       "norm_label": "fbget()"
     },
     {
@@ -1818,7 +1827,7 @@
       "source_file": "api/cron/ads-scoreboard.js",
       "source_location": "L35",
       "id": "ads_scoreboard_sbget",
-      "community": 14,
+      "community": 12,
       "norm_label": "sbget()"
     },
     {
@@ -1827,7 +1836,7 @@
       "source_file": "api/cron/ads-scoreboard.js",
       "source_location": "L45",
       "id": "ads_scoreboard_sbupsertdaily",
-      "community": 14,
+      "community": 12,
       "norm_label": "sbupsertdaily()"
     },
     {
@@ -1836,7 +1845,7 @@
       "source_file": "api/cron/ads-scoreboard.js",
       "source_location": "L59",
       "id": "ads_scoreboard_readactions",
-      "community": 14,
+      "community": 12,
       "norm_label": "readactions()"
     },
     {
@@ -1845,7 +1854,7 @@
       "source_file": "api/cron/ads-scoreboard.js",
       "source_location": "L72",
       "id": "ads_scoreboard_handler",
-      "community": 14,
+      "community": 12,
       "norm_label": "handler()"
     },
     {
@@ -1854,7 +1863,7 @@
       "source_file": "api/cron/backfill-videos.js",
       "source_location": "L1",
       "id": "api_cron_backfill_videos_js",
-      "community": 15,
+      "community": 13,
       "norm_label": "backfill-videos.js"
     },
     {
@@ -1863,7 +1872,7 @@
       "source_file": "api/cron/backfill-videos.js",
       "source_location": "L25",
       "id": "backfill_videos_ig",
-      "community": 15,
+      "community": 13,
       "norm_label": "ig()"
     },
     {
@@ -1872,7 +1881,7 @@
       "source_file": "api/cron/backfill-videos.js",
       "source_location": "L33",
       "id": "backfill_videos_sb",
-      "community": 15,
+      "community": 13,
       "norm_label": "sb()"
     },
     {
@@ -1881,7 +1890,7 @@
       "source_file": "api/cron/backfill-videos.js",
       "source_location": "L50",
       "id": "backfill_videos_storageexists",
-      "community": 15,
+      "community": 13,
       "norm_label": "storageexists()"
     },
     {
@@ -1890,7 +1899,7 @@
       "source_file": "api/cron/backfill-videos.js",
       "source_location": "L59",
       "id": "backfill_videos_publicurl",
-      "community": 15,
+      "community": 13,
       "norm_label": "publicurl()"
     },
     {
@@ -1899,7 +1908,7 @@
       "source_file": "api/cron/backfill-videos.js",
       "source_location": "L62",
       "id": "backfill_videos_remainingcount",
-      "community": 15,
+      "community": 13,
       "norm_label": "remainingcount()"
     },
     {
@@ -1908,7 +1917,7 @@
       "source_file": "api/cron/backfill-videos.js",
       "source_location": "L71",
       "id": "backfill_videos_handler",
-      "community": 15,
+      "community": 13,
       "norm_label": "handler()"
     },
     {
@@ -1917,7 +1926,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L1",
       "id": "api_cron_generate_blog_js",
-      "community": 2,
+      "community": 3,
       "norm_label": "generate-blog.js"
     },
     {
@@ -1926,7 +1935,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L43",
       "id": "generate_blog_handler",
-      "community": 2,
+      "community": 3,
       "norm_label": "handler()"
     },
     {
@@ -1935,7 +1944,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L186",
       "id": "generate_blog_autocomplete",
-      "community": 2,
+      "community": 3,
       "norm_label": "autocomplete()"
     },
     {
@@ -1944,7 +1953,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L213",
       "id": "generate_blog_fetchinstagramcontext",
-      "community": 2,
+      "community": 3,
       "norm_label": "fetchinstagramcontext()"
     },
     {
@@ -1953,7 +1962,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L229",
       "id": "generate_blog_indexnowping",
-      "community": 2,
+      "community": 3,
       "norm_label": "indexnowping()"
     },
     {
@@ -1962,7 +1971,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L243",
       "id": "generate_blog_researchandwrite",
-      "community": 2,
+      "community": 3,
       "norm_label": "researchandwrite()"
     },
     {
@@ -1971,7 +1980,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L316",
       "id": "generate_blog_require_angle",
-      "community": 2,
+      "community": 3,
       "norm_label": "require_angle()"
     },
     {
@@ -1980,7 +1989,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L331",
       "id": "generate_blog_callclaude",
-      "community": 2,
+      "community": 3,
       "norm_label": "callclaude()"
     },
     {
@@ -1989,7 +1998,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L354",
       "id": "generate_blog_extracttextandsources",
-      "community": 2,
+      "community": 3,
       "norm_label": "extracttextandsources()"
     },
     {
@@ -1998,7 +2007,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L372",
       "id": "generate_blog_parsejson",
-      "community": 2,
+      "community": 3,
       "norm_label": "parsejson()"
     },
     {
@@ -2007,7 +2016,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L390",
       "id": "generate_blog_escapecontrolcharsinstrings",
-      "community": 2,
+      "community": 3,
       "norm_label": "escapecontrolcharsinstrings()"
     },
     {
@@ -2016,7 +2025,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L414",
       "id": "generate_blog_repairjson",
-      "community": 2,
+      "community": 3,
       "norm_label": "repairjson()"
     },
     {
@@ -2025,7 +2034,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L426",
       "id": "generate_blog_nodash",
-      "community": 2,
+      "community": 3,
       "norm_label": "nodash()"
     },
     {
@@ -2034,7 +2043,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L429",
       "id": "generate_blog_sanitisebody",
-      "community": 2,
+      "community": 3,
       "norm_label": "sanitisebody()"
     },
     {
@@ -2043,7 +2052,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L439",
       "id": "generate_blog_countwords",
-      "community": 2,
+      "community": 3,
       "norm_label": "countwords()"
     },
     {
@@ -2052,7 +2061,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L442",
       "id": "generate_blog_slugify",
-      "community": 2,
+      "community": 3,
       "norm_label": "slugify()"
     },
     {
@@ -2061,7 +2070,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L445",
       "id": "generate_blog_uniqueslug",
-      "community": 2,
+      "community": 3,
       "norm_label": "uniqueslug()"
     },
     {
@@ -2070,7 +2079,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L454",
       "id": "generate_blog_arr",
-      "community": 2,
+      "community": 3,
       "norm_label": "arr()"
     },
     {
@@ -2079,7 +2088,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L456",
       "id": "generate_blog_logrun",
-      "community": 2,
+      "community": 3,
       "norm_label": "logrun()"
     },
     {
@@ -2088,70 +2097,61 @@
       "source_file": "api/cron/ad-autopilot.js",
       "source_location": "L1",
       "id": "api_cron_ad_autopilot_js",
-      "community": 13,
+      "community": 2,
       "norm_label": "ad-autopilot.js"
     },
     {
       "label": "sb()",
       "file_type": "code",
       "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L46",
+      "source_location": "L52",
       "id": "ad_autopilot_sb",
-      "community": 13,
+      "community": 2,
       "norm_label": "sb()"
     },
     {
       "label": "fbGet()",
       "file_type": "code",
       "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L62",
+      "source_location": "L68",
       "id": "ad_autopilot_fbget",
-      "community": 13,
+      "community": 2,
       "norm_label": "fbget()"
     },
     {
       "label": "fbPost()",
       "file_type": "code",
       "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L71",
+      "source_location": "L77",
       "id": "ad_autopilot_fbpost",
-      "community": 13,
+      "community": 2,
       "norm_label": "fbpost()"
     },
     {
       "label": "pickWinner()",
       "file_type": "code",
       "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L84",
+      "source_location": "L90",
       "id": "ad_autopilot_pickwinner",
-      "community": 13,
+      "community": 2,
       "norm_label": "pickwinner()"
-    },
-    {
-      "label": "getImageUrl()",
-      "file_type": "code",
-      "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L117",
-      "id": "ad_autopilot_getimageurl",
-      "community": 13,
-      "norm_label": "getimageurl()"
     },
     {
       "label": "currentActiveAds()",
       "file_type": "code",
       "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L130",
+      "source_location": "L119",
       "id": "ad_autopilot_currentactiveads",
-      "community": 13,
+      "community": 2,
       "norm_label": "currentactiveads()"
     },
     {
       "label": "handler()",
       "file_type": "code",
       "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L136",
+      "source_location": "L125",
       "id": "ad_autopilot_handler",
-      "community": 13,
+      "community": 2,
       "norm_label": "handler()"
     },
     {
@@ -2160,7 +2160,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L1",
       "id": "api_cron_ig_sync_js",
-      "community": 6,
+      "community": 7,
       "norm_label": "ig-sync.js"
     },
     {
@@ -2169,7 +2169,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L53",
       "id": "ig_sync_ig",
-      "community": 6,
+      "community": 7,
       "norm_label": "ig()"
     },
     {
@@ -2178,7 +2178,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L61",
       "id": "ig_sync_sb",
-      "community": 6,
+      "community": 7,
       "norm_label": "sb()"
     },
     {
@@ -2187,7 +2187,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L83",
       "id": "ig_sync_sleep",
-      "community": 6,
+      "community": 7,
       "norm_label": "sleep()"
     },
     {
@@ -2196,7 +2196,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L86",
       "id": "ig_sync_fetchrecentmedia",
-      "community": 6,
+      "community": 7,
       "norm_label": "fetchrecentmedia()"
     },
     {
@@ -2205,7 +2205,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L114",
       "id": "ig_sync_fetchstaleinsightposts",
-      "community": 6,
+      "community": 7,
       "norm_label": "fetchstaleinsightposts()"
     },
     {
@@ -2214,7 +2214,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L122",
       "id": "ig_sync_fetchinsights",
-      "community": 6,
+      "community": 7,
       "norm_label": "fetchinsights()"
     },
     {
@@ -2223,7 +2223,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L138",
       "id": "ig_sync_fetchcarouselchildren",
-      "community": 6,
+      "community": 7,
       "norm_label": "fetchcarouselchildren()"
     },
     {
@@ -2232,7 +2232,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L148",
       "id": "ig_sync_fetchdemographics",
-      "community": 6,
+      "community": 7,
       "norm_label": "fetchdemographics()"
     },
     {
@@ -2241,7 +2241,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L182",
       "id": "ig_sync_fetchreacheddemographics",
-      "community": 6,
+      "community": 7,
       "norm_label": "fetchreacheddemographics()"
     },
     {
@@ -2250,7 +2250,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L212",
       "id": "ig_sync_fetchdailysnapshot",
-      "community": 6,
+      "community": 7,
       "norm_label": "fetchdailysnapshot()"
     },
     {
@@ -2259,7 +2259,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L249",
       "id": "ig_sync_storageexists",
-      "community": 6,
+      "community": 7,
       "norm_label": "storageexists()"
     },
     {
@@ -2268,7 +2268,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L258",
       "id": "ig_sync_ensureheroreels",
-      "community": 6,
+      "community": 7,
       "norm_label": "ensureheroreels()"
     },
     {
@@ -2277,7 +2277,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L286",
       "id": "ig_sync_handler",
-      "community": 6,
+      "community": 7,
       "norm_label": "handler()"
     },
     {
@@ -2286,7 +2286,7 @@
       "source_file": "api/cron/daily-brief.js",
       "source_location": "L1",
       "id": "api_cron_daily_brief_js",
-      "community": 2,
+      "community": 3,
       "norm_label": "daily-brief.js"
     },
     {
@@ -2295,7 +2295,7 @@
       "source_file": "api/cron/daily-brief.js",
       "source_location": "L13",
       "id": "daily_brief_sb",
-      "community": 2,
+      "community": 3,
       "norm_label": "sb()"
     },
     {
@@ -2304,7 +2304,7 @@
       "source_file": "api/cron/daily-brief.js",
       "source_location": "L28",
       "id": "daily_brief_claude",
-      "community": 2,
+      "community": 3,
       "norm_label": "claude()"
     },
     {
@@ -2313,7 +2313,7 @@
       "source_file": "api/cron/daily-brief.js",
       "source_location": "L47",
       "id": "daily_brief_handler",
-      "community": 2,
+      "community": 3,
       "norm_label": "handler()"
     },
     {
@@ -2322,7 +2322,7 @@
       "source_file": "api/cron/daily-brief.js",
       "source_location": "L177",
       "id": "daily_brief_logrun",
-      "community": 2,
+      "community": 3,
       "norm_label": "logrun()"
     }
   ],
@@ -5462,6 +5462,270 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_src": "api_igpromote_js",
+      "_tgt": "igpromote_adstoken",
+      "source": "api_igpromote_js",
+      "target": "igpromote_adstoken",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_src": "api_igpromote_js",
+      "_tgt": "igpromote_fbget",
+      "source": "api_igpromote_js",
+      "target": "igpromote_fbget",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L46",
+      "weight": 1.0,
+      "_src": "api_igpromote_js",
+      "_tgt": "igpromote_shortcodeof",
+      "source": "api_igpromote_js",
+      "target": "igpromote_shortcodeof",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_src": "api_igpromote_js",
+      "_tgt": "igpromote_resolveiguserid",
+      "source": "api_igpromote_js",
+      "target": "igpromote_resolveiguserid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L75",
+      "weight": 1.0,
+      "_src": "api_igpromote_js",
+      "_tgt": "igpromote_fetchigmediamap",
+      "source": "api_igpromote_js",
+      "target": "igpromote_fetchigmediamap",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L100",
+      "weight": 1.0,
+      "_src": "api_igpromote_js",
+      "_tgt": "igpromote_resolvemediabyshortcode",
+      "source": "api_igpromote_js",
+      "target": "igpromote_resolvemediabyshortcode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L119",
+      "weight": 1.0,
+      "_src": "api_igpromote_js",
+      "_tgt": "igpromote_existingpostcreativebody",
+      "source": "api_igpromote_js",
+      "target": "igpromote_existingpostcreativebody",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_src": "igpromote_fbget",
+      "_tgt": "igpromote_adstoken",
+      "source": "igpromote_adstoken",
+      "target": "igpromote_fbget",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L76",
+      "weight": 1.0,
+      "_src": "igpromote_fetchigmediamap",
+      "_tgt": "igpromote_adstoken",
+      "source": "igpromote_adstoken",
+      "target": "igpromote_fetchigmediamap",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L60",
+      "weight": 1.0,
+      "_src": "igpromote_resolveiguserid",
+      "_tgt": "igpromote_fbget",
+      "source": "igpromote_fbget",
+      "target": "igpromote_resolveiguserid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L88",
+      "weight": 1.0,
+      "_src": "igpromote_fetchigmediamap",
+      "_tgt": "igpromote_shortcodeof",
+      "source": "igpromote_shortcodeof",
+      "target": "igpromote_fetchigmediamap",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/ad-autopilot.js",
+      "source_location": "L157",
+      "weight": 1.0,
+      "_src": "ad_autopilot_handler",
+      "_tgt": "igpromote_shortcodeof",
+      "source": "igpromote_shortcodeof",
+      "target": "ad_autopilot_handler"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/launch-reels.js",
+      "source_location": "L184",
+      "weight": 1.0,
+      "_src": "launch_reels_handler",
+      "_tgt": "igpromote_resolveiguserid",
+      "source": "igpromote_resolveiguserid",
+      "target": "launch_reels_handler"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/boost-reel.js",
+      "source_location": "L99",
+      "weight": 1.0,
+      "_src": "boost_reel_handler",
+      "_tgt": "igpromote_resolveiguserid",
+      "source": "igpromote_resolveiguserid",
+      "target": "boost_reel_handler"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/ad-autopilot.js",
+      "source_location": "L171",
+      "weight": 1.0,
+      "_src": "ad_autopilot_handler",
+      "_tgt": "igpromote_resolveiguserid",
+      "source": "igpromote_resolveiguserid",
+      "target": "ad_autopilot_handler"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_igpromote.js",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_src": "igpromote_resolvemediabyshortcode",
+      "_tgt": "igpromote_fetchigmediamap",
+      "source": "igpromote_fetchigmediamap",
+      "target": "igpromote_resolvemediabyshortcode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/launch-reels.js",
+      "source_location": "L111",
+      "weight": 1.0,
+      "_src": "launch_reels_resolvereels",
+      "_tgt": "igpromote_fetchigmediamap",
+      "source": "igpromote_fetchigmediamap",
+      "target": "launch_reels_resolvereels"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/launch-reels.js",
+      "source_location": "L188",
+      "weight": 1.0,
+      "_src": "launch_reels_handler",
+      "_tgt": "igpromote_fetchigmediamap",
+      "source": "igpromote_fetchigmediamap",
+      "target": "launch_reels_handler"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/boost-reel.js",
+      "source_location": "L101",
+      "weight": 1.0,
+      "_src": "boost_reel_handler",
+      "_tgt": "igpromote_resolvemediabyshortcode",
+      "source": "igpromote_resolvemediabyshortcode",
+      "target": "boost_reel_handler"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/ad-autopilot.js",
+      "source_location": "L172",
+      "weight": 1.0,
+      "_src": "ad_autopilot_handler",
+      "_tgt": "igpromote_resolvemediabyshortcode",
+      "source": "igpromote_resolvemediabyshortcode",
+      "target": "ad_autopilot_handler"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/boost-reel.js",
+      "source_location": "L143",
+      "weight": 1.0,
+      "_src": "boost_reel_handler",
+      "_tgt": "igpromote_existingpostcreativebody",
+      "source": "igpromote_existingpostcreativebody",
+      "target": "boost_reel_handler"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/ad-autopilot.js",
+      "source_location": "L185",
+      "weight": 1.0,
+      "_src": "ad_autopilot_handler",
+      "_tgt": "igpromote_existingpostcreativebody",
+      "source": "igpromote_existingpostcreativebody",
+      "target": "ad_autopilot_handler"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "api/cron/complete-campaign.js",
       "source_location": "L19",
       "weight": 1.0,
@@ -5619,7 +5883,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L61",
+      "source_location": "L63",
       "weight": 1.0,
       "_src": "api_cron_launch_reels_js",
       "_tgt": "launch_reels_fbget",
@@ -5631,7 +5895,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L70",
+      "source_location": "L72",
       "weight": 1.0,
       "_src": "api_cron_launch_reels_js",
       "_tgt": "launch_reels_fbpost",
@@ -5643,24 +5907,12 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L87",
+      "source_location": "L89",
       "weight": 1.0,
       "_src": "api_cron_launch_reels_js",
       "_tgt": "launch_reels_fbdelete",
       "source": "api_cron_launch_reels_js",
       "target": "launch_reels_fbdelete",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L95",
-      "weight": 1.0,
-      "_src": "api_cron_launch_reels_js",
-      "_tgt": "launch_reels_sleep",
-      "source": "api_cron_launch_reels_js",
-      "target": "launch_reels_sleep",
       "confidence_score": 1.0
     },
     {
@@ -5691,7 +5943,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L147",
+      "source_location": "L126",
       "weight": 1.0,
       "_src": "api_cron_launch_reels_js",
       "_tgt": "launch_reels_buildtargeting",
@@ -5703,31 +5955,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L167",
-      "weight": 1.0,
-      "_src": "api_cron_launch_reels_js",
-      "_tgt": "launch_reels_uploadvideo",
-      "source": "api_cron_launch_reels_js",
-      "target": "launch_reels_uploadvideo",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L187",
-      "weight": 1.0,
-      "_src": "api_cron_launch_reels_js",
-      "_tgt": "launch_reels_uploadthumb",
-      "source": "api_cron_launch_reels_js",
-      "target": "launch_reels_uploadthumb",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L197",
+      "source_location": "L146",
       "weight": 1.0,
       "_src": "api_cron_launch_reels_js",
       "_tgt": "launch_reels_handler",
@@ -5751,19 +5979,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L177",
-      "weight": 1.0,
-      "_src": "launch_reels_uploadvideo",
-      "_tgt": "launch_reels_fbget",
-      "source": "launch_reels_fbget",
-      "target": "launch_reels_uploadvideo",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L224",
+      "source_location": "L169",
       "weight": 1.0,
       "_src": "launch_reels_handler",
       "_tgt": "launch_reels_fbget",
@@ -5775,31 +5991,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L168",
-      "weight": 1.0,
-      "_src": "launch_reels_uploadvideo",
-      "_tgt": "launch_reels_fbpost",
-      "source": "launch_reels_fbpost",
-      "target": "launch_reels_uploadvideo",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L192",
-      "weight": 1.0,
-      "_src": "launch_reels_uploadthumb",
-      "_tgt": "launch_reels_fbpost",
-      "source": "launch_reels_fbpost",
-      "target": "launch_reels_uploadthumb",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L232",
+      "source_location": "L177",
       "weight": 1.0,
       "_src": "launch_reels_handler",
       "_tgt": "launch_reels_fbpost",
@@ -5823,19 +6015,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L181",
-      "weight": 1.0,
-      "_src": "launch_reels_uploadvideo",
-      "_tgt": "launch_reels_sleep",
-      "source": "launch_reels_sleep",
-      "target": "launch_reels_uploadvideo",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L216",
+      "source_location": "L161",
       "weight": 1.0,
       "_src": "launch_reels_handler",
       "_tgt": "launch_reels_cleanupoldcampaigns",
@@ -5847,7 +6027,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L240",
+      "source_location": "L198",
       "weight": 1.0,
       "_src": "launch_reels_handler",
       "_tgt": "launch_reels_resolvereels",
@@ -5859,7 +6039,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L294",
+      "source_location": "L233",
       "weight": 1.0,
       "_src": "launch_reels_handler",
       "_tgt": "launch_reels_buildtargeting",
@@ -5871,7 +6051,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/boost-reel.js",
-      "source_location": "L32",
+      "source_location": "L39",
       "weight": 1.0,
       "_src": "api_cron_boost_reel_js",
       "_tgt": "boost_reel_fbget",
@@ -5883,7 +6063,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/boost-reel.js",
-      "source_location": "L41",
+      "source_location": "L48",
       "weight": 1.0,
       "_src": "api_cron_boost_reel_js",
       "_tgt": "boost_reel_fbpost",
@@ -5895,7 +6075,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/boost-reel.js",
-      "source_location": "L58",
+      "source_location": "L65",
       "weight": 1.0,
       "_src": "api_cron_boost_reel_js",
       "_tgt": "boost_reel_fbdelete",
@@ -5907,55 +6087,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/boost-reel.js",
-      "source_location": "L65",
-      "weight": 1.0,
-      "_src": "api_cron_boost_reel_js",
-      "_tgt": "boost_reel_sleep",
-      "source": "api_cron_boost_reel_js",
-      "target": "boost_reel_sleep",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L67",
-      "weight": 1.0,
-      "_src": "api_cron_boost_reel_js",
-      "_tgt": "boost_reel_resolvereel",
-      "source": "api_cron_boost_reel_js",
-      "target": "boost_reel_resolvereel",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L95",
-      "weight": 1.0,
-      "_src": "api_cron_boost_reel_js",
-      "_tgt": "boost_reel_uploadvideo",
-      "source": "api_cron_boost_reel_js",
-      "target": "boost_reel_uploadvideo",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L111",
-      "weight": 1.0,
-      "_src": "api_cron_boost_reel_js",
-      "_tgt": "boost_reel_uploadthumb",
-      "source": "api_cron_boost_reel_js",
-      "target": "boost_reel_uploadthumb",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L120",
+      "source_location": "L72",
       "weight": 1.0,
       "_src": "api_cron_boost_reel_js",
       "_tgt": "boost_reel_buildtargeting",
@@ -5967,7 +6099,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/boost-reel.js",
-      "source_location": "L132",
+      "source_location": "L84",
       "weight": 1.0,
       "_src": "api_cron_boost_reel_js",
       "_tgt": "boost_reel_handler",
@@ -5981,18 +6113,6 @@
       "source_file": "api/cron/boost-reel.js",
       "source_location": "L102",
       "weight": 1.0,
-      "_src": "boost_reel_uploadvideo",
-      "_tgt": "boost_reel_fbget",
-      "source": "boost_reel_fbget",
-      "target": "boost_reel_uploadvideo",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L149",
-      "weight": 1.0,
       "_src": "boost_reel_handler",
       "_tgt": "boost_reel_fbget",
       "source": "boost_reel_fbget",
@@ -6003,12 +6123,12 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/boost-reel.js",
-      "source_location": "L96",
+      "source_location": "L119",
       "weight": 1.0,
-      "_src": "boost_reel_uploadvideo",
+      "_src": "boost_reel_handler",
       "_tgt": "boost_reel_fbpost",
       "source": "boost_reel_fbpost",
-      "target": "boost_reel_uploadvideo",
+      "target": "boost_reel_handler",
       "confidence_score": 1.0
     },
     {
@@ -6016,30 +6136,6 @@
       "confidence": "EXTRACTED",
       "source_file": "api/cron/boost-reel.js",
       "source_location": "L116",
-      "weight": 1.0,
-      "_src": "boost_reel_uploadthumb",
-      "_tgt": "boost_reel_fbpost",
-      "source": "boost_reel_fbpost",
-      "target": "boost_reel_uploadthumb",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L169",
-      "weight": 1.0,
-      "_src": "boost_reel_handler",
-      "_tgt": "boost_reel_fbpost",
-      "source": "boost_reel_fbpost",
-      "target": "boost_reel_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L164",
       "weight": 1.0,
       "_src": "boost_reel_handler",
       "_tgt": "boost_reel_fbdelete",
@@ -6051,55 +6147,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/boost-reel.js",
-      "source_location": "L106",
-      "weight": 1.0,
-      "_src": "boost_reel_uploadvideo",
-      "_tgt": "boost_reel_sleep",
-      "source": "boost_reel_sleep",
-      "target": "boost_reel_uploadvideo",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L148",
-      "weight": 1.0,
-      "_src": "boost_reel_handler",
-      "_tgt": "boost_reel_resolvereel",
-      "source": "boost_reel_resolvereel",
-      "target": "boost_reel_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L167",
-      "weight": 1.0,
-      "_src": "boost_reel_handler",
-      "_tgt": "boost_reel_uploadvideo",
-      "source": "boost_reel_uploadvideo",
-      "target": "boost_reel_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L167",
-      "weight": 1.0,
-      "_src": "boost_reel_handler",
-      "_tgt": "boost_reel_uploadthumb",
-      "source": "boost_reel_uploadthumb",
-      "target": "boost_reel_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L185",
+      "source_location": "L135",
       "weight": 1.0,
       "_src": "boost_reel_handler",
       "_tgt": "boost_reel_buildtargeting",
@@ -7455,7 +7503,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L46",
+      "source_location": "L52",
       "weight": 1.0,
       "_src": "api_cron_ad_autopilot_js",
       "_tgt": "ad_autopilot_sb",
@@ -7467,7 +7515,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L62",
+      "source_location": "L68",
       "weight": 1.0,
       "_src": "api_cron_ad_autopilot_js",
       "_tgt": "ad_autopilot_fbget",
@@ -7479,7 +7527,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L71",
+      "source_location": "L77",
       "weight": 1.0,
       "_src": "api_cron_ad_autopilot_js",
       "_tgt": "ad_autopilot_fbpost",
@@ -7491,7 +7539,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L84",
+      "source_location": "L90",
       "weight": 1.0,
       "_src": "api_cron_ad_autopilot_js",
       "_tgt": "ad_autopilot_pickwinner",
@@ -7503,19 +7551,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L117",
-      "weight": 1.0,
-      "_src": "api_cron_ad_autopilot_js",
-      "_tgt": "ad_autopilot_getimageurl",
-      "source": "api_cron_ad_autopilot_js",
-      "target": "ad_autopilot_getimageurl",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L130",
+      "source_location": "L119",
       "weight": 1.0,
       "_src": "api_cron_ad_autopilot_js",
       "_tgt": "ad_autopilot_currentactiveads",
@@ -7527,7 +7563,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L136",
+      "source_location": "L125",
       "weight": 1.0,
       "_src": "api_cron_ad_autopilot_js",
       "_tgt": "ad_autopilot_handler",
@@ -7539,7 +7575,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L86",
+      "source_location": "L92",
       "weight": 1.0,
       "_src": "ad_autopilot_pickwinner",
       "_tgt": "ad_autopilot_sb",
@@ -7551,19 +7587,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L121",
-      "weight": 1.0,
-      "_src": "ad_autopilot_getimageurl",
-      "_tgt": "ad_autopilot_sb",
-      "source": "ad_autopilot_sb",
-      "target": "ad_autopilot_getimageurl",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L131",
+      "source_location": "L120",
       "weight": 1.0,
       "_src": "ad_autopilot_currentactiveads",
       "_tgt": "ad_autopilot_fbget",
@@ -7575,7 +7599,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L192",
+      "source_location": "L181",
       "weight": 1.0,
       "_src": "ad_autopilot_handler",
       "_tgt": "ad_autopilot_fbpost",
@@ -7587,7 +7611,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L161",
+      "source_location": "L150",
       "weight": 1.0,
       "_src": "ad_autopilot_handler",
       "_tgt": "ad_autopilot_pickwinner",
@@ -7599,19 +7623,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L168",
-      "weight": 1.0,
-      "_src": "ad_autopilot_handler",
-      "_tgt": "ad_autopilot_getimageurl",
-      "source": "ad_autopilot_getimageurl",
-      "target": "ad_autopilot_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/ad-autopilot.js",
-      "source_location": "L222",
+      "source_location": "L193",
       "weight": 1.0,
       "_src": "ad_autopilot_handler",
       "_tgt": "ad_autopilot_currentactiveads",

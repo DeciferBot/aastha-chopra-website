@@ -25,6 +25,13 @@ export const config = { maxDuration: 120 };
  * GET /api/cron/ad-autopilot   (Bearer CRON_SECRET or MANUAL_SYNC_KEY)
  */
 
+import {
+  resolveIgUserId,
+  resolveMediaByShortcode,
+  shortcodeOf,
+  existingPostCreativeBody,
+} from '../_igpromote.js';
+
 const SUPABASE_URL = 'https://uqzvaytvynrglijvwjsz.supabase.co';
 const FB_BASE      = 'https://graph.facebook.com/v21.0';
 
@@ -33,8 +40,7 @@ const AD_ACCOUNT   = '1508208884141959';          // act_ prefix added where nee
 const CAMPAIGN_ID  = '120247258501960261';         // "Autopilot — Boost Winners"
 const ADSET_ID     = '120247260470810261';         // "UAE Women — Post Engagement v2" (ON_POST)
 const PAGE_ID      = '109895657605220';            // aastha_sochic
-const IG_USER_ID   = '17841400363033312';          // @aastha_sochic IG business account
-const PROFILE_LINK = 'https://www.instagram.com/aastha_sochic/';  // follow-intent destination
+const IG_USER_ID   = '17841400363033312';          // @aastha_sochic IG business account (fallback)
 
 // Hard spend cap — never raised by this code.
 const DAILY_BUDGET_CENTS = 1000;                   // 10 AED/day
@@ -109,23 +115,6 @@ async function pickWinner() {
   return scored[0] || null;
 }
 
-// ── Step 2: get a usable image URL for the winner ─────────────────────────────
-// The Marketing API can't promote an existing IG post via API (that's UI-only),
-// so we build a FRESH single-image creative from the post's synced feed image —
-// the proven-working path. Social proof does NOT carry over. For carousels the
-// post-level media_url is null, so fall back to the first child image.
-async function getImageUrl(winner) {
-  // Prefer the stable Supabase-hosted copy — IG CDN URLs expire (~2 weeks) and
-  // intermittently fail Meta's image fetch. Fall back to IG CDN only if needed.
-  if (winner.storage_image_url) return winner.storage_image_url;
-  const kids = await sb(
-    `/instagram_carousel_children?parent_id=eq.${winner.id}&select=storage_url,original_url&order=sort_order.asc&limit=1`
-  );
-  if (kids?.[0]?.storage_url) return kids[0].storage_url;
-  if (winner.original_media_url) return winner.original_media_url;
-  return kids?.[0]?.original_url || null;
-}
-
 // ── Step 3: find the currently-active ad in the ad set (to pause it) ───────────
 async function currentActiveAds() {
   const data = await fbGet(`/${ADSET_ID}/ads?fields=id,name,status&limit=50`);
@@ -164,67 +153,49 @@ export default async function handler(req, res) {
       return res.status(200).json({ ok: true, status: 'skipped', reason: 'no winner' });
     }
 
-    // 2. Get the post's synced feed image (fresh single-image creative).
-    const imageUrl = await getImageUrl(winner);
-    if (!imageUrl) {
-      await logRun({
-        status: 'error', winner_post_id: winner.id, winner_permalink: winner.permalink,
-        winner_eng_rate: Number(winner.eng_rate.toFixed(1)),
-        detail: 'No image URL available for winner (carousel children not synced?).',
-      });
-      return res.status(200).json({ ok: false, status: 'error', reason: 'no image url' });
-    }
-
+    // 2. Parse the winner's shortcode — needed to resolve its ad-side media id.
+    const shortcode = shortcodeOf(winner.permalink);
     const base = {
       winner_post_id: winner.id,
       winner_permalink: winner.permalink,
       winner_eng_rate: Number(winner.eng_rate.toFixed(1)),
       daily_budget_cents: DAILY_BUDGET_CENTS,
     };
+    if (!shortcode) {
+      await logRun({ ...base, status: 'error', detail: `Could not parse a shortcode from permalink ${winner.permalink}.` });
+      return res.status(200).json({ ok: false, status: 'error', reason: 'no shortcode' });
+    }
+
+    // 3. Resolve the IG identity + the post's real media id (in the
+    //    source_instagram_media_id namespace — see ../_igpromote.js).
+    const igUserId = await resolveIgUserId(PAGE_ID, IG_USER_ID);
+    const media = await resolveMediaByShortcode(igUserId, shortcode);
 
     if (dryRun) {
       await logRun({ ...base, status: 'skipped',
-        detail: `DRY RUN — would boost ${winner.permalink} (${winner.eng_rate.toFixed(1)}% eng) via image.` });
-      return res.status(200).json({ ok: true, status: 'dry-run', winner: { ...base, image_url: imageUrl } });
+        detail: `DRY RUN — would boost existing post ${winner.permalink} (${winner.eng_rate.toFixed(1)}% eng).` });
+      return res.status(200).json({ ok: true, status: 'dry-run', winner: { ...base, ig_user_id: igUserId, media_id: media.id } });
     }
 
-    // 3. Re-assert the hard budget cap before anything goes live.
+    // 4. Re-assert the hard budget cap before anything goes live.
     await fbPost(`/${CAMPAIGN_ID}`, { daily_budget: DAILY_BUDGET_CENTS });
 
-    // 4. Upload the feed image to the ad account to obtain an image_hash. Meta's
-    //    link_data requires image_hash (NOT image_url) — passing a URL here fails
-    //    with "Invalid parameter". We fetch the image bytes and upload them.
-    const imgResp = await fetch(imageUrl);
-    if (!imgResp.ok) throw new Error(`Image fetch failed: HTTP ${imgResp.status}`);
-    const imgB64 = Buffer.from(await imgResp.arrayBuffer()).toString('base64');
-    const uploaded = await fbPost(`/act_${AD_ACCOUNT}/adimages`, { bytes: imgB64 });
-    const imageHash = Object.values(uploaded.images || {})[0]?.hash;
-    if (!imageHash) throw new Error('adimages upload returned no hash');
-
-    // 5. Build a single-image creative from that image, delivering on Facebook +
-    //    Instagram (instagram_user_id). The original post's likes/comments do NOT
-    //    carry — Marketing API can't promote an existing IG post.
-    const caption = (winner.caption || '').replace(/\s+/g, ' ').trim().slice(0, 280);
-    const creative = await fbPost(`/act_${AD_ACCOUNT}/adcreatives`, {
+    // 5. Build the creative by promoting the EXISTING post — its organic
+    //    likes/comments stay on the real post and grow as social proof.
+    const creative = await fbPost(`/act_${AD_ACCOUNT}/adcreatives`, existingPostCreativeBody({
       name: `Autopilot creative — ${winner.permalink}`,
-      object_story_spec: {
-        page_id: PAGE_ID,
-        instagram_user_id: IG_USER_ID,
-        link_data: {
-          image_hash: imageHash,
-          link: PROFILE_LINK,
-          message: caption || 'Follow @aastha_sochic ✨',
-        },
-      },
-    });
+      pageId: PAGE_ID,
+      igUserId,
+      mediaId: media.id,
+    }));
 
-    // 5. Pause the previously-active ad(s) — keep exactly one running.
+    // 6. Pause the previously-active ad(s) — keep exactly one running.
     const prev = await currentActiveAds();
     for (const a of prev) {
       await fbPost(`/${a.id}`, { status: 'PAUSED' }).catch(() => {});
     }
 
-    // 6. Create the new ad, active.
+    // 7. Create the new ad, active.
     const ad = await fbPost(`/act_${AD_ACCOUNT}/ads`, {
       name: `Boost ${winner.permalink} (${winner.eng_rate.toFixed(0)}% eng)`,
       adset_id: ADSET_ID,
@@ -232,7 +203,7 @@ export default async function handler(req, res) {
       status: 'ACTIVE',
     });
 
-    // 7. Make sure the ad set + campaign are live (idempotent).
+    // 8. Make sure the ad set + campaign are live (idempotent).
     await fbPost(`/${ADSET_ID}`, { status: 'ACTIVE' }).catch(() => {});
     await fbPost(`/${CAMPAIGN_ID}`, { status: 'ACTIVE' }).catch(() => {});
 
