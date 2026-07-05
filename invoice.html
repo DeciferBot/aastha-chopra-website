@@ -900,16 +900,39 @@
   function renderToPdfBlob() {
     // Capture from an untransformed, off-screen clone so the on-screen mobile
     // scale-to-fit never affects what actually gets rendered into the PDF.
+    // NOTE: the clone is positioned `absolute`, NOT `fixed` — html2canvas
+    // renders a `position:fixed` off-screen element as a blank canvas on iOS
+    // Safari, which is exactly what produced blank emailed/downloaded invoices.
     var original = document.getElementById('invoicePreview');
     var clone = original.cloneNode(true);
     clone.style.transform = 'none';
-    clone.style.position = 'fixed';
+    clone.style.position = 'absolute';
     clone.style.left = '-9999px';
     clone.style.top = '0';
+    clone.style.width = '794px';
     document.body.appendChild(clone);
 
-    return html2canvas(clone, {scale: 2, backgroundColor: '#ffffff'}).then(function(canvas){
-      document.body.removeChild(clone);
+    function cleanup() { if (clone.parentNode) document.body.removeChild(clone); }
+
+    // Give web fonts a chance to load so the invoice isn't painted with fallback
+    // metrics (or, in the worst case, not at all). Cap the wait so a slow/blocked
+    // font never hangs the export.
+    var fontsReady = (document.fonts && document.fonts.ready)
+      ? Promise.race([document.fonts.ready, new Promise(function(r){ setTimeout(r, 1500); })])
+      : Promise.resolve();
+
+    return fontsReady.then(function(){
+      // iOS Safari silently returns a blank canvas once a dimension crosses
+      // ~4096px, so a full-length invoice at scale 2 (794px wide → tall pages)
+      // can blow the ceiling. Clamp the capture scale to keep every dimension
+      // comfortably under it; short invoices still capture at full scale 2.
+      var contentHeight = clone.scrollHeight || 1123;
+      var MAX_DIM = 4000;
+      var scale = Math.min(2, MAX_DIM / 794, MAX_DIM / contentHeight);
+      if (!(scale > 0)) scale = 1;
+      return html2canvas(clone, {scale: scale, backgroundColor: '#ffffff', useCORS: true});
+    }).then(function(canvas){
+      cleanup();
       var img = canvas.toDataURL('image/jpeg', 0.95);
       var pdf = new window.jspdf.jsPDF('p', 'pt', 'a4');
       var pageWidth = pdf.internal.pageSize.getWidth();
@@ -927,7 +950,7 @@
       }
       return pdf.output('blob');
     }).catch(function(err){
-      if (clone.parentNode) document.body.removeChild(clone);
+      cleanup();
       throw err;
     });
   }
