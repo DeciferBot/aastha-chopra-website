@@ -290,9 +290,19 @@ ${igPosts.map((p) => `- [${/\/reel\//.test(p.permalink) ? 'Reel' : 'Post'}] ${St
   }
 
   const { text, sources: citedSources } = extractTextAndSources(data);
-  const post = parseJson(text);
+  let post = parseJson(text);
+
+  // The model occasionally wraps, truncates, or slightly malforms the JSON
+  // (unescaped quotes in HTML attributes, a body cut off at max_tokens). One
+  // cheap no-web-search repair pass rescues those runs instead of losing them.
   if (!post || !post.title || !post.body_html) {
-    throw new Error('Model did not return usable post JSON');
+    post = await repairJson(text).catch(() => null);
+  }
+
+  if (!post || !post.title || !post.body_html) {
+    const stop = data && data.stop_reason ? ` stop_reason=${data.stop_reason}` : '';
+    const tail = String(text || '').replace(/\s+/g, ' ').slice(-200);
+    throw new Error(`Model did not return usable post JSON (len=${(text || '').length}${stop}; tail: ${tail})`);
   }
 
   // Merge model-declared sources with real citation URLs from the search results.
@@ -318,10 +328,10 @@ function require_angle(segment) {
   return ANGLES[segment] || 'real, useful, Dubai-grounded storytelling';
 }
 
-async function callClaude({ system, user, useTools }) {
+async function callClaude({ system, user, useTools, maxTokens = 8000 }) {
   const body = {
     model: 'claude-sonnet-4-6',
-    max_tokens: 6000,
+    max_tokens: maxTokens,
     system,
     messages: [{ role: 'user', content: user }],
   };
@@ -361,11 +371,55 @@ function extractTextAndSources(data) {
 
 function parseJson(text) {
   if (!text) return null;
-  let t = text.trim().replace(/^```(?:json)?/i, '').replace(/```$/, '').trim();
+  const t = String(text).trim().replace(/^```(?:json)?/i, '').replace(/```$/, '').trim();
   const start = t.indexOf('{');
   const end = t.lastIndexOf('}');
-  if (start === -1 || end === -1) return null;
-  try { return JSON.parse(t.slice(start, end + 1)); } catch { return null; }
+  if (start === -1 || end === -1 || end < start) return null;
+  const slice = t.slice(start, end + 1);
+  // 1. straight parse
+  try { return JSON.parse(slice); } catch { /* fall through */ }
+  // 2. the common breaker: literal newlines/tabs/control chars left unescaped
+  //    inside a string value (models pretty-print body_html with real newlines).
+  try { return JSON.parse(escapeControlCharsInStrings(slice)); } catch { /* fall through */ }
+  return null;
+}
+
+// Walk the text tracking string vs structure, and escape any control character
+// that appears literally inside a JSON string. Leaves already-escaped sequences
+// and all structural characters untouched.
+function escapeControlCharsInStrings(s) {
+  let out = '';
+  let inStr = false;
+  let esc = false;
+  for (let i = 0; i < s.length; i++) {
+    const ch = s[i];
+    if (esc) { out += ch; esc = false; continue; }
+    if (ch === '\\') { out += ch; esc = true; continue; }
+    if (ch === '"') { inStr = !inStr; out += ch; continue; }
+    if (inStr) {
+      if (ch === '\n') { out += '\\n'; continue; }
+      if (ch === '\r') { out += '\\r'; continue; }
+      if (ch === '\t') { out += '\\t'; continue; }
+      const code = ch.charCodeAt(0);
+      if (code < 0x20) { out += '\\u' + code.toString(16).padStart(4, '0'); continue; }
+    }
+    out += ch;
+  }
+  return out;
+}
+
+// Backstop for responses that parseJson could not salvage (unescaped quotes in
+// HTML attributes, a truncated tail). Ask the model to emit strict JSON only.
+// No web_search, so it is cheap and fast.
+async function repairJson(text) {
+  if (!text || text.length < 20) return null;
+  const data = await callClaude({
+    system: 'You convert almost-JSON into strict, valid JSON. Output ONLY the corrected JSON object: no code fences, no commentary. Preserve all content verbatim. Properly escape every character that must be escaped inside a JSON string (double quotes, backslashes, newlines, tabs). If the input was cut off mid-object, complete it minimally so it parses.',
+    user: `Fix this into one valid JSON object:\n\n${String(text).slice(0, 100000)}`,
+    useTools: false,
+  });
+  const { text: fixed } = extractTextAndSources(data);
+  return parseJson(fixed);
 }
 
 // ── Sanitisers ──────────────────────────────────────────────────────────────

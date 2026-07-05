@@ -9,7 +9,7 @@
       "source_file": "generate-pdf.js",
       "source_location": "L1",
       "id": "generate_pdf_js",
-      "community": 25,
+      "community": 24,
       "norm_label": "generate-pdf.js"
     },
     {
@@ -333,7 +333,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L1",
       "id": "js_meta_events_js",
-      "community": 20,
+      "community": 19,
       "norm_label": "meta-events.js"
     },
     {
@@ -342,7 +342,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L11",
       "id": "meta_events_fbqready",
-      "community": 20,
+      "community": 19,
       "norm_label": "fbqready()"
     },
     {
@@ -351,7 +351,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L12",
       "id": "meta_events_eventid",
-      "community": 20,
+      "community": 19,
       "norm_label": "eventid()"
     },
     {
@@ -387,7 +387,7 @@
       "source_file": "api/analytics-auth.js",
       "source_location": "L1",
       "id": "api_analytics_auth_js",
-      "community": 21,
+      "community": 20,
       "norm_label": "analytics-auth.js"
     },
     {
@@ -396,7 +396,7 @@
       "source_file": "api/analytics-auth.js",
       "source_location": "L1",
       "id": "analytics_auth_handler",
-      "community": 21,
+      "community": 20,
       "norm_label": "handler()"
     },
     {
@@ -702,7 +702,7 @@
       "source_file": "api/ig-profile.js",
       "source_location": "L1",
       "id": "api_ig_profile_js",
-      "community": 22,
+      "community": 21,
       "norm_label": "ig-profile.js"
     },
     {
@@ -711,7 +711,7 @@
       "source_file": "api/ig-profile.js",
       "source_location": "L3",
       "id": "ig_profile_handler",
-      "community": 22,
+      "community": 21,
       "norm_label": "handler()"
     },
     {
@@ -1080,7 +1080,7 @@
       "source_file": "api/reels.js",
       "source_location": "L1",
       "id": "api_reels_js",
-      "community": 18,
+      "community": 0,
       "norm_label": "reels.js"
     },
     {
@@ -1089,7 +1089,7 @@
       "source_file": "api/reels.js",
       "source_location": "L20",
       "id": "reels_classify",
-      "community": 18,
+      "community": 0,
       "norm_label": "classify()"
     },
     {
@@ -1107,7 +1107,7 @@
       "source_file": "api/reels.js",
       "source_location": "L25",
       "id": "reels_cardcaption",
-      "community": 18,
+      "community": 0,
       "norm_label": "cardcaption()"
     },
     {
@@ -1116,7 +1116,7 @@
       "source_file": "api/reels.js",
       "source_location": "L34",
       "id": "reels_handler",
-      "community": 18,
+      "community": 0,
       "norm_label": "handler()"
     },
     {
@@ -1125,7 +1125,7 @@
       "source_file": "api/instagram.js",
       "source_location": "L1",
       "id": "api_instagram_js",
-      "community": 23,
+      "community": 22,
       "norm_label": "instagram.js"
     },
     {
@@ -1134,7 +1134,7 @@
       "source_file": "api/instagram.js",
       "source_location": "L15",
       "id": "instagram_handler",
-      "community": 23,
+      "community": 22,
       "norm_label": "handler()"
     },
     {
@@ -1143,7 +1143,7 @@
       "source_file": "api/ig-stats.js",
       "source_location": "L1",
       "id": "api_ig_stats_js",
-      "community": 24,
+      "community": 23,
       "norm_label": "ig-stats.js"
     },
     {
@@ -1152,7 +1152,7 @@
       "source_file": "api/ig-stats.js",
       "source_location": "L11",
       "id": "ig_stats_handler",
-      "community": 24,
+      "community": 23,
       "norm_label": "handler()"
     },
     {
@@ -1755,7 +1755,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L1",
       "id": "api_cron_inbound_nudge_js",
-      "community": 19,
+      "community": 18,
       "norm_label": "inbound-nudge.js"
     },
     {
@@ -1764,7 +1764,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L16",
       "id": "inbound_nudge_sb",
-      "community": 19,
+      "community": 18,
       "norm_label": "sb()"
     },
     {
@@ -1773,7 +1773,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L24",
       "id": "inbound_nudge_tg",
-      "community": 19,
+      "community": 18,
       "norm_label": "tg()"
     },
     {
@@ -1782,7 +1782,7 @@
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L32",
       "id": "inbound_nudge_handler",
-      "community": 19,
+      "community": 18,
       "norm_label": "handler()"
     },
     {
@@ -1969,7 +1969,7 @@
       "label": "require_angle()",
       "file_type": "code",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L306",
+      "source_location": "L316",
       "id": "generate_blog_require_angle",
       "community": 2,
       "norm_label": "require_angle()"
@@ -1978,7 +1978,7 @@
       "label": "callClaude()",
       "file_type": "code",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L321",
+      "source_location": "L331",
       "id": "generate_blog_callclaude",
       "community": 2,
       "norm_label": "callclaude()"
@@ -1987,7 +1987,7 @@
       "label": "extractTextAndSources()",
       "file_type": "code",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L344",
+      "source_location": "L354",
       "id": "generate_blog_extracttextandsources",
       "community": 2,
       "norm_label": "extracttextandsources()"
@@ -1996,16 +1996,34 @@
       "label": "parseJson()",
       "file_type": "code",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L362",
+      "source_location": "L372",
       "id": "generate_blog_parsejson",
       "community": 2,
       "norm_label": "parsejson()"
     },
     {
+      "label": "escapeControlCharsInStrings()",
+      "file_type": "code",
+      "source_file": "api/cron/generate-blog.js",
+      "source_location": "L390",
+      "id": "generate_blog_escapecontrolcharsinstrings",
+      "community": 2,
+      "norm_label": "escapecontrolcharsinstrings()"
+    },
+    {
+      "label": "repairJson()",
+      "file_type": "code",
+      "source_file": "api/cron/generate-blog.js",
+      "source_location": "L414",
+      "id": "generate_blog_repairjson",
+      "community": 2,
+      "norm_label": "repairjson()"
+    },
+    {
       "label": "noDash()",
       "file_type": "code",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L372",
+      "source_location": "L426",
       "id": "generate_blog_nodash",
       "community": 2,
       "norm_label": "nodash()"
@@ -2014,7 +2032,7 @@
       "label": "sanitiseBody()",
       "file_type": "code",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L375",
+      "source_location": "L429",
       "id": "generate_blog_sanitisebody",
       "community": 2,
       "norm_label": "sanitisebody()"
@@ -2023,7 +2041,7 @@
       "label": "countWords()",
       "file_type": "code",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L385",
+      "source_location": "L439",
       "id": "generate_blog_countwords",
       "community": 2,
       "norm_label": "countwords()"
@@ -2032,7 +2050,7 @@
       "label": "slugify()",
       "file_type": "code",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L388",
+      "source_location": "L442",
       "id": "generate_blog_slugify",
       "community": 2,
       "norm_label": "slugify()"
@@ -2041,7 +2059,7 @@
       "label": "uniqueSlug()",
       "file_type": "code",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L391",
+      "source_location": "L445",
       "id": "generate_blog_uniqueslug",
       "community": 2,
       "norm_label": "uniqueslug()"
@@ -2050,7 +2068,7 @@
       "label": "arr()",
       "file_type": "code",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L400",
+      "source_location": "L454",
       "id": "generate_blog_arr",
       "community": 2,
       "norm_label": "arr()"
@@ -2059,7 +2077,7 @@
       "label": "logRun()",
       "file_type": "code",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L402",
+      "source_location": "L456",
       "id": "generate_blog_logrun",
       "community": 2,
       "norm_label": "logrun()"
@@ -4752,8 +4770,8 @@
       "source_file": "api/blog.js",
       "source_location": "L68",
       "weight": 1.0,
-      "_src": "blog_handler",
-      "_tgt": "blog_dedupepostimages",
+      "_src": "blog_dedupepostimages",
+      "_tgt": "blog_handler",
       "source": "blog_dedupepostimages",
       "target": "blog_handler"
     },
@@ -6969,7 +6987,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L306",
+      "source_location": "L316",
       "weight": 1.0,
       "_src": "api_cron_generate_blog_js",
       "_tgt": "generate_blog_require_angle",
@@ -6981,7 +6999,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L321",
+      "source_location": "L331",
       "weight": 1.0,
       "_src": "api_cron_generate_blog_js",
       "_tgt": "generate_blog_callclaude",
@@ -6993,7 +7011,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L344",
+      "source_location": "L354",
       "weight": 1.0,
       "_src": "api_cron_generate_blog_js",
       "_tgt": "generate_blog_extracttextandsources",
@@ -7005,7 +7023,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L362",
+      "source_location": "L372",
       "weight": 1.0,
       "_src": "api_cron_generate_blog_js",
       "_tgt": "generate_blog_parsejson",
@@ -7017,7 +7035,31 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L372",
+      "source_location": "L390",
+      "weight": 1.0,
+      "_src": "api_cron_generate_blog_js",
+      "_tgt": "generate_blog_escapecontrolcharsinstrings",
+      "source": "api_cron_generate_blog_js",
+      "target": "generate_blog_escapecontrolcharsinstrings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/generate-blog.js",
+      "source_location": "L414",
+      "weight": 1.0,
+      "_src": "api_cron_generate_blog_js",
+      "_tgt": "generate_blog_repairjson",
+      "source": "api_cron_generate_blog_js",
+      "target": "generate_blog_repairjson",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/generate-blog.js",
+      "source_location": "L426",
       "weight": 1.0,
       "_src": "api_cron_generate_blog_js",
       "_tgt": "generate_blog_nodash",
@@ -7029,7 +7071,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L375",
+      "source_location": "L429",
       "weight": 1.0,
       "_src": "api_cron_generate_blog_js",
       "_tgt": "generate_blog_sanitisebody",
@@ -7041,7 +7083,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L385",
+      "source_location": "L439",
       "weight": 1.0,
       "_src": "api_cron_generate_blog_js",
       "_tgt": "generate_blog_countwords",
@@ -7053,7 +7095,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L388",
+      "source_location": "L442",
       "weight": 1.0,
       "_src": "api_cron_generate_blog_js",
       "_tgt": "generate_blog_slugify",
@@ -7065,7 +7107,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L391",
+      "source_location": "L445",
       "weight": 1.0,
       "_src": "api_cron_generate_blog_js",
       "_tgt": "generate_blog_uniqueslug",
@@ -7077,7 +7119,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L400",
+      "source_location": "L454",
       "weight": 1.0,
       "_src": "api_cron_generate_blog_js",
       "_tgt": "generate_blog_arr",
@@ -7089,7 +7131,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L402",
+      "source_location": "L456",
       "weight": 1.0,
       "_src": "api_cron_generate_blog_js",
       "_tgt": "generate_blog_logrun",
@@ -7305,7 +7347,19 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L300",
+      "source_location": "L299",
+      "weight": 1.0,
+      "_src": "generate_blog_researchandwrite",
+      "_tgt": "generate_blog_repairjson",
+      "source": "generate_blog_researchandwrite",
+      "target": "generate_blog_repairjson",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/generate-blog.js",
+      "source_location": "L310",
       "weight": 1.0,
       "_src": "generate_blog_researchandwrite",
       "_tgt": "generate_blog_arr",
@@ -7317,7 +7371,55 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/generate-blog.js",
-      "source_location": "L376",
+      "source_location": "L416",
+      "weight": 1.0,
+      "_src": "generate_blog_repairjson",
+      "_tgt": "generate_blog_callclaude",
+      "source": "generate_blog_callclaude",
+      "target": "generate_blog_repairjson",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/generate-blog.js",
+      "source_location": "L421",
+      "weight": 1.0,
+      "_src": "generate_blog_repairjson",
+      "_tgt": "generate_blog_extracttextandsources",
+      "source": "generate_blog_extracttextandsources",
+      "target": "generate_blog_repairjson",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/generate-blog.js",
+      "source_location": "L383",
+      "weight": 1.0,
+      "_src": "generate_blog_parsejson",
+      "_tgt": "generate_blog_escapecontrolcharsinstrings",
+      "source": "generate_blog_parsejson",
+      "target": "generate_blog_escapecontrolcharsinstrings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/generate-blog.js",
+      "source_location": "L422",
+      "weight": 1.0,
+      "_src": "generate_blog_repairjson",
+      "_tgt": "generate_blog_parsejson",
+      "source": "generate_blog_parsejson",
+      "target": "generate_blog_repairjson",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/cron/generate-blog.js",
+      "source_location": "L430",
       "weight": 1.0,
       "_src": "generate_blog_sanitisebody",
       "_tgt": "generate_blog_nodash",
