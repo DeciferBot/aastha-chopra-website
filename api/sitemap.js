@@ -9,22 +9,22 @@
 import { SITE, sb, esc } from './_blog.js';
 
 const CORE = [
-  { loc: '/',               changefreq: 'weekly',  priority: '1.0', images: [
+  { loc: '/',               changefreq: 'weekly',  priority: '1.0', lastmod: '2026-07-05', images: [
     { loc: '/images/aastha-chopra-dubai-luxury-fashion-beauty.jpg', title: 'Aastha Chopra — Dubai luxury fashion and beauty influencer' },
     { loc: '/images/og-image.jpg', title: 'Aastha Chopra — Official Portfolio' },
   ] },
-  { loc: '/fashion.html',   changefreq: 'weekly',  priority: '0.9', images: [
+  { loc: '/fashion.html',   changefreq: 'weekly',  priority: '0.9', lastmod: '2026-06-25', images: [
     { loc: '/images/og-image.jpg', title: 'Aastha Chopra — Dubai Fashion & Beauty Creator' },
   ] },
-  { loc: '/luxury.html',    changefreq: 'weekly',  priority: '0.9', images: [
+  { loc: '/luxury.html',    changefreq: 'weekly',  priority: '0.9', lastmod: '2026-06-25', images: [
     { loc: '/images/og-image.jpg', title: 'Aastha Chopra — Dubai Luxury & Travel Insider' },
   ] },
-  { loc: '/wellness.html',  changefreq: 'weekly',  priority: '0.9', images: [
+  { loc: '/wellness.html',  changefreq: 'weekly',  priority: '0.9', lastmod: '2026-06-25', images: [
     { loc: '/images/og-image.jpg', title: 'Aastha Chopra — Dubai Wellness & Fitness Creator' },
   ] },
   { loc: '/blog',           changefreq: 'daily',   priority: '0.8' },
-  { loc: '/media-pack.html', changefreq: 'weekly', priority: '0.8' },
-  { loc: '/privacy.html',   changefreq: 'yearly',  priority: '0.3' },
+  { loc: '/media-pack.html', changefreq: 'weekly', priority: '0.8', lastmod: '2026-07-05' },
+  { loc: '/privacy.html',   changefreq: 'yearly',  priority: '0.3', lastmod: '2026-06-25' },
 ];
 
 export default async function handler(req, res) {
@@ -42,7 +42,7 @@ export default async function handler(req, res) {
 
   const coreXml = CORE.map((p) => urlEntry({
     loc: SITE.base + p.loc,
-    lastmod: today,
+    lastmod: p.lastmod || today,
     changefreq: p.changefreq,
     priority: p.priority,
     images: p.images,

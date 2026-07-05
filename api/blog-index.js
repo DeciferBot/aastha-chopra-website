@@ -110,7 +110,7 @@ function renderHomeView({ heading, sub, posts }) {
   const fimg = sbImg(postImage(featured), 1000);
   const featuredHtml = `
     <a class="bfeature" href="/blog/${esc(featured.slug)}">
-      <div class="bfeature-media" style="--img:url('${esc(fimg)}')"><img src="${esc(fimg)}" alt="" loading="eager" /></div>
+      <div class="bfeature-media" style="--img:url('${esc(fimg)}')"><img src="${esc(fimg)}" alt="${esc(featured.title)}" loading="eager" /></div>
       <div class="bfeature-body">
         <span class="seg">${esc(fseg.label)} &nbsp;·&nbsp; Latest</span>
         <h2>${esc(featured.title)}</h2>

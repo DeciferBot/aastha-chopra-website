@@ -432,7 +432,7 @@ export function renderPostCard(p) {
   const short = dek.length > 130 ? dek.slice(0, 130).trim() + '…' : dek;
   const img = sbImg(postImage(p), 720);
   return `<a class="bcard" href="/blog/${esc(p.slug)}">
-        <div class="bcard-media" style="--img:url('${esc(img)}')"><img src="${esc(img)}" alt="" loading="lazy" /></div>
+        <div class="bcard-media" style="--img:url('${esc(img)}')"><img src="${esc(img)}" alt="${esc(p.title)}" loading="lazy" /></div>
         <div class="bcard-body">
           <span class="seg">${esc(seg.label)}</span>
           <h3>${esc(p.title)}</h3>
