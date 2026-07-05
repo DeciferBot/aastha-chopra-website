@@ -1,11 +1,11 @@
 # Graph Report - .  (2026-07-05)
 
 ## Corpus Check
-- 37 files · ~1,087,512 words
+- 42 files · ~1,088,483 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 258 nodes · 483 edges · 23 communities detected
+- 270 nodes · 492 edges · 29 communities detected
 - Extraction: 86% EXTRACTED · 14% INFERRED · 0% AMBIGUOUS · INFERRED: 67 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
@@ -33,6 +33,12 @@
 - [[_COMMUNITY_Community 20|Community 20]]
 - [[_COMMUNITY_Community 21|Community 21]]
 - [[_COMMUNITY_Community 22|Community 22]]
+- [[_COMMUNITY_Community 23|Community 23]]
+- [[_COMMUNITY_Community 24|Community 24]]
+- [[_COMMUNITY_Community 25|Community 25]]
+- [[_COMMUNITY_Community 26|Community 26]]
+- [[_COMMUNITY_Community 27|Community 27]]
+- [[_COMMUNITY_Community 28|Community 28]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `handler()` - 14 edges
@@ -61,7 +67,7 @@
 ## Communities
 
 ### Community 0 - "Community 0"
-Cohesion: 0.14
+Cohesion: 0.18
 Nodes (29): attachInstagramImages(), ctaBlock(), dedupePostImages(), esc(), handler(), hashStr(), filterBar(), handler() (+21 more)
 
 ### Community 1 - "Community 1"
@@ -125,19 +131,19 @@ Cohesion: 0.7
 Nodes (4): applyEvent(), handler(), readRaw(), verify()
 
 ### Community 16 - "Community 16"
-Cohesion: 0.67
-Nodes (2): handler(), sb()
+Cohesion: 0.83
+Nodes (3): escapeHtml(), handler(), sanitizeSubject()
 
 ### Community 17 - "Community 17"
-Cohesion: 0.67
+Cohesion: 0.5
 Nodes (0): 
 
 ### Community 18 - "Community 18"
-Cohesion: 1.0
-Nodes (0): 
+Cohesion: 0.67
+Nodes (2): handler(), sb()
 
 ### Community 19 - "Community 19"
-Cohesion: 1.0
+Cohesion: 0.67
 Nodes (0): 
 
 ### Community 20 - "Community 20"
@@ -152,27 +158,59 @@ Nodes (0):
 Cohesion: 1.0
 Nodes (0): 
 
+### Community 23 - "Community 23"
+Cohesion: 1.0
+Nodes (0): 
+
+### Community 24 - "Community 24"
+Cohesion: 1.0
+Nodes (0): 
+
+### Community 25 - "Community 25"
+Cohesion: 1.0
+Nodes (0): 
+
+### Community 26 - "Community 26"
+Cohesion: 1.0
+Nodes (0): 
+
+### Community 27 - "Community 27"
+Cohesion: 1.0
+Nodes (0): 
+
+### Community 28 - "Community 28"
+Cohesion: 1.0
+Nodes (0): 
+
 ## Knowledge Gaps
-- **Thin community `Community 18`** (2 nodes): `handler()`, `analytics-auth.js`
+- **Thin community `Community 20`** (2 nodes): `handler()`, `analytics-auth.js`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 19`** (2 nodes): `ig-profile.js`, `handler()`
+- **Thin community `Community 21`** (2 nodes): `invoice-save.js`, `handler()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 20`** (2 nodes): `instagram.js`, `handler()`
+- **Thin community `Community 22`** (2 nodes): `invoice-auth.js`, `handler()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 21`** (2 nodes): `ig-stats.js`, `handler()`
+- **Thin community `Community 23`** (2 nodes): `invoice-list.js`, `handler()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 22`** (1 nodes): `generate-pdf.js`
+- **Thin community `Community 24`** (2 nodes): `ig-profile.js`, `handler()`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 25`** (2 nodes): `instagram.js`, `handler()`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 26`** (2 nodes): `invoice-next.js`, `handler()`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 27`** (2 nodes): `ig-stats.js`, `handler()`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 28`** (1 nodes): `generate-pdf.js`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `sb()` connect `Community 3` to `Community 0`, `Community 6`?**
-  _High betweenness centrality (0.123) - this node is a cross-community bridge._
+  _High betweenness centrality (0.112) - this node is a cross-community bridge._
 - **Why does `esc()` connect `Community 0` to `Community 1`, `Community 6`?**
-  _High betweenness centrality (0.098) - this node is a cross-community bridge._
+  _High betweenness centrality (0.090) - this node is a cross-community bridge._
 - **Why does `handler()` connect `Community 2` to `Community 3`?**
-  _High betweenness centrality (0.094) - this node is a cross-community bridge._
+  _High betweenness centrality (0.086) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `handler()` (e.g. with `segmentMeta()` and `sb()`) actually correct?**
   _`handler()` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 3 inferred relationships involving `send()` (e.g. with `handler()` and `handler()`) actually correct?**
