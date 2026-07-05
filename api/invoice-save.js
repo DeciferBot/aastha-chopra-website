@@ -3,7 +3,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { invoiceNumber, agencyName, billToText, campaign, poNumber, currency, total, lineItems, profile } = req.body || {};
+  const { invoiceNumber, agencyName, billToText, campaign, poNumber, currency, total, lineItems, profile, agencyContactName, agencyContactEmail } = req.body || {};
 
   if (!invoiceNumber || !agencyName || !billToText) {
     return res.status(400).json({ error: 'invoiceNumber, agencyName and billToText are required' });
@@ -26,6 +26,8 @@ export default async function handler(req, res) {
         name: agencyName,
         bill_to_text: billToText,
         currency: currency || 'AED',
+        contact_name: agencyContactName || null,
+        contact_email: agencyContactEmail || null,
         last_used_at: new Date().toISOString(),
       }]),
     });

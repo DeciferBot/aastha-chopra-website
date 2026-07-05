@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   try {
     const [counterRes, agenciesRes, profileRes] = await Promise.all([
       fetch(`${SUPABASE_URL}/rest/v1/invoice_counter?select=last_number&id=eq.1`, { headers }),
-      fetch(`${SUPABASE_URL}/rest/v1/invoice_agencies?select=name,bill_to_text,currency&order=last_used_at.desc.nullslast,name.asc`, { headers }),
+      fetch(`${SUPABASE_URL}/rest/v1/invoice_agencies?select=name,bill_to_text,currency,contact_name,contact_email&order=last_used_at.desc.nullslast,name.asc`, { headers }),
       fetch(`${SUPABASE_URL}/rest/v1/invoice_profile?select=*&id=eq.1`, { headers }),
     ]);
 
@@ -30,6 +30,8 @@ export default async function handler(req, res) {
         name: a.name,
         billToText: a.bill_to_text,
         currency: a.currency,
+        contactName: a.contact_name,
+        contactEmail: a.contact_email,
       })),
       profile: p ? {
         businessName: p.business_name,
