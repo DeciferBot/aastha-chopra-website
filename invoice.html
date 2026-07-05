@@ -243,6 +243,16 @@
         <label for="clientAddress">Address, TRN, finance contact</label>
         <textarea id="clientAddress" placeholder="1st Floor, Villa 11, Boutique Offices&#10;Dubai Media City, Dubai, UAE&#10;TRN: 104020498200003&#10;finance@imfluence.ae" minlength="5" required></textarea>
       </div>
+      <div class="row2">
+        <div class="field">
+          <label for="agencyContactName">Contact person (optional)</label>
+          <input id="agencyContactName" type="text" placeholder="e.g. Sara from Imfluence" />
+        </div>
+        <div class="field">
+          <label for="agencyContactEmail">Their email (to send invoice)</label>
+          <input id="agencyContactEmail" type="email" placeholder="finance@imfluence.ae" />
+        </div>
+      </div>
       <div class="field">
         <label for="poNumber">PO number (if given)</label>
         <input id="poNumber" type="text" placeholder="e.g. IMF-CMPN-2026-034" />
@@ -346,7 +356,9 @@
       <button class="btn" id="shareBtn" style="flex:1">Share PDF</button>
       <button class="btn btn-ghost btn-sm" id="downloadBtn">Download</button>
     </div>
-    <p class="hint">Share sends the PDF straight to WhatsApp, Mail, or any app that takes files. Download saves it to your phone.</p>
+    <button class="btn btn-ghost" id="emailBtn">Email Invoice</button>
+    <p class="hint">Share sends the PDF straight to WhatsApp, Mail, or any app that takes files. Download saves it to your phone. Email sends it to the agency's email (with a copy to you) — add their email above first.</p>
+    <p class="hint" id="emailStatus"></p>
     <p class="hint" id="saveStatus"></p>
   </div>
 
@@ -447,6 +459,8 @@
       if (!a) return;
       document.getElementById('agencyName').value = a.name;
       document.getElementById('clientAddress').value = a.billToText;
+      document.getElementById('agencyContactName').value = a.contactName || '';
+      document.getElementById('agencyContactEmail').value = a.contactEmail || '';
       if (a.currency) document.getElementById('currency').value = a.currency;
       updateTotal();
     });
@@ -500,8 +514,12 @@
   function currencySymbolCode() { return document.getElementById('currency').value; }
 
   function agencyNameValue() { return document.getElementById('agencyName').value.trim(); }
+  // The address block alone — this is what's saved/reused per agency, kept separate
+  // from the name so re-selecting a saved agency never duplicates the name line.
+  function addressOnly() { return document.getElementById('clientAddress').value.trim(); }
+  // The full Bill To block as it appears on the invoice document.
   function billToText() {
-    return agencyNameValue() + '\n' + document.getElementById('clientAddress').value.trim();
+    return agencyNameValue() + '\n' + addressOnly();
   }
 
   function getLineItems() {
@@ -584,6 +602,9 @@
       ? '<tr><td>Billed via</td><td>'+esc(companyName)+'</td></tr><tr><td>Influencer Name</td><td>'+esc(businessName)+'</td></tr>'
       : '';
 
+    var agencyContactName = document.getElementById('agencyContactName').value.trim();
+    var attnLine = agencyContactName ? '<br><em>Attn: ' + esc(agencyContactName) + '</em>' : '';
+
     return ''+
     '<div class="inv-header">'+
       '<div class="brand">'+esc(businessName)+'<small>Influencer Services Invoice</small></div>'+
@@ -592,7 +613,7 @@
     (licenseNumber ? '<div class="inv-license">License Number: '+esc(licenseNumber)+'</div>' : '')+
     '<div class="inv-body">'+
       '<div class="inv-to-row">'+
-        '<div class="box"><strong>Bill To</strong>'+esc(clientBlock).replace(/\n/g,'<br>')+'</div>'+
+        '<div class="box"><strong>Bill To</strong>'+esc(clientBlock).replace(/\n/g,'<br>')+attnLine+'</div>'+
         '<div class="inv-details"><table>'+
           '<tr><td>Invoice No.</td><td>'+esc(invNumber)+'</td></tr>'+
           '<tr><td>Date</td><td>'+fmtDate(invDate)+'</td></tr>'+
@@ -674,7 +695,9 @@
         body: JSON.stringify({
           invoiceNumber: invoiceNumberInt,
           agencyName: agencyNameValue(),
-          billToText: billToText(),
+          billToText: addressOnly(),
+          agencyContactName: document.getElementById('agencyContactName').value.trim(),
+          agencyContactEmail: document.getElementById('agencyContactEmail').value.trim(),
           campaign: document.getElementById('campaignName').value.trim(),
           poNumber: document.getElementById('poNumber').value.trim(),
           currency: currencySymbolCode(),
@@ -768,6 +791,51 @@
       if (err && err.name !== 'AbortError') console.error(err);
     }).finally(function(){
       btn.disabled = false; btn.textContent = 'Share PDF';
+    });
+  });
+
+  function blobToBase64(blob) {
+    return new Promise(function(resolve, reject){
+      var reader = new FileReader();
+      reader.onloadend = function(){ resolve(reader.result.split(',')[1]); };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  document.getElementById('emailBtn').addEventListener('click', function(){
+    var btn = this;
+    var emailStatus = document.getElementById('emailStatus');
+    var agencyEmail = document.getElementById('agencyContactEmail').value.trim();
+    if (!agencyEmail) {
+      emailStatus.textContent = 'Add the agency/brand email above first.';
+      return;
+    }
+    btn.disabled = true; btn.textContent = 'Sending…';
+    emailStatus.textContent = '';
+    renderToPdfBlob().then(function(blob){
+      return blobToBase64(blob);
+    }).then(function(base64){
+      return fetch('/api/invoice-email', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          agencyEmail: agencyEmail,
+          ccEmail: document.getElementById('yourEmail').value.trim(),
+          agencyName: agencyNameValue(),
+          campaign: document.getElementById('campaignName').value.trim(),
+          invoiceNumber: document.getElementById('invNumber').value.trim(),
+          pdfBase64: base64,
+          filename: invoiceFilename(),
+        }),
+      });
+    }).then(function(r){
+      if (!r.ok) throw new Error('send failed');
+      emailStatus.textContent = 'Emailed to ' + agencyEmail + ' — and copied to you.';
+    }).catch(function(){
+      emailStatus.textContent = 'Could not send the email — try Share or Download instead.';
+    }).finally(function(){
+      btn.disabled = false; btn.textContent = 'Email Invoice';
     });
   });
 })();
