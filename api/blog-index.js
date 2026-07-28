@@ -6,7 +6,7 @@
  * Segment view: a flat archive of that pillar. Emits Blog + Person JSON-LD.
  */
 
-import { SITE, sb, esc, renderShell, segmentMeta, SEGMENTS, renderPostCard, personSchema, postImage, attachInstagramImages, dedupePostImages, sbImg } from './_blog.js';
+import { SITE, sb, esc, renderShell, segmentMeta, SEGMENTS, renderPostCard, personSchema, postImage, attachInstagramImages, dedupePostImages, sbImg, postDateParts } from './_blog.js';
 
 const SEG_KEYS = Object.keys(SEGMENTS);
 
@@ -108,6 +108,7 @@ function renderHomeView({ heading, sub, posts }) {
   const featured = posts[0];
   const fseg = segmentMeta(featured.segment);
   const fimg = sbImg(postImage(featured), 1000);
+  const fdate = postDateParts(featured);
   const featuredHtml = `
     <a class="bfeature" href="/blog/${esc(featured.slug)}">
       <div class="bfeature-media" style="--img:url('${esc(fimg)}')"><img src="${esc(fimg)}" alt="${esc(featured.title)}" loading="eager" /></div>
@@ -115,6 +116,7 @@ function renderHomeView({ heading, sub, posts }) {
         <span class="seg">${esc(fseg.label)} &nbsp;·&nbsp; Latest</span>
         <h2>${esc(featured.title)}</h2>
         <p>${esc((featured.excerpt || featured.meta_description || '').slice(0, 180))}</p>
+        ${fdate ? `<time class="bfeature-date" datetime="${esc(fdate.iso)}">${esc(fdate.label)}</time>` : ''}
         <span class="bfeature-cta">Read the story &rsaquo;</span>
       </div>
     </a>`;
