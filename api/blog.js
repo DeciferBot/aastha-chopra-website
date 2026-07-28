@@ -9,7 +9,7 @@
 
 import {
   SITE, sb, esc, renderShell, ctaBlock, segmentMeta,
-  renderHeroSVG, renderAuthorBox, renderPostCard, personSchema, renderInstagramBlock, postImage, attachInstagramImages, dedupePostImages, sbImg,
+  renderHeroSVG, renderAuthorBox, renderPostCard, personSchema, renderInstagramBlock, postImage, attachInstagramImages, dedupePostImages, sbImg, postDateParts,
 } from './_blog.js';
 
 export default async function handler(req, res) {
@@ -52,7 +52,7 @@ export default async function handler(req, res) {
   let related = [];
   try {
     related = await sb(
-      `/blog_posts?select=slug,segment,title,excerpt,meta_description,instagram_refs,hero_image_url`
+      `/blog_posts?select=slug,segment,title,excerpt,meta_description,published_at,created_at,instagram_refs,hero_image_url`
       + `&status=eq.published&segment=eq.${encodeURIComponent(post.segment)}`
       + `&slug=neq.${encodeURIComponent(post.slug)}`
       + `&order=published_at.desc.nullslast,created_at.desc&limit=3`
@@ -82,7 +82,7 @@ export default async function handler(req, res) {
     ? '  <meta name="robots" content="noindex, nofollow" />\n'
     : '';
   const head = noindex + renderHead({ post, url, image, seg, published, faq });
-  const body = renderArticle({ post, url, seg, published, faq, sources, related });
+  const body = renderArticle({ post, url, seg, faq, sources, related });
 
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.setHeader('Cache-Control', 's-maxage=3600, stale-while-revalidate=86400');
@@ -153,11 +153,15 @@ function renderHead({ post, url, image, seg, published, faq }) {
   <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`;
 }
 
-function renderArticle({ post, url, seg, published, faq, sources, related }) {
-  const dateStr = new Date(published).toLocaleDateString('en-GB', {
-    day: 'numeric', month: 'long', year: 'numeric',
-  });
+function renderArticle({ post, url, seg, faq, sources, related }) {
+  const date = postDateParts(post);
   const readMins = Math.max(2, Math.round((post.word_count || 0) / 220));
+  // Built from parts so a dateless post doesn't render a stray separator.
+  const byline = [
+    `By ${esc(SITE.name)}`,
+    ...(date ? [`<time datetime="${esc(date.iso)}">${esc(date.label)}</time>`] : []),
+    `${readMins} min read`,
+  ].join(' &nbsp;·&nbsp; ');
 
   const himg = esc(sbImg(postImage(post), 1200));
   const heroHtml = `<div class="bhero" style="--img:url('${himg}')"><img src="${himg}" alt="${esc(post.title)}" loading="eager" /></div>`;
@@ -190,7 +194,7 @@ function renderArticle({ post, url, seg, published, faq, sources, related }) {
       <p class="bkicker">${esc(seg.label)}</p>
       <h1>${esc(post.title)}</h1>
       ${post.excerpt ? `<p class="bdek">${esc(post.excerpt)}</p>` : ''}
-      <p class="bmeta">By ${esc(SITE.name)} &nbsp;·&nbsp; ${dateStr} &nbsp;·&nbsp; ${readMins} min read</p>
+      <p class="bmeta">${byline}</p>
       ${heroHtml}
       ${post.body_html || ''}
       ${renderInstagramBlock(post.instagram_refs)}

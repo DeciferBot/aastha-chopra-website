@@ -19,6 +19,8 @@ export const SITE = {
   ig:      'https://www.instagram.com/aastha_sochic/',
   ogImage: 'https://www.aasthachopra.com/images/og-image.jpg',
   blogPath: '/blog',
+  // Aastha publishes from Dubai; dates render in her zone, not the server's.
+  timeZone: 'Asia/Dubai',
 };
 
 // Author identity for E-E-A-T: connects every post to a credentialed real
@@ -425,18 +427,55 @@ export function renderHeroSVG(segmentKey) {
   </svg>`;
 }
 
+/**
+ * Publish date for a card or feature, as both a machine value and a readable
+ * label. Returns null when a post carries no usable date, so callers omit the
+ * element instead of printing "Invalid Date".
+ */
+export function postDateParts(p) {
+  const raw = p && (p.published_at || p.created_at);
+  if (!raw) return null;
+  const s = String(raw).trim();
+  let d = new Date(s);
+  if (Number.isNaN(d.getTime())) {
+    // Postgres renders timestamptz as "2026-07-05 10:11:38.671413+00" — a space
+    // separator and a two-digit offset, neither of which Date parses. PostgREST
+    // normally hands us proper ISO, but tolerate the raw form so a date never
+    // silently vanishes from a card.
+    d = new Date(s.replace(' ', 'T').replace(/([+-]\d{2})$/, '$1:00'));
+  }
+  if (Number.isNaN(d.getTime())) return null;
+  // Both values are pinned to Dubai time. Left to the runtime they would
+  // disagree: the label would follow the server zone (UTC on Vercel, +04 in
+  // local dev) while an ISO slice is always UTC, so anything published after
+  // 20:00 UTC showed one day in the text and another in the datetime attribute.
+  // en-CA formats as YYYY-MM-DD, which is exactly the datetime attribute form.
+  return {
+    iso: new Intl.DateTimeFormat('en-CA', {
+      timeZone: SITE.timeZone, year: 'numeric', month: '2-digit', day: '2-digit',
+    }).format(d),
+    label: new Intl.DateTimeFormat('en-GB', {
+      timeZone: SITE.timeZone, day: 'numeric', month: 'long', year: 'numeric',
+    }).format(d),
+  };
+}
+
 /** Reusable post card, used by the Journal home and by related-post blocks. */
 export function renderPostCard(p) {
   const seg = segmentMeta(p.segment);
   const dek = p.excerpt || p.meta_description || '';
   const short = dek.length > 130 ? dek.slice(0, 130).trim() + '…' : dek;
   const img = sbImg(postImage(p), 720);
+  const date = postDateParts(p);
+  const dateHtml = date
+    ? `\n          <time class="bcard-date" datetime="${esc(date.iso)}">${esc(date.label)}</time>`
+    : '';
   return `<a class="bcard" href="/blog/${esc(p.slug)}">
         <div class="bcard-media" style="--img:url('${esc(img)}')"><img src="${esc(img)}" alt="${esc(p.title)}" loading="lazy" /></div>
         <div class="bcard-body">
           <span class="seg">${esc(seg.label)}</span>
           <h3>${esc(p.title)}</h3>
-          <p>${esc(short)}</p>
+          <p>${esc(short)}</p>${dateHtml}
         </div>
       </a>`;
 }
@@ -593,6 +632,10 @@ const BLOG_CSS = `
   .bcard .seg{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);}
   .bcard h3{font-family:var(--serif);font-weight:400;font-size:1.4rem;line-height:1.22;margin:9px 0 9px;color:var(--text);}
   .bcard p{font-size:.9rem;color:var(--text-mid);line-height:1.6;}
+  /* margin-top:auto pins the date to the foot of the card so a row of cards
+     with uneven excerpt lengths still lines its dates up. */
+  .bcard-date{margin-top:auto;padding-top:14px;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);}
+  .bfeature-date{display:block;margin-top:16px;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-dim);}
   @media(hover:hover) and (pointer:fine){.bcard:hover .bcard-media img{transform:scale(1.05);}}
   .bhubhead{text-align:center;margin-bottom:8px;}
   .bhubhead h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,6vw,3.4rem);}
