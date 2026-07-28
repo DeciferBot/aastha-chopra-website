@@ -26,19 +26,43 @@ const SEG_KEYS = Object.keys(SEGMENTS);
 // near-instant discovery. Google does not use IndexNow; it relies on the sitemap.
 const INDEXNOW_KEY = 'b4bd21537f724b699428afa92452c614';
 
-// Curated high-intent UAE query seeds per pillar, so the cron deliberately
-// targets winnable evergreen terms, not only whatever is trending today.
+// Autocomplete PREFIXES per pillar, not finished queries.
+//
+// The earlier list aimed straight at head terms ("where to buy gold in dubai",
+// "best brunch in dubai") that Time Out, Gulf News and Visit Dubai have owned
+// for years with domain authority a new blog cannot match, so those posts had
+// no realistic path to page one.
+//
+// Each string below is instead a stem Google will complete. Feeding it to
+// autocomplete harvests the real long-tail queries hanging off it — "best
+// brunch in dubai" becomes "best brunch in dubai for families", "for kids",
+// "for couples" — which is what people actually type and what a first-hand
+// UAE blog can win. Every prefix here was checked against the UAE-locale
+// endpoint and returns at least three five-word-or-longer completions; stems
+// that returned nothing were dropped rather than guessed at.
+//
+// Because these are prefixes, they are deliberately NOT added to the candidate
+// title pool: "best facial in dubai for" is a fragment, not a headline.
 const CURATED_SEEDS = {
-  fashion:     ['what to wear in dubai summer', 'where to buy abayas in dubai', 'dubai wedding guest outfit ideas', 'modest fashion brands dubai', 'best malls for fashion in dubai'],
-  beauty:      ['best skincare for dubai weather', 'where to get a facial in dubai', 'best salons in dubai', 'how to protect skin in dubai sun', 'best makeup for hot humid weather'],
-  fragrance:   ['where to buy perfume in dubai', 'best arabic perfumes for women', 'how to make perfume last in the heat', 'best oud perfumes in dubai', 'is dubai perfume authentic'],
-  jewellery:   ['where to buy gold in dubai', 'dubai gold souk tips for buyers', 'is gold cheaper in dubai', 'best place to buy diamond jewellery dubai', 'how to buy gold jewellery in dubai'],
-  wellness:    ['best gyms in dubai', 'best yoga studios in dubai', 'healthy restaurants in dubai', 'how to stay fit in dubai summer', 'best wellness retreats in the uae'],
-  hospitality: ['best brunch in dubai', 'best staycation deals in dubai', 'best afternoon tea in dubai', 'best hotels in dubai for residents', 'best rooftop restaurants dubai'],
-  travel:      ['best day trips from dubai', 'things to do in dubai in summer', 'weekend getaways from dubai', 'best beaches in dubai', 'dubai to abu dhabi day trip'],
-  automobile:  ['best cars for dubai weather', 'tips for renting a car in dubai', 'best road trips from dubai', 'electric cars in the uae', 'driving in dubai for new residents'],
-  retail:      ['best things to buy in dubai', 'dubai shopping festival tips', 'best outlet malls in dubai', 'where to shop in dubai on a budget', 'best souvenirs to buy in dubai'],
+  fashion:     ['what to wear to a wedding in dubai', 'where to buy abaya in dubai for', 'what to wear in dubai in summer as'],
+  beauty:      ['best facial in dubai for', 'best sunscreen in dubai for', 'how to stop makeup melting in', 'best dermatologist in dubai for'],
+  fragrance:   ['how to make perfume last', 'best oud perfume for', 'best perfume in dubai for', 'how to layer perfume', 'where to buy original perfume in dubai'],
+  jewellery:   ['how to buy gold in dubai souk', 'is gold cheaper in dubai than', 'how to clean gold jewellery at home', '21k vs 22k gold'],
+  wellness:    ['best gym in dubai for', 'best spa in dubai for', 'best massage in dubai for', 'best reformer pilates in dubai', 'best wellness retreat in the uae'],
+  hospitality: ['best brunch in dubai for', 'best staycation in dubai for', 'best afternoon tea in dubai for', 'best pool day pass in dubai', 'best vegetarian restaurant in dubai for'],
+  travel:      ['best beach in dubai for', 'ras al khaimah vs', 'places to visit near dubai in'],
+  retail:      ['where to buy indian clothes in dubai', 'best outlet mall in dubai for', 'where to buy gifts in dubai', 'cheapest place to buy in dubai', 'best place to buy home decor in dubai'],
 };
+
+// Pillars the blog writes for. Deliberately excludes `automobile`: car hire and
+// used car buying guides sit far outside a fashion and beauty creator's remit,
+// and scattering the site across unrelated subjects weakens the topical
+// authority Google uses to decide what this domain is actually about.
+const BLOG_PILLARS = SEG_KEYS.filter((k) => k !== 'automobile');
+
+/** Words in a search phrase. Used as the long-tail proxy: more words, less competition.
+ *  Named distinctly from the local `wordCount` the handler computes for body copy. */
+const phraseWords = (s) => String(s || '').trim().split(/\s+/).filter(Boolean).length;
 
 export default async function handler(req, res) {
   // Cron uses the Bearer header; ?key= lets it be triggered by tapping a link
@@ -62,7 +86,7 @@ export default async function handler(req, res) {
     // ── 1. Pillar (rotates by day so every segment gets covered) ──────────
     if (!SEGMENTS[segment]) {
       const doy = Math.floor((Date.now() - Date.UTC(new Date().getUTCFullYear(), 0, 0)) / 86400000);
-      segment = SEG_KEYS[doy % SEG_KEYS.length];
+      segment = BLOG_PILLARS[doy % BLOG_PILLARS.length];
     }
     const seg = segmentMeta(segment);
 
@@ -92,20 +116,23 @@ export default async function handler(req, res) {
 
     // ── 3. Real questions from Google autocomplete (UAE locale) ───────────
     const curated = CURATED_SEEDS[segment] || [];
-    const seeds = [
-      ...curated,
-      `best ${matchTerm} dubai`,
-      `${matchTerm} dubai`,
-      ...['how', 'what', 'where', 'which', 'is'].map((q) => `${q} ${matchTerm} dubai`),
-    ];
-    const suggestions = new Set(curated);
-    for (const seed of seeds) {
+    // Expand only from the curated long-tail seeds. The previous generic stems
+    // ("best <pillar> dubai", "<pillar> dubai") pulled Google's most-searched
+    // head terms into the list, which is precisely the competition a new blog
+    // has no path to beat.
+    // Seeds are prefixes, so only their completions are candidate titles.
+    const suggestions = new Set();
+    for (const seed of curated) {
       for (const s of await autocomplete(seed)) {
-        if (s.length > 8) suggestions.add(s);
+        // Five words or more keeps the tail long: "best brunch dubai" is out,
+        // "best brunch in dubai for families" is in.
+        if (phraseWords(s) >= 5) suggestions.add(s);
       }
     }
     const questions = [...suggestions]
       .filter((s) => /\b(how|what|where|which|why|is|are|can|do|does|best|cost|price)\b/i.test(s))
+      // Most specific first, so the title the model picks comes from the tail.
+      .sort((a, b) => phraseWords(b) - phraseWords(a))
       .slice(0, 25);
     queriesFound = questions.length;
 
@@ -247,6 +274,7 @@ Your job is to answer a real question people search on Google, completely and us
 
 NON-NEGOTIABLE RULES:
 - Real value only. No filler intro, no "in today's world", no padding. Every paragraph teaches something.
+- Depth wins rankings. Aim for 1400 to 1800 words. Posts of 700 words do not outrank an established guide on the same question. Never pad to reach the count: if you cannot fill it honestly, answer more of the real sub-questions people also ask, add concrete specifics (venues, price ranges, timings, what to avoid), or narrow the title further and go deeper on that.
 - Be specific to the UAE: real neighbourhoods, malls, venues, AED prices, the climate and seasons, local context. Never invent facts, names or prices. If you are not sure, leave it out.
 - Use the web_search tool to research current, accurate details BEFORE writing. Search a few times. Prefer recent, reputable sources.
 - Voice: first person, honest, warm, confident, a little personal. Write like a real person talking, not a brand.
@@ -261,7 +289,7 @@ Title: ${signal.title}
 ${signal.description ? `Detail: ${signal.description}\n` : ''}Category: ${signal.category || 'n/a'}
 Source: ${signal.source_name || 'n/a'}
 
-REAL QUESTIONS PEOPLE SEARCH (from Google autocomplete, UAE). Pick the single most valuable, rankable question as your title, and use the related ones as H2s and FAQ:
+REAL QUESTIONS PEOPLE SEARCH (from Google autocomplete, UAE), most specific first. Pick the MOST SPECIFIC question you can genuinely answer well as your title, and use the related ones as H2s and FAQ. Do not broaden it: "best brunch in dubai" is already owned by major publishers, while "best quiet brunch in dubai for a birthday" is winnable and is what a real person actually types. Narrow beats broad every time here:
 ${questions.length ? questions.map((q) => `- ${q}`).join('\n') : '- (none returned; choose a strong question yourself for this pillar in a UAE context)'}
 
 ${igPosts && igPosts.length ? `AASTHA'S REAL INSTAGRAM POSTS (her genuine lived experience). Weave the most relevant one or two into the article naturally, in first person, then list those you referenced in instagram_refs:
