@@ -235,6 +235,46 @@ async function fetchDailySnapshot(token) {
   }
 }
 
+/**
+ * Best-effort gross follows / unfollows for the day.
+ *
+ * Deliberately additive, never load-bearing. Net growth is already derivable
+ * from followers_count day over day, which is the number the ads scoreboard
+ * actually needs; this only adds the gross split when Instagram will give it.
+ *
+ * The metric is `follows_and_unfollows` (period=day, metric_type=total_value,
+ * breakdown=follow_type). Its documented breakdown values describe follower
+ * status rather than the action, so rather than assume a mapping we look for an
+ * explicit UNFOLLOW-style key and return nulls when the shape is anything else.
+ * A null here is honest missing data; a guess would silently corrupt the only
+ * table we use to judge whether ad spend works.
+ */
+async function fetchFollowsUnfollows(token) {
+  const empty = { follows: null, unfollows: null };
+  try {
+    const res = await ig(
+      '/me/insights?metric=follows_and_unfollows&period=day&metric_type=total_value&breakdown=follow_type',
+      token
+    );
+    const results = res?.data?.[0]?.total_value?.breakdowns?.[0]?.results;
+    if (!Array.isArray(results) || !results.length) return empty;
+
+    let follows = null;
+    let unfollows = null;
+    for (const r of results) {
+      const key = String(r?.dimension_values?.[0] || '').toUpperCase();
+      const value = Number(r?.value);
+      if (!Number.isFinite(value)) continue;
+      if (key.includes('UNFOLLOW')) unfollows = (unfollows || 0) + value;
+      else if (key.includes('FOLLOW')) follows = (follows || 0) + value;
+    }
+    // Only trust the pair when both sides were actually identified.
+    return (follows != null && unfollows != null) ? { follows, unfollows } : empty;
+  } catch {
+    return empty;
+  }
+}
+
 // ── 6. Hero reels: mirror the 3 featured world-page reels into Storage ─────────
 // fashion/luxury/wellness each play one reel inline, served from durable Storage
 // URLs (raw IG CDN links carry a short-lived signature and can't be hot-linked).
@@ -449,6 +489,27 @@ export default async function handler(req, res) {
           body: JSON.stringify([snapshot]),
         });
         log.push(`Snapshot saved for ${snapshot.snapshot_date}: ${snapshot.followers_count} followers`);
+
+        // Mirror into instagram_daily_metrics, the table the ads scoreboard reads
+        // to answer the only question that matters: did the spend move followers.
+        // followers_count is the dependable signal — day-over-day difference is
+        // net growth. Gross follows/unfollows are attempted separately and are
+        // allowed to be null, because that metric is not reliably available.
+        const gross = await fetchFollowsUnfollows(token);
+        await sb('/instagram_daily_metrics?on_conflict=metric_date', {
+          method: 'POST',
+          body: JSON.stringify([{
+            metric_date: snapshot.snapshot_date,
+            follower_count: snapshot.followers_count,
+            reach: snapshot.reach_day,
+            profile_views: snapshot.profile_views,
+            website_clicks: snapshot.website_clicks,
+            follows: gross.follows,
+            unfollows: gross.unfollows,
+          }]),
+        });
+        log.push(`Daily metrics saved for ${snapshot.snapshot_date}`
+          + (gross.follows == null ? ' (gross follows unavailable)' : ` (+${gross.follows}/-${gross.unfollows})`));
       }
     } catch (e) {
       log.push(`Snapshot error: ${e.message}`);
