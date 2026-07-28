@@ -8,8 +8,8 @@
  * and AED 1,450 of ad spend ran for weeks while followers fell. Each of those
  * was visible in the database the day it started.
  *
- * This reads the tables the other crons write and messages Telegram when
- * something needs a human. It makes no decisions and changes no state.
+ * This reads the tables the other crons write and emails when something needs a
+ * human. It makes no decisions and changes no state.
  *
  * Silent when everything is healthy — an alert that fires daily gets muted, and
  * a muted alert is the problem it was built to solve.
@@ -19,8 +19,11 @@
 
 const SUPABASE_URL = 'https://uqzvaytvynrglijvwjsz.supabase.co';
 const SERVICE_KEY  = process.env.SUPABASE_SERVICE_KEY;
-const BOT_TOKEN    = process.env.TELEGRAM_BOT_TOKEN;
-const ALLOWED_IDS  = (process.env.TELEGRAM_ALLOWED_IDS || '').split(',').map((s) => s.trim()).filter(Boolean);
+const RESEND_KEY   = process.env.RESEND_API_KEY;
+// Operational alerts go to whoever runs the system, not to Aastha. Overridable
+// without a deploy, but defaulted so a missing env var can't silence the alarm.
+const ALERT_EMAIL  = process.env.ALERT_EMAIL || 'chopraa@gmail.com';
+const ALERT_FROM   = 'Site Monitor <hello@aasthachopra.com>';
 
 // How far back each check looks.
 const FAILURE_LOOKBACK_DAYS = 3;   // job failures worth waking someone for
@@ -36,12 +39,16 @@ async function sb(path) {
   return res.json();
 }
 
-async function tg(chatId, text) {
-  await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+/** Returns the Resend id on success; throws so a silent send failure can't pass as healthy. */
+async function sendAlert(subject, text) {
+  const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: chatId, text, disable_web_page_preview: true }),
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${RESEND_KEY}` },
+    body: JSON.stringify({ from: ALERT_FROM, to: ALERT_EMAIL, subject, text }),
   });
+  if (!res.ok) throw new Error(`Resend: ${await res.text()}`);
+  const body = await res.json().catch(() => ({}));
+  return body.id || 'sent';
 }
 
 const daysAgo = (n) => new Date(Date.now() - n * 86400000).toISOString();
@@ -146,24 +153,35 @@ export default async function handler(req, res) {
     }
   });
 
-  // Silence is the feature. Report the all-clear to the caller, not to Telegram.
+  // Silence is the feature. Report the all-clear to the caller, not to the inbox.
   if (!broken.length && !watch.length) {
     return res.status(200).json({ ok: true, healthy: true, alerted: false, checks });
   }
 
-  const msg = [
-    broken.length ? `⚠️ ${broken.length} thing${broken.length === 1 ? '' : 's'} need${broken.length === 1 ? 's' : ''} you today` : `Nothing broken — ${watch.length} to keep an eye on`,
+  const headline = broken.length
+    ? `${broken.length} thing${broken.length === 1 ? '' : 's'} need${broken.length === 1 ? 's' : ''} you today`
+    : `Nothing broken — ${watch.length} to keep an eye on`;
+
+  // The subject is the whole message on a phone lock screen, so it carries the
+  // count and the first problem rather than a fixed string.
+  const lead = (broken[0] || watch[0] || '').split('\n')[0].replace(/^[^\w]+\s*/, '');
+  const subject = `${broken.length ? '⚠️' : 'ℹ️'} ${headline}: ${lead}`.slice(0, 140);
+
+  const text = [
+    headline,
     '',
     ...broken,
     ...(broken.length && watch.length ? [''] : []),
     ...watch,
+    '',
+    '—',
+    'Daily check of aasthachopra.com automation. You only get this when something is wrong.',
   ].join('\n');
 
-  const recipients = ALLOWED_IDS;
-  await Promise.all(recipients.map((id) => tg(id, msg)));
+  const emailId = await sendAlert(subject, text);
 
   res.status(200).json({
-    ok: true, healthy: false, alerted: recipients.length,
+    ok: true, healthy: false, alerted: ALERT_EMAIL, email_id: emailId,
     broken: broken.length, watch: watch.length, checks,
   });
 }
