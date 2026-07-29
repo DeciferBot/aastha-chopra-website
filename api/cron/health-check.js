@@ -64,7 +64,9 @@ function firstError(errors) {
   if (!raw) return 'no detail recorded';
   const text = typeof raw === 'string' ? raw : JSON.stringify(raw);
   // Surface the human-readable message when the payload is a nested API error.
-  const message = text.match(/"message"\s*:\s*"([^"]{5,160})"/);
+  // Quoting varies by source: the blog agent logs real JSON, the UAE agent logs
+  // a Python dict repr, so match either quote style rather than only JSON.
+  const message = text.match(/["']message["']\s*:\s*["']([^"']{5,160})["']/);
   const clean = (message ? message[1] : text).replace(/\s+/g, ' ').trim();
   return clean.length > 120 ? `${clean.slice(0, 117)}…` : clean;
 }
