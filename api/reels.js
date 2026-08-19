@@ -12,6 +12,11 @@ export const config = { runtime: 'edge' };
 
 const SUPABASE_URL = process.env.SUPABASE_URL || 'https://uqzvaytvynrglijvwjsz.supabase.co';
 
+// Grid size, split between the newest reels and the best-performing back
+// catalogue. RECENT_SLOTS = 0 reverts to a pure greatest-hits grid.
+const RECENT_SLOTS = 6;
+const TOP_SLOTS = 48;
+
 const RULES = [
   ['Beauty', /\b(makeup|lip|lipstick|mascara|concealer|foundation|primer|blush|bronzer|highlighter|eyeshadow|skin|skincare|glow|serum|fragrance|perfume|parfum|scent|beauty|kosas|huda|maybelline|sephora|sephoria|charlotte tilbury|gisou|nars|elf|haircare|hair oil|note cosmet|dolce.{0,3}gabbana beauty|rasasi|under.?eye)\b/i],
   ['Wellness', /\b(hike|hiking|ski|skiing|snow|yoga|fitness|activewear|wiskii|gym|workout|sweat|sleep|spa|ayurveda|wellness|jungle|alpaca|penguin|waterfall|mountain|arctic|wild|nature|movement|strength|balance)\b/i],
@@ -39,23 +44,43 @@ export default async function handler() {
     });
   }
   try {
-    const select = 'permalink,caption,views,like_count,storage_thumbnail_url,storage_video_url';
-    const url = `${SUPABASE_URL}/rest/v1/instagram_posts?media_type=eq.VIDEO`
-      + `&storage_thumbnail_url=not.is.null&views=not.is.null`
-      + `&select=${select}&order=views.desc&limit=48`;
-    const res = await fetch(url, { headers: { apikey: key, Authorization: `Bearer ${key}` } });
-    if (!res.ok) throw new Error(`Supabase ${res.status}`);
-    const rows = await res.json();
+    const select = 'permalink,caption,timestamp,views,like_count,storage_thumbnail_url,storage_video_url';
+    const base = `${SUPABASE_URL}/rest/v1/instagram_posts?media_type=eq.VIDEO`
+      + `&storage_thumbnail_url=not.is.null`
+      + `&select=${select}`;
+    const headers = { apikey: key, Authorization: `Bearer ${key}` };
 
-    const reels = rows.map(r => ({
+    // Two pools. A brand-new reel has a few thousand views against a top-48
+    // cut-off in the tens of thousands, so ranking purely by views means the
+    // reels Aastha just posted can never reach the site. RECENT_SLOTS of the
+    // newest reels are therefore always carried, and views fill the remainder.
+    const [topRes, newRes] = await Promise.all([
+      fetch(`${base}&views=not.is.null&order=views.desc&limit=${TOP_SLOTS}`, { headers }),
+      fetch(`${base}&order=timestamp.desc.nullslast&limit=${RECENT_SLOTS}`, { headers }),
+    ]);
+    if (!topRes.ok) throw new Error(`Supabase ${topRes.status}`);
+    const top = await topRes.json();
+    const recent = newRes.ok ? await newRes.json() : [];
+
+    const seen = new Set();
+    const reels = [...recent, ...top].filter(r => {
+      if (!r.permalink || seen.has(r.permalink)) return false;
+      seen.add(r.permalink);
+      return true;
+    }).map(r => ({
       permalink: r.permalink,
       thumbnail: sbImg(r.storage_thumbnail_url, 720),
       caption: cardCaption(r.caption),
       category: classify(r.caption),
       media_url: r.storage_video_url || null,
+      posted_at: r.timestamp || null,
       views: r.views,
       likes: r.like_count ?? null,
     })).filter(r => r.permalink && r.thumbnail);
+    // Order: newest first, then the back catalogue by views. `recent` is already
+    // timestamp-desc and `top` is already views-desc, so the concatenation above
+    // is the final order — no re-sort, which would bury the new reels again.
+    // To lead with the strongest work instead, set RECENT_SLOTS to 0.
 
     return new Response(JSON.stringify({ generated_at: new Date().toISOString(), count: reels.length, reels }), {
       headers: {

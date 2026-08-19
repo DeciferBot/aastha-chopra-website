@@ -220,8 +220,19 @@
     var wanted = {};
     (CFG.categories || []).forEach(function (c) { wanted[c] = 1; });
 
-    fetch('data/reels.json', { cache: 'no-cache' })
+    // Live from Supabase first so newly posted reels show without a rebuild;
+    // the committed data/reels.json is the fallback when the API is unavailable.
+    function fromFile() {
+      return fetch('data/reels.json', { cache: 'no-cache' })
+        .then(function (r) { return r.ok ? r.json() : null; });
+    }
+
+    fetch('/api/reels', { cache: 'no-cache' })
       .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        return (d && d.reels && d.reels.length) ? d : fromFile();
+      })
+      .catch(fromFile)
       .then(function (d) {
         var all = (d && d.reels) || [];
         var byPermalink = {};
