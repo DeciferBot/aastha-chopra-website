@@ -33,6 +33,7 @@ try {
 const SUPABASE_URL = process.env.SUPABASE_URL || 'https://uqzvaytvynrglijvwjsz.supabase.co';
 const KEY = process.env.SUPABASE_SERVICE_KEY;
 const LIMIT = parseInt(process.env.REELS_LIMIT || '48', 10);
+const RECENT_SLOTS = parseInt(process.env.REELS_RECENT || '6', 10);
 
 if (!KEY) {
   console.error('Missing SUPABASE_SERVICE_KEY (env or .env.local). Aborting — reels.json left unchanged.');
@@ -70,18 +71,34 @@ function cardCaption(caption = '') {
 }
 
 async function main() {
-  const select = 'permalink,caption,views,like_count,comments_count,storage_thumbnail_url,storage_video_url';
-  const url = `${SUPABASE_URL}/rest/v1/instagram_posts?media_type=eq.VIDEO`
-    + `&storage_thumbnail_url=not.is.null&views=not.is.null`
-    + `&select=${select}&order=views.desc&limit=${LIMIT}`;
+  const select = 'permalink,caption,timestamp,views,like_count,comments_count,storage_thumbnail_url,storage_video_url';
+  const base = `${SUPABASE_URL}/rest/v1/instagram_posts?media_type=eq.VIDEO`
+    + `&storage_thumbnail_url=not.is.null`
+    + `&select=${select}`;
+  const headers = { apikey: KEY, Authorization: `Bearer ${KEY}` };
 
-  const res = await fetch(url, { headers: { apikey: KEY, Authorization: `Bearer ${KEY}` } });
-  if (!res.ok) {
-    console.error(`Supabase fetch failed: ${res.status} ${await res.text()}`);
+  // Mirrors /api/reels: the newest reels are always carried, because a fresh
+  // reel's view count can't compete with a top-48 cut-off in the tens of
+  // thousands and would otherwise never reach the site. RECENT_SLOTS = 0 gives
+  // back a pure greatest-hits list.
+  const [topRes, newRes] = await Promise.all([
+    fetch(`${base}&views=not.is.null&order=views.desc&limit=${LIMIT}`, { headers }),
+    fetch(`${base}&order=timestamp.desc.nullslast&limit=${RECENT_SLOTS}`, { headers }),
+  ]);
+  if (!topRes.ok) {
+    console.error(`Supabase fetch failed: ${topRes.status} ${await topRes.text()}`);
     process.exit(1);
   }
-  const rows = await res.json();
-  if (!Array.isArray(rows) || rows.length === 0) {
+  const top = await topRes.json();
+  const recent = newRes.ok ? await newRes.json() : [];
+
+  const seen = new Set();
+  const rows = [...recent, ...top].filter(r => {
+    if (!r.permalink || seen.has(r.permalink)) return false;
+    seen.add(r.permalink);
+    return true;
+  });
+  if (rows.length === 0) {
     console.error('No reels returned — leaving reels.json unchanged.');
     process.exit(1);
   }
@@ -97,13 +114,14 @@ async function main() {
     caption: cardCaption(r.caption),
     category: classify(r.caption),
     media_url: r.storage_video_url || null,
+    posted_at: r.timestamp || null,
     views: r.views,
     likes: r.like_count ?? null,
   })).filter(r => r.permalink && r.thumbnail);
 
   const out = {
     generated_at: new Date().toISOString(),
-    source: 'supabase:instagram_posts (storage_thumbnail_url, ranked by views)',
+    source: `supabase:instagram_posts (storage_thumbnail_url; newest ${RECENT_SLOTS}, then ranked by views)`,
     count: reels.length,
     reels,
   };

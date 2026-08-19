@@ -4008,11 +4008,15 @@
 
       render();
 
-      // Primary source: durable, view-ranked reels generated from Supabase
-      // Storage (scripts/sync-reels.mjs → data/reels.json). Replaces the local
-      // fallback list when available; on any failure the fallback stays.
-      fetch('data/reels.json', { cache: 'no-cache' })
-        .then(r => r.ok ? r.json() : null)
+      // Primary source: /api/reels, read live from Supabase, so a newly posted
+      // reel appears once the media mirror has copied its cover — no rebuild.
+      // data/reels.json is the committed fallback for when the API is down.
+      fetch('/api/reels', { cache: 'no-cache' })
+        .then(r => (r.ok ? r.json() : null))
+        .then(d => (d && Array.isArray(d.reels) && d.reels.length)
+          ? d
+          : fetch('data/reels.json', { cache: 'no-cache' }).then(r => (r.ok ? r.json() : null)))
+        .catch(() => fetch('data/reels.json', { cache: 'no-cache' }).then(r => (r.ok ? r.json() : null)))
         .then(data => {
           const list = data?.reels;
           if (!Array.isArray(list) || !list.length) return;
