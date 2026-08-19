@@ -153,6 +153,10 @@ export default async function handler(req, res) {
     const update = { video_backfill_attempted_at: now.toISOString() };
 
     // One Graph API read gives fresh, signed urls for both the cover and the mp4.
+    // Instagram leaves media_url OUT of the response for reels that use licensed
+    // (copyrighted) audio, so some reels can never get an mp4 here — they keep the
+    // thumbnail and the site plays them through the Instagram embed instead.
+    // Verified 2026-08-19: reels with no mp4 return thumbnail_url but no media_url.
     let meta = {};
     try {
       meta = await ig(`/${p.id}?fields=media_url,thumbnail_url`, token);
