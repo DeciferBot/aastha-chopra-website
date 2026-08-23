@@ -21,6 +21,9 @@ export const SITE = {
   blogPath: '/blog',
   // Aastha publishes from Dubai; dates render in her zone, not the server's.
   timeZone: 'Asia/Dubai',
+  // Same GA4 property as the static pages (index.html, fashion.html, ...), so
+  // Journal traffic lands in one report instead of going unmeasured.
+  ga4: 'G-MNSRF3MYFY',
 };
 
 // Author identity for E-E-A-T: connects every post to a credentialed real
@@ -343,6 +346,17 @@ export function renderShell({ title, description, canonical, head = '', body, ac
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=${SITE.ga4}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${SITE.ga4}', {
+      page_title: document.title,
+      page_location: window.location.href
+    });
+  </script>
 ${head}
   <style>${BLOG_CSS}</style>
 </head>
@@ -397,7 +411,7 @@ export function ctaBlock() {
         fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},
           body:JSON.stringify({email:email,eventId:'blog-'+Date.now()})})
           .then(function(r){return r.json().then(function(d){return {ok:r.ok,d:d};});})
-          .then(function(x){note.textContent=x.ok?'You are on the list. Check your inbox.':(x.d.error||'Something went wrong.');if(x.ok)f.reset();})
+          .then(function(x){note.textContent=x.ok?'You are on the list. Check your inbox.':(x.d.error||'Something went wrong.');if(x.ok){f.reset();if(window.gtag)gtag('event','subscribe',{event_category:'engagement',event_label:'blog_cta'});}})
           .catch(function(){note.textContent='Something went wrong. Please try again.';});
         return false;
       }
