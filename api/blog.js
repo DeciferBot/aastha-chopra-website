@@ -26,9 +26,10 @@ export default async function handler(req, res) {
 
   let post;
   try {
-    const statusFilter = previewOk ? '' : '&status=eq.published';
+    // Fetch by slug alone so merged posts are still found — they need to answer
+    // a redirect, not a 404. The status check happens below.
     const rows = await sb(
-      `/blog_posts?slug=eq.${encodeURIComponent(slug)}${statusFilter}&limit=1`
+      `/blog_posts?slug=eq.${encodeURIComponent(slug)}&limit=1`
     );
     post = rows && rows[0];
   } catch (err) {
@@ -37,6 +38,19 @@ export default async function handler(req, res) {
   }
 
   if (!post) {
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    return res.status(404).send(notFound());
+  }
+
+  // Two posts covering the same question split their own ranking, so the weaker
+  // one gets merged into the stronger one and points here. 301 keeps whatever
+  // links and history the old URL earned.
+  if (post.redirect_to && post.redirect_to !== post.slug) {
+    res.setHeader('Cache-Control', 's-maxage=86400');
+    return res.redirect(301, `${SITE.blogPath}/${post.redirect_to}`);
+  }
+
+  if (post.status !== 'published' && !previewOk) {
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     return res.status(404).send(notFound());
   }
