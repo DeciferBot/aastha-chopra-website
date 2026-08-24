@@ -29,7 +29,7 @@ const ALERT_FROM   = 'Site Monitor <hello@aasthachopra.com>';
 const FAILURE_LOOKBACK_DAYS = 3;   // job failures worth waking someone for
 const FOLLOWER_WINDOW_DAYS  = 7;   // growth is noisy day to day; a week is a trend
 const QUEUE_STALE_DAYS      = 3;   // a pitch waiting this long is stuck, not pending
-const BLOG_STALE_DAYS       = 10;  // publishes Mon/Thu/Sat, so 10 days means broken
+const BLOG_DRAFT_NAG_DAYS   = 2;   // a Journal draft older than this is waiting on a person
 
 async function sb(path) {
   const res = await fetch(`${SUPABASE_URL}/rest/v1${path}`, {
@@ -146,13 +146,20 @@ export default async function handler(req, res) {
     }
   });
 
-  // ── 6. Blog stopped publishing ────────────────────────────────────────────
-  await guard('blog_cadence', async () => {
-    const [latest] = await sb('/blog_posts?status=eq.published&select=published_at&order=published_at.desc.nullslast&limit=1');
-    if (!latest?.published_at) return;
-    if (latest.published_at < daysAgo(BLOG_STALE_DAYS)) {
-      watch.push(`🟡 No blog post published since ${latest.published_at.slice(0, 10)}`);
-    }
+  // ── 6. Journal drafts waiting for a person ────────────────────────────────
+  // The generator writes drafts only (since the August 2026 content overhaul);
+  // nothing goes live until someone reads it. Each line carries the preview link
+  // and the one-tap publish link so it can be dealt with from a phone.
+  await guard('blog_drafts', async () => {
+    const drafts = await sb(`/blog_posts?status=eq.draft&created_at=lte.${daysAgo(BLOG_DRAFT_NAG_DAYS)}&select=slug,title,word_count,created_at&order=created_at.asc&limit=10`);
+    if (!drafts.length) return;
+    const secret = process.env.CRON_SECRET;
+    const lines = drafts.map((d) =>
+      `   • ${d.title} (${d.word_count || '?'} words, ${String(d.created_at).slice(0, 10)})\n`
+      + `     read: https://www.aasthachopra.com/blog/${d.slug}?preview=${encodeURIComponent(secret)}\n`
+      + `     publish: https://www.aasthachopra.com/api/blog-publish?slug=${d.slug}&key=${encodeURIComponent(secret)}`
+    );
+    watch.push(`🟡 ${drafts.length} Journal draft${drafts.length === 1 ? '' : 's'} waiting for review\n${lines.join('\n')}`);
   });
 
   // Silence is the feature. Report the all-clear to the caller, not to the inbox.

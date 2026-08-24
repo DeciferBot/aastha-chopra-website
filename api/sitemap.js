@@ -9,7 +9,7 @@
 import { SITE, sb, esc } from './_blog.js';
 
 const CORE = [
-  { loc: '/',               changefreq: 'weekly',  priority: '1.0', lastmod: '2026-07-05', images: [
+  { loc: '/',               changefreq: 'weekly',  priority: '1.0', lastmod: '2026-08-24', images: [
     { loc: '/images/aastha-chopra-dubai-luxury-fashion-beauty.jpg', title: 'Aastha Chopra — Dubai luxury fashion and beauty influencer' },
     { loc: '/images/og-image.jpg', title: 'Aastha Chopra — Official Portfolio' },
   ] },
