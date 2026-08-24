@@ -2,6 +2,46 @@
 
 Short records of why the site is the way it is. Newest first.
 
+## 2026-08-24 — Search engines: how the site actually gets submitted
+
+**Google.** Its sitemap ping endpoint was deprecated in June 2023 and now 404s,
+so the only routes are the `Sitemap:` line in robots.txt (passive) and Search
+Console (active). The sitemap is submitted; it had been sitting on a 5 July
+submission from before the content rebuild.
+
+Search Console can be driven from this machine without a browser. The gcloud
+service account `decifer-integrations@decifer-service-integrations.iam.gserviceaccount.com`
+is a full user on the property:
+
+```bash
+TOK=$(gcloud auth print-access-token --scopes="https://www.googleapis.com/auth/webmasters")
+SITE="https%3A%2F%2Fwww.aasthachopra.com%2F"
+SM="https%3A%2F%2Fwww.aasthachopra.com%2Fsitemap.xml"
+curl -s -H "Authorization: Bearer $TOK" "https://www.googleapis.com/webmasters/v3/sites/$SITE/sitemaps"
+curl -s -X PUT -H "Authorization: Bearer $TOK" "https://www.googleapis.com/webmasters/v3/sites/$SITE/sitemaps/$SM"
+```
+
+Two traps, both of which produced a convincing but wrong "no access" reading
+the first time this was tried:
+
+- Calling `gcloud auth print-access-token` **without** `--scopes` returns a
+  cloud-platform token, and Search Console answers
+  `ACCESS_TOKEN_SCOPE_INSUFFICIENT`. That is the token missing a scope, not the
+  account missing permission.
+- `--impersonate-service-account` is wrong here. The service account is already
+  the active account, so impersonating it needs `serviceAccountTokenCreator` on
+  itself. The `PERMISSION_DENIED` that follows looks like proof of no access.
+
+**Bing, Yandex, Seznam, Naver.** IndexNow, no auth. Key
+`b4bd21537f724b699428afa92452c614`, hosted at `/b4bd21537f724b699428afa92452c614.txt`.
+`api/cron/generate-blog.js` pings it whenever a post publishes, and the full
+URL list can be pushed at any time by POSTing `{host, key, keyLocation, urlList}`
+to `https://api.indexnow.org/indexnow`.
+
+**Baseline on the day of the rebuild** (28 days to 23 August, so before any
+rewritten guide could rank): 8 clicks, 1,298 impressions, average position 50.6.
+Worth comparing against in a few weeks.
+
 ## 2026-08-24 — Journal auto-publishes, behind quality gates
 
 **Problem.** After the rebuild below, the cron wrote drafts and waited for a
