@@ -4141,10 +4141,13 @@
 
       const TYPE_LABEL = { VIDEO: 'Reel', CAROUSEL_ALBUM: 'Series', IMAGE: 'Photo' };
 
-      // Videos only carry a thumbnail; photos/carousels carry the media itself.
+      // Durable Supabase Storage copies first. The original_* columns are the raw
+      // scontent.cdninstagram.com URLs, which carry a short expiry: relying on
+      // them is what left dead tiles on this page before. They stay only as a
+      // last resort for a post the mirror has not picked up yet.
       const imgFor = (p) => p.media_type === 'VIDEO'
-        ? (p.original_thumbnail_url || p.original_media_url)
-        : (p.original_media_url || p.original_thumbnail_url);
+        ? (p.storage_thumbnail_url || p.storage_image_url || p.original_thumbnail_url || p.original_media_url)
+        : (p.storage_image_url || p.storage_thumbnail_url || p.original_media_url || p.original_thumbnail_url);
 
       function shuffle(arr) {
         for (let i = arr.length - 1; i > 0; i--) {
@@ -4192,7 +4195,7 @@
         // Top performers by total engagement; randomise among them so the
         // featured set rotates per visitor while always staying "best of".
         const res = await fetch(
-          `${SUPABASE_URL}/rest/v1/instagram_posts?select=id,media_type,caption,permalink,original_media_url,original_thumbnail_url,total_interactions&order=total_interactions.desc.nullslast&limit=${POOL}`,
+          `${SUPABASE_URL}/rest/v1/instagram_posts?select=id,media_type,caption,permalink,storage_image_url,storage_thumbnail_url,original_media_url,original_thumbnail_url,total_interactions&order=total_interactions.desc.nullslast&limit=${POOL}`,
           { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } }
         );
         let posts = await res.json();
