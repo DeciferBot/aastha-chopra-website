@@ -226,7 +226,7 @@
 
   <!-- Primary SEO -->
   <title>Aastha Chopra | Dubai Luxury Fashion & Beauty Influencer | Brand Collaborations UAE</title>
-  <meta name="description" content="Dubai luxury fashion & beauty influencer with 51K+ Instagram followers across UAE, India & US. Practising lawyer. UAE Media Council licensed. Fashion, beauty & lifestyle brand partnerships. View media pack →" />
+  <meta name="description" content="Dubai fashion and beauty creator with 51K+ Instagram followers across the UAE, India and the US. UAE Media Council licensed. Brand partnerships and media pack." />
   <meta name="keywords" content="Aastha Chopra, luxury lifestyle creator Dubai, UAE fashion influencer, aastha sochic, luxury wellness Dubai, fashion creator UAE, brand collaborations Dubai, influencer Dubai" />
   <link rel="canonical" href="https://www.aasthachopra.com/" />
 
@@ -3791,13 +3791,18 @@
 
       const INSTA_ICON = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>`;
 
+      // /api/reels serves Supabase Storage thumbnails, which are permanent.
+      // /api/instagram proxies the Graph API, whose scontent.cdninstagram.com
+      // URLs carry a short expiry: six of these tiles were already dead on the
+      // live homepage. Durable source only.
       let posts = [];
       try {
-        const res = await fetch('/api/instagram');
+        const res = await fetch('/api/reels');
         const data = await res.json();
-        posts = (data.data || []).slice(0, 6);
+        const items = Array.isArray(data) ? data : (data.reels || data.data || []);
+        posts = items.filter(p => p && p.thumbnail && p.permalink).slice(0, 6);
       } catch (e) {
-        console.warn('Instagram API unavailable', e);
+        console.warn('Reels API unavailable', e);
       }
 
       // Fallback to local images when API unavailable (local dev)
@@ -3819,7 +3824,7 @@
       }
 
       grid.innerHTML = posts.map(p => {
-        const imgSrc = p.thumbnail_url || p.media_url || '';
+        const imgSrc = p.thumbnail || p.thumbnail_url || '';
         const alt = (p.caption || '').slice(0, 60);
         return `
           <a class="insta-tile" href="${p.permalink}" target="_blank" rel="noopener">
