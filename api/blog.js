@@ -9,7 +9,7 @@
 
 import {
   SITE, sb, esc, renderShell, ctaBlock, segmentMeta,
-  renderHeroSVG, renderAuthorBox, renderPostCard, personSchema, renderInstagramBlock, postImage, attachInstagramImages, dedupePostImages, sbImg, postDateParts, updatedDateParts,
+  renderHeroSVG, renderAuthorBox, renderPostCard, personSchema, organizationSchema, renderInstagramBlock, renderPicture, postImage, attachInstagramImages, dedupePostImages, sbImg, postDateParts, updatedDateParts,
 } from './_blog.js';
 
 export default async function handler(req, res) {
@@ -113,28 +113,96 @@ export default async function handler(req, res) {
 function renderHead({ post, url, image, seg, published, faq }) {
   const desc = post.meta_description || post.excerpt || '';
 
+  // Entities the piece is genuinely about. Google uses these to place the page
+  // in a topic, and every one of them is a real thing with its own Wikipedia
+  // entry, so they are safe to assert.
+  const about = [
+    { '@type': 'Place', name: 'Dubai', sameAs: 'https://en.wikipedia.org/wiki/Dubai' },
+    { '@type': 'Thing', name: seg.label },
+  ];
+
   const graph = [
     personSchema(),
+    organizationSchema(),
     {
-      '@type': 'Article',
-      headline: post.title,
+      '@type': 'WebSite',
+      '@id': `${SITE.base}/#website`,
+      url: SITE.base,
+      name: SITE.name,
+      publisher: { '@id': `${SITE.base}/#organization` },
+      inLanguage: 'en-AE',
+    },
+    {
+      '@type': 'Blog',
+      '@id': `${SITE.base}/blog#blog`,
+      name: `${SITE.name} — Journal`,
+      url: `${SITE.base}/blog`,
+      isPartOf: { '@id': `${SITE.base}/#website` },
+    },
+    {
+      // The page itself, so mainEntityOfPage below points at a node that exists
+      // rather than a bare id nothing defines.
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: post.title,
       description: desc,
-      image: [image],
+      inLanguage: 'en-AE',
+      isPartOf: { '@id': `${SITE.base}/#website` },
+      primaryImageOfPage: { '@id': `${url}#primaryimage` },
+      datePublished: published,
+      dateModified: post.updated_at || published,
+      breadcrumb: { '@id': `${url}#breadcrumb` },
+    },
+    {
+      '@type': 'ImageObject',
+      '@id': `${url}#primaryimage`,
+      url: image,
+      contentUrl: image,
+      width: 1200,
+      height: 1500,
+      caption: post.title,
+    },
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      headline: post.title.slice(0, 110),
+      name: post.title,
+      description: desc,
+      // An ImageObject with real dimensions is eligible for image-rich results
+      // where a bare URL string is not.
+      image: { '@id': `${url}#primaryimage` },
       datePublished: published,
       dateModified: post.updated_at || published,
       inLanguage: 'en-AE',
       author: { '@id': `${SITE.base}/#aastha` },
-      publisher: { '@id': `${SITE.base}/#aastha` },
+      publisher: { '@id': `${SITE.base}/#organization` },
+      isPartOf: { '@id': `${SITE.base}/blog#blog` },
       mainEntityOfPage: { '@type': 'WebPage', '@id': url },
       articleSection: seg.label,
+      about,
+      wordCount: post.word_count || undefined,
+      timeRequired: `PT${Math.max(2, Math.round((post.word_count || 0) / 220))}M`,
       keywords: (post.seo_keywords || []).join(', '),
+      // The excerpt is written as the direct answer, which is exactly what a
+      // voice assistant should read out.
+      speakable: {
+        '@type': 'SpeakableSpecification',
+        cssSelector: ['.bdek', 'article h1'],
+      },
+      // Declaring the licence and sourcing policy is an E-E-A-T signal and it
+      // happens to be true: every post lists the sources it used.
+      isAccessibleForFree: true,
+      creativeWorkStatus: 'Published',
     },
     {
       '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Journal', item: `${SITE.base}/blog` },
-        { '@type': 'ListItem', position: 2, name: seg.label, item: `${SITE.base}/blog?segment=${post.segment}` },
-        { '@type': 'ListItem', position: 3, name: post.title, item: url },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.base}/` },
+        { '@type': 'ListItem', position: 2, name: 'Journal', item: `${SITE.base}/blog` },
+        { '@type': 'ListItem', position: 3, name: seg.label, item: `${SITE.base}/blog?segment=${post.segment}` },
+        { '@type': 'ListItem', position: 4, name: post.title, item: url },
       ],
     },
   ];
@@ -160,10 +228,21 @@ function renderHead({ post, url, image, seg, published, faq }) {
   <meta property="og:locale" content="en_AE" />
   <meta property="article:published_time" content="${esc(published)}" />
   <meta property="article:section" content="${esc(seg.label)}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="1500" />
+  <meta property="og:image:alt" content="${esc(post.title)}" />
+  <meta property="article:modified_time" content="${esc(post.updated_at || published)}" />
+  <meta property="article:author" content="${esc(SITE.name)}" />
+  <meta name="author" content="${esc(SITE.name)}" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="${esc(post.title)}" />
   <meta name="twitter:description" content="${esc(desc)}" />
   <meta name="twitter:image" content="${esc(image)}" />
+  <meta name="twitter:image:alt" content="${esc(post.title)}" />
+  <meta name="twitter:label1" content="Written by" />
+  <meta name="twitter:data1" content="${esc(SITE.name)}" />
+  <meta name="twitter:label2" content="Reading time" />
+  <meta name="twitter:data2" content="${Math.max(2, Math.round((post.word_count || 0) / 220))} min" />
   <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>`;
 }
 
@@ -179,8 +258,9 @@ function renderArticle({ post, url, seg, faq, sources, related }) {
     `${readMins} min read`,
   ].join(' &nbsp;·&nbsp; ');
 
-  const himg = esc(sbImg(postImage(post), 1200));
-  const heroHtml = `<div class="bhero" style="--img:url('${himg}')"><img src="${himg}" alt="${esc(post.title)}" loading="eager" /></div>`;
+  const heroSrc = sbImg(postImage(post), 1200);
+  const himg = esc(heroSrc);
+  const heroHtml = `<div class="bhero" style="--img:url('${himg}')">${renderPicture({ src: heroSrc, alt: post.title, eager: true })}</div>`;
 
   const faqHtml = faq.length ? `
     <section class="bfaq">

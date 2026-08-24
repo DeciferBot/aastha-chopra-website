@@ -6,7 +6,7 @@
  * Segment view: a flat archive of that pillar. Emits Blog + Person JSON-LD.
  */
 
-import { SITE, sb, esc, renderShell, segmentMeta, SEGMENTS, JOURNAL_SEGMENTS, pillarFirst, renderPostCard, personSchema, postImage, attachInstagramImages, dedupePostImages, sbImg, postDateParts } from './_blog.js';
+import { SITE, sb, esc, renderShell, segmentMeta, SEGMENTS, JOURNAL_SEGMENTS, pillarFirst, renderPicture, renderPostCard, personSchema, organizationSchema, postImage, attachInstagramImages, dedupePostImages, sbImg, postDateParts } from './_blog.js';
 
 // Pillars shown to readers. Hidden pillars (automobile) never get a section or a
 // filter chip; a ?segment= for one of them falls back to the full Journal.
@@ -45,9 +45,12 @@ export default async function handler(req, res) {
     '@type': 'Blog',
     '@id': `${SITE.base}/blog#blog`,
     name: `${SITE.name} — Journal`,
+    description: sub,
     url: `${SITE.base}/blog`,
     inLanguage: 'en-AE',
+    isPartOf: { '@id': `${SITE.base}/#website` },
     author: { '@id': `${SITE.base}/#aastha` },
+    publisher: { '@id': `${SITE.base}/#organization` },
     blogPost: posts.slice(0, 20).map((p) => ({
       '@type': 'BlogPosting',
       headline: p.title,
@@ -55,7 +58,50 @@ export default async function handler(req, res) {
       datePublished: p.published_at || p.created_at,
     })),
   };
-  const jsonLd = { '@context': 'https://schema.org', '@graph': [personSchema(), blogLd] };
+
+  // A CollectionPage with an explicit ItemList tells Google this is a hub and
+  // gives it the order the guides are actually presented in.
+  const collectionLd = {
+    '@type': 'CollectionPage',
+    '@id': `${url}#collection`,
+    url,
+    name: `${heading} | ${SITE.name}`,
+    description: sub,
+    inLanguage: 'en-AE',
+    isPartOf: { '@id': `${SITE.base}/#website` },
+    about: { '@id': `${SITE.base}/#aastha` },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: posts.length,
+      itemListElement: posts.slice(0, 30).map((p, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        url: `${SITE.base}/blog/${p.slug}`,
+        name: p.title,
+      })),
+    },
+  };
+
+  const crumbs = [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.base}/` },
+    { '@type': 'ListItem', position: 2, name: 'Journal', item: `${SITE.base}/blog` },
+  ];
+  if (filtered) crumbs.push({ '@type': 'ListItem', position: 3, name: heading, item: url });
+
+  const websiteLd = {
+    '@type': 'WebSite',
+    '@id': `${SITE.base}/#website`,
+    url: SITE.base,
+    name: SITE.name,
+    inLanguage: 'en-AE',
+    publisher: { '@id': `${SITE.base}/#organization` },
+  };
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [personSchema(), organizationSchema(), websiteLd, blogLd, collectionLd,
+      { '@type': 'BreadcrumbList', itemListElement: crumbs }],
+  };
 
   const ogRaw = posts.length ? postImage(posts[0]) : SITE.ogImage;
   const ogImg = sbImg(ogRaw.startsWith('http') ? ogRaw : `${SITE.base}${ogRaw}`, 1200);
@@ -113,7 +159,7 @@ function renderHomeView({ heading, sub, posts }) {
   const fdate = postDateParts(featured);
   const featuredHtml = `
     <a class="bfeature" href="/blog/${esc(featured.slug)}">
-      <div class="bfeature-media" style="--img:url('${esc(fimg)}')"><img src="${esc(fimg)}" alt="${esc(featured.title)}" loading="eager" /></div>
+      <div class="bfeature-media" style="--img:url('${esc(fimg)}')">${renderPicture({ src: fimg, alt: featured.title, eager: true })}</div>
       <div class="bfeature-body">
         <span class="seg">${esc(fseg.label)} &nbsp;·&nbsp; Latest</span>
         <h2>${esc(featured.title)}</h2>

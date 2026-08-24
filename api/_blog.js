@@ -506,6 +506,25 @@ export function postDateParts(p) {
   };
 }
 
+/**
+ * Image markup that prefers WebP.
+ *
+ * Two sources feed these pages. Supabase Storage URLs already content-negotiate
+ * (they return image/webp to any browser whose Accept header allows it), so they
+ * are left as a plain <img>. The local pillar photos under /images are plain
+ * files, so those get a <picture> with a .webp source and the .jpg as fallback.
+ */
+export function renderPicture({ src, alt, className = '', eager = false, width, height }) {
+  const loading = eager ? 'eager' : 'lazy';
+  const cls = className ? ` class="${esc(className)}"` : '';
+  const dims = (width && height) ? ` width="${width}" height="${height}"` : '';
+  const img = `<img${cls} src="${esc(src)}" alt="${esc(alt)}" loading="${loading}"${dims} />`;
+  const local = /^\/images\/[^"']+\.jpg$/i.test(String(src || ''));
+  if (!local) return img;
+  const webp = String(src).replace(/\.jpg$/i, '.webp');
+  return `<picture><source srcset="${esc(webp)}" type="image/webp">${img}</picture>`;
+}
+
 /** Reusable post card, used by the Journal home and by related-post blocks. */
 export function renderPostCard(p) {
   const seg = segmentMeta(p.segment);
@@ -517,7 +536,7 @@ export function renderPostCard(p) {
     ? `\n          <time class="bcard-date" datetime="${esc(date.iso)}">${esc(date.label)}</time>`
     : '';
   return `<a class="bcard" href="/blog/${esc(p.slug)}">
-        <div class="bcard-media" style="--img:url('${esc(img)}')"><img src="${esc(img)}" alt="${esc(p.title)}" loading="lazy" /></div>
+        <div class="bcard-media" style="--img:url('${esc(img)}')">${renderPicture({ src: img, alt: p.title })}</div>
         <div class="bcard-body">
           <span class="seg">${esc(seg.label)}</span>
           <h3>${esc(p.title)}</h3>
@@ -584,6 +603,29 @@ export function renderInstagramBlock(refs) {
       ${cards}
       </div>
     </aside>`;
+}
+
+/**
+ * Organization entity, shared with the static pages so the whole site describes
+ * one business rather than a different one per template. Google prefers an
+ * Organization publisher on Article results, and it is the entity a brand
+ * actually contracts with.
+ */
+export function organizationSchema() {
+  return {
+    '@type': 'Organization',
+    '@id': `${SITE.base}/#organization`,
+    name: AUTHOR.name,
+    url: SITE.base,
+    logo: { '@type': 'ImageObject', url: `${SITE.base}/favicon-512.png`, width: 512, height: 512 },
+    image: AUTHOR.image,
+    description: 'Brand partnerships with Dubai based fashion, beauty and lifestyle creator Aastha Chopra.',
+    founder: { '@id': `${SITE.base}/#aastha` },
+    email: 'management@aasthachopra.com',
+    address: { '@type': 'PostalAddress', addressLocality: 'Dubai', addressCountry: 'AE' },
+    areaServed: [{ '@type': 'Country', name: 'United Arab Emirates' }],
+    sameAs: AUTHOR.sameAs,
+  };
 }
 
 /** Person entity for JSON-LD. Referenced by Article author and listed in @graph. */

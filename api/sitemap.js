@@ -6,7 +6,7 @@
  * published blog_posts are appended, newest first.
  */
 
-import { SITE, sb, esc } from './_blog.js';
+import { SITE, sb, esc, JOURNAL_SEGMENTS } from './_blog.js';
 
 const CORE = [
   { loc: '/',               changefreq: 'weekly',  priority: '1.0', lastmod: '2026-08-24', images: [
@@ -33,7 +33,7 @@ export default async function handler(req, res) {
   let posts = [];
   try {
     posts = (await sb(
-      '/blog_posts?select=slug,published_at,updated_at,hero_image_url,title'
+      '/blog_posts?select=slug,segment,published_at,updated_at,hero_image_url,title'
       + '&status=eq.published&order=published_at.desc.nullslast&limit=2000'
     )) || [];
   } catch {
@@ -48,6 +48,19 @@ export default async function handler(req, res) {
     images: p.images,
   })).join('\n');
 
+  // The section hubs (/blog?segment=beauty and friends) are self-canonical and
+  // indexable, so they belong here. They are the natural landing page for a
+  // broad query like "dubai beauty blog" and were previously undiscoverable
+  // except by crawling the filter bar.
+  const segmentsXml = JOURNAL_SEGMENTS
+    .filter((key) => posts.some((p) => p.segment === key))
+    .map((key) => urlEntry({
+      loc: `${SITE.base}/blog?segment=${key}`,
+      lastmod: today,
+      changefreq: 'weekly',
+      priority: '0.6',
+    })).join('\n');
+
   const postsXml = posts.map((p) => urlEntry({
     loc: `${SITE.base}/blog/${p.slug}`,
     lastmod: (p.updated_at || p.published_at || today).slice(0, 10),
@@ -59,7 +72,7 @@ export default async function handler(req, res) {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-${coreXml}${postsXml ? '\n' + postsXml : ''}
+${coreXml}${segmentsXml ? '\n' + segmentsXml : ''}${postsXml ? '\n' + postsXml : ''}
 </urlset>`;
 
   res.setHeader('Content-Type', 'application/xml; charset=utf-8');
