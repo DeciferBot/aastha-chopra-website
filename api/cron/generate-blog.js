@@ -101,8 +101,9 @@ export default async function handler(req, res) {
     const used = new Set(usedRows.map((r) => r.source_signal_id).filter(Boolean));
 
     // Prefer a signal whose category/tags match the pillar; fall back to top unused.
+    // Match on the pillar KEY: labels are reader-facing ("Eat & Stay") and can change.
     const fresh = signals.filter((s) => !used.has(s.id));
-    const matchTerm = seg.label.toLowerCase();
+    const matchTerm = segment;
     const signal = fresh.find((s) =>
       String(s.category || '').toLowerCase().includes(matchTerm)
       || (s.tags || []).some((t) => String(t).toLowerCase().includes(matchTerm))
@@ -139,9 +140,25 @@ export default async function handler(req, res) {
     // ── 3b. Aastha's real Instagram posts for this pillar (lived experience) ──
     const igPosts = await fetchInstagramContext(segment);
 
+    // ── 3c. What the Journal already answers ─────────────────────────────
+    // The August 2026 clean-up found the same question published three times
+    // ("how to make perfume last") because nothing checked. The writer gets the
+    // live list so it picks an unanswered question, and the result is checked
+    // again below before anything is stored.
+    const existing = await sb(
+      '/blog_posts?select=slug,title,target_queries&status=in.(published,draft)&order=published_at.desc.nullslast&limit=300'
+    ) || [];
+
     // ── 4. Deep research + write ─────────────────────────────────────────
-    const { post, sources } = await researchAndWrite({ seg, segment, signal, questions, igPosts });
+    const { post, sources } = await researchAndWrite({ seg, segment, signal, questions, igPosts, existing });
     sourcesUsed = sources.length;
+
+    // ── 4b. Refuse a duplicate topic ─────────────────────────────────────
+    const clash = findTopicClash(post, existing);
+    if (clash) {
+      await logRun({ startMs, segment, topic, status: 'skipped', dryRun, queriesFound, errors: [`Topic already covered by /blog/${clash.slug}`] });
+      return res.status(200).json({ ok: true, note: 'Topic already covered', segment, existing: clash.slug, proposed: post.title });
+    }
 
     // ── 5. Sanitise + dedupe slug ────────────────────────────────────────
     let slug = slugify(post.slug || post.title);
@@ -266,23 +283,55 @@ async function indexNowPing(url) {
   });
 }
 
+// ── Duplicate-topic guard ──────────────────────────────────────────────────
+// Word-overlap between the proposed title/queries and every existing post. Stop
+// words are dropped so "dubai", "best" and "in" do not make everything match.
+const STOP = new Set(['the', 'a', 'an', 'in', 'of', 'for', 'to', 'and', 'or', 'on', 'at', 'with', 'is', 'are', 'do', 'does', 'how', 'what', 'where', 'which', 'why', 'can', 'you', 'your', 'my', 'i', 'it', 'as', 'by', 'from', 'dubai', 'uae', 'best', 'guide', 'really', 'actually', 'should', 'get']);
+function topicTokens(s) {
+  return new Set(String(s || '').toLowerCase().replace(/[^a-z0-9\s]/g, ' ').split(/\s+/).filter((w) => w.length > 2 && !STOP.has(w)));
+}
+function overlap(a, b) {
+  if (!a.size || !b.size) return 0;
+  let n = 0;
+  for (const w of a) if (b.has(w)) n++;
+  return n / Math.min(a.size, b.size);
+}
+function findTopicClash(post, existing) {
+  const mine = topicTokens([post.title, ...arr(post.target_queries).slice(0, 5)].join(' '));
+  for (const e of existing) {
+    const theirs = topicTokens([e.title, ...arr(e.target_queries).slice(0, 5)].join(' '));
+    if (overlap(mine, theirs) >= 0.6) return e;
+  }
+  return null;
+}
+
 // ── Claude: research with web_search, then write ───────────────────────────
-async function researchAndWrite({ seg, segment, signal, questions, igPosts }) {
+async function researchAndWrite({ seg, segment, signal, questions, igPosts, existing = [] }) {
   const system = `You are Aastha Chopra, a Dubai-based lifestyle creator (fashion, beauty, fragrance, wellness). You are writing a post for your OWN website, aasthachopra.com, for women in the UAE aged 25 to 44, many of them South Asian expats in Dubai.
 
-Your job is to answer a real question people search on Google, completely and usefully, so the post earns its ranking.
+Your job is to answer a real question people search on Google, completely and usefully, so the post earns its ranking. A draft is reviewed by a person before it is published, and anything that reads like a brochure or a search-results mashup gets thrown away.
 
 NON-NEGOTIABLE RULES:
 - Real value only. No filler intro, no "in today's world", no padding. Every paragraph teaches something.
-- Depth wins rankings. Aim for 1400 to 1800 words. Posts of 700 words do not outrank an established guide on the same question. Never pad to reach the count: if you cannot fill it honestly, answer more of the real sub-questions people also ask, add concrete specifics (venues, price ranges, timings, what to avoid), or narrow the title further and go deeper on that.
-- Be specific to the UAE: real neighbourhoods, malls, venues, AED prices, the climate and seasons, local context. Never invent facts, names or prices. If you are not sure, leave it out.
-- Use the web_search tool to research current, accurate details BEFORE writing. Search a few times. Prefer recent, reputable sources.
-- Voice: first person, honest, warm, confident, a little personal. Write like a real person talking, not a brand.
-- Where it fits, weave in Aastha's REAL Instagram experiences listed below, in first person and naturally (a launch she attended, a product she featured, a place she visited). Never invent an experience she did not have.
-- NEVER use em dashes. Not once. Use commas, full stops, or rewrite the sentence.
-- Structure: a short direct answer first, then depth under question-style H2 headings (the related things people also ask). Keep paragraphs short.
+- Aim for 1000 to 1500 words. Never pad to reach the count: if you cannot fill it honestly, answer more of the real sub-questions people also ask, add concrete specifics (venues, price ranges, timings, what to avoid), or narrow the title further and go deeper on that. 900 good words beat 1800 stitched ones.
+- Be specific to the UAE: real neighbourhoods, malls, venues, AED prices, the climate and seasons, local context. Never invent facts, names or prices. If you are not sure, leave it out. Ranges ("roughly AED 40 to 80") beat exact prices that go stale.
+- Use the web_search tool to research current, accurate details BEFORE writing. Search a few times. Prefer official and reputable sources (Visit Dubai, RTA, Gulf News, The National, Time Out Dubai, brand sites). NEVER copy a sentence from a source, a shop or a brand website. Put every fact in your own words.
+- Voice: first person, honest, warm, direct, a little dry. Short sentences. Everyday words. Never use: elevate, curated, unforgettable, nestled, must-visit, game-changer, sanctuary, indulge.
+- Opinions are welcome: "I would skip X" is more useful than a neutral list. Include a short "What I would skip" or "Mistakes I see" section where it fits.
+- Where it fits, weave in Aastha's REAL Instagram experiences listed below, in first person and naturally (a launch she attended, a product she featured, a place she visited). Never invent an experience she did not have. If she has not been somewhere, say so or leave it out.
+- If a product you mention was gifted to her or the brand is a partner (the caption says "use my code", "invited", "launch", "press day", "#ad" or similar), add one line inside the body: <p class="bdisclosure">Disclosure: [brand] gifted this / I have worked with [brand]. My opinion is my own.</p>
+- The UAE working week is Monday to Friday. Never say Sunday to Thursday.
+- NEVER use em dashes or en dashes. Not once. Use commas, full stops, or rewrite the sentence. Write ranges as "AED 100 to 400".
+- British spelling. Write "AED 280", never "280 dirhams" or "280 AED".
+- No year in the title ("2026 guide"), no "ultimate", no "complete". The title is the question as people type it, in plain words.
+- Structure: the direct answer in the first two to four sentences, then depth under question-style H2 headings (the related things people also ask). Keep paragraphs short. End with one or two links to related guides from the EXISTING POSTS list, as <a href="/blog/slug">anchor</a>.
 - The body is clean semantic HTML only: <p>, <h2>, <h3>, <ul>/<li>, <ol>/<li>, <blockquote>, and <table> when it genuinely helps. No <h1>, no inline styles, no <script>, no images, no markdown.
+- Do NOT write about a question the Journal already answers (list below). Pick a question that is genuinely new. If every candidate question is already covered, return {"skip": true, "reason": "..."} instead of an article.
 - This is content for the ${seg.label} pillar. Angle: ${require_angle(segment)}`;
+
+  const existingList = existing.length
+    ? `\n\nEXISTING POSTS (already answered, do not repeat; link to them where relevant):\n${existing.slice(0, 120).map((e) => `- /blog/${e.slug}: ${e.title}`).join('\n')}`
+    : '';
 
   const user = `TRENDING UAE CONTEXT (your starting point, ground the post in this where it fits):
 Title: ${signal.title}
@@ -295,7 +344,9 @@ ${questions.length ? questions.map((q) => `- ${q}`).join('\n') : '- (none return
 ${igPosts && igPosts.length ? `AASTHA'S REAL INSTAGRAM POSTS (her genuine lived experience). Weave the most relevant one or two into the article naturally, in first person, then list those you referenced in instagram_refs:
 ${igPosts.map((p) => `- [${/\/reel\//.test(p.permalink) ? 'Reel' : 'Post'}] ${String(p.caption || '').replace(/\s+/g, ' ').slice(0, 160)} (${p.permalink})`).join('\n')}
 
-` : ''}Research the topic with web_search, then return ONLY a JSON object (no prose, no code fences) with exactly these keys:
+` : ''}${existingList}
+
+Research the topic with web_search, then return ONLY a JSON object (no prose, no code fences) with exactly these keys:
 {
   "title": "the question as people type it",
   "slug": "kebab-case-url-slug",
@@ -319,6 +370,12 @@ ${igPosts.map((p) => `- [${/\/reel\//.test(p.permalink) ? 'Reel' : 'Post'}] ${St
 
   const { text, sources: citedSources } = extractTextAndSources(data);
   let post = parseJson(text);
+
+  // The writer is allowed to decline when every candidate question is already
+  // answered on the site. Surface that as a clean skip, not a parse failure.
+  if (post && post.skip) {
+    throw new Error(`Writer skipped: ${post.reason || 'every candidate question is already covered'}`);
+  }
 
   // The model occasionally wraps, truncates, or slightly malforms the JSON
   // (unescaped quotes in HTML attributes, a body cut off at max_tokens). One

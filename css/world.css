@@ -704,6 +704,15 @@ body::before {
 .brand-tag:hover { border-color: var(--gold); color: var(--text); transform: translateY(-2px); }
 .brand-tag:hover::before { transform: scaleY(1); }
 
+/* Journal guide links. Same chip as .brand-tag, but they are links, so they need
+   the underline removed and a gold hover that reads as "this goes somewhere". */
+a.brand-tag { text-decoration: none; display: inline-block; }
+a.brand-tag:hover { color: var(--gold); }
+.world-brands-inner > p.guides-note {
+  color: var(--text-mid); font-size: 0.9rem; line-height: 1.7;
+  max-width: 620px; margin: -14px auto 26px;
+}
+
 /* ════════════════════════════════════════════
    WHITESPACE CALLOUT (wellness)
    ════════════════════════════════════════════ */

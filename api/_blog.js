@@ -34,6 +34,9 @@ export const AUTHOR = {
   image: `${SITE.base}/images/aastha-chopra-dubai-luxury-fashion-beauty.jpg`,
   jobTitle: 'Lifestyle, Fashion and Beauty Creator',
   bio: 'Aastha is a Dubai based lifestyle, fashion and beauty creator and a UAE Media Council licensed creator. She writes from years of living, shopping and getting ready in the UAE, with more than 110 brand collaborations behind her.',
+  // Shown under every post. Readers should know how the writing is paid for
+  // before they trust a recommendation, and brands should see that she says so.
+  disclosure: 'How I work with brands: some products in the Journal were gifted or come from brands I have worked with. Where that is the case I say so in the post. Nobody pays for a placement here, and every opinion is my own.',
   // Keep in sync with the homepage Person sameAs (index.html #aastha) so the
   // same entity is declared consistently across every page Google crawls.
   sameAs: [
@@ -45,24 +48,53 @@ export const AUTHOR = {
 };
 
 /**
- * The 9 brand pillars, mirrored from _pitch.js SEGMENT_ANGLES. Each maps to a
- * related landing page on the static site so every post links back into the
- * funnel, and carries a short hub blurb.
+ * The 9 brand pillars, mirrored from _pitch.js SEGMENT_ANGLES. The KEYS are the
+ * stable contract (blog_posts.segment, the pitch engine, the generator). The
+ * labels are what a reader sees, so they use reader words: "Shopping" not
+ * "Retail", "Eat & Stay" not "Hospitality". Each maps to a related landing page
+ * on the static site so every post links back into the funnel, and carries a
+ * short hub blurb. `hidden` keeps a pillar out of the Journal hub and filter
+ * bar: automobile is a brand pillar, not a subject this site writes about.
  */
 export const SEGMENTS = {
-  fashion:     { label: 'Fashion',     page: '/fashion.html', blurb: 'Styling real Dubai life, season by season.' },
-  beauty:      { label: 'Beauty',      page: '/fashion.html', blurb: 'Honest, tested beauty for the Gulf climate.' },
-  fragrance:   { label: 'Fragrance',   page: '/fashion.html', blurb: 'Scent as feeling, memory and occasion.' },
-  jewellery:   { label: 'Jewellery',   page: '/luxury.html',  blurb: 'Pieces and the moments they are worn for.' },
-  wellness:    { label: 'Wellness',    page: '/wellness.html', blurb: 'Believable routines that hold up in real life.' },
-  hospitality: { label: 'Hospitality', page: '/luxury.html',  blurb: 'Stays and tables worth recreating.' },
-  travel:      { label: 'Travel',      page: '/luxury.html',  blurb: 'Destinations built into a story you can plan.' },
-  automobile:  { label: 'Automobile',  page: '/luxury.html',  blurb: 'The drive inside an aspirational life.' },
-  retail:      { label: 'Retail',      page: '/fashion.html', blurb: 'Wide ranges made personal and shoppable.' },
+  beauty:      { label: 'Beauty',      page: '/fashion.html', blurb: 'Skincare and makeup that survive Dubai heat, tested on my own face.' },
+  fragrance:   { label: 'Fragrance',   page: '/fashion.html', blurb: 'How to buy, wear and keep perfume in the Gulf.' },
+  fashion:     { label: 'Fashion',     page: '/fashion.html', blurb: 'What to wear in Dubai, by month, occasion and dress code.' },
+  jewellery:   { label: 'Jewellery',   page: '/luxury.html',  blurb: 'Buying gold and diamonds in Dubai without overpaying.' },
+  wellness:    { label: 'Wellness',    page: '/wellness.html', blurb: 'Spas, gyms, yoga, padel and eating well in the city.' },
+  hospitality: { label: 'Eat & Stay',  page: '/luxury.html',  blurb: 'Brunches, afternoon teas, family lunches and staycations I would book again.' },
+  travel:      { label: 'Travel',      page: '/luxury.html',  blurb: 'Beaches, getaways and trips out of Dubai, from someone who takes them.' },
+  retail:      { label: 'Shopping',    page: '/fashion.html', blurb: 'Where to buy what in Dubai: malls, Indian wear, local designers and home.' },
+  automobile:  { label: 'Automobile',  page: '/luxury.html',  blurb: 'The drive inside an aspirational life.', hidden: true },
 };
 
 export function segmentMeta(key) {
   return SEGMENTS[key] || { label: 'Journal', page: '/', blurb: '' };
+}
+
+/** Pillars that appear in the Journal hub and filter bar, in display order. */
+export const JOURNAL_SEGMENTS = Object.keys(SEGMENTS).filter((k) => !SEGMENTS[k].hidden);
+
+/**
+ * The broadest guide in each section. Pinned to the front of its section on the
+ * hub so a reader lands on the overview before the narrower pieces, whatever
+ * the publish dates say. One per section; the rest sort by date.
+ */
+export const PILLAR_SLUGS = new Set([
+  'best-skincare-routine-dubai-climate',
+  'how-to-make-perfume-last-in-dubai-heat',
+  'what-to-wear-in-dubai',
+  'where-to-buy-gold-in-dubai',
+  'best-spas-in-dubai',
+  'best-brunch-in-dubai',
+  'best-day-trips-from-dubai',
+  'best-malls-in-dubai',
+]);
+
+/** Stable sort: pillar first, then the order the list already has (newest first). */
+export function pillarFirst(posts) {
+  const list = Array.isArray(posts) ? posts : [];
+  return [...list.filter((p) => p && PILLAR_SLUGS.has(p.slug)), ...list.filter((p) => !(p && PILLAR_SLUGS.has(p.slug)))];
 }
 
 /** On-brand local photography per pillar. A POOL (not one photo) per pillar so
@@ -504,9 +536,24 @@ export function renderAuthorBox() {
         <p class="bauthor-name">${esc(AUTHOR.name)}</p>
         <p class="bauthor-role">${esc(AUTHOR.jobTitle)}</p>
         <p class="bauthor-bio">${esc(AUTHOR.bio)}</p>
+        <p class="bauthor-disclosure">${esc(AUTHOR.disclosure)}</p>
         <a class="bauthor-follow" href="${SITE.ig}" target="_blank" rel="noopener">Follow @${SITE.handle} &rsaquo;</a>
       </div>
     </aside>`;
+}
+
+/**
+ * "Updated" date for the byline, only when a post was meaningfully revised
+ * after publishing (more than a day later). Same Dubai-zone handling as
+ * postDateParts so the two dates never disagree.
+ */
+export function updatedDateParts(p) {
+  if (!p || !p.updated_at) return null;
+  const pub = postDateParts(p);
+  const upd = postDateParts({ published_at: p.updated_at });
+  if (!upd || !pub || upd.iso <= pub.iso) return null;
+  const diffDays = (new Date(upd.iso) - new Date(pub.iso)) / 86400000;
+  return diffDays > 1 ? upd : null;
 }
 
 /** "As seen on my Instagram" block: links a post to Aastha's real reels. */
@@ -595,8 +642,12 @@ const BLOG_CSS = `
   article a{border-bottom:1px solid var(--border-hi);}
   article blockquote{margin:28px 0;padding:4px 22px;border-left:2px solid var(--border-hi);
     font-family:var(--serif);font-size:1.3rem;font-style:italic;color:var(--text);}
-  article table{width:100%;border-collapse:collapse;margin:24px 0;font-size:.92rem;}
+  /* Tables are capped at 4 columns, so they fit a phone. This is the safety net:
+     a wider one scrolls inside itself instead of pushing the page sideways. */
+  article table{display:block;width:100%;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:24px 0;font-size:.92rem;-webkit-overflow-scrolling:touch;}
+  article thead,article tbody{display:table;width:100%;}
   article th,article td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);}
+  @media(max-width:520px){article th,article td{padding:9px 8px;font-size:.86rem;}}
   article th{color:var(--gold);text-transform:uppercase;font-size:.66rem;letter-spacing:.14em;}
   /* Reels are native 9:16 — too tall to show whole. Crop to a 4/5 portrait
      (capped to the viewport), anchored to the top so faces stay in frame. */
@@ -671,7 +722,12 @@ const BLOG_CSS = `
   .bauthor-name{font-family:var(--serif);font-size:1.4rem;color:var(--text);line-height:1.1;}
   .bauthor-role{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:4px 0 10px;}
   .bauthor-bio{font-size:.92rem;color:var(--text-mid);margin-bottom:10px;}
+  .bauthor-disclosure{font-size:.8rem;color:var(--text-dim);line-height:1.6;margin-bottom:12px;padding-top:10px;border-top:1px solid var(--border);}
   .bauthor-follow{font-size:.78rem;letter-spacing:.08em;color:var(--gold);}
+  /* In-post disclosure: written into body_html by the author when a product was
+     gifted or the brand is a partner. Quiet but unmistakable. */
+  article .bdisclosure{font-size:.82rem;color:var(--text-dim);border-left:2px solid var(--border-hi);padding:6px 14px;margin:0 0 22px;}
+  article .bnote{font-size:.9rem;color:var(--text-mid);background:var(--bg-card);border:1px solid var(--border);padding:14px 18px;margin:0 0 22px;}
   @media(max-width:520px){.bauthor{flex-direction:column;gap:14px;}}
 
   .brelated{margin:56px 0 0;border-top:1px solid var(--border);padding-top:8px;}

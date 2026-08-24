@@ -6,13 +6,15 @@
  * Segment view: a flat archive of that pillar. Emits Blog + Person JSON-LD.
  */
 
-import { SITE, sb, esc, renderShell, segmentMeta, SEGMENTS, renderPostCard, personSchema, postImage, attachInstagramImages, dedupePostImages, sbImg, postDateParts } from './_blog.js';
+import { SITE, sb, esc, renderShell, segmentMeta, SEGMENTS, JOURNAL_SEGMENTS, pillarFirst, renderPostCard, personSchema, postImage, attachInstagramImages, dedupePostImages, sbImg, postDateParts } from './_blog.js';
 
-const SEG_KEYS = Object.keys(SEGMENTS);
+// Pillars shown to readers. Hidden pillars (automobile) never get a section or a
+// filter chip; a ?segment= for one of them falls back to the full Journal.
+const SEG_KEYS = JOURNAL_SEGMENTS;
 
 export default async function handler(req, res) {
   const segment = String(req.query.segment || '').toLowerCase().replace(/[^a-z]/g, '');
-  const filtered = segment && SEGMENTS[segment] ? segment : '';
+  const filtered = segment && SEGMENTS[segment] && !SEGMENTS[segment].hidden ? segment : '';
 
   let posts = [];
   try {
@@ -32,7 +34,7 @@ export default async function handler(req, res) {
   const heading = filtered ? segmentMeta(filtered).label : 'The Journal';
   const sub = filtered
     ? segmentMeta(filtered).blurb
-    : 'Honest, researched notes on living well in the UAE. Fashion, beauty, fragrance, wellness, travel and the city itself.';
+    : 'Straight answers to the questions people actually ask about living in Dubai: what to wear, what works on your skin here, where to buy gold and perfume, where to eat, rest and escape. Written from experience, not brochures.';
   const url = filtered ? `${SITE.base}/blog?segment=${filtered}` : `${SITE.base}/blog`;
 
   const body = filtered
@@ -132,7 +134,7 @@ function renderHomeView({ heading, sub, posts }) {
     .filter((key) => bySeg.has(key))
     .map((key) => {
       const seg = segmentMeta(key);
-      const items = bySeg.get(key).slice(0, 4);
+      const items = pillarFirst(bySeg.get(key)).slice(0, 4);
       return `
     <section class="bsection">
       <div class="bsection-head">
@@ -160,7 +162,7 @@ function renderSegmentView({ filtered, heading, posts }) {
   // On a pillar page, offer the full pillar set; bar shows all pillars with posts.
   const available = new Set(SEG_KEYS); // bar links stay useful even if a pillar is briefly empty
   const grid = posts.length
-    ? `<div class="bgrid">\n      ${posts.map(renderPostCard).join('\n      ')}\n    </div>`
+    ? `<div class="bgrid">\n      ${pillarFirst(posts).map(renderPostCard).join('\n      ')}\n    </div>`
     : `<div class="bempty">No ${esc(heading.toLowerCase())} stories yet. More are on the way.</div>`;
   return `
     <div class="bhubhead">

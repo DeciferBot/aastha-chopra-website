@@ -9,7 +9,7 @@
 
 import {
   SITE, sb, esc, renderShell, ctaBlock, segmentMeta,
-  renderHeroSVG, renderAuthorBox, renderPostCard, personSchema, renderInstagramBlock, postImage, attachInstagramImages, dedupePostImages, sbImg, postDateParts,
+  renderHeroSVG, renderAuthorBox, renderPostCard, personSchema, renderInstagramBlock, postImage, attachInstagramImages, dedupePostImages, sbImg, postDateParts, updatedDateParts,
 } from './_blog.js';
 
 export default async function handler(req, res) {
@@ -169,11 +169,13 @@ function renderHead({ post, url, image, seg, published, faq }) {
 
 function renderArticle({ post, url, seg, faq, sources, related }) {
   const date = postDateParts(post);
+  const updated = updatedDateParts(post);
   const readMins = Math.max(2, Math.round((post.word_count || 0) / 220));
   // Built from parts so a dateless post doesn't render a stray separator.
   const byline = [
     `By ${esc(SITE.name)}`,
     ...(date ? [`<time datetime="${esc(date.iso)}">${esc(date.label)}</time>`] : []),
+    ...(updated ? [`Updated <time datetime="${esc(updated.iso)}">${esc(updated.label)}</time>`] : []),
     `${readMins} min read`,
   ].join(' &nbsp;·&nbsp; ');
 
@@ -212,7 +214,7 @@ function renderArticle({ post, url, seg, faq, sources, related }) {
       ${heroHtml}
       ${post.body_html || ''}
       ${renderInstagramBlock(post.instagram_refs)}
-      <p style="margin-top:36px;color:var(--text-mid);">More from Aastha's ${esc(seg.label.toLowerCase())} world: <a href="${esc(seg.page)}">explore here</a>.</p>
+      <p style="margin-top:36px;color:var(--text-mid);">All my <a href="/blog?segment=${esc(post.segment)}">${esc(seg.label)}</a> guides &nbsp;·&nbsp; Brands: <a href="${esc(seg.page)}">work with me on ${esc(seg.label.toLowerCase())}</a>.</p>
       ${renderAuthorBox()}
     </article>
     ${faqHtml}
