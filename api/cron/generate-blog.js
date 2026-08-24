@@ -1,23 +1,36 @@
 /**
  * Blog generator — Vercel Cron / on-demand.
- * GET /api/cron/generate-blog        -> dry run, writes ONE draft, publishes nothing
- * GET /api/cron/generate-blog?publish=1   -> writes and publishes (used by the live cron)
+ * GET /api/cron/generate-blog             -> writes and publishes if it passes every gate
+ * GET /api/cron/generate-blog?draft=1     -> writes, gates, but stores as a draft
  * GET /api/cron/generate-blog?segment=fragrance   -> force a pillar
  *
  * Pipeline:
  *   1. Pick a rotating pillar + a fresh, unused trending row from uae_signals
  *   2. Expand into the real questions people search via Google autocomplete (UAE)
  *   3. Deep research + write in ONE Claude call using the server-side web_search
- *      tool (multi-source, the cron-viable equivalent of the deep-research skill)
- *   4. Sanitise to the locked voice (no em dashes, no <h1>, no scripts) and store
+ *   4. QUALITY GATES (api/_blog-qa.js): rules, then an editor, then a fact check.
+ *      Anything the gates flag gets ONE revision pass, then the gates run again.
+ *   5. Publish only on a clean pass. Otherwise store as `needs_work` and stay quiet.
+ *
+ * Nothing publishes unchecked, and nothing publishes that failed a check. A post
+ * that never publishes costs nothing; a wrong one costs the site's credibility.
  *
  * Skips cleanly when there is no real topic or the model cannot ground the piece.
  * Auth: Bearer CRON_SECRET, same as the other crons.
  */
 
 import { sb, SEGMENTS, SITE, segmentMeta } from '../_blog.js';
+import { ruleGate, editorGate, factGate, reviseDraft } from '../_blog-qa.js';
 
-export const config = { maxDuration: 300 };
+// Writer (web research) plus three gates plus one revision does not fit in the
+// 300s default. Fluid Compute allows longer; if a plan ever caps this lower, the
+// time guard below simply refuses to publish unchecked rather than misbehaving.
+export const config = { maxDuration: 600 };
+
+// The gates need time to run. If the writer overran and there is not enough left
+// to check the piece properly, we store it unpublished rather than publish blind.
+// Editor (~20s) + fact check (~60s) + revision (~30s) + a re-check, with margin.
+const GATE_TIME_RESERVE_MS = 180_000;
 
 const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;
 const SEG_KEYS = Object.keys(SEGMENTS);
@@ -74,7 +87,9 @@ export default async function handler(req, res) {
   }
 
   const startMs = Date.now();
-  const dryRun = req.query.publish !== '1';
+  // Auto-publish is the default now. ?draft=1 stores without publishing, which is
+  // how a topic is trialled by hand without touching the live site.
+  const draftOnly = req.query.draft === '1';
   const errors = [];
   let segment = String(req.query.segment || '').toLowerCase();
   let topic = null;
@@ -110,7 +125,7 @@ export default async function handler(req, res) {
     ) || fresh[0];
 
     if (!signal) {
-      await logRun({ startMs, segment, status: 'skipped', dryRun, errors: ['No fresh signal to write about'] });
+      await logRun({ startMs, segment, status: 'skipped', dryRun: draftOnly, errors: ['No fresh signal to write about'] });
       return res.status(200).json({ ok: true, note: 'No fresh signal', segment });
     }
     topic = signal.title;
@@ -146,7 +161,7 @@ export default async function handler(req, res) {
     // live list so it picks an unanswered question, and the result is checked
     // again below before anything is stored.
     const existing = await sb(
-      '/blog_posts?select=slug,title,target_queries&status=in.(published,draft)&order=published_at.desc.nullslast&limit=300'
+      '/blog_posts?select=slug,title,target_queries,status&status=in.(published,draft)&order=published_at.desc.nullslast&limit=300'
     ) || [];
 
     // ── 4. Deep research + write ─────────────────────────────────────────
@@ -156,40 +171,70 @@ export default async function handler(req, res) {
     // ── 4b. Refuse a duplicate topic ─────────────────────────────────────
     const clash = findTopicClash(post, existing);
     if (clash) {
-      await logRun({ startMs, segment, topic, status: 'skipped', dryRun, queriesFound, errors: [`Topic already covered by /blog/${clash.slug}`] });
+      await logRun({ startMs, segment, topic, status: 'skipped', dryRun: draftOnly, queriesFound, errors: [`Topic already covered by /blog/${clash.slug}`] });
       return res.status(200).json({ ok: true, note: 'Topic already covered', segment, existing: clash.slug, proposed: post.title });
     }
 
-    // ── 5. Sanitise + dedupe slug ────────────────────────────────────────
-    let slug = slugify(post.slug || post.title);
+    // ── 5. Quality gates ─────────────────────────────────────────────────
+    // Three checks, cheapest first, then ONE revision pass, then the same
+    // checks again. Nothing publishes that has not come back clean.
+    const publishedSlugs = new Set(existing.filter((e) => e.status === 'published').map((e) => e.slug));
+    const knownPermalinks = new Set(
+      igPosts.map((p) => (String(p.permalink || '').match(/instagram\.com\/(?:reel|p)\/([A-Za-z0-9_-]+)/) || [])[1]).filter(Boolean)
+    );
+    const gateCtx = { publishedSlugs, knownPermalinks };
+
+    let candidate = { ...post, body_html: sanitiseBody(post.body_html || ''), research_sources: sources.slice(0, 8) };
+    let gate = await runGates({ candidate, igPosts, existing, gateCtx, startMs });
+    let revised = false;
+
+    if (!gate.pass && gate.problems.length) {
+      const factsAlreadyPassed = Boolean(gate.report.facts && gate.report.facts.pass);
+      const fixed = await reviseDraft({ post: candidate, problems: gate.problems, callClaude, parseJson }).catch(() => null);
+      if (fixed) {
+        revised = true;
+        candidate = {
+          ...candidate, ...fixed,
+          body_html: sanitiseBody(fixed.body_html || ''),
+          research_sources: arr(fixed.sources).length ? arr(fixed.sources).slice(0, 8) : candidate.research_sources,
+        };
+        gate = await runGates({
+          candidate, igPosts, existing, gateCtx, startMs,
+          skipFacts: factsAlreadyPassed,
+        });
+      }
+    }
+
+    // ── 6. Store. Published only on a clean pass. ────────────────────────
+    let slug = slugify(candidate.slug || candidate.title);
     slug = await uniqueSlug(slug);
 
-    const bodyHtml = sanitiseBody(post.body_html || '');
+    const bodyHtml = sanitiseBody(candidate.body_html || '');
     const wordCount = countWords(bodyHtml);
-
-    if (wordCount < 350) {
-      errors.push(`Thin draft (${wordCount} words), storing anyway for review`);
-    }
+    const publishable = gate.pass && !draftOnly;
 
     const row = {
       slug,
       segment,
-      title: noDash(post.title || topic),
-      meta_description: noDash(post.meta_description || '').slice(0, 200),
-      excerpt: noDash(post.excerpt || ''),
+      title: noDash(candidate.title || topic),
+      meta_description: noDash(candidate.meta_description || '').slice(0, 200),
+      excerpt: noDash(candidate.excerpt || ''),
       body_html: bodyHtml,
-      seo_keywords: arr(post.seo_keywords).slice(0, 12),
-      target_queries: (post.target_queries && arr(post.target_queries).length ? arr(post.target_queries) : questions).slice(0, 20),
-      faq: arr(post.faq).filter((f) => f && f.q && f.a).map((f) => ({ q: noDash(f.q), a: noDash(f.a) })).slice(0, 6),
-      research_sources: sources.slice(0, 8),
-      instagram_refs: arr(post.instagram_refs)
+      seo_keywords: arr(candidate.seo_keywords).slice(0, 12),
+      target_queries: (candidate.target_queries && arr(candidate.target_queries).length ? arr(candidate.target_queries) : questions).slice(0, 20),
+      faq: arr(candidate.faq).filter((f) => f && f.q && f.a).map((f) => ({ q: noDash(f.q), a: noDash(f.a) })).slice(0, 6),
+      research_sources: arr(candidate.research_sources).slice(0, 8),
+      instagram_refs: arr(candidate.instagram_refs)
         .filter((r) => r && r.permalink && /instagram\.com/.test(r.permalink))
         .map((r) => ({ permalink: r.permalink, caption: noDash(String(r.caption || '')).slice(0, 200), type: r.type || '' }))
         .slice(0, 3),
       word_count: wordCount,
       source_signal_id: signal.id,
-      status: dryRun ? 'draft' : 'published',
-      published_at: dryRun ? null : new Date().toISOString(),
+      // `needs_work` is a third state on purpose: it is not a draft waiting for a
+      // human (nobody is watching) and it is not published. It is a record of a
+      // piece the gates rejected, kept so the failures can be read back later.
+      status: publishable ? 'published' : (draftOnly ? 'draft' : 'needs_work'),
+      published_at: publishable ? new Date().toISOString() : null,
     };
 
     const [saved] = await sb('/blog_posts', {
@@ -199,29 +244,30 @@ export default async function handler(req, res) {
     });
     created = { slug: saved.slug, title: saved.title, status: saved.status, words: saved.word_count };
 
-    // Ping IndexNow (Bing/Yandex) on publish for near-instant discovery. Non-blocking.
-    if (!dryRun) {
+    if (publishable) {
       await indexNowPing(`${SITE.base}/blog/${saved.slug}`).catch(() => {});
     }
 
+    for (const p of gate.problems) errors.push(p);
     await logRun({
-      startMs, segment, topic, status: errors.length ? 'partial' : 'success',
-      dryRun, postsCreated: 1, queriesFound, sourcesUsed, errors,
+      startMs, segment, topic,
+      status: publishable ? 'success' : 'rejected',
+      dryRun: draftOnly, postsCreated: publishable ? 1 : 0,
+      queriesFound, sourcesUsed, errors,
     });
 
-    // Caller already proved the secret, so hand back a directly tappable link:
-    // drafts need the preview token, published posts are public.
     const liveUrl = `${SITE.base}/blog/${saved.slug}`;
-    const previewUrl = dryRun ? `${liveUrl}?preview=${encodeURIComponent(secret)}` : liveUrl;
     return res.status(200).json({
-      ok: true, dryRun, segment, created,
-      preview: previewUrl,
-      queriesFound, sourcesUsed, errors,
+      ok: true, published: publishable, segment, created, revised,
+      gates: gate.report,
+      url: publishable ? liveUrl : `${liveUrl}?preview=${encodeURIComponent(secret)}`,
+      queriesFound, sourcesUsed,
+      problems: gate.problems,
     });
 
   } catch (err) {
     errors.push(err.message);
-    await logRun({ startMs, segment, topic, status: 'failed', dryRun, queriesFound, sourcesUsed, errors }).catch(() => {});
+    await logRun({ startMs, segment, topic, status: 'failed', dryRun: draftOnly, queriesFound, sourcesUsed, errors }).catch(() => {});
     return res.status(500).json({ ok: false, error: err.message, segment });
   }
 }
@@ -283,6 +329,58 @@ async function indexNowPing(url) {
   });
 }
 
+// ── The gate runner ────────────────────────────────────────────────────────
+/**
+ * Rules, then the editor, then the facts. Stops at the first gate that fails so
+ * a piece with broken HTML never burns a fact-check call.
+ *
+ * Fails closed on time: the writer's web research can overrun, and publishing
+ * something the fact gate never saw is exactly the failure this whole thing
+ * exists to prevent.
+ */
+async function runGates({ candidate, igPosts, existing, gateCtx, startMs, skipFacts = false }) {
+  const report = {};
+
+  const rules = ruleGate(candidate, gateCtx);
+  report.rules = { pass: rules.pass, problems: rules.problems.length, words: rules.wordCount };
+  if (!rules.pass) return { pass: false, problems: rules.problems, report };
+
+  if (Date.now() - startMs > config.maxDuration * 1000 - GATE_TIME_RESERVE_MS) {
+    report.editor = { pass: false, reason: 'no time' };
+    return { pass: false, problems: ['There was not enough time left to check this piece, so it was not published.'], report };
+  }
+
+  let editor;
+  try {
+    editor = await editorGate({ post: candidate, igPosts, existing, callClaude, parseJson });
+  } catch (e) {
+    report.editor = { pass: false, reason: e.message };
+    return { pass: false, problems: [`The editor check could not run: ${e.message}`], report };
+  }
+  report.editor = { pass: editor.pass, scores: editor.scores };
+  if (!editor.pass) return { pass: false, problems: editor.problems, report };
+
+  // The revision pass is told to remove or soften facts rather than research new
+  // ones, so once the facts have passed there is nothing new to verify. Skipping
+  // the re-check is what keeps a revised piece inside the function's time limit.
+  if (skipFacts) {
+    report.facts = { pass: true, skipped: 'already verified before revision' };
+    return { pass: true, problems: [], report };
+  }
+
+  let facts;
+  try {
+    facts = await factGate({ post: candidate, callClaude, parseJson });
+  } catch (e) {
+    report.facts = { pass: false, reason: e.message };
+    return { pass: false, problems: [`The fact check could not run: ${e.message}`], report };
+  }
+  report.facts = { pass: facts.pass, wrong: facts.wrongCount, unverified: facts.unverifiedCount, checked: (facts.claims || []).length };
+  if (!facts.pass) return { pass: false, problems: facts.problems, report };
+
+  return { pass: true, problems: [], report };
+}
+
 // ── Duplicate-topic guard ──────────────────────────────────────────────────
 // Word-overlap between the proposed title/queries and every existing post. Stop
 // words are dropped so "dubai", "best" and "in" do not make everything match.
@@ -330,7 +428,7 @@ NON-NEGOTIABLE RULES:
 - This is content for the ${seg.label} pillar. Angle: ${require_angle(segment)}`;
 
   const existingList = existing.length
-    ? `\n\nEXISTING POSTS (already answered, do not repeat; link to them where relevant):\n${existing.slice(0, 120).map((e) => `- /blog/${e.slug}: ${e.title}`).join('\n')}`
+    ? `\n\nEXISTING POSTS (already answered, do not repeat; link only to these):\n${existing.filter((e) => e.status === 'published').slice(0, 120).map((e) => `- /blog/${e.slug}: ${e.title}`).join('\n')}`
     : '';
 
   const user = `TRENDING UAE CONTEXT (your starting point, ground the post in this where it fits):
@@ -413,7 +511,7 @@ function require_angle(segment) {
   return ANGLES[segment] || 'real, useful, Dubai-grounded storytelling';
 }
 
-async function callClaude({ system, user, useTools, maxTokens = 8000 }) {
+async function callClaude({ system, user, useTools, maxTokens = 8000, maxSearches = 6 }) {
   const body = {
     model: 'claude-sonnet-4-6',
     max_tokens: maxTokens,
@@ -421,7 +519,7 @@ async function callClaude({ system, user, useTools, maxTokens = 8000 }) {
     messages: [{ role: 'user', content: user }],
   };
   if (useTools) {
-    body.tools = [{ type: 'web_search_20250305', name: 'web_search', max_uses: 6 }];
+    body.tools = [{ type: 'web_search_20250305', name: 'web_search', max_uses: maxSearches }];
   }
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -538,7 +636,7 @@ async function uniqueSlug(base) {
 }
 function arr(x) { return Array.isArray(x) ? x : []; }
 
-async function logRun({ startMs, segment, topic, status, dryRun, postsCreated = 0, queriesFound = 0, sourcesUsed = 0, errors = [] }) {
+async function logRun({ startMs, segment, topic, status, dryRun = false, postsCreated = 0, queriesFound = 0, sourcesUsed = 0, errors = [] }) {
   await sb('/blog_agent_runs', {
     method: 'POST',
     headers: { Prefer: 'return=minimal' },

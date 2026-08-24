@@ -29,7 +29,8 @@ const ALERT_FROM   = 'Site Monitor <hello@aasthachopra.com>';
 const FAILURE_LOOKBACK_DAYS = 3;   // job failures worth waking someone for
 const FOLLOWER_WINDOW_DAYS  = 7;   // growth is noisy day to day; a week is a trend
 const QUEUE_STALE_DAYS      = 3;   // a pitch waiting this long is stuck, not pending
-const BLOG_DRAFT_NAG_DAYS   = 2;   // a Journal draft older than this is waiting on a person
+const BLOG_STALE_DAYS       = 10;  // publishes Mon and Thu, so 10 quiet days means stuck
+const BLOG_REJECT_WINDOW_DAYS = 14; // window for "is everything being rejected?"
 
 async function sb(path) {
   const res = await fetch(`${SUPABASE_URL}/rest/v1${path}`, {
@@ -146,20 +147,33 @@ export default async function handler(req, res) {
     }
   });
 
-  // ── 6. Journal drafts waiting for a person ────────────────────────────────
-  // The generator writes drafts only (since the August 2026 content overhaul);
-  // nothing goes live until someone reads it. Each line carries the preview link
-  // and the one-tap publish link so it can be dealt with from a phone.
-  await guard('blog_drafts', async () => {
-    const drafts = await sb(`/blog_posts?status=eq.draft&created_at=lte.${daysAgo(BLOG_DRAFT_NAG_DAYS)}&select=slug,title,word_count,created_at&order=created_at.asc&limit=10`);
-    if (!drafts.length) return;
-    const secret = process.env.CRON_SECRET;
-    const lines = drafts.map((d) =>
-      `   • ${d.title} (${d.word_count || '?'} words, ${String(d.created_at).slice(0, 10)})\n`
-      + `     read: https://www.aasthachopra.com/blog/${d.slug}?preview=${encodeURIComponent(secret)}\n`
-      + `     publish: https://www.aasthachopra.com/api/blog-publish?slug=${d.slug}&key=${encodeURIComponent(secret)}`
-    );
-    watch.push(`🟡 ${drafts.length} Journal draft${drafts.length === 1 ? '' : 's'} waiting for review\n${lines.join('\n')}`);
+  // ── 6. The Journal pipeline ───────────────────────────────────────────────
+  // The generator auto-publishes, but only what passes the quality gates
+  // (api/_blog-qa.js). So there is nothing to approve. The two things worth
+  // knowing are: has it silently stopped publishing, and is it writing pieces
+  // that keep getting rejected? Both mean the pipeline needs a look, not a tap.
+  await guard('blog_publishing', async () => {
+    const [latest] = await sb('/blog_posts?status=eq.published&select=slug,published_at&order=published_at.desc.nullslast&limit=1');
+    if (latest?.published_at && latest.published_at < daysAgo(BLOG_STALE_DAYS)) {
+      watch.push(`🟡 Nothing new on the Journal since ${latest.published_at.slice(0, 10)}. The writer may be failing every quality gate.`);
+    }
+
+    const runs = await sb(`/blog_agent_runs?ran_at=gte.${daysAgo(BLOG_REJECT_WINDOW_DAYS)}&select=ran_at,status,segment,errors&order=ran_at.desc&limit=20`);
+    const decided = runs.filter((r) => r.status === 'success' || r.status === 'rejected');
+    const rejected = decided.filter((r) => r.status === 'rejected');
+    // Some rejection is the gates doing their job. Everything rejected means the
+    // writer and the gates disagree, and no amount of waiting will fix it.
+    if (decided.length >= 3 && rejected.length === decided.length) {
+      watch.push(
+        `🟡 The Journal writer has been rejected on its last ${decided.length} runs, so nothing has published.\n`
+        + `   Most recent reason: ${firstError(rejected[0].errors)}`
+      );
+    }
+
+    const stuck = await sb('/blog_posts?status=eq.needs_work&select=slug&limit=25');
+    if (stuck.length >= 8) {
+      watch.push(`🟡 ${stuck.length} Journal pieces are sitting in needs_work. Worth reading a couple to see what the gates keep catching.`);
+    }
   });
 
   // Silence is the feature. Report the all-clear to the caller, not to the inbox.

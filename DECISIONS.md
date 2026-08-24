@@ -2,6 +2,58 @@
 
 Short records of why the site is the way it is. Newest first.
 
+## 2026-08-24 — Journal auto-publishes, behind quality gates
+
+**Problem.** After the rebuild below, the cron wrote drafts and waited for a
+person. Nobody wants to read drafts. But the reason drafts existed was real:
+the writer, left alone, had produced 64 posts with pasted marketing copy,
+invented first-person experiences, wrong facts and repeated topics.
+
+**Decision.** Auto-publish, but only what survives three gates. `api/_blog-qa.js`:
+
+1. **Rules** (free, instant). Style and structure: no em dashes, no year in the
+   title, no banned marketing words, word count, meta length, balanced HTML,
+   internal links that point at published posts, Instagram references that are
+   really hers, at least two credible sources, and a disclosure whenever the
+   piece mentions gifted or partner product. Tested against the old corpus: it
+   flags 57 of the 69 old posts and passes all 42 rewritten ones.
+2. **Editor** (one Claude call, no tools). Scores five things out of five and
+   needs 4+ on each: is it in its own words or lifted from a venue website, is
+   every "I did this" backed by one of the supplied Instagram captions, does it
+   answer its own title, does it contradict itself, is it a genuinely different
+   question from what is already published.
+3. **Facts** (one Claude call with web_search). Pulls out every checkable
+   specific (prices, addresses, hours, directions, stats) and verifies. Any
+   claim it can show is wrong blocks publication. More than four unverifiable
+   specifics also blocks: a piece asserting things nobody can stand behind is
+   the failure mode that produced the old posts.
+
+Anything flagged gets **one revision pass**, then the gates run again. The
+revision is told to remove or soften a bad fact rather than research a new one,
+which is why the second pass can skip the fact gate and still fit in the
+function's time budget.
+
+**Fails closed.** If a gate errors, returns nonsense, or there is not enough
+time left to run it, the post is not published. It is stored as `needs_work`,
+which 404s and stays out of the sitemap. A post that never publishes costs
+nothing; a wrong one costs the site's credibility.
+
+**After publishing.** `api/cron/blog-audit.js` re-runs the fact gate weekly over
+the least recently audited live posts, oldest first. Anything found plainly
+wrong is pulled back to `needs_work` and emailed. This catches both the fact the
+checker missed and the fact that has since gone stale, which is most prices and
+opening hours.
+
+**What the morning email says now.** Nothing to approve. It only speaks up if
+the Journal has published nothing for ten days, if every recent run was
+rejected, or if `needs_work` is piling up. All three mean the pipeline needs a
+look, not a tap.
+
+**Honest limit.** Rules and the editor are strong on style, pasted copy,
+invented experience and duplication. The fact gate is good, not perfect: a
+plausible wrong number with no clear source can still get through. The weekly
+audit is the second net, and unpublishing is one API call.
+
 ## 2026-08-24 — Journal content overhaul
 
 **Problem.** The Journal had 64 live posts, all written by the cron in
@@ -45,16 +97,16 @@ Short records of why the site is the way it is. Newest first.
    the automobile pillar hidden from the Journal; each section's pillar guide
    pinned first; a static "From the Journal" block on the homepage linking the
    three strongest pillars and all eight sections; `llms.txt` updated.
-6. Automation: the cron now writes **drafts only** (Mon and Thu, 03:00 UTC).
-   It receives the list of existing posts, refuses a duplicate topic (word
-   overlap ≥ 0.6 with an existing title/queries), and must follow the house
-   rules. The morning health check lists drafts older than two days with a
-   preview link and a one-tap publish link (`api/blog-publish.js`, gated by
-   `CRON_SECRET`). Nothing goes live without a person reading it.
+6. Automation: the cron receives the list of existing posts and refuses a
+   duplicate topic (word overlap >= 0.6 with an existing title/queries).
+   It originally wrote drafts for a person to approve; that was replaced the
+   same day by the quality gates described in the entry above, because nobody
+   wants to read drafts.
 
-**Rejected.** Keeping the cron on auto-publish with a better prompt. The prompt
-was already decent; the failure was structural (no duplicate check, no review,
-web-search output pasted as prose). A human gate is the only fix that holds.
+**Rejected.** Keeping the cron on auto-publish with only a better prompt. The
+prompt was already decent; the failure was structural (nothing checked the
+output). The fix is a check, not better instructions. See the entry above for
+the check that replaced the human one.
 
 **Open.** The rewrites are grounded in Instagram captions, so a few venue
 details that could not be verified online are written as "roughly" or "check
