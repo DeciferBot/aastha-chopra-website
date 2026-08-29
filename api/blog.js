@@ -45,9 +45,35 @@ export default async function handler(req, res) {
   // Two posts covering the same question split their own ranking, so the weaker
   // one gets merged into the stronger one and points here. 301 keeps whatever
   // links and history the old URL earned.
+  //
+  // THE TARGET HAS TO BE ALIVE, and for a while it did not have to be.
+  //
+  // This redirected on the strength of the column alone, before the status
+  // check below. That is fine until the target stops being published — and
+  // api/cron/blog-audit.js exists precisely to unpublish a post when it finds a
+  // wrong fact in it. When that happened to best-spas-in-dubai, the two posts
+  // merged into it kept sending every visitor and every crawler to a page that
+  // answered 404. Checked live on 2026-08-29: two 301s, both landing on a dead
+  // page, one of them still ranking at position 7.
+  //
+  // So the redirect is followed only if there is something live at the end of
+  // it. If there is not, the journal index is the honest destination: it is a
+  // real page with the same pillar's writing on it, which is a far better
+  // answer than a 404 for somebody who arrived from a search result.
   if (post.redirect_to && post.redirect_to !== post.slug) {
+    let targetLive = false;
+    try {
+      const rows = await sb(
+        `/blog_posts?slug=eq.${encodeURIComponent(post.redirect_to)}&status=eq.published&select=slug&limit=1`
+      );
+      targetLive = Boolean(rows && rows[0]);
+    } catch {
+      // A lookup that could not run is not evidence the target is dead. Send
+      // them on: the old behaviour, which is right whenever the target is fine.
+      targetLive = true;
+    }
     res.setHeader('Cache-Control', 's-maxage=86400');
-    return res.redirect(301, `${SITE.blogPath}/${post.redirect_to}`);
+    return res.redirect(301, targetLive ? `${SITE.blogPath}/${post.redirect_to}` : SITE.blogPath);
   }
 
   if (post.status !== 'published' && !previewOk) {
