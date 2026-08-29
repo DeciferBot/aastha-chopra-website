@@ -174,6 +174,29 @@ export default async function handler(req, res) {
     if (stuck.length >= 8) {
       watch.push(`🟡 ${stuck.length} Journal pieces are sitting in needs_work. Worth reading a couple to see what the gates keep catching.`);
     }
+
+    // A REDIRECT WITH NOTHING AT THE END OF IT.
+    //
+    // blog-audit.js unpublishes a post when it finds a wrong fact, which is the
+    // right call. What it cannot see is that another post may be pointing at
+    // the one it just pulled. api/blog.js now sends those visitors to the
+    // journal index rather than a 404, so nobody lands on nothing — but the
+    // redirect is still aimed at a dead page and the old URL has quietly
+    // stopped passing its history anywhere useful. That is worth a line here,
+    // because it is invisible from every other angle.
+    const redirects = await sb('/blog_posts?redirect_to=not.is.null&select=slug,redirect_to&limit=200') || [];
+    if (redirects.length) {
+      const live = new Set(
+        ((await sb('/blog_posts?status=eq.published&select=slug&limit=500')) || []).map((p) => p.slug)
+      );
+      const dangling = redirects.filter((r) => !live.has(r.redirect_to));
+      if (dangling.length) {
+        watch.push(
+          `🟡 ${dangling.length} Journal redirect${dangling.length === 1 ? '' : 's'} point at a page that is no longer published.\n`
+          + dangling.slice(0, 5).map((r) => `   /blog/${r.slug} → ${r.redirect_to}`).join('\n')
+        );
+      }
+    }
   });
 
   // Silence is the feature. Report the all-clear to the caller, not to the inbox.
