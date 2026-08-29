@@ -72,8 +72,20 @@ export default async function handler(req, res) {
       // them on: the old behaviour, which is right whenever the target is fine.
       targetLive = true;
     }
-    res.setHeader('Cache-Control', 's-maxage=86400');
-    return res.redirect(301, targetLive ? `${SITE.blogPath}/${post.redirect_to}` : SITE.blogPath);
+    // 301 when the target is alive, because that consolidation is permanent
+    // and we want the old URL's history to move. 302 for the fallback, because
+    // a target being unpublished is TEMPORARY: the fact audit pulls a post,
+    // somebody fixes the fact, and it comes back. That happened on 2026-08-29,
+    // hours after this file first started falling back. A 301 would have told
+    // every browser and every crawler that the journal index was the permanent
+    // home of those URLs, and 301s are cached hard and for a long time.
+    //
+    // Short cache on the fallback for the same reason: it should stop being
+    // served within minutes of the target returning, not within a day.
+    res.setHeader('Cache-Control', targetLive ? 's-maxage=86400' : 's-maxage=60');
+    return targetLive
+      ? res.redirect(301, `${SITE.blogPath}/${post.redirect_to}`)
+      : res.redirect(302, SITE.blogPath);
   }
 
   if (post.status !== 'published' && !previewOk) {
