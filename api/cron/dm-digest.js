@@ -27,6 +27,7 @@ export const config = { maxDuration: 300 };
 import { checkText, VOICE_RULES } from '../_accuracy.js';
 import { dedash, esc } from '../_pitch.js';
 import { sb, OUTREACH_SEGMENTS, byBudgetThenScore } from '../_outreach-shared.js';
+import { STATIC_PROFILE } from '../_profile.js';
 
 const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;
 const RESEND_KEY    = process.env.RESEND_API_KEY;
@@ -106,23 +107,34 @@ HER WORK FACTS (the only work references allowed): ${collabs.length ? `she recen
 }
 
 async function generateDm(brand, collabs, feedback = '') {
-  const systemPrompt = `You write short Instagram direct messages from Aastha Chopra, a Dubai lifestyle creator, to a brand's Instagram account. The goal is a reply, so the message must read like a person, never a broadcast.
+  const sig = STATIC_PROFILE;
+  // Structure calibrated 2026-08-31 against a message Aastha actually sent
+  // (she rewrote a shorter draft into this shape before sending it) —
+  // a proper introduction, not a quick DM.
+  const systemPrompt = `You write Instagram messages from Aastha Chopra, a Dubai lifestyle creator, to a brand's Instagram account. The goal is a reply, so it must read like a real person opening a business conversation, never a broadcast.
+
+STRUCTURE, four short paragraphs:
+1. GREETING: "Hi [Brand] Team" or "Hi [Brand]," on its own line, then a blank line.
+2. INTRODUCTION: one sentence, her name and role, then what she creates and for whom. E.g. "I'm Aastha Chopra, a Dubai-based ${sig.role}, creating content across [her relevant categories] for a predominantly UAE/GCC audience."
+3. THE BRAND + THE HOOK: one concrete observation about the brand (from the description below), then one line connecting it to what her audience actually wants in this category (an audience-demand angle, e.g. "my audience is always asking for..."). If she has real work to name, weave it in here too.
+4. THE ASK: name concretely what she wants (the right PR/creator-partnerships contact, and being considered for launches, gifting, events), then close with a direct, answerable question inviting a reply.
 
 HARD RULES:
-- 40 to 70 words. Two short paragraphs at most.
-- The FIRST sentence must be specific to this brand (it is all they see in the request preview). Never open with "Hi" alone, her own name, or "I am a creator".
 - ACCURACY IS EVERYTHING. Only reference facts that appear in the brand description supplied below. NEVER name a specific product, collection, campaign, or drop that is not in that description. NEVER claim she saw something "in your feed", "last week", or at any specific time or place. If the description is thin, speak to what the brand's category does well, without inventing particulars.
-- Make one concrete observation about the brand (from the description), then one line on what she wants to make with them, then a plain question that invites a reply.
-- Mention her recent work ONLY if names are supplied below, using the word "featured" (she featured them in her content). Never say "worked with" or imply a paid deal.
-- No numbers, no follower counts, no links, no hashtags. Never the word "collab" (say "work together").
-- Warm, confident, a little playful. Sounds typed on a phone, not mailed.
-- End with "Aastha x" on its own line.
+- Mention her recent work ONLY if names are supplied below, using "featured" or "worked around" (she featured them / worked around them in her content). Never say "worked with" or imply a paid deal.
+- No numbers, no follower counts, no hashtags. Never the word "collab" (say "work together").
+- One or two emoji total, placed naturally (e.g. after the greeting, before the closing question). Never more than two.
+- Warm, confident, professional. 100 to 180 words.
+- Sign off exactly as:
+Aastha x
+${sig.website}
 ${VOICE_RULES}
 
-OUTPUT: only a JSON object {"message": "..."} with real line breaks as \\n. Nothing else.`;
+OUTPUT: only a JSON object {"message": "..."} with real line breaks as \\n, including the blank lines between paragraphs. Nothing else.`;
 
   const userPrompt = `Brand: ${brand.name} (Instagram ${brand.handle})
 What the brand is: ${brand.brand_brief || brand.notes || `${brand.name}, a ${brand.segment} brand active in the UAE.`}
+Her relevant content categories for this brand: ${brand.segment}
 Her recent ${brand.segment} work she can truthfully name: ${collabs.length ? collabs.join(', ') : '(none supplied, do not invent any)'}${feedback ? `\n\n${feedback}` : ''}`;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {

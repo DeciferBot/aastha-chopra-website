@@ -19,8 +19,13 @@ export const STATIC_PROFILE = {
   name: 'Aastha Chopra',
   handle: '@aastha_sochic',
   niches: 'lifestyle, fashion, beauty, fitness',
+  // Confirmed 2026-08-31 from her own edit of a sent message — a real,
+  // always-true fact the writer may cite, not something the per-brand
+  // accuracy checker needs to verify.
+  role: 'content creator and practicing corporate lawyer',
   whatsapp: '+97153646723',
   mediaPackUrl: 'https://www.aasthachopra.com/Aastha_Chopra_Media_Pack.pdf',
+  website: 'https://www.aasthachopra.com',
   location: 'Dubai, UAE',
 };
 

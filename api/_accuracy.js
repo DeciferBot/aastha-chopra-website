@@ -28,10 +28,13 @@ const DASHES = /[—–]/;
 // showed up in nearly every generated pitch and DM, which is exactly why a
 // brand manager's eye slides off them. Enforced here so no wording request has
 // to be trusted.
+// Calibrated against Aastha's own edit of a sent message (2026-08-31): she
+// used "genuinely" twice and opened with "I'd love to connect" unprompted,
+// so those are HER real voice, not AI filler — removed from this list rather
+// than banned against evidence of how she actually writes.
 const AI_TELLS = [
   [/bring(ing|s)?[^.!?]{0,40}to life/i, '"bring to life" filler'],
-  [/\b(would you be open to|i would love to|i'd love to)\b/i, 'stock ask ("would you be open" / "I would love to")'],
-  [/\bgenuinely\b/i, 'filler word "genuinely"'],
+  [/\bwould you be open to\b/i, 'stock ask ("would you be open to")'],
   [/\bhonestly\b/i, 'filler word "honestly"'],
   [/\bnot just\b/i, '"not just X" construction'],
   [/rent[- ]free/i, 'meme phrase "rent-free"'],
