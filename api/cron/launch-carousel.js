@@ -36,8 +36,8 @@ export const config = { maxDuration: 300 };
  */
 
 import { getIgToken } from '../_igtoken.js';
+import { fbGet, fbPost, fbDelete } from '../_meta-graph.js';
 
-const FB_BASE = 'https://graph.facebook.com/v21.0';
 const IG_GRAPH = 'https://graph.instagram.com/v21.0';
 
 // Fixed assets (see ad-autopilot.js / project_meta_ads memory)
@@ -56,40 +56,6 @@ const DEFAULT_CODE = 'DZzRmJijMHL';                   // M·A·C × Sephora laun
 const DAILY_BUDGET_CENTS = 1500;                      // 15 AED/day
 const MAX_CARDS = 10;                                 // Meta carousel hard cap
 const CAMPAIGN_NAME = 'Sephora Collab — Profile Visits (Jun 2026)';
-
-// ── Meta Graph helpers ────────────────────────────────────────────────────────
-async function fbGet(path) {
-  const token = process.env.META_ADS_ACCESS_TOKEN;
-  const sep = path.includes('?') ? '&' : '?';
-  const res = await fetch(`${FB_BASE}${path}${sep}access_token=${token}`);
-  const data = await res.json();
-  if (data.error) throw new Error(`FB GET ${path}: ${data.error.message}`);
-  return data;
-}
-
-async function fbPost(path, body) {
-  const token = process.env.META_ADS_ACCESS_TOKEN;
-  const res = await fetch(`${FB_BASE}${path}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ ...body, access_token: token }),
-  });
-  const data = await res.json();
-  if (data.error) {
-    const e = data.error;
-    throw new Error(`FB POST ${path}: ${e.message}` +
-      (e.error_user_msg ? ` | ${e.error_user_title}: ${e.error_user_msg}` : '') +
-      (e.error_subcode ? ` | subcode=${e.error_subcode}` : ''));
-  }
-  return data;
-}
-
-async function fbDelete(path) {
-  const token = process.env.META_ADS_ACCESS_TOKEN;
-  const sep = path.includes('?') ? '&' : '?';
-  const res = await fetch(`${FB_BASE}${path}${sep}access_token=${token}`, { method: 'DELETE' });
-  return res.json().catch(() => ({}));
-}
 
 // Delete any prior campaign we created with this exact name (idempotent retries).
 async function cleanupOldCampaigns() {
@@ -141,11 +107,11 @@ async function resolveCarousel(code) {
 }
 
 // Upload one image URL → image_hash (link_data needs image_hash, not a URL).
-async function uploadImage(imageUrl) {
+async function uploadImage(imageUrl, deadline) {
   const r = await fetch(imageUrl);
   if (!r.ok) throw new Error(`Image fetch failed: HTTP ${r.status}`);
   const b64 = Buffer.from(await r.arrayBuffer()).toString('base64');
-  const up = await fbPost(`/act_${AD_ACCOUNT}/adimages`, { bytes: b64 });
+  const up = await fbPost(`/act_${AD_ACCOUNT}/adimages`, { bytes: b64 }, deadline);
   const hash = Object.values(up.images || {})[0]?.hash;
   if (!hash) throw new Error('adimages upload returned no hash');
   return hash;
@@ -184,6 +150,9 @@ export default async function handler(req, res) {
   const code     = req.query?.code || DEFAULT_CODE;
   const dryRun    = req.query?.dryrun === '1';
   const activate  = req.query?.activate === '1';   // default: build PAUSED
+  // Stay well under the function's own 300s ceiling so a retry can always
+  // detect it's out of time and fail cleanly instead of being killed mid-write.
+  const deadline = Date.now() + 260000;
 
   try {
     // 1. Resolve the carousel + reference config (parallel).
@@ -216,7 +185,7 @@ export default async function handler(req, res) {
 
     // 3. Upload all carousel images → image_hashes (preserve order).
     const hashes = [];
-    for (const u of carousel.image_urls) hashes.push(await uploadImage(u));
+    for (const u of carousel.image_urls) hashes.push(await uploadImage(u, deadline));
 
     // 4. Campaign (PAUSED). ABO — budget lives on the ad set.
     const campaign = await fbPost(`/act_${AD_ACCOUNT}/campaigns`, {
@@ -225,7 +194,7 @@ export default async function handler(req, res) {
       special_ad_categories: [],
       is_adset_budget_sharing_enabled: false,   // ABO: independent ad-set budget
       status: 'PAUSED',
-    });
+    }, deadline);
 
     // 5. Ad set (PAUSED) — clone the proven profile-visit spec, our audience/budget.
     const adsetBody = {
@@ -241,7 +210,7 @@ export default async function handler(req, res) {
     };
     if (refAdset.promoted_object)  adsetBody.promoted_object  = refAdset.promoted_object;
     if (refAdset.attribution_spec) adsetBody.attribution_spec = refAdset.attribution_spec;
-    const adset = await fbPost(`/act_${AD_ACCOUNT}/adsets`, adsetBody);
+    const adset = await fbPost(`/act_${AD_ACCOUNT}/adsets`, adsetBody, deadline);
 
     // 6. Carousel creative — multi-image child_attachments under @aastha_sochic.
     const linkData = {
@@ -257,7 +226,7 @@ export default async function handler(req, res) {
     const creative = await fbPost(`/act_${AD_ACCOUNT}/adcreatives`, {
       name: `Sephora carousel creative (${code})`,
       object_story_spec: { page_id: PAGE_ID, instagram_user_id: IG_USER_ID, link_data: linkData },
-    });
+    }, deadline);
 
     // 7. Ad (PAUSED).
     const ad = await fbPost(`/act_${AD_ACCOUNT}/ads`, {
@@ -265,14 +234,14 @@ export default async function handler(req, res) {
       adset_id: adset.id,
       creative: { creative_id: creative.id },
       status: 'PAUSED',
-    });
+    }, deadline);
 
     // 8. Re-assert budget cap, then activate LAST (only if asked).
-    await fbPost(`/${adset.id}`, { daily_budget: DAILY_BUDGET_CENTS });
+    await fbPost(`/${adset.id}`, { daily_budget: DAILY_BUDGET_CENTS }, deadline);
     if (activate) {
-      await fbPost(`/${campaign.id}`, { status: 'ACTIVE' });
-      await fbPost(`/${adset.id}`,    { status: 'ACTIVE' });
-      await fbPost(`/${ad.id}`,       { status: 'ACTIVE' });
+      await fbPost(`/${campaign.id}`, { status: 'ACTIVE' }, deadline);
+      await fbPost(`/${adset.id}`,    { status: 'ACTIVE' }, deadline);
+      await fbPost(`/${ad.id}`,       { status: 'ACTIVE' }, deadline);
     }
 
     return res.status(200).json({
