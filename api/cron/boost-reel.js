@@ -47,19 +47,26 @@ async function fbGet(path) {
 
 async function fbPost(path, body) {
   const token = process.env.META_ADS_ACCESS_TOKEN;
-  const res = await fetch(`${FB_BASE}${path}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ ...body, access_token: token }),
-  });
-  const data = await res.json();
-  if (data.error) {
+  // The ad account can be throttled to 1 write per 30s (code 613 / subcode
+  // 4841018); a launch makes ~8 writes back-to-back, so wait out the window
+  // and retry instead of failing the whole build mid-flight.
+  for (let attempt = 0; ; attempt++) {
+    const res = await fetch(`${FB_BASE}${path}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...body, access_token: token }),
+    });
+    const data = await res.json();
+    if (!data.error) return data;
     const e = data.error;
+    if (e.code === 613 && attempt < 3) {
+      await new Promise((r) => setTimeout(r, 32000));
+      continue;
+    }
     throw new Error(`FB POST ${path}: ${e.message}` +
       (e.error_user_msg ? ` | ${e.error_user_title}: ${e.error_user_msg}` : '') +
       (e.error_subcode ? ` | subcode=${e.error_subcode}` : ''));
   }
-  return data;
 }
 
 async function fbDelete(path) {

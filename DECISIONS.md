@@ -2,6 +2,76 @@
 
 Short records of why the site is the way it is. Newest first.
 
+## 2026-08-31 — Strategy reset: the machine must follow Aastha, not run beside her
+
+**The numbers, checked today (31 Aug).**
+
+- The website gets 20–50 visits a week (Google's own count, June–August).
+  Effectively nobody sees it.
+- Instagram followers: 51,574 on 4 June → 51,848 on 31 Aug. Up 274 in three
+  months. Flat.
+- Ad spend: 0.00 AED every day for at least the last two weeks. No promotion
+  is running at all.
+- The daily pitch writer has produced 190 pitches since June. Exactly 2 ever
+  reached a brand (both in June, in the old voice). The other 186 landed in
+  Aastha's inbox as drafts. Of the last 30: 17 had **no contact address at
+  all**, and 25 used the identical opening line ("Bringing X to life"). The
+  rotation included Cadillac, Audi, Lucid and Visit Maldives — brands with
+  near-zero chance of paying a 51k lifestyle creator for a cold email.
+- Meanwhile, her own feed over the last 60 days shows roughly **14 real brand
+  collaborations**: L'Occitane, Alo, Zara, Kosas, Elemis × Sephora Middle
+  East, L'Oréal, Huda Beauty, JW PEI, an Ounass discount code (AH91), two
+  fragrance houses, restaurants. She is doing the business herself, by hand.
+
+**The root cause.** Every part of the system produces output from static
+lists — a 185-brand watchlist, a blog topic queue — and none of it reads the
+one live asset that matters: what Aastha just posted and who she actually
+works with. All that evidence sits in our own database (posts sync every four
+hours) and the pitch writer never looks at it. We measured activity (pitches
+written, posts published) instead of outcomes (replies, deals, followers).
+
+**The strategy: one loop, anchored on her feed.**
+
+1. **Repeat-business engine — the fastest money.** About a week after each
+   collab post, send that brand a results note with the real numbers (reach,
+   views, saves) and one idea for the next piece. A brand she just tagged is
+   the warmest lead that exists; nobody is following these up today.
+2. **Sniper pitches instead of a rotation.** A pitch goes out only when three
+   things line up: she posted in that category within 30 days (real proof to
+   cite), we have a checked contact address, and ideally the brand is running
+   UAE ads right now. Three to five a week, each citing the actual reel and
+   its numbers. Never again a pitch with no address.
+3. **A personal page per pitch.** Each pitch links to
+   aasthachopra.com/for/(brand): her work in that brand's category, live
+   numbers, similar past collabs, rates. A visit to that page tells us the
+   brand is interested — that becomes the alert that matters. This is the
+   website's real job: convincing brand managers, not chasing Google.
+4. **Ads restart with one job: amplify the proven winner.** Put the paused
+   ~50 AED/day behind her best reel of each week, shown to people who already
+   engage with her and their lookalikes. When a collab happens, ask the brand
+   about partnership ads (they often pay).
+5. **The scoreboard becomes replies and deals**, plus follower change — not
+   counts of things the machine produced.
+
+**Done the same day (31 Aug).** The always-on promotion is back, boosting her
+real posts (15 AED/day, the L'Occitane reel first). An Instagram-message pack
+now lands in her inbox Mondays and Thursdays: three checked brands, written
+messages, one tap opens the brand's chat, she sends from her own profile. Both
+outreach channels now run through one shared accuracy engine: hard rules in
+code (no invented sightings, no "worked with", no unapproved numbers) plus an
+independent fact-check against the researched brand description; anything that
+fails twice is dropped, never delivered.
+
+**Stopped / demoted.**
+
+- The three-drafts-a-day emails to Aastha stop — replaced the same day by at
+  most five a week, one a day, and only for brands with a checked address, a
+  researched description, and a category she actually creates in.
+- Cold pitches to the auto/travel/luxury "reach" tier stop.
+- The Journal keeps its current low cadence but gets no further investment:
+  it has produced roughly zero readers, and it only started being measured on
+  23 Aug. Revisit with data in a quarter.
+
 ## 2026-08-24 — Search engines: how the site actually gets submitted
 
 **Google.** Its sitemap ping endpoint was deprecated in June 2023 and now 404s,

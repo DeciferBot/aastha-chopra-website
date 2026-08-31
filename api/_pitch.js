@@ -51,7 +51,7 @@ export function buildFactSheet(profile) {
 /**
  * @returns {Promise<{subject:string, body:string}>}
  */
-export async function generatePitch(brandName, profile, brandNotes = '', segment = '') {
+export async function generatePitch(brandName, profile, brandNotes = '', segment = '', feedback = '') {
   const factSheet = buildFactSheet(profile);
   const angle = SEGMENT_ANGLES[segment] || '';
 
@@ -85,9 +85,9 @@ OUTPUT: Return ONLY a single valid JSON object: {"subject": "...", "body": "..."
 
   const userPrompt = `Write a pitch email from Aastha Chopra to a brand manager at ${brandName}.
 
-THE BRAND: ${brandNotes
+THE BRAND (the ONLY brand facts you may use; never name a product, collection, campaign, store, event, or award that is not stated here): ${brandNotes
     ? brandNotes
-    : `${brandName}, active in the UAE lifestyle market. Draw on what you genuinely know about ${brandName}. If you are unsure of specifics, speak to its category and what brands like it do well, and do not invent particular facts, products, or claims.`}
+    : `${brandName}, active in the UAE lifestyle market. No further facts are known, so speak only to its category and what brands like it do well. Do not invent particular facts, products, or claims.`}
 
 HOW SHE WOULD CREATE FOR THIS CATEGORY: ${angle || 'Show concretely how she would feature the brand and tell its story through her content.'}
 
@@ -98,7 +98,7 @@ ABOUT AASTHA (background, not the headline):
 STATS (the ONLY numbers you may cite, and only if one genuinely strengthens a point; the email should not be about numbers):
 ${factSheet || '- (no numbers needed; lead with story and craft)'}
 
-Lead with the brand and how she would bring it to life. Treat her audience understanding as the proof of her authority, not a stats dump. Return JSON only.`;
+Lead with the brand and how she would bring it to life. Treat her audience understanding as the proof of her authority, not a stats dump. Return JSON only.${feedback ? `\n\n${feedback}` : ''}`;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',

@@ -1,36 +1,59 @@
+export const config = { maxDuration: 300 };
+
 /**
- * Daily Outreach Agent — Vercel Cron
- * Runs at 2:00 UTC (6:00 AM UAE time) every day.
- * Scores brands, generates pitches for top 3 grounded in LIVE Instagram numbers,
- * stores them in brand_pitches, and emails one forward-ready pitch per brand.
- * GET /api/cron/daily-agent
+ * Outreach Agent — Vercel Cron (daily at 02:00 UTC, 06:00 UAE)
+ *
+ * Rebuilt 2026-08-31 to the "few, sharp, true" rules:
+ *   - At most OUTREACH_WEEKLY_LIMIT (5) email pitches per rolling 7 days,
+ *     at most OUTREACH_DAILY_LIMIT (1) per run. Quota spent = the run exits.
+ *   - A brand is eligible ONLY with a checked contact address
+ *     (email_status mx_ok/verified), a researched brand_brief, tier warm/paid,
+ *     and a segment Aastha actually creates in. No address or no brief means
+ *     no pitch, ever.
+ *   - Every pitch runs through the shared accuracy engine (_accuracy.js):
+ *     hard code rules plus an independent fact-check against the brief and the
+ *     live stats sheet. Fails CLOSED: a pitch that cannot pass is dropped and
+ *     the next candidate is tried.
+ *   - Grounded in live Instagram numbers via getLiveProfile(); the model may
+ *     only cite numbers that appear in the fact sheet.
+ *
+ * Routing is unchanged: review mode (OUTREACH_REDIRECT_TO set) delivers a
+ * forward-ready email to Aastha's inbox; autosend to brands stays gated behind
+ * OUTREACH_FROM + OUTREACH_PAUSE and never touches reach-tier brands.
+ *
+ * GET /api/cron/daily-agent[?dryRun=1]
  */
 
 import { getLiveProfile } from '../_profile.js';
-import { generatePitch, sendPitchEmail, sendBrandPitch, autosendEnabled } from '../_pitch.js';
+import { generatePitch, sendPitchEmail, sendBrandPitch, autosendEnabled, buildFactSheet } from '../_pitch.js';
+import { checkText } from '../_accuracy.js';
 import { recordPipeline } from '../_pipeline.js';
 
 const SUPABASE_URL  = 'https://uqzvaytvynrglijvwjsz.supabase.co';
 const SERVICE_KEY   = process.env.SUPABASE_SERVICE_KEY;
 // Ad Library lookups accept any valid app/user token. FB_ACCESS_TOKEN can quietly
-// expire and take the whole timing signal down with it, so we keep the ads-autopilot
-// token (which is exercised weekly and stays fresh) as a fallback. First working one wins.
+// expire, so the ads-autopilot token (exercised weekly, stays fresh) is the
+// fallback. First working one wins.
 const AD_TOKENS = [...new Set(
   [process.env.FB_ACCESS_TOKEN, process.env.META_ADS_ACCESS_TOKEN].filter(Boolean)
 )];
 // REVIEW MODE: when OUTREACH_REDIRECT_TO is set, every pitch is delivered to that
-// single inbox (forward-ready) and NOTHING goes to a brand — Aastha reviews/forwards.
-// Unset it to let autosend deliver straight to brands.
+// single inbox (forward-ready) and NOTHING goes to a brand.
 const REDIRECT_TO   = process.env.OUTREACH_REDIRECT_TO || '';
 const AASTHA_EMAIL  = REDIRECT_TO || 'aasthac8@gmail.com';
 
-// Autonomy controls (all overridable via env, sane defaults baked in)
-const DAILY_LIMIT   = Number(process.env.OUTREACH_DAILY_LIMIT  || 3);   // fresh pitches per run
-const COOLDOWN_DAYS = Number(process.env.OUTREACH_COOLDOWN_DAYS || 30);  // don't re-pitch within N days
-const MIN_AUTOSEND  = Number(process.env.OUTREACH_MIN_SCORE     || 5);   // min fit score to send to brand
-// Which tiers may be auto-sent to the brand directly. Default warm+paid; reach is
-// never cold-emailed. Set e.g. OUTREACH_TIERS=warm to restrict the first wave.
+const PER_RUN       = Number(process.env.OUTREACH_DAILY_LIMIT   || 1);
+const WEEKLY_LIMIT  = Number(process.env.OUTREACH_WEEKLY_LIMIT  || 5);
+const COOLDOWN_DAYS = Number(process.env.OUTREACH_COOLDOWN_DAYS || 45);
+const MIN_AUTOSEND  = Number(process.env.OUTREACH_MIN_SCORE     || 5);
 const AUTOSEND_TIERS = (process.env.OUTREACH_TIERS || 'warm,paid').split(',').map((t) => t.trim());
+
+// The segments Aastha actually creates in. Cars, cold travel boards, and
+// generic retail are out: a pitch there reads as spam because it is.
+const PITCH_SEGMENTS = ['beauty', 'fashion', 'fragrance', 'jewellery', 'wellness', 'hospitality'];
+
+// How many top candidates get a fresh Ad Library timing check each run.
+const AD_CHECK_LIMIT = 25;
 
 async function sb(path, opts = {}) {
   const res = await fetch(`${SUPABASE_URL}/rest/v1${path}`, {
@@ -61,11 +84,7 @@ async function adArchive(searchTerms, token, limit = 10) {
   return res.json();
 }
 
-/**
- * Resolve a token that actually works against the Ad Library, once per run.
- * Returns { token, reason }. reason is 'ok', 'no_token', or the API error message —
- * so the run surfaces *why* the timing signal is dark instead of silently blanking it.
- */
+/** Resolve a token that works against the Ad Library, once per run. */
 async function resolveAdToken() {
   if (!AD_TOKENS.length) return { token: null, reason: 'no_token' };
   let reason = 'no_token';
@@ -82,11 +101,8 @@ async function resolveAdToken() {
 }
 
 /**
- * Per-brand Ad Library check. Always returns a structured result:
- *   { ok:true, active, count, recentCount }  — call succeeded
- *   { ok:false, reason }                     — call failed (token/api)
- * Never returns null, so a failed lookup is recorded as 'error' (recoverable),
- * never confused with 'none' (genuinely no active ads).
+ * Per-brand Ad Library check. Always structured:
+ *   { ok:true, active, count, recentCount } | { ok:false, reason }
  */
 async function checkAdLibrary(brandName, token) {
   if (!token) return { ok: false, reason: 'no_token' };
@@ -114,10 +130,24 @@ function scoreBrand(brand, adData) {
 }
 
 /**
- * Persist a generated pitch so the analytics tab / on-demand "send me this pitch"
- * button can re-deliver it without regenerating, and so we keep an audit trail of
- * exactly which live numbers each pitch quoted.
+ * Generate a pitch, run it through the shared accuracy engine, allow one
+ * corrected retry. Fails CLOSED — null means this brand sends nothing today.
  */
+async function generateCheckedPitch(brand, profile) {
+  const factSheet = buildFactSheet(profile);
+  const facts = `BRAND FACTS (the only brand facts that exist): ${brand.brand_brief}
+HER STATS (the only numbers allowed):\n${factSheet || '(none, so the pitch may cite no numbers)'}`;
+  let feedback = '';
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const { subject, body } = await generatePitch(brand.name, profile, brand.brand_brief, brand.segment || '', feedback);
+    const verdict = await checkText({ text: `${subject}\n${body}`, facts, factSheet });
+    if (verdict.ok) return { subject, body, attempts: attempt + 1 };
+    feedback = `Your previous attempt was rejected by the fact checker: ${verdict.problems.join('; ')}. Fix every one. Only use the supplied brand facts and stats.`;
+  }
+  return null;
+}
+
+/** Persist a generated pitch (audit trail + on-demand re-delivery). */
 async function storePitch({ brand, subject, body, score, adData, profile }) {
   const rows = await sb('/brand_pitches', {
     method: 'POST',
@@ -144,31 +174,54 @@ export default async function handler(req, res) {
   const allowed = auth === `Bearer ${process.env.CRON_SECRET}` || (!!process.env.MANUAL_SYNC_KEY && auth === `Bearer ${process.env.MANUAL_SYNC_KEY}`);
   if (!allowed) return res.status(401).end();
 
-  // dryRun: ground + generate the real pitches and return them, but write nothing
-  // and email nothing. Use this to preview a forward-ready pitch before the live cron.
+  // dryRun: select + generate + check for real, but write and email nothing.
   const dryRun = req.query?.dryRun === '1';
 
-  const brands = await sb('/outreach_brands?is_agency=eq.false&select=*');
-  if (!brands.length) {
-    return res.status(200).json({ ok: true, note: 'No brands in watchlist' });
+  // Weekly quota first: email pitches (any status except 'dm') in the last 7 days.
+  const weekAgo = new Date(Date.now() - 7 * 86400000).toISOString();
+  const weekRows = await sb(`/brand_pitches?select=id&generated_at=gte.${weekAgo}&status=neq.dm`).catch(() => []);
+  const weekUsed = (weekRows || []).length;
+  if (weekUsed >= WEEKLY_LIMIT) {
+    return res.status(200).json({ ok: true, note: `weekly limit reached (${weekUsed}/${WEEKLY_LIMIT}); no pitch today` });
+  }
+  const budget = Math.min(PER_RUN, WEEKLY_LIMIT - weekUsed);
+
+  // Eligibility is absolute: checked address + researched brief + her segments
+  // + warm/paid tier. A brand missing any of these cannot be pitched at all.
+  const candidates = await sb(
+    `/outreach_brands?is_agency=eq.false&tier=in.(warm,paid)` +
+    `&segment=in.(${PITCH_SEGMENTS.join(',')})` +
+    `&contact_email=not.is.null&email_status=in.(mx_ok,verified)` +
+    `&brand_brief=not.is.null&select=*`
+  );
+  if (!candidates.length) {
+    return res.status(200).json({ ok: true, note: 'no eligible brands (checked address + brief + segment + tier)' });
   }
 
-  // Ground every pitch in Aastha's real, current Instagram numbers — once per run.
+  // Cooldown: never re-pitch a brand contacted (any channel) inside the window.
+  const since = new Date(Date.now() - COOLDOWN_DAYS * 86400000).toISOString();
+  const recent = await sb(`/brand_pitches?select=brand_id&generated_at=gte.${since}`).catch(() => []);
+  const onCooldown = new Set((recent || []).map((p) => p.brand_id));
+  const pool = candidates.filter((b) => !onCooldown.has(b.id));
+  if (!pool.length) {
+    return res.status(200).json({ ok: true, note: 'all eligible brands are on cooldown' });
+  }
+
+  // Ground every pitch in Aastha's real, current numbers — once per run.
   const profile = await getLiveProfile();
 
+  // Timing signal: refresh the Ad Library read for the top of the pool only.
+  const { token: adToken, reason: adTokenReason } = await resolveAdToken();
   const today = new Date().toISOString().slice(0, 10);
   const scored = [];
-
-  // Resolve a working Ad Library token once. If none works, the run still proceeds
-  // (scores fall back to niche_fit) but records ad_status='error' + the reason.
-  const { token: adToken, reason: adTokenReason } = await resolveAdToken();
-
-  for (const brand of brands) {
+  const toCheck = pool
+    .sort((a, b) => (b.fit_score ?? 0) - (a.fit_score ?? 0))
+    .slice(0, AD_CHECK_LIMIT);
+  for (const brand of toCheck) {
     const adData = adToken
       ? await checkAdLibrary(brand.name, adToken)
       : { ok: false, reason: adTokenReason };
     const score = scoreBrand(brand, adData);
-
     if (!dryRun) {
       await sb(`/outreach_brands?id=eq.${brand.id}`, {
         method: 'PATCH',
@@ -180,110 +233,73 @@ export default async function handler(req, res) {
         }),
       });
     }
-
     scored.push({ brand, adData, score });
-    if (adToken && !dryRun) await new Promise(r => setTimeout(r, 300));
+    if (adToken) await new Promise(r => setTimeout(r, 300));
   }
-
-  // Visibility into the timing signal: tokenReason + how brands resolved this run.
-  const adSignal = scored.reduce((a, r) => {
-    const k = r.adData.ok ? (r.adData.active ? 'active' : 'none') : 'error';
-    a[k] = (a[k] || 0) + 1; return a;
-  }, { tokenReason: adTokenReason });
-
   scored.sort((a, b) => b.score - a.score);
 
-  // Cadence guard: never re-pitch a brand already contacted within the cooldown.
-  // Rotates the agent through the watchlist instead of spamming the same top names.
-  const since = new Date(Date.now() - COOLDOWN_DAYS * 86400000).toISOString();
-  const recent = await sb(`/brand_pitches?select=brand_id&generated_at=gte.${since}`).catch(() => []);
-  const onCooldown = new Set((recent || []).map((p) => p.brand_id));
-  const eligible = scored.filter((r) => !onCooldown.has(r.brand.id));
-  const top = eligible.slice(0, DAILY_LIMIT);
-
-  // Route each pitch. AUTOSEND (verified sender + not paused + has a contact +
-  // a real fit score + not a reach/seeding-tier brand) → straight to the brand,
-  // replies + BCC to management. Otherwise fall back to Aastha's forward-ready inbox.
-  // Review mode (OUTREACH_REDIRECT_TO set) forces every pitch to the one inbox.
   const canAutosend = autosendEnabled() && !REDIRECT_TO;
-  // Sequential, NOT Promise.all: sends share one Resend account that rate-limits
-  // (~2 req/s), and in review mode every pitch hits the same inbox — concurrent
-  // POSTs 429 and previously crashed the whole run. Each pitch is isolated in a
-  // try/catch so one failed send can never abort the others, with a small gap
-  // between sends to stay under the rate limit.
-  for (let i = 0; i < top.length; i++) {
-    const r = top[i];
-    // Prefer the clean, researched brand_brief for pitch context; fall back to
-    // operational notes only if no brief has been captured yet.
-    const { subject, body } = await generatePitch(r.brand.name, profile, r.brand.brand_brief || r.brand.notes || '', r.brand.segment || '');
-    r.subject = subject;
-    r.body = body;
+  const delivered = [];
+  const rejected = [];
+
+  // Walk candidates in score order until the budget is spent. A pitch that the
+  // accuracy engine rejects twice is dropped and the next brand is tried.
+  for (const r of scored) {
+    if (delivered.length >= budget) break;
+    const checked = await generateCheckedPitch(r.brand, profile);
+    if (!checked) { rejected.push(r.brand.name); continue; }
+    r.subject = checked.subject;
+    r.body = checked.body;
+    r.attempts = checked.attempts;
 
     const toBrand = canAutosend
-      && !!r.brand.contact_email
-      // Deliverability gate: only ever auto-send to an address whose domain can
-      // receive mail (mx_ok) or that we've confirmed (verified). Anything unknown,
-      // mx_fail, or previously bounced routes to Aastha so a dead address can never
-      // hard-bounce off her sending domain. See email_status on outreach_brands.
       && ['mx_ok', 'verified'].includes(r.brand.email_status)
       && r.brand.tier !== 'reach'
       && AUTOSEND_TIERS.includes(r.brand.tier)
       && r.score >= MIN_AUTOSEND;
     r.route = toBrand ? 'brand' : 'aastha';
 
-    if (dryRun) continue;
+    if (dryRun) { delivered.push(r); continue; }
 
     try {
-      r.pitchId = await storePitch({ brand: r.brand, subject, body, score: r.score, adData: r.adData, profile });
-
+      r.pitchId = await storePitch({ brand: r.brand, subject: r.subject, body: r.body, score: r.score, adData: r.adData, profile });
       if (toBrand) {
-        const resendId = await sendBrandPitch({ to: r.brand.contact_email, subject, body });
+        const resendId = await sendBrandPitch({ to: r.brand.contact_email, subject: r.subject, body: r.body });
         await sb(`/brand_pitches?id=eq.${r.pitchId}`, {
           method: 'PATCH',
           body: JSON.stringify({ status: 'sent', to_email: r.brand.contact_email, emailed_at: new Date().toISOString() }),
         });
-        // Brand-facing send → track opens/clicks via the Resend webhook (keyed on resendId).
-        await recordPipeline({ brandName: r.brand.name, contactEmail: r.brand.contact_email, subject, body, status: 'sent', resendId, route: 'brand' });
+        await recordPipeline({ brandName: r.brand.name, contactEmail: r.brand.contact_email, subject: r.subject, body: r.body, status: 'sent', resendId, route: 'brand' });
       } else {
-        const resendId = await sendPitchEmail({ to: AASTHA_EMAIL, brand: r.brand, subject, body, score: r.score, adData: r.adData });
+        const resendId = await sendPitchEmail({ to: AASTHA_EMAIL, brand: r.brand, subject: r.subject, body: r.body, score: r.score, adData: r.adData });
         await sb(`/brand_pitches?id=eq.${r.pitchId}`, {
           method: 'PATCH',
           body: JSON.stringify({ status: 'emailed', emailed_at: new Date().toISOString() }),
         });
-        // Forwarded to Aastha for manual send → 'queued' until she forwards it on.
-        await recordPipeline({ brandName: r.brand.name, contactEmail: r.brand.contact_email, subject, body, status: 'queued', resendId, route: 'aastha' });
+        await recordPipeline({ brandName: r.brand.name, contactEmail: r.brand.contact_email, subject: r.subject, body: r.body, status: 'queued', resendId, route: 'aastha' });
       }
+      delivered.push(r);
+      // Stay under Resend's rate limit between consecutive sends.
+      await new Promise((rs) => setTimeout(rs, 600));
     } catch (e) {
       r.sendError = String(e?.message || e);
       console.error(`pitch send failed for ${r.brand.name}:`, r.sendError);
+      rejected.push(r.brand.name);
     }
-
-    // Stay under Resend's rate limit between consecutive sends.
-    if (i < top.length - 1) await new Promise((res) => setTimeout(res, 600));
   }
 
-  if (dryRun) {
-    return res.status(200).json({
-      ok: true, dryRun: true, autosend: canAutosend, groundedOn: profile,
-      adSignal,
-      eligibleAfterCooldown: eligible.length,
-      pitches: top.map((r) => ({
-        brand: r.brand.name, tier: r.brand.tier, score: r.score, route: r.route,
-        recipient: r.route === 'brand' ? r.brand.contact_email : `${AASTHA_EMAIL} (forward-ready)`,
-        subject: r.subject, body: r.body,
-      })),
-    });
-  }
-
-  res.status(200).json({
+  return res.status(200).json({
     ok: true,
-    brandsChecked: brands.length,
-    adSignal,
+    dryRun,
+    weeklyQuota: `${weekUsed + (dryRun ? 0 : delivered.length)}/${WEEKLY_LIMIT}`,
+    eligible: pool.length,
+    adSignal: { tokenReason: adTokenReason, checked: scored.length },
     autosend: canAutosend,
-    onCooldown: onCooldown.size,
-    sentToBrand: top.filter((r) => r.route === 'brand' && !r.sendError).map((r) => r.brand.name),
-    forwardedToAastha: top.filter((r) => r.route === 'aastha' && !r.sendError).map((r) => r.brand.name),
-    failed: top.filter((r) => r.sendError).map((r) => ({ brand: r.brand.name, error: r.sendError })),
-    groundedOn: { followers: profile.followers, uaeFollowers: profile.uaeFollowers, uaeReach: profile.uaeReach, asOf: profile.asOf },
+    rejectedByChecks: rejected,
+    pitches: delivered.map((r) => ({
+      brand: r.brand.name, tier: r.brand.tier, score: r.score, attempts: r.attempts, route: r.route,
+      recipient: r.route === 'brand' ? r.brand.contact_email : `${AASTHA_EMAIL} (forward-ready)`,
+      subject: r.subject, ...(dryRun ? { body: r.body } : {}),
+    })),
   });
 }
