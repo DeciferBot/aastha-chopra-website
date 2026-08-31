@@ -16,3 +16,9 @@ outreach/
 images/ad-creatives/
 # graphify build cache
 graphify-out/cache/
+
+# Travel map working files: rebuilt by scripts/, too heavy to keep
+build/
+data/travel-thumbs.json
+.thumb-tmp/
+.thumb-tmp-manual/

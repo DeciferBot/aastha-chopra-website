@@ -1,0 +1,38 @@
+{
+  "_readme": [
+    "Trips that were ticked 'she went' but that the captions plainly contradict.",
+    "These are kept out of the map. The tick is left alone in travel-verdicts.json,",
+    "so nothing is lost and putting one back is a one-line delete from this file.",
+    "",
+    "Every one of these is a post made in Dubai about a product, a shop or a gift",
+    "that happens to carry a country's name. That is the same trap that put Sri Lanka",
+    "and Japan in the list. A map going in front of hotels cannot carry them."
+  ],
+  "excluded": [
+    {
+      "tripId": "france-2026-04-26",
+      "why": "Dior's 'Dioriviera' collection launch, a range inspired by the French Riviera. A beauty post, not a trip to France.",
+      "post": "https://www.instagram.com/reel/DXl_C9ijKXJ/"
+    },
+    {
+      "tripId": "india-2024-03-07",
+      "why": "Forest Essentials, an Indian brand, opening in Dubai Hills Mall and Mirdiff City Centre. She is in Dubai.",
+      "post": "https://www.instagram.com/p/C4NC5z0tHpV/"
+    },
+    {
+      "tripId": "switzerland-2024-02-04",
+      "why": "A Modista shopping event in Dubai. Nothing in the post puts her in Switzerland.",
+      "post": "https://www.instagram.com/reel/C27N68NNI__/"
+    },
+    {
+      "tripId": "india-2022-01-22",
+      "why": "'No1 does winter wear like DELHI GIRLS' with the tag #dubaiwinters. She is in Dubai talking about Delhi.",
+      "post": "https://www.instagram.com/p/CZCkSYpB0jw/"
+    },
+    {
+      "tripId": "thailand-2023-06-22",
+      "why": "An outfit post. The only Thai thing in it is a bag someone brought her back as a gift.",
+      "post": "https://www.instagram.com/p/CtzWe3ltyAb/"
+    }
+  ]
+}

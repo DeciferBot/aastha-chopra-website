@@ -1,0 +1,3868 @@
+{
+  "generated_at": "2026-08-31T15:47:25.001Z",
+  "source": "supabase:instagram_posts captions and hashtags",
+  "warning": "EVERY TRIP HERE IS A GUESS. Nothing goes on the map until verdict is \"yes\".",
+  "since": "2021-01-01",
+  "posts_scanned": 895,
+  "summary": {
+    "candidate_trips": 61,
+    "countries": 25,
+    "high_confidence": 6,
+    "medium_confidence": 15,
+    "low_confidence": 40
+  },
+  "trips": [
+    {
+      "country": "United Kingdom",
+      "lat": 51.51,
+      "lon": -0.13,
+      "firstDate": "2026-07-16",
+      "lastDate": "2026-07-30",
+      "posts": [
+        {
+          "postId": "18095335754527328",
+          "country": "United Kingdom",
+          "lat": 51.51,
+          "lon": -0.13,
+          "matchedOn": "london",
+          "date": "2026-07-16",
+          "permalink": "https://www.instagram.com/p/Da2aqvrDYRU/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2026-07/18095335754527328_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 133,
+          "comments": 144,
+          "caption": "London? Say less. We were already on our way ☎️🇬🇧\n\nArth’s First, iconic sights, lots of walking, plenty of laughs, and memories we’ll be talking about for years.\n\n#LondonDiaries #FamilyTravel #SummerInLondon #TravelWithKids #SoChicTravels \n\nWearing @zara",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18133901542611630",
+          "country": "United Kingdom",
+          "lat": 51.51,
+          "lon": -0.13,
+          "matchedOn": "england",
+          "date": "2026-07-18",
+          "permalink": "https://www.instagram.com/reel/Da8Rf74sZML/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2026-07/18133901542611630.jpg",
+          "mediaType": "VIDEO",
+          "views": 3118,
+          "likes": 123,
+          "comments": 185,
+          "caption": "POV: You visit a 5,000-year-old landmark and somehow turn it into a playground🤸🏻‍♀️🤍🇬🇧\n\n📍 @stonehenge \n\n#Stonehenge #England #UKSummer #FamilyTravel #FamilyReel",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18143578024530544",
+          "country": "United Kingdom",
+          "lat": 51.51,
+          "lon": -0.13,
+          "matchedOn": "england",
+          "date": "2026-07-28",
+          "permalink": "https://www.instagram.com/p/DbVQcabjEWd/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2026-07/18143578024530544_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 127,
+          "comments": 121,
+          "caption": "This is how I experienced England🇬🇧\n\nA country where history meets modern style.\nWhere every street tells a story and every corner inspires.\nThis is what I wore, one outfit at a time✨\n\n#LondonStyle #LondonFashion #OOTD #StreetStyle UKSummer\n\nTell me your favourite look by slide number (1–12). I want to know which one wins. 🤍",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17869314834632676",
+          "country": "United Kingdom",
+          "lat": 51.51,
+          "lon": -0.13,
+          "matchedOn": "london",
+          "date": "2026-07-30",
+          "permalink": "https://www.instagram.com/reel/DbaY0pJMKle/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2026-07/17869314834632676.jpg",
+          "mediaType": "VIDEO",
+          "views": 1315,
+          "likes": 115,
+          "comments": 203,
+          "caption": "An English summer with my favourite people. 🇬🇧✨\nFrom the charm of the countryside to the magic of London, every stop became a memory we’ll hold close forever. Family adventures, endless exploring and a summer so beautifully British ❤️ \n\n#dubaiinfluencer #familytime❤️ #vacacion #a4chopra",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "exploring"
+          ],
+          "brandWords": [],
+          "atHomeWords": [
+            "dubai"
+          ]
+        }
+      ],
+      "tripId": "united-kingdom-2026-07-16",
+      "spanDays": 14,
+      "postCount": 4,
+      "score": 5,
+      "confidence": "high",
+      "forIt": [
+        "posts span 14 days",
+        "says \"exploring\""
+      ],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Australia",
+      "lat": -33.87,
+      "lon": 151.21,
+      "firstDate": "2026-06-26",
+      "lastDate": "2026-06-26",
+      "posts": [
+        {
+          "postId": "18105330986043855",
+          "country": "Australia",
+          "lat": -33.87,
+          "lon": 151.21,
+          "matchedOn": "australia",
+          "date": "2026-06-26",
+          "permalink": "https://www.instagram.com/reel/DaDFYVeMOPQ/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2026-06/18105330986043855.jpg",
+          "mediaType": "VIDEO",
+          "views": 2038,
+          "likes": 84,
+          "comments": 104,
+          "caption": "Discovering Sunset Hour by Goldfield & Banks Australia — bright, beachy and made for sun-kissed evenings.\n\n@goldfield_and_banks_australia @christian_vinsot @revalueconsulting \n#GoldfieldAndBanks #SunsetHour #DubaiPerfume #LuxuryFragrance",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "perfume",
+            "fragrance"
+          ],
+          "atHomeWords": [
+            "dubai"
+          ]
+        }
+      ],
+      "tripId": "australia-2026-06-26",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -3,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "United States",
+      "lat": 40.71,
+      "lon": -74.01,
+      "firstDate": "2026-06-01",
+      "lastDate": "2026-06-01",
+      "posts": [
+        {
+          "postId": "18065324690439562",
+          "country": "United States",
+          "lat": 40.71,
+          "lon": -74.01,
+          "matchedOn": "new york",
+          "date": "2026-06-01",
+          "permalink": "https://www.instagram.com/p/DZDQ1bDjCEG/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2026-06/18065324690439562_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 163,
+          "comments": 106,
+          "caption": "Coffee only if it’s New York style, with this guy and a little retail therapy✨🖤\n\n@aimeleondore \n@ounassstage \n@ounass",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "united-states-2026-06-01",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 0,
+      "confidence": "low",
+      "forIt": [],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "France",
+      "lat": 48.86,
+      "lon": 2.35,
+      "firstDate": "2026-04-26",
+      "lastDate": "2026-04-26",
+      "posts": [
+        {
+          "postId": "18312709147263013",
+          "country": "France",
+          "lat": 48.86,
+          "lon": 2.35,
+          "matchedOn": "french riviera",
+          "date": "2026-04-26",
+          "permalink": "https://www.instagram.com/reel/DXl_C9ijKXJ/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2026-04/18312709147263013.jpg",
+          "mediaType": "VIDEO",
+          "views": 10989,
+          "likes": 118,
+          "comments": 153,
+          "caption": "Dioriviera Summer 2026 🐞🌼\nNew @diorbeauty collection inspired by the blue skies of the French Riviera\nHow stunning are these 🌟🌟🌟Bronzer and highlighter Totally OBSESSED!! \n\nOutfit from @revolvemena @revolve \n\n#dubaifashion #dioraddict #dubaiinfluencer #dioriviera #",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "collection",
+            "bronzer",
+            "highlighter"
+          ],
+          "atHomeWords": [
+            "dubai"
+          ]
+        }
+      ],
+      "tripId": "france-2026-04-26",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -3,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Italy",
+      "lat": 41.9,
+      "lon": 12.5,
+      "firstDate": "2026-03-22",
+      "lastDate": "2026-03-22",
+      "posts": [
+        {
+          "postId": "18087542783248453",
+          "country": "Italy",
+          "lat": 41.9,
+          "lon": 12.5,
+          "matchedOn": "milano",
+          "date": "2026-03-22",
+          "permalink": "https://www.instagram.com/reel/DWMEDgnDJ91/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2026-03/18087542783248453.jpg",
+          "mediaType": "VIDEO",
+          "views": 63958,
+          "likes": 615,
+          "comments": 215,
+          "caption": "Good skin, good glow, good mood ✨\n\n✨ Current glam lineup:\n• Paradis Des Sens Anela Perfume @pdsparfums \n• Dolce & Gabbana Lip Liner & Mascara @dolcegabbana_beauty \n• Huda Beauty Peach Corrector, Matcha Easy Bake & Blush @hudabeauty \n• KIKO Milano Power Shake Fixing Spray @kikomilanoarabia \n• Yves Saint Laurent All Hours Glow Foundation @yslbeauty \n• Hermès Beauty Highlighter & Lipstick @hermes \n• ",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "perfume",
+            "lip liner",
+            "mascara",
+            "bronzer",
+            "highlighter",
+            "serum"
+          ],
+          "atHomeWords": [
+            "dubai",
+            "mydubai"
+          ]
+        }
+      ],
+      "tripId": "italy-2026-03-22",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -3,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\", \"mydubai\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "France",
+      "lat": 48.86,
+      "lon": 2.35,
+      "firstDate": "2026-03-05",
+      "lastDate": "2026-03-05",
+      "posts": [
+        {
+          "postId": "18074108729154584",
+          "country": "France",
+          "lat": 48.86,
+          "lon": 2.35,
+          "matchedOn": "paris",
+          "date": "2026-03-05",
+          "permalink": "https://www.instagram.com/reel/DVgaaNZDEsH/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2026-03/18074108729154584.jpg",
+          "mediaType": "VIDEO",
+          "views": 13062,
+          "likes": 103,
+          "comments": 106,
+          "caption": "Finland → Brussels → Paris → Dubai\n\nThis wasn’t part of the plan—four days stranded in Europe during a war. But what happened next restored my faith in leadership and humanity.\n\nFirst and foremost, my deepest gratitude to God, my Mahadev🔱for protecting us and guiding us safely back home. I truly feel blessed🕉️\n\nThe past few days were a reminder of how unpredictable life can be. Being stranded in",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "stranded"
+          ],
+          "brandWords": [],
+          "atHomeWords": [
+            "dubai"
+          ]
+        }
+      ],
+      "tripId": "france-2026-03-05",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 3,
+      "confidence": "medium",
+      "forIt": [
+        "says \"stranded\""
+      ],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Belgium",
+      "lat": 50.85,
+      "lon": 4.35,
+      "firstDate": "2026-03-05",
+      "lastDate": "2026-03-05",
+      "posts": [
+        {
+          "postId": "18074108729154584",
+          "country": "Belgium",
+          "lat": 50.85,
+          "lon": 4.35,
+          "matchedOn": "brussels",
+          "date": "2026-03-05",
+          "permalink": "https://www.instagram.com/reel/DVgaaNZDEsH/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2026-03/18074108729154584.jpg",
+          "mediaType": "VIDEO",
+          "views": 13062,
+          "likes": 103,
+          "comments": 106,
+          "caption": "Finland → Brussels → Paris → Dubai\n\nThis wasn’t part of the plan—four days stranded in Europe during a war. But what happened next restored my faith in leadership and humanity.\n\nFirst and foremost, my deepest gratitude to God, my Mahadev🔱for protecting us and guiding us safely back home. I truly feel blessed🕉️\n\nThe past few days were a reminder of how unpredictable life can be. Being stranded in",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "stranded"
+          ],
+          "brandWords": [],
+          "atHomeWords": [
+            "dubai"
+          ]
+        }
+      ],
+      "tripId": "belgium-2026-03-05",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 3,
+      "confidence": "medium",
+      "forIt": [
+        "says \"stranded\""
+      ],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Finland",
+      "lat": 60.17,
+      "lon": 24.94,
+      "firstDate": "2026-02-26",
+      "lastDate": "2026-03-18",
+      "posts": [
+        {
+          "postId": "18044669126718951",
+          "country": "Finland",
+          "lat": 60.17,
+          "lon": 24.94,
+          "matchedOn": "lapland",
+          "date": "2026-02-26",
+          "permalink": "https://www.instagram.com/reel/DVOrW4UjPrG/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2026-02/18044669126718951.jpg",
+          "mediaType": "VIDEO",
+          "views": 41821,
+          "likes": 457,
+          "comments": 116,
+          "caption": "Bucket list, but make it couture. ✨\n\nPrivate glass igloo. Arctic skies. Absolute silence.\nIn the heart of Lapland, where luxury meets the wild and the ceiling is made of stars. ❄️🌌\n\nThis isn’t a stay. It’s a statement.\n\n📍 @auroraqueenresort 🇫🇮\n\n#BucketList\n#GlassIgloo\n#LaplandLuxury\n#Lapland\n#ArcticEscape\nLuxuryTravel\nWinterWonderland\nLuxuryLifestyle\nStayInStyle\nCoutureTravel\nNordicDream\nUnder",
+          "notThereWords": [
+            "bucket list"
+          ],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18174797212347333",
+          "country": "Finland",
+          "lat": 60.17,
+          "lon": 24.94,
+          "matchedOn": "finland",
+          "date": "2026-02-27",
+          "permalink": "https://www.instagram.com/p/DVRITgjjJJE/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2026-02/18174797212347333_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 284,
+          "comments": 194,
+          "caption": "We watched the sky change colors 💚💗💜🤍\nemerald into blush, violet into pearl —\nlike the universe itself was celebrating us👩‍❤️‍👨\n\nCountless memories🔱\nOne timeless love🧿\n\nTo the man who turns dreams into destinations —\nand checks off my ultimate bucket list:\nhappy anniversary, my love🌌✨🔱♥️\n\n#Finland #NorthernLights #AuroraBorealis\n#BucketListGoals #LuxuryTravel",
+          "notThereWords": [
+            "bucket list"
+          ],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18074108729154584",
+          "country": "Finland",
+          "lat": 60.17,
+          "lon": 24.94,
+          "matchedOn": "finland",
+          "date": "2026-03-05",
+          "permalink": "https://www.instagram.com/reel/DVgaaNZDEsH/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2026-03/18074108729154584.jpg",
+          "mediaType": "VIDEO",
+          "views": 13062,
+          "likes": 103,
+          "comments": 106,
+          "caption": "Finland → Brussels → Paris → Dubai\n\nThis wasn’t part of the plan—four days stranded in Europe during a war. But what happened next restored my faith in leadership and humanity.\n\nFirst and foremost, my deepest gratitude to God, my Mahadev🔱for protecting us and guiding us safely back home. I truly feel blessed🕉️\n\nThe past few days were a reminder of how unpredictable life can be. Being stranded in",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "stranded"
+          ],
+          "brandWords": [],
+          "atHomeWords": [
+            "dubai"
+          ]
+        },
+        {
+          "postId": "18395256853198721",
+          "country": "Finland",
+          "lat": 60.17,
+          "lon": 24.94,
+          "matchedOn": "lapland",
+          "date": "2026-03-06",
+          "permalink": "https://www.instagram.com/reel/DVjF5J1DEq4/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2026-03/18395256853198721.jpg",
+          "mediaType": "VIDEO",
+          "views": 36194,
+          "likes": 390,
+          "comments": 217,
+          "caption": "Unlike any other hike I’ve ever done.\n\nWhat started as a casual “let’s go see a waterfall”\nturned into a four-hour hike through snow-covered mountains in -25°C.\n\nLayers on layers of clothes.\nRestricted movement.\nFreezing hands.\nFrozen nose. 🥶\n\nEven taking photos and videos felt like a challenge…\nbut somehow I managed.\n\nAnd the waterfall I came to see?\nNot one. Not two. FOUR waterfalls — all compl",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17970504626858923",
+          "country": "Finland",
+          "lat": 60.17,
+          "lon": 24.94,
+          "matchedOn": "finland",
+          "date": "2026-03-08",
+          "permalink": "https://www.instagram.com/reel/DVoTxaxjGzK/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2026-03/17970504626858923.jpg",
+          "mediaType": "VIDEO",
+          "views": 29978,
+          "likes": 601,
+          "comments": 241,
+          "caption": "How often do you find yourself walking an alpaca🦙through a magical, snow-capped forest in the Arctic Circle, feeling like you’ve wandered straight into Narnia?\n\nEverywhere I looked, there was nothing but white — trees wrapped in thick snow, the quiet crunch beneath my boots, and the softest little alpaca walking beside me as if it had always belonged in this fairytale. The air was icy, the forest",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18575495542052637",
+          "country": "Finland",
+          "lat": 60.17,
+          "lon": 24.94,
+          "matchedOn": "finland",
+          "date": "2026-03-11",
+          "permalink": "https://www.instagram.com/reel/DVwLD3RjIJ-/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2026-03/18575495542052637.jpg",
+          "mediaType": "VIDEO",
+          "views": 34427,
+          "likes": 611,
+          "comments": 192,
+          "caption": "Me trying to ski while my brain chants:\nhot chocolate. glögg. fish & chips😌 \n\n📍Finland \n@visitfinlandia \n@visitingfinland",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18090393872175419",
+          "country": "Finland",
+          "lat": 60.17,
+          "lon": 24.94,
+          "matchedOn": "saariselka",
+          "date": "2026-03-14",
+          "permalink": "https://www.instagram.com/p/DV3cS59DLZG/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2026-03/18090393872175419_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 131,
+          "comments": 184,
+          "caption": "Snowmobiling through the wild beauty of the Arctic ❄️ One of those once-in-a-lifetime experiences.\n📍Saariselka, Finland 🇫🇮 \n\n@ourfinland",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18122358169609210",
+          "country": "Finland",
+          "lat": 60.17,
+          "lon": 24.94,
+          "matchedOn": "finland",
+          "date": "2026-03-18",
+          "permalink": "https://www.instagram.com/reel/DWBz8tEDHY9/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2026-03/18122358169609210.jpg",
+          "mediaType": "VIDEO",
+          "views": 21680,
+          "likes": 418,
+          "comments": 164,
+          "caption": "POV: You accidentally find your true personality in the snow 🐧❄️\n\n#Finland #SnowAngel #PenguinVibes #FunnyReels #JustForFun",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "finland-2026-02-26",
+      "spanDays": 20,
+      "postCount": 8,
+      "score": 1,
+      "confidence": "medium",
+      "forIt": [
+        "posts span 20 days",
+        "says \"stranded\""
+      ],
+      "against": [
+        "says \"bucket list\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Thailand",
+      "lat": 13.76,
+      "lon": 100.5,
+      "firstDate": "2026-02-21",
+      "lastDate": "2026-02-21",
+      "posts": [
+        {
+          "postId": "18066511226270214",
+          "country": "Thailand",
+          "lat": 13.76,
+          "lon": 100.5,
+          "matchedOn": "thailand",
+          "date": "2026-02-21",
+          "permalink": "https://www.instagram.com/p/DVCRNYKDGsp/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2026-02/18066511226270214_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 147,
+          "comments": 123,
+          "caption": "Thailand Diaries — Unposted moments hit different.\nGreat vibes. Better memories. Elite energy. @phuket \n\n@threemonkeysrestaurant @yonabeach @cafedelmarphuket",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "thailand-2026-02-21",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 0,
+      "confidence": "low",
+      "forIt": [],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Thailand",
+      "lat": 13.76,
+      "lon": 100.5,
+      "firstDate": "2026-01-21",
+      "lastDate": "2026-01-21",
+      "posts": [
+        {
+          "postId": "17956867449050885",
+          "country": "Thailand",
+          "lat": 13.76,
+          "lon": 100.5,
+          "matchedOn": "thailand",
+          "date": "2026-01-21",
+          "permalink": "https://www.instagram.com/reel/DTxdA_XjIUz/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2026-01/17956867449050885.jpg",
+          "mediaType": "VIDEO",
+          "views": 31886,
+          "likes": 293,
+          "comments": 164,
+          "caption": "Sun, music, and my first taste of Thailand — the Café del Mar way ✨🍹 @cafedelmarphuket \n\n#CafeDelMarPhuket #PhuketLuxury #ThailandFirsts #BeachClubElegance #IslandVibes #JetSetLife",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "first taste of"
+          ],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "thailand-2026-01-21",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 3,
+      "confidence": "medium",
+      "forIt": [
+        "says \"first taste of\""
+      ],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "India",
+      "lat": 28.61,
+      "lon": 77.21,
+      "firstDate": "2026-01-05",
+      "lastDate": "2026-01-05",
+      "posts": [
+        {
+          "postId": "18097475044699893",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "varanasi",
+          "date": "2026-01-05",
+          "permalink": "https://www.instagram.com/reel/DTIUOfIDMUb/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2026-01/18097475044699893.jpg",
+          "mediaType": "VIDEO",
+          "views": 38471,
+          "likes": 532,
+          "comments": 207,
+          "caption": "Introducing November Noon🤎 @novembernoon \n\nA dialogue between handwoven craftsmanship and architectural tailoring, where lustrous reflections meet quiet matte finishes.\n\nI’m Aastha. I work full-time , curate  with intention, passion and believe true luxury should live with you — not demand a performance.\n\nThis is beauty with purpose.Style chosen, not rushed.\nModern luxury designed for women who m",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "collection"
+          ],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "india-2026-01-05",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 0,
+      "confidence": "low",
+      "forIt": [],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Italy",
+      "lat": 41.9,
+      "lon": 12.5,
+      "firstDate": "2025-11-03",
+      "lastDate": "2025-11-03",
+      "posts": [
+        {
+          "postId": "18537636034035877",
+          "country": "Italy",
+          "lat": 41.9,
+          "lon": 12.5,
+          "matchedOn": "firenze",
+          "date": "2025-11-03",
+          "permalink": "https://www.instagram.com/p/DQmLn8Fj-p0/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2025-11/18537636034035877_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 303,
+          "comments": 218,
+          "caption": "@teatroarabia X @bloomingdalesme \n\nWhen fragrance meets mindfulness 🌿\nSo grateful to be part of the Mystic Leather launch by Teatro Firenze, beautifully hosted at Kayani Wellness — a morning of yoga, scent, and serenity. ✨\n#MysticLeather #TeatroFirenze #KayaniWellness",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "fragrance",
+            "scent",
+            "launch"
+          ],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "italy-2025-11-03",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 0,
+      "confidence": "low",
+      "forIt": [],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "United States",
+      "lat": 40.71,
+      "lon": -74.01,
+      "firstDate": "2025-10-19",
+      "lastDate": "2025-10-19",
+      "posts": [
+        {
+          "postId": "18161966695380130",
+          "country": "United States",
+          "lat": 40.71,
+          "lon": -74.01,
+          "matchedOn": "new york",
+          "date": "2025-10-19",
+          "permalink": "https://www.instagram.com/reel/DP_5mHTDyO_/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2025-10/18161966695380130.jpg",
+          "mediaType": "VIDEO",
+          "views": 2020,
+          "likes": 23,
+          "comments": 22,
+          "caption": "When Diwali lights meet New York glamour ✨ Celebrating in style with the Michael Kors Diwali Capsule Collection🪔",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "collection",
+            "capsule"
+          ],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "united-states-2025-10-19",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 0,
+      "confidence": "low",
+      "forIt": [],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Sri Lanka",
+      "lat": 6.93,
+      "lon": 79.86,
+      "firstDate": "2025-09-29",
+      "lastDate": "2025-09-29",
+      "posts": [
+        {
+          "postId": "17986977821893924",
+          "country": "Sri Lanka",
+          "lat": 6.93,
+          "lon": 79.86,
+          "matchedOn": "sri lanka",
+          "date": "2025-09-29",
+          "permalink": "https://www.instagram.com/reel/DPMn9BpjCqC/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2025-09/17986977821893924.jpg",
+          "mediaType": "VIDEO",
+          "views": 24488,
+          "likes": 546,
+          "comments": 112,
+          "caption": "🌸 Elegant & Calming 🌸 with love from Sri Lanka🫶🏼\nWhere wellness feels regal ✨ Spa Ceylon has made its debut in Dubai, @spaceylon.ae  unveiling Ayurveda rituals that gently harmonize the mind, body & soul… 🌿\n\nI indulged in their Peace, De-Stress & Sleep Intense ranges (and De-Stress is definitely my personal favorite!) 💚Ayurvedic treasures I can’t wait to weave into my bedtime rituals🌙\n✨ A n",
+          "notThereWords": [
+            "can't wait"
+          ],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "debut"
+          ],
+          "atHomeWords": [
+            "dubai",
+            "uae"
+          ]
+        }
+      ],
+      "tripId": "sri-lanka-2025-09-29",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -7,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\", \"uae\"",
+        "says \"can't wait\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "India",
+      "lat": 28.61,
+      "lon": 77.21,
+      "firstDate": "2025-09-26",
+      "lastDate": "2025-09-26",
+      "posts": [
+        {
+          "postId": "17920431759039445",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "mumbai",
+          "date": "2025-09-26",
+          "permalink": "https://www.instagram.com/reel/DPETHOdj5Ph/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2025-09/17920431759039445.jpg",
+          "mediaType": "VIDEO",
+          "views": 48712,
+          "likes": 774,
+          "comments": 144,
+          "caption": "✨ The ultimate festive vibe is back with @be.divalicious — your go-to for destination weddings, celebrations, and all things party season! ✨\n\nWhich festive diva are you?\n👑 Queen of Hearts → Bold, fierce, unstoppable\n💎 Diamond Diva → Sparkle, shine, slay\n\nWhy pick one when you can be both? 😉 DIVAlicious is making its way to Dubai & Mumbai!\n\n📍 Dubai Pop-Up\n🗓️ 28 September\n📌 Jumeirah Emirates T",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": [
+            "dubai"
+          ]
+        }
+      ],
+      "tripId": "india-2025-09-26",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -3,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Italy",
+      "lat": 41.9,
+      "lon": 12.5,
+      "firstDate": "2025-09-17",
+      "lastDate": "2025-10-06",
+      "posts": [
+        {
+          "postId": "17877185886406760",
+          "country": "Italy",
+          "lat": 41.9,
+          "lon": 12.5,
+          "matchedOn": "rome",
+          "date": "2025-09-17",
+          "permalink": "https://www.instagram.com/reel/DOss1GzDDDh/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2025-09/17877185886406760.jpg",
+          "mediaType": "VIDEO",
+          "views": 28335,
+          "likes": 316,
+          "comments": 56,
+          "caption": "Woke up in Rome surrounded by history, wandered through the Colosseum’s timeless arches, and ended the day sipping wine in the countryside 🍷🇮🇹💕 A perfect mix of ancient wonders and little joys with my favorite person by my side @simplychopra 💖 \n\n#Fromruinstorose #favcity #bellaroma #rome",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18176077786353288",
+          "country": "Italy",
+          "lat": 41.9,
+          "lon": 12.5,
+          "matchedOn": "italy",
+          "date": "2025-09-18",
+          "permalink": "https://www.instagram.com/reel/DOwILnSjzT1/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2025-09/18176077786353288.jpg",
+          "mediaType": "VIDEO",
+          "views": 13386,
+          "likes": 62,
+          "comments": 47,
+          "caption": "🌊 How cute is this Dior pop-up in Capri? Had to stop by 💙🤍 @capri \n\n#Dior #DiorCapri #DiorPopUp #CapriItaly #CapriVibes #IslandChic #LaDolceVita #LuxuryStyle #TravelInStyle #OOTDGoals #italy",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17991532244699576",
+          "country": "Italy",
+          "lat": 41.9,
+          "lon": 12.5,
+          "matchedOn": "capri",
+          "date": "2025-09-19",
+          "permalink": "https://www.instagram.com/p/DOyCciQjKjz/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2025-09/17991532244699576_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 111,
+          "comments": 54,
+          "caption": "Sailing through the heart of Capri, past the majestic Faraglioni, exploring the mystical Blue and Emerald Grottos , checking the bucket list ✅\nswimming in crystal-clear waters, and soaking in views that take your breath away 🌊✨🏝️ \n\n@capri \n\n#CapriVibes #FaraglioniViews #BlueGrottoMagic #EmeraldGrotto #IslandDreams #SailingCapri #CrystalWaters #TravelDiaries #WanderlustItaly #SeaAndSun #MagicalMo",
+          "notThereWords": [
+            "bucket list"
+          ],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "exploring"
+          ],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18085878931895925",
+          "country": "Italy",
+          "lat": 41.9,
+          "lon": 12.5,
+          "matchedOn": "positano",
+          "date": "2025-09-20",
+          "permalink": "https://www.instagram.com/reel/DO1QSpmDGit/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2025-09/18085878931895925.jpg",
+          "mediaType": "VIDEO",
+          "views": 18346,
+          "likes": 81,
+          "comments": 56,
+          "caption": "La Dolce vita hits different in\nPositano and the lemons steal the show🍋💛\n\n#Positano #AmalfiCoast #ItalyVibes #CoastalDreams #TravelItaly #LaDolceVita #MediterraneanMagic #ItalianSummer #PostcardViews #TravelReels #BucketListTravel #SeaSunSoul #ParadiseFound #CoastalCharm #WanderlustItaly",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18092825941690808",
+          "country": "Italy",
+          "lat": 41.9,
+          "lon": 12.5,
+          "matchedOn": "naples",
+          "date": "2025-09-23",
+          "permalink": "https://www.instagram.com/p/DO9MrdnE-gr/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2025-09/18092825941690808_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 103,
+          "comments": 50,
+          "caption": "Naples = Pizza heaven 🍕✨ Had the pleasure of dining at the most premium pizzeria by the legend himself, chef Franco pepe  @pepe_ingrani \nFrom the classic Margherita to fried pizza and creative variations, every bite was pure magic. The dough, the flavors… truly beyond words. Best part? Meeting Mr. Pepe in person and watching him work his craft. If you’re ever in Italy, a trip to Naples just for t",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17952717887889249",
+          "country": "Italy",
+          "lat": 41.9,
+          "lon": 12.5,
+          "matchedOn": "naples",
+          "date": "2025-10-06",
+          "permalink": "https://www.instagram.com/reel/DPde0mgDztN/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2025-10/17952717887889249.jpg",
+          "mediaType": "VIDEO",
+          "views": 22024,
+          "likes": 73,
+          "comments": 51,
+          "caption": "POV: you just stumbled upon the most beautiful metro station in the world 🗺️\n\n📍Toledo Metro Station, Naples — often ranked among the world’s most stunning underground stops, and it’s easy to see why 🌟\n\nIf you’re visiting the Murales Maradona, hop on the metro and make sure to stop here for a little art meets architecture magic.\n\nSAVE for your next Italy trip 🇮🇹\n\n#travel #italy #naples #travel",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "italy-2025-09-17",
+      "spanDays": 19,
+      "postCount": 6,
+      "score": 1,
+      "confidence": "medium",
+      "forIt": [
+        "posts span 19 days",
+        "says \"exploring\""
+      ],
+      "against": [
+        "says \"bucket list\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Singapore",
+      "lat": 1.35,
+      "lon": 103.82,
+      "firstDate": "2025-08-26",
+      "lastDate": "2025-08-26",
+      "posts": [
+        {
+          "postId": "18007463381623318",
+          "country": "Singapore",
+          "lat": 1.35,
+          "lon": 103.82,
+          "matchedOn": "singapore",
+          "date": "2025-08-26",
+          "permalink": "https://www.instagram.com/p/DNztDlo3g6v/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2025-08/18007463381623318_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 382,
+          "comments": 47,
+          "caption": "Rains, sun, food, fun, skylines & adventures… Singapore wrapped it all up into one perfect family holiday 🌴🍜🏙️❤️🐼🦖🌦️",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "holiday",
+            "family holiday"
+          ],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "singapore-2025-08-26",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 3,
+      "confidence": "medium",
+      "forIt": [
+        "says \"holiday\", \"family holiday\""
+      ],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Kenya",
+      "lat": -1.29,
+      "lon": 36.82,
+      "firstDate": "2025-07-11",
+      "lastDate": "2025-07-21",
+      "posts": [
+        {
+          "postId": "18004119959622581",
+          "country": "Kenya",
+          "lat": -1.29,
+          "lon": 36.82,
+          "matchedOn": "kenya",
+          "date": "2025-07-11",
+          "permalink": "https://www.instagram.com/reel/DL9W9YLNPGC/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2025-07/18004119959622581.jpg",
+          "mediaType": "VIDEO",
+          "views": 10625,
+          "likes": 109,
+          "comments": 89,
+          "caption": "Back where the wild feels like home. Kenya, round two—let’s make it even more unforgettable🐘🍃🦁🦏🐆🐃\n#kenya #africa",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17913622617152681",
+          "country": "Kenya",
+          "lat": -1.29,
+          "lon": 36.82,
+          "matchedOn": "nairobi",
+          "date": "2025-07-21",
+          "permalink": "https://www.instagram.com/p/DMYKyTOSh4z/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2025-07/17913622617152681_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 142,
+          "comments": 107,
+          "caption": "Exploring Kenya side-by-side, our hearts grew as wide as the savannah.\n\nKenya album - it’s always a good idea 🇰🇪\n\n#summer25 #nairobi",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "exploring"
+          ],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "kenya-2025-07-11",
+      "spanDays": 10,
+      "postCount": 2,
+      "score": 5,
+      "confidence": "high",
+      "forIt": [
+        "posts span 10 days",
+        "says \"exploring\""
+      ],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Maldives",
+      "lat": 3.2,
+      "lon": 73.22,
+      "firstDate": "2025-06-22",
+      "lastDate": "2025-06-22",
+      "posts": [
+        {
+          "postId": "17995773104644748",
+          "country": "Maldives",
+          "lat": 3.2,
+          "lon": 73.22,
+          "matchedOn": "maldives",
+          "date": "2025-06-22",
+          "permalink": "https://www.instagram.com/reel/DLNerzuyoWq/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2025-06/17995773104644748.jpg",
+          "mediaType": "VIDEO",
+          "views": 15790,
+          "likes": 2460,
+          "comments": 74,
+          "caption": "POV: When vanity is a summer moodboard. \n\n@kayali @monakattan \nVacay in a bottle set:\n🍊Marrakesh in a bottle - Orange Blossom 24\n🍋Capri in a bottle - Lemon Sugar 14\n🍌Maui in a bottle - Sweet Banana 37\n🥥Maldives in a bottle - Ylang Coco 20\n\n@gisou @negin_mirsalehi \n🐝🍯infused Lip oil \n\n@laneige_eu \n🍬Sweet candy \n🥭Mango lip balm \n\n@sephoramiddleeast @sephora \n\nHave you tried any of these?? Co",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "vacay"
+          ],
+          "brandWords": [
+            "bottle"
+          ],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "maldives-2025-06-22",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 3,
+      "confidence": "medium",
+      "forIt": [
+        "says \"vacay\""
+      ],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Morocco",
+      "lat": 31.63,
+      "lon": -7.99,
+      "firstDate": "2025-06-22",
+      "lastDate": "2025-06-22",
+      "posts": [
+        {
+          "postId": "17995773104644748",
+          "country": "Morocco",
+          "lat": 31.63,
+          "lon": -7.99,
+          "matchedOn": "marrakesh",
+          "date": "2025-06-22",
+          "permalink": "https://www.instagram.com/reel/DLNerzuyoWq/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2025-06/17995773104644748.jpg",
+          "mediaType": "VIDEO",
+          "views": 15790,
+          "likes": 2460,
+          "comments": 74,
+          "caption": "POV: When vanity is a summer moodboard. \n\n@kayali @monakattan \nVacay in a bottle set:\n🍊Marrakesh in a bottle - Orange Blossom 24\n🍋Capri in a bottle - Lemon Sugar 14\n🍌Maui in a bottle - Sweet Banana 37\n🥥Maldives in a bottle - Ylang Coco 20\n\n@gisou @negin_mirsalehi \n🐝🍯infused Lip oil \n\n@laneige_eu \n🍬Sweet candy \n🥭Mango lip balm \n\n@sephoramiddleeast @sephora \n\nHave you tried any of these?? Co",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "vacay"
+          ],
+          "brandWords": [
+            "bottle"
+          ],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "morocco-2025-06-22",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 3,
+      "confidence": "medium",
+      "forIt": [
+        "says \"vacay\""
+      ],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Australia",
+      "lat": -33.87,
+      "lon": 151.21,
+      "firstDate": "2025-06-16",
+      "lastDate": "2025-06-16",
+      "posts": [
+        {
+          "postId": "18010915331765509",
+          "country": "Australia",
+          "lat": -33.87,
+          "lon": 151.21,
+          "matchedOn": "australia",
+          "date": "2025-06-16",
+          "permalink": "https://www.instagram.com/reel/DK9v5uUSlho/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2025-06/18010915331765509.jpg",
+          "mediaType": "VIDEO",
+          "views": 12214,
+          "likes": 839,
+          "comments": 110,
+          "caption": "Perfume passport, stamped! 🌍✨\nSniffed my way through a world of divine scents at @revalueconsulting press day—an unforgettable olfactory journey.\n\n@goldfield_and_banks_australia from Australia delivered crisp, coastal freshness with a luxurious twist.\n\n@fugazzifragrances from Amsterdam was all things bold, zesty, and playfully fruity.\n\n@jusboxperfumes from Italy brought contemporary chic with fra",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "perfume",
+            "fragrance",
+            "scent",
+            "press day"
+          ],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "australia-2025-06-16",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 0,
+      "confidence": "low",
+      "forIt": [],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "France",
+      "lat": 48.86,
+      "lon": 2.35,
+      "firstDate": "2025-06-16",
+      "lastDate": "2025-06-16",
+      "posts": [
+        {
+          "postId": "18010915331765509",
+          "country": "France",
+          "lat": 48.86,
+          "lon": 2.35,
+          "matchedOn": "france",
+          "date": "2025-06-16",
+          "permalink": "https://www.instagram.com/reel/DK9v5uUSlho/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2025-06/18010915331765509.jpg",
+          "mediaType": "VIDEO",
+          "views": 12214,
+          "likes": 839,
+          "comments": 110,
+          "caption": "Perfume passport, stamped! 🌍✨\nSniffed my way through a world of divine scents at @revalueconsulting press day—an unforgettable olfactory journey.\n\n@goldfield_and_banks_australia from Australia delivered crisp, coastal freshness with a luxurious twist.\n\n@fugazzifragrances from Amsterdam was all things bold, zesty, and playfully fruity.\n\n@jusboxperfumes from Italy brought contemporary chic with fra",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "perfume",
+            "fragrance",
+            "scent",
+            "press day"
+          ],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "france-2025-06-16",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 0,
+      "confidence": "low",
+      "forIt": [],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Italy",
+      "lat": 41.9,
+      "lon": 12.5,
+      "firstDate": "2025-06-16",
+      "lastDate": "2025-06-22",
+      "posts": [
+        {
+          "postId": "18010915331765509",
+          "country": "Italy",
+          "lat": 41.9,
+          "lon": 12.5,
+          "matchedOn": "italy",
+          "date": "2025-06-16",
+          "permalink": "https://www.instagram.com/reel/DK9v5uUSlho/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2025-06/18010915331765509.jpg",
+          "mediaType": "VIDEO",
+          "views": 12214,
+          "likes": 839,
+          "comments": 110,
+          "caption": "Perfume passport, stamped! 🌍✨\nSniffed my way through a world of divine scents at @revalueconsulting press day—an unforgettable olfactory journey.\n\n@goldfield_and_banks_australia from Australia delivered crisp, coastal freshness with a luxurious twist.\n\n@fugazzifragrances from Amsterdam was all things bold, zesty, and playfully fruity.\n\n@jusboxperfumes from Italy brought contemporary chic with fra",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "perfume",
+            "fragrance",
+            "scent",
+            "press day"
+          ],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17995773104644748",
+          "country": "Italy",
+          "lat": 41.9,
+          "lon": 12.5,
+          "matchedOn": "capri",
+          "date": "2025-06-22",
+          "permalink": "https://www.instagram.com/reel/DLNerzuyoWq/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2025-06/17995773104644748.jpg",
+          "mediaType": "VIDEO",
+          "views": 15790,
+          "likes": 2460,
+          "comments": 74,
+          "caption": "POV: When vanity is a summer moodboard. \n\n@kayali @monakattan \nVacay in a bottle set:\n🍊Marrakesh in a bottle - Orange Blossom 24\n🍋Capri in a bottle - Lemon Sugar 14\n🍌Maui in a bottle - Sweet Banana 37\n🥥Maldives in a bottle - Ylang Coco 20\n\n@gisou @negin_mirsalehi \n🐝🍯infused Lip oil \n\n@laneige_eu \n🍬Sweet candy \n🥭Mango lip balm \n\n@sephoramiddleeast @sephora \n\nHave you tried any of these?? Co",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "vacay"
+          ],
+          "brandWords": [
+            "bottle"
+          ],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "italy-2025-06-16",
+      "spanDays": 6,
+      "postCount": 2,
+      "score": 5,
+      "confidence": "high",
+      "forIt": [
+        "posts span 6 days",
+        "says \"vacay\""
+      ],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Netherlands",
+      "lat": 52.37,
+      "lon": 4.9,
+      "firstDate": "2025-06-16",
+      "lastDate": "2025-06-16",
+      "posts": [
+        {
+          "postId": "18010915331765509",
+          "country": "Netherlands",
+          "lat": 52.37,
+          "lon": 4.9,
+          "matchedOn": "amsterdam",
+          "date": "2025-06-16",
+          "permalink": "https://www.instagram.com/reel/DK9v5uUSlho/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2025-06/18010915331765509.jpg",
+          "mediaType": "VIDEO",
+          "views": 12214,
+          "likes": 839,
+          "comments": 110,
+          "caption": "Perfume passport, stamped! 🌍✨\nSniffed my way through a world of divine scents at @revalueconsulting press day—an unforgettable olfactory journey.\n\n@goldfield_and_banks_australia from Australia delivered crisp, coastal freshness with a luxurious twist.\n\n@fugazzifragrances from Amsterdam was all things bold, zesty, and playfully fruity.\n\n@jusboxperfumes from Italy brought contemporary chic with fra",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "perfume",
+            "fragrance",
+            "scent",
+            "press day"
+          ],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "netherlands-2025-06-16",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 0,
+      "confidence": "low",
+      "forIt": [],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "India",
+      "lat": 28.61,
+      "lon": 77.21,
+      "firstDate": "2025-05-24",
+      "lastDate": "2025-05-24",
+      "posts": [
+        {
+          "postId": "17863933254401705",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "india",
+          "date": "2025-05-24",
+          "permalink": "https://www.instagram.com/p/DKBtfRayu1L/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2025-05/17863933254401705_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 406,
+          "comments": 51,
+          "caption": "Queen behavior only 👑✨ @viceroydxb \nWhen you’re invited to one of the most exclusive dining experiences in town — Viceroy’s Table, where India’s iconic gymkhana charm meets modern-day finesse. From bold, flavour-packed bites to colonial elegance on a plate, this isn’t just a meal, it’s a whole mood🍸🍴\n\nThink Colonial Indian cuisine reimagined with the finest seasonal British ingredients — vibran",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": [
+            "in town"
+          ]
+        }
+      ],
+      "tripId": "india-2025-05-24",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -3,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"in town\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Singapore",
+      "lat": 1.35,
+      "lon": 103.82,
+      "firstDate": "2025-05-19",
+      "lastDate": "2025-05-19",
+      "posts": [
+        {
+          "postId": "17895284220211588",
+          "country": "Singapore",
+          "lat": 1.35,
+          "lon": 103.82,
+          "matchedOn": "singapore",
+          "date": "2025-05-19",
+          "permalink": "https://www.instagram.com/reel/DJ09IttSSRQ/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2025-05/17895284220211588.jpg",
+          "mediaType": "VIDEO",
+          "views": 21467,
+          "likes": 616,
+          "comments": 63,
+          "caption": "X @theeditorsmarket.me \nBreezy, effortless, and oh-so-chic ✨\nLinen sets that move with you — modest, modern & made for the everyday.\nFrom Singapore to 7+ branches across the UAE… find your timeless essential 💛 \n\nShop the collection online or in-store\nShop locations:\nDubai:\n@citywalkdubai @dubaihillsmall @dubaifestivalcitymall @difcgateavenue\nSharjah:\n° @citycentralzahia\nAbu Dhabi:\n@thegalleriauae",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "collection",
+            "shop the"
+          ],
+          "atHomeWords": [
+            "dubai",
+            "uae",
+            "abu dhabi",
+            "sharjah"
+          ]
+        }
+      ],
+      "tripId": "singapore-2025-05-19",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -3,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\", \"uae\", \"abu dhabi\", \"sharjah\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "China",
+      "lat": 22.32,
+      "lon": 114.17,
+      "firstDate": "2025-05-06",
+      "lastDate": "2025-05-06",
+      "posts": [
+        {
+          "postId": "17977645424837232",
+          "country": "China",
+          "lat": 22.32,
+          "lon": 114.17,
+          "matchedOn": "china",
+          "date": "2025-05-06",
+          "permalink": "https://www.instagram.com/reel/DJUEYdcyGE0/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2025-05/17977645424837232.jpg",
+          "mediaType": "VIDEO",
+          "views": 35767,
+          "likes": 849,
+          "comments": 60,
+          "caption": "POV: You just stepped into a dopamine dream. House of Hype hits different, \nDubai’s wildest playground .100+ experiences, infinite vibes. @househype \n\n📍China Town Dubai Mall \nPr @trifidmedia",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": [
+            "dubai"
+          ]
+        }
+      ],
+      "tripId": "china-2025-05-06",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -3,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "United Kingdom",
+      "lat": 51.51,
+      "lon": -0.13,
+      "firstDate": "2025-04-24",
+      "lastDate": "2025-04-26",
+      "posts": [
+        {
+          "postId": "18010279160548459",
+          "country": "United Kingdom",
+          "lat": 51.51,
+          "lon": -0.13,
+          "matchedOn": "london",
+          "date": "2025-04-24",
+          "permalink": "https://www.instagram.com/p/DI0xlbjSzUW/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2025-04/18010279160548459_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 347,
+          "comments": 111,
+          "caption": "Straight from London to Dubai — @breadaheaduae has officially arrived at @citycentremirdif , and it’s everything your tastebuds have been waiting for.\nFrom artisan sourdough -style pizzas with the dreamiest crust, to rich cappuccinos and velvety iced matchas that redefine your coffee ritual — every detail is thoughtfully crafted👌🏻\nThe pastries? Next level. The golden, flaky Spinach & Feta croiss",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "straight from"
+          ],
+          "brandWords": [],
+          "atHomeWords": [
+            "dubai"
+          ]
+        },
+        {
+          "postId": "17860709694398915",
+          "country": "United Kingdom",
+          "lat": 51.51,
+          "lon": -0.13,
+          "matchedOn": "bath",
+          "date": "2025-04-26",
+          "permalink": "https://www.instagram.com/p/DI502SpyOHK/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2025-04/17860709694398915_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 102,
+          "comments": 133,
+          "caption": "Explored the brand-new Lush Concept Store at Dubai Hills Mall — and what a day it was!\nMade our own bath bombs and fresh face masks, learned the art of sustainable gift wrapping, indulged in a relaxing spa massage, and got expert haircare tips too!\nPlus, we wandered through the region’s first-ever Lush Perfume Library and discovered fragrances with stories as beautiful as their scents.\nLeft feelin",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "perfume",
+            "fragrance",
+            "scent"
+          ],
+          "atHomeWords": [
+            "dubai"
+          ]
+        }
+      ],
+      "tripId": "united-kingdom-2025-04-24",
+      "spanDays": 2,
+      "postCount": 2,
+      "score": 5,
+      "confidence": "high",
+      "forIt": [
+        "posts span 2 days",
+        "says \"straight from\""
+      ],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "United States",
+      "lat": 40.71,
+      "lon": -74.01,
+      "firstDate": "2025-04-23",
+      "lastDate": "2025-04-23",
+      "posts": [
+        {
+          "postId": "17843256327471663",
+          "country": "United States",
+          "lat": 40.71,
+          "lon": -74.01,
+          "matchedOn": "usa",
+          "date": "2025-04-23",
+          "permalink": "https://www.instagram.com/p/DIyvBxcyGYa/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2025-04/17843256327471663_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 62,
+          "comments": 52,
+          "caption": "When it comes to clean beauty for hair, @haskuae is seriously in a league of its own.\nMade in the USA and powered by globally-sourced ingredients like Moroccan argan oil, Tahitian monoi, and South Pacific coconut oil, their products are sulfate-free, paraben-free, and basically therapy for tired, heat-styled, protein-treated hair (like mine) \nCurrently obsessed with their Argan Oil Repairing colle",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "collection"
+          ],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "united-states-2025-04-23",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 0,
+      "confidence": "low",
+      "forIt": [],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Japan",
+      "lat": 35.68,
+      "lon": 139.69,
+      "firstDate": "2025-04-20",
+      "lastDate": "2025-04-20",
+      "posts": [
+        {
+          "postId": "18079885522613659",
+          "country": "Japan",
+          "lat": 35.68,
+          "lon": 139.69,
+          "matchedOn": "japan",
+          "date": "2025-04-20",
+          "permalink": "https://www.instagram.com/p/DIrgO8jzBU4/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2025-04/18079885522613659_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 58,
+          "comments": 49,
+          "caption": "A morning well spent with my favourites @goldcollagenuae, celebrating the launch of Forte Ageless — their newest, most powerful collagen yet.\nFrench Marine Collagen, crafted in Japan, designed to nourish from within — boosting glow, hydration, immunity, and so much more.\nBeauty truly starts inside, and with Forte Ageless, it just gets better.\nThank you @goldcollagenuae for a stunning morning and @",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "launch"
+          ],
+          "atHomeWords": [
+            "dubai"
+          ]
+        }
+      ],
+      "tripId": "japan-2025-04-20",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -3,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "India",
+      "lat": 28.61,
+      "lon": 77.21,
+      "firstDate": "2025-04-02",
+      "lastDate": "2025-04-14",
+      "posts": [
+        {
+          "postId": "17894495247085360",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "india",
+          "date": "2025-04-02",
+          "permalink": "https://www.instagram.com/p/DH8VLU9yXPt/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2025-04/17894495247085360_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 97,
+          "comments": 64,
+          "caption": "When a meal feels like a trip down memory lane— @daftardubai truly delivers a taste of home with every bite! The perfect blend of old-world charm and modern finesse, each dish bursts with authentic, comforting flavors that transport you straight to the heart of India. It’s rare to find a place that nails the rich, soulful essence of Indian cuisine, but Daftar does it effortlessly.\n\nThe food was so",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": [
+            "dubai"
+          ]
+        },
+        {
+          "postId": "18076905061757455",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "delhi",
+          "date": "2025-04-14",
+          "permalink": "https://www.instagram.com/p/DIav5KkyZDm/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2025-04/18076905061757455_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 185,
+          "comments": 44,
+          "caption": "Stepped into @bombaybungalow that feels like a royal escape and tastes like home—every corner is a visual treat, but it’s the food that truly steals your heart. Rich, authentic, and bursting with the same soul as the streets of Delhi. If you’ve ever craved that dilliwala flavor—this is where you’ll find it, without boarding a flight! \n\n@chef_neerajrana \n\nThankyou for this wonderful treat to the so",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": [
+            "dubai",
+            "mydubai"
+          ]
+        }
+      ],
+      "tripId": "india-2025-04-02",
+      "spanDays": 12,
+      "postCount": 2,
+      "score": -1,
+      "confidence": "low",
+      "forIt": [
+        "posts span 12 days"
+      ],
+      "against": [
+        "caption is about home: \"dubai\", \"mydubai\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Italy",
+      "lat": 41.9,
+      "lon": 12.5,
+      "firstDate": "2025-02-06",
+      "lastDate": "2025-02-06",
+      "posts": [
+        {
+          "postId": "18073555861675953",
+          "country": "Italy",
+          "lat": 41.9,
+          "lon": 12.5,
+          "matchedOn": "italy",
+          "date": "2025-02-06",
+          "permalink": "https://www.instagram.com/p/DFuCDi1yBOB/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2025-02/18073555861675953_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 178,
+          "comments": 77,
+          "caption": "A wonderful evening exploring the world of Italian beauty! From luxurious makeup to exquisitely designed packaging, each product reflects Italy’s dedication to quality and craftsmanship. Italian beauty brands are making waves in the UAE, bringing their signature innovation and excellence. When it comes to beauty, Italians do it best! Excited to see these brands thrive here!\n@itatradeagency \n@itadu",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "exploring"
+          ],
+          "brandWords": [],
+          "atHomeWords": [
+            "uae"
+          ]
+        }
+      ],
+      "tripId": "italy-2025-02-06",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 3,
+      "confidence": "medium",
+      "forIt": [
+        "says \"exploring\""
+      ],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "India",
+      "lat": 28.61,
+      "lon": 77.21,
+      "firstDate": "2024-09-11",
+      "lastDate": "2024-09-11",
+      "posts": [
+        {
+          "postId": "18064970533721723",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "mumbai",
+          "date": "2024-09-11",
+          "permalink": "https://www.instagram.com/reel/C_xx27OSb_1/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2024-09/18064970533721723.jpg",
+          "mediaType": "VIDEO",
+          "views": 25001,
+          "likes": 408,
+          "comments": 91,
+          "caption": "Creating my perfect wedding guest moodboard with these 3 looks from @be.divalicious powered by @flormar_uae \n\nGet ready to be a pataka🧨diva this festive✨season! \nShop from over 100 designers across Delhi, Mumbai & Dubai showcasing wedding wear, festive attire, fine jewelry, accessories, gifting, decor & edibles! 🛍️⁠\n⁠\nBe it a wedding, festive, resort wear or an evening Soiree it’s all there!⁠ \nN",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": [
+            "dubai"
+          ]
+        }
+      ],
+      "tripId": "india-2024-09-11",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -3,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "France",
+      "lat": 48.86,
+      "lon": 2.35,
+      "firstDate": "2024-08-02",
+      "lastDate": "2024-08-02",
+      "posts": [
+        {
+          "postId": "17879034909050212",
+          "country": "France",
+          "lat": 48.86,
+          "lon": 2.35,
+          "matchedOn": "paris",
+          "date": "2024-08-02",
+          "permalink": "https://www.instagram.com/reel/C-K-JunysFS/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2024-08/17879034909050212.jpg",
+          "mediaType": "VIDEO",
+          "views": 10304,
+          "likes": 275,
+          "comments": 50,
+          "caption": "He took me to all 3 of my fav \nRome-Ibiza-Paris♥️ @simplychopra \n\n#summer24 #couple #reels #reelsinstagram #reelitfeelit #love #viral #viralvideos #trend #trending #viral #couple #couplegoals #husbandandwife #love #relation #relatable #happiness #explore #trendingnow #europe \n\n(Reels, trending, couples, couple goals, love, husband love, happiness, trending videos, viral, explore, travel, travel tr",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "france-2024-08-02",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 0,
+      "confidence": "low",
+      "forIt": [],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Italy",
+      "lat": 41.9,
+      "lon": 12.5,
+      "firstDate": "2024-08-02",
+      "lastDate": "2024-08-02",
+      "posts": [
+        {
+          "postId": "17879034909050212",
+          "country": "Italy",
+          "lat": 41.9,
+          "lon": 12.5,
+          "matchedOn": "rome",
+          "date": "2024-08-02",
+          "permalink": "https://www.instagram.com/reel/C-K-JunysFS/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2024-08/17879034909050212.jpg",
+          "mediaType": "VIDEO",
+          "views": 10304,
+          "likes": 275,
+          "comments": 50,
+          "caption": "He took me to all 3 of my fav \nRome-Ibiza-Paris♥️ @simplychopra \n\n#summer24 #couple #reels #reelsinstagram #reelitfeelit #love #viral #viralvideos #trend #trending #viral #couple #couplegoals #husbandandwife #love #relation #relatable #happiness #explore #trendingnow #europe \n\n(Reels, trending, couples, couple goals, love, husband love, happiness, trending videos, viral, explore, travel, travel tr",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "italy-2024-08-02",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 0,
+      "confidence": "low",
+      "forIt": [],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Spain",
+      "lat": 40.42,
+      "lon": -3.7,
+      "firstDate": "2024-08-02",
+      "lastDate": "2024-08-16",
+      "posts": [
+        {
+          "postId": "17879034909050212",
+          "country": "Spain",
+          "lat": 40.42,
+          "lon": -3.7,
+          "matchedOn": "ibiza",
+          "date": "2024-08-02",
+          "permalink": "https://www.instagram.com/reel/C-K-JunysFS/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2024-08/17879034909050212.jpg",
+          "mediaType": "VIDEO",
+          "views": 10304,
+          "likes": 275,
+          "comments": 50,
+          "caption": "He took me to all 3 of my fav \nRome-Ibiza-Paris♥️ @simplychopra \n\n#summer24 #couple #reels #reelsinstagram #reelitfeelit #love #viral #viralvideos #trend #trending #viral #couple #couplegoals #husbandandwife #love #relation #relatable #happiness #explore #trendingnow #europe \n\n(Reels, trending, couples, couple goals, love, husband love, happiness, trending videos, viral, explore, travel, travel tr",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18022519727342150",
+          "country": "Spain",
+          "lat": 40.42,
+          "lon": -3.7,
+          "matchedOn": "ibiza",
+          "date": "2024-08-04",
+          "permalink": "https://www.instagram.com/p/C-QmW3WyFSA/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2024-08/18022519727342150_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 113,
+          "comments": 48,
+          "caption": "Back in my beloved Forte🎶🫶🏼💃🏻\n\n#Ibiza #Sweetestsummer #Ushuaia",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17906192108915928",
+          "country": "Spain",
+          "lat": 40.42,
+          "lon": -3.7,
+          "matchedOn": "ibiza",
+          "date": "2024-08-07",
+          "permalink": "https://www.instagram.com/p/C-XCFW6yUCh/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2024-08/17906192108915928_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 69,
+          "comments": 24,
+          "caption": "Stay a while in this stunning Vatavaran—where the vibes and views are pure magic. 🎶🌳🪭🫶🏼 \n\n@528ibiza @brunchibiza \nWearing @caladelacruz \n🕶️ @asos \n\n#Summer #island #ibiza #musiccalholiday",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "holiday"
+          ],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18045142939741146",
+          "country": "Spain",
+          "lat": 40.42,
+          "lon": -3.7,
+          "matchedOn": "spain",
+          "date": "2024-08-09",
+          "permalink": "https://www.instagram.com/reel/C-cYImYSLz1/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2024-08/18045142939741146.jpg",
+          "mediaType": "VIDEO",
+          "views": 14421,
+          "likes": 513,
+          "comments": 47,
+          "caption": "Three years of dreaming, and it exceeded everything I imagined. I’ve waited over three years to experience this hike and feel the magic. It’s truly a dream come true, the best day of my life🙏🕉️🫶🏼\n@ibizahikestation \nThis iconic Ibiza hike combines the majestic beauty of Es Vedrà—a towering limestone rock rising from the Mediterranean—with the transformative power of meditation. Ascend 400 meter",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17966720480784390",
+          "country": "Spain",
+          "lat": 40.42,
+          "lon": -3.7,
+          "matchedOn": "ibiza",
+          "date": "2024-08-12",
+          "permalink": "https://www.instagram.com/p/C-kob1xNymf/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2024-08/17966720480784390_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 103,
+          "comments": 47,
+          "caption": "In a sunshine state of mind💛💛 \n\nOutfit via @revolvemena @revolve \n\n#holidayvibes #ibiza #earlycelebration #birthday",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "holiday"
+          ],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18451510822040181",
+          "country": "Spain",
+          "lat": 40.42,
+          "lon": -3.7,
+          "matchedOn": "ibiza",
+          "date": "2024-08-13",
+          "permalink": "https://www.instagram.com/reel/C-nizJDyE_5/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2024-08/18451510822040181.jpg",
+          "mediaType": "VIDEO",
+          "views": 11064,
+          "likes": 166,
+          "comments": 42,
+          "caption": "IBIZA 5.0 you were a BEAUTY🤌🏼 Best 8 days of my life🫶🏼Many unforgettable moments sweet, sour & spicy 🌶️ Thankyou Amit & friends for these amazing memories. 🥂👏🏻💃🏻to many more🙌 \n\n#summer #holiday #ibiza #besttimes",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "holiday"
+          ],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18345158998140708",
+          "country": "Spain",
+          "lat": 40.42,
+          "lon": -3.7,
+          "matchedOn": "spain",
+          "date": "2024-08-16",
+          "permalink": "https://www.instagram.com/reel/C-vhtARy2ff/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2024-08/18345158998140708.jpg",
+          "mediaType": "VIDEO",
+          "views": 30070,
+          "likes": 201,
+          "comments": 42,
+          "caption": "When you are Happy & you know it🥂👏🏻😉\n.\n.\n.\n.\n.\n.\nCouples, Indian Travellers, Ibiza, food of Spain, Indian Content creators, Beautiful Destinations, Travel is Life",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "spain-2024-08-02",
+      "spanDays": 14,
+      "postCount": 7,
+      "score": 5,
+      "confidence": "high",
+      "forIt": [
+        "posts span 14 days",
+        "says \"holiday\""
+      ],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Switzerland",
+      "lat": 46.95,
+      "lon": 7.45,
+      "firstDate": "2024-05-24",
+      "lastDate": "2024-05-29",
+      "posts": [
+        {
+          "postId": "17898482889003229",
+          "country": "Switzerland",
+          "lat": 46.95,
+          "lon": 7.45,
+          "matchedOn": "zurich",
+          "date": "2024-05-24",
+          "permalink": "https://www.instagram.com/reel/C7XiZrptX-E/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2024-05/17898482889003229.jpg",
+          "mediaType": "VIDEO",
+          "views": 7714,
+          "likes": 1960,
+          "comments": 34,
+          "caption": "The joy of uninterrupted tranquility🤌🏼 \n\nWearing @obeyclothing \nVia @namshi %code ASTHAO \n#travelgram #namshifinds #obeyclothing #eurotrip #zurich🇨🇭",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18014386079131643",
+          "country": "Switzerland",
+          "lat": 46.95,
+          "lon": 7.45,
+          "matchedOn": "switzerland",
+          "date": "2024-05-25",
+          "permalink": "https://www.instagram.com/p/C7Z3RwXtqjj/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2024-05/18014386079131643_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 102,
+          "comments": 21,
+          "caption": "Hallo, wunderbare Schweiz!\n\n#hike #GiessbachFalls #europe #eurotrip24 #switzerland",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18049988218732844",
+          "country": "Switzerland",
+          "lat": 46.95,
+          "lon": 7.45,
+          "matchedOn": "switzerland",
+          "date": "2024-05-27",
+          "permalink": "https://www.instagram.com/reel/C7dg7qONh7V/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2024-05/18049988218732844.jpg",
+          "mediaType": "VIDEO",
+          "views": 99218,
+          "likes": 9297,
+          "comments": 59,
+          "caption": "Hiking to the best view ever! Every step reveals a new breathtaking view. \n📍Oeschinen lake\nSwiss Alpine lake paradise 🏔️ \n\n#hike #swiss #oeschinensee #switzerland",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18398070121075077",
+          "country": "Switzerland",
+          "lat": 46.95,
+          "lon": 7.45,
+          "matchedOn": "swiss",
+          "date": "2024-05-29",
+          "permalink": "https://www.instagram.com/p/C7jllLVSDNw/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2024-05/18398070121075077_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 95,
+          "comments": 36,
+          "caption": "Toasting to the Swiss mountains with a fine red 🍷🗻 @glacier.boutiquehotel \n\n#SwissMountains #RedWine #SwissViews #AlpineAdventure #MountainMagic #WineAndViews #SwitzerlandLove #WineInTheAlps #ScenicSips #TravelGoals #WineMoments #NatureAndWine #AlpineEscape #SwissBeauty #cheerstolife",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "switzerland-2024-05-24",
+      "spanDays": 5,
+      "postCount": 4,
+      "score": 2,
+      "confidence": "medium",
+      "forIt": [
+        "posts span 5 days"
+      ],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "France",
+      "lat": 48.86,
+      "lon": 2.35,
+      "firstDate": "2024-04-11",
+      "lastDate": "2024-04-13",
+      "posts": [
+        {
+          "postId": "18001384718310449",
+          "country": "France",
+          "lat": 48.86,
+          "lon": 2.35,
+          "matchedOn": "eiffel",
+          "date": "2024-04-11",
+          "permalink": "https://www.instagram.com/p/C5ngGRZt7SA/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2024-04/18001384718310449_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 169,
+          "comments": 14,
+          "caption": "Gazing at the majestic Eiffel Tower amidst the cherry blossoms with my family has truly made this Spring a cherished memory. I am filled with gratitude & feel incredibly blessed🌸🙏 \n#Paris2024 #cherryblossom #spring #family #grateful \n\nWearing @diesel @diesel_arabia \n🕶️ @asos",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18027785065952999",
+          "country": "France",
+          "lat": 48.86,
+          "lon": 2.35,
+          "matchedOn": "eiffel",
+          "date": "2024-04-12",
+          "permalink": "https://www.instagram.com/p/C5qXYoANQHR/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2024-04/18027785065952999_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 277,
+          "comments": 26,
+          "caption": "Exploring Paris with my tribe, with the Eiffel Tower towering above us. Every moment a treasure, every memory a gem. 💫🗼 #FamilyAdventuresInParis #EiffelTowerGlimpses",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "exploring"
+          ],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18070502380450820",
+          "country": "France",
+          "lat": 48.86,
+          "lon": 2.35,
+          "matchedOn": "paris",
+          "date": "2024-04-13",
+          "permalink": "https://www.instagram.com/p/C5tBmWBSjaJ/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2024-04/18070502380450820_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 154,
+          "comments": 6,
+          "caption": "An evening in Paris ♥️ \n\n#ParisNights #CityOfLove #EiffelTowerViews #SeineRiverWalks #EveningMagic #UrbanCharm",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "france-2024-04-11",
+      "spanDays": 2,
+      "postCount": 3,
+      "score": 5,
+      "confidence": "high",
+      "forIt": [
+        "posts span 2 days",
+        "says \"exploring\""
+      ],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Netherlands",
+      "lat": 52.37,
+      "lon": 4.9,
+      "firstDate": "2024-04-07",
+      "lastDate": "2024-04-07",
+      "posts": [
+        {
+          "postId": "18025950029044567",
+          "country": "Netherlands",
+          "lat": 52.37,
+          "lon": 4.9,
+          "matchedOn": "holland",
+          "date": "2024-04-07",
+          "permalink": "https://www.instagram.com/p/C5cz0HEtBY8/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2024-04/18025950029044567_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 328,
+          "comments": 56,
+          "caption": "Hey there, tulip enthusiasts! Reporting live from the flower-powered wonderland of Holland! 🌷🌷 Let’s paint the town red… and yellow, and pink! 🎨🇳🇱 #TulipMania🌷💃🇳🇱 #TulipFestival #SpringBreak #tulipholland",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "netherlands-2024-04-07",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 0,
+      "confidence": "low",
+      "forIt": [],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Saudi Arabia",
+      "lat": 24.71,
+      "lon": 46.68,
+      "firstDate": "2024-03-12",
+      "lastDate": "2024-03-12",
+      "posts": [
+        {
+          "postId": "18013698128233756",
+          "country": "Saudi Arabia",
+          "lat": 24.71,
+          "lon": 46.68,
+          "matchedOn": "saudi",
+          "date": "2024-03-12",
+          "permalink": "https://www.instagram.com/p/C4aZTo_SiMr/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2024-03/18013698128233756_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 83,
+          "comments": 39,
+          "caption": "Prepare to dazzle with @aldo_shoes exquisite Ramadan Collection showcasing renowned superstar @myriamfares \nStep into the spotlight with these glamorous designs of shoes, bags & accessories ideal for the season’s festivities. \nThe #ALDORamadan  collection presents standout styles adorned with intricate details, ensuring you make a memorable entrance wherever you go🤎\n\nCheckout the new collection a",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "collection"
+          ],
+          "atHomeWords": [
+            "dubai",
+            "uae"
+          ]
+        }
+      ],
+      "tripId": "saudi-arabia-2024-03-12",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -3,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\", \"uae\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Qatar",
+      "lat": 25.29,
+      "lon": 51.53,
+      "firstDate": "2024-03-12",
+      "lastDate": "2024-03-12",
+      "posts": [
+        {
+          "postId": "18013698128233756",
+          "country": "Qatar",
+          "lat": 25.29,
+          "lon": 51.53,
+          "matchedOn": "qatar",
+          "date": "2024-03-12",
+          "permalink": "https://www.instagram.com/p/C4aZTo_SiMr/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2024-03/18013698128233756_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 83,
+          "comments": 39,
+          "caption": "Prepare to dazzle with @aldo_shoes exquisite Ramadan Collection showcasing renowned superstar @myriamfares \nStep into the spotlight with these glamorous designs of shoes, bags & accessories ideal for the season’s festivities. \nThe #ALDORamadan  collection presents standout styles adorned with intricate details, ensuring you make a memorable entrance wherever you go🤎\n\nCheckout the new collection a",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "collection"
+          ],
+          "atHomeWords": [
+            "dubai",
+            "uae"
+          ]
+        }
+      ],
+      "tripId": "qatar-2024-03-12",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -3,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\", \"uae\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "India",
+      "lat": 28.61,
+      "lon": 77.21,
+      "firstDate": "2024-03-07",
+      "lastDate": "2024-03-07",
+      "posts": [
+        {
+          "postId": "18058409413532693",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "india",
+          "date": "2024-03-07",
+          "permalink": "https://www.instagram.com/p/C4NC5z0tHpV/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2024-03/18058409413532693_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 80,
+          "comments": 48,
+          "caption": "Step into the timeless elegance of Forest Essentials, India’s premier luxury beauty brand, now available in Dubai. With locations in Dubai Hills Mall and Mirdiff City Centre.\nForest Essentials seamlessly blends ancient Ayurvedic traditions with modern allure, celebrated for its effectiveness and luxurious products. From essential skincare to delightful haircare products, their diverse range includ",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "skincare"
+          ],
+          "atHomeWords": [
+            "dubai"
+          ]
+        }
+      ],
+      "tripId": "india-2024-03-07",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -3,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Pakistan",
+      "lat": 33.69,
+      "lon": 73.05,
+      "firstDate": "2024-03-03",
+      "lastDate": "2024-03-03",
+      "posts": [
+        {
+          "postId": "17998536905288965",
+          "country": "Pakistan",
+          "lat": 33.69,
+          "lon": 73.05,
+          "matchedOn": "pakistan",
+          "date": "2024-03-03",
+          "permalink": "https://www.instagram.com/reel/C4CxXVvS1L6/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2024-03/17998536905288965.jpg",
+          "mediaType": "VIDEO",
+          "views": 10008,
+          "likes": 111,
+          "comments": 60,
+          "caption": "Ensemble’s much awaited annual Ramadan Festive Souk, \nHappening on Saturday\n🗓️9th March \n🕥10:30am to 8pm \n📍Ritz Carlton DIFC. \n\nWearing @armoire.ae by Faiza Saqlain🧡\n\nFREE entry for all and valet will be available. Pakistan’s much sought after designers are participating including Rizwan Beyg, Nomi Ansari, Sania Maskatiya, Faiza Saqlain, Harris Shakeel and many more so don’t miss out!\n\n#Ensemb",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": [
+            "dubai"
+          ]
+        }
+      ],
+      "tripId": "pakistan-2024-03-03",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -3,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Switzerland",
+      "lat": 46.95,
+      "lon": 7.45,
+      "firstDate": "2024-02-04",
+      "lastDate": "2024-02-08",
+      "posts": [
+        {
+          "postId": "18074131234455614",
+          "country": "Switzerland",
+          "lat": 46.95,
+          "lon": 7.45,
+          "matchedOn": "swiss",
+          "date": "2024-02-04",
+          "permalink": "https://www.instagram.com/reel/C27N68NNI__/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2024-02/18074131234455614.jpg",
+          "mediaType": "VIDEO",
+          "views": 12184,
+          "likes": 193,
+          "comments": 45,
+          "caption": "Modista Season returns & this is your reminder to save the date and check out their show in Dubai!! Truly the best one stop shop for all your Wedding & Ramadan Shopping. \n\nWearing @theohailakhanofficial \nJewelry @blingbyruchika \nStyled by @styleitwithshiveta \n\nMODISTA RAMADAN EDIT @modistadxb \n\n 📆17 & 18 February- 11am to 8pm\n📍Swissôtel Al Murooj Hotel, Dubai\n\n#modista #modistadubai #modistafash",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": [
+            "dubai"
+          ]
+        },
+        {
+          "postId": "17996930468582755",
+          "country": "Switzerland",
+          "lat": 46.95,
+          "lon": 7.45,
+          "matchedOn": "swiss",
+          "date": "2024-02-08",
+          "permalink": "https://www.instagram.com/reel/C3E_wC5yr16/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2024-02/17996930468582755.jpg",
+          "mediaType": "VIDEO",
+          "views": 16442,
+          "likes": 201,
+          "comments": 49,
+          "caption": "><Modista has the most amazing collection from designer @ruchisoniofficial \n\nBridesmaid Wedding Outfits Inspo✨\nWhich outfit is your favourite 1st or 2nd\nComment below \n\nWearing @ruchisoniofficial \nClutch @adwita_bags_jewels \nJewelry @shopattbe \nStyled by @styleitwithshiveta \n\nMODISTA RAMADAN EDIT @modistadxb \n\n 📆17 & 18 February- 11am to 8pm\n📍Swissôtel Al Murooj Hotel, Dubai\n\n#modista #modistadu",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "collection"
+          ],
+          "atHomeWords": [
+            "dubai"
+          ]
+        }
+      ],
+      "tripId": "switzerland-2024-02-04",
+      "spanDays": 4,
+      "postCount": 2,
+      "score": -1,
+      "confidence": "low",
+      "forIt": [
+        "posts span 4 days"
+      ],
+      "against": [
+        "caption is about home: \"dubai\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Pakistan",
+      "lat": 33.69,
+      "lon": 73.05,
+      "firstDate": "2023-11-15",
+      "lastDate": "2023-11-21",
+      "posts": [
+        {
+          "postId": "18026041069756400",
+          "country": "Pakistan",
+          "lat": 33.69,
+          "lon": 73.05,
+          "matchedOn": "pakistan",
+          "date": "2023-11-15",
+          "permalink": "https://www.instagram.com/p/CzrfFd7SrIg/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-11/18026041069756400_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 34,
+          "comments": 12,
+          "caption": "X @mysiebytahira - Straight out of a fairytale🧚🏻‍♀️ \n\nThe collection exhibits delicately curated designs inspired from the wedding festivities and rich traditions. \nThe floral motifs enhanced with the beaming embellishments and distinguished silhouettes are what make this collection a complete style guide for the wedding season.\n\nDM or WhatsApp for Queries: +923047771646 &\n+923000885503\n\nJewelry",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "collection"
+          ],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17918172785820664",
+          "country": "Pakistan",
+          "lat": 33.69,
+          "lon": 73.05,
+          "matchedOn": "pakistan",
+          "date": "2023-11-15",
+          "permalink": "https://www.instagram.com/p/Czq4B1KyKTB/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-11/17918172785820664_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 78,
+          "comments": 23,
+          "caption": "X @mysiebytahira - Straight out of a Fairytale 🧚🏻‍♀️\n\nThe collection exhibits delicately curated designs inspired from the wedding festivities and rich traditions.\n\nThe floral motifs enhanced with the beaming embellishments and distinguished silhouettes are what make this collection a complete style guide for the wedding season.\n\nDM or WhatsApp for Queries: +923047771646 &\n+923000885503\n\nJewelry",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "collection"
+          ],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17978728673614479",
+          "country": "Pakistan",
+          "lat": 33.69,
+          "lon": 73.05,
+          "matchedOn": "pakistan",
+          "date": "2023-11-15",
+          "permalink": "https://www.instagram.com/reel/CzqlcVwN9R6/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2023-11/17978728673614479.jpg",
+          "mediaType": "VIDEO",
+          "views": 12611,
+          "likes": 91,
+          "comments": 27,
+          "caption": "X @mysiebytahira - Straight out of a Fairytale🧚🏻‍♀️ \n\nThe collection exhibits delicately curated designs inspired from the wedding festivities and rich traditions. \nThe floral motifs enhanced with the beaming embellishments and distinguished silhouettes are what make this collection a complete style guide for the wedding season.\n\nDM or WhatsApp for Queries: +923047771646 &\n+923000885503\n\nJewelry",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "collection"
+          ],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18398336896053379",
+          "country": "Pakistan",
+          "lat": 33.69,
+          "lon": 73.05,
+          "matchedOn": "pakistan",
+          "date": "2023-11-21",
+          "permalink": "https://www.instagram.com/p/Cz5nYJnSI-t/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-11/18398336896053379_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 96,
+          "comments": 35,
+          "caption": "X @zainabsalmanofficial \n\nNavy blue embellished wrap, twirling through style with velvet palazzo pants and a slip. An ensemble that whispers sophistication. \n\nJewelry by @label_rm \n\n#zainabsalman #velvet #luxuryformals #pakistan #lahore #luxurycollection #luxuryprêt #luxewedding #easternwear #pakistandesigner #summerpret #lawncollection #summerlawn #bridalstyle #aasthasochic",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "collection"
+          ],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "pakistan-2023-11-15",
+      "spanDays": 6,
+      "postCount": 4,
+      "score": 2,
+      "confidence": "medium",
+      "forIt": [
+        "posts span 6 days"
+      ],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "India",
+      "lat": 28.61,
+      "lon": 77.21,
+      "firstDate": "2023-08-15",
+      "lastDate": "2023-09-28",
+      "posts": [
+        {
+          "postId": "17999389912888169",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "india",
+          "date": "2023-08-15",
+          "permalink": "https://www.instagram.com/p/Cv9FXdfNokZ/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-08/17999389912888169_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 88,
+          "comments": 26,
+          "caption": "🇮🇳Jai Hind Jai Bharat🇮🇳 \nProud Indian Pro INDIA 🇮🇳 \n\n#happyindependenceday\n#happyindependenceday🇮🇳 #proudindian #mentalhealth #mentalhealthawareness #positivity #fitmom #igers #ootd #style #inspo\n#independenceday #jaihind #15august #jaihind #bharat #india #fashionblogger #influencer #fashionista #fashionstyle #fashionphotography #potd #photography #photooftheday #photogram #newdelhi #incre",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17983359518357380",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "rajasthan",
+          "date": "2023-08-20",
+          "permalink": "https://www.instagram.com/p/CwLQZDAyMQC/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-08/17983359518357380_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 295,
+          "comments": 50,
+          "caption": "Amidst the Aravali mountains & lake Pichola🥰 feeling like a Queen👸 \n\n#TheLeela #TheLeelaPalaceUdaipur #Udaipur\n#Luxury #LakePichola #LakeView #PalaceByTheLake #LuxuryLiving  #ootd #fashion #style #instagram #inspo #fashioninspo #inspiration #mentalhealth #fitmom #fashionstyle #igers #positivity #mentalhealthawarness #positivity #incredibleindia #rajasthan #lakecity #photo #photography #holiday #",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "holiday",
+            "vacation"
+          ],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17947000772569032",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "rajasthan",
+          "date": "2023-08-21",
+          "permalink": "https://www.instagram.com/reel/CwNmCS2h2qU/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2023-08/17947000772569032.jpg",
+          "mediaType": "VIDEO",
+          "views": 11263,
+          "likes": 199,
+          "comments": 18,
+          "caption": "A day in the beautiful Udaipur🤩 \n\nDress @mango \nVia @namshi \nUse code : ASTHA0 \n.\n.\n.\n.\n#udaipur #udaipurvisit #ambraighat #eveningvibes #weekend #udaipurevenings #citypalaceudaipur #udaipurpalace #picholalake #udaipurlove #udaipurlakecity #udaipurcity #udaipurtravel #udaipurtourism #udaipurblogger #rajasthan #rajasthantourism #instagood #explorepage #udaipurdiaries #udaipurite #mesmerizing #udai",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "use code"
+          ],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18011144698864510",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "rajasthan",
+          "date": "2023-08-23",
+          "permalink": "https://www.instagram.com/p/CwSCvO9yqF6/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-08/18011144698864510_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 253,
+          "comments": 35,
+          "caption": "I keep it classy most of the time, but in the pool, I'm sassy😎\n\n@theleelapalaceudaipur \n@bhavyarameshjewelry \n\n#TheLeela #TheLeelaPalaceUdaipur #Udaipur\n#Luxury #LakePichola #LakeView #PalaceByTheLake #LuxuryLiving  #ootd #fashion #style #instagram #inspo #fashioninspo #inspiration #mentalhealth #fitmom #fashionstyle #igers #positivity #mentalhealthawarness #positivity #incredibleindia #rajasthan",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18352744207078971",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "rajasthan",
+          "date": "2023-08-24",
+          "permalink": "https://www.instagram.com/p/CwVUS9Nyjy-/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-08/18352744207078971_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 207,
+          "comments": 35,
+          "caption": "Channeling my inner Kimberly k🙆🏻‍♀️ \n.\n.\n.\n👗: @micas.official \nuse my code: Aastha12 \n\n🕶️ : @bhavyarameshjewelry \n\n🏫 : @theleelapalace_jaipur \n.\n.\n#micasgals #ootd #fashion #style #instagram #inspo #fashioninspo #inspiration #mentalhealth #fitmom #fashionstyle #igers #positivity #mentalhealthawarness #positivity #incredibleindia #rajasthan #pinkcity #mentalhealth #fitmom #fashionstyle #igers ",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17880053846928732",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "rajasthan",
+          "date": "2023-08-27",
+          "permalink": "https://www.instagram.com/p/CwdcJ0KSuXX/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-08/17880053846928732_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 199,
+          "comments": 22,
+          "caption": "The city of Jaipur, where every street has a story to tell.\nThe Pink City, where history & beauty come together. This place is magical✨\n\n#Summer23 #familytrip #india #rajasthan #loveyourself #bodypositive #selfworth #positivity #recovery #mindfulness #gratitude #healing #spirituality #mentalhealth #mentalhealthawareness #instagood #healthy #fashion #fitnessmotivation #selflove #selfcare #spiritjun",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17965815893473264",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "rajasthan",
+          "date": "2023-08-30",
+          "permalink": "https://www.instagram.com/p/Cwj-xR2y8lR/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-08/17965815893473264_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 209,
+          "comments": 38,
+          "caption": "The most beautiful nyt of all💚💙 \n\n@theleelapalace_jaipur \n\nWearing @neverfullydressed \nVia @namshi \nUse my code : ASTHA0 \n\n#namshi #neverfullydressed #jaipur #theleela #Summer23 #familytrip #india #rajasthan #loveyourself #bodypositive #selfworth #positivity #recovery #mindfulness #gratitude #healing #spirituality #mentalhealth #mentalhealthawareness #instagood  #fitnessmotivation #selflove #sel",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17866442522986477",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "rajasthan",
+          "date": "2023-08-31",
+          "permalink": "https://www.instagram.com/reel/CwnrM5WSB1s/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2023-08/17866442522986477.jpg",
+          "mediaType": "VIDEO",
+          "views": 17181,
+          "likes": 148,
+          "comments": 21,
+          "caption": "Summer 23 comes to an end with beautiful 🤩 memories, experiences, friendships and adventures 👨‍👩‍👧‍👦\n\n#Summer23 #familytrip #india #rajasthan #loveyourself #bodypositive #selfworth #positivity #recovery #mindfulness #gratitude #healing #spirituality #mentalhealth #mentalhealthawareness #instagood #healthy #fashion #fitnessmotivation #selflove #selfcare #spiritjunkie #photo #igers\n#jaipur #inc",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17859787259982275",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "india",
+          "date": "2023-09-13",
+          "permalink": "https://www.instagram.com/p/CxIl_pQteqb/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-09/17859787259982275_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 182,
+          "comments": 29,
+          "caption": "Sunday Family Funday called⭐️ This one is a complete Winner 🏆 \n\n@bombaybungalow Embraces the modern Indian culinary renaissance with bold, spicy, tangy, and flavorful traditional and modern Indian dishes.\n\nThe traditional setup elevates the dining experience to a multisensory celebration of India's heritage.\n\nUnravel the season with refreshingly unique and delightfully uncommon beverages! 🍹 \n\n S",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": [
+            "dubai"
+          ]
+        },
+        {
+          "postId": "17960743034638338",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "rajasthan",
+          "date": "2023-09-19",
+          "permalink": "https://www.instagram.com/reel/CxYpFPCN5OZ/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2023-09/17960743034638338.jpg",
+          "mediaType": "VIDEO",
+          "views": 5815,
+          "likes": 170,
+          "comments": 20,
+          "caption": "No it’s not Holiday blues it’s just I need to get rid of the holiday content on my phone😅 \nCover up @micas.official @micasgal \n\nUse my discount code: Aastha12 \n\n#micasgal #shopmicas\n\n#storagesolutions #storageissues #iphone15 holidayreels #holiday #summertime #reels #islandvibes #islandgirl #photo #mentalhealth #mentalhealthawareness #positivity #rajasthan #leelapalace #fashion #fitnessmotivation",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "holiday"
+          ],
+          "brandWords": [
+            "discount"
+          ],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17931129611658238",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "india",
+          "date": "2023-09-28",
+          "permalink": "https://www.instagram.com/p/CxudM4cN4ry/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-09/17931129611658238_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 188,
+          "comments": 21,
+          "caption": "Some M A S T I  for  brunch plz🥳 \n\nI can easily say that Masti’s Sunday Brunch is the BEST DESI BRUNCH in town👍🏻 \n\nServing the best cocktails and mouthwatering starters from all across INDIA🇮🇳 you will be spoilt for choices. \nNot to miss my fav dosa which was so Crispy & delicious 😋 aahhhh I can have it all dayyy & night🤌🏼\nAlso the desserts were all amazing but for me the gulab jamun with ",
+          "notThereWords": [
+            "can't wait"
+          ],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "now open"
+          ],
+          "atHomeWords": [
+            "dubai",
+            "in town"
+          ]
+        }
+      ],
+      "tripId": "india-2023-08-15",
+      "spanDays": 44,
+      "postCount": 11,
+      "score": 1,
+      "confidence": "medium",
+      "forIt": [
+        "posts span 44 days",
+        "says \"holiday\", \"vacation\""
+      ],
+      "against": [
+        "says \"can't wait\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Kenya",
+      "lat": -1.29,
+      "lon": 36.82,
+      "firstDate": "2023-07-19",
+      "lastDate": "2023-07-26",
+      "posts": [
+        {
+          "postId": "18011996674633229",
+          "country": "Kenya",
+          "lat": -1.29,
+          "lon": 36.82,
+          "matchedOn": "kenya",
+          "date": "2023-07-19",
+          "permalink": "https://www.instagram.com/p/Cu4t5hfNvea/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-07/18011996674633229_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 141,
+          "comments": 40,
+          "caption": "Rolling in the Savanna🍂\n\nThankyouuu @my.africanretreat for planning our trip🤎\n\n#migration #wilderbeast \n#masaimara #savanna #grassland #summer23 #familytrip #kenya #wildlife  #loveyourself #bodypositive #selfworth #positivity #recovery #mindfulness #gratitude #healing #spirituality #mentalhealth  #mentalhealthawareness #instagood #healthy #fashion #fitnessmotivation #selflove #selfcare #spiritju",
+          "notThereWords": [
+            "planning our trip"
+          ],
+          "oldTripWords": [],
+          "wasThereWords": [
+            "our trip"
+          ],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18031489732548170",
+          "country": "Kenya",
+          "lat": -1.29,
+          "lon": 36.82,
+          "matchedOn": "kenya",
+          "date": "2023-07-26",
+          "permalink": "https://www.instagram.com/reel/CvJ4RUNt7MU/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2023-07/18031489732548170.jpg",
+          "mediaType": "VIDEO",
+          "views": 6971,
+          "likes": 141,
+          "comments": 27,
+          "caption": "Beautiful Kenya 🇰🇪 A trip with laughter, amusement, excitement, adventure, celebrations and much more words can’t describe #kenya #africa #safari #gamedrive #thebigfive #wildlife #intothewild #mentalhealth #happy #lakenakuru #masaimara #masaimaranationalpark #family #junglesafari #africanelephant #lions #blackrhino #whiterhino #positivibe #gvo #streetstyle #safariphotography #wildlifeaddicts #fu",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "kenya-2023-07-19",
+      "spanDays": 7,
+      "postCount": 2,
+      "score": 1,
+      "confidence": "medium",
+      "forIt": [
+        "posts span 7 days",
+        "says \"our trip\""
+      ],
+      "against": [
+        "says \"planning our trip\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Thailand",
+      "lat": 13.76,
+      "lon": 100.5,
+      "firstDate": "2023-06-22",
+      "lastDate": "2023-06-22",
+      "posts": [
+        {
+          "postId": "17961985811572779",
+          "country": "Thailand",
+          "lat": 13.76,
+          "lon": 100.5,
+          "matchedOn": "thailand",
+          "date": "2023-06-22",
+          "permalink": "https://www.instagram.com/p/CtzWe3ltyAb/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-06/17961985811572779_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 95,
+          "comments": 38,
+          "caption": "\"I'm In Love I'm obsessed 🤩 \n\nDress @alemais.official \nSandals @prada \nBag - gift from Thailand \n\n#ootd #alemais #myounass #lookbook #ootn \n#stylish #instastyle #outfitoftheday #lookbook #look  #styleblogger #lookoftheday #shoes #fashiongram #fashiondiaries #fashionable #fashionblog #streetwear #streetfashion #wiw #trend #whatiwore #wiwt #styles #fashionpost #mentalhealthawareness #photo #igers #",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "thailand-2023-06-22",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 0,
+      "confidence": "low",
+      "forIt": [],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Nepal",
+      "lat": 27.72,
+      "lon": 85.32,
+      "firstDate": "2023-04-16",
+      "lastDate": "2023-04-21",
+      "posts": [
+        {
+          "postId": "18181920445262272",
+          "country": "Nepal",
+          "lat": 27.72,
+          "lon": 85.32,
+          "matchedOn": "kathmandu",
+          "date": "2023-04-16",
+          "permalink": "https://www.instagram.com/p/CrG_ja8y5NI/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-04/18181920445262272_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 94,
+          "comments": 29,
+          "caption": "We woke up in a new country!!\nNepal 🇳🇵 \n\nIt’s always so exiting to be in a new place. Eat new food, meet new people, learn about their culture and their HISTORY😄 \n\n#newcountry #southeastasia #asia #asiaexplore #travel #nepal #monkeytemple #ancientcity #historybuff \nfashion #spiritjunkie  #recovery #mentalhealth  #confidence #mindfulness  #gratitude #meditation  #healing #spirituality #positivev",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17895278909728053",
+          "country": "Nepal",
+          "lat": 27.72,
+          "lon": 85.32,
+          "matchedOn": "everest",
+          "date": "2023-04-18",
+          "permalink": "https://www.instagram.com/p/CrLzfJlt_VU/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-04/17895278909728053_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 109,
+          "comments": 26,
+          "caption": "Feel the magic of the mountains🏔️\n\n#magic #mountain #nepal #explore #travel #travelphotography #travelgram #instatravel #spirituality #mentalhealth #mentalhealthawareness #yogini #fitness #fitmom #style #photography #photooftheday #naturephotography #nature #naturephotography #naturegram #selflove #happiness #selfcare #loveyourself #mountains #everest #himalayas #himalayan #travelnepal",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17864890034913762",
+          "country": "Nepal",
+          "lat": 27.72,
+          "lon": 85.32,
+          "matchedOn": "kathmandu",
+          "date": "2023-04-20",
+          "permalink": "https://www.instagram.com/p/CrRpz4nN5Px/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-04/17864890034913762_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 27,
+          "comments": 6,
+          "caption": "Kala Patthar 5545mtrs  Nepal \n\n#everest #basecamp #nepal #mounteverest\n#everestbasecamp #everesttrek #Sagarmatha\n#Chomolungma #beauty #spirituality \n#recovery #mentalhealth  #confidence #mindfulness  #gratitude #meditation  #healing #spirituality #positivevibes #selfesteem  #bodylove #positive #selfacceptance #fitmom #fitness #igers #kathmandu #hike #tallestmountain #kalapatthar",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18002646580734743",
+          "country": "Nepal",
+          "lat": 27.72,
+          "lon": 85.32,
+          "matchedOn": "kathmandu",
+          "date": "2023-04-20",
+          "permalink": "https://www.instagram.com/p/CrRm_fqN5M6/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-04/18002646580734743_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 31,
+          "comments": 11,
+          "caption": "Kala Patthar 5545mtrs  Nepal \n\n#everest #basecamp #nepal #mounteverest\n#everestbasecamp #everesttrek #Sagarmatha\n#Chomolungma #beauty #spirituality \n#recovery #mentalhealth  #confidence #mindfulness  #gratitude #meditation  #healing #spirituality #positivevibes #selfesteem  #bodylove #positive #selfacceptance #fitmom #fitness #igers #kathmandu #hike #tallestmountain #kalapatthar",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17961148256301180",
+          "country": "Nepal",
+          "lat": 27.72,
+          "lon": 85.32,
+          "matchedOn": "kathmandu",
+          "date": "2023-04-20",
+          "permalink": "https://www.instagram.com/p/CrRiGZSNUsj/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-04/17961148256301180_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 25,
+          "comments": 4,
+          "caption": "Everest Base Camp, 5364mts  Nepal 🇳🇵 \n\n#everest #basecamp #nepal #mounteverest\n#everestbasecamp #everesttrek #Sagarmatha\n#Chomolungma #beauty #spirituality \n#recovery #mentalhealth  #confidence #mindfulness  #gratitude #meditation  #healing #spirituality #positivevibes #selfesteem  #bodylove #positive #selfacceptance #fitmom #fitness #igers #kathmandu #hike #tallestmountain #kalapatthar",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17879392538847963",
+          "country": "Nepal",
+          "lat": 27.72,
+          "lon": 85.32,
+          "matchedOn": "kathmandu",
+          "date": "2023-04-20",
+          "permalink": "https://www.instagram.com/p/CrRewa3yLu-/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-04/17879392538847963_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 44,
+          "comments": 9,
+          "caption": "Kala patthar 5535 mtrs  Nepal 🇳🇵 \n\n#everest #basecamp #nepal #mounteverest #ebc\n#everestbasecamp #everesttrek #Sagarmatha\n#Chomolungma #beauty #spirituality \n#recovery #mentalhealth  #confidence #mindfulness  #gratitude #meditation  #healing #spirituality #positivevibes #selfesteem  #bodylove #positive #selfacceptance #fitmom #fitness #kathmandu #hike #tallestmountain #kalapatthar",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17952144461421058",
+          "country": "Nepal",
+          "lat": 27.72,
+          "lon": 85.32,
+          "matchedOn": "kathmandu",
+          "date": "2023-04-20",
+          "permalink": "https://www.instagram.com/p/CrRcd6tNoU9/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-04/17952144461421058_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 38,
+          "comments": 7,
+          "caption": "Kala patthar 5545 mtrs  Nepal🇳🇵 \n#ebc \n#everest #basecamp #nepal #mounteverest\n#everestbasecamp #everesttrek #Sagarmatha\n#Chomolungma #beauty #spirituality \n#recovery #mentalhealth  #confidence #mindfulness  #gratitude #meditation  #healing #spirituality #positivevibes #selfesteem  #bodylove #positive #fitmom #fitness #igers #kathmandu #hike #tallestmountain #kalapatthar",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18278549527186382",
+          "country": "Nepal",
+          "lat": 27.72,
+          "lon": 85.32,
+          "matchedOn": "kathmandu",
+          "date": "2023-04-20",
+          "permalink": "https://www.instagram.com/p/CrRZN5FtuzV/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-04/18278549527186382_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 33,
+          "comments": 10,
+          "caption": "Mount Everest Basecamp, 5364mts Nepal🇳🇵 \n\n#everest #basecamp #nepal #mounteverest\n#everestbasecamp #everesttrek #Sagarmatha\n#Chomolungma #beauty #spirituality \n#recovery #mentalhealth  #confidence #mindfulness  #gratitude #meditation  #healing #spirituality #positivevibes #selfesteem  #bodylove #positive #selfacceptance #fitmom #fitness #igers #kathmandu #hike #himalayas #himalayan",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17870351918844206",
+          "country": "Nepal",
+          "lat": 27.72,
+          "lon": 85.32,
+          "matchedOn": "kathmandu",
+          "date": "2023-04-21",
+          "permalink": "https://www.instagram.com/p/CrSehP1Nrxk/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-04/17870351918844206_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 46,
+          "comments": 7,
+          "caption": "Everest Base Camp 5364 above sea level, Nepal 🇳🇵 \n\n#everest #basecamp #nepal #mounteverest\n#everestbasecamp #everesttrek #Sagarmatha\n#Chomolungma #beauty #spirituality \n#recovery #mentalhealth  #confidence #mindfulness  #gratitude #meditation  #healing #spirituality #positivevibes #selfesteem  #bodylove #positive #selfacceptance #fitmom #fitness #igers #kathmandu #hike #tallestmountain #kalapatt",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17985788392972166",
+          "country": "Nepal",
+          "lat": 27.72,
+          "lon": 85.32,
+          "matchedOn": "kathmandu",
+          "date": "2023-04-21",
+          "permalink": "https://www.instagram.com/p/CrSaj5LybNh/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-04/17985788392972166_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 41,
+          "comments": 1,
+          "caption": "Kala Patthar 5545mtrs  Nepal 🇳🇵 \n\n#everest #basecamp #nepal #mounteverest\n#everestbasecamp #everesttrek #Sagarmatha\n#Chomolungma #beauty #spirituality \n#recovery #mentalhealth  #confidence #mindfulness  #gratitude #meditation  #healing #spirituality #positivevibes #selfesteem  #bodylove #positive #selfacceptance #fitmom #fitness #igers #kathmandu #hike #tallestmountain #kalapatthar",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17852815199952210",
+          "country": "Nepal",
+          "lat": 27.72,
+          "lon": 85.32,
+          "matchedOn": "kathmandu",
+          "date": "2023-04-21",
+          "permalink": "https://www.instagram.com/p/CrSXcGPtyIz/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-04/17852815199952210_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 49,
+          "comments": 9,
+          "caption": "Everest Base Camp 5364 above sea level, Nepal 🇳🇵 \n\n#everest #basecamp #nepal #mounteverest\n#everestbasecamp #everesttrek #Sagarmatha\n#Chomolungma #beauty #spirituality \n#recovery #mentalhealth  #confidence #mindfulness  #gratitude #meditation  #healing #spirituality #positivevibes #selfesteem  #bodylove #positive #selfacceptance #fitmom #fitness #igers #kathmandu #hike #tallestmountain #kalapatt",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "nepal-2023-04-16",
+      "spanDays": 5,
+      "postCount": 11,
+      "score": 2,
+      "confidence": "medium",
+      "forIt": [
+        "posts span 5 days"
+      ],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Thailand",
+      "lat": 13.76,
+      "lon": 100.5,
+      "firstDate": "2023-03-06",
+      "lastDate": "2023-03-06",
+      "posts": [
+        {
+          "postId": "17993425471743600",
+          "country": "Thailand",
+          "lat": 13.76,
+          "lon": 100.5,
+          "matchedOn": "thailand",
+          "date": "2023-03-06",
+          "permalink": "https://www.instagram.com/p/CpcmzqNS5oP/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2023-03/17993425471743600_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 177,
+          "comments": 18,
+          "caption": "MINTSA- REALESE \n\nNew collection by this stunning all natural stones and crystals bag brand from Thailand is up for grabs. \n\nWearing @cilvanadesigns Pret line \n\n#carrymintsa #mintsabags #clutchbags #bridalaccessories #partyaccessories #giftingideas #fashionsale #designersale #designerwear #clutchpurse #mintsa #thailand #crystals #bags #bagslover #mydubai #bangkok #styleinspo #inspiration #fashion ",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "collection"
+          ],
+          "atHomeWords": [
+            "dubai",
+            "mydubai"
+          ]
+        }
+      ],
+      "tripId": "thailand-2023-03-06",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -3,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\", \"mydubai\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Switzerland",
+      "lat": 46.95,
+      "lon": 7.45,
+      "firstDate": "2023-02-25",
+      "lastDate": "2023-02-25",
+      "posts": [
+        {
+          "postId": "17987407234849902",
+          "country": "Switzerland",
+          "lat": 46.95,
+          "lon": 7.45,
+          "matchedOn": "swiss",
+          "date": "2023-02-25",
+          "permalink": "https://www.instagram.com/reel/CpF0dHQOIiu/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2023-02/17987407234849902.jpg",
+          "mediaType": "VIDEO",
+          "views": 21310,
+          "likes": 204,
+          "comments": 12,
+          "caption": "Beautiful handmade Bags by @adwita_bags \n\nThese and more exclusively showcasing at @modistadxb on 3rd & 4th March \n11:00 AM - 8:00 PM\nSWISSÔTEL AL MUROOJ\n\n#modista #giveaway #jewellery #shopping #dubaishopping #dubaishoppingfestival #exhibition #fashionexhibition #mydubai #winwinwin #giveaway #pakistanidesigner #indiandesigners #indianjewellery #giveawaybag #winwithmodista #festivewear #festivecol",
+          "notThereWords": [
+            "giveaway"
+          ],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [
+            "collection"
+          ],
+          "atHomeWords": [
+            "dubai",
+            "mydubai"
+          ]
+        }
+      ],
+      "tripId": "switzerland-2023-02-25",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -7,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\", \"mydubai\"",
+        "says \"giveaway\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "India",
+      "lat": 28.61,
+      "lon": 77.21,
+      "firstDate": "2022-12-30",
+      "lastDate": "2022-12-30",
+      "posts": [
+        {
+          "postId": "17939142833409796",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "india",
+          "date": "2022-12-30",
+          "permalink": "https://www.instagram.com/reel/CmzGkb2BBT3/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2022-12/17939142833409796.jpg",
+          "mediaType": "VIDEO",
+          "views": 19697,
+          "likes": 288,
+          "comments": 21,
+          "caption": "Stepping into 2023 ) with\n3\nthings!\n“ The confidence TO DO, specially those things I have alwavs been afraid to start because of fear of failure.\n(2 The Courage TO take action! Not letting others view of my dreams stop me.\n3 The TRUST in God, understanding that without him I am nothing, and always putting my plans, wish and goals in his hands! 🫶🏼\n\n#incredibleindia #india #igers #bossbabe #fitmom",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "india-2022-12-30",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 0,
+      "confidence": "low",
+      "forIt": [],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "India",
+      "lat": 28.61,
+      "lon": 77.21,
+      "firstDate": "2022-10-11",
+      "lastDate": "2022-10-11",
+      "posts": [
+        {
+          "postId": "17960622143052428",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "india",
+          "date": "2022-10-11",
+          "permalink": "https://www.instagram.com/reel/CjkbpA4BVmW/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2022-10/17960622143052428.jpg",
+          "mediaType": "VIDEO",
+          "views": 21021,
+          "likes": 517,
+          "comments": 34,
+          "caption": "Giving you a reason to fall in love with this Kesariya💛 Murat Mustard Organza Sharara set by @pomcha_jaipur \n\nFind the perfect cotton sharara set with Gota work or other embellishments that add an extra oomph to your ethnic look. With a flattering silhouette and flared pants, a cotton printed sharara set is the best pick for every traditional occasion. \n\n#sharara #pomchajaipur #indian #ethenic #w",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "india-2022-10-11",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 0,
+      "confidence": "low",
+      "forIt": [],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "United Kingdom",
+      "lat": 51.51,
+      "lon": -0.13,
+      "firstDate": "2022-08-17",
+      "lastDate": "2022-08-17",
+      "posts": [
+        {
+          "postId": "17961702514778153",
+          "country": "United Kingdom",
+          "lat": 51.51,
+          "lon": -0.13,
+          "matchedOn": "bath",
+          "date": "2022-08-17",
+          "permalink": "https://www.instagram.com/reel/ChXaPTfpaH_/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2022-08/17961702514778153.jpg",
+          "mediaType": "VIDEO",
+          "views": 11025,
+          "likes": 155,
+          "comments": 5,
+          "caption": "It’s all about QUALITY✨Shop now & avail 15% off with my code - AASTHASOCHIC15 to \nGet affordable luxurious bath & bedding products from La’Marvel @lamarvel_linens \n\nOrder Now: https://bit.ly/3nZWhnK\n\n #premium #luxurybedding #bathsets #luxurylifestyle #marvelyourlife #lifestyle #mydubai #dubailife#premiumquality #affordable #bedding #bedsheets #reelsvideo #viral #reelsinstagram #reelitfeelit #mydu",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": [
+            "dubai",
+            "mydubai"
+          ]
+        }
+      ],
+      "tripId": "united-kingdom-2022-08-17",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -3,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\", \"mydubai\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "India",
+      "lat": 28.61,
+      "lon": 77.21,
+      "firstDate": "2022-07-23",
+      "lastDate": "2022-08-12",
+      "posts": [
+        {
+          "postId": "17925544964329507",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "shimla",
+          "date": "2022-07-23",
+          "permalink": "https://www.instagram.com/reel/CgVskhxhZqh/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2022-07/17925544964329507.jpg",
+          "mediaType": "VIDEO",
+          "views": 9985,
+          "likes": 175,
+          "comments": 19,
+          "caption": "Living Amidst the Clouds ⛅️ #paradise #euphoria #magical #happiness #cloud9  #travel #himalya  #shimla_captured #incredibleindia #reelsvideo #reelsindia #trending #trendingreels #reelitfeelit",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "18027972010381119",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "india",
+          "date": "2022-07-28",
+          "permalink": "https://www.instagram.com/p/CgkRbythr8c/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2022-07/18027972010381119_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 398,
+          "comments": 38,
+          "caption": "“The more real you get, the more unreal the world gets.” #naturephotography #dreamy #pinchme #realbeauty #nature #forests #sky #himalayas #incredibleindia #india",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17941804847234075",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "shimla",
+          "date": "2022-07-31",
+          "permalink": "https://www.instagram.com/p/CgrYu3uBNNG/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2022-07/17941804847234075_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 155,
+          "comments": 26,
+          "caption": "The Queen has arrived at her Castle🏰 @wildflowerhall  Where is my 👑? #queen #travelgram #glam #ootd #happyplace #igers #shimla #queenofhills",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17966252527814044",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "manali",
+          "date": "2022-08-03",
+          "permalink": "https://www.instagram.com/p/CgyYMgyBtAH/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2022-08/17966252527814044_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 122,
+          "comments": 20,
+          "caption": "You, me, the summer breeze on the highest peak of Manali and a lot of MAGIC✨ #happyhigh #rohtangpass #highestpeak #incredibleindia #igers #husbandandwife #loveisintheair",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17960697610760834",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "delhi",
+          "date": "2022-08-07",
+          "permalink": "https://www.instagram.com/p/Cg9dWZfBPon/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2022-08/17960697610760834_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 114,
+          "comments": 18,
+          "caption": "Sunday Brunch in delhi #brunch #delhifood #delhigram #ootd #potd #travel #glam #lookbook #look",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        },
+        {
+          "postId": "17938790015482545",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "india",
+          "date": "2022-08-12",
+          "permalink": "https://www.instagram.com/p/ChKNSisBL3O/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2022-08/17938790015482545_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 91,
+          "comments": 21,
+          "caption": "“You must go on adventures to find out where you truly belong “ #inthehimalayas #woods #mountains #himalayas #incredibleindia #india #himachalpradesh",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "india-2022-07-23",
+      "spanDays": 20,
+      "postCount": 6,
+      "score": 2,
+      "confidence": "medium",
+      "forIt": [
+        "posts span 20 days"
+      ],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Indonesia",
+      "lat": -8.41,
+      "lon": 115.19,
+      "firstDate": "2022-05-04",
+      "lastDate": "2022-05-04",
+      "posts": [
+        {
+          "postId": "18017745115375853",
+          "country": "Indonesia",
+          "lat": -8.41,
+          "lon": 115.19,
+          "matchedOn": "bali",
+          "date": "2022-05-04",
+          "permalink": "https://www.instagram.com/p/CdIGes0h2HH/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2022-05/18017745115375853_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 168,
+          "comments": 41,
+          "caption": "Shell top & sheer pants✨Getting all that BALI feels @barduportdubai #OOTN #GLAM #sheerpants #LOOKBOOK #lookdujour #photooftheday",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "indonesia-2022-05-04",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 0,
+      "confidence": "low",
+      "forIt": [],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "France",
+      "lat": 48.86,
+      "lon": 2.35,
+      "firstDate": "2022-03-27",
+      "lastDate": "2022-03-27",
+      "posts": [
+        {
+          "postId": "17852612981734976",
+          "country": "France",
+          "lat": 48.86,
+          "lon": 2.35,
+          "matchedOn": "paris",
+          "date": "2022-03-27",
+          "permalink": "https://www.instagram.com/p/CbmpL9ehnJS/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2022-03/17852612981734976.jpg",
+          "mediaType": "IMAGE",
+          "views": null,
+          "likes": 127,
+          "comments": 29,
+          "caption": "🌸ITS SPRING🌸 @expo2020dubai - I will miss u Expo- last 6 months have been 🤩 #expo2020 #mydubai #livelife #paris #spring",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": [
+            "dubai",
+            "mydubai"
+          ]
+        }
+      ],
+      "tripId": "france-2022-03-27",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -3,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\", \"mydubai\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "India",
+      "lat": 28.61,
+      "lon": 77.21,
+      "firstDate": "2022-01-22",
+      "lastDate": "2022-01-22",
+      "posts": [
+        {
+          "postId": "17963061931553004",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "delhi",
+          "date": "2022-01-22",
+          "permalink": "https://www.instagram.com/p/CZCkSYpB0jw/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2022-01/17963061931553004_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 120,
+          "comments": 39,
+          "caption": "No1 does winter wear like DELHI GIRLS✌🏻We are a vibe😎😉 #winters #dubaiwinters #selflove #confidence",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": [
+            "dubai"
+          ]
+        }
+      ],
+      "tripId": "india-2022-01-22",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -3,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "India",
+      "lat": 28.61,
+      "lon": 77.21,
+      "firstDate": "2021-10-03",
+      "lastDate": "2021-10-03",
+      "posts": [
+        {
+          "postId": "18186882709124256",
+          "country": "India",
+          "lat": 28.61,
+          "lon": 77.21,
+          "matchedOn": "india",
+          "date": "2021-10-03",
+          "permalink": "https://www.instagram.com/p/CUjm9I6BDiK/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2021-10/18186882709124256_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 14009,
+          "comments": 78,
+          "caption": "Woww🤩 that’s what it felt. Representing my county INDIA 🇮🇳 @indiaatexpo2020  at the @expo2020dubai gave me goosebumps 🤍 cnt thank @vavci enough for this opportunity 🙏. #womenofsubstance #india #khadi",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "india-2021-10-03",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 0,
+      "confidence": "low",
+      "forIt": [],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Greece",
+      "lat": 37.98,
+      "lon": 23.73,
+      "firstDate": "2021-06-04",
+      "lastDate": "2021-06-04",
+      "posts": [
+        {
+          "postId": "18234269476029331",
+          "country": "Greece",
+          "lat": 37.98,
+          "lon": 23.73,
+          "matchedOn": "santorini",
+          "date": "2021-06-04",
+          "permalink": "https://www.instagram.com/p/CPs_oV9DjlU/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/images/2021-06/18234269476029331_cover.jpg",
+          "mediaType": "CAROUSEL_ALBUM",
+          "views": null,
+          "likes": 164,
+          "comments": 19,
+          "caption": "Santorini Vibes🇬🇷 #santorini #love #whiteandblue #happiness",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": []
+        }
+      ],
+      "tripId": "greece-2021-06-04",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": 0,
+      "confidence": "low",
+      "forIt": [],
+      "against": [],
+      "verdict": null,
+      "ratifiedAt": null
+    },
+    {
+      "country": "Spain",
+      "lat": 40.42,
+      "lon": -3.7,
+      "firstDate": "2021-04-05",
+      "lastDate": "2021-04-05",
+      "posts": [
+        {
+          "postId": "18078302233300633",
+          "country": "Spain",
+          "lat": 40.42,
+          "lon": -3.7,
+          "matchedOn": "ibiza",
+          "date": "2021-04-05",
+          "permalink": "https://www.instagram.com/reel/CNSatupDHXS/",
+          "thumbnail": "https://uqzvaytvynrglijvwjsz.supabase.co/storage/v1/object/public/instagram-media/thumbnails/2021-04/18078302233300633.jpg",
+          "mediaType": "VIDEO",
+          "views": 13441,
+          "likes": 262,
+          "comments": 39,
+          "caption": "IBIZAAA IS CALLINGGG... & I’m Ready🙌 Who wants to come along?? #ibiza #summertime #fashionreels #reels #reelsinstagram #reelsviral #style #swimwear #reelitfeelit #reelkarofeelkaro #instamood #bikini #mydubai #reel #reelsvideo #reeltoreel #mensfashion #menstyle #style #beachvibes #fashion",
+          "notThereWords": [],
+          "oldTripWords": [],
+          "wasThereWords": [],
+          "brandWords": [],
+          "atHomeWords": [
+            "dubai",
+            "mydubai"
+          ]
+        }
+      ],
+      "tripId": "spain-2021-04-05",
+      "spanDays": 0,
+      "postCount": 1,
+      "score": -3,
+      "confidence": "low",
+      "forIt": [],
+      "against": [
+        "caption is about home: \"dubai\", \"mydubai\""
+      ],
+      "verdict": null,
+      "ratifiedAt": null
+    }
+  ]
+}

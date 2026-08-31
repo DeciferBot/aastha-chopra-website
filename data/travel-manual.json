@@ -1,0 +1,31 @@
+{
+  "_readme": [
+    "Trips Aastha took but never named in a caption, so the caption scan cannot find them.",
+    "Vietnam is the proof: zero posts out of 2,089 mention it, yet she was there.",
+    "",
+    "One entry per journey. 'countries' can list several for a multi-country trip.",
+    "'start' and 'end' are YYYY-MM-DD. If only the month is known, put the same date in",
+    "both and the card will show just the month, which claims nothing it cannot back up.",
+    "Entries with an empty start date are skipped, so half-finished rows do no harm.",
+    "",
+    "'postLinks' are Instagram links to posts made on that trip, even when the caption",
+    "never says where it was. Their photos and view counts get pulled in automatically.",
+    "",
+    "Known countries and where their dot sits: scripts/scan-travel.mjs and the EXTRA_POS",
+    "list in scripts/build-travel-map.mjs.",
+    "",
+    "After editing, run:  node scripts/fetch-manual-posts.mjs && node scripts/build-travel-map.mjs"
+  ],
+  "trips": [
+    {
+      "countries": ["Vietnam"],
+      "start": "2025-12-18",
+      "end": "2025-12-21",
+      "monthOnly": false,
+      "note": "Amit gave the exact dates on 31 Aug 2026: 18 to 21 December 2025. The reel below went up on 30 Dec, after she was home, which is why the date on the post does not match the trip.",
+      "postLinks": [
+        "https://www.instagram.com/reel/DS5BQzBDMNW/"
+      ]
+    }
+  ]
+}
