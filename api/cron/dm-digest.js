@@ -28,7 +28,11 @@ const AASTHA_EMAIL  = process.env.OUTREACH_REDIRECT_TO || 'aasthac8@gmail.com';
 const OPERATOR_BCC  = process.env.OUTREACH_BCC || 'chopraa@gmail.com';
 const COOLDOWN_DAYS = Number(process.env.OUTREACH_COOLDOWN_DAYS || 45);
 
-const DM_SEGMENTS = ['beauty', 'fashion', 'fragrance', 'jewellery', 'wellness'];
+const DM_SEGMENTS = ['beauty', 'fashion', 'fragrance', 'jewellery', 'wellness', 'hospitality', 'travel', 'retail'];
+
+// Money weighting (Amit, 2026-08-31: "focus on things that pay"). A small
+// local studio only gets a DM slot when no major or mid brand is available.
+const BUDGET_WEIGHT = { major: 3, mid: 1, small: -2 };
 
 async function sb(path, opts = {}) {
   const res = await fetch(`${SUPABASE_URL}/rest/v1${path}`, {
@@ -66,6 +70,7 @@ function recentCollabsFor(segment, captions) {
     fragrance: /@(fugazzifragrance|memoiresdamourparfum|louisvuitton|offscent\w*|officialemilelise)/gi,
     jewellery: /@(missoma|tanishq\w*)/gi,
     wellness:  /@(aloyoga|alo\b|caffelinidubai)/gi,
+    hospitality: /@(caffelinidubai|trottoirdepalomadxb|gloriaosteria)/gi,
   };
   const re = PATTERNS[segment];
   if (!re) return [];
@@ -81,6 +86,7 @@ function recentCollabsFor(segment, captions) {
     acler: 'Acler', alo: 'Alo', aloyoga: 'Alo Yoga', fugazzifragrance: 'Fugazzi',
     memoiresdamourparfum: "Memoires d'Amour", louisvuitton: 'Louis Vuitton',
     missoma: 'Missoma', caffelinidubai: 'Caffelini',
+    trottoirdepalomadxb: 'Trottoir de Paloma', gloriaosteria: 'Gloria Osteria',
   };
   const named = [];
   for (const h of found) {
@@ -193,9 +199,15 @@ export default async function handler(req, res) {
     const candidates = (await sb(
       `/outreach_brands?handle_status=eq.verified&is_agency=eq.false` +
       `&tier=in.(warm,paid)&segment=in.(${DM_SEGMENTS.join(',')})` +
-      `&select=id,name,handle,segment,tier,fit_score,active_ad_count,brand_brief,notes` +
-      `&order=fit_score.desc.nullslast,active_ad_count.desc.nullslast&limit=60`
-    )).filter((b) => !recentNames.has(b.name)).slice(0, limit);
+      `&select=id,name,handle,segment,tier,fit_score,active_ad_count,brand_brief,notes,budget_tier` +
+      `&limit=200`
+    ))
+      .filter((b) => !recentNames.has(b.name))
+      .sort((a, b) =>
+        ((BUDGET_WEIGHT[b.budget_tier] ?? 1) - (BUDGET_WEIGHT[a.budget_tier] ?? 1)) ||
+        ((b.fit_score ?? 0) - (a.fit_score ?? 0)) ||
+        ((b.active_ad_count ?? 0) - (a.active_ad_count ?? 0)))
+      .slice(0, limit);
 
     if (!candidates.length) {
       return res.status(200).json({ ok: true, sent: 0, note: 'no eligible verified-handle brands (cooldown or empty list)' });

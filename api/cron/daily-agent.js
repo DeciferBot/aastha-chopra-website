@@ -48,9 +48,13 @@ const COOLDOWN_DAYS = Number(process.env.OUTREACH_COOLDOWN_DAYS || 45);
 const MIN_AUTOSEND  = Number(process.env.OUTREACH_MIN_SCORE     || 5);
 const AUTOSEND_TIERS = (process.env.OUTREACH_TIERS || 'warm,paid').split(',').map((t) => t.trim());
 
-// The segments Aastha actually creates in. Cars, cold travel boards, and
-// generic retail are out: a pitch there reads as spam because it is.
-const PITCH_SEGMENTS = ['beauty', 'fashion', 'fragrance', 'jewellery', 'wellness', 'hospitality'];
+// The segments Aastha actually creates in, weighted toward budgets that pay:
+// hotels, travel, retail chains, and FMCG beauty. Cars stay out.
+const PITCH_SEGMENTS = ['beauty', 'fashion', 'fragrance', 'jewellery', 'wellness', 'hospitality', 'travel', 'retail'];
+
+// Money weighting (Amit, 2026-08-31: "focus on things that pay"). A small
+// local studio only surfaces when no major or mid brand is available.
+const BUDGET_WEIGHT = { major: 3, mid: 1, small: -2 };
 
 // How many top candidates get a fresh Ad Library timing check each run.
 const AD_CHECK_LIMIT = 25;
@@ -126,7 +130,8 @@ function scoreBrand(brand, adData) {
   if (brand.niche_fit === 'high')   score += 3;
   if (brand.niche_fit === 'medium') score += 1;
   if (brand.contact_email)       score += 1;
-  return Math.min(score, 10);
+  score += BUDGET_WEIGHT[brand.budget_tier] ?? 1;
+  return Math.max(0, Math.min(score, 10));
 }
 
 /**
@@ -217,7 +222,9 @@ export default async function handler(req, res) {
   const today = new Date().toISOString().slice(0, 10);
   const scored = [];
   const toCheck = pool
-    .sort((a, b) => (b.fit_score ?? 0) - (a.fit_score ?? 0))
+    .sort((a, b) =>
+      ((BUDGET_WEIGHT[b.budget_tier] ?? 1) - (BUDGET_WEIGHT[a.budget_tier] ?? 1)) ||
+      ((b.fit_score ?? 0) - (a.fit_score ?? 0)))
     .slice(0, AD_CHECK_LIMIT);
   for (const brand of toCheck) {
     const adData = adToken
