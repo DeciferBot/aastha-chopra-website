@@ -2,6 +2,33 @@
 
 Short records of why the site is the way it is. Newest first.
 
+## 2026-08-31 — One photo, one place: the de-duplication pass
+
+The site had the same photos showing up all over: the angel-wings shoot in
+three places, the ski photo twice on the wellness page, the rooftop and
+race-car photos twice each on the luxury page, and near-identical frames from
+the same shoot sitting side by side in galleries. Two "new" photos added on
+31 Aug were actually re-uploads of photos already on the site under older
+names (the G-Wagon shot ≈ `dubai-fashion-luxury-1`, the Burj jumpsuit ≈
+`dubai-lifestyle`).
+
+**Rule going forward: a photo appears at most once per page, and ideally once
+across the homepage + three world pages.** Frames from the same shoot count
+as the same photo for gallery purposes — pick the best one. Before adding
+"new" photos, render a labeled contact sheet of `images/aastha-chopra-*.jpg`
+and check the new files against it; several shoots already have 2–4 frames
+in the folder.
+
+Photos are placed by meaning, not just looks: the wellness "watch" cover is
+the snow-robe shot because the reel beside it is a Swiss alpine hike; the
+wellness story shows the Alo store visit because the text is about wellness
+brands; the homepage "where to buy gold" tile shows the gold-lantern hotel
+look. Same-shoot spares (`desert-editorial-2`, `floral-feather-evening-1`,
+`dubai-polka-jumpsuit`, `dubai-lifestyle`, `dubai-fashion-luxury-1`,
+`dubai-wellness-fitness-1`, `premium-beauty-dubai`, `fashion-editorial-dubai`,
+the MAC spares, `madinat-jumeirah-dubai`) stay in the folder for the Journal
+and future swaps — do not re-add them to galleries.
+
 ## 2026-08-31 — Strategy reset: the machine must follow Aastha, not run beside her
 
 **The numbers, checked today (31 Aug).**
