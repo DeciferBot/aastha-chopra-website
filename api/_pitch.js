@@ -7,6 +7,7 @@
  */
 
 import { STATIC_PROFILE } from './_profile.js';
+import { VOICE_RULES } from './_accuracy.js';
 
 const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;
 const RESEND_KEY    = process.env.RESEND_API_KEY;
@@ -73,15 +74,13 @@ HARD RULES:
 - Do NOT lead with or headline follower counts or audience size. This email is about storytelling and audience understanding, not reach. Leaving numbers out entirely is fine and often better.
 - If you reference any number, it must appear verbatim in the STATS block below. Never invent or round up. A number is background, never the selling point.
 - Do NOT default to a "South Asian diaspora" framing. Mention it ONLY if the brand context clearly shows the brand has a South Asian line or audience. Otherwise speak to her broad Dubai and UAE lifestyle audience.
-- Zero em dashes anywhere. Use commas, full stops, or "and". Not one.
-- Zero "not just X" constructions. Write what something IS.
 - Every sentence is a positive statement. No "if X then Y" logic.
-- Banned words: synergy, authentic, leverage, elevate, resonate, curated, align, journey, space, narrative.
 - No lists or bullet points in the body. Under 140 words total.
-- Warm, assured, genuinely enthusiastic. She sounds like someone who loves making content and is good at it.
+- Warm and assured. She sounds like someone who loves making content and is good at it.
 - Sign off as Aastha only.
+${VOICE_RULES}
 
-OUTPUT: Return ONLY a single valid JSON object: {"subject": "...", "body": "..."}. Output nothing else — no markdown code fences, no backticks, no commentary, no corrections, nothing before or after the object, and never more than one object. The subject is under 60 characters, specific to the brand, warm, no clickbait, no em dash. The body is the email text with real line breaks between paragraphs (use \\n) and ends with the single sign-off "Aastha".`;
+OUTPUT: Return ONLY a single valid JSON object: {"subject": "...", "body": "..."}. Output nothing else — no markdown code fences, no backticks, no commentary, no corrections, nothing before or after the object, and never more than one object. The subject is under 60 characters and reads like a person wrote it for this one brand: name the idea, not the gesture. NEVER a template like "Bringing X to life" or "X, a story worth telling". The body is the email text with real line breaks between paragraphs (use \\n) and ends with the single sign-off "Aastha".`;
 
   const userPrompt = `Write a pitch email from Aastha Chopra to a brand manager at ${brandName}.
 

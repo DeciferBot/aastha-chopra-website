@@ -20,9 +20,23 @@
 const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;
 
 const BANNED_WORDS = /\b(authentic|elevate|resonate|curated|align|journey|synergy|space|collab|leverage|narrative)\b/i;
-const FAKE_EXPERIENCE = /\b(your feed|last week|yesterday|spotted|i saw|i visited|i tried|i wore|stopped my scroll)\b/i;
+const FAKE_EXPERIENCE = /\b(your feed|last week|yesterday|spotted|i saw|i visited|i tried|i wore|stopped my scroll|my routine|my rotation|i use it|i('ve| have) been (using|loving|wearing|reaching))\b/i;
 const FAKE_RELATIONSHIP = /\bworked with\b/i;
 const DASHES = /[—–]/;
+
+// AI-tell phrases (Amit, 2026-08-31: "write like a natural marketer"). These
+// showed up in nearly every generated pitch and DM, which is exactly why a
+// brand manager's eye slides off them. Enforced here so no wording request has
+// to be trusted.
+const AI_TELLS = [
+  [/bring(ing|s)?[^.!?]{0,40}to life/i, '"bring to life" filler'],
+  [/\b(would you be open to|i would love to|i'd love to)\b/i, 'stock ask ("would you be open" / "I would love to")'],
+  [/\bgenuinely\b/i, 'filler word "genuinely"'],
+  [/\bhonestly\b/i, 'filler word "honestly"'],
+  [/\bnot just\b/i, '"not just X" construction'],
+  [/rent[- ]free/i, 'meme phrase "rent-free"'],
+  [/\b(obsessed|iconic|chef'?s kiss|say less)\b/i, 'social-media filler word'],
+];
 
 /**
  * Numbers discipline: every digit-run in the text must literally appear in the
@@ -41,10 +55,24 @@ export function mechanicalProblems(text, { factSheet = '' } = {}) {
   if (FAKE_EXPERIENCE.test(text)) problems.push('claims a specific sighting or personal experience');
   const banned = String(text).match(BANNED_WORDS);
   if (banned) problems.push(`banned word "${banned[0]}"`);
+  for (const [re, why] of AI_TELLS) {
+    if (re.test(text)) problems.push(why);
+  }
   const nums = unsupportedNumbers(text, factSheet);
   if (nums.length) problems.push(`cites number(s) not in the fact sheet: ${nums.join(', ')}`);
   return problems;
 }
+
+/**
+ * The voice rules as prose, for embedding in writer prompts, so the writers
+ * and the checker always describe the same rules from one place.
+ */
+export const VOICE_RULES = `Write like a sharp, natural marketer typing to a person:
+- Short sentences. Concrete nouns. One clear ask, phrased plainly (e.g. "Who looks after creator partnerships for you in the UAE?").
+- Vary your openings; no two sentences start the same way.
+- NEVER use: "bring to life" in any form, "would you be open to", "I would love to", "genuinely", "honestly", "not just", "rent-free", "obsessed", "iconic", em dashes, or the words authentic/elevate/resonate/curated/align/journey/synergy.
+- No compliment-sandwich openers. Open with something concrete and specific, not admiration filler.
+- Never claim to use, own, or have a routine with the brand's products. She has not, unless the supplied facts say so.`;
 
 /**
  * Independent fact-check. `facts` is the complete, plain-text list of what is
@@ -62,7 +90,7 @@ export async function verifyClaims(facts, text) {
     body: JSON.stringify({
       model: 'claude-sonnet-4-6',
       max_tokens: 400,
-      system: `You are a strict fact-checker for outreach messages. You are given the ONLY facts known to be true, and a text. List every specific factual claim the text makes: named products, collections, campaigns, drops, stores, events, awards, timings, statistics, and any claim of personal experience (saw, tried, visited, wore) or of a past relationship. A claim is UNSUPPORTED unless it appears in the supplied facts. Pure opinions about style, category, or city life are not claims. Reply ONLY with JSON: {"ok": true} if every claim is supported, else {"ok": false, "problems": ["..."]}.`,
+      system: `You are a strict fact-checker for outreach messages. You are given the ONLY facts known to be true, and a text. List every specific factual claim the text makes: named products, collections, campaigns, drops, stores, events, awards, timings, statistics, any claim of personal experience or product use (saw, tried, visited, wore, uses, owns, "in my routine", "been using"), and any implied past relationship. A claim is UNSUPPORTED unless it appears in the supplied facts. The writer has NEVER used the brand's products unless the facts say so. Pure opinions about style, category, or city life are not claims. Reply ONLY with JSON: {"ok": true} if every claim is supported, else {"ok": false, "problems": ["..."]}.`,
       messages: [{ role: 'user', content: `THE ONLY KNOWN FACTS:\n${facts}\n\nTEXT TO CHECK:\n${text}` }],
     }),
   });
