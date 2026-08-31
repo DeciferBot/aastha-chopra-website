@@ -37,8 +37,7 @@ import {
   fetchIgMediaMap,
   existingPostCreativeBody,
 } from '../_igpromote.js';
-
-const FB_BASE = 'https://graph.facebook.com/v21.0';
+import { fbGet, fbPost, fbDelete } from '../_meta-graph.js';
 
 // Fixed assets (see project_meta_ads + project_meta_business_portfolios memory)
 const AD_ACCOUNT     = '1508208884141959';
@@ -58,41 +57,6 @@ const REELS = [
   { code: 'DGcufa-yTKL', theme: 'Beauty'   },
   { code: 'DU2pRgajMct', theme: 'Luxury'   },
 ];
-
-// ── Meta Graph helpers ────────────────────────────────────────────────────────
-async function fbGet(path) {
-  const token = process.env.META_ADS_ACCESS_TOKEN;
-  const sep = path.includes('?') ? '&' : '?';
-  const res = await fetch(`${FB_BASE}${path}${sep}access_token=${token}`);
-  const data = await res.json();
-  if (data.error) throw new Error(`FB GET ${path}: ${data.error.message}`);
-  return data;
-}
-
-async function fbPost(path, body) {
-  const token = process.env.META_ADS_ACCESS_TOKEN;
-  const res = await fetch(`${FB_BASE}${path}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ ...body, access_token: token }),
-  });
-  const data = await res.json();
-  if (data.error) {
-    const e = data.error;
-    throw new Error(`FB POST ${path}: ${e.message}` +
-      (e.error_user_msg ? ` | ${e.error_user_title}: ${e.error_user_msg}` : '') +
-      (e.error_subcode ? ` | subcode=${e.error_subcode}` : ''));
-  }
-  return data;
-}
-
-async function fbDelete(path) {
-  const token = process.env.META_ADS_ACCESS_TOKEN;
-  const sep = path.includes('?') ? '&' : '?';
-  const res = await fetch(`${FB_BASE}${path}${sep}access_token=${token}`, { method: 'DELETE' });
-  const data = await res.json().catch(() => ({}));
-  return data;
-}
 
 const CAMPAIGN_NAME = 'Reels — Newer Work (UAE+KSA Women) Jun 2026';
 
@@ -155,6 +119,9 @@ export default async function handler(req, res) {
 
   const dryRun   = req.query?.dryrun === '1';
   const activate = req.query?.activate !== '0';      // default: go live
+  // Stay well under the function's own 300s ceiling so a retry can always
+  // detect it's out of time and fail cleanly instead of being killed mid-write.
+  const deadline = Date.now() + 260000;
 
   try {
     if (req.query?.cleanuponly === '1') {
@@ -174,7 +141,7 @@ export default async function handler(req, res) {
       for (const a of adsets.data || []) {
         const t = a.targeting || {};
         t.age_max = ageMax;
-        await fbPost(`/${a.id}`, { targeting: t });
+        await fbPost(`/${a.id}`, { targeting: t }, deadline);
         updated.push({ id: a.id, name: a.name, age_min: t.age_min, age_max: t.age_max });
       }
       return res.status(200).json({ ok: true, status: 'age-updated', updated });
@@ -228,7 +195,7 @@ export default async function handler(req, res) {
       special_ad_categories: [],
       is_adset_budget_sharing_enabled: false, // independent per-reel budgets (clean A/B)
       status: 'PAUSED',
-    });
+    }, deadline);
 
     const targeting = buildTargeting(refAdset.targeting);
 
@@ -252,7 +219,7 @@ export default async function handler(req, res) {
           ...(refAdset.attribution_spec ? { attribution_spec: refAdset.attribution_spec } : {}),
           targeting,
           status: 'PAUSED',
-        });
+        }, deadline);
         adsetId = adset.id;
 
         // Promote the EXISTING reel — engagement lands on the real post.
@@ -261,14 +228,14 @@ export default async function handler(req, res) {
           pageId: PAGE_ID,
           igUserId,
           mediaId: reel.media_id,
-        }));
+        }), deadline);
 
         const ad = await fbPost(`/act_${AD_ACCOUNT}/ads`, {
           name: `Reel — ${reel.theme}`,
           adset_id: adset.id,
           creative: { creative_id: creative.id },
           status: 'PAUSED',
-        });
+        }, deadline);
 
         return { ok: true, theme: reel.theme, code: reel.code, permalink: reel.permalink, adset_id: adset.id, creative_id: creative.id, ad_id: ad.id, media_id: reel.media_id };
       } catch (e) {
@@ -289,13 +256,13 @@ export default async function handler(req, res) {
     }
 
     // Re-assert the budget cap on every built ad set before going live.
-    await Promise.all(built.map((b) => fbPost(`/${b.adset_id}`, { daily_budget: DAILY_BUDGET_CENTS })));
+    await Promise.all(built.map((b) => fbPost(`/${b.adset_id}`, { daily_budget: DAILY_BUDGET_CENTS }, deadline)));
 
     // Activate LAST (campaign → ad sets → ads). Nothing spent until here.
     if (activate) {
-      await fbPost(`/${campaign.id}`, { status: 'ACTIVE' });
-      await Promise.all(built.map((b) => fbPost(`/${b.adset_id}`, { status: 'ACTIVE' })));
-      await Promise.all(built.map((b) => fbPost(`/${b.ad_id}`, { status: 'ACTIVE' })));
+      await fbPost(`/${campaign.id}`, { status: 'ACTIVE' }, deadline);
+      await Promise.all(built.map((b) => fbPost(`/${b.adset_id}`, { status: 'ACTIVE' }, deadline)));
+      await Promise.all(built.map((b) => fbPost(`/${b.ad_id}`, { status: 'ACTIVE' }, deadline)));
     }
 
     return res.status(200).json({

@@ -25,8 +25,7 @@ import {
   resolveMediaByShortcode,
   existingPostCreativeBody,
 } from '../_igpromote.js';
-
-const FB_BASE = 'https://graph.facebook.com/v21.0';
+import { fbGet, fbPost, fbDelete } from '../_meta-graph.js';
 
 const AD_ACCOUNT       = '1508208884141959';
 const PAGE_ID          = '109895657605220';
@@ -35,56 +34,6 @@ const REF_ADSET        = '120247276442590261'; // proven VISIT_INSTAGRAM_PROFILE
 const REF_CAMPAIGN     = '120247276440520261';
 
 const DEFAULT_BUDGET_CENTS = 1500; // 15 AED/day
-
-async function fbGet(path) {
-  const token = process.env.META_ADS_ACCESS_TOKEN;
-  const sep = path.includes('?') ? '&' : '?';
-  const res = await fetch(`${FB_BASE}${path}${sep}access_token=${token}`);
-  const data = await res.json();
-  if (data.error) throw new Error(`FB GET ${path}: ${data.error.message}`);
-  return data;
-}
-
-// A retry sleeps 32s to clear Facebook's 30s write window. A full launch makes
-// ~8 sequential writes, so if several are throttled the wait can add up to
-// more than the function's own 300s ceiling — stop retrying with a clear
-// error BEFORE that happens, rather than let the platform kill the function
-// silently mid-build and leave a half-created campaign with no error at all.
-const RETRY_SLEEP_MS = 32000;
-
-async function fbPost(path, body, deadline) {
-  const token = process.env.META_ADS_ACCESS_TOKEN;
-  // The ad account can be throttled to 1 write per 30s (code 613 / subcode
-  // 4841018); wait out the window and retry instead of failing the whole
-  // build on the first throttle.
-  for (let attempt = 0; ; attempt++) {
-    const res = await fetch(`${FB_BASE}${path}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...body, access_token: token }),
-    });
-    const data = await res.json();
-    if (!data.error) return data;
-    const e = data.error;
-    if (e.code === 613 && attempt < 3) {
-      if (deadline && Date.now() + RETRY_SLEEP_MS > deadline) {
-        throw new Error(`FB POST ${path}: still rate-limited but out of time before this run's own deadline. Stopped cleanly instead of letting the platform kill it mid-build; nothing after this call was created. Safe to retry the same request in a minute.`);
-      }
-      await new Promise((r) => setTimeout(r, RETRY_SLEEP_MS));
-      continue;
-    }
-    throw new Error(`FB POST ${path}: ${e.message}` +
-      (e.error_user_msg ? ` | ${e.error_user_title}: ${e.error_user_msg}` : '') +
-      (e.error_subcode ? ` | subcode=${e.error_subcode}` : ''));
-  }
-}
-
-async function fbDelete(path) {
-  const token = process.env.META_ADS_ACCESS_TOKEN;
-  const sep = path.includes('?') ? '&' : '?';
-  const res = await fetch(`${FB_BASE}${path}${sep}access_token=${token}`, { method: 'DELETE' });
-  return res.json().catch(() => ({}));
-}
 
 function buildTargeting(t = {}) {
   const out = {
