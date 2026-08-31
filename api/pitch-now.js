@@ -13,25 +13,9 @@
 import { getLiveProfile } from './_profile.js';
 import { generatePitch, sendPitchEmail } from './_pitch.js';
 import { recordPipeline } from './_pipeline.js';
+import { sb, weeklyQuota } from './_outreach-shared.js';
 
-const SUPABASE_URL = 'https://uqzvaytvynrglijvwjsz.supabase.co';
-const SERVICE_KEY  = process.env.SUPABASE_SERVICE_KEY;
 const AASTHA_EMAIL = 'aasthac8@gmail.com';
-
-async function sb(path, opts = {}) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1${path}`, {
-    ...opts,
-    headers: {
-      apikey: SERVICE_KEY,
-      Authorization: `Bearer ${SERVICE_KEY}`,
-      'Content-Type': 'application/json',
-      Prefer: 'return=representation',
-      ...(opts.headers || {}),
-    },
-  });
-  if (!res.ok) throw new Error(`Supabase: ${await res.text()}`);
-  return res.json();
-}
 
 const enc = (v) => encodeURIComponent(v);
 
@@ -49,6 +33,14 @@ export default async function handler(req, res) {
   if (!name && !page_id) return res.status(400).json({ ok: false, error: 'name or page_id required' });
 
   try {
+    // Shares the same 5-a-week budget as the automatic robot (_outreach-shared.js)
+    // so a burst of manual sends can't silently zero out the day's automated
+    // pitch without anyone knowing why nothing went out.
+    const quota = await weeklyQuota();
+    if (quota.remaining <= 0) {
+      return res.status(200).json({ ok: false, error: `this week's pitch limit is already used (${quota.used}/${quota.limit}); wait for it to reset before sending more` });
+    }
+
     // 1. Resolve the full brand row (has contact_email, notes, score, last ad data).
     let brands = [];
     if (page_id) brands = await sb(`/outreach_brands?page_id=eq.${enc(page_id)}&limit=1&select=*`);

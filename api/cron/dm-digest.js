@@ -13,14 +13,21 @@ export const config = { maxDuration: 300 };
  * This code NEVER messages a brand. Instagram forbids automated cold DMs and
  * enforcement risks the account, so the last tap is always hers by design.
  *
+ * Hardened 2026-08-31 (code review): one brand's writer/checker error can no
+ * longer throw away every other brand's already-verified message in the same
+ * run. The audit record is written BEFORE the email goes out, not after — if
+ * the record fails to save, nothing is emailed either, so a brand can never
+ * end up contacted with no record of it (which used to let the same brand be
+ * re-picked and double-messaged on the next run).
+ *
  * GET /api/cron/dm-digest[?dryRun=1][&limit=3]
  *   Auth: Bearer CRON_SECRET | MANUAL_SYNC_KEY
  */
 
 import { checkText, VOICE_RULES } from '../_accuracy.js';
+import { dedash, esc } from '../_pitch.js';
+import { sb, OUTREACH_SEGMENTS, byBudgetThenScore } from '../_outreach-shared.js';
 
-const SUPABASE_URL = 'https://uqzvaytvynrglijvwjsz.supabase.co';
-const SERVICE_KEY  = process.env.SUPABASE_SERVICE_KEY;
 const ANTHROPIC_KEY = process.env.ANTHROPIC_API_KEY;
 const RESEND_KEY    = process.env.RESEND_API_KEY;
 
@@ -28,40 +35,15 @@ const AASTHA_EMAIL  = process.env.OUTREACH_REDIRECT_TO || 'aasthac8@gmail.com';
 const OPERATOR_BCC  = process.env.OUTREACH_BCC || 'chopraa@gmail.com';
 const COOLDOWN_DAYS = Number(process.env.OUTREACH_COOLDOWN_DAYS || 45);
 
-const DM_SEGMENTS = ['beauty', 'fashion', 'fragrance', 'jewellery', 'wellness', 'hospitality', 'travel', 'retail'];
-
-// Money weighting (Amit, 2026-08-31: "focus on things that pay"). A small
-// local studio only gets a DM slot when no major or mid brand is available.
-const BUDGET_WEIGHT = { major: 3, mid: 1, small: -2 };
-
-async function sb(path, opts = {}) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1${path}`, {
-    ...opts,
-    headers: {
-      apikey: SERVICE_KEY,
-      Authorization: `Bearer ${SERVICE_KEY}`,
-      'Content-Type': 'application/json',
-      Prefer: 'return=representation',
-      ...(opts.headers || {}),
-    },
-  });
-  if (!res.ok) throw new Error(`Supabase: ${await res.text()}`);
-  return res.json();
-}
-
-/** Em/en dashes never reach a brand, mirroring the pitch brain's voice rule. */
-function dedash(s) {
-  return String(s).replace(/\s*[—–]\s*/g, ', ');
-}
-
-function esc(s) {
-  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
 /**
  * Real, checkable context: brands she tagged in her own captions recently, per
  * segment. A DM that says "I have been creating beauty stories with X and Y"
  * survives the 10 seconds the brand spends checking her profile.
+ *
+ * Every substring PATTERNS can match has a matching DISPLAY name — a match
+ * with no name used to be silently dropped (verified 2026-08-31: Sephora,
+ * L'Oréal, Elemis, Maybelline, JWPEI, Offscent, Memoires d'Amour's fragrance
+ * cousin brands, and Tanishq all fell through this hole).
  */
 function recentCollabsFor(segment, captions) {
   const PATTERNS = {
@@ -87,6 +69,9 @@ function recentCollabsFor(segment, captions) {
     memoiresdamourparfum: "Memoires d'Amour", louisvuitton: 'Louis Vuitton',
     missoma: 'Missoma', caffelinidubai: 'Caffelini',
     trottoirdepalomadxb: 'Trottoir de Paloma', gloriaosteria: 'Gloria Osteria',
+    sephora: 'Sephora', loreal: "L'Oréal", elemis: 'Elemis', maybelline: 'Maybelline',
+    jwpei: 'JW PEI', offscent: 'Offscent', officialemilelise: 'Emile Lise',
+    tanishq: 'Tanishq',
   };
   const named = [];
   for (const h of found) {
@@ -99,17 +84,23 @@ function recentCollabsFor(segment, captions) {
 /**
  * Generate, then run the shared accuracy engine, up to two attempts. A DM may
  * cite no numbers at all (empty fact sheet). Fails CLOSED: a message that does
- * not pass is never delivered; the brand is skipped this run.
+ * not pass is never delivered; the brand is skipped this run. Never throws —
+ * a writer/checker error is treated as a skip, not a reason to lose every
+ * other brand's already-verified message in the same run.
  */
 async function generateCheckedDm(brand, collabs) {
   const facts = `BRAND FACTS (the only brand facts that exist): ${brand.brand_brief || brand.notes || `${brand.name} is a ${brand.segment} brand active in the UAE.`}
 HER WORK FACTS (the only work references allowed): ${collabs.length ? `she recently featured ${collabs.join(', ')} in her content` : 'none, so the message may not reference any past work'}`;
   let feedback = '';
-  for (let attempt = 0; attempt < 2; attempt++) {
-    const message = await generateDm(brand, collabs, feedback);
-    const verdict = await checkText({ text: message, facts, factSheet: '' });
-    if (verdict.ok) return { message, attempts: attempt + 1 };
-    feedback = `Your previous attempt was rejected: ${verdict.problems.join('; ')}. Fix every one. Only use the supplied facts.`;
+  try {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const message = await generateDm(brand, collabs, feedback);
+      const verdict = await checkText({ text: message, facts, factSheet: '' });
+      if (verdict.ok) return { message, attempts: attempt + 1 };
+      feedback = `Your previous attempt was rejected: ${verdict.problems.join('; ')}. Fix every one. Only use the supplied facts.`;
+    }
+  } catch (e) {
+    return { message: null, attempts: 0, error: String(e?.message || e) };
   }
   return { message: null, attempts: 2 };
 }
@@ -188,26 +179,28 @@ export default async function handler(req, res) {
   if (!ok) return res.status(401).end();
 
   const dryRun = req.query?.dryRun === '1' || req.query?.dryrun === '1';
-  const limit = Math.min(5, Number(req.query?.limit) || 3);
+  // `?limit=0` must mean zero, not "unset" — Number('0') || 3 would silently
+  // turn a deliberate zero-brand probe into a real 3-brand send.
+  const rawLimit = req.query?.limit;
+  const parsedLimit = rawLimit !== undefined ? Number(rawLimit) : NaN;
+  const limit = Math.min(5, Number.isFinite(parsedLimit) && parsedLimit >= 0 ? parsedLimit : 3);
 
   try {
     // Brands contacted on ANY channel inside the cooldown window are off-limits.
+    // A 'failed' row (nothing actually delivered) does not count.
     const since = new Date(Date.now() - COOLDOWN_DAYS * 864e5).toISOString();
-    const recent = await sb(`/brand_pitches?select=brand_name&generated_at=gte.${since}`);
+    const recent = await sb(`/brand_pitches?select=brand_name&generated_at=gte.${since}&status=neq.failed`);
     const recentNames = new Set(recent.map((r) => r.brand_name));
 
     const candidates = (await sb(
       `/outreach_brands?handle_status=eq.verified&is_agency=eq.false` +
       `&budget_tier=eq.major` +
-      `&tier=in.(warm,paid)&segment=in.(${DM_SEGMENTS.join(',')})` +
+      `&tier=in.(warm,paid)&segment=in.(${OUTREACH_SEGMENTS.join(',')})` +
       `&select=id,name,handle,segment,tier,fit_score,active_ad_count,brand_brief,notes,budget_tier` +
       `&limit=200`
     ))
       .filter((b) => !recentNames.has(b.name))
-      .sort((a, b) =>
-        ((BUDGET_WEIGHT[b.budget_tier] ?? 1) - (BUDGET_WEIGHT[a.budget_tier] ?? 1)) ||
-        ((b.fit_score ?? 0) - (a.fit_score ?? 0)) ||
-        ((b.active_ad_count ?? 0) - (a.active_ad_count ?? 0)))
+      .sort((a, b) => byBudgetThenScore(a, b) || ((b.active_ad_count ?? 0) - (a.active_ad_count ?? 0)))
       .slice(0, limit);
 
     if (!candidates.length) {
@@ -224,9 +217,9 @@ export default async function handler(req, res) {
     const skipped = [];
     for (const brand of candidates) {
       const collabs = recentCollabsFor(brand.segment, captions);
-      const { message, attempts } = await generateCheckedDm(brand, collabs);
+      const { message, attempts, error } = await generateCheckedDm(brand, collabs);
       if (message) items.push({ brand, message, attempts });
-      else skipped.push(brand.name);
+      else skipped.push(error ? { name: brand.name, reason: error } : brand.name);
     }
 
     if (dryRun) {
@@ -239,6 +232,24 @@ export default async function handler(req, res) {
     if (!items.length) {
       return res.status(200).json({ ok: true, sent: 0, skipped, note: 'every candidate failed the accuracy checks; nothing delivered' });
     }
+
+    // Record BEFORE sending: if the record never saves, the email never goes
+    // out either, so a brand can't end up messaged with no memory of it (the
+    // old order let a send succeed, the record fail, and the same brand get
+    // picked and messaged again next run).
+    await sb('/brand_pitches', {
+      method: 'POST',
+      body: JSON.stringify(items.map(({ brand, message }) => ({
+        brand_id: brand.id,
+        brand_name: brand.name,
+        category: brand.segment,
+        subject: `IG DM to ${brand.handle}`,
+        body: message,
+        to_email: null,
+        to_confidence: 'ig_handle_verified',
+        status: 'dm',
+      }))),
+    });
 
     const html = renderDigestHtml(items);
     const mail = await fetch('https://api.resend.com/emails', {
@@ -253,20 +264,6 @@ export default async function handler(req, res) {
       }),
     });
     if (!mail.ok) throw new Error(`Resend: ${await mail.text()}`);
-
-    await sb('/brand_pitches', {
-      method: 'POST',
-      body: JSON.stringify(items.map(({ brand, message }) => ({
-        brand_id: brand.id,
-        brand_name: brand.name,
-        category: brand.segment,
-        subject: `IG DM to ${brand.handle}`,
-        body: message,
-        to_email: null,
-        to_confidence: 'ig_handle_verified',
-        status: 'dm',
-      }))),
-    });
 
     return res.status(200).json({ ok: true, sent: items.length, skipped, brands: items.map((i) => i.brand.name) });
   } catch (err) {

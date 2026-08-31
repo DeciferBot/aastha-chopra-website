@@ -45,11 +45,18 @@ async function fbGet(path) {
   return data;
 }
 
-async function fbPost(path, body) {
+// A retry sleeps 32s to clear Facebook's 30s write window. A full launch makes
+// ~8 sequential writes, so if several are throttled the wait can add up to
+// more than the function's own 300s ceiling — stop retrying with a clear
+// error BEFORE that happens, rather than let the platform kill the function
+// silently mid-build and leave a half-created campaign with no error at all.
+const RETRY_SLEEP_MS = 32000;
+
+async function fbPost(path, body, deadline) {
   const token = process.env.META_ADS_ACCESS_TOKEN;
   // The ad account can be throttled to 1 write per 30s (code 613 / subcode
-  // 4841018); a launch makes ~8 writes back-to-back, so wait out the window
-  // and retry instead of failing the whole build mid-flight.
+  // 4841018); wait out the window and retry instead of failing the whole
+  // build on the first throttle.
   for (let attempt = 0; ; attempt++) {
     const res = await fetch(`${FB_BASE}${path}`, {
       method: 'POST',
@@ -60,7 +67,10 @@ async function fbPost(path, body) {
     if (!data.error) return data;
     const e = data.error;
     if (e.code === 613 && attempt < 3) {
-      await new Promise((r) => setTimeout(r, 32000));
+      if (deadline && Date.now() + RETRY_SLEEP_MS > deadline) {
+        throw new Error(`FB POST ${path}: still rate-limited but out of time before this run's own deadline. Stopped cleanly instead of letting the platform kill it mid-build; nothing after this call was created. Safe to retry the same request in a minute.`);
+      }
+      await new Promise((r) => setTimeout(r, RETRY_SLEEP_MS));
       continue;
     }
     throw new Error(`FB POST ${path}: ${e.message}` +
@@ -104,6 +114,9 @@ export default async function handler(req, res) {
   // existing live campaign for the same reel instead of colliding with it.
   const suffix = (req.query?.suffix || '').toString().trim();
   const campaignName = `Boost Reel — ${code} (Jun 2026)${suffix ? ` [${suffix}]` : ''}`;
+  // Stay well under the function's own 300s ceiling so a retry can always
+  // detect it's out of time and fail cleanly instead of being killed mid-write.
+  const deadline = Date.now() + 260000;
 
   try {
     const igUserId = await resolveIgUserId(PAGE_ID, IG_USER_FALLBACK);
@@ -133,7 +146,7 @@ export default async function handler(req, res) {
       special_ad_categories: [],
       is_adset_budget_sharing_enabled: false,
       status: 'PAUSED',
-    });
+    }, deadline);
 
     const adsetBody = {
       name: `Boost Reel — ${code} (UAE+KSA Women)`,
@@ -148,7 +161,7 @@ export default async function handler(req, res) {
     };
     if (refAdset.promoted_object)  adsetBody.promoted_object  = refAdset.promoted_object;
     if (refAdset.attribution_spec) adsetBody.attribution_spec = refAdset.attribution_spec;
-    const adset = await fbPost(`/act_${AD_ACCOUNT}/adsets`, adsetBody);
+    const adset = await fbPost(`/act_${AD_ACCOUNT}/adsets`, adsetBody, deadline);
 
     // Promote the EXISTING post — engagement lands on the real reel.
     const creative = await fbPost(`/act_${AD_ACCOUNT}/adcreatives`, existingPostCreativeBody({
@@ -156,17 +169,17 @@ export default async function handler(req, res) {
       pageId: PAGE_ID,
       igUserId,
       mediaId: media.id,
-    }));
+    }), deadline);
 
     const ad = await fbPost(`/act_${AD_ACCOUNT}/ads`, {
       name: `Boost Reel — ${code}`, adset_id: adset.id, creative: { creative_id: creative.id }, status: 'PAUSED',
-    });
+    }, deadline);
 
-    await fbPost(`/${adset.id}`, { daily_budget: budget });
+    await fbPost(`/${adset.id}`, { daily_budget: budget }, deadline);
     if (activate) {
-      await fbPost(`/${campaign.id}`, { status: 'ACTIVE' });
-      await fbPost(`/${adset.id}`,    { status: 'ACTIVE' });
-      await fbPost(`/${ad.id}`,       { status: 'ACTIVE' });
+      await fbPost(`/${campaign.id}`, { status: 'ACTIVE' }, deadline);
+      await fbPost(`/${adset.id}`,    { status: 'ACTIVE' }, deadline);
+      await fbPost(`/${ad.id}`,       { status: 'ACTIVE' }, deadline);
     }
 
     return res.status(200).json({

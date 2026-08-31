@@ -31,6 +31,17 @@ const SEGMENT_ANGLES = {
 };
 
 /**
+ * The ONLY brand-facts text a pitch may use, shared by the writer prompt and
+ * the accuracy checker so they always describe the same picture of what's
+ * known. A blank or whitespace-only brief is treated exactly like a missing
+ * one (the DB's `not.is.null` filter lets an empty string through).
+ */
+export function brandFactsText(brandName, brandNotes) {
+  const trimmed = (brandNotes || '').trim();
+  return trimmed || `${brandName}, active in the UAE lifestyle market. No further facts are known, so speak only to its category and what brands like it do well. Do not invent particular facts, products, or claims.`;
+}
+
+/**
  * Build the ONLY stats block a pitch may cite. Every line is a real number pulled
  * live from Instagram, so nothing the model writes can drift from what a brand sees.
  */
@@ -84,9 +95,7 @@ OUTPUT: Return ONLY a single valid JSON object: {"subject": "...", "body": "..."
 
   const userPrompt = `Write a pitch email from Aastha Chopra to a brand manager at ${brandName}.
 
-THE BRAND (the ONLY brand facts you may use; never name a product, collection, campaign, store, event, or award that is not stated here): ${brandNotes
-    ? brandNotes
-    : `${brandName}, active in the UAE lifestyle market. No further facts are known, so speak only to its category and what brands like it do well. Do not invent particular facts, products, or claims.`}
+THE BRAND (the ONLY brand facts you may use; never name a product, collection, campaign, store, event, or award that is not stated here): ${brandFactsText(brandName, brandNotes)}
 
 HOW SHE WOULD CREATE FOR THIS CATEGORY: ${angle || 'Show concretely how she would feature the brand and tell its story through her content.'}
 
@@ -129,7 +138,7 @@ Lead with the brand and how she would bring it to life. Treat her audience under
  * with a comma so a dash can never reach a brand. Hyphens (e.g. "25-44") are left
  * untouched.
  */
-function dedash(s) {
+export function dedash(s) {
   return String(s).replace(/\s*[—–]\s*/g, ', ');
 }
 
@@ -166,7 +175,7 @@ function stripToText(raw) {
   return raw.replace(/```[\s\S]*?```/g, '').replace(/^\s*[{}]\s*$/gm, '').trim();
 }
 
-function esc(s) {
+export function esc(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
