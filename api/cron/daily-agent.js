@@ -131,9 +131,15 @@ HER STATS (the only numbers allowed):\n${factSheet || '(none, so the pitch may c
   try {
     for (let attempt = 0; attempt < 2; attempt++) {
       const { subject, body } = await generatePitch(brand.name, profile, brand.brand_brief, brand.segment || '', feedback);
+      const problems = [];
+      // A real, always-true fact about her (confirmed 2026-08-31 from her own
+      // edit of a sent message) that the introduction must include — checked
+      // here because it's a content requirement, not a fact-accuracy question.
+      if (!/lawyer/i.test(body)) problems.push('the introduction dropped that she is a practicing corporate lawyer, a real detail that must appear');
       const verdict = await checkText({ text: `${subject}\n${body}`, facts, factSheet });
-      if (verdict.ok) return { subject, body, attempts: attempt + 1 };
-      feedback = `Your previous attempt was rejected by the fact checker: ${verdict.problems.join('; ')}. Fix every one. Only use the supplied brand facts and stats.`;
+      if (!verdict.ok) problems.push(...verdict.problems);
+      if (!problems.length) return { subject, body, attempts: attempt + 1 };
+      feedback = `Your previous attempt was rejected: ${problems.join('; ')}. Fix every one. Only use the supplied brand facts and stats.`;
     }
   } catch (e) {
     return { subject: null, body: null, attempts: 0, error: String(e?.message || e) };

@@ -67,28 +67,33 @@ export async function generatePitch(brandName, profile, brandNotes = '', segment
   const factSheet = buildFactSheet(profile);
   const angle = SEGMENT_ANGLES[segment] || '';
 
-  const systemPrompt = `You write outreach emails from Aastha Chopra, a Dubai-based lifestyle creator, to brand managers.
+  // Structure calibrated 2026-08-31 against a message Aastha actually
+  // rewrote and sent (a DM, but the introduction and ask generalize to
+  // email): a real greeting, her name and role, and a concrete, multi-part
+  // ask instead of one vague invitation to talk.
+  const systemPrompt = `You write outreach emails from Aastha Chopra, a Dubai-based content creator and practicing corporate lawyer, to brand managers.
 
 WHO SHE IS: A content creator whose real strength is understanding her audience and telling a brand's story well. She is warm, assured, and good at her craft. This email should make a brand feel that she gets them and could bring their work to life. It is not a pitch about reach.
 
 WHAT THE EMAIL IS ABOUT, in order of importance:
 1. THE BRAND. Show genuine understanding of what this brand is and what makes it good: its work, its look, what it stands for.
-2. HOW SHE WOULD CREATE FOR IT. A concrete, believable picture of how she would feature the brand and tell its story through her content. This is the heart of the email.
+2. HOW SHE WOULD CREATE FOR IT, and where it fits, what her audience is actually asking for in this category. This is the heart of the email.
 3. HER AUTHORITY AS A STORYTELLER. She knows the UAE audience and knows how to show a product so people feel it. Her value is judgment and craft.
 
-STRUCTURE — three short paragraphs, no headers, no bullet points:
-1. OPEN: One or two sentences showing you truly know this brand and admire something specific about it.
-2. MIDDLE: How she pictures creating with the brand, and why her read on the audience makes that work.
-3. CLOSE: A warm, confident invitation to talk.
+STRUCTURE — four short paragraphs, no headers, no bullet points:
+1. GREETING: "Hi [Brand] Team," on its own line.
+2. INTRODUCTION: one sentence that MUST include, in this order: her name, "a Dubai-based content creator and practicing corporate lawyer" (this exact phrase, or very close to it — never drop the lawyer part), and what she creates for whom (her relevant categories, a predominantly UAE/GCC audience). This sentence is not optional and not a paraphrase target: the lawyer detail is real, specific, and must appear.
+3. THE BRAND + THE WORK: show you truly know this brand and admire something specific about it, then how she pictures creating with it, and — where it genuinely strengthens the point — one line on what her audience is actually asking for in this category.
+4. THE ASK: name concretely what she wants (the right person for PR and creator partnerships, and being considered for upcoming launches, gifting, or events), then a warm, direct question inviting a reply.
 
 HARD RULES:
 - Do NOT lead with or headline follower counts or audience size. This email is about storytelling and audience understanding, not reach. Leaving numbers out entirely is fine and often better.
 - If you reference any number, it must appear verbatim in the STATS block below. Never invent or round up. A number is background, never the selling point.
 - Do NOT default to a "South Asian diaspora" framing. Mention it ONLY if the brand context clearly shows the brand has a South Asian line or audience. Otherwise speak to her broad Dubai and UAE lifestyle audience.
 - Every sentence is a positive statement. No "if X then Y" logic.
-- No lists or bullet points in the body. Under 140 words total.
-- Warm and assured. She sounds like someone who loves making content and is good at it.
-- Sign off as Aastha only.
+- No lists or bullet points in the body. 160 to 220 words total.
+- Warm, assured, professional — a real introduction, not a quick note.
+- Sign off as Aastha only. No emoji (this is an email, not a direct message).
 ${VOICE_RULES}
 
 OUTPUT: Return ONLY a single valid JSON object: {"subject": "...", "body": "..."}. Output nothing else — no markdown code fences, no backticks, no commentary, no corrections, nothing before or after the object, and never more than one object. The subject is under 60 characters and reads like a person wrote it for this one brand: name the idea, not the gesture. NEVER a template like "Bringing X to life" or "X, a story worth telling". The body is the email text with real line breaks between paragraphs (use \\n) and ends with the single sign-off "Aastha".`;
@@ -100,13 +105,13 @@ THE BRAND (the ONLY brand facts you may use; never name a product, collection, c
 HOW SHE WOULD CREATE FOR THIS CATEGORY: ${angle || 'Show concretely how she would feature the brand and tell its story through her content.'}
 
 ABOUT AASTHA (background, not the headline):
-- Lifestyle creator based in ${STATIC_PROFILE.location}; niches: ${STATIC_PROFILE.niches}.
+- Content creator and practicing corporate lawyer based in ${STATIC_PROFILE.location}; niches: ${STATIC_PROFILE.niches}.
 - Her edge is reading the UAE audience and depicting a product so people feel it.
 
 STATS (the ONLY numbers you may cite, and only if one genuinely strengthens a point; the email should not be about numbers):
 ${factSheet || '- (no numbers needed; lead with story and craft)'}
 
-Lead with the brand and how she would bring it to life. Treat her audience understanding as the proof of her authority, not a stats dump. Return JSON only.${feedback ? `\n\n${feedback}` : ''}`;
+Open with a real greeting, introduce her briefly, lead with the brand and how she would bring it to life, then close with a concrete ask. Treat her audience understanding as the proof of her authority, not a stats dump. Return JSON only.${feedback ? `\n\n${feedback}` : ''}`;
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
