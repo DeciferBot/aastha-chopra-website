@@ -181,10 +181,12 @@ export default async function handler(req, res) {
   const weekAgo = new Date(Date.now() - 7 * 86400000).toISOString();
   const weekRows = await sb(`/brand_pitches?select=id&generated_at=gte.${weekAgo}&status=neq.dm`).catch(() => []);
   const weekUsed = (weekRows || []).length;
-  if (weekUsed >= WEEKLY_LIMIT) {
+  // A dry run delivers nothing, so it previews the next real run even while
+  // the weekly limit is spent.
+  if (weekUsed >= WEEKLY_LIMIT && !dryRun) {
     return res.status(200).json({ ok: true, note: `weekly limit reached (${weekUsed}/${WEEKLY_LIMIT}); no pitch today` });
   }
-  const budget = Math.min(PER_RUN, WEEKLY_LIMIT - weekUsed);
+  const budget = dryRun ? PER_RUN : Math.min(PER_RUN, WEEKLY_LIMIT - weekUsed);
 
   // Eligibility is absolute: checked address + researched brief + her segments
   // + warm/paid tier. A brand missing any of these cannot be pitched at all.
