@@ -47,6 +47,10 @@
       "schedule": "30 7 * * *"
     },
     {
+      "path": "/api/cron/dm-digest",
+      "schedule": "30 3 * * 1,4"
+    },
+    {
       "path": "/api/cron/generate-blog",
       "schedule": "0 3 * * 1,4"
     },
