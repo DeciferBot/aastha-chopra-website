@@ -198,6 +198,7 @@ export default async function handler(req, res) {
 
     const candidates = (await sb(
       `/outreach_brands?handle_status=eq.verified&is_agency=eq.false` +
+      `&budget_tier=eq.major` +
       `&tier=in.(warm,paid)&segment=in.(${DM_SEGMENTS.join(',')})` +
       `&select=id,name,handle,segment,tier,fit_score,active_ad_count,brand_brief,notes,budget_tier` +
       `&limit=200`
