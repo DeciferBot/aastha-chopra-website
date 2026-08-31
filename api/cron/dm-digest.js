@@ -17,7 +17,7 @@ export const config = { maxDuration: 300 };
  *   Auth: Bearer CRON_SECRET | MANUAL_SYNC_KEY
  */
 
-import { checkText } from '../_accuracy.js';
+import { checkText, VOICE_RULES } from '../_accuracy.js';
 
 const SUPABASE_URL = 'https://uqzvaytvynrglijvwjsz.supabase.co';
 const SERVICE_KEY  = process.env.SUPABASE_SERVICE_KEY;
@@ -121,12 +121,12 @@ HARD RULES:
 - 40 to 70 words. Two short paragraphs at most.
 - The FIRST sentence must be specific to this brand (it is all they see in the request preview). Never open with "Hi" alone, her own name, or "I am a creator".
 - ACCURACY IS EVERYTHING. Only reference facts that appear in the brand description supplied below. NEVER name a specific product, collection, campaign, or drop that is not in that description. NEVER claim she saw something "in your feed", "last week", or at any specific time or place. If the description is thin, speak to what the brand's category does well, without inventing particulars.
-- Show one genuine observation about the brand (from the description), then one line on what she would love to create with them, then a light question that invites a reply.
+- Make one concrete observation about the brand (from the description), then one line on what she wants to make with them, then a plain question that invites a reply.
 - Mention her recent work ONLY if names are supplied below, using the word "featured" (she featured them in her content). Never say "worked with" or imply a paid deal.
-- No numbers, no follower counts, no links, no hashtags.
-- Zero em dashes. Banned words: authentic, elevate, resonate, curated, align, journey, collab (use "work together"), synergy.
+- No numbers, no follower counts, no links, no hashtags. Never the word "collab" (say "work together").
 - Warm, confident, a little playful. Sounds typed on a phone, not mailed.
 - End with "Aastha x" on its own line.
+${VOICE_RULES}
 
 OUTPUT: only a JSON object {"message": "..."} with real line breaks as \\n. Nothing else.`;
 
