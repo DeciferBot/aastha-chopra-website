@@ -195,8 +195,11 @@ export default async function handler(req, res) {
 
   // Eligibility is absolute: checked address + researched brief + her segments
   // + warm/paid tier. A brand missing any of these cannot be pitched at all.
+  // Quality bar (Amit, 2026-08-31): only names people have heard of get
+  // chased at all. Mid and small brands stay stored but get no slots.
   const candidates = await sb(
     `/outreach_brands?is_agency=eq.false&tier=in.(warm,paid)` +
+    `&budget_tier=eq.major` +
     `&segment=in.(${PITCH_SEGMENTS.join(',')})` +
     `&contact_email=not.is.null&email_status=in.(mx_ok,verified)` +
     `&brand_brief=not.is.null&select=*`
