@@ -9,7 +9,7 @@
       "source_file": "generate-pdf.js",
       "source_location": "L1",
       "id": "generate_pdf_js",
-      "community": 25,
+      "community": 24,
       "norm_label": "generate-pdf.js"
     },
     {
@@ -333,7 +333,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L1",
       "id": "js_meta_events_js",
-      "community": 18,
+      "community": 17,
       "norm_label": "meta-events.js"
     },
     {
@@ -342,7 +342,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L11",
       "id": "meta_events_fbqready",
-      "community": 18,
+      "community": 17,
       "norm_label": "fbqready()"
     },
     {
@@ -351,7 +351,7 @@
       "source_file": "js/meta-events.js",
       "source_location": "L12",
       "id": "meta_events_eventid",
-      "community": 18,
+      "community": 17,
       "norm_label": "eventid()"
     },
     {
@@ -360,7 +360,7 @@
       "source_file": "api/sitemap.js",
       "source_location": "L1",
       "id": "api_sitemap_js",
-      "community": 7,
+      "community": 8,
       "norm_label": "sitemap.js"
     },
     {
@@ -369,7 +369,7 @@
       "source_file": "api/sitemap.js",
       "source_location": "L30",
       "id": "sitemap_handler",
-      "community": 7,
+      "community": 8,
       "norm_label": "handler()"
     },
     {
@@ -378,7 +378,7 @@
       "source_file": "api/sitemap.js",
       "source_location": "L83",
       "id": "sitemap_urlentry",
-      "community": 1,
+      "community": 8,
       "norm_label": "urlentry()"
     },
     {
@@ -387,7 +387,7 @@
       "source_file": "api/analytics-auth.js",
       "source_location": "L1",
       "id": "api_analytics_auth_js",
-      "community": 19,
+      "community": 18,
       "norm_label": "analytics-auth.js"
     },
     {
@@ -396,7 +396,7 @@
       "source_file": "api/analytics-auth.js",
       "source_location": "L1",
       "id": "analytics_auth_handler",
-      "community": 19,
+      "community": 18,
       "norm_label": "handler()"
     },
     {
@@ -423,7 +423,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L1",
       "id": "api_telegram_js",
-      "community": 7,
+      "community": 9,
       "norm_label": "telegram.js"
     },
     {
@@ -432,7 +432,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L17",
       "id": "telegram_emailpitchtoaastha",
-      "community": 7,
+      "community": 9,
       "norm_label": "emailpitchtoaastha()"
     },
     {
@@ -441,7 +441,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L47",
       "id": "telegram_send",
-      "community": 7,
+      "community": 9,
       "norm_label": "send()"
     },
     {
@@ -450,7 +450,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L60",
       "id": "telegram_sb",
-      "community": 7,
+      "community": 9,
       "norm_label": "sb()"
     },
     {
@@ -459,7 +459,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L89",
       "id": "telegram_generatepitch",
-      "community": 7,
+      "community": 9,
       "norm_label": "generatepitch()"
     },
     {
@@ -468,7 +468,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L145",
       "id": "telegram_handleadd",
-      "community": 7,
+      "community": 9,
       "norm_label": "handleadd()"
     },
     {
@@ -477,7 +477,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L164",
       "id": "telegram_handleremove",
-      "community": 7,
+      "community": 9,
       "norm_label": "handleremove()"
     },
     {
@@ -486,7 +486,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L170",
       "id": "telegram_handlelist",
-      "community": 7,
+      "community": 9,
       "norm_label": "handlelist()"
     },
     {
@@ -495,7 +495,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L183",
       "id": "telegram_handlestatus",
-      "community": 7,
+      "community": 9,
       "norm_label": "handlestatus()"
     },
     {
@@ -504,7 +504,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L206",
       "id": "telegram_handleleads",
-      "community": 7,
+      "community": 9,
       "norm_label": "handleleads()"
     },
     {
@@ -513,7 +513,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L227",
       "id": "telegram_handleleaddone",
-      "community": 7,
+      "community": 9,
       "norm_label": "handleleaddone()"
     },
     {
@@ -522,7 +522,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L238",
       "id": "telegram_handlepitch",
-      "community": 7,
+      "community": 9,
       "norm_label": "handlepitch()"
     },
     {
@@ -531,7 +531,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L258",
       "id": "telegram_handlehelp",
-      "community": 7,
+      "community": 9,
       "norm_label": "handlehelp()"
     },
     {
@@ -540,7 +540,7 @@
       "source_file": "api/telegram.js",
       "source_location": "L276",
       "id": "telegram_handler",
-      "community": 7,
+      "community": 9,
       "norm_label": "handler()"
     },
     {
@@ -549,7 +549,7 @@
       "source_file": "api/blog-index.js",
       "source_location": "L1",
       "id": "api_blog_index_js",
-      "community": 1,
+      "community": 2,
       "norm_label": "blog-index.js"
     },
     {
@@ -558,7 +558,7 @@
       "source_file": "api/blog-index.js",
       "source_location": "L15",
       "id": "blog_index_handler",
-      "community": 1,
+      "community": 2,
       "norm_label": "handler()"
     },
     {
@@ -567,7 +567,7 @@
       "source_file": "api/blog-index.js",
       "source_location": "L134",
       "id": "blog_index_filterbar",
-      "community": 1,
+      "community": 2,
       "norm_label": "filterbar()"
     },
     {
@@ -576,7 +576,7 @@
       "source_file": "api/blog-index.js",
       "source_location": "L144",
       "id": "blog_index_renderhomeview",
-      "community": 1,
+      "community": 2,
       "norm_label": "renderhomeview()"
     },
     {
@@ -585,7 +585,7 @@
       "source_file": "api/blog-index.js",
       "source_location": "L207",
       "id": "blog_index_rendersegmentview",
-      "community": 1,
+      "community": 2,
       "norm_label": "rendersegmentview()"
     },
     {
@@ -594,7 +594,7 @@
       "source_file": "api/invoice-auth.js",
       "source_location": "L1",
       "id": "api_invoice_auth_js",
-      "community": 20,
+      "community": 19,
       "norm_label": "invoice-auth.js"
     },
     {
@@ -603,7 +603,7 @@
       "source_file": "api/invoice-auth.js",
       "source_location": "L1",
       "id": "invoice_auth_handler",
-      "community": 20,
+      "community": 19,
       "norm_label": "handler()"
     },
     {
@@ -612,43 +612,43 @@
       "source_file": "api/_profile.js",
       "source_location": "L1",
       "id": "api_profile_js",
-      "community": 2,
+      "community": 0,
       "norm_label": "_profile.js"
     },
     {
       "label": "sbGet()",
       "file_type": "code",
       "source_file": "api/_profile.js",
-      "source_location": "L29",
+      "source_location": "L34",
       "id": "profile_sbget",
-      "community": 2,
+      "community": 0,
       "norm_label": "sbget()"
     },
     {
       "label": "latestGeneration()",
       "file_type": "code",
       "source_file": "api/_profile.js",
-      "source_location": "L39",
+      "source_location": "L44",
       "id": "profile_latestgeneration",
-      "community": 2,
+      "community": 0,
       "norm_label": "latestgeneration()"
     },
     {
       "label": "cleanCity()",
       "file_type": "code",
       "source_file": "api/_profile.js",
-      "source_location": "L45",
+      "source_location": "L50",
       "id": "profile_cleancity",
-      "community": 2,
+      "community": 0,
       "norm_label": "cleancity()"
     },
     {
       "label": "getLiveProfile()",
       "file_type": "code",
       "source_file": "api/_profile.js",
-      "source_location": "L56",
+      "source_location": "L61",
       "id": "profile_getliveprofile",
-      "community": 2,
+      "community": 0,
       "norm_label": "getliveprofile()"
     },
     {
@@ -657,7 +657,7 @@
       "source_file": "api/resend-webhook.js",
       "source_location": "L1",
       "id": "api_resend_webhook_js",
-      "community": 4,
+      "community": 14,
       "norm_label": "resend-webhook.js"
     },
     {
@@ -666,7 +666,7 @@
       "source_file": "api/resend-webhook.js",
       "source_location": "L25",
       "id": "resend_webhook_readraw",
-      "community": 4,
+      "community": 14,
       "norm_label": "readraw()"
     },
     {
@@ -675,7 +675,7 @@
       "source_file": "api/resend-webhook.js",
       "source_location": "L32",
       "id": "resend_webhook_verify",
-      "community": 4,
+      "community": 14,
       "norm_label": "verify()"
     },
     {
@@ -684,7 +684,7 @@
       "source_file": "api/resend-webhook.js",
       "source_location": "L49",
       "id": "resend_webhook_applyevent",
-      "community": 4,
+      "community": 14,
       "norm_label": "applyevent()"
     },
     {
@@ -693,7 +693,7 @@
       "source_file": "api/resend-webhook.js",
       "source_location": "L62",
       "id": "resend_webhook_handler",
-      "community": 4,
+      "community": 14,
       "norm_label": "handler()"
     },
     {
@@ -738,7 +738,7 @@
       "source_file": "api/capi-event.js",
       "source_location": "L1",
       "id": "api_capi_event_js",
-      "community": 12,
+      "community": 11,
       "norm_label": "capi-event.js"
     },
     {
@@ -747,7 +747,7 @@
       "source_file": "api/capi-event.js",
       "source_location": "L10",
       "id": "capi_event_handler",
-      "community": 12,
+      "community": 11,
       "norm_label": "handler()"
     },
     {
@@ -756,7 +756,7 @@
       "source_file": "api/invoice-list.js",
       "source_location": "L1",
       "id": "api_invoice_list_js",
-      "community": 21,
+      "community": 20,
       "norm_label": "invoice-list.js"
     },
     {
@@ -765,7 +765,7 @@
       "source_file": "api/invoice-list.js",
       "source_location": "L1",
       "id": "invoice_list_handler",
-      "community": 21,
+      "community": 20,
       "norm_label": "handler()"
     },
     {
@@ -774,7 +774,7 @@
       "source_file": "api/subscribe.js",
       "source_location": "L1",
       "id": "api_subscribe_js",
-      "community": 12,
+      "community": 11,
       "norm_label": "subscribe.js"
     },
     {
@@ -783,7 +783,7 @@
       "source_file": "api/subscribe.js",
       "source_location": "L3",
       "id": "subscribe_handler",
-      "community": 12,
+      "community": 11,
       "norm_label": "handler()"
     },
     {
@@ -792,7 +792,7 @@
       "source_file": "api/ig-profile.js",
       "source_location": "L1",
       "id": "api_ig_profile_js",
-      "community": 22,
+      "community": 21,
       "norm_label": "ig-profile.js"
     },
     {
@@ -801,7 +801,7 @@
       "source_file": "api/ig-profile.js",
       "source_location": "L3",
       "id": "ig_profile_handler",
-      "community": 22,
+      "community": 21,
       "norm_label": "handler()"
     },
     {
@@ -810,7 +810,7 @@
       "source_file": "api/refresh-live.js",
       "source_location": "L1",
       "id": "api_refresh_live_js",
-      "community": 16,
+      "community": 13,
       "norm_label": "refresh-live.js"
     },
     {
@@ -819,7 +819,7 @@
       "source_file": "api/refresh-live.js",
       "source_location": "L24",
       "id": "refresh_live_ig",
-      "community": 16,
+      "community": 13,
       "norm_label": "ig()"
     },
     {
@@ -828,7 +828,7 @@
       "source_file": "api/refresh-live.js",
       "source_location": "L32",
       "id": "refresh_live_sb",
-      "community": 16,
+      "community": 13,
       "norm_label": "sb()"
     },
     {
@@ -837,7 +837,7 @@
       "source_file": "api/refresh-live.js",
       "source_location": "L48",
       "id": "refresh_live_sleep",
-      "community": 16,
+      "community": 13,
       "norm_label": "sleep()"
     },
     {
@@ -846,7 +846,7 @@
       "source_file": "api/refresh-live.js",
       "source_location": "L51",
       "id": "refresh_live_fetchdemo",
-      "community": 16,
+      "community": 13,
       "norm_label": "fetchdemo()"
     },
     {
@@ -855,7 +855,7 @@
       "source_file": "api/refresh-live.js",
       "source_location": "L74",
       "id": "refresh_live_handler",
-      "community": 16,
+      "community": 13,
       "norm_label": "handler()"
     },
     {
@@ -864,34 +864,25 @@
       "source_file": "api/pitch-now.js",
       "source_location": "L1",
       "id": "api_pitch_now_js",
-      "community": 2,
+      "community": 0,
       "norm_label": "pitch-now.js"
-    },
-    {
-      "label": "sb()",
-      "file_type": "code",
-      "source_file": "api/pitch-now.js",
-      "source_location": "L21",
-      "id": "pitch_now_sb",
-      "community": 2,
-      "norm_label": "sb()"
     },
     {
       "label": "enc()",
       "file_type": "code",
       "source_file": "api/pitch-now.js",
-      "source_location": "L36",
+      "source_location": "L20",
       "id": "pitch_now_enc",
-      "community": 2,
+      "community": 0,
       "norm_label": "enc()"
     },
     {
       "label": "handler()",
       "file_type": "code",
       "source_file": "api/pitch-now.js",
-      "source_location": "L38",
+      "source_location": "L22",
       "id": "pitch_now_handler",
-      "community": 2,
+      "community": 0,
       "norm_label": "handler()"
     },
     {
@@ -900,7 +891,7 @@
       "source_file": "api/blog-publish.js",
       "source_location": "L1",
       "id": "api_blog_publish_js",
-      "community": 0,
+      "community": 8,
       "norm_label": "blog-publish.js"
     },
     {
@@ -909,8 +900,44 @@
       "source_file": "api/blog-publish.js",
       "source_location": "L13",
       "id": "blog_publish_handler",
-      "community": 0,
+      "community": 8,
       "norm_label": "handler()"
+    },
+    {
+      "label": "_meta-graph.js",
+      "file_type": "code",
+      "source_file": "api/_meta-graph.js",
+      "source_location": "L1",
+      "id": "api_meta_graph_js",
+      "community": 16,
+      "norm_label": "_meta-graph.js"
+    },
+    {
+      "label": "fbGet()",
+      "file_type": "code",
+      "source_file": "api/_meta-graph.js",
+      "source_location": "L17",
+      "id": "meta_graph_fbget",
+      "community": 16,
+      "norm_label": "fbget()"
+    },
+    {
+      "label": "fbPost()",
+      "file_type": "code",
+      "source_file": "api/_meta-graph.js",
+      "source_location": "L35",
+      "id": "meta_graph_fbpost",
+      "community": 16,
+      "norm_label": "fbpost()"
+    },
+    {
+      "label": "fbDelete()",
+      "file_type": "code",
+      "source_file": "api/_meta-graph.js",
+      "source_location": "L59",
+      "id": "meta_graph_fbdelete",
+      "community": 16,
+      "norm_label": "fbdelete()"
     },
     {
       "label": "blog.js",
@@ -918,7 +945,7 @@
       "source_file": "api/blog.js",
       "source_location": "L1",
       "id": "api_blog_js",
-      "community": 1,
+      "community": 2,
       "norm_label": "blog.js"
     },
     {
@@ -927,7 +954,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L71",
       "id": "blog_segmentmeta",
-      "community": 1,
+      "community": 2,
       "norm_label": "segmentmeta()"
     },
     {
@@ -936,7 +963,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L95",
       "id": "blog_pillarfirst",
-      "community": 1,
+      "community": 2,
       "norm_label": "pillarfirst()"
     },
     {
@@ -945,7 +972,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L194",
       "id": "blog_segmentimage",
-      "community": 1,
+      "community": 2,
       "norm_label": "segmentimage()"
     },
     {
@@ -954,7 +981,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L200",
       "id": "blog_hashstr",
-      "community": 1,
+      "community": 2,
       "norm_label": "hashstr()"
     },
     {
@@ -963,7 +990,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L210",
       "id": "blog_segmentimagefor",
-      "community": 1,
+      "community": 2,
       "norm_label": "segmentimagefor()"
     },
     {
@@ -972,7 +999,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L221",
       "id": "blog_attachinstagramimages",
-      "community": 1,
+      "community": 2,
       "norm_label": "attachinstagramimages()"
     },
     {
@@ -981,7 +1008,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L285",
       "id": "blog_overrideimage",
-      "community": 1,
+      "community": 2,
       "norm_label": "overrideimage()"
     },
     {
@@ -990,7 +1017,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L297",
       "id": "blog_naturalimage",
-      "community": 1,
+      "community": 2,
       "norm_label": "naturalimage()"
     },
     {
@@ -999,7 +1026,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L304",
       "id": "blog_postimage",
-      "community": 1,
+      "community": 2,
       "norm_label": "postimage()"
     },
     {
@@ -1008,7 +1035,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L315",
       "id": "blog_dedupepostimages",
-      "community": 1,
+      "community": 2,
       "norm_label": "dedupepostimages()"
     },
     {
@@ -1017,7 +1044,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L334",
       "id": "blog_sbimg",
-      "community": 1,
+      "community": 2,
       "norm_label": "sbimg()"
     },
     {
@@ -1026,7 +1053,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L341",
       "id": "blog_sb",
-      "community": 1,
+      "community": 2,
       "norm_label": "sb()"
     },
     {
@@ -1035,7 +1062,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L359",
       "id": "blog_esc",
-      "community": 1,
+      "community": 2,
       "norm_label": "esc()"
     },
     {
@@ -1044,7 +1071,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L364",
       "id": "blog_rendershell",
-      "community": 1,
+      "community": 2,
       "norm_label": "rendershell()"
     },
     {
@@ -1053,7 +1080,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L424",
       "id": "blog_ctablock",
-      "community": 1,
+      "community": 2,
       "norm_label": "ctablock()"
     },
     {
@@ -1062,7 +1089,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L454",
       "id": "blog_renderherosvg",
-      "community": 1,
+      "community": 2,
       "norm_label": "renderherosvg()"
     },
     {
@@ -1071,7 +1098,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L481",
       "id": "blog_postdateparts",
-      "community": 1,
+      "community": 2,
       "norm_label": "postdateparts()"
     },
     {
@@ -1080,7 +1107,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L517",
       "id": "blog_renderpicture",
-      "community": 1,
+      "community": 2,
       "norm_label": "renderpicture()"
     },
     {
@@ -1089,7 +1116,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L529",
       "id": "blog_renderpostcard",
-      "community": 1,
+      "community": 2,
       "norm_label": "renderpostcard()"
     },
     {
@@ -1098,7 +1125,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L549",
       "id": "blog_renderauthorbox",
-      "community": 1,
+      "community": 2,
       "norm_label": "renderauthorbox()"
     },
     {
@@ -1107,7 +1134,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L569",
       "id": "blog_updateddateparts",
-      "community": 1,
+      "community": 2,
       "norm_label": "updateddateparts()"
     },
     {
@@ -1116,7 +1143,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L579",
       "id": "blog_renderinstagramblock",
-      "community": 1,
+      "community": 2,
       "norm_label": "renderinstagramblock()"
     },
     {
@@ -1125,7 +1152,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L614",
       "id": "blog_organizationschema",
-      "community": 1,
+      "community": 2,
       "norm_label": "organizationschema()"
     },
     {
@@ -1134,7 +1161,7 @@
       "source_file": "api/_blog.js",
       "source_location": "L632",
       "id": "blog_personschema",
-      "community": 1,
+      "community": 2,
       "norm_label": "personschema()"
     },
     {
@@ -1143,7 +1170,7 @@
       "source_file": "api/blog.js",
       "source_location": "L15",
       "id": "blog_handler",
-      "community": 1,
+      "community": 2,
       "norm_label": "handler()"
     },
     {
@@ -1152,7 +1179,7 @@
       "source_file": "api/blog.js",
       "source_location": "L151",
       "id": "blog_renderhead",
-      "community": 1,
+      "community": 2,
       "norm_label": "renderhead()"
     },
     {
@@ -1161,7 +1188,7 @@
       "source_file": "api/blog.js",
       "source_location": "L287",
       "id": "blog_renderarticle",
-      "community": 1,
+      "community": 2,
       "norm_label": "renderarticle()"
     },
     {
@@ -1170,7 +1197,7 @@
       "source_file": "api/blog.js",
       "source_location": "L344",
       "id": "blog_notfound",
-      "community": 1,
+      "community": 2,
       "norm_label": "notfound()"
     },
     {
@@ -1179,7 +1206,7 @@
       "source_file": "api/_capi.js",
       "source_location": "L1",
       "id": "api_capi_js",
-      "community": 12,
+      "community": 11,
       "norm_label": "_capi.js"
     },
     {
@@ -1188,7 +1215,7 @@
       "source_file": "api/_capi.js",
       "source_location": "L14",
       "id": "capi_hash",
-      "community": 12,
+      "community": 11,
       "norm_label": "hash()"
     },
     {
@@ -1197,7 +1224,7 @@
       "source_file": "api/_capi.js",
       "source_location": "L23",
       "id": "capi_readfbcookies",
-      "community": 12,
+      "community": 11,
       "norm_label": "readfbcookies()"
     },
     {
@@ -1206,8 +1233,44 @@
       "source_file": "api/_capi.js",
       "source_location": "L48",
       "id": "capi_sendcapievent",
-      "community": 12,
+      "community": 11,
       "norm_label": "sendcapievent()"
+    },
+    {
+      "label": "_outreach-shared.js",
+      "file_type": "code",
+      "source_file": "api/_outreach-shared.js",
+      "source_location": "L1",
+      "id": "api_outreach_shared_js",
+      "community": 0,
+      "norm_label": "_outreach-shared.js"
+    },
+    {
+      "label": "sb()",
+      "file_type": "code",
+      "source_file": "api/_outreach-shared.js",
+      "source_location": "L13",
+      "id": "outreach_shared_sb",
+      "community": 0,
+      "norm_label": "sb()"
+    },
+    {
+      "label": "byBudgetThenScore()",
+      "file_type": "code",
+      "source_file": "api/_outreach-shared.js",
+      "source_location": "L37",
+      "id": "outreach_shared_bybudgetthenscore",
+      "community": 0,
+      "norm_label": "bybudgetthenscore()"
+    },
+    {
+      "label": "weeklyQuota()",
+      "file_type": "code",
+      "source_file": "api/_outreach-shared.js",
+      "source_location": "L52",
+      "id": "outreach_shared_weeklyquota",
+      "community": 0,
+      "norm_label": "weeklyquota()"
     },
     {
       "label": "_accuracy.js",
@@ -1215,43 +1278,43 @@
       "source_file": "api/_accuracy.js",
       "source_location": "L1",
       "id": "api_accuracy_js",
-      "community": 9,
+      "community": 0,
       "norm_label": "_accuracy.js"
     },
     {
       "label": "unsupportedNumbers()",
       "file_type": "code",
       "source_file": "api/_accuracy.js",
-      "source_location": "L31",
+      "source_location": "L48",
       "id": "accuracy_unsupportednumbers",
-      "community": 9,
+      "community": 0,
       "norm_label": "unsupportednumbers()"
     },
     {
       "label": "mechanicalProblems()",
       "file_type": "code",
       "source_file": "api/_accuracy.js",
-      "source_location": "L37",
+      "source_location": "L54",
       "id": "accuracy_mechanicalproblems",
-      "community": 9,
+      "community": 0,
       "norm_label": "mechanicalproblems()"
     },
     {
       "label": "verifyClaims()",
       "file_type": "code",
       "source_file": "api/_accuracy.js",
-      "source_location": "L54",
+      "source_location": "L85",
       "id": "accuracy_verifyclaims",
-      "community": 9,
+      "community": 0,
       "norm_label": "verifyclaims()"
     },
     {
       "label": "checkText()",
       "file_type": "code",
       "source_file": "api/_accuracy.js",
-      "source_location": "L85",
+      "source_location": "L116",
       "id": "accuracy_checktext",
-      "community": 9,
+      "community": 0,
       "norm_label": "checktext()"
     },
     {
@@ -1260,7 +1323,7 @@
       "source_file": "api/_pipeline.js",
       "source_location": "L1",
       "id": "api_pipeline_js",
-      "community": 2,
+      "community": 0,
       "norm_label": "_pipeline.js"
     },
     {
@@ -1269,7 +1332,7 @@
       "source_file": "api/_pipeline.js",
       "source_location": "L18",
       "id": "pipeline_recordpipeline",
-      "community": 2,
+      "community": 0,
       "norm_label": "recordpipeline()"
     },
     {
@@ -1278,7 +1341,7 @@
       "source_file": "api/reels.js",
       "source_location": "L1",
       "id": "api_reels_js",
-      "community": 17,
+      "community": 15,
       "norm_label": "reels.js"
     },
     {
@@ -1287,7 +1350,7 @@
       "source_file": "api/reels.js",
       "source_location": "L25",
       "id": "reels_classify",
-      "community": 17,
+      "community": 15,
       "norm_label": "classify()"
     },
     {
@@ -1296,7 +1359,7 @@
       "source_file": "api/reels.js",
       "source_location": "L26",
       "id": "reels_sbimg",
-      "community": 1,
+      "community": 2,
       "norm_label": "sbimg()"
     },
     {
@@ -1305,7 +1368,7 @@
       "source_file": "api/reels.js",
       "source_location": "L30",
       "id": "reels_cardcaption",
-      "community": 17,
+      "community": 15,
       "norm_label": "cardcaption()"
     },
     {
@@ -1314,7 +1377,7 @@
       "source_file": "api/reels.js",
       "source_location": "L39",
       "id": "reels_handler",
-      "community": 17,
+      "community": 15,
       "norm_label": "handler()"
     },
     {
@@ -1323,7 +1386,7 @@
       "source_file": "api/instagram.js",
       "source_location": "L1",
       "id": "api_instagram_js",
-      "community": 23,
+      "community": 22,
       "norm_label": "instagram.js"
     },
     {
@@ -1332,7 +1395,7 @@
       "source_file": "api/instagram.js",
       "source_location": "L15",
       "id": "instagram_handler",
-      "community": 23,
+      "community": 22,
       "norm_label": "handler()"
     },
     {
@@ -1341,7 +1404,7 @@
       "source_file": "api/invoice-next.js",
       "source_location": "L1",
       "id": "api_invoice_next_js",
-      "community": 24,
+      "community": 23,
       "norm_label": "invoice-next.js"
     },
     {
@@ -1350,7 +1413,7 @@
       "source_file": "api/invoice-next.js",
       "source_location": "L1",
       "id": "invoice_next_handler",
-      "community": 24,
+      "community": 23,
       "norm_label": "handler()"
     },
     {
@@ -1377,106 +1440,115 @@
       "source_file": "api/_pitch.js",
       "source_location": "L1",
       "id": "api_pitch_js",
-      "community": 2,
+      "community": 0,
       "norm_label": "_pitch.js"
+    },
+    {
+      "label": "brandFactsText()",
+      "file_type": "code",
+      "source_file": "api/_pitch.js",
+      "source_location": "L39",
+      "id": "pitch_brandfactstext",
+      "community": 0,
+      "norm_label": "brandfactstext()"
     },
     {
       "label": "buildFactSheet()",
       "file_type": "code",
       "source_file": "api/_pitch.js",
-      "source_location": "L36",
+      "source_location": "L48",
       "id": "pitch_buildfactsheet",
-      "community": 2,
+      "community": 0,
       "norm_label": "buildfactsheet()"
     },
     {
       "label": "generatePitch()",
       "file_type": "code",
       "source_file": "api/_pitch.js",
-      "source_location": "L54",
+      "source_location": "L66",
       "id": "pitch_generatepitch",
-      "community": 2,
+      "community": 0,
       "norm_label": "generatepitch()"
     },
     {
       "label": "dedash()",
       "file_type": "code",
       "source_file": "api/_pitch.js",
-      "source_location": "L133",
+      "source_location": "L146",
       "id": "pitch_dedash",
-      "community": 2,
+      "community": 0,
       "norm_label": "dedash()"
     },
     {
       "label": "parsePitchResponse()",
       "file_type": "code",
       "source_file": "api/_pitch.js",
-      "source_location": "L144",
+      "source_location": "L157",
       "id": "pitch_parsepitchresponse",
-      "community": 2,
+      "community": 0,
       "norm_label": "parsepitchresponse()"
     },
     {
       "label": "stripToText()",
       "file_type": "code",
       "source_file": "api/_pitch.js",
-      "source_location": "L166",
+      "source_location": "L179",
       "id": "pitch_striptotext",
-      "community": 2,
+      "community": 0,
       "norm_label": "striptotext()"
     },
     {
       "label": "esc()",
       "file_type": "code",
       "source_file": "api/_pitch.js",
-      "source_location": "L170",
+      "source_location": "L183",
       "id": "pitch_esc",
-      "community": 1,
+      "community": 2,
       "norm_label": "esc()"
     },
     {
       "label": "renderPitchEmailHtml()",
       "file_type": "code",
       "source_file": "api/_pitch.js",
-      "source_location": "L179",
+      "source_location": "L192",
       "id": "pitch_renderpitchemailhtml",
-      "community": 2,
+      "community": 0,
       "norm_label": "renderpitchemailhtml()"
     },
     {
       "label": "sendPitchEmail()",
       "file_type": "code",
       "source_file": "api/_pitch.js",
-      "source_location": "L209",
+      "source_location": "L222",
       "id": "pitch_sendpitchemail",
-      "community": 2,
+      "community": 0,
       "norm_label": "sendpitchemail()"
     },
     {
       "label": "autosendEnabled()",
       "file_type": "code",
       "source_file": "api/_pitch.js",
-      "source_location": "L240",
+      "source_location": "L253",
       "id": "pitch_autosendenabled",
-      "community": 2,
+      "community": 0,
       "norm_label": "autosendenabled()"
     },
     {
       "label": "renderBrandEmailHtml()",
       "file_type": "code",
       "source_file": "api/_pitch.js",
-      "source_location": "L245",
+      "source_location": "L258",
       "id": "pitch_renderbrandemailhtml",
-      "community": 2,
+      "community": 0,
       "norm_label": "renderbrandemailhtml()"
     },
     {
       "label": "sendBrandPitch()",
       "file_type": "code",
       "source_file": "api/_pitch.js",
-      "source_location": "L264",
+      "source_location": "L277",
       "id": "pitch_sendbrandpitch",
-      "community": 2,
+      "community": 0,
       "norm_label": "sendbrandpitch()"
     },
     {
@@ -1485,7 +1557,7 @@
       "source_file": "api/_blog-qa.js",
       "source_location": "L1",
       "id": "api_blog_qa_js",
-      "community": 0,
+      "community": 3,
       "norm_label": "_blog-qa.js"
     },
     {
@@ -1521,7 +1593,7 @@
       "source_file": "api/_blog-qa.js",
       "source_location": "L183",
       "id": "blog_qa_editorgate",
-      "community": 0,
+      "community": 3,
       "norm_label": "editorgate()"
     },
     {
@@ -1530,7 +1602,7 @@
       "source_file": "api/_blog-qa.js",
       "source_location": "L253",
       "id": "blog_qa_factgate",
-      "community": 0,
+      "community": 3,
       "norm_label": "factgate()"
     },
     {
@@ -1539,7 +1611,7 @@
       "source_file": "api/_blog-qa.js",
       "source_location": "L291",
       "id": "blog_qa_revisedraft",
-      "community": 0,
+      "community": 3,
       "norm_label": "revisedraft()"
     },
     {
@@ -1548,7 +1620,7 @@
       "source_file": "api/_blog-qa.js",
       "source_location": "L320",
       "id": "blog_qa_extracttext",
-      "community": 0,
+      "community": 3,
       "norm_label": "extracttext()"
     },
     {
@@ -1557,7 +1629,7 @@
       "source_file": "api/_blog-qa.js",
       "source_location": "L325",
       "id": "blog_qa_arr",
-      "community": 0,
+      "community": 3,
       "norm_label": "arr()"
     },
     {
@@ -1566,7 +1638,7 @@
       "source_file": "api/_blog-qa.js",
       "source_location": "L326",
       "id": "blog_qa_num",
-      "community": 0,
+      "community": 3,
       "norm_label": "num()"
     },
     {
@@ -1575,7 +1647,7 @@
       "source_file": "api/_igpromote.js",
       "source_location": "L1",
       "id": "api_igpromote_js",
-      "community": 3,
+      "community": 1,
       "norm_label": "_igpromote.js"
     },
     {
@@ -1584,7 +1656,7 @@
       "source_file": "api/_igpromote.js",
       "source_location": "L31",
       "id": "igpromote_adstoken",
-      "community": 3,
+      "community": 1,
       "norm_label": "adstoken()"
     },
     {
@@ -1593,7 +1665,7 @@
       "source_file": "api/_igpromote.js",
       "source_location": "L37",
       "id": "igpromote_fbget",
-      "community": 3,
+      "community": 1,
       "norm_label": "fbget()"
     },
     {
@@ -1602,7 +1674,7 @@
       "source_file": "api/_igpromote.js",
       "source_location": "L46",
       "id": "igpromote_shortcodeof",
-      "community": 3,
+      "community": 1,
       "norm_label": "shortcodeof()"
     },
     {
@@ -1611,7 +1683,7 @@
       "source_file": "api/_igpromote.js",
       "source_location": "L59",
       "id": "igpromote_resolveiguserid",
-      "community": 3,
+      "community": 1,
       "norm_label": "resolveiguserid()"
     },
     {
@@ -1620,7 +1692,7 @@
       "source_file": "api/_igpromote.js",
       "source_location": "L75",
       "id": "igpromote_fetchigmediamap",
-      "community": 3,
+      "community": 1,
       "norm_label": "fetchigmediamap()"
     },
     {
@@ -1629,7 +1701,7 @@
       "source_file": "api/_igpromote.js",
       "source_location": "L100",
       "id": "igpromote_resolvemediabyshortcode",
-      "community": 3,
+      "community": 1,
       "norm_label": "resolvemediabyshortcode()"
     },
     {
@@ -1638,7 +1710,7 @@
       "source_file": "api/_igpromote.js",
       "source_location": "L119",
       "id": "igpromote_existingpostcreativebody",
-      "community": 3,
+      "community": 1,
       "norm_label": "existingpostcreativebody()"
     },
     {
@@ -1647,7 +1719,7 @@
       "source_file": "api/cron/blog-audit.js",
       "source_location": "L1",
       "id": "api_cron_blog_audit_js",
-      "community": 0,
+      "community": 8,
       "norm_label": "blog-audit.js"
     },
     {
@@ -1656,7 +1728,7 @@
       "source_file": "api/cron/blog-audit.js",
       "source_location": "L38",
       "id": "blog_audit_handler",
-      "community": 0,
+      "community": 8,
       "norm_label": "handler()"
     },
     {
@@ -1665,7 +1737,7 @@
       "source_file": "api/cron/blog-audit.js",
       "source_location": "L96",
       "id": "blog_audit_alert",
-      "community": 0,
+      "community": 8,
       "norm_label": "alert()"
     },
     {
@@ -1674,7 +1746,7 @@
       "source_file": "api/cron/blog-audit.js",
       "source_location": "L126",
       "id": "blog_audit_callclaude",
-      "community": 0,
+      "community": 8,
       "norm_label": "callclaude()"
     },
     {
@@ -1683,7 +1755,7 @@
       "source_file": "api/cron/blog-audit.js",
       "source_location": "L147",
       "id": "blog_audit_parsejson",
-      "community": 0,
+      "community": 8,
       "norm_label": "parsejson()"
     },
     {
@@ -1692,7 +1764,7 @@
       "source_file": "api/cron/complete-campaign.js",
       "source_location": "L1",
       "id": "api_cron_complete_campaign_js",
-      "community": 13,
+      "community": 4,
       "norm_label": "complete-campaign.js"
     },
     {
@@ -1701,7 +1773,7 @@
       "source_file": "api/cron/complete-campaign.js",
       "source_location": "L19",
       "id": "complete_campaign_ymd",
-      "community": 13,
+      "community": 4,
       "norm_label": "ymd()"
     },
     {
@@ -1710,7 +1782,7 @@
       "source_file": "api/cron/complete-campaign.js",
       "source_location": "L21",
       "id": "complete_campaign_fbget",
-      "community": 13,
+      "community": 4,
       "norm_label": "fbget()"
     },
     {
@@ -1719,7 +1791,7 @@
       "source_file": "api/cron/complete-campaign.js",
       "source_location": "L30",
       "id": "complete_campaign_fbpost",
-      "community": 13,
+      "community": 4,
       "norm_label": "fbpost()"
     },
     {
@@ -1728,7 +1800,7 @@
       "source_file": "api/cron/complete-campaign.js",
       "source_location": "L42",
       "id": "complete_campaign_sbget",
-      "community": 13,
+      "community": 4,
       "norm_label": "sbget()"
     },
     {
@@ -1737,7 +1809,7 @@
       "source_file": "api/cron/complete-campaign.js",
       "source_location": "L51",
       "id": "complete_campaign_sbupsert",
-      "community": 13,
+      "community": 4,
       "norm_label": "sbupsert()"
     },
     {
@@ -1746,7 +1818,7 @@
       "source_file": "api/cron/complete-campaign.js",
       "source_location": "L66",
       "id": "complete_campaign_visitsfrom",
-      "community": 13,
+      "community": 4,
       "norm_label": "visitsfrom()"
     },
     {
@@ -1755,7 +1827,7 @@
       "source_file": "api/cron/complete-campaign.js",
       "source_location": "L72",
       "id": "complete_campaign_handler",
-      "community": 13,
+      "community": 4,
       "norm_label": "handler()"
     },
     {
@@ -1764,70 +1836,43 @@
       "source_file": "api/cron/launch-reels.js",
       "source_location": "L1",
       "id": "api_cron_launch_reels_js",
-      "community": 3,
+      "community": 1,
       "norm_label": "launch-reels.js"
-    },
-    {
-      "label": "fbGet()",
-      "file_type": "code",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L63",
-      "id": "launch_reels_fbget",
-      "community": 3,
-      "norm_label": "fbget()"
-    },
-    {
-      "label": "fbPost()",
-      "file_type": "code",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L72",
-      "id": "launch_reels_fbpost",
-      "community": 3,
-      "norm_label": "fbpost()"
-    },
-    {
-      "label": "fbDelete()",
-      "file_type": "code",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L89",
-      "id": "launch_reels_fbdelete",
-      "community": 3,
-      "norm_label": "fbdelete()"
     },
     {
       "label": "cleanupOldCampaigns()",
       "file_type": "code",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L102",
+      "source_location": "L66",
       "id": "launch_reels_cleanupoldcampaigns",
-      "community": 3,
+      "community": 1,
       "norm_label": "cleanupoldcampaigns()"
     },
     {
       "label": "resolveReels()",
       "file_type": "code",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L110",
+      "source_location": "L74",
       "id": "launch_reels_resolvereels",
-      "community": 3,
+      "community": 1,
       "norm_label": "resolvereels()"
     },
     {
       "label": "buildTargeting()",
       "file_type": "code",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L126",
+      "source_location": "L90",
       "id": "launch_reels_buildtargeting",
-      "community": 3,
+      "community": 1,
       "norm_label": "buildtargeting()"
     },
     {
       "label": "handler()",
       "file_type": "code",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L146",
+      "source_location": "L110",
       "id": "launch_reels_handler",
-      "community": 3,
+      "community": 1,
       "norm_label": "handler()"
     },
     {
@@ -1836,52 +1881,25 @@
       "source_file": "api/cron/boost-reel.js",
       "source_location": "L1",
       "id": "api_cron_boost_reel_js",
-      "community": 3,
+      "community": 1,
       "norm_label": "boost-reel.js"
-    },
-    {
-      "label": "fbGet()",
-      "file_type": "code",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L39",
-      "id": "boost_reel_fbget",
-      "community": 3,
-      "norm_label": "fbget()"
-    },
-    {
-      "label": "fbPost()",
-      "file_type": "code",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L48",
-      "id": "boost_reel_fbpost",
-      "community": 3,
-      "norm_label": "fbpost()"
-    },
-    {
-      "label": "fbDelete()",
-      "file_type": "code",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L72",
-      "id": "boost_reel_fbdelete",
-      "community": 3,
-      "norm_label": "fbdelete()"
     },
     {
       "label": "buildTargeting()",
       "file_type": "code",
       "source_file": "api/cron/boost-reel.js",
-      "source_location": "L79",
+      "source_location": "L38",
       "id": "boost_reel_buildtargeting",
-      "community": 3,
+      "community": 1,
       "norm_label": "buildtargeting()"
     },
     {
       "label": "handler()",
       "file_type": "code",
       "source_file": "api/cron/boost-reel.js",
-      "source_location": "L91",
+      "source_location": "L50",
       "id": "boost_reel_handler",
-      "community": 3,
+      "community": 1,
       "norm_label": "handler()"
     },
     {
@@ -1890,61 +1908,52 @@
       "source_file": "api/cron/daily-agent.js",
       "source_location": "L1",
       "id": "api_cron_daily_agent_js",
-      "community": 2,
+      "community": 0,
       "norm_label": "daily-agent.js"
-    },
-    {
-      "label": "sb()",
-      "file_type": "code",
-      "source_file": "api/cron/daily-agent.js",
-      "source_location": "L58",
-      "id": "daily_agent_sb",
-      "community": 2,
-      "norm_label": "sb()"
     },
     {
       "label": "adArchive()",
       "file_type": "code",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L73",
+      "source_location": "L60",
       "id": "daily_agent_adarchive",
-      "community": 2,
+      "community": 0,
       "norm_label": "adarchive()"
     },
     {
       "label": "resolveAdToken()",
       "file_type": "code",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L88",
+      "source_location": "L75",
       "id": "daily_agent_resolveadtoken",
-      "community": 2,
+      "community": 0,
       "norm_label": "resolveadtoken()"
     },
     {
       "label": "checkAdLibrary()",
       "file_type": "code",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L107",
+      "source_location": "L94",
       "id": "daily_agent_checkadlibrary",
-      "community": 2,
+      "community": 0,
       "norm_label": "checkadlibrary()"
     },
     {
       "label": "scoreBrand()",
       "file_type": "code",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L122",
+      "source_location": "L109",
       "id": "daily_agent_scorebrand",
-      "community": 2,
+      "community": 0,
       "norm_label": "scorebrand()"
     },
     {
       "label": "generateCheckedPitch()",
       "file_type": "code",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L136",
+      "source_location": "L126",
       "id": "daily_agent_generatecheckedpitch",
-      "community": 2,
+      "community": 0,
       "norm_label": "generatecheckedpitch()"
     },
     {
@@ -1953,7 +1962,7 @@
       "source_file": "api/cron/daily-agent.js",
       "source_location": "L151",
       "id": "daily_agent_storepitch",
-      "community": 2,
+      "community": 0,
       "norm_label": "storepitch()"
     },
     {
@@ -1962,7 +1971,7 @@
       "source_file": "api/cron/daily-agent.js",
       "source_location": "L172",
       "id": "daily_agent_handler",
-      "community": 2,
+      "community": 0,
       "norm_label": "handler()"
     },
     {
@@ -1971,79 +1980,52 @@
       "source_file": "api/cron/launch-carousel.js",
       "source_location": "L1",
       "id": "api_cron_launch_carousel_js",
-      "community": 10,
+      "community": 1,
       "norm_label": "launch-carousel.js"
-    },
-    {
-      "label": "fbGet()",
-      "file_type": "code",
-      "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L61",
-      "id": "launch_carousel_fbget",
-      "community": 10,
-      "norm_label": "fbget()"
-    },
-    {
-      "label": "fbPost()",
-      "file_type": "code",
-      "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L70",
-      "id": "launch_carousel_fbpost",
-      "community": 10,
-      "norm_label": "fbpost()"
-    },
-    {
-      "label": "fbDelete()",
-      "file_type": "code",
-      "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L87",
-      "id": "launch_carousel_fbdelete",
-      "community": 10,
-      "norm_label": "fbdelete()"
     },
     {
       "label": "cleanupOldCampaigns()",
       "file_type": "code",
       "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L95",
+      "source_location": "L61",
       "id": "launch_carousel_cleanupoldcampaigns",
-      "community": 10,
+      "community": 1,
       "norm_label": "cleanupoldcampaigns()"
     },
     {
       "label": "resolveCarousel()",
       "file_type": "code",
       "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L103",
+      "source_location": "L69",
       "id": "launch_carousel_resolvecarousel",
-      "community": 10,
+      "community": 1,
       "norm_label": "resolvecarousel()"
     },
     {
       "label": "uploadImage()",
       "file_type": "code",
       "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L144",
+      "source_location": "L110",
       "id": "launch_carousel_uploadimage",
-      "community": 10,
+      "community": 1,
       "norm_label": "uploadimage()"
     },
     {
       "label": "buildTargeting()",
       "file_type": "code",
       "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L154",
+      "source_location": "L120",
       "id": "launch_carousel_buildtargeting",
-      "community": 10,
+      "community": 1,
       "norm_label": "buildtargeting()"
     },
     {
       "label": "handler()",
       "file_type": "code",
       "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L173",
+      "source_location": "L139",
       "id": "launch_carousel_handler",
-      "community": 10,
+      "community": 1,
       "norm_label": "handler()"
     },
     {
@@ -2052,7 +2034,7 @@
       "source_file": "api/cron/setup-audiences.js",
       "source_location": "L1",
       "id": "api_cron_setup_audiences_js",
-      "community": 14,
+      "community": 1,
       "norm_label": "setup-audiences.js"
     },
     {
@@ -2061,7 +2043,7 @@
       "source_file": "api/cron/setup-audiences.js",
       "source_location": "L46",
       "id": "setup_audiences_fbget",
-      "community": 14,
+      "community": 1,
       "norm_label": "fbget()"
     },
     {
@@ -2070,7 +2052,7 @@
       "source_file": "api/cron/setup-audiences.js",
       "source_location": "L55",
       "id": "setup_audiences_fbpost",
-      "community": 14,
+      "community": 1,
       "norm_label": "fbpost()"
     },
     {
@@ -2079,7 +2061,7 @@
       "source_file": "api/cron/setup-audiences.js",
       "source_location": "L72",
       "id": "setup_audiences_fbdelete",
-      "community": 14,
+      "community": 1,
       "norm_label": "fbdelete()"
     },
     {
@@ -2088,7 +2070,7 @@
       "source_file": "api/cron/setup-audiences.js",
       "source_location": "L80",
       "id": "setup_audiences_findaudience",
-      "community": 14,
+      "community": 1,
       "norm_label": "findaudience()"
     },
     {
@@ -2097,7 +2079,7 @@
       "source_file": "api/cron/setup-audiences.js",
       "source_location": "L85",
       "id": "setup_audiences_cleanupoldcampaigns",
-      "community": 14,
+      "community": 1,
       "norm_label": "cleanupoldcampaigns()"
     },
     {
@@ -2106,7 +2088,7 @@
       "source_file": "api/cron/setup-audiences.js",
       "source_location": "L92",
       "id": "setup_audiences_targetingfor",
-      "community": 14,
+      "community": 1,
       "norm_label": "targetingfor()"
     },
     {
@@ -2115,7 +2097,7 @@
       "source_file": "api/cron/setup-audiences.js",
       "source_location": "L108",
       "id": "setup_audiences_handler",
-      "community": 14,
+      "community": 1,
       "norm_label": "handler()"
     },
     {
@@ -2160,7 +2142,7 @@
       "source_file": "api/cron/ads-scoreboard.js",
       "source_location": "L1",
       "id": "api_cron_ads_scoreboard_js",
-      "community": 15,
+      "community": 12,
       "norm_label": "ads-scoreboard.js"
     },
     {
@@ -2169,7 +2151,7 @@
       "source_file": "api/cron/ads-scoreboard.js",
       "source_location": "L24",
       "id": "ads_scoreboard_ymd",
-      "community": 15,
+      "community": 12,
       "norm_label": "ymd()"
     },
     {
@@ -2178,7 +2160,7 @@
       "source_file": "api/cron/ads-scoreboard.js",
       "source_location": "L26",
       "id": "ads_scoreboard_fbget",
-      "community": 15,
+      "community": 12,
       "norm_label": "fbget()"
     },
     {
@@ -2187,7 +2169,7 @@
       "source_file": "api/cron/ads-scoreboard.js",
       "source_location": "L35",
       "id": "ads_scoreboard_sbget",
-      "community": 15,
+      "community": 12,
       "norm_label": "sbget()"
     },
     {
@@ -2196,7 +2178,7 @@
       "source_file": "api/cron/ads-scoreboard.js",
       "source_location": "L45",
       "id": "ads_scoreboard_sbupsertdaily",
-      "community": 15,
+      "community": 12,
       "norm_label": "sbupsertdaily()"
     },
     {
@@ -2205,7 +2187,7 @@
       "source_file": "api/cron/ads-scoreboard.js",
       "source_location": "L59",
       "id": "ads_scoreboard_readactions",
-      "community": 15,
+      "community": 12,
       "norm_label": "readactions()"
     },
     {
@@ -2214,7 +2196,7 @@
       "source_file": "api/cron/ads-scoreboard.js",
       "source_location": "L72",
       "id": "ads_scoreboard_handler",
-      "community": 15,
+      "community": 12,
       "norm_label": "handler()"
     },
     {
@@ -2286,79 +2268,52 @@
       "source_file": "api/cron/dm-digest.js",
       "source_location": "L1",
       "id": "api_cron_dm_digest_js",
-      "community": 9,
+      "community": 0,
       "norm_label": "dm-digest.js"
-    },
-    {
-      "label": "sb()",
-      "file_type": "code",
-      "source_file": "api/cron/dm-digest.js",
-      "source_location": "L33",
-      "id": "dm_digest_sb",
-      "community": 9,
-      "norm_label": "sb()"
-    },
-    {
-      "label": "dedash()",
-      "file_type": "code",
-      "source_file": "api/cron/dm-digest.js",
-      "source_location": "L49",
-      "id": "dm_digest_dedash",
-      "community": 9,
-      "norm_label": "dedash()"
-    },
-    {
-      "label": "esc()",
-      "file_type": "code",
-      "source_file": "api/cron/dm-digest.js",
-      "source_location": "L53",
-      "id": "dm_digest_esc",
-      "community": 1,
-      "norm_label": "esc()"
     },
     {
       "label": "recentCollabsFor()",
       "file_type": "code",
       "source_file": "api/cron/dm-digest.js",
-      "source_location": "L62",
+      "source_location": "L49",
       "id": "dm_digest_recentcollabsfor",
-      "community": 9,
+      "community": 0,
       "norm_label": "recentcollabsfor()"
     },
     {
       "label": "generateCheckedDm()",
       "file_type": "code",
       "source_file": "api/cron/dm-digest.js",
-      "source_location": "L98",
+      "source_location": "L92",
       "id": "dm_digest_generatecheckeddm",
-      "community": 9,
+      "community": 0,
       "norm_label": "generatecheckeddm()"
     },
     {
       "label": "generateDm()",
       "file_type": "code",
       "source_file": "api/cron/dm-digest.js",
-      "source_location": "L111",
+      "source_location": "L109",
       "id": "dm_digest_generatedm",
-      "community": 9,
+      "community": 0,
       "norm_label": "generatedm()"
     },
     {
       "label": "renderDigestHtml()",
       "file_type": "code",
       "source_file": "api/cron/dm-digest.js",
-      "source_location": "L158",
+      "source_location": "L167",
       "id": "dm_digest_renderdigesthtml",
-      "community": 9,
+      "community": 0,
       "norm_label": "renderdigesthtml()"
     },
     {
       "label": "handler()",
       "file_type": "code",
       "source_file": "api/cron/dm-digest.js",
-      "source_location": "L178",
+      "source_location": "L187",
       "id": "dm_digest_handler",
-      "community": 9,
+      "community": 0,
       "norm_label": "handler()"
     },
     {
@@ -2367,7 +2322,7 @@
       "source_file": "api/cron/backfill-videos.js",
       "source_location": "L1",
       "id": "api_cron_backfill_videos_js",
-      "community": 11,
+      "community": 10,
       "norm_label": "backfill-videos.js"
     },
     {
@@ -2376,7 +2331,7 @@
       "source_file": "api/cron/backfill-videos.js",
       "source_location": "L34",
       "id": "backfill_videos_ig",
-      "community": 11,
+      "community": 10,
       "norm_label": "ig()"
     },
     {
@@ -2385,7 +2340,7 @@
       "source_file": "api/cron/backfill-videos.js",
       "source_location": "L42",
       "id": "backfill_videos_sb",
-      "community": 11,
+      "community": 10,
       "norm_label": "sb()"
     },
     {
@@ -2394,7 +2349,7 @@
       "source_file": "api/cron/backfill-videos.js",
       "source_location": "L59",
       "id": "backfill_videos_storageexists",
-      "community": 11,
+      "community": 10,
       "norm_label": "storageexists()"
     },
     {
@@ -2403,7 +2358,7 @@
       "source_file": "api/cron/backfill-videos.js",
       "source_location": "L68",
       "id": "backfill_videos_publicurl",
-      "community": 11,
+      "community": 10,
       "norm_label": "publicurl()"
     },
     {
@@ -2412,7 +2367,7 @@
       "source_file": "api/cron/backfill-videos.js",
       "source_location": "L72",
       "id": "backfill_videos_mirror",
-      "community": 11,
+      "community": 10,
       "norm_label": "mirror()"
     },
     {
@@ -2421,7 +2376,7 @@
       "source_file": "api/cron/backfill-videos.js",
       "source_location": "L99",
       "id": "backfill_videos_pendingfilter",
-      "community": 11,
+      "community": 10,
       "norm_label": "pendingfilter()"
     },
     {
@@ -2430,7 +2385,7 @@
       "source_file": "api/cron/backfill-videos.js",
       "source_location": "L111",
       "id": "backfill_videos_pendingcount",
-      "community": 11,
+      "community": 10,
       "norm_label": "pendingcount()"
     },
     {
@@ -2439,7 +2394,7 @@
       "source_file": "api/cron/backfill-videos.js",
       "source_location": "L120",
       "id": "backfill_videos_handler",
-      "community": 11,
+      "community": 10,
       "norm_label": "handler()"
     },
     {
@@ -2448,7 +2403,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L1",
       "id": "api_cron_generate_blog_js",
-      "community": 0,
+      "community": 3,
       "norm_label": "generate-blog.js"
     },
     {
@@ -2457,7 +2412,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L78",
       "id": "generate_blog_phrasewords",
-      "community": 0,
+      "community": 3,
       "norm_label": "phrasewords()"
     },
     {
@@ -2466,7 +2421,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L80",
       "id": "generate_blog_handler",
-      "community": 0,
+      "community": 3,
       "norm_label": "handler()"
     },
     {
@@ -2475,7 +2430,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L276",
       "id": "generate_blog_autocomplete",
-      "community": 0,
+      "community": 3,
       "norm_label": "autocomplete()"
     },
     {
@@ -2484,7 +2439,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L303",
       "id": "generate_blog_fetchinstagramcontext",
-      "community": 0,
+      "community": 3,
       "norm_label": "fetchinstagramcontext()"
     },
     {
@@ -2493,7 +2448,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L319",
       "id": "generate_blog_indexnowping",
-      "community": 0,
+      "community": 3,
       "norm_label": "indexnowping()"
     },
     {
@@ -2502,7 +2457,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L341",
       "id": "generate_blog_rungates",
-      "community": 0,
+      "community": 3,
       "norm_label": "rungates()"
     },
     {
@@ -2511,7 +2466,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L388",
       "id": "generate_blog_topictokens",
-      "community": 0,
+      "community": 3,
       "norm_label": "topictokens()"
     },
     {
@@ -2520,7 +2475,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L391",
       "id": "generate_blog_overlap",
-      "community": 0,
+      "community": 3,
       "norm_label": "overlap()"
     },
     {
@@ -2529,7 +2484,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L397",
       "id": "generate_blog_findtopicclash",
-      "community": 0,
+      "community": 3,
       "norm_label": "findtopicclash()"
     },
     {
@@ -2538,7 +2493,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L407",
       "id": "generate_blog_researchandwrite",
-      "community": 0,
+      "community": 3,
       "norm_label": "researchandwrite()"
     },
     {
@@ -2547,7 +2502,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L499",
       "id": "generate_blog_require_angle",
-      "community": 0,
+      "community": 3,
       "norm_label": "require_angle()"
     },
     {
@@ -2556,7 +2511,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L514",
       "id": "generate_blog_callclaude",
-      "community": 0,
+      "community": 3,
       "norm_label": "callclaude()"
     },
     {
@@ -2565,7 +2520,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L537",
       "id": "generate_blog_extracttextandsources",
-      "community": 0,
+      "community": 3,
       "norm_label": "extracttextandsources()"
     },
     {
@@ -2574,7 +2529,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L555",
       "id": "generate_blog_parsejson",
-      "community": 0,
+      "community": 3,
       "norm_label": "parsejson()"
     },
     {
@@ -2583,7 +2538,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L573",
       "id": "generate_blog_escapecontrolcharsinstrings",
-      "community": 0,
+      "community": 3,
       "norm_label": "escapecontrolcharsinstrings()"
     },
     {
@@ -2592,7 +2547,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L597",
       "id": "generate_blog_repairjson",
-      "community": 0,
+      "community": 3,
       "norm_label": "repairjson()"
     },
     {
@@ -2601,7 +2556,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L609",
       "id": "generate_blog_nodash",
-      "community": 0,
+      "community": 3,
       "norm_label": "nodash()"
     },
     {
@@ -2610,7 +2565,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L612",
       "id": "generate_blog_sanitisebody",
-      "community": 0,
+      "community": 3,
       "norm_label": "sanitisebody()"
     },
     {
@@ -2619,7 +2574,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L622",
       "id": "generate_blog_countwords",
-      "community": 0,
+      "community": 3,
       "norm_label": "countwords()"
     },
     {
@@ -2628,7 +2583,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L625",
       "id": "generate_blog_slugify",
-      "community": 0,
+      "community": 3,
       "norm_label": "slugify()"
     },
     {
@@ -2637,7 +2592,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L628",
       "id": "generate_blog_uniqueslug",
-      "community": 0,
+      "community": 3,
       "norm_label": "uniqueslug()"
     },
     {
@@ -2646,7 +2601,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L637",
       "id": "generate_blog_arr",
-      "community": 0,
+      "community": 3,
       "norm_label": "arr()"
     },
     {
@@ -2655,7 +2610,7 @@
       "source_file": "api/cron/generate-blog.js",
       "source_location": "L639",
       "id": "generate_blog_logrun",
-      "community": 0,
+      "community": 3,
       "norm_label": "logrun()"
     },
     {
@@ -2664,7 +2619,7 @@
       "source_file": "api/cron/ad-autopilot.js",
       "source_location": "L1",
       "id": "api_cron_ad_autopilot_js",
-      "community": 3,
+      "community": 1,
       "norm_label": "ad-autopilot.js"
     },
     {
@@ -2673,7 +2628,7 @@
       "source_file": "api/cron/ad-autopilot.js",
       "source_location": "L52",
       "id": "ad_autopilot_sb",
-      "community": 3,
+      "community": 1,
       "norm_label": "sb()"
     },
     {
@@ -2682,7 +2637,7 @@
       "source_file": "api/cron/ad-autopilot.js",
       "source_location": "L68",
       "id": "ad_autopilot_fbget",
-      "community": 3,
+      "community": 1,
       "norm_label": "fbget()"
     },
     {
@@ -2691,7 +2646,7 @@
       "source_file": "api/cron/ad-autopilot.js",
       "source_location": "L77",
       "id": "ad_autopilot_fbpost",
-      "community": 3,
+      "community": 1,
       "norm_label": "fbpost()"
     },
     {
@@ -2700,7 +2655,7 @@
       "source_file": "api/cron/ad-autopilot.js",
       "source_location": "L90",
       "id": "ad_autopilot_pickwinner",
-      "community": 3,
+      "community": 1,
       "norm_label": "pickwinner()"
     },
     {
@@ -2709,7 +2664,7 @@
       "source_file": "api/cron/ad-autopilot.js",
       "source_location": "L119",
       "id": "ad_autopilot_currentactiveads",
-      "community": 3,
+      "community": 1,
       "norm_label": "currentactiveads()"
     },
     {
@@ -2718,7 +2673,7 @@
       "source_file": "api/cron/ad-autopilot.js",
       "source_location": "L125",
       "id": "ad_autopilot_handler",
-      "community": 3,
+      "community": 1,
       "norm_label": "handler()"
     },
     {
@@ -2727,7 +2682,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L1",
       "id": "api_cron_ig_sync_js",
-      "community": 8,
+      "community": 7,
       "norm_label": "ig-sync.js"
     },
     {
@@ -2736,7 +2691,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L53",
       "id": "ig_sync_ig",
-      "community": 8,
+      "community": 7,
       "norm_label": "ig()"
     },
     {
@@ -2745,7 +2700,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L61",
       "id": "ig_sync_sb",
-      "community": 8,
+      "community": 7,
       "norm_label": "sb()"
     },
     {
@@ -2754,7 +2709,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L83",
       "id": "ig_sync_sleep",
-      "community": 8,
+      "community": 7,
       "norm_label": "sleep()"
     },
     {
@@ -2763,7 +2718,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L86",
       "id": "ig_sync_fetchrecentmedia",
-      "community": 8,
+      "community": 7,
       "norm_label": "fetchrecentmedia()"
     },
     {
@@ -2772,7 +2727,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L114",
       "id": "ig_sync_fetchstaleinsightposts",
-      "community": 8,
+      "community": 7,
       "norm_label": "fetchstaleinsightposts()"
     },
     {
@@ -2781,7 +2736,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L122",
       "id": "ig_sync_fetchinsights",
-      "community": 8,
+      "community": 7,
       "norm_label": "fetchinsights()"
     },
     {
@@ -2790,7 +2745,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L138",
       "id": "ig_sync_fetchcarouselchildren",
-      "community": 8,
+      "community": 7,
       "norm_label": "fetchcarouselchildren()"
     },
     {
@@ -2799,7 +2754,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L148",
       "id": "ig_sync_fetchdemographics",
-      "community": 8,
+      "community": 7,
       "norm_label": "fetchdemographics()"
     },
     {
@@ -2808,7 +2763,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L182",
       "id": "ig_sync_fetchreacheddemographics",
-      "community": 8,
+      "community": 7,
       "norm_label": "fetchreacheddemographics()"
     },
     {
@@ -2817,7 +2772,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L212",
       "id": "ig_sync_fetchdailysnapshot",
-      "community": 8,
+      "community": 7,
       "norm_label": "fetchdailysnapshot()"
     },
     {
@@ -2826,7 +2781,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L252",
       "id": "ig_sync_fetchfollowsunfollows",
-      "community": 8,
+      "community": 7,
       "norm_label": "fetchfollowsunfollows()"
     },
     {
@@ -2835,7 +2790,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L289",
       "id": "ig_sync_storageexists",
-      "community": 8,
+      "community": 7,
       "norm_label": "storageexists()"
     },
     {
@@ -2844,7 +2799,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L298",
       "id": "ig_sync_ensureheroreels",
-      "community": 8,
+      "community": 7,
       "norm_label": "ensureheroreels()"
     },
     {
@@ -2853,7 +2808,7 @@
       "source_file": "api/cron/ig-sync.js",
       "source_location": "L326",
       "id": "ig_sync_handler",
-      "community": 8,
+      "community": 7,
       "norm_label": "handler()"
     },
     {
@@ -2862,7 +2817,7 @@
       "source_file": "api/cron/daily-brief.js",
       "source_location": "L1",
       "id": "api_cron_daily_brief_js",
-      "community": 0,
+      "community": 8,
       "norm_label": "daily-brief.js"
     },
     {
@@ -2871,7 +2826,7 @@
       "source_file": "api/cron/daily-brief.js",
       "source_location": "L13",
       "id": "daily_brief_sb",
-      "community": 0,
+      "community": 8,
       "norm_label": "sb()"
     },
     {
@@ -2880,7 +2835,7 @@
       "source_file": "api/cron/daily-brief.js",
       "source_location": "L28",
       "id": "daily_brief_claude",
-      "community": 0,
+      "community": 8,
       "norm_label": "claude()"
     },
     {
@@ -2889,7 +2844,7 @@
       "source_file": "api/cron/daily-brief.js",
       "source_location": "L47",
       "id": "daily_brief_handler",
-      "community": 0,
+      "community": 8,
       "norm_label": "handler()"
     },
     {
@@ -2898,7 +2853,7 @@
       "source_file": "api/cron/daily-brief.js",
       "source_location": "L177",
       "id": "daily_brief_logrun",
-      "community": 0,
+      "community": 8,
       "norm_label": "logrun()"
     }
   ],
@@ -3598,18 +3553,6 @@
       "_tgt": "telegram_send",
       "source": "sitemap_handler",
       "target": "telegram_send"
-    },
-    {
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "api/sitemap.js",
-      "source_location": "L89",
-      "weight": 1.0,
-      "_src": "sitemap_urlentry",
-      "_tgt": "dm_digest_esc",
-      "source": "sitemap_urlentry",
-      "target": "dm_digest_esc"
     },
     {
       "relation": "calls",
@@ -4336,12 +4279,12 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "api/blog-index.js",
-      "source_location": "L109",
+      "source_location": "L57",
       "weight": 1.0,
       "_src": "blog_index_handler",
-      "_tgt": "dm_digest_esc",
+      "_tgt": "pitch_esc",
       "source": "blog_index_handler",
-      "target": "dm_digest_esc"
+      "target": "pitch_esc"
     },
     {
       "relation": "calls",
@@ -4354,18 +4297,6 @@
       "_tgt": "blog_rendershell",
       "source": "blog_index_handler",
       "target": "blog_rendershell"
-    },
-    {
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "api/blog-index.js",
-      "source_location": "L57",
-      "weight": 1.0,
-      "_src": "blog_index_handler",
-      "_tgt": "pitch_esc",
-      "source": "blog_index_handler",
-      "target": "pitch_esc"
     },
     {
       "relation": "calls",
@@ -4396,12 +4327,12 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "api/blog-index.js",
-      "source_location": "L139",
+      "source_location": "L87",
       "weight": 1.0,
       "_src": "blog_index_filterbar",
-      "_tgt": "dm_digest_esc",
+      "_tgt": "pitch_esc",
       "source": "blog_index_filterbar",
-      "target": "dm_digest_esc"
+      "target": "pitch_esc"
     },
     {
       "relation": "calls",
@@ -4420,24 +4351,12 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "api/blog-index.js",
-      "source_location": "L87",
-      "weight": 1.0,
-      "_src": "blog_index_filterbar",
-      "_tgt": "pitch_esc",
-      "source": "blog_index_filterbar",
-      "target": "pitch_esc"
-    },
-    {
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "api/blog-index.js",
-      "source_location": "L149",
+      "source_location": "L97",
       "weight": 1.0,
       "_src": "blog_index_renderhomeview",
-      "_tgt": "dm_digest_esc",
+      "_tgt": "pitch_esc",
       "source": "blog_index_renderhomeview",
-      "target": "dm_digest_esc"
+      "target": "pitch_esc"
     },
     {
       "relation": "calls",
@@ -4504,18 +4423,6 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "api/blog-index.js",
-      "source_location": "L97",
-      "weight": 1.0,
-      "_src": "blog_index_renderhomeview",
-      "_tgt": "pitch_esc",
-      "source": "blog_index_renderhomeview",
-      "target": "pitch_esc"
-    },
-    {
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "api/blog-index.js",
       "source_location": "L211",
       "weight": 1.0,
       "_src": "blog_index_rendersegmentview",
@@ -4528,12 +4435,12 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "api/blog-index.js",
-      "source_location": "L212",
+      "source_location": "L158",
       "weight": 1.0,
       "_src": "blog_index_rendersegmentview",
-      "_tgt": "dm_digest_esc",
+      "_tgt": "pitch_esc",
       "source": "blog_index_rendersegmentview",
-      "target": "dm_digest_esc"
+      "target": "pitch_esc"
     },
     {
       "relation": "calls",
@@ -4546,18 +4453,6 @@
       "_tgt": "blog_segmentmeta",
       "source": "blog_index_rendersegmentview",
       "target": "blog_segmentmeta"
-    },
-    {
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "api/blog-index.js",
-      "source_location": "L158",
-      "weight": 1.0,
-      "_src": "blog_index_rendersegmentview",
-      "_tgt": "pitch_esc",
-      "source": "blog_index_rendersegmentview",
-      "target": "pitch_esc"
     },
     {
       "relation": "contains",
@@ -4575,7 +4470,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/_profile.js",
-      "source_location": "L29",
+      "source_location": "L34",
       "weight": 1.0,
       "_src": "api_profile_js",
       "_tgt": "profile_sbget",
@@ -4587,7 +4482,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/_profile.js",
-      "source_location": "L39",
+      "source_location": "L44",
       "weight": 1.0,
       "_src": "api_profile_js",
       "_tgt": "profile_latestgeneration",
@@ -4599,7 +4494,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/_profile.js",
-      "source_location": "L45",
+      "source_location": "L50",
       "weight": 1.0,
       "_src": "api_profile_js",
       "_tgt": "profile_cleancity",
@@ -4611,7 +4506,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/_profile.js",
-      "source_location": "L56",
+      "source_location": "L61",
       "weight": 1.0,
       "_src": "api_profile_js",
       "_tgt": "profile_getliveprofile",
@@ -4623,7 +4518,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/_profile.js",
-      "source_location": "L64",
+      "source_location": "L69",
       "weight": 1.0,
       "_src": "profile_getliveprofile",
       "_tgt": "profile_sbget",
@@ -4647,7 +4542,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/_profile.js",
-      "source_location": "L71",
+      "source_location": "L76",
       "weight": 1.0,
       "_src": "profile_getliveprofile",
       "_tgt": "profile_latestgeneration",
@@ -5055,19 +4950,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/pitch-now.js",
-      "source_location": "L21",
-      "weight": 1.0,
-      "_src": "api_pitch_now_js",
-      "_tgt": "pitch_now_sb",
-      "source": "api_pitch_now_js",
-      "target": "pitch_now_sb",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/pitch-now.js",
-      "source_location": "L36",
+      "source_location": "L20",
       "weight": 1.0,
       "_src": "api_pitch_now_js",
       "_tgt": "pitch_now_enc",
@@ -5079,7 +4962,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/pitch-now.js",
-      "source_location": "L38",
+      "source_location": "L22",
       "weight": 1.0,
       "_src": "api_pitch_now_js",
       "_tgt": "pitch_now_handler",
@@ -5091,11 +4974,11 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/pitch-now.js",
-      "source_location": "L54",
+      "source_location": "L46",
       "weight": 1.0,
       "_src": "pitch_now_handler",
-      "_tgt": "pitch_now_sb",
-      "source": "pitch_now_sb",
+      "_tgt": "pitch_now_enc",
+      "source": "pitch_now_enc",
       "target": "pitch_now_handler",
       "confidence_score": 1.0
     },
@@ -5104,24 +4987,24 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "api/pitch-now.js",
-      "source_location": "L32",
+      "source_location": "L39",
       "weight": 1.0,
-      "_src": "pitch_now_sb",
-      "_tgt": "blog_qa_text",
-      "source": "pitch_now_sb",
-      "target": "blog_qa_text"
+      "_src": "pitch_now_handler",
+      "_tgt": "outreach_shared_weeklyquota",
+      "source": "pitch_now_handler",
+      "target": "outreach_shared_weeklyquota"
     },
     {
       "relation": "calls",
-      "confidence": "EXTRACTED",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
       "source_file": "api/pitch-now.js",
-      "source_location": "L54",
+      "source_location": "L46",
       "weight": 1.0,
       "_src": "pitch_now_handler",
-      "_tgt": "pitch_now_enc",
-      "source": "pitch_now_enc",
-      "target": "pitch_now_handler",
-      "confidence_score": 1.0
+      "_tgt": "daily_brief_sb",
+      "source": "pitch_now_handler",
+      "target": "daily_brief_sb"
     },
     {
       "relation": "calls",
@@ -5182,6 +5065,42 @@
       "_tgt": "daily_brief_sb",
       "source": "blog_publish_handler",
       "target": "daily_brief_sb"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_meta-graph.js",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_src": "api_meta_graph_js",
+      "_tgt": "meta_graph_fbget",
+      "source": "api_meta_graph_js",
+      "target": "meta_graph_fbget",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_meta-graph.js",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_src": "api_meta_graph_js",
+      "_tgt": "meta_graph_fbpost",
+      "source": "api_meta_graph_js",
+      "target": "meta_graph_fbpost",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_meta-graph.js",
+      "source_location": "L59",
+      "weight": 1.0,
+      "_src": "api_meta_graph_js",
+      "_tgt": "meta_graph_fbdelete",
+      "source": "api_meta_graph_js",
+      "target": "meta_graph_fbdelete",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -6028,18 +5947,6 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "api/blog.js",
-      "source_location": "L259",
-      "weight": 1.0,
-      "_src": "blog_renderhead",
-      "_tgt": "dm_digest_esc",
-      "source": "blog_renderhead",
-      "target": "dm_digest_esc"
-    },
-    {
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "api/blog.js",
       "source_location": "L134",
       "weight": 1.0,
       "_src": "blog_renderhead",
@@ -6052,30 +5959,6 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "api/blog.js",
-      "source_location": "L293",
-      "weight": 1.0,
-      "_src": "blog_renderarticle",
-      "_tgt": "dm_digest_esc",
-      "source": "blog_renderarticle",
-      "target": "dm_digest_esc"
-    },
-    {
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "api/blog.js",
-      "source_location": "L157",
-      "weight": 1.0,
-      "_src": "blog_renderarticle",
-      "_tgt": "reels_sbimg",
-      "source": "blog_renderarticle",
-      "target": "reels_sbimg"
-    },
-    {
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "api/blog.js",
       "source_location": "L157",
       "weight": 1.0,
       "_src": "blog_renderarticle",
@@ -6088,12 +5971,12 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "api/blog.js",
-      "source_location": "L353",
+      "source_location": "L157",
       "weight": 1.0,
-      "_src": "blog_notfound",
-      "_tgt": "dm_digest_esc",
-      "source": "blog_notfound",
-      "target": "dm_digest_esc"
+      "_src": "blog_renderarticle",
+      "_tgt": "reels_sbimg",
+      "source": "blog_renderarticle",
+      "target": "reels_sbimg"
     },
     {
       "relation": "calls",
@@ -6170,8 +6053,80 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "api/_outreach-shared.js",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_src": "api_outreach_shared_js",
+      "_tgt": "outreach_shared_sb",
+      "source": "api_outreach_shared_js",
+      "target": "outreach_shared_sb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_outreach-shared.js",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_src": "api_outreach_shared_js",
+      "_tgt": "outreach_shared_bybudgetthenscore",
+      "source": "api_outreach_shared_js",
+      "target": "outreach_shared_bybudgetthenscore",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_outreach-shared.js",
+      "source_location": "L52",
+      "weight": 1.0,
+      "_src": "api_outreach_shared_js",
+      "_tgt": "outreach_shared_weeklyquota",
+      "source": "api_outreach_shared_js",
+      "target": "outreach_shared_weeklyquota",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_outreach-shared.js",
+      "source_location": "L54",
+      "weight": 1.0,
+      "_src": "outreach_shared_weeklyquota",
+      "_tgt": "outreach_shared_sb",
+      "source": "outreach_shared_sb",
+      "target": "outreach_shared_weeklyquota",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/_outreach-shared.js",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_src": "outreach_shared_sb",
+      "_tgt": "blog_qa_text",
+      "source": "outreach_shared_sb",
+      "target": "blog_qa_text"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/daily-agent.js",
+      "source_location": "L183",
+      "weight": 1.0,
+      "_src": "outreach_shared_weeklyquota",
+      "_tgt": "daily_agent_handler",
+      "source": "outreach_shared_weeklyquota",
+      "target": "daily_agent_handler"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "api/_accuracy.js",
-      "source_location": "L31",
+      "source_location": "L48",
       "weight": 1.0,
       "_src": "api_accuracy_js",
       "_tgt": "accuracy_unsupportednumbers",
@@ -6183,7 +6138,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/_accuracy.js",
-      "source_location": "L37",
+      "source_location": "L54",
       "weight": 1.0,
       "_src": "api_accuracy_js",
       "_tgt": "accuracy_mechanicalproblems",
@@ -6195,7 +6150,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/_accuracy.js",
-      "source_location": "L54",
+      "source_location": "L85",
       "weight": 1.0,
       "_src": "api_accuracy_js",
       "_tgt": "accuracy_verifyclaims",
@@ -6207,7 +6162,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/_accuracy.js",
-      "source_location": "L85",
+      "source_location": "L116",
       "weight": 1.0,
       "_src": "api_accuracy_js",
       "_tgt": "accuracy_checktext",
@@ -6219,7 +6174,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/_accuracy.js",
-      "source_location": "L44",
+      "source_location": "L64",
       "weight": 1.0,
       "_src": "accuracy_mechanicalproblems",
       "_tgt": "accuracy_unsupportednumbers",
@@ -6231,7 +6186,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/_accuracy.js",
-      "source_location": "L86",
+      "source_location": "L117",
       "weight": 1.0,
       "_src": "accuracy_checktext",
       "_tgt": "accuracy_mechanicalproblems",
@@ -6243,7 +6198,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/_accuracy.js",
-      "source_location": "L88",
+      "source_location": "L119",
       "weight": 1.0,
       "_src": "accuracy_checktext",
       "_tgt": "accuracy_verifyclaims",
@@ -6258,8 +6213,8 @@
       "source_file": "api/cron/daily-agent.js",
       "source_location": "L143",
       "weight": 1.0,
-      "_src": "daily_agent_generatecheckedpitch",
-      "_tgt": "accuracy_checktext",
+      "_src": "accuracy_checktext",
+      "_tgt": "daily_agent_generatecheckedpitch",
       "source": "accuracy_checktext",
       "target": "daily_agent_generatecheckedpitch"
     },
@@ -6270,8 +6225,8 @@
       "source_file": "api/cron/dm-digest.js",
       "source_location": "L104",
       "weight": 1.0,
-      "_src": "dm_digest_generatecheckeddm",
-      "_tgt": "accuracy_checktext",
+      "_src": "accuracy_checktext",
+      "_tgt": "dm_digest_generatecheckeddm",
       "source": "accuracy_checktext",
       "target": "dm_digest_generatecheckeddm"
     },
@@ -6411,7 +6366,19 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L36",
+      "source_location": "L39",
+      "weight": 1.0,
+      "_src": "api_pitch_js",
+      "_tgt": "pitch_brandfactstext",
+      "source": "api_pitch_js",
+      "target": "pitch_brandfactstext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_pitch.js",
+      "source_location": "L48",
       "weight": 1.0,
       "_src": "api_pitch_js",
       "_tgt": "pitch_buildfactsheet",
@@ -6423,7 +6390,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L54",
+      "source_location": "L66",
       "weight": 1.0,
       "_src": "api_pitch_js",
       "_tgt": "pitch_generatepitch",
@@ -6435,7 +6402,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L133",
+      "source_location": "L146",
       "weight": 1.0,
       "_src": "api_pitch_js",
       "_tgt": "pitch_dedash",
@@ -6447,7 +6414,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L144",
+      "source_location": "L157",
       "weight": 1.0,
       "_src": "api_pitch_js",
       "_tgt": "pitch_parsepitchresponse",
@@ -6459,7 +6426,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L166",
+      "source_location": "L179",
       "weight": 1.0,
       "_src": "api_pitch_js",
       "_tgt": "pitch_striptotext",
@@ -6471,7 +6438,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L170",
+      "source_location": "L183",
       "weight": 1.0,
       "_src": "api_pitch_js",
       "_tgt": "pitch_esc",
@@ -6483,7 +6450,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L179",
+      "source_location": "L192",
       "weight": 1.0,
       "_src": "api_pitch_js",
       "_tgt": "pitch_renderpitchemailhtml",
@@ -6495,7 +6462,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L209",
+      "source_location": "L222",
       "weight": 1.0,
       "_src": "api_pitch_js",
       "_tgt": "pitch_sendpitchemail",
@@ -6507,7 +6474,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L240",
+      "source_location": "L253",
       "weight": 1.0,
       "_src": "api_pitch_js",
       "_tgt": "pitch_autosendenabled",
@@ -6519,7 +6486,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L245",
+      "source_location": "L258",
       "weight": 1.0,
       "_src": "api_pitch_js",
       "_tgt": "pitch_renderbrandemailhtml",
@@ -6531,7 +6498,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L264",
+      "source_location": "L277",
       "weight": 1.0,
       "_src": "api_pitch_js",
       "_tgt": "pitch_sendbrandpitch",
@@ -6543,7 +6510,31 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L55",
+      "source_location": "L103",
+      "weight": 1.0,
+      "_src": "pitch_generatepitch",
+      "_tgt": "pitch_brandfactstext",
+      "source": "pitch_brandfactstext",
+      "target": "pitch_generatepitch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/daily-agent.js",
+      "source_location": "L128",
+      "weight": 1.0,
+      "_src": "pitch_brandfactstext",
+      "_tgt": "daily_agent_generatecheckedpitch",
+      "source": "pitch_brandfactstext",
+      "target": "daily_agent_generatecheckedpitch"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "api/_pitch.js",
+      "source_location": "L67",
       "weight": 1.0,
       "_src": "pitch_generatepitch",
       "_tgt": "pitch_buildfactsheet",
@@ -6558,8 +6549,8 @@
       "source_file": "api/cron/daily-agent.js",
       "source_location": "L137",
       "weight": 1.0,
-      "_src": "daily_agent_generatecheckedpitch",
-      "_tgt": "pitch_buildfactsheet",
+      "_src": "pitch_buildfactsheet",
+      "_tgt": "daily_agent_generatecheckedpitch",
       "source": "pitch_buildfactsheet",
       "target": "daily_agent_generatecheckedpitch"
     },
@@ -6567,7 +6558,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L121",
+      "source_location": "L134",
       "weight": 1.0,
       "_src": "pitch_generatepitch",
       "_tgt": "pitch_parsepitchresponse",
@@ -6579,7 +6570,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L122",
+      "source_location": "L135",
       "weight": 1.0,
       "_src": "pitch_generatepitch",
       "_tgt": "pitch_dedash",
@@ -6591,7 +6582,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L124",
+      "source_location": "L137",
       "weight": 1.0,
       "_src": "pitch_generatepitch",
       "_tgt": "pitch_striptotext",
@@ -6606,8 +6597,8 @@
       "source_file": "api/cron/daily-agent.js",
       "source_location": "L142",
       "weight": 1.0,
-      "_src": "daily_agent_generatecheckedpitch",
-      "_tgt": "pitch_generatepitch",
+      "_src": "pitch_generatepitch",
+      "_tgt": "daily_agent_generatecheckedpitch",
       "source": "pitch_generatepitch",
       "target": "daily_agent_generatecheckedpitch"
     },
@@ -6625,9 +6616,21 @@
     },
     {
       "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/dm-digest.js",
+      "source_location": "L161",
+      "weight": 1.0,
+      "_src": "pitch_dedash",
+      "_tgt": "dm_digest_generatedm",
+      "source": "pitch_dedash",
+      "target": "dm_digest_generatedm"
+    },
+    {
+      "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L184",
+      "source_location": "L197",
       "weight": 1.0,
       "_src": "pitch_renderpitchemailhtml",
       "_tgt": "pitch_esc",
@@ -6639,7 +6642,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L249",
+      "source_location": "L262",
       "weight": 1.0,
       "_src": "pitch_renderbrandemailhtml",
       "_tgt": "pitch_esc",
@@ -6651,7 +6654,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L210",
+      "source_location": "L223",
       "weight": 1.0,
       "_src": "pitch_sendpitchemail",
       "_tgt": "pitch_renderpitchemailhtml",
@@ -6687,7 +6690,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L265",
+      "source_location": "L278",
       "weight": 1.0,
       "_src": "pitch_sendbrandpitch",
       "_tgt": "pitch_autosendenabled",
@@ -6711,7 +6714,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/_pitch.js",
-      "source_location": "L266",
+      "source_location": "L279",
       "weight": 1.0,
       "_src": "pitch_sendbrandpitch",
       "_tgt": "pitch_renderbrandemailhtml",
@@ -6903,18 +6906,6 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
-      "source_file": "api/cron/daily-agent.js",
-      "source_location": "L46",
-      "weight": 1.0,
-      "_src": "blog_qa_text",
-      "_tgt": "daily_agent_sb",
-      "source": "blog_qa_text",
-      "target": "daily_agent_sb"
-    },
-    {
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
       "source_file": "api/cron/inbound-nudge.js",
       "source_location": "L20",
       "weight": 1.0,
@@ -6952,22 +6943,10 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "api/cron/dm-digest.js",
-      "source_location": "L44",
-      "weight": 1.0,
-      "_src": "dm_digest_sb",
-      "_tgt": "blog_qa_text",
-      "source": "blog_qa_text",
-      "target": "dm_digest_sb"
-    },
-    {
-      "relation": "calls",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "api/cron/dm-digest.js",
       "source_location": "L242",
       "weight": 1.0,
-      "_src": "dm_digest_handler",
-      "_tgt": "blog_qa_text",
+      "_src": "blog_qa_text",
+      "_tgt": "dm_digest_handler",
       "source": "blog_qa_text",
       "target": "dm_digest_handler"
     },
@@ -7767,43 +7746,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L63",
-      "weight": 1.0,
-      "_src": "api_cron_launch_reels_js",
-      "_tgt": "launch_reels_fbget",
-      "source": "api_cron_launch_reels_js",
-      "target": "launch_reels_fbget",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L72",
-      "weight": 1.0,
-      "_src": "api_cron_launch_reels_js",
-      "_tgt": "launch_reels_fbpost",
-      "source": "api_cron_launch_reels_js",
-      "target": "launch_reels_fbpost",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L89",
-      "weight": 1.0,
-      "_src": "api_cron_launch_reels_js",
-      "_tgt": "launch_reels_fbdelete",
-      "source": "api_cron_launch_reels_js",
-      "target": "launch_reels_fbdelete",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L102",
+      "source_location": "L66",
       "weight": 1.0,
       "_src": "api_cron_launch_reels_js",
       "_tgt": "launch_reels_cleanupoldcampaigns",
@@ -7815,7 +7758,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L110",
+      "source_location": "L74",
       "weight": 1.0,
       "_src": "api_cron_launch_reels_js",
       "_tgt": "launch_reels_resolvereels",
@@ -7827,7 +7770,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L126",
+      "source_location": "L90",
       "weight": 1.0,
       "_src": "api_cron_launch_reels_js",
       "_tgt": "launch_reels_buildtargeting",
@@ -7839,7 +7782,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L146",
+      "source_location": "L110",
       "weight": 1.0,
       "_src": "api_cron_launch_reels_js",
       "_tgt": "launch_reels_handler",
@@ -7851,67 +7794,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L103",
-      "weight": 1.0,
-      "_src": "launch_reels_cleanupoldcampaigns",
-      "_tgt": "launch_reels_fbget",
-      "source": "launch_reels_fbget",
-      "target": "launch_reels_cleanupoldcampaigns",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L169",
-      "weight": 1.0,
-      "_src": "launch_reels_handler",
-      "_tgt": "launch_reels_fbget",
-      "source": "launch_reels_fbget",
-      "target": "launch_reels_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L177",
-      "weight": 1.0,
-      "_src": "launch_reels_handler",
-      "_tgt": "launch_reels_fbpost",
-      "source": "launch_reels_fbpost",
-      "target": "launch_reels_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L105",
-      "weight": 1.0,
-      "_src": "launch_reels_cleanupoldcampaigns",
-      "_tgt": "launch_reels_fbdelete",
-      "source": "launch_reels_fbdelete",
-      "target": "launch_reels_cleanupoldcampaigns",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L287",
-      "weight": 1.0,
-      "_src": "launch_reels_handler",
-      "_tgt": "launch_reels_fbdelete",
-      "source": "launch_reels_fbdelete",
-      "target": "launch_reels_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-reels.js",
-      "source_location": "L161",
+      "source_location": "L128",
       "weight": 1.0,
       "_src": "launch_reels_handler",
       "_tgt": "launch_reels_cleanupoldcampaigns",
@@ -7921,9 +7804,33 @@
     },
     {
       "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/launch-reels.js",
+      "source_location": "L67",
+      "weight": 1.0,
+      "_src": "launch_reels_cleanupoldcampaigns",
+      "_tgt": "ad_autopilot_fbget",
+      "source": "launch_reels_cleanupoldcampaigns",
+      "target": "ad_autopilot_fbget"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/launch-reels.js",
+      "source_location": "L69",
+      "weight": 1.0,
+      "_src": "launch_reels_cleanupoldcampaigns",
+      "_tgt": "setup_audiences_fbdelete",
+      "source": "launch_reels_cleanupoldcampaigns",
+      "target": "setup_audiences_fbdelete"
+    },
+    {
+      "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L198",
+      "source_location": "L165",
       "weight": 1.0,
       "_src": "launch_reels_handler",
       "_tgt": "launch_reels_resolvereels",
@@ -7935,7 +7842,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-reels.js",
-      "source_location": "L233",
+      "source_location": "L200",
       "weight": 1.0,
       "_src": "launch_reels_handler",
       "_tgt": "launch_reels_buildtargeting",
@@ -7944,46 +7851,46 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L39",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/launch-reels.js",
+      "source_location": "L136",
       "weight": 1.0,
-      "_src": "api_cron_boost_reel_js",
-      "_tgt": "boost_reel_fbget",
-      "source": "api_cron_boost_reel_js",
-      "target": "boost_reel_fbget",
-      "confidence_score": 1.0
+      "_src": "launch_reels_handler",
+      "_tgt": "ad_autopilot_fbget",
+      "source": "launch_reels_handler",
+      "target": "ad_autopilot_fbget"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/launch-reels.js",
+      "source_location": "L144",
+      "weight": 1.0,
+      "_src": "launch_reels_handler",
+      "_tgt": "ad_autopilot_fbpost",
+      "source": "launch_reels_handler",
+      "target": "ad_autopilot_fbpost"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/launch-reels.js",
+      "source_location": "L254",
+      "weight": 1.0,
+      "_src": "launch_reels_handler",
+      "_tgt": "setup_audiences_fbdelete",
+      "source": "launch_reels_handler",
+      "target": "setup_audiences_fbdelete"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/boost-reel.js",
-      "source_location": "L48",
-      "weight": 1.0,
-      "_src": "api_cron_boost_reel_js",
-      "_tgt": "boost_reel_fbpost",
-      "source": "api_cron_boost_reel_js",
-      "target": "boost_reel_fbpost",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L72",
-      "weight": 1.0,
-      "_src": "api_cron_boost_reel_js",
-      "_tgt": "boost_reel_fbdelete",
-      "source": "api_cron_boost_reel_js",
-      "target": "boost_reel_fbdelete",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L79",
+      "source_location": "L38",
       "weight": 1.0,
       "_src": "api_cron_boost_reel_js",
       "_tgt": "boost_reel_buildtargeting",
@@ -7995,7 +7902,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/boost-reel.js",
-      "source_location": "L91",
+      "source_location": "L50",
       "weight": 1.0,
       "_src": "api_cron_boost_reel_js",
       "_tgt": "boost_reel_handler",
@@ -8007,43 +7914,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/boost-reel.js",
-      "source_location": "L112",
-      "weight": 1.0,
-      "_src": "boost_reel_handler",
-      "_tgt": "boost_reel_fbget",
-      "source": "boost_reel_fbget",
-      "target": "boost_reel_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L130",
-      "weight": 1.0,
-      "_src": "boost_reel_handler",
-      "_tgt": "boost_reel_fbpost",
-      "source": "boost_reel_fbpost",
-      "target": "boost_reel_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L127",
-      "weight": 1.0,
-      "_src": "boost_reel_handler",
-      "_tgt": "boost_reel_fbdelete",
-      "source": "boost_reel_fbdelete",
-      "target": "boost_reel_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/boost-reel.js",
-      "source_location": "L146",
+      "source_location": "L108",
       "weight": 1.0,
       "_src": "boost_reel_handler",
       "_tgt": "boost_reel_buildtargeting",
@@ -8052,22 +7923,46 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/daily-agent.js",
-      "source_location": "L58",
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/boost-reel.js",
+      "source_location": "L74",
       "weight": 1.0,
-      "_src": "api_cron_daily_agent_js",
-      "_tgt": "daily_agent_sb",
-      "source": "api_cron_daily_agent_js",
-      "target": "daily_agent_sb",
-      "confidence_score": 1.0
+      "_src": "boost_reel_handler",
+      "_tgt": "ad_autopilot_fbget",
+      "source": "boost_reel_handler",
+      "target": "ad_autopilot_fbget"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/boost-reel.js",
+      "source_location": "L89",
+      "weight": 1.0,
+      "_src": "boost_reel_handler",
+      "_tgt": "setup_audiences_fbdelete",
+      "source": "boost_reel_handler",
+      "target": "setup_audiences_fbdelete"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/boost-reel.js",
+      "source_location": "L92",
+      "weight": 1.0,
+      "_src": "boost_reel_handler",
+      "_tgt": "ad_autopilot_fbpost",
+      "source": "boost_reel_handler",
+      "target": "ad_autopilot_fbpost"
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L73",
+      "source_location": "L60",
       "weight": 1.0,
       "_src": "api_cron_daily_agent_js",
       "_tgt": "daily_agent_adarchive",
@@ -8079,7 +7974,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L88",
+      "source_location": "L75",
       "weight": 1.0,
       "_src": "api_cron_daily_agent_js",
       "_tgt": "daily_agent_resolveadtoken",
@@ -8091,7 +7986,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L107",
+      "source_location": "L94",
       "weight": 1.0,
       "_src": "api_cron_daily_agent_js",
       "_tgt": "daily_agent_checkadlibrary",
@@ -8103,7 +7998,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L122",
+      "source_location": "L109",
       "weight": 1.0,
       "_src": "api_cron_daily_agent_js",
       "_tgt": "daily_agent_scorebrand",
@@ -8115,7 +8010,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L136",
+      "source_location": "L126",
       "weight": 1.0,
       "_src": "api_cron_daily_agent_js",
       "_tgt": "daily_agent_generatecheckedpitch",
@@ -8151,31 +8046,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L152",
-      "weight": 1.0,
-      "_src": "daily_agent_storepitch",
-      "_tgt": "daily_agent_sb",
-      "source": "daily_agent_sb",
-      "target": "daily_agent_storepitch",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/daily-agent.js",
-      "source_location": "L182",
-      "weight": 1.0,
-      "_src": "daily_agent_handler",
-      "_tgt": "daily_agent_sb",
-      "source": "daily_agent_sb",
-      "target": "daily_agent_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/daily-agent.js",
-      "source_location": "L93",
+      "source_location": "L80",
       "weight": 1.0,
       "_src": "daily_agent_resolveadtoken",
       "_tgt": "daily_agent_adarchive",
@@ -8187,7 +8058,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L110",
+      "source_location": "L97",
       "weight": 1.0,
       "_src": "daily_agent_checkadlibrary",
       "_tgt": "daily_agent_adarchive",
@@ -8199,7 +8070,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L216",
+      "source_location": "L223",
       "weight": 1.0,
       "_src": "daily_agent_handler",
       "_tgt": "daily_agent_resolveadtoken",
@@ -8211,7 +8082,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L224",
+      "source_location": "L235",
       "weight": 1.0,
       "_src": "daily_agent_handler",
       "_tgt": "daily_agent_checkadlibrary",
@@ -8223,7 +8094,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L226",
+      "source_location": "L237",
       "weight": 1.0,
       "_src": "daily_agent_handler",
       "_tgt": "daily_agent_scorebrand",
@@ -8235,7 +8106,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L251",
+      "source_location": "L264",
       "weight": 1.0,
       "_src": "daily_agent_handler",
       "_tgt": "daily_agent_generatecheckedpitch",
@@ -8247,7 +8118,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/daily-agent.js",
-      "source_location": "L267",
+      "source_location": "L283",
       "weight": 1.0,
       "_src": "daily_agent_handler",
       "_tgt": "daily_agent_storepitch",
@@ -8256,46 +8127,34 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/daily-agent.js",
+      "source_location": "L152",
+      "weight": 1.0,
+      "_src": "daily_agent_storepitch",
+      "_tgt": "daily_brief_sb",
+      "source": "daily_agent_storepitch",
+      "target": "daily_brief_sb"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/daily-agent.js",
+      "source_location": "L195",
+      "weight": 1.0,
+      "_src": "daily_agent_handler",
+      "_tgt": "daily_brief_sb",
+      "source": "daily_agent_handler",
+      "target": "daily_brief_sb"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-carousel.js",
       "source_location": "L61",
-      "weight": 1.0,
-      "_src": "api_cron_launch_carousel_js",
-      "_tgt": "launch_carousel_fbget",
-      "source": "api_cron_launch_carousel_js",
-      "target": "launch_carousel_fbget",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L70",
-      "weight": 1.0,
-      "_src": "api_cron_launch_carousel_js",
-      "_tgt": "launch_carousel_fbpost",
-      "source": "api_cron_launch_carousel_js",
-      "target": "launch_carousel_fbpost",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L87",
-      "weight": 1.0,
-      "_src": "api_cron_launch_carousel_js",
-      "_tgt": "launch_carousel_fbdelete",
-      "source": "api_cron_launch_carousel_js",
-      "target": "launch_carousel_fbdelete",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L95",
       "weight": 1.0,
       "_src": "api_cron_launch_carousel_js",
       "_tgt": "launch_carousel_cleanupoldcampaigns",
@@ -8307,7 +8166,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L103",
+      "source_location": "L69",
       "weight": 1.0,
       "_src": "api_cron_launch_carousel_js",
       "_tgt": "launch_carousel_resolvecarousel",
@@ -8319,7 +8178,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L144",
+      "source_location": "L110",
       "weight": 1.0,
       "_src": "api_cron_launch_carousel_js",
       "_tgt": "launch_carousel_uploadimage",
@@ -8331,7 +8190,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L154",
+      "source_location": "L120",
       "weight": 1.0,
       "_src": "api_cron_launch_carousel_js",
       "_tgt": "launch_carousel_buildtargeting",
@@ -8343,7 +8202,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L173",
+      "source_location": "L139",
       "weight": 1.0,
       "_src": "api_cron_launch_carousel_js",
       "_tgt": "launch_carousel_handler",
@@ -8355,67 +8214,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L96",
-      "weight": 1.0,
-      "_src": "launch_carousel_cleanupoldcampaigns",
-      "_tgt": "launch_carousel_fbget",
-      "source": "launch_carousel_fbget",
-      "target": "launch_carousel_cleanupoldcampaigns",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L192",
-      "weight": 1.0,
-      "_src": "launch_carousel_handler",
-      "_tgt": "launch_carousel_fbget",
-      "source": "launch_carousel_fbget",
-      "target": "launch_carousel_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L148",
-      "weight": 1.0,
-      "_src": "launch_carousel_uploadimage",
-      "_tgt": "launch_carousel_fbpost",
-      "source": "launch_carousel_fbpost",
-      "target": "launch_carousel_uploadimage",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L222",
-      "weight": 1.0,
-      "_src": "launch_carousel_handler",
-      "_tgt": "launch_carousel_fbpost",
-      "source": "launch_carousel_fbpost",
-      "target": "launch_carousel_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L98",
-      "weight": 1.0,
-      "_src": "launch_carousel_cleanupoldcampaigns",
-      "_tgt": "launch_carousel_fbdelete",
-      "source": "launch_carousel_fbdelete",
-      "target": "launch_carousel_cleanupoldcampaigns",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L215",
+      "source_location": "L184",
       "weight": 1.0,
       "_src": "launch_carousel_handler",
       "_tgt": "launch_carousel_cleanupoldcampaigns",
@@ -8425,9 +8224,33 @@
     },
     {
       "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/launch-carousel.js",
+      "source_location": "L62",
+      "weight": 1.0,
+      "_src": "launch_carousel_cleanupoldcampaigns",
+      "_tgt": "ad_autopilot_fbget",
+      "source": "launch_carousel_cleanupoldcampaigns",
+      "target": "ad_autopilot_fbget"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/launch-carousel.js",
+      "source_location": "L64",
+      "weight": 1.0,
+      "_src": "launch_carousel_cleanupoldcampaigns",
+      "_tgt": "setup_audiences_fbdelete",
+      "source": "launch_carousel_cleanupoldcampaigns",
+      "target": "setup_audiences_fbdelete"
+    },
+    {
+      "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L191",
+      "source_location": "L160",
       "weight": 1.0,
       "_src": "launch_carousel_handler",
       "_tgt": "launch_carousel_resolvecarousel",
@@ -8439,7 +8262,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L219",
+      "source_location": "L188",
       "weight": 1.0,
       "_src": "launch_carousel_handler",
       "_tgt": "launch_carousel_uploadimage",
@@ -8449,15 +8272,51 @@
     },
     {
       "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/launch-carousel.js",
+      "source_location": "L114",
+      "weight": 1.0,
+      "_src": "launch_carousel_uploadimage",
+      "_tgt": "ad_autopilot_fbpost",
+      "source": "launch_carousel_uploadimage",
+      "target": "ad_autopilot_fbpost"
+    },
+    {
+      "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/launch-carousel.js",
-      "source_location": "L239",
+      "source_location": "L208",
       "weight": 1.0,
       "_src": "launch_carousel_handler",
       "_tgt": "launch_carousel_buildtargeting",
       "source": "launch_carousel_buildtargeting",
       "target": "launch_carousel_handler",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/launch-carousel.js",
+      "source_location": "L161",
+      "weight": 1.0,
+      "_src": "launch_carousel_handler",
+      "_tgt": "ad_autopilot_fbget",
+      "source": "launch_carousel_handler",
+      "target": "ad_autopilot_fbget"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/launch-carousel.js",
+      "source_location": "L191",
+      "weight": 1.0,
+      "_src": "launch_carousel_handler",
+      "_tgt": "ad_autopilot_fbpost",
+      "source": "launch_carousel_handler",
+      "target": "ad_autopilot_fbpost"
     },
     {
       "relation": "contains",
@@ -8907,43 +8766,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/dm-digest.js",
-      "source_location": "L33",
-      "weight": 1.0,
-      "_src": "api_cron_dm_digest_js",
-      "_tgt": "dm_digest_sb",
-      "source": "api_cron_dm_digest_js",
-      "target": "dm_digest_sb",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/dm-digest.js",
       "source_location": "L49",
-      "weight": 1.0,
-      "_src": "api_cron_dm_digest_js",
-      "_tgt": "dm_digest_dedash",
-      "source": "api_cron_dm_digest_js",
-      "target": "dm_digest_dedash",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/dm-digest.js",
-      "source_location": "L53",
-      "weight": 1.0,
-      "_src": "api_cron_dm_digest_js",
-      "_tgt": "dm_digest_esc",
-      "source": "api_cron_dm_digest_js",
-      "target": "dm_digest_esc",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/dm-digest.js",
-      "source_location": "L62",
       "weight": 1.0,
       "_src": "api_cron_dm_digest_js",
       "_tgt": "dm_digest_recentcollabsfor",
@@ -8955,7 +8778,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/dm-digest.js",
-      "source_location": "L98",
+      "source_location": "L92",
       "weight": 1.0,
       "_src": "api_cron_dm_digest_js",
       "_tgt": "dm_digest_generatecheckeddm",
@@ -8967,7 +8790,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/dm-digest.js",
-      "source_location": "L111",
+      "source_location": "L109",
       "weight": 1.0,
       "_src": "api_cron_dm_digest_js",
       "_tgt": "dm_digest_generatedm",
@@ -8979,7 +8802,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/dm-digest.js",
-      "source_location": "L158",
+      "source_location": "L167",
       "weight": 1.0,
       "_src": "api_cron_dm_digest_js",
       "_tgt": "dm_digest_renderdigesthtml",
@@ -8991,7 +8814,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/dm-digest.js",
-      "source_location": "L178",
+      "source_location": "L187",
       "weight": 1.0,
       "_src": "api_cron_dm_digest_js",
       "_tgt": "dm_digest_handler",
@@ -9003,31 +8826,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/dm-digest.js",
-      "source_location": "L190",
-      "weight": 1.0,
-      "_src": "dm_digest_handler",
-      "_tgt": "dm_digest_sb",
-      "source": "dm_digest_sb",
-      "target": "dm_digest_handler",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/dm-digest.js",
-      "source_location": "L152",
-      "weight": 1.0,
-      "_src": "dm_digest_generatedm",
-      "_tgt": "dm_digest_dedash",
-      "source": "dm_digest_dedash",
-      "target": "dm_digest_generatedm",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "api/cron/dm-digest.js",
-      "source_location": "L213",
+      "source_location": "L231",
       "weight": 1.0,
       "_src": "dm_digest_handler",
       "_tgt": "dm_digest_recentcollabsfor",
@@ -9039,7 +8838,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/dm-digest.js",
-      "source_location": "L103",
+      "source_location": "L98",
       "weight": 1.0,
       "_src": "dm_digest_generatecheckeddm",
       "_tgt": "dm_digest_generatedm",
@@ -9051,7 +8850,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/dm-digest.js",
-      "source_location": "L214",
+      "source_location": "L232",
       "weight": 1.0,
       "_src": "dm_digest_handler",
       "_tgt": "dm_digest_generatecheckeddm",
@@ -9063,13 +8862,25 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "api/cron/dm-digest.js",
-      "source_location": "L230",
+      "source_location": "L266",
       "weight": 1.0,
       "_src": "dm_digest_handler",
       "_tgt": "dm_digest_renderdigesthtml",
       "source": "dm_digest_renderdigesthtml",
       "target": "dm_digest_handler",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "api/cron/dm-digest.js",
+      "source_location": "L204",
+      "weight": 1.0,
+      "_src": "dm_digest_handler",
+      "_tgt": "daily_brief_sb",
+      "source": "dm_digest_handler",
+      "target": "daily_brief_sb"
     },
     {
       "relation": "contains",
