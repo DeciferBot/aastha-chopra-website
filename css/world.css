@@ -198,6 +198,7 @@ body::before {
   position: relative;
   margin-top: var(--nav-h);
   min-height: clamp(560px, 86vh, 900px);
+  min-height: clamp(560px, 86svh, 900px);
   overflow: hidden;
   background: var(--bg);
 }
@@ -885,4 +886,19 @@ html.js .reveal.visible { transform: none; filter: blur(0); }
 @media (prefers-reduced-motion: reduce) {
   html.js .reveal { transform: none; filter: none; transition: none; }
   .btn-primary, .world-nav-cta, .btn-outline, .cognac-band .btn-cognac { transition: none; }
+}
+
+/* Touch press feedback — cards only had :hover, so a mobile tap gave zero
+   visible response until the lightbox/link actually opened. .brand-tag
+   already has its own transition (border-color/color/transform) — reusing
+   it here instead of a new shorthand, which would silently drop those. */
+.reel-card, .gallery-item, .reel-feature-poster {
+  transition: transform 0.15s var(--ease);
+}
+.reel-card:active, .gallery-item:active, a.brand-tag:active, .reel-feature-poster:active {
+  transform: scale(0.97);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reel-card, .gallery-item, .reel-feature-poster { transition: none; }
+  .reel-card:active, .gallery-item:active, a.brand-tag:active, .reel-feature-poster:active { transform: none; }
 }
