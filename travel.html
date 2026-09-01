@@ -55,12 +55,12 @@
 }
 .tm-intro h1{
   font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(38px,6.4vw,74px);
-  line-height:1.04; margin:0; color:var(--text, #F2EDE4); letter-spacing:-.01em;
+  line-height:1.04; margin:0; color:var(--text); letter-spacing:-.01em;
 }
 .tm-intro h1 em{font-style:italic; color:var(--gold-light)}
 .tm-lede{
   font-family:'Jost',sans-serif; font-weight:300; font-size:clamp(15px,1.6vw,18px);
-  line-height:1.72; color:var(--text-dim,#B8AE9E); margin:22px 0 0; max-width:56ch;
+  line-height:1.72; color:var(--text-dim); margin:22px 0 0; max-width:56ch;
 }
 .tm-stats{
   display:flex; flex-wrap:wrap; gap:clamp(26px,5vw,60px); margin:40px 0 0;
@@ -72,7 +72,7 @@
 }
 .tm-stat span{
   display:block; font-family:'Jost',sans-serif; font-size:10px; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--text-dim,#B8AE9E); margin-top:11px;
+  text-transform:uppercase; color:var(--text-dim); margin-top:11px;
 }
 
 .tm-mapbox{
@@ -88,7 +88,7 @@ svg.tm-map{display:block; width:100%; height:auto}
 .tm-map .leader{stroke:var(--gold-mid); stroke-width:.8; fill:none}
 .tm-map text{
   font-family:'Jost',sans-serif; font-size:9px; font-weight:400; letter-spacing:.12em;
-  fill:#F2EDE4; paint-order:stroke; stroke:#0f0d0b; stroke-width:3px; stroke-linejoin:round;
+  fill:var(--text); paint-order:stroke; stroke:#0f0d0b; stroke-width:3px; stroke-linejoin:round;
 }
 .tm-map .dot.on .halo{opacity:.4}
 .tm-map .home circle{fill:none; stroke:var(--gold-mid); stroke-width:1.4}
@@ -96,17 +96,17 @@ svg.tm-map{display:block; width:100%; height:auto}
 .tm-legend{
   display:flex; gap:20px; flex-wrap:wrap; padding:13px 20px; border-top:1px solid var(--gold-dim);
   font-family:'Jost',sans-serif; font-size:11px; letter-spacing:.13em; text-transform:uppercase;
-  color:var(--text-dim,#B8AE9E);
+  color:var(--text-dim);
 }
 
 .tm-section{margin:clamp(52px,7vw,92px) 0 0}
 .tm-section h2{
   font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(28px,3.6vw,44px);
-  margin:0 0 8px; color:#F2EDE4;
+  margin:0 0 8px; color:var(--text);
 }
 .tm-note{
   font-family:'Jost',sans-serif; font-weight:300; font-size:15px; line-height:1.7;
-  color:var(--text-dim,#B8AE9E); margin:0 0 26px; max-width:58ch;
+  color:var(--text-dim); margin:0 0 26px; max-width:58ch;
 }
 .tm-year{
   display:grid; grid-template-columns:72px 1fr; gap:18px; align-items:center;
@@ -126,11 +126,11 @@ svg.tm-map{display:block; width:100%; height:auto}
 .tm-pill{
   font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.14em; text-transform:uppercase;
   padding:6px 15px; border-radius:2px; cursor:pointer; background:transparent;
-  color:var(--text-dim,#B8AE9E); border:1px solid var(--gold-dim);
+  color:var(--text-dim); border:1px solid var(--gold-dim);
 }
 .tm-pill[aria-pressed="true"]{background:var(--gold); color:#0a0a0a; border-color:var(--gold)}
 .tm-showing{
-  font-family:'Jost',sans-serif; font-size:13px; color:var(--text-dim,#B8AE9E);
+  font-family:'Jost',sans-serif; font-size:13px; color:var(--text-dim);
   margin:0 12px 0 0; letter-spacing:.04em;
 }
 
@@ -145,19 +145,19 @@ svg.tm-map{display:block; width:100%; height:auto}
 .tm-cover{display:block; width:100%; height:auto; background:var(--bg-overlay,#1a1712)}
 .tm-cover-none{
   padding:30px 18px; text-align:center; background:var(--bg-overlay,#1a1712);
-  font-family:'Jost',sans-serif; font-size:13px; color:var(--text-dim,#B8AE9E);
+  font-family:'Jost',sans-serif; font-size:13px; color:var(--text-dim);
 }
 .tm-more{display:flex; gap:7px; flex-wrap:wrap; padding:14px 18px 0}
 .tm-more a{width:54px; height:54px; border-radius:2px; overflow:hidden; display:block; border:1px solid var(--gold-dim)}
 .tm-more a img{width:100%; height:100%; object-fit:cover; display:block}
 .tm-more a:hover{border-color:var(--gold-hi)}
 .tm-body{padding:16px 18px 18px}
-.tm-route{font-family:'Cormorant Garamond',serif; font-weight:300; font-size:26px; line-height:1.16; margin:0; color:#F2EDE4}
+.tm-route{font-family:'Cormorant Garamond',serif; font-weight:300; font-size:26px; line-height:1.16; margin:0; color:var(--text)}
 .tm-when{
   font-family:'Jost',sans-serif; font-size:11px; letter-spacing:.16em; text-transform:uppercase;
   color:var(--gold-light); margin:7px 0 0;
 }
-.tm-cap{font-family:'Jost',sans-serif; font-weight:300; font-size:14px; line-height:1.68; color:var(--text-dim,#B8AE9E); margin:13px 0 0}
+.tm-cap{font-family:'Jost',sans-serif; font-weight:300; font-size:14px; line-height:1.68; color:var(--text-dim); margin:13px 0 0}
 .tm-links{display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 0}
 .tm-links a{
   font-family:'Jost',sans-serif; font-size:10px; letter-spacing:.16em; text-transform:uppercase;
@@ -168,7 +168,7 @@ svg.tm-map{display:block; width:100%; height:auto}
 .tm-foot{
   margin:clamp(48px,6vw,80px) 0 0; padding:26px 0 clamp(60px,8vw,100px);
   border-top:1px solid var(--gold-dim); font-family:'Jost',sans-serif; font-weight:300;
-  font-size:13px; line-height:1.7; color:var(--text-dim,#B8AE9E); max-width:62ch;
+  font-size:13px; line-height:1.7; color:var(--text-dim); max-width:62ch;
 }
 @media (prefers-reduced-motion:reduce){ *{animation:none!important; transition:none!important} }
 </style>
