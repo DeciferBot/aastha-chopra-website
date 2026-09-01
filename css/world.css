@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
    AASTHA CHOPRA — WORLD PAGES DESIGN SYSTEM
-   Shared across fashion.html, luxury.html, wellness.html
+   Shared across fashion.html, luxury.html, wellness.html, travel.html
    Rebuilt mobile-first. Fluid type, content-led layouts, no dead space.
    ═══════════════════════════════════════════════════════════════ */
 
@@ -153,7 +153,7 @@ body::before {
 .world-nav.menu-open .world-nav-toggle .icon-open { display: none; }
 .world-nav.menu-open .world-nav-toggle .icon-close { display: block; }
 
-@media (max-width: 860px) {
+@media (max-width: 959px) {
   .world-nav-cta { display: none; }
   .world-nav-toggle { display: inline-flex; }
   .world-nav-links {
@@ -543,6 +543,9 @@ body::before {
 .stat-label {
   font-size: 0.62rem; font-weight: 500; letter-spacing: 0.18em;
   text-transform: uppercase; color: var(--text-mid); line-height: 1.7;
+}
+@media (max-width: 400px) {
+  .stat-num, .stat-number { font-size: clamp(2rem, 9vw, 6rem); }
 }
 
 /* ════════════════════════════════════════════

@@ -109,7 +109,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .s-pull span{color:var(--gold)}
 .s-body{font-family:var(--sans);font-size:10.5px;font-weight:300;line-height:1.75;color:var(--ivory-dim)}
 .s-body p{margin-bottom:12px}
-.s-img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block;margin-bottom:16px}
+.s-img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center 15%;display:block;margin-bottom:16px}
 .creds{background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--gold);padding:20px}
 .creds-title{font-family:var(--sans);font-size:7.5px;font-weight:500;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
 .cred{display:flex;gap:10px;align-items:flex-start;margin-bottom:11px}
@@ -235,25 +235,35 @@ table.rc tr:last-child td{border-bottom:none}
 
 /* ── TOP NAV (screen only) ── */
 .mp-nav{display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:56px;background:rgba(8,7,6,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;width:100%}
-.mp-nav-logo{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--ivory);text-decoration:none;letter-spacing:.04em}
+.mp-nav-logo{font-family:var(--serif);font-size:20px;font-weight:400;color:var(--ivory);text-decoration:none;letter-spacing:.04em;display:inline-block;transition:transform .16s cubic-bezier(0.22,1,0.36,1)}
 .mp-nav-logo span{color:var(--gold);font-style:italic}
+.mp-nav-logo:active{transform:scale(.96)}
+@media (prefers-reduced-motion:reduce){.mp-nav-logo{transition:none}}
 .mp-nav-links{display:flex;align-items:center;gap:24px}
-.mp-nav-links a{font-family:var(--sans);font-size:11px;font-weight:400;letter-spacing:.14em;color:var(--ivory-dim);text-decoration:none;text-transform:uppercase;transition:color .2s}
+.mp-nav-links a{font-family:var(--sans);font-size:11px;font-weight:400;letter-spacing:.14em;color:var(--ivory-dim);text-decoration:none;text-transform:uppercase;transition:color .2s ease,transform .18s cubic-bezier(0.22,1,0.36,1)}
 .mp-nav-links a:hover{color:var(--ivory)}
-.mp-nav-dl{font-family:var(--sans);font-size:11px;font-weight:400;letter-spacing:.14em;color:var(--gold);text-decoration:none;text-transform:uppercase;border:1px solid var(--gold-mid);padding:7px 16px;transition:background .2s ease,color .2s ease,border-color .2s ease,transform .18s cubic-bezier(0.22,1,0.36,1)}
-.mp-nav-dl:hover{background:var(--gold-pale);color:var(--gold-hi);border-color:var(--gold)}
+.mp-nav-links a:active{transform:scale(.97)}
+.mp-nav-dl{font-family:var(--sans);font-size:11px;font-weight:400;letter-spacing:.14em;color:var(--gold);text-decoration:none;text-transform:uppercase;border:1px solid var(--gold-mid);padding:7px 16px}
+/* Higher specificity than ".mp-nav-links a" above (the CTA is itself a nav link) so its own hover transition isn't silently dropped */
+.mp-nav-links a.mp-nav-dl{transition:background .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease,transform .18s cubic-bezier(0.22,1,0.36,1)}
 @media (hover:hover) and (pointer:fine){.mp-nav-dl:hover{transform:translateY(-1px)}}
 .mp-nav-dl:active{transform:scale(.97)}
-.mp-nav-links a{transition:color .2s ease,transform .18s cubic-bezier(0.22,1,0.36,1)}
-.mp-nav-links a:active{transform:scale(.97)}
 @media (prefers-reduced-motion:reduce){.mp-nav-dl,.mp-nav-links a{transition:none}}
 
 /* ── WhatsApp CTA on contact page ── */
-.cp-wa{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;text-decoration:none;font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:14px 28px;margin-bottom:32px;transition:opacity .2s}
+.cp-wa{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;text-decoration:none;font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:14px 28px;margin-bottom:32px;transition:opacity .2s ease,transform .16s cubic-bezier(0.22,1,0.36,1)}
 .cp-wa:hover{opacity:.88}
+.cp-wa:active{transform:scale(.97)}
+@media (prefers-reduced-motion:reduce){.cp-wa{transition:none}}
 .cp-wa svg{flex-shrink:0}
-.cp-iv a{color:var(--ivory);text-decoration:none}
+.cp-iv a{color:var(--ivory);text-decoration:none;display:inline-block;transition:color .2s ease,transform .16s cubic-bezier(0.22,1,0.36,1)}
 .cp-iv a:hover{color:var(--gold-hi)}
+.cp-iv a:active{transform:scale(.96)}
+@media (prefers-reduced-motion:reduce){.cp-iv a{transition:color .2s ease}}
+.mp-footnote-link{color:var(--gold);text-decoration:none;display:inline-block;transition:color .2s ease,transform .16s cubic-bezier(0.22,1,0.36,1)}
+.mp-footnote-link:hover{color:var(--gold-hi);text-decoration:underline}
+.mp-footnote-link:active{transform:scale(.96)}
+@media (prefers-reduced-motion:reduce){.mp-footnote-link{transition:color .2s ease}}
 
 /* ── MOBILE RESPONSIVE ── */
 @media(max-width:768px){
@@ -301,6 +311,14 @@ table.rc tr:last-child td{border-bottom:none}
     will-change: opacity, transform;
   }
   html.mp-anim .mp-rv.in { opacity: 1; transform: none; }
+  /* Siblings that land in view together should cascade in, not pop as one block */
+  .c-stat:nth-child(1).mp-rv.in{transition-delay:0ms}
+  .c-stat:nth-child(2).mp-rv.in{transition-delay:60ms}
+  .c-stat:nth-child(3).mp-rv.in{transition-delay:120ms}
+  .c-stat:nth-child(4).mp-rv.in{transition-delay:180ms}
+  .pillar-card:nth-of-type(1).mp-rv.in{transition-delay:0ms}
+  .pillar-card:nth-of-type(2).mp-rv.in{transition-delay:80ms}
+  .pillar-card:nth-of-type(3).mp-rv.in{transition-delay:160ms}
 }
 @media print { .mp-rv { opacity: 1 !important; transform: none !important; } }
 /* Belt-and-suspenders: keep the on-screen nav out of the printed/PDF deck so
@@ -638,7 +656,7 @@ table.rc tr:last-child td{border-bottom:none}
       <div class="mix-c"><span class="mix-p">69</span><span class="mix-l">Posts On The Road</span></div>
       <div class="mix-c"><span class="mix-p">5</span><span class="mix-l">Years Running</span></div>
     </div>
-    <div style="font-family:var(--sans);font-size:8.5px;color:var(--muted);font-style:italic;text-align:center;padding:6px 0 16px">Every trip verified against her own posts. See them all at <a href="travel.html" style="color:var(--gold);text-decoration:none">aasthachopra.com/travel</a></div>
+    <div style="font-family:var(--sans);font-size:8.5px;color:var(--muted);font-style:italic;text-align:center;padding:6px 0 16px">Every trip verified against her own posts. See them all at <a href="travel.html" class="mp-footnote-link">aasthachopra.com/travel</a></div>
 
     <div class="sl" style="margin-bottom:10px">Hotel Groups Already Featured</div>
     <div class="mix"><div class="mix-c"><span class="mix-p">38</span><span class="mix-l">Jumeirah</span></div><div class="mix-c"><span class="mix-p">18</span><span class="mix-l">Accor</span></div><div class="mix-c"><span class="mix-p">14</span><span class="mix-l">Marriott</span></div><div class="mix-c"><span class="mix-p">10</span><span class="mix-l">Address Hotels</span></div><div class="mix-c"><span class="mix-p">4</span><span class="mix-l">Shangri-La</span></div><div class="mix-c"><span class="mix-p">4</span><span class="mix-l">Kempinski</span></div></div>
@@ -785,7 +803,7 @@ table.rc tr:last-child td{border-bottom:none}
   (function(){
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var docEl = document.documentElement;
-    var sel = '.sl, .st, .ss, .c-eye, .c-name, .c-desc, .c-stat, .stat-block, .pillar, .p-card, blockquote';
+    var sel = '.sl, .st, .ss, .c-eye, .c-name, .c-desc, .c-stat, .pillar-card, .s-pull';
     var nodes = document.querySelectorAll(sel);
     if (!nodes.length) return;
     docEl.classList.add('mp-anim');

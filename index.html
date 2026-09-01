@@ -215,7 +215,7 @@
             btn.disabled = false;
             btnText.textContent = 'Send Brief';
             status.textContent = 'Something went wrong — please email management@aasthachopra.com directly.';
-            status.style.color = 'rgba(242,232,208,0.5)';
+            status.style.color = 'var(--color-text-secondary)';
           });
         });
       }
@@ -515,7 +515,7 @@
     }
 
     /* WhatsApp inline button — harmonized with the de-clashed float */
-    .btn-whatsapp { background: #1F9D55; transition: transform 0.22s var(--ease-spring), box-shadow 0.4s var(--ease-default), opacity var(--duration-fast); }
+    .btn-whatsapp { background: #25D366; transition: transform 0.22s var(--ease-spring), box-shadow 0.4s var(--ease-default), opacity var(--duration-fast); }
     .btn-whatsapp:hover { opacity: 1; }
     .btn-whatsapp:active { transform: scale(0.97); }
     @media (hover: hover) and (pointer: fine) {
@@ -1390,7 +1390,8 @@
       padding: 8px 20px;
       transition: border-color var(--duration-fast) var(--ease-default),
                   color var(--duration-fast) var(--ease-default),
-                  background var(--duration-fast) var(--ease-default);
+                  background var(--duration-fast) var(--ease-default),
+                  transform 0.2s var(--ease-spring);
     }
     .collab-tag:hover {
       border-color: var(--color-gold);
@@ -1478,7 +1479,7 @@
       border-radius: var(--radius-xs);
       position: relative;
       overflow: hidden;
-      transition: opacity var(--duration-fast) var(--ease-default);
+      transition: transform 0.22s var(--ease-spring), box-shadow 0.4s var(--ease-default), opacity var(--duration-fast) var(--ease-default);
     }
     .btn-primary:hover { opacity: 0.88; }
     .btn-primary span { position: relative; z-index: 1; }
@@ -1497,7 +1498,7 @@
       background: #25D366;
       padding: 16px 36px;
       border-radius: var(--radius-xs);
-      transition: opacity var(--duration-fast) var(--ease-default);
+      transition: transform 0.22s var(--ease-spring), box-shadow 0.4s var(--ease-default), opacity var(--duration-fast) var(--ease-default);
     }
     .btn-whatsapp:hover { opacity: 0.88; }
     .btn-whatsapp span { position: relative; z-index: 1; }
@@ -1511,7 +1512,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      background: #1F9D55;
+      background: #25D366;
       color: #fff;
       text-decoration: none;
       padding: 12px 14px;
@@ -2221,7 +2222,7 @@
 
     /* Nav — always on dark background */
     nav .nav-logo { color: var(--color-text-primary); }
-    nav .nav-links a { color: rgba(242,232,208,0.5); }
+    nav .nav-links a { color: var(--color-text-secondary); }
     nav .nav-cta { color: var(--color-gold); border-color: var(--color-gold); }
     nav.scrolled .nav-logo { color: var(--color-text-primary); }
     nav.scrolled .nav-links a { color: var(--color-text-secondary); }
@@ -3856,28 +3857,6 @@
         setTimeout(() => { btn.textContent = 'Subscribe'; }, 3000);
       }
     }
-
-    // Live Instagram feed
-    async function loadInstagramFeed() {
-      const grid = document.querySelector('.instagram-grid');
-      if (!grid) return;
-      try {
-        const res = await fetch('/api/instagram');
-        if (!res.ok) return;
-        const data = await res.json();
-        if (!data.data || !data.data.length) return;
-        const posts = data.data.slice(0, 6);
-        grid.innerHTML = posts.map(p => {
-          const img = p.thumbnail_url || p.media_url;
-          const alt = p.caption ? p.caption.slice(0, 60) : 'Aastha Chopra';
-          return `<a class="insta-tile" href="${p.permalink}" target="_blank" rel="noopener">
-            <img src="${img}" alt="${alt.replace(/"/g,'')}" style="width:100%;height:100%;object-fit:cover;" />
-            <div class="insta-overlay"><svg class="insta-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></div>
-          </a>`;
-        }).join('');
-      } catch {}
-    }
-    loadInstagramFeed();
 
     // Hamburger (mobile)
     /* ─── LIVE STATS: hydrate from Supabase via /api/ig-stats ─── */
