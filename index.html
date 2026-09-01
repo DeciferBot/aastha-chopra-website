@@ -89,19 +89,18 @@
         });
       })();
 
-      // Track nav CTA clicks separately
-      var navCollabCta = document.querySelector('.nav-cta');
-      if (navCollabCta) {
-        navCollabCta.addEventListener('click', function() {
+      // Track nav CTA clicks separately — querySelectorAll so both the
+      // desktop pill/button and the mobile-menu duplicate get counted.
+      document.querySelectorAll('[data-cta="collaborate"]').forEach(function(el) {
+        el.addEventListener('click', function() {
           gtag('event', 'nav_cta_click', { event_category: 'intent', cta: 'collaborate' });
         });
-      }
-      var navMediaPack = document.querySelector('.nav-mediapack');
-      if (navMediaPack) {
-        navMediaPack.addEventListener('click', function() {
+      });
+      document.querySelectorAll('[data-cta="media_pack"]').forEach(function(el) {
+        el.addEventListener('click', function() {
           gtag('event', 'nav_cta_click', { event_category: 'intent', cta: 'media_pack' });
         });
-      }
+      });
 
       // Track section visibility (which sections brands actually read)
       var sectionNames = ['about', 'reels', 'portfolio', 'collabs', 'instagram', 'contact'];
@@ -414,6 +413,7 @@
     }
     .nav-links a:hover { color: var(--color-text-primary); }
     .nav-links a:hover::after { width: 100%; }
+    .nav-links-mobile-only { display: none; }
     .nav-cta {
       font-family: var(--font-ui);
       font-size: 0.6rem;
@@ -550,6 +550,7 @@
     #hero {
       position: relative;
       height: 100vh;
+      height: 100svh;
       min-height: 700px;
       overflow: hidden;
       background: #0D0608;
@@ -651,6 +652,7 @@
       display: flex;
       align-items: flex-end;
       padding: 0 7vw 10vh;
+      padding-bottom: 10svh;
     }
 
     .hero-content {
@@ -836,6 +838,7 @@
       position: absolute;
       right: 7vw;
       bottom: 12vh;
+      bottom: 12svh;
       z-index: 4;
       display: flex;
       flex-direction: column;
@@ -876,6 +879,7 @@
       position: absolute;
       left: 7vw;
       bottom: 12vh;
+      bottom: 12svh;
       z-index: 4;
       display: flex;
       align-items: center;
@@ -1222,9 +1226,15 @@
       box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.3);
       transition: transform 0.4s var(--ease-spring), box-shadow 0.4s var(--ease-spring);
     }
-    .portfolio-item:hover {
-      transform: translateY(-6px) scale(1.01);
-      box-shadow: 0 20px 56px rgba(0,0,0,0.65), 0 6px 18px rgba(0,0,0,0.4);
+    .portfolio-item:active {
+      transform: scale(0.97);
+      transition-duration: 0.15s;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      .portfolio-item:hover {
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 20px 56px rgba(0,0,0,0.65), 0 6px 18px rgba(0,0,0,0.4);
+      }
     }
     .portfolio-item .portfolio-bg {
       width: 100%;
@@ -1233,7 +1243,9 @@
       filter: saturate(0.82) contrast(1.06);
       transition: transform 0.7s var(--ease-spring);
     }
-    .portfolio-item:hover .portfolio-bg { transform: scale(1.04); }
+    @media (hover: hover) and (pointer: fine) {
+      .portfolio-item:hover .portfolio-bg { transform: scale(1.04); }
+    }
 
     .portfolio-bg {
       width: 100%;
@@ -1258,7 +1270,9 @@
     .portfolio-item:nth-child(5) .portfolio-placeholder { background: #E5DFD5; }
     .portfolio-item:nth-child(6) .portfolio-placeholder { background: #D6D0C7; }
 
-    .portfolio-item:hover .portfolio-placeholder { transform: scale(1.04); }
+    @media (hover: hover) and (pointer: fine) {
+      .portfolio-item:hover .portfolio-placeholder { transform: scale(1.04); }
+    }
 
     .portfolio-overlay {
       position: absolute;
@@ -2199,8 +2213,11 @@
       width: 24px;
       height: 1px;
       background: var(--color-text-primary);
-      transition: all 0.3s;
+      transition: transform var(--duration-mid) var(--ease-default), opacity var(--duration-fast) var(--ease-default);
     }
+    nav.menu-open .hamburger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    nav.menu-open .hamburger span:nth-child(2) { opacity: 0; }
+    nav.menu-open .hamburger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
     nav.scrolled .hamburger span { background: var(--color-text-primary); }
 
     /* Nav — always on dark background */
@@ -2237,14 +2254,32 @@
 
     /* ─── MOBILE (<768px) ─── */
     @media (max-width: 768px) {
-      nav { padding: 18px 20px; }
+      nav { padding: 18px 20px; flex-wrap: wrap; row-gap: 6px; }
       nav.scrolled { padding: 14px 20px; }
-      .nav-links { display: none; }
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px; left: 0; right: 0;
+        background: rgba(8,7,6,0.98);
+        padding: 24px;
+        gap: 24px;
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-12px);
+        pointer-events: none;
+        transition: opacity var(--duration-mid) var(--ease-default), transform var(--duration-mid) var(--ease-spring), visibility 0s linear var(--duration-mid);
+      }
+      nav.menu-open .nav-links { opacity: 1; visibility: visible; transform: none; pointer-events: auto; transition-delay: 0s; }
+      .nav-links-mobile-only { display: list-item; }
+      .nav-mediapack { display: none; }
       .nav-cta { display: none; }
       .hamburger { display: flex; }
 
       .hero-first, .hero-last { font-size: clamp(3.5rem, 16vw, 6rem); }
-      .hero-layout { padding: 0 6vw 14vh; align-items: flex-end; }
+      .hero-layout { padding: 0 6vw 14vh; padding-bottom: 14svh; align-items: flex-end; }
       .hero-scroll { display: none; }
       .orn-c1, .orn-c2 { display: none; }
 
@@ -2366,7 +2401,11 @@
       display: block;
       transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-    .reel-item:hover .reel-thumb img { transform: scale(1.04); }
+    .reel-thumb { transition: transform 0.15s var(--ease-default); }
+    .reel-item:active .reel-thumb { transform: scale(0.97); }
+    @media (hover: hover) and (pointer: fine) {
+      .reel-item:hover .reel-thumb img { transform: scale(1.04); }
+    }
 
     /* ═══ BOLD: editorial reels — featured top tile + staggered entrance ═══ */
     @media (min-width: 900px) {
@@ -2410,10 +2449,15 @@
       justify-content: center;
       transition: transform 0.3s, background 0.3s;
     }
-    .reel-item:hover .reel-play-btn { background: rgba(0,0,0,0.35); }
-    .reel-item:hover .play-circle { transform: scale(1.1); background: var(--gold); }
+    .reel-item:active .play-circle { transform: scale(0.97); }
+    @media (hover: hover) and (pointer: fine) {
+      .reel-item:hover .reel-play-btn { background: rgba(0,0,0,0.35); }
+      .reel-item:hover .play-circle { transform: scale(1.1); background: var(--gold); }
+    }
     .reel-play-btn.playing { background: transparent; opacity: 0; }
-    .reel-thumb:hover .reel-play-btn.playing { opacity: 1; }
+    @media (hover: hover) and (pointer: fine) {
+      .reel-thumb:hover .reel-play-btn.playing { opacity: 1; }
+    }
 
     .reel-unmute-btn {
       position: absolute;
@@ -2427,7 +2471,12 @@
       opacity: 0;
       transition: opacity 0.3s;
     }
-    .reel-thumb:hover .reel-unmute-btn { opacity: 1; }
+    @media (hover: hover) and (pointer: fine) {
+      .reel-thumb:hover .reel-unmute-btn { opacity: 1; }
+    }
+    @media (hover: none), (pointer: coarse) {
+      .reel-unmute-btn { opacity: 1; }
+    }
 
     .reel-permalink {
       position: absolute;
@@ -2441,7 +2490,12 @@
       opacity: 0;
       transition: opacity 0.3s;
     }
-    .reel-thumb:hover .reel-permalink { opacity: 1; }
+    @media (hover: hover) and (pointer: fine) {
+      .reel-thumb:hover .reel-permalink { opacity: 1; }
+    }
+    @media (hover: none), (pointer: coarse) {
+      .reel-permalink { opacity: 1; }
+    }
 
     .reel-caption {
       font-family: var(--ff-sans);
@@ -2452,7 +2506,9 @@
       line-height: 1.5;
       transition: color 0.3s;
     }
-    .reel-item:hover .reel-caption { color: var(--gold-light); }
+    @media (hover: hover) and (pointer: fine) {
+      .reel-item:hover .reel-caption { color: var(--gold-light); }
+    }
 
     .reels-loading {
       grid-column: 1 / -1;
@@ -2697,7 +2753,9 @@
       color: var(--color-text-secondary);
       transition: color var(--duration-fast) var(--ease-default);
     }
-    .reel-item:hover .reel-caption { color: var(--color-gold); }
+    @media (hover: hover) and (pointer: fine) {
+      .reel-item:hover .reel-caption { color: var(--color-gold); }
+    }
 
     .journal-editorial {
       box-shadow: var(--shadow-md);
@@ -2809,14 +2867,16 @@
       <li><a href="#instagram">Instagram</a></li>
       <li><a href="/travel.html">Travel</a></li>
       <li><a href="/blog">Journal</a></li>
+      <li class="nav-links-mobile-only"><a href="media-pack.html" data-cta="media_pack">Media Pack</a></li>
+      <li class="nav-links-mobile-only"><a href="#contact" data-cta="collaborate">Work With Me</a></li>
     </ul>
-    <a href="media-pack.html" class="nav-mediapack">
+    <a href="media-pack.html" class="nav-mediapack" data-cta="media_pack">
       <svg width="11" height="11" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M6 1v7M3.5 5.5L6 8l2.5-2.5M2 10h8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       Media Pack
     </a>
-    <a href="#contact" class="nav-cta">Work With Me</a>
+    <a href="#contact" class="nav-cta" data-cta="collaborate">Work With Me</a>
     <div class="hamburger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </div>
@@ -3267,8 +3327,8 @@
       <a href="/wellness.html" class="bf-card reveal reveal-delay-2">
         <div class="bf-card-visual">
           <picture>
-            <source srcset="images/aastha-chopra-dubai-wellness-fitness-2.webp" type="image/webp">
-            <img src="images/aastha-chopra-dubai-wellness-fitness-2.jpg" alt="Aastha Chopra — Wellness and outdoor lifestyle" loading="lazy" style="object-position: center center;" width="1467" height="2200" />
+            <source srcset="images/aastha-chopra-dubai-wellness-fitness-hero.webp" type="image/webp">
+            <img src="images/aastha-chopra-dubai-wellness-fitness-hero.jpg" alt="Aastha Chopra — skiing, adventure and outdoor fitness" loading="lazy" style="object-position: center center;" width="1536" height="2048" />
           </picture>
           <div class="bf-card-tag">Wellness · Fitness · Balance</div>
         </div>
@@ -4135,20 +4195,11 @@
     })();
 
     function toggleMenu() {
-      const links = document.querySelector('.nav-links');
-      if (links) {
-        links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
-        links.style.flexDirection = 'column';
-        links.style.position = 'absolute';
-        links.style.top = '70px';
-        links.style.left = '0';
-        links.style.right = '0';
-        links.style.background = 'rgba(8,7,6,0.98)';
-        links.style.padding = '24px';
-        links.style.gap = '24px';
-        links.style.backdropFilter = 'blur(12px)';
-      }
+      nav.classList.toggle('menu-open');
     }
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => nav.classList.remove('menu-open'));
+    });
   </script>
 
   <!-- ─── SUPABASE PORTFOLIO ─── -->
@@ -4222,12 +4273,12 @@
 
       // Local fallback — only used if the live query fails or returns nothing.
       const FALLBACK = [
-        { src: 'images/aastha-chopra-dubai-travel.jpg', title: 'Evening in Dubai',   tag: 'Lifestyle', permalink: 'https://www.instagram.com/aastha_sochic/' },
+        { src: 'images/aastha-chopra-dubai-travel.jpg', title: 'Evening in Dubai',   tag: 'Luxury',    permalink: 'https://www.instagram.com/aastha_sochic/' },
         { src: 'images/aastha-chopra-dubai-creator-portrait.jpg', title: 'Powder Blue Moment', tag: 'Fashion',   permalink: 'https://www.instagram.com/aastha_sochic/' },
-        { src: 'images/aastha-chopra-dubai-luxury-rooftop.jpg', title: 'Dubai Nights',       tag: 'Lifestyle', permalink: 'https://www.instagram.com/aastha_sochic/' },
-        { src: 'images/aastha-chopra-dubai-wellness-3.jpg', title: 'Desert Arches',      tag: 'Travel',    permalink: 'https://www.instagram.com/aastha_sochic/' },
-        { src: 'images/aastha-chopra-dubai-hotel-content.jpg', title: 'Golden Heritage',    tag: 'Fashion',   permalink: 'https://www.instagram.com/aastha_sochic/' },
-        { src: 'images/aastha-chopra-dubai-lifestyle.jpg', title: 'Burj Al Arab Days',  tag: 'Lifestyle', permalink: 'https://www.instagram.com/aastha_sochic/' },
+        { src: 'images/aastha-chopra-dubai-luxury-rooftop.jpg', title: 'Dubai Nights',       tag: 'Luxury',    permalink: 'https://www.instagram.com/aastha_sochic/' },
+        { src: 'images/aastha-chopra-dubai-wellness-3.jpg', title: 'Desert Arches',      tag: 'Wellness',  permalink: 'https://www.instagram.com/aastha_sochic/' },
+        { src: 'images/aastha-chopra-dubai-hotel-content.jpg', title: 'Golden Heritage',    tag: 'Luxury',    permalink: 'https://www.instagram.com/aastha_sochic/' },
+        { src: 'images/aastha-chopra-dubai-lifestyle.jpg', title: 'Burj Al Arab Days',  tag: 'Luxury',    permalink: 'https://www.instagram.com/aastha_sochic/' },
       ];
 
       try {

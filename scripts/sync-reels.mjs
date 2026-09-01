@@ -45,8 +45,11 @@ if (!KEY) {
 // most-specific-first so beauty/wellness win over the broad fashion default.
 const RULES = [
   ['Beauty', /\b(makeup|lip|lipstick|lip oil|lip liner|mascara|concealer|foundation|primer|blush|bronzer|highlighter|eyeshadow|skin|skincare|glow|serum|fragrance|perfume|parfum|scent|beauty|kosas|huda|maybelline|sephora|sephoria|charlotte tilbury|gisou|nars|elf|haircare|hair oil|fable\s*&?\s*mane|note cosmet|d&g|dolce.{0,3}gabbana beauty|rasasi|under.?eye)\b/i],
-  ['Wellness', /\b(hike|hiking|ski|skiing|snow|yoga|fitness|activewear|wiskii|gym|workout|sweat|sleep|spa|ayurveda|wellness|jungle|alpaca|penguin|waterfall|mountain|arctic|wild|nature|movement|strength|balance)\b/i],
-  ['Luxury', /\b(hotel|resort|suite|igloo|lapland|finland|italy|rome|naples|phuket|thailand|travel|getaway|staycation|dining|restaurant|dinner|brunch|feast|burj|tower|penthouse|supercar|porsche|yacht|vodka|golden hour|metro station|sheraton|lana|fountain|khaleeji|vip|luxury|first class|jet)\b/i],
+  ['Luxury', /\b(hotel|resort|suite|igloo|lapland|finland|italy|rome|naples|phuket|thailand|travel|getaway|staycation|dining|restaurant|dinner|brunch|feast|burj|tower|penthouse|supercar|porsche|yacht|vodka|golden hour|metro station|sheraton|lana|fountain|khaleeji|vip|luxury|first class|jet|london|paris|europe|castle|landmark|airport|flight|trip|vacation|holiday|abroad|ancient|historic|souvenir|passport|visiting|city break)\b/i],
+  // Checked after Luxury: family/kids/health are broad, generic words that
+  // should not steal a caption that already carries a specific Luxury signal
+  // (e.g. "family at the Sheraton" is Luxury, not Wellness).
+  ['Wellness', /\b(hike|hiking|ski|skiing|snow|yoga|fitness|activewear|wiskii|gym|workout|sweat|sleep|spa|ayurveda|wellness|jungle|alpaca|penguin|waterfall|mountain|arctic|wild|nature|movement|strength|balance|family|kids?|mask|vaccinated|vaccine|health|wellbeing|mental health)\b/i],
 ];
 function classify(caption = '') {
   for (const [cat, re] of RULES) if (re.test(caption)) return cat;
